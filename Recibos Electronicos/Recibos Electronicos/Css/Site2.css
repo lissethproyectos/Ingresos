@@ -1,0 +1,524 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+
+body   
+{
+    /*background: #b6b7bc;*/
+    font-size: .80em;
+    font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    color: #6c7275;
+    background: url("../Imagenes/fondo2.png") repeat-x;
+  /*  text-align: center; MELY 11/10/2013: se lo comente porque me centraba el menu y los texbox */
+}
+
+        optgroup {
+        
+        display: block;
+        color:#a9d5fb;
+        font-weight:bold;
+        }
+    
+        option {
+        font-weight: normal;        
+        color:#fff;
+        }
+    
+        select
+        {
+        border-radius: 2px;
+        padding:2px;
+        font-family:Calibri;
+        }
+
+a:link, a:visited
+{
+    color: #034af3;
+}
+
+a:hover
+{
+    color: #1d60ff;
+    text-decoration: none;
+}
+
+a:active
+{
+    color: #034af3;
+}
+
+p
+{
+    margin-bottom: 10px;
+    line-height: 1.6em;
+}
+
+select{
+    /*background: #989ea2;
+    color:#fff;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);*/
+    background: #777d80;
+    color:#fff;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);        
+}
+
+.box{
+    background: #777d80;
+    color:#fff;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);
+    text-transform: uppercase;
+}
+
+.MsjError
+{
+	color:Red;	
+}
+
+input[type="text"], textarea
+{
+    /*background: #989ea2;*/
+    /*color:#fff;*/
+    background: #777d80;
+    color:#fff;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);
+	
+}
+
+input[type="text"]:disabled
+{
+    background: #989ea2; /*#c8d2da;*/
+    color:#fff;
+    text-shadow:0 1px 0 rgba(0,0,0,0.4);
+    
+}
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6
+{
+    font-size: 1.5em;
+    color: #666666;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+h1
+{
+    font-size: 1.6em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+h2
+{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h3
+{
+    font-size: 1.2em;
+}
+
+h4
+{
+    font-size: 1.1em;
+}
+
+h5, h6
+{
+    font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2
+{
+    margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page
+{
+    width: 980px;
+    /*background-color: #fff;*/
+    margin: 0px auto 0px auto;
+    /*border: 1px solid #496077;*/
+}
+
+.header
+{
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+	background: url("../Imagenes/encabezado.png") repeat-x;
+	height:217px;
+    width: 980px;
+    background-position:center;
+}
+
+.header h1
+{
+    font-weight: 700;
+    margin: 0px;
+    padding: 0px 0px 0px 20px;
+    color: #f9f9f9;
+    border: none;
+    line-height: 2em;
+    font-size: 2em;
+}
+
+.contenido
+{
+    /*padding: 0px 12px;*/
+    /*margin: 12px 8px 8px 8px;*/
+    width:980px;    
+    height: auto;
+	overflow:auto;
+	background: url("../Imagenes/contenido.png") repeat-y;    
+	font-size:12px;
+}
+
+.main
+{
+    /*padding: 0px 12px;    
+    min-height: 420px;*/
+    padding: 0px 4px;
+    
+	
+}
+
+.leftCol
+{
+    padding: 6px 0px;
+    margin: 12px 8px 8px 8px;
+    width: 200px;
+    min-height: 200px;
+}
+
+.footer
+{
+    color: #4e5766;
+    /*padding: 8px 0px 0px 0px;*/
+    margin: 0px auto;
+    text-align: center;
+    line-height: normal;
+	background: url("../Imagenes/pie.png") repeat-x;
+	height:140px;
+	width:980px;
+}
+
+/*	Contador de Visitas	*/
+.Contador_Visitas
+{
+	/*position:relative;
+	left:650px;
+	bottom:78px;*/
+	float:right;
+    color:#ffffff;
+    font-size:20px; 
+	/*background: url("../Imagenes/computadora.png") no-repeat;	*/
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+
+div.hideSkiplink
+{
+    /*background-color:#3a4f63;*/
+    padding:120px 0px 0px 0px;
+    
+    
+    
+	
+}
+div.fondo_menu
+{
+	background:url("../Imagenes/menu.PNG") no-repeat;
+	height:40px;
+	width:788px;	
+	margin-left:150px;
+}
+div.menu
+{
+	float:left;
+	padding-top:4px;
+    /*padding: 4px 0px 4px 180px;*/
+}
+
+div.menu ul
+{
+	/*background-color: #536d86; */
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    -moz-border-radius: .4em;
+    border-radius: .4em;       
+}
+
+div.menu ul ul
+{
+	background-color: #536d86; 
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    width: auto;
+    -moz-border-radius: .4em;
+    border-radius: .4em;       
+}
+
+div.menu ul li a, div.menu ul li a:visited
+{
+    /*background-color: #465c71;*/
+    /*border: 1px #4e667d solid;*/
+    color: #ffffff;
+    display: block;
+    line-height: 1.35em;
+    padding: 4px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+div.menu ul li a:hover
+{
+    background-color: #bfcbd6; /*c1d3e1*/
+    color: #465c71;
+    text-decoration: none;
+    -moz-border-radius: .4em;
+    border-radius: .4em;    
+}
+
+div.menu ul li a:active
+{
+    background-color: #465c71;
+    color: #cfdbe6;
+    text-decoration: none;
+}
+
+/* FORM ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset
+{
+    margin: 1em 0px;
+    padding: 1em;
+    border: 1px solid #ccc;
+}
+
+fieldset p 
+{
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label
+{
+    display: block;
+}
+
+fieldset label.inline 
+{
+    display: inline;
+}
+
+legend 
+{
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input.textEntry 
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+input.passwordEntry 
+{
+    width: 320px;
+    border: 1px solid #ccc;
+}
+
+div.accountInfo
+{
+    width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear
+{
+    clear: both;
+}
+
+.title
+{
+    display: block;
+    float: left;
+    text-align: left;
+    width: auto;
+}
+
+.loginDisplay
+{
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    padding: 12px 28px;
+    color: #000000;
+}
+
+.loginDisplay a:link
+{
+    color: #000000;
+}
+
+.loginDisplay a:visited
+{
+    color: #000000;
+}
+
+.loginDisplay a:hover
+{
+    color: #000000;
+}
+
+.failureNotification
+{
+    font-size: 1.2em;
+    color: Red;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+.submitButton
+{
+    text-align: right;
+    padding-right: 10px;
+}
+
+.boton     
+{
+	font-family:Calibri, Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    background-color:#536d86;
+    /*background: url("../Imagenes/boton1.png") repeat-x;*/
+    border-color:#45b7d1;
+    border-width:1px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+.titulo
+{
+    font-weight: bold;
+    color:#83aaae;
+}
+
+.button
+{
+	font-family:Calibri, Verdana, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    /*margin: 10px;*/
+    text-decoration: none;
+    background: url("../Imagenes/boton1.png") repeat-x;
+    display: inline-block;
+    text-align: center;
+    color: #fff;    
+    border: 1px solid #9c9c9c; /* Fallback style */
+    border: 1px solid rgba(0, 0, 0, 0.3);                
+    text-shadow: 0 1px 0 rgba(0,0,0,0.4);    
+    box-shadow: 0 0 .05em rgba(10,0,0,0.4);
+    -moz-box-shadow: 0 0 .05em rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0 0 .05em rgba(0,0,0,0.4);
+    
+}
+
+.button, .button span
+{
+    -moz-border-radius: .4em;
+    border-radius: .4em;
+}
+
+
+.button:hover
+{
+    box-shadow: 0 0 .1em rgba(0,0,0,0.4);
+    -moz-box-shadow: 0 0 .1em rgba(0,0,0,0.4);
+    -webkit-box-shadow: 0 0 .1em rgba(0,0,0,0.4);
+}
+
+.button:active
+{
+    /* When pressed, move it down 1px */
+    position: relative;
+    top: 1px;
+}
+
+.modalBackground_Proy
+{
+	background-color: #eef5f6;         
+	opacity: 0.8;
+	filter:alpha(opacity=60);
+}
+
+.BordeSolid_Celeste
+{
+	BORDER-RIGHT: #989ea2 1px Solid; 
+	BORDER-TOP: #989ea2 1px Solid; 
+	BORDER-LEFT: #989ea2 1px Solid; 
+	BORDER-BOTTOM: #989ea2 1px Solid;
+}
+
+.accordionContent {
+background-color: #D3DEEF;
+border: 1px dashed #2F4F4F;
+border-top: none;
+padding: 5px;
+padding-top: 10px;
+}
+
+
+.accordionHeader {
+border: 1px solid #2F4F4F;
+color: white;
+background-color: #2E4d7B;
+font-family: Arial, Sans-Serif;
+font-size: 12px;
+font-weight: bold;
+padding: 5px;
+margin-top: 5px;
+cursor: pointer;
+}
+
+
+.TituloModalPopupMsg {
+	background-color: #ffffff;
+	color: #000;
+	/*vertical-align: middle;*/
+	border-style:solid;
+	border-width:thin;
+	border-color:#cccccc;
+    width:400px;
+	
+}
+
+.modalBackground
+{
+	background-color: #eef5f6;         
+	opacity: 0.6;
+	filter:alpha(opacity=60);
+}

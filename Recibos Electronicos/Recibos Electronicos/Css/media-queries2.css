@@ -1,0 +1,172 @@
+/*
+ * Para 980px o menos
+ */
+ @media screen and (max-width: 980px){
+ 	#pagewrap{
+ 		width: 94%; 		
+ 	}
+ 	header{
+ 		background-color: #CCCCCC;
+ 	}
+ 	#content{
+ 		width: 65%;
+ 	}
+ 	#sidebar{
+ 		width: 30%;
+ 	}
+	.content_main
+	{
+		width:100%;
+		float:left;
+	}
+
+	.img_evento
+	{
+		display:none;
+	}
+
+ }
+
+
+ @media screen and (max-width: 800px){
+	.page
+	{
+		width: 98%;
+		margin: 0px auto 0px auto;
+	}
+	
+	.nombre_sistema
+	{
+		display:none;
+	}
+	.content_main
+	{
+		width:100%;
+		float:left;
+	}
+
+	.img_evento
+	{
+		display:none;
+	}
+ }
+
+
+ @media screen and (max-width: 768px){
+
+ }
+/*
+ * Para 700px o menos
+ */
+ @media screen and (max-width: 700px){
+ 	header{
+ 		background-color: #DDDDDD;
+ 	}	
+ 	#content{
+ 		width: 100%; 		
+ 	}
+ 	#sidebar{
+ 		width: 100%;
+ 		float: left;
+ 	}
+ }
+
+/*
+ * Para 480px o menos
+ */
+ @media screen and (max-width: 480px){ 	
+ 	header{
+ 		height: auto;
+ 		background-color: #EEEEEE;
+ 	}
+ 	h1{
+ 		font-size: 24px;
+ 	}
+ 	#sidebar{
+ 		display:none;
+ 	}
+ }
+ 
+ 
+
+@media screen and (max-width: 1024px){ 	
+	.page{
+		width: 98%;
+		margin: 0px auto 0px auto;
+
+}	
+
+.row {
+    font-size:35px;
+}
+	
+	.nombre_sistema{
+font-size:30px;
+		display:block;}
+		
+	.content_main{
+		width:100%;
+		float:left;
+		font-size:18px;
+		}
+
+	.img_evento{
+		display:none;}
+	
+	.label-dorado {
+    	background-color: #b7b178;
+	  	margin-bottom: 5px;
+		font-weight: bold;
+		color: #ffffff;
+		text-align: center;
+		vertical-align: baseline;
+		border-radius: .25em;
+		border-color:#8f894d;
+		border-style:solid;
+		border-width:thin;}
+		
+    .contenedor_botones{
+        display:none;}
+
+	.letra_movil{
+	font-size:x-large;}
+
+	input[type="submit"]{
+	/*width:50%;*/
+	font-size:35px;
+	height:100px;
+	}
+	.bancos{
+		display:block;
+		font-size:14px;
+	}
+	.bancos img
+	{
+		margin: 0px auto 0px auto;
+	}
+	
+	.titulo	
+	{
+		display:none;
+	}
+	.container {
+		padding-right: 2px;
+		padding-left: 2px;
+		margin-right: auto;
+		margin-left: auto;
+	}	
+ }
+/*
+ * Para 700px o menos
+ */
+
+
+/*  @media screen and (max-width: 1024px){ 	
+	input[type="text"]
+	{
+		width:100%;
+	}
+	[class*="col-"] {
+	  border: 1px solid #dedede;
+	}	
+ }*/

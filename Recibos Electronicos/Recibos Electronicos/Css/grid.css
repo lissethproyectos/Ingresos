@@ -1,0 +1,33 @@
+.mGrid {   
+    width: 90%;   
+    background-color: #E3EAEB;   
+    margin: 5px 0 10px 0;   
+    border: solid 1px #808080;   
+    border-collapse:collapse;   
+    font-size:12px;
+}  
+.mGrid td {   
+    padding: 2px;   
+    border-left: solid 1px #808080;   
+    color: #040404;   
+}  
+.mGrid th {   
+    padding: 4px 2px;   
+    color: #fff;   
+    background: #469C9D; 
+    border-left: solid 1px #808080;
+    font-size:12px;
+}  
+.mGrid .alt { background: #fcfcfc url(grd_alt.png) repeat-x top; }  
+.mGrid .pgr { background:#469C9D url(grd_pgr.png) repeat-x top; }  
+.mGrid .pgr table { margin: 5px 0; }  
+.mGrid .pgr td {   
+    border-width: 0;   
+    padding: 0 6px;   
+    border-left: solid 1px #808080;  
+    font-weight: bold;   
+    color: #fff;   
+    line-height: 12px;   
+ }     
+.mGrid .pgr a { color: #666; text-decoration: none; }  
+.mGrid .pgr a:hover { color: #000; text-decoration: none; }  

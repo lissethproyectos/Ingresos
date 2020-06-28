@@ -1,0 +1,243 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Recibos_Electronicos.SiteMaster" %>
+
+<%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    Namespace="System.Web.UI" TagPrefix="asp" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Sistema de Ingresos</title>
+    <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/bootstrap/css/mdb.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://sysweb.unach.mx/resources/css/StyleCOIN.css" />
+    <link href="https://sysweb.unach.mx/resources/css/modal.css" type="text/css" rel="stylesheet" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://sysweb.unach.mx/ingresos/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+
+    <script type="text/javascript" src="https://sysweb.unach.mx/resources/js/index.js" charset="iso-8859-1"></script>
+    <script type="text/javascript" src="Js/jsGeneral.js"> </script>
+
+
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
+
+
+    <%--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">--%>
+    <style type="text/css">
+        .dropdown-item:focus, .dropdown-item:hover {
+            color: #16181b;
+            text-decoration: none;
+            background-color: #829db8;
+        }
+
+        .largefont {
+            color: #0066FF;
+            font-family: arial;
+            font-size: 6px;
+        }
+
+        .navbar {
+            padding: 1px 1px 0px 1px;
+        }
+
+        .table td, .table th {
+            padding: .10rem;
+        }
+
+        .enc {
+            background-color: #d8d8d8;
+        }
+
+        .bg-dark {
+            background-color: #275090 !important;
+        }
+
+        .navbar-dark .navbar-nav .nav-link {
+            color: #ffffff;
+            font-size: 13px;
+        }
+
+        .quedate_en_casa {
+            position: absolute;
+            top: 0;
+            right: 0;
+            text-align: right;
+            margin: 0 auto;
+            width: 20px;
+        }
+
+        @media (max-width:640px) {
+            .image_section img:first-child {
+                display: none;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <a id="wrap"></a>
+    <form id="form1" runat="server" enctype="multipart/form-data">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="True"></asp:ScriptManager>
+        <div class="navbar navbar-inverse navbar-fixed-top" style="background-color: #18386b;">
+            <div class="top-line" style="width: 100%">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-start">
+                        <a href="https://sysweb.unach.mx/DSIA/">
+                            <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
+                        </a>
+                    </div>
+                    <div class="align-self-center p-2 bd-highlight text-center">
+                        <h5 class="text-uppercase text-light font-weight-bold">
+                            <div class="media-body">
+                                <h4 class="media-heading">Recaudación de Pagos</h4>
+                                <h6>Ingresos</h6>
+                            </div>
+                        </h5>
+                    </div>
+                    <div class="d-flex justify-content-end">
+
+                        <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
+                    </div>
+                </div>
+                <nav class="navbar navbar-expand-lg navbar-dark primary-color" style="width: 100%">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarsExampleDefault">    
+                     <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
+                            <ContentTemplate>
+                                <asp:Menu ID="MenuTop" runat="server" 
+                                                    StaticMenuStyle-CssClass= "nav navbar-nav secondary-color"
+                                                    StaticSelectedStyle-CssClass="active"
+                                                    Orientation="Horizontal"  RenderingMode="List" 
+                                                    Sonmenuitemclick="MenuTop_MenuItemClick" 
+                                                    IncludeStyleBlock="False">                        
+                                                    <DynamicMenuStyle CssClass="dropdown-menu"></DynamicMenuStyle>
+                                                    <StaticMenuItemStyle CssClass="nav-link" Font-Names="Calibri" Font-Size="12px" />
+                                                    <StaticMenuStyle CssClass="nav navbar-nav"></StaticMenuStyle>
+                                                    <StaticSelectedStyle Font-Bold="true"   />
+                                                    <DynamicMenuItemStyle CssClass="dropdown-item" />                    
+                                                        <Items>
+                                                            <asp:MenuItem Text="Ingresos" Value="Ingresos"></asp:MenuItem>
+                                                            <asp:MenuItem Text="Catálogos" Value="Catálogos"></asp:MenuItem>
+                                                        </Items>
+                                                    <StaticHoverStyle CssClass="dropdown-menu"/>
+                                                    </asp:Menu>
+                                </ContentTemplate>
+                         </asp:UpdatePanel>
+                    </div>
+                    <div class="btn-group dropdown my-2 my-lg-9" style="left: 0px; top: 0px">
+                        <asp:Button ID="bttnCorreoUnach" runat="server" Text="Button" class="btn_usuario btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></asp:Button>
+                        <div class="dropdown-menu dropdown-menu-sm-right" style="background-color:#4a769b">                
+                            <a class="dropdown-item"><div style="color:#fff;"><asp:Label ID="lblUsuario" runat="server"></asp:Label></div></a>                   
+                            <a class="dropdown-item"><input type="button" id="bttnActualiza" class="btn btn-info" value="Actualizar Datos"/></a>
+                            <a class="dropdown-item">
+                            <asp:Button ID="bttnCerrarSesion" runat="server" Text="Cerrar Sesión" CssClass="btn btn-light" OnClick="bttnCerrarSesion_Click" TabIndex="1000" /></a>
+                        </div>                       
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <div data-role="main" class="ui-content" style="min-height: 400px;">
+            <div class="p_info">
+                <div class="c_info">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+                            <asp:SiteMapPath ID="SiteMapPath1" runat="server" CssClass="SiteMap">
+                                <RootNodeStyle Font-Bold="True" />
+                            </asp:SiteMapPath>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                    <asp:Label ID="lblMsjE" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                </div>
+            </div>
+            <div class="container">
+                <div>
+                    <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+        <div class="piePagina" style="width: 100%">
+            <footer class="page-footer font-small pt-4" style="background-color: #585858; color: #fff">
+
+
+  <!-- Footer Text -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+<!-- Grid column -->
+      <div class="col-md-6 mb-md-0 mb-3">
+        <h6 class="text-uppercase mb-4 font-weight-bold">Contacto</h6>
+        <p>
+          <i class="fas fa-home mr-3"></i>2da. Poniente Sur No. 108, Edificio Maciel, 3er. Piso Tuxtla Gutiérrez, Chiapas.</p>
+        <p>
+          <i class="fas fa-envelope mr-3"></i>sysweb@unach.mx</p>
+      </div>
+              <div class="col-md-6 mb-md-0 mb-3">
+                  <div class="text-xl-center">
+                      
+                      </div>
+
+</div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Text -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">Universidad Autónoma de Chiapas
+  </div>
+  <!-- Copyright -->
+
+</footer>
+        </div>
+    </form>
+</body>
+</html>
+
+<script language="javascript" type="text/javascript">
+
+    $(document).ready(function () {
+        jQuery(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop().fadeIn("fast");
+                },
+                function () {
+                    $('.dropdown-menu', this).stop().fadeOut("fast");
+                });
+        });
+    });
+
+    $('#MenuTop ul li a.selected').parent().addClass('fa fa-home');
+
+
+    $("#bttnActualiza").click(function () {
+        //alert("pasa");
+        window.location.href = 'https://sysweb.unach.mx/administrator';
+    });
+
+
+    $("#imgSYSWEB").click(function () {
+        window.location.href = 'https://sysweb.unach.mx';
+    });
+
+    $("#imgUNACH").click(function () {
+        window.location.href = 'https://www.unach.mx/';
+    });
+</script>

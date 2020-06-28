@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{21015761-B420-49B3-B521-2943D03EAAB9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CapaEntidad</RootNamespace>
+    <AssemblyName>CapaEntidad</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Alumno.cs" />
+    <Compile Include="Banco.cs" />
+    <Compile Include="Bien.cs" />
+    <Compile Include="CajaFactura.cs" />
+    <Compile Include="Comun.cs" />
+    <Compile Include="ConceptoCuotaLibre.cs" />
+    <Compile Include="ConceptoPago.cs" />
+    <Compile Include="Control_Cierre.cs" />
+    <Compile Include="CuotasLenguasSIAE.cs" />
+    <Compile Include="Curso.cs" />
+    <Compile Include="DetConcepto.cs" />
+    <Compile Include="DetFactura.cs" />
+    <Compile Include="Evento.cs" />
+    <Compile Include="Evento_Tipo_Participante2.cs" />
+    <Compile Include="Factura.cs" />
+    <Compile Include="FichaReferenciada.cs" />
+    <Compile Include="Mensaje.cs" />
+    <Compile Include="Menus.cs" />
+    <Compile Include="MultiPago.cs" />
+    <Compile Include="Oficio.cs" />
+    <Compile Include="Participante.cs" />
+    <Compile Include="Persona.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registro.cs" />
+    <Compile Include="Retencion.cs" />
+    <Compile Include="Sesion.cs" />
+    <Compile Include="Configuracion_Evento.cs" />
+    <Compile Include="Usuario.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
