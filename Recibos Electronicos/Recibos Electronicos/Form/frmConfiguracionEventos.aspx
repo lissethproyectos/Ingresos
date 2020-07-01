@@ -95,6 +95,13 @@
             white-space: nowrap
         }
 
+         .TituloModalPopupMsg{
+            z-index: 2 !important;
+        }
+        .modalBackground_Proy{
+            z-index: 1 !important;
+        }
+
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
