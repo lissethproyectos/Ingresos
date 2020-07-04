@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Recibos_Electronicos.Form {
-    
-    
-    public partial class FrmFacturas {
-        
+namespace Recibos_Electronicos.Form
+{
+
+
+    public partial class FrmFacturas
+    {
+
         /// <summary>
         /// Control UpdateProgress4.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress4;
-        
+
         /// <summary>
         /// Control UpdatePanel50.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel50;
-        
+
         /// <summary>
         /// Control lblDependencia.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDependencia;
-        
+
         /// <summary>
         /// Control UpdatePanel48.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel48;
-        
+
         /// <summary>
         /// Control ddlDependencia.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDependencia;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator14.
         /// </summary>
@@ -65,7 +67,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator14;
-        
+
         /// <summary>
         /// Control UpdatePanel11.
         /// </summary>
@@ -74,7 +76,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel11;
-        
+
         /// <summary>
         /// Control mltViewFacturas.
         /// </summary>
@@ -83,7 +85,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.MultiView mltViewFacturas;
-        
+
         /// <summary>
         /// Control Datos.
         /// </summary>
@@ -92,7 +94,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View Datos;
-        
+
         /// <summary>
         /// Control lblFecha_Factura_Ini.
         /// </summary>
@@ -101,7 +103,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFecha_Factura_Ini;
-        
+
         /// <summary>
         /// Control txtFecha_Factura_Ini.
         /// </summary>
@@ -110,7 +112,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFecha_Factura_Ini;
-        
+
         /// <summary>
         /// Control txtFecha_Factura_Ini_CalendarExtender.
         /// </summary>
@@ -119,7 +121,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender txtFecha_Factura_Ini_CalendarExtender;
-        
+
         /// <summary>
         /// Control imgCalendarioIni.
         /// </summary>
@@ -128,7 +130,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgCalendarioIni;
-        
+
         /// <summary>
         /// Control lblFecha_Factura_Fin.
         /// </summary>
@@ -137,7 +139,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFecha_Factura_Fin;
-        
+
         /// <summary>
         /// Control txtFecha_Factura_Fin.
         /// </summary>
@@ -146,7 +148,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFecha_Factura_Fin;
-        
+
         /// <summary>
         /// Control txtFecha_Factura_Fin_CalendarExtender.
         /// </summary>
@@ -155,7 +157,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender txtFecha_Factura_Fin_CalendarExtender;
-        
+
         /// <summary>
         /// Control imgCalendarioFin.
         /// </summary>
@@ -164,7 +166,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgCalendarioFin;
-        
+
         /// <summary>
         /// Control ddlAvance.
         /// </summary>
@@ -173,7 +175,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlAvance;
-        
+
         /// <summary>
         /// Control hddnBandera.
         /// </summary>
@@ -182,7 +184,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hddnBandera;
-        
+
         /// <summary>
         /// Control Label4.
         /// </summary>
@@ -191,7 +193,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label4;
-        
+
         /// <summary>
         /// Control ddlTipo.
         /// </summary>
@@ -200,7 +202,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
-        
+
         /// <summary>
         /// Control lblStatus.
         /// </summary>
@@ -209,7 +211,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblStatus;
-        
+
         /// <summary>
         /// Control ddlStatus.
         /// </summary>
@@ -218,7 +220,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlStatus;
-        
+
         /// <summary>
         /// Control mltViewTipo.
         /// </summary>
@@ -227,7 +229,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.MultiView mltViewTipo;
-        
+
         /// <summary>
         /// Control View1.
         /// </summary>
@@ -236,7 +238,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View View1;
-        
+
         /// <summary>
         /// Control pnlMsg.
         /// </summary>
@@ -245,16 +247,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlMsg;
-        
-        /// <summary>
-        /// Control Image1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
-        
+
         /// <summary>
         /// Control UpdatePanel7.
         /// </summary>
@@ -263,7 +256,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel7;
-        
+
         /// <summary>
         /// Control btnSi.
         /// </summary>
@@ -272,7 +265,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSi;
-        
+
         /// <summary>
         /// Control btnNo.
         /// </summary>
@@ -281,7 +274,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNo;
-        
+
         /// <summary>
         /// Control hddnModal.
         /// </summary>
@@ -290,7 +283,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hddnModal;
-        
+
         /// <summary>
         /// Control ModalPopup.
         /// </summary>
@@ -299,7 +292,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.ModalPopupExtender ModalPopup;
-        
+
         /// <summary>
         /// Control pnlOpcConfirma.
         /// </summary>
@@ -308,7 +301,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlOpcConfirma;
-        
+
         /// <summary>
         /// Control rdoStatusConfirmados.
         /// </summary>
@@ -317,7 +310,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdoStatusConfirmados;
-        
+
         /// <summary>
         /// Control txtReferencia.
         /// </summary>
@@ -326,7 +319,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReferencia;
-        
+
         /// <summary>
         /// Control imgBttnBuscar.
         /// </summary>
@@ -335,7 +328,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBttnBuscar;
-        
+
         /// <summary>
         /// Control imgBttnNuevo.
         /// </summary>
@@ -344,7 +337,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBttnNuevo;
-        
+
         /// <summary>
         /// Control ValidationSummary1.
         /// </summary>
@@ -353,7 +346,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary ValidationSummary1;
-        
+
         /// <summary>
         /// Control grdDatosFactura.
         /// </summary>
@@ -362,7 +355,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdDatosFactura;
-        
+
         /// <summary>
         /// Control hddnDoctos.
         /// </summary>
@@ -371,7 +364,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hddnDoctos;
-        
+
         /// <summary>
         /// Control modalDoctos.
         /// </summary>
@@ -380,7 +373,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.ModalPopupExtender modalDoctos;
-        
+
         /// <summary>
         /// Control pnlDoctos.
         /// </summary>
@@ -389,7 +382,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlDoctos;
-        
+
         /// <summary>
         /// Control grdDoctosFactura.
         /// </summary>
@@ -398,7 +391,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdDoctosFactura;
-        
+
         /// <summary>
         /// Control bttnSalir.
         /// </summary>
@@ -407,7 +400,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bttnSalir;
-        
+
         /// <summary>
         /// Control View2.
         /// </summary>
@@ -416,7 +409,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View View2;
-        
+
         /// <summary>
         /// Control Reporte.
         /// </summary>
@@ -425,7 +418,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View Reporte;
-        
+
         /// <summary>
         /// Control UpdatePanel6.
         /// </summary>
@@ -434,7 +427,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel6;
-        
+
         /// <summary>
         /// Control btnRegresar.
         /// </summary>
@@ -443,7 +436,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRegresar;
-        
+
         /// <summary>
         /// Control UpdateProgress2.
         /// </summary>
@@ -452,7 +445,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress2;
-        
+
         /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
@@ -461,7 +454,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
+
         /// <summary>
         /// Control Facturas.
         /// </summary>
@@ -470,7 +463,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View Facturas;
-        
+
         /// <summary>
         /// Control validationSumGuardar.
         /// </summary>
@@ -479,7 +472,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary validationSumGuardar;
-        
+
         /// <summary>
         /// Control tabFacturas.
         /// </summary>
@@ -488,7 +481,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.TabContainer tabFacturas;
-        
+
         /// <summary>
         /// Control TabPanel1.
         /// </summary>
@@ -497,7 +490,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.TabPanel TabPanel1;
-        
+
         /// <summary>
         /// Control lblReceptor_Rfc.
         /// </summary>
@@ -506,7 +499,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptor_Rfc;
-        
+
         /// <summary>
         /// Control txtReceptor_Rfc.
         /// </summary>
@@ -515,7 +508,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReceptor_Rfc;
-        
+
         /// <summary>
         /// Control valRFC.
         /// </summary>
@@ -524,7 +517,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valRFC;
-        
+
         /// <summary>
         /// Control valLongitudRFC0.
         /// </summary>
@@ -533,7 +526,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator valLongitudRFC0;
-        
+
         /// <summary>
         /// Control lblReceptorTipoPersona.
         /// </summary>
@@ -542,7 +535,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptorTipoPersona;
-        
+
         /// <summary>
         /// Control UpdatePanel51.
         /// </summary>
@@ -551,7 +544,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel51;
-        
+
         /// <summary>
         /// Control rdoBttnReceptorTipoPersona.
         /// </summary>
@@ -560,7 +553,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdoBttnReceptorTipoPersona;
-        
+
         /// <summary>
         /// Control valTipoPers.
         /// </summary>
@@ -569,7 +562,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valTipoPers;
-        
+
         /// <summary>
         /// Control lblReceptor_Domicilio.
         /// </summary>
@@ -578,7 +571,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptor_Domicilio;
-        
+
         /// <summary>
         /// Control txtReceptor_Domicilio.
         /// </summary>
@@ -587,7 +580,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReceptor_Domicilio;
-        
+
         /// <summary>
         /// Control valCalle_Fiscal.
         /// </summary>
@@ -596,7 +589,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valCalle_Fiscal;
-        
+
         /// <summary>
         /// Control lblReceptor_Nombre.
         /// </summary>
@@ -605,7 +598,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptor_Nombre;
-        
+
         /// <summary>
         /// Control txtReceptor_Nombre.
         /// </summary>
@@ -614,7 +607,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReceptor_Nombre;
-        
+
         /// <summary>
         /// Control valRazon_Social.
         /// </summary>
@@ -623,7 +616,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valRazon_Social;
-        
+
         /// <summary>
         /// Control lblReceptor_CP.
         /// </summary>
@@ -632,7 +625,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptor_CP;
-        
+
         /// <summary>
         /// Control txtReceptor_CP.
         /// </summary>
@@ -641,7 +634,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReceptor_CP;
-        
+
         /// <summary>
         /// Control valCP_Fiscal.
         /// </summary>
@@ -650,7 +643,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valCP_Fiscal;
-        
+
         /// <summary>
         /// Control lblReceptor_Colonia.
         /// </summary>
@@ -659,7 +652,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptor_Colonia;
-        
+
         /// <summary>
         /// Control txtReceptor_Colonia.
         /// </summary>
@@ -668,7 +661,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReceptor_Colonia;
-        
+
         /// <summary>
         /// Control valColonia_Fiscal.
         /// </summary>
@@ -677,7 +670,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valColonia_Fiscal;
-        
+
         /// <summary>
         /// Control lblReceptor_Estado.
         /// </summary>
@@ -686,7 +679,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptor_Estado;
-        
+
         /// <summary>
         /// Control UpdatePanel12.
         /// </summary>
@@ -695,7 +688,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel12;
-        
+
         /// <summary>
         /// Control ddlReceptor_Estado.
         /// </summary>
@@ -704,7 +697,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlReceptor_Estado;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator12.
         /// </summary>
@@ -713,7 +706,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator12;
-        
+
         /// <summary>
         /// Control lblMunicipio_Fiscal.
         /// </summary>
@@ -722,7 +715,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMunicipio_Fiscal;
-        
+
         /// <summary>
         /// Control ddlReceptor_Municipio.
         /// </summary>
@@ -731,7 +724,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlReceptor_Municipio;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator13.
         /// </summary>
@@ -740,7 +733,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator13;
-        
+
         /// <summary>
         /// Control lblReceptor_MetodoPago.
         /// </summary>
@@ -749,7 +742,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptor_MetodoPago;
-        
+
         /// <summary>
         /// Control ddlReceptor_MetodoPago.
         /// </summary>
@@ -758,7 +751,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlReceptor_MetodoPago;
-        
+
         /// <summary>
         /// Control valMetodoPago.
         /// </summary>
@@ -767,7 +760,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valMetodoPago;
-        
+
         /// <summary>
         /// Control lblReceptor_Telefono.
         /// </summary>
@@ -776,7 +769,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptor_Telefono;
-        
+
         /// <summary>
         /// Control txtReceptor_Telefono.
         /// </summary>
@@ -785,7 +778,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReceptor_Telefono;
-        
+
         /// <summary>
         /// Control lblReceptor_Correo.
         /// </summary>
@@ -794,7 +787,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblReceptor_Correo;
-        
+
         /// <summary>
         /// Control txtReceptor_Correo.
         /// </summary>
@@ -803,7 +796,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReceptor_Correo;
-        
+
         /// <summary>
         /// Control chkRechazado.
         /// </summary>
@@ -812,7 +805,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkRechazado;
-        
+
         /// <summary>
         /// Control lblRechazado.
         /// </summary>
@@ -821,7 +814,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRechazado;
-        
+
         /// <summary>
         /// Control UpdatePanel39.
         /// </summary>
@@ -830,7 +823,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel39;
-        
+
         /// <summary>
         /// Control txtObservaciones.
         /// </summary>
@@ -839,7 +832,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtObservaciones;
-        
+
         /// <summary>
         /// Control chkConfirmaSolicitud.
         /// </summary>
@@ -848,7 +841,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkConfirmaSolicitud;
-        
+
         /// <summary>
         /// Control valCheck.
         /// </summary>
@@ -857,7 +850,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator valCheck;
-        
+
         /// <summary>
         /// Control TabPanel3.
         /// </summary>
@@ -866,7 +859,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.TabPanel TabPanel3;
-        
+
         /// <summary>
         /// Control UpdatePanel47.
         /// </summary>
@@ -875,7 +868,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel47;
-        
+
         /// <summary>
         /// Control Accordion1.
         /// </summary>
@@ -884,7 +877,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.Accordion Accordion1;
-        
+
         /// <summary>
         /// Control lblFolio.
         /// </summary>
@@ -893,7 +886,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFolio;
-        
+
         /// <summary>
         /// Control txtFolio.
         /// </summary>
@@ -902,7 +895,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFolio;
-        
+
         /// <summary>
         /// Control valFolio.
         /// </summary>
@@ -911,7 +904,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valFolio;
-        
+
         /// <summary>
         /// Control lblFecha.
         /// </summary>
@@ -920,7 +913,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFecha;
-        
+
         /// <summary>
         /// Control txtFecha.
         /// </summary>
@@ -929,7 +922,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFecha;
-        
+
         /// <summary>
         /// Control txtFecha_CalendarExtender.
         /// </summary>
@@ -938,7 +931,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender txtFecha_CalendarExtender;
-        
+
         /// <summary>
         /// Control imgFecha.
         /// </summary>
@@ -947,7 +940,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgFecha;
-        
+
         /// <summary>
         /// Control valFecha.
         /// </summary>
@@ -956,7 +949,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valFecha;
-        
+
         /// <summary>
         /// Control lblImporte.
         /// </summary>
@@ -965,7 +958,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblImporte;
-        
+
         /// <summary>
         /// Control txtImporte.
         /// </summary>
@@ -974,7 +967,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtImporte;
-        
+
         /// <summary>
         /// Control valImporte.
         /// </summary>
@@ -983,7 +976,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valImporte;
-        
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -992,7 +985,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control lblTitVoucher.
         /// </summary>
@@ -1001,7 +994,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTitVoucher;
-        
+
         /// <summary>
         /// Control lblVoucher.
         /// </summary>
@@ -1010,7 +1003,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblVoucher;
-        
+
         /// <summary>
         /// Control fileVoucher.
         /// </summary>
@@ -1019,7 +1012,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileVoucher;
-        
+
         /// <summary>
         /// Control btnVoucher.
         /// </summary>
@@ -1028,7 +1021,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVoucher;
-        
+
         /// <summary>
         /// Control RegularExpressionValidator3.
         /// </summary>
@@ -1037,7 +1030,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
-        
+
         /// <summary>
         /// Control lblArchivoVoucher.
         /// </summary>
@@ -1046,7 +1039,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink lblArchivoVoucher;
-        
+
         /// <summary>
         /// Control UpdatePanel49.
         /// </summary>
@@ -1055,7 +1048,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel49;
-        
+
         /// <summary>
         /// Control linkBttnEliminarVoucher.
         /// </summary>
@@ -1064,7 +1057,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton linkBttnEliminarVoucher;
-        
+
         /// <summary>
         /// Control AccordionPane1.
         /// </summary>
@@ -1073,7 +1066,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.AccordionPane AccordionPane1;
-        
+
         /// <summary>
         /// Control UpdatePanel2.
         /// </summary>
@@ -1082,7 +1075,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel2;
-        
+
         /// <summary>
         /// Control lblNumOficio.
         /// </summary>
@@ -1091,7 +1084,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNumOficio;
-        
+
         /// <summary>
         /// Control txtNumOficio.
         /// </summary>
@@ -1100,7 +1093,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumOficio;
-        
+
         /// <summary>
         /// Control valNumOficio.
         /// </summary>
@@ -1109,7 +1102,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valNumOficio;
-        
+
         /// <summary>
         /// Control lblTitOficio.
         /// </summary>
@@ -1118,7 +1111,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTitOficio;
-        
+
         /// <summary>
         /// Control lblOficio.
         /// </summary>
@@ -1127,7 +1120,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblOficio;
-        
+
         /// <summary>
         /// Control fileOficio.
         /// </summary>
@@ -1136,7 +1129,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileOficio;
-        
+
         /// <summary>
         /// Control btnOficio.
         /// </summary>
@@ -1145,7 +1138,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnOficio;
-        
+
         /// <summary>
         /// Control RegularExpressionValidator1.
         /// </summary>
@@ -1154,7 +1147,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
-        
+
         /// <summary>
         /// Control lblArchivoOficio.
         /// </summary>
@@ -1163,7 +1156,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink lblArchivoOficio;
-        
+
         /// <summary>
         /// Control linkBttnEliminarOficio.
         /// </summary>
@@ -1172,7 +1165,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton linkBttnEliminarOficio;
-        
+
         /// <summary>
         /// Control AccordionPane2.
         /// </summary>
@@ -1181,7 +1174,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.AccordionPane AccordionPane2;
-        
+
         /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
@@ -1190,7 +1183,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
+
         /// <summary>
         /// Control lblImporteConvenio.
         /// </summary>
@@ -1199,7 +1192,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblImporteConvenio;
-        
+
         /// <summary>
         /// Control txtImporteConvenio.
         /// </summary>
@@ -1208,7 +1201,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtImporteConvenio;
-        
+
         /// <summary>
         /// Control valImpConvenio.
         /// </summary>
@@ -1217,7 +1210,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valImpConvenio;
-        
+
         /// <summary>
         /// Control lblIVA.
         /// </summary>
@@ -1226,7 +1219,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblIVA;
-        
+
         /// <summary>
         /// Control txtIVA.
         /// </summary>
@@ -1235,7 +1228,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtIVA;
-        
+
         /// <summary>
         /// Control valIva.
         /// </summary>
@@ -1244,7 +1237,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valIva;
-        
+
         /// <summary>
         /// Control lblTotal.
         /// </summary>
@@ -1253,7 +1246,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotal;
-        
+
         /// <summary>
         /// Control txtTotal.
         /// </summary>
@@ -1262,7 +1255,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtTotal;
-        
+
         /// <summary>
         /// Control valTotal.
         /// </summary>
@@ -1271,7 +1264,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valTotal;
-        
+
         /// <summary>
         /// Control lblObservacionesConvenio.
         /// </summary>
@@ -1280,7 +1273,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblObservacionesConvenio;
-        
+
         /// <summary>
         /// Control txtObservacionesConvenio.
         /// </summary>
@@ -1289,7 +1282,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtObservacionesConvenio;
-        
+
         /// <summary>
         /// Control lblTitConvenio.
         /// </summary>
@@ -1298,7 +1291,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTitConvenio;
-        
+
         /// <summary>
         /// Control lblConvenio.
         /// </summary>
@@ -1307,7 +1300,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblConvenio;
-        
+
         /// <summary>
         /// Control fileConvenio.
         /// </summary>
@@ -1316,7 +1309,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileConvenio;
-        
+
         /// <summary>
         /// Control btnConvenio.
         /// </summary>
@@ -1325,7 +1318,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnConvenio;
-        
+
         /// <summary>
         /// Control RegularExpressionValidator4.
         /// </summary>
@@ -1334,7 +1327,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator4;
-        
+
         /// <summary>
         /// Control lblArchivoConvenio.
         /// </summary>
@@ -1343,7 +1336,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink lblArchivoConvenio;
-        
+
         /// <summary>
         /// Control linkBttnEliminarConvenio.
         /// </summary>
@@ -1352,7 +1345,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton linkBttnEliminarConvenio;
-        
+
         /// <summary>
         /// Control lblNivel.
         /// </summary>
@@ -1361,7 +1354,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNivel;
-        
+
         /// <summary>
         /// Control ddlNivel.
         /// </summary>
@@ -1370,7 +1363,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlNivel;
-        
+
         /// <summary>
         /// Control valConceptos.
         /// </summary>
@@ -1379,7 +1372,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CustomValidator valConceptos;
-        
+
         /// <summary>
         /// Control lblConceptosDisp.
         /// </summary>
@@ -1388,7 +1381,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblConceptosDisp;
-        
+
         /// <summary>
         /// Control lblConceptosAsig.
         /// </summary>
@@ -1397,7 +1390,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblConceptosAsig;
-        
+
         /// <summary>
         /// Control grvConceptosDisp.
         /// </summary>
@@ -1406,7 +1399,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvConceptosDisp;
-        
+
         /// <summary>
         /// Control grvConceptos.
         /// </summary>
@@ -1415,7 +1408,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvConceptos;
-        
+
         /// <summary>
         /// Control TabPanel2.
         /// </summary>
@@ -1424,7 +1417,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.TabPanel TabPanel2;
-        
+
         /// <summary>
         /// Control UpdatePanelFoto.
         /// </summary>
@@ -1433,7 +1426,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanelFoto;
-        
+
         /// <summary>
         /// Control lblFolio_Fact_Cja.
         /// </summary>
@@ -1442,7 +1435,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFolio_Fact_Cja;
-        
+
         /// <summary>
         /// Control txtFolio_Fact_Cja.
         /// </summary>
@@ -1451,7 +1444,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFolio_Fact_Cja;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator9.
         /// </summary>
@@ -1460,7 +1453,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
-        
+
         /// <summary>
         /// Control lblFecha_Fact_Cja.
         /// </summary>
@@ -1469,7 +1462,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblFecha_Fact_Cja;
-        
+
         /// <summary>
         /// Control txtFecha_Fact_Cja.
         /// </summary>
@@ -1478,7 +1471,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFecha_Fact_Cja;
-        
+
         /// <summary>
         /// Control txtFecha_Fact_Cja_CalendarExtender.
         /// </summary>
@@ -1487,7 +1480,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender txtFecha_Fact_Cja_CalendarExtender;
-        
+
         /// <summary>
         /// Control imgFecha_Fact_Cja.
         /// </summary>
@@ -1496,7 +1489,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgFecha_Fact_Cja;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator8.
         /// </summary>
@@ -1505,7 +1498,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
-        
+
         /// <summary>
         /// Control lblArchivos.
         /// </summary>
@@ -1514,7 +1507,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblArchivos;
-        
+
         /// <summary>
         /// Control fileFactura.
         /// </summary>
@@ -1523,7 +1516,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload fileFactura;
-        
+
         /// <summary>
         /// Control btnAgregaFactura.
         /// </summary>
@@ -1532,7 +1525,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnAgregaFactura;
-        
+
         /// <summary>
         /// Control RegularExpressionValidator2.
         /// </summary>
@@ -1541,7 +1534,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
-        
+
         /// <summary>
         /// Control grdArchivos.
         /// </summary>
@@ -1550,7 +1543,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdArchivos;
-        
+
         /// <summary>
         /// Control btnGuardarEditar.
         /// </summary>
@@ -1559,7 +1552,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnGuardarEditar;
-        
+
         /// <summary>
         /// Control btnCancelarEditar.
         /// </summary>
@@ -1568,7 +1561,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelarEditar;
-        
+
         /// <summary>
         /// Control hddnCorreo.
         /// </summary>
@@ -1577,7 +1570,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hddnCorreo;
-        
+
         /// <summary>
         /// Control modalCorreo.
         /// </summary>
@@ -1586,7 +1579,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.ModalPopupExtender modalCorreo;
-        
+
         /// <summary>
         /// Control pnlCorreo.
         /// </summary>
@@ -1595,7 +1588,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlCorreo;
-        
+
         /// <summary>
         /// Control UpdatePanel35.
         /// </summary>
@@ -1604,7 +1597,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel35;
-        
+
         /// <summary>
         /// Control lblMensajeCorreo.
         /// </summary>
@@ -1613,7 +1606,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMensajeCorreo;
-        
+
         /// <summary>
         /// Control UpdatePanel36.
         /// </summary>
@@ -1622,7 +1615,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel36;
-        
+
         /// <summary>
         /// Control lblCorreo.
         /// </summary>
@@ -1631,7 +1624,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCorreo;
-        
+
         /// <summary>
         /// Control UpdatePanel34.
         /// </summary>
@@ -1640,7 +1633,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel34;
-        
+
         /// <summary>
         /// Control txtCorreo.
         /// </summary>
@@ -1649,7 +1642,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCorreo;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator6.
         /// </summary>
@@ -1658,7 +1651,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator6;
-        
+
         /// <summary>
         /// Control UpdatePanel38.
         /// </summary>
@@ -1667,7 +1660,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel38;
-        
+
         /// <summary>
         /// Control UpdateProgress12.
         /// </summary>
@@ -1676,7 +1669,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress12;
-        
+
         /// <summary>
         /// Control UpdatePanel37.
         /// </summary>
@@ -1685,7 +1678,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel37;
-        
+
         /// <summary>
         /// Control bttnCorreo.
         /// </summary>
@@ -1694,7 +1687,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bttnCorreo;
-        
+
         /// <summary>
         /// Control bttnCancelarCorreo.
         /// </summary>

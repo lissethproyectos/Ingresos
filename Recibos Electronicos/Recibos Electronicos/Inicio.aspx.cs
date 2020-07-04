@@ -26,6 +26,7 @@ namespace Recibos_Electronicos
         CN_Usuario CNUsuario = new CN_Usuario();
         CN_Alumno CNAlumno = new CN_Alumno();
         CN_Evento CNEvento = new CN_Evento();
+        CN_CajaFactura CNCjaFactura = new CN_CajaFactura();
         string Verificador = "";
 
         #endregion
@@ -350,5 +351,52 @@ namespace Recibos_Electronicos
         {
             CargarGrid();
         }
+
+        protected void grdDoctosFactura_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            try
+            {
+                grdDatosFactura.PageIndex = 0;
+                grdDatosFactura.PageIndex = e.NewPageIndex;
+                CargarGridDoctos();
+            }
+            catch (Exception ex)
+            {
+                string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
+            }
+        }
+
+        private void CargarGridDoctos()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                grdDoctosFactura.DataSource = dt;
+                grdDoctosFactura.DataSource = GetListDoctos();
+                grdDoctosFactura.DataBind();
+            }
+            catch (Exception ex)
+            {
+                string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
+            }
+        }
+
+        private List<Factura> GetListDoctos()
+        {
+            try
+            {
+                List<Factura> List = new List<Factura>();
+                ObjFactura.ID_FACT = Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
+                CNCjaFactura.FacturaDoctosConsultaGrid(ObjFactura, ref List);
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

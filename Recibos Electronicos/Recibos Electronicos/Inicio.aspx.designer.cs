@@ -294,6 +294,15 @@ namespace Recibos_Electronicos
         protected global::System.Web.UI.WebControls.GridView grdDatosFactura;
 
         /// <summary>
+        /// Control hddnFactura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddnFactura;
+
+        /// <summary>
         /// Control UpdatePanel41.
         /// </summary>
         /// <remarks>
@@ -445,5 +454,32 @@ namespace Recibos_Electronicos
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSalir;
+
+        /// <summary>
+        /// Control pnlDoctos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlDoctos;
+
+        /// <summary>
+        /// Control grdDoctosFactura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdDoctosFactura;
+
+        /// <summary>
+        /// Control bttnSalir.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bttnSalir;
     }
 }

@@ -379,6 +379,7 @@
     <Content Include="Imagenes\esq-inf-izq.png" />
     <Content Include="Imagenes\esq-sup-der.png" />
     <Content Include="Imagenes\esq-sup-izq.png" />
+    <Content Include="Imagenes\fact_xml.png" />
     <Content Include="Imagenes\files_edit.png" />
     <Content Include="Imagenes\fondo.jpg" />
     <Content Include="Imagenes\ico-pdf.png" />
