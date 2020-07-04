@@ -303,6 +303,15 @@ namespace Recibos_Electronicos
         protected global::System.Web.UI.WebControls.HiddenField hddnFactura;
 
         /// <summary>
+        /// Control modalFactura.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender modalFactura;
+
+        /// <summary>
         /// Control UpdatePanel41.
         /// </summary>
         /// <remarks>
@@ -465,6 +474,15 @@ namespace Recibos_Electronicos
         protected global::System.Web.UI.WebControls.Panel pnlDoctos;
 
         /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
         /// Control grdDoctosFactura.
         /// </summary>
         /// <remarks>
@@ -474,12 +492,12 @@ namespace Recibos_Electronicos
         protected global::System.Web.UI.WebControls.GridView grdDoctosFactura;
 
         /// <summary>
-        /// Control bttnSalir.
+        /// Control bttnSalirDoctos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bttnSalir;
+        protected global::System.Web.UI.WebControls.Button bttnSalirDoctos;
     }
 }

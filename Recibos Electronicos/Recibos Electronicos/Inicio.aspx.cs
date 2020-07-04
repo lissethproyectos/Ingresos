@@ -398,5 +398,24 @@ namespace Recibos_Electronicos
             }
         }
 
+        protected void imgBttnFact_Click(object sender, ImageClickEventArgs e)
+        {
+            ImageButton cbi = (ImageButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            try
+            {
+                grdDatosFactura.SelectedIndex = row.RowIndex;
+                CargarGridDoctos();
+                modalFactura.Show();
+            }
+
+
+            catch (Exception ex)
+            {
+                string Msj = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Msj);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
     }
 }

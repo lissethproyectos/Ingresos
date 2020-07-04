@@ -308,7 +308,7 @@
                                         <asp:BoundField DataField="ID_CODIGO_QR" />
                                         <asp:TemplateField HeaderText="Ver Factura" ShowHeader="False">
                                             <ItemTemplate>
-                                                <asp:ImageButton ID="imgBttnFact" runat="server" CausesValidation="False" CommandName="Select" ImageUrl="~/Imagenes/fact_xml.png" Text="Seleccionar" />
+                                                <asp:ImageButton ID="imgBttnFact" runat="server" CausesValidation="False" ImageUrl="~/Imagenes/fact_xml.png" Text="Seleccionar"  Visible='<%# Bind("VISIBLE1") %>' OnClick="imgBttnFact_Click" />
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Center" />
@@ -327,6 +327,9 @@
             </div>
         </div>
         <asp:HiddenField ID="hddnFactura" runat="server" />
+
+        <ajaxToolkit:ModalPopupExtender ID="modalFactura" runat="server" TargetControlID="hddnFactura" PopupControlID="pnlDoctos" CancelControlID="bttnSalirDoctos">
+        </ajaxToolkit:ModalPopupExtender>
 
         <div class="container">
             <div class="row">
@@ -444,41 +447,46 @@
         </div>
     </asp:Panel>
 
-<asp:Panel ID="pnlDoctos" runat="server" Width="40%">
-                                                                                <div class="card text-white bg-dark mb-3">
-                                                                                    <div class="card-header">
-                                                                                        Documentos
-                                                                                    </div>
-                                                                                    <div class="card-body">
-                                                                                        <div class="container">
-                                                                                            <div class="row">
-                                                                                                <div class="col text-center">
-                                                                                                    <asp:GridView ID="grdDoctosFactura" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered" Width="100%" BackColor="#CCCCCC" OnPageIndexChanging="grdDoctosFactura_PageIndexChanging">
-                                                                                                        <Columns>
-                                                                                                            <asp:BoundField DataField="FACT_TIPO" HeaderText="TIPO" />
-                                                                                                            <asp:TemplateField HeaderText="ARCHIVO">
-                                                                                                                <ItemTemplate>
-                                                                                                                    <asp:HyperLink ID="linkDocto" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "RUTA_ADJUNTO") %>' Target="_blank"><%# DataBinder.Eval(Container.DataItem, "OFICIO") %></asp:HyperLink>
-                                                                                                                </ItemTemplate>
-                                                                                                            </asp:TemplateField>
-                                                                                                        </Columns>
-                                                                                                        <FooterStyle CssClass="enc" />
-                                                                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                                                        <SelectedRowStyle CssClass="sel" />
-                                                                                                        <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
-                                                                                                        <AlternatingRowStyle CssClass="alt" />
-                                                                                                    </asp:GridView>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="row">
-                                                                                                <div class="col text-center">
-                                                                                                    <asp:Button ID="bttnSalir" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalir_Click" Text="SALIR" />
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </asp:Panel>
+    <asp:Panel ID="pnlDoctos" runat="server" Width="40%">
+        <div class="card text-white bg-dark mb-3">
+            <div class="card-header">
+                Documentos
+            </div>
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col text-center">
+                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                <ContentTemplate>
+                                    <asp:GridView ID="grdDoctosFactura" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered" Width="100%" BackColor="#CCCCCC" OnPageIndexChanging="grdDoctosFactura_PageIndexChanging">
+                                        <Columns>
+                                            <asp:BoundField DataField="FACT_TIPO" HeaderText="TIPO" />
+                                            <asp:TemplateField HeaderText="ARCHIVO">
+                                                <ItemTemplate>
+                                                    <asp:HyperLink ID="linkDocto" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "RUTA_ADJUNTO") %>' Target="_blank"><%# DataBinder.Eval(Container.DataItem, "OFICIO") %></asp:HyperLink>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <FooterStyle CssClass="enc" />
+                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                        <SelectedRowStyle CssClass="sel" />
+                                        <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                                        <AlternatingRowStyle CssClass="alt" />
+                                    </asp:GridView>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <asp:Button ID="bttnSalirDoctos" runat="server" CssClass="btn btn-blue-grey" Text="SALIR" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </asp:Panel>
 
 
 
