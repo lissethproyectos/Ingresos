@@ -4,20 +4,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
-        .auto-style1 {
-            text-align: right;
-            width: 178px;
-        }
-
         .auto-style4 {
             width: 781px;
             text-align: center;
-        }
-
-
-        .auto-style6 {
-            left: 0px;
-            top: 0px;
         }
     </style>
 </asp:Content>
@@ -258,6 +247,19 @@
         </div>
         <div class="container">
             <div class="row">
+                <div class="col text-center">
+                   <asp:UpdateProgress ID="UpdateProgressFactura" runat="server" AssociatedUpdatePanelID="UpdatePanelGrid">
+                        <ProgressTemplate>
+                            <asp:Image ID="imgPrecargaFact" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                                ToolTip="Espere un momento, por favor.." Width="50px" Height="50px" />
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
                 <div class="col-sm">
                     <div style="overflow-x: auto;">
                         <asp:UpdatePanel ID="UpdatePanelGrid" runat="server">
@@ -306,9 +308,12 @@
                                         </asp:TemplateField>
                                         <asp:BoundField DataField="FACT_MATRICULA" />
                                         <asp:BoundField DataField="ID_CODIGO_QR" />
-                                        <asp:TemplateField HeaderText="Ver Factura" ShowHeader="False">
+                                        <asp:TemplateField HeaderText="Factura" ShowHeader="False">
                                             <ItemTemplate>
-                                                <asp:ImageButton ID="imgBttnFact" runat="server" CausesValidation="False" ImageUrl="~/Imagenes/fact_xml.png" Text="Seleccionar"  Visible='<%# Bind("VISIBLE1") %>' OnClick="imgBttnFact_Click" />
+                                                <asp:ImageButton ID="imgBttnFact" runat="server" CausesValidation="False" ImageUrl='~/Imagenes/fact_xml.png' Text="No" Visible='<%# Bind("VISIBLE1") %>' OnClick="imgBttnFact_Click" />
+                                                <asp:Label ID="lblSinFactura" runat="server" Text="NO" Visible='<%# Bind("VISIBLE2") %>'></asp:Label>
+
+                                                <%--<asp:Image ID="Image1" runat="server" ImageUrl='~/Imagenes/recibo3.png' Text="No"  Visible='<%# Bind("VISIBLE2") %>'/>--%>
                                             </ItemTemplate>
                                             <HeaderStyle HorizontalAlign="Center" />
                                             <ItemStyle HorizontalAlign="Center" />
@@ -351,7 +356,7 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col-sm">
+                <div class="col-sm text-center">
                     <asp:UpdateProgress ID="updProg" runat="server" AssociatedUpdatePanelID="updPnl">
                         <ProgressTemplate>
                             <asp:Image ID="Image5" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."

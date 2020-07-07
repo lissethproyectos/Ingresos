@@ -420,7 +420,7 @@
                                                                     <tr>
                                                                         <td colspan="4">
                                                                             <asp:Panel ID="pnlMsg" runat="server" Width="40%">
-                                                                                 <div class="card text-white bg-dark mb-3">
+                                                                                <div class="card text-white bg-dark mb-3">
                                                                                     <div class="card-header">
                                                                                         ¿Confirmar Facturas?
                                                                                     </div>
@@ -428,19 +428,19 @@
                                                                                         <div class="container">
                                                                                             <div class="row">
                                                                                                 <div class="col text-center">
-                                                                                            <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                                                                                                <ContentTemplate>
-                                                                                                    <br />
-                                                                                                    &nbsp;&nbsp;<asp:Button ID="btnSi" runat="server" CssClass="btn btn-info" Height="40px" OnClick="btnSi_Click" Text="Si" Width="70px" />
-                                                                                                    &nbsp;<asp:Button ID="btnNo" runat="server" CssClass="btn btn-blue-grey" Height="40px" Text="No" Width="70px" />
-                                                                                                    <br />
-                                                                                                </ContentTemplate>
-                                                                                            </asp:UpdatePanel>
-                                                                                           </div>
+                                                                                                    <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                                                                                        <ContentTemplate>
+                                                                                                            <br />
+                                                                                                            &nbsp;&nbsp;<asp:Button ID="btnSi" runat="server" CssClass="btn btn-info" Height="40px" OnClick="btnSi_Click" Text="Si" Width="70px" />
+                                                                                                            &nbsp;<asp:Button ID="btnNo" runat="server" CssClass="btn btn-blue-grey" Height="40px" Text="No" Width="70px" />
+                                                                                                            <br />
+                                                                                                        </ContentTemplate>
+                                                                                                    </asp:UpdatePanel>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                     </div>
+                                                                                    </div>
+                                                                                </div>
                                                                             </asp:Panel>
                                                                         </td>
                                                                     </tr>
@@ -733,7 +733,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td>
-                                                                    <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="2" CssClass="ajax__myTab" Width="100%">
+                                                                    <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="2" Width="100%">
                                                                         <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                                             <HeaderTemplate>Información de Factura</HeaderTemplate>
                                                                             <ContentTemplate>

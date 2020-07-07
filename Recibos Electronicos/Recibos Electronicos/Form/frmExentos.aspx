@@ -8,10 +8,6 @@
             width: 25%;
         }
 
-        .auto-style1 {
-            width: 160px;
-        }
-
         .auto-style14 {
             width: 11%;
         }
@@ -50,10 +46,7 @@
           width: 30px;
           height: 30px;
         }*/
-        .auto-style23 {
-            width: 71px;
-        }
-
+        
         .auto-style40 {
             width: 14%;
         }
@@ -156,13 +149,13 @@
             width: 4px;
         }
 
-        .TituloModalPopupMsg {
+        /*.TituloModalPopupMsg {
             z-index: 2 !important;
         }
 
         .modalBackground_Proy {
             z-index: 1 !important;
-        }
+        }*/
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -263,7 +256,7 @@
                                         <div class="col-md-10">
                                             <asp:TextBox ID="txtReferencia" runat="server" CssClass="box" PlaceHolder="Nombre ó Matricula" TabIndex="4" Visible="true" Width="100%"></asp:TextBox>
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-md-2 text-right">
                                             <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" />
 
                                             <asp:ImageButton ID="imgBttnNuevo0" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="imgBttnNuevo_Click" ValidationGroup="Nuevo" />
@@ -441,164 +434,144 @@
                                 <table style="width: 100%;">
                                     <tr>
                                         <td>
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" CssClass="ajax__myTab" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1">
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" CssClass="classic-tabs">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
-                                                        (1) Datos del Alumno
+                                                        <i class="fa fa-user-circle" aria-hidden="true"></i> Datos del Alumno
                                                     </HeaderTemplate>
                                                     <ContentTemplate>
-                                                        <table style="width: 100%;">
-                                                            <tr>
-                                                                <td valign="top" colspan="2">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <div class="col">
                                                                     <div class="alert alert-info">
                                                                         Para activar las siguientes pestañas debe proporcionar los datos del alumno.
                                                                     </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1" valign="top">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblGrupo" runat="server" Text="Evento:"></asp:Label>
-                                                                </td>
-                                                                <td valign="top">
+                                                                </div>
+                                                                <div class="col-md-10">
                                                                     <asp:DropDownList ID="ddlEvento" runat="server" AutoPostBack="True" TabIndex="4" Width="85%">
                                                                     </asp:DropDownList>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1" valign="top">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblMatricula" runat="server" Text="No. de Ficha / Matricula / Id Sysweb"></asp:Label>
-                                                                </td>
-                                                                <td valign="top">
-                                                                    <table style="width: 100%;">
-                                                                        <tr>
-                                                                            <td class="auto-style23" valign="top">
-                                                                                <asp:TextBox ID="txtMatricula" runat="server" CssClass="box" MaxLength="8" TabIndex="4" Width="80px"></asp:TextBox>
-                                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtMatricula" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
-                                                                            </td>
-                                                                            <td valign="top">
-                                                                                <asp:ImageButton ID="imgBttnBuscarMat" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscarMat_Click" />
-                                                                            </td>
-                                                                            <td valign="top">
-                                                                                <asp:Button ID="Registrar" runat="server" CssClass="btn3" OnClick="Registrar_Click" Text="Registrar Matrícula" Visible="False" />
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1" valign="top">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <asp:TextBox ID="txtMatricula" runat="server" CssClass="box" MaxLength="8" TabIndex="4" Width="100%"></asp:TextBox>
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtMatricula" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <asp:ImageButton ID="imgBttnBuscarMat" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscarMat_Click" />
+                                                                    <asp:Button ID="Registrar" runat="server" CssClass="btn3" OnClick="Registrar_Click" Text="Registrar Matrícula" Visible="False" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblNivel0" runat="server" Text="Nivel:"></asp:Label>
-                                                                </td>
-                                                                <td valign="top">
+                                                                </div>
+                                                                <div class="col-md-3">
                                                                     <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:ListBox ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="250px"></asp:ListBox>
+                                                                            <asp:ListBox ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%"></asp:ListBox>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1" valign="top">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblDependencia_D" runat="server" Text="Dependencia:"></asp:Label>
-                                                                </td>
-                                                                <td valign="top">
+                                                                </div>
+                                                                <div class="col-md-10">
                                                                     <asp:DropDownList ID="ddlDependencia_D" runat="server" AutoPostBack="True" ClientIDMode="Predictable" Enabled="False" OnSelectedIndexChanged="ddlDependencia_D_SelectedIndexChanged" TabIndex="1" Width="85%">
                                                                     </asp:DropDownList>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlDependencia_D" CssClass="MsjError" ErrorMessage="*Requerido" InitialValue="00000" ValidationGroup="guardar"></asp:RequiredFieldValidator>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblCarrera0" runat="server" Text="Carrera:"></asp:Label>
-                                                                </td>
-                                                                <td>
+                                                                </div>
+                                                                <div class="col-md-10">
                                                                     <asp:DropDownList ID="ddlCarrera" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged" TabIndex="6" Width="85%">
                                                                     </asp:DropDownList>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblOtraCarrera" runat="server" Text="Especificar:" Visible="False"></asp:Label>
-                                                                </td>
-                                                                <td>
+                                                                </div>
+                                                                <div class="col-md-10">
                                                                     <asp:TextBox ID="txtCarrera" runat="server" CssClass="box" Visible="False" Width="85%"></asp:TextBox>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
-                                                                </td>
-                                                                <td>
+                                                                </div>
+                                                                <div class="col-md-10">
                                                                     <asp:TextBox ID="txtNombre" runat="server" CssClass="box" Enabled="False" MaxLength="700" ReadOnly="True" TabIndex="5" Width="85%"></asp:TextBox>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblPaterno" runat="server" Text="Apellido Paterno:"></asp:Label>
-                                                                </td>
-                                                                <td>
+                                                                </div>
+                                                                <div class="col-md-10">
                                                                     <asp:TextBox ID="txtPaterno" runat="server" Enabled="False" TabIndex="4" Width="85%"></asp:TextBox>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblMaterno" runat="server" Text="Apellido Materno:"></asp:Label>
-                                                                </td>
-                                                                <td>
+                                                                </div>
+                                                                <div class="col-md-10">
                                                                     <asp:TextBox ID="txtMaterno" runat="server" Enabled="False" TabIndex="5" Width="85%"></asp:TextBox>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblFechaNacimiento" runat="server" Text="Fecha de Nacimiento:"></asp:Label>
-                                                                </td>
-                                                                <td>
-                                                                    <table style="width: 100%;">
-                                                                        <tr>
-                                                                            <td class="auto-style3">
-                                                                                <asp:TextBox ID="txtFechaNacimiento" runat="server" Enabled="False"></asp:TextBox>
-                                                                                <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtFechaNacimiento" PopupButtonID="imgCalNac" BehaviorID="_content_CalendarExtender1" />
-                                                                                <asp:ImageButton ID="imgCalNac" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-
-                                                                            </td>
-                                                                            <td align="right" class="auto-style4">
-                                                                                <asp:Label ID="lblGenero" runat="server" Text="Sexo:"></asp:Label>
-                                                                            </td>
-                                                                            <td>
-                                                                                <asp:RadioButtonList ID="rdoBttnLstGenero" runat="server" Enabled="False" RepeatDirection="Horizontal">
-                                                                                    <asp:ListItem Value="M">Masculino</asp:ListItem>
-                                                                                    <asp:ListItem Value="F">Femenino</asp:ListItem>
-                                                                                </asp:RadioButtonList>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="auto-style1">
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <asp:TextBox ID="txtFechaNacimiento" runat="server" Enabled="False"></asp:TextBox>
+                                                                    <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtFechaNacimiento" PopupButtonID="imgCalNac" BehaviorID="_content_CalendarExtender1" />
+                                                                    <asp:ImageButton ID="imgCalNac" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <asp:Label ID="lblGenero" runat="server" Text="Sexo:"></asp:Label>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <asp:RadioButtonList ID="rdoBttnLstGenero" runat="server" Enabled="False" RepeatDirection="Horizontal">
+                                                                        <asp:ListItem Value="M">Masculino</asp:ListItem>
+                                                                        <asp:ListItem Value="F">Femenino</asp:ListItem>
+                                                                    </asp:RadioButtonList>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2">
                                                                     <asp:Label ID="lblSemestre" runat="server" Text="Semestre:"></asp:Label>
-                                                                </td>
-                                                                <td>
-                                                                    <table style="width: 100%;">
-                                                                        <tr>
-                                                                            <td class="auto-style3">
-                                                                                <asp:TextBox ID="txtSemestre" runat="server" CssClass="box" TabIndex="7" Width="50px"></asp:TextBox>
-                                                                            </td>
-                                                                            <td align="right" class="auto-style4">&#160;</td>
-                                                                            <td>&#160;</td>
-                                                                            <td>
-                                                                                <asp:TextBox ID="txtGrupo" runat="server" CssClass="box" TabIndex="8" Width="50px"></asp:TextBox>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <asp:TextBox ID="txtSemestre" runat="server" CssClass="box" TabIndex="7" Width="50px"></asp:TextBox>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    Grupo:
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <asp:TextBox ID="txtGrupo" runat="server" CssClass="box" TabIndex="8" Width="50px"></asp:TextBox>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </ContentTemplate>
                                                 </ajaxToolkit:TabPanel>
                                                 <ajaxToolkit:TabPanel ID="TabPanel2" runat="server" HeaderText="TabPanel2">
                                                     <HeaderTemplate>
-                                                        (2) Datos de la Exención
+                                                        <i class="fa fa-cog" aria-hidden="true"></i> Datos de la Exención
                                                     </HeaderTemplate>
                                                     <ContentTemplate>
                                                         <table style="width: 100%;">
@@ -838,7 +811,7 @@
                                                 </ajaxToolkit:TabPanel>
                                                 <ajaxToolkit:TabPanel ID="TabPanel3" runat="server" HeaderText="TabPanel3">
                                                     <HeaderTemplate>
-                                                        (3) Oficios
+                                                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Oficios
                                                     </HeaderTemplate>
                                                     <ContentTemplate>
                                                         <table style="width: 100%;">

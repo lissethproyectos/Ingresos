@@ -116,10 +116,10 @@ namespace Recibos_Electronicos.Form
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdEventos.SelectedIndex = row.RowIndex;
             string CveEvento = grdEventos.SelectedRow.Cells[0].Text;
-            //string DescEvento = grdEventos.SelectedRow.Cells[2].Text;
+            string DescEvento = grdEventos.SelectedRow.Cells[2].Text;
             //Response.Redirect(Ruta, false);
 
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP052&dependencia=" + ddlDependencia.SelectedValue + "&Evento=" + CveEvento; /* + "&TipoDesc=" + DescEvento*/;
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP052&dependencia=" + ddlDependencia.SelectedValue + "&Evento=" + CveEvento  + "&TipoDesc=" + DescEvento;
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 

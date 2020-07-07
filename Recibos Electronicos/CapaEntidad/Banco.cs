@@ -46,7 +46,7 @@ namespace CapaEntidad
 
         private static UInt16 bnt_longitud = 336;
         private static UInt16 std_longitud = 149;
-        private static UInt16 stdnew_longitud = 401;
+        private static UInt16 stdnew_longitud = 199;
 
         private static UInt16 bnx_longitud = 120;
         private static UInt16 bcm_longitud = 141;

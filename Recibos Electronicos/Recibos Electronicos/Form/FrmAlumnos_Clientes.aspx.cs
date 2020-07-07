@@ -507,5 +507,14 @@ namespace Recibos_Electronicos.Form
             }
 
         }
+
+        protected void imgBttnNuevo_Click(object sender, ImageClickEventArgs e)
+        {
+            pnlDatos_Alumno.Visible = true;
+            pnlPrincipal.Visible = false;
+            SesionUsu.Editar = 0;
+            txtMatricula.Enabled = true;
+            Nuevo();
+        }
     }
 }

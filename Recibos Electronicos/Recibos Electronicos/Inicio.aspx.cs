@@ -296,6 +296,7 @@ namespace Recibos_Electronicos
             //btnRegresar.Visible = true;
             pnlReciboOficial.Visible = true;
             btnRegresar.Visible = true;
+            grdDatosFactura.Visible = false;
             ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ObtenerQR(" + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text) + "," + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[11].Text) + ");", true);
         }
 
@@ -341,7 +342,7 @@ namespace Recibos_Electronicos
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            //grdDatosFactura.Visible = true;
+            grdDatosFactura.Visible = true;
             //pnlContenor.Visible = true;
             pnlReciboOficial.Visible = false;
             btnRegresar.Visible = false;

@@ -19,17 +19,8 @@
         .auto-style21 {
             width: 13px;
         }
-        .auto-style26 {
-            width: 1874px;
-        }
-        .auto-style27 {
-            width: 288px;
-        }
         .auto-style29 {
             width: 585px;
-        }
-        .auto-style32 {
-            width: 12%;
         }
         .auto-style34 {
             width: 462px;
@@ -95,12 +86,12 @@
             white-space: nowrap
         }
 
-         .TituloModalPopupMsg{
+         /*.TituloModalPopupMsg{
             z-index: 2 !important;
         }
         .modalBackground_Proy{
             z-index: 1 !important;
-        }
+        }*/
 
         </style>
 </asp:Content>
@@ -164,6 +155,9 @@
                                                         <asp:ValidationSummary ID="ValidationSummary1" runat="server" HeaderText="Para guardar el registro se requieren los siguientes campos:" ValidationGroup="guardar" />
                                                     </td>
                                                     <td __designer:mapid="aa8">&nbsp;</td>
+                                                </tr>
+                                                <tr __designer:mapid="aa5">
+                                                    <td __designer:mapid="aa6" class="text-left" colspan="3">&nbsp;</td>
                                                 </tr>
                                             </table>
                                         </td>
@@ -286,7 +280,8 @@
                                 <table style="width: 100%;">
                                     <tr>
                                         <td>
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" Width="100%" CssClass="ajax__myTab">
+                                            <br />
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" Width="100%" CssClass="styleTab">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
                                                         (1) Datos Generales

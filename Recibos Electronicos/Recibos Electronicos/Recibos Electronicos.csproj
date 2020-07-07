@@ -394,6 +394,7 @@
     <Content Include="Imagenes\nube.jpg" />
     <Content Include="Imagenes\nube1.png" />
     <Content Include="Imagenes\pie.PNG" />
+    <Content Include="Imagenes\recibo3.png" />
     <Content Include="Imagenes\santander.png" />
     <Content Include="Imagenes\Search.png" />
     <Content Include="Imagenes\unachch.ico" />
@@ -2204,7 +2205,7 @@
     <Content Include="bootstrap\css\DataTables\css\semanticui.scss" />
     <Content Include="bootstrap\js\bootstrap.js.map" />
     <Content Include="bootstrap\js\bootstrap.min.js.map" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\COIN.pubxml" />
     <None Include="Properties\PublishProfiles\Lis.pubxml" />
   </ItemGroup>
   <PropertyGroup>

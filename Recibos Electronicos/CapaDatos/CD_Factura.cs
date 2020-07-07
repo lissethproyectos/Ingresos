@@ -182,6 +182,8 @@ namespace CapaDatos
                     ObjFactura.FACT_MATRICULA = Convert.ToString(dr.GetValue(7));
                     ObjFactura.ID_CODIGO_QR = Convert.ToInt32(dr.GetValue(8));
                     ObjFactura.VISIBLE1= Convert.ToInt32(dr.GetValue(9))==0?false:true;
+                    ObjFactura.VISIBLE2 = Convert.ToInt32(dr.GetValue(9)) == 0 ? true : false;
+                    ObjFactura.RUTA_ADJUNTO= Convert.ToInt32(dr.GetValue(9)) == 0 ? "" : "~/Imagenes/fact_xml.png";
                     List.Add(ObjFactura);
 
                 }
