@@ -86,7 +86,7 @@ namespace Recibos_Electronicos.Form
             try
             {
                 List<Alumno> List = new List<Alumno>();
-                ObjAlumno.TipoPersonaStr = "TODOS";
+                ObjAlumno.TipoPersonaStr = ddlOrigen.SelectedValue; // "TODOS";
                 ObjAlumno.Nivel = ddlNivel.SelectedValue;
                 ObjAlumno.Dependencia = ddlDependencias.SelectedValue;
                 ObjAlumno.CicloEscolar = ddlCicloEscolar.SelectedValue;  //ViewState["Filter"].ToString();

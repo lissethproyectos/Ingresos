@@ -19,10 +19,6 @@
             width: 126px;
         }
 
-        .auto-style1 {
-            width: 66%;
-        }
-
         .auto-style2 {
             width: 160px;
         }
@@ -40,10 +36,6 @@
         }
         .auto-style7 {
             width: 680px;
-        }
-        .auto-style8 {
-            width: 102px;
-            height: 120px;
         }
         .auto-style9 {
             height: 120px;
@@ -435,18 +427,7 @@
             </td>
         </tr>
         <tr>
-            <td><table style="width:100%;">
-                <tr>
-                    <td class="auto-style8" style="background-image:url(../Imagenes/logo_ayuda.png)">
-                        
-                        <br />
-                        
-                    </td>
-                    <td class="auto-style9" style="background-image:url(../Imagenes/fondo_ayuda.png)">Si el pago se realizó en Sábado ó Domingo, el COMPROBANTE OFICIAL estará disponible a partir del Martes inmediato.Para días inhábiles, aplica el mismo criterio; el COMPROBANTE OFICIAL estará disponible un dia después al día hábil inmediato.<br />
-                        Para dudas o aclaraciones favor de comunicarse al teléfono de la <strong>Mesa de Servicio (961) 61 7 80 00 eXT.: 5508, 5503, 5509, 5501. Depto de Finanzas Ext. 5108, </strong>o al correo<strong> <a href="mailto:sysweb@unach.mx">sysweb@unach.mx</a> </strong>de <strong>Lunes a Viernes de 8:00 a 16:00 horas.</strong></td>
-                </tr>
-                </table>
-            </td>
+            <td>&nbsp;</td>
         </tr>
         <tr>
             <td class="centro">

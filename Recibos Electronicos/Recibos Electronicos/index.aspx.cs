@@ -603,6 +603,7 @@ namespace Recibos_Electronicos
                 DDLConceptos.Visible = true;
                 lblNivel.Visible = true;
                 DDLNivel.Visible = true;
+                grdDatosFactura.Visible = false;
                 //linkBttnCatReembolsables.Visible = true;
 
             }
@@ -896,7 +897,13 @@ namespace Recibos_Electronicos
             pnlContenor.Visible = false;
             grdDatosFactura.Visible = false;
             btnRegresar.Visible = true;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerReporteExportarConceptos('" + SesionUsu.Reporte + "','" + ddlDependencia.SelectedValue + "','" + txtFecha_Factura_Ini.Text + "','" + txtFecha_Factura_Fin.Text + "','" + DDLConceptos.SelectedValue + "','" + DDLEjercicio.SelectedValue + "','" + DDLMes.SelectedValue + "','" + ddlCiclo.SelectedValue + "','" + ddlTipo.SelectedValue + "','" + rdoListStatus .SelectedValue+ "','"+DDLMes_Fin.SelectedValue+"','"+SesionUsu.ReporteEnExcel+"','"+DDLNivel.SelectedValue+ "', '" + SesionUsu.ReporteconGraficas + "');", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerReporteExportarConceptos('" + SesionUsu.Reporte + "','" + ddlDependencia.SelectedValue + "','" + txtFecha_Factura_Ini.Text + "','" + txtFecha_Factura_Fin.Text + "','" + DDLConceptos.SelectedValue + "','" + DDLEjercicio.SelectedValue + "','" + DDLMes.SelectedValue + "','" + ddlCiclo.SelectedValue + "','" + ddlTipo.SelectedValue + "','" + rdoListStatus .SelectedValue+ "','"+DDLMes_Fin.SelectedValue+"','"+SesionUsu.ReporteEnExcel+"','"+DDLNivel.SelectedValue+ "', '" + SesionUsu.ReporteconGraficas + "');", true);
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=" + SesionUsu.Reporte + "&CDet=" + ddlDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&IdConcepto=" + DDLConceptos.SelectedValue + "&Ejercicio=" + DDLEjercicio.SelectedValue + "&Mes=" + DDLMes.SelectedValue + "&ciclo=" + ddlCiclo.SelectedValue + "&TipoDesc=" + ddlTipo.SelectedValue + "&Status=" + rdoListStatus.SelectedValue;
+            //"&Ciclo=" + ddlCiclo.SelectedValue + "&CDet=" + ddlDependencia.SelectedValue + "&status=" + ddlStatus_Ini.SelectedValue;
+            string _open = "window.open('" + ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+
 
         }
         private void HideColumns(GridView grdView, Int32[] Celdas)

@@ -60,13 +60,13 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
 
         /// <summary>
-        /// Control bttnBuscar.
+        /// Control imgBttnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton bttnBuscar;
+        protected global::System.Web.UI.WebControls.ImageButton imgBttnBuscar;
 
         /// <summary>
         /// Control updPrMultiview.

@@ -121,7 +121,7 @@
                     <td colspan="5">
                         <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                             <ContentTemplate>
-                                <asp:GridView ID="grvAspirantes" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid3 mGrid10px" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvAlumnosUNACH_PageIndexChanging" PageSize="20" Width="100%" Font-Size="Small">
+                                <asp:GridView ID="grvAspirantes" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvAlumnosUNACH_PageIndexChanging" PageSize="20" Width="100%" Font-Size="Small">
                                     <Columns>
                                         <asp:BoundField DataField="TipoPersonaStr" HeaderText="Origen" />
                                         <asp:BoundField DataField="Nivel" HeaderText="Nivel">

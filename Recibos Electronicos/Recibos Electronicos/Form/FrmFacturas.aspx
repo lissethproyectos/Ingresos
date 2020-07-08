@@ -314,7 +314,7 @@
                         <td>
                             <table style="width: 100%;">
                                 <tr>
-                                    <td valign="top" colspan="2">
+                                    <td valign="top" colspan="2" class="text-center">
                                         <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
                                             <ProgressTemplate>
                                                 <asp:Image ID="Image85" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />

@@ -71,9 +71,8 @@
                                         <asp:DropDownList ID="DDLTipoUsuario" runat="server" class="form-control">
                                             <asp:ListItem Value="5">Seleccionar</asp:ListItem>
                                             <asp:ListItem Value="1">Alumno ó Aspirante</asp:ListItem>   
-                                            <asp:ListItem Value="2">Persona Fisica/Moral</asp:ListItem>                 
                                             <asp:ListItem Value="3">Usuario Dependencia</asp:ListItem>                    
-                                            <asp:ListItem Value="4">Referencia Bancaria</asp:ListItem>
+                                            <asp:ListItem Value="4">Referencia Bancaria (recibo de pago de EVENTO)</asp:ListItem>
                                             <asp:ListItem Value="6">Cliente UNACH</asp:ListItem>
                                         </asp:DropDownList>
 	                        </div> <!-- form-group end.// -->

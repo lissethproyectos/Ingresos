@@ -40,8 +40,7 @@
                         </asp:DropDownList>
                     </div>
                     <div class="col-md-3">
-                        <asp:LinkButton runat="server" ID="bttnBuscar" class="btn btn-mini" OnClick="bttnBuscar_Click">Buscar <i class="fa fa-search" aria-hidden="true"></i>
-                        </asp:LinkButton>
+                        <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="bttnBuscar_Click" />
                     </div>
                 </div>
                 <div class="row text-center">
@@ -101,6 +100,7 @@
                                                                         <asp:ImageButton ID="imgBttnEditar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" Style="width: 20px" OnClick="imgBttnEditar_Click" />
                                                                         &nbsp;<asp:ImageButton ID="imgBttnCancelar" runat="server" CommandName="Delete" ImageUrl="~/Imagenes/del.PNG" OnClick="imgBttnCancelar_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');" Style="width: 20px" />
                                                                     </ItemTemplate>
+                                                                    <ItemStyle HorizontalAlign="Center" />
                                                                 </asp:TemplateField>
                                                                 <asp:BoundField DataField="Anexo" />
                                                             </Columns>
