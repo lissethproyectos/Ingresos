@@ -153,9 +153,9 @@ namespace Recibos_Electronicos
 
                 if (Sesion.Usu_TipoUsu == 3)
                 {
-                    //bool Valido = ValidaCorreoUNACH(ref NombreUsu);
-                    if (txtPassword.Text == "F1N4NZ4S")
-                    //if (Valido == true)
+                    bool Valido = ValidaCorreoUNACH(ref NombreUsu);
+                    //if (txtPassword.Text == "F1N4NZ4S")
+                    if (Valido == true)
                     {
                         //Sesion.Correo_UNACH = txtCve.Text;
                         CN_Usuario.UsuarioPermisos(ref Sesion, txtCve.Text, ref Verificador);

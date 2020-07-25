@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="Recibos_Electronicos.Inicio" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.Master" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="Recibos_Electronicos.Inicio" %>
 
 <%@ Register TagName="uCCorreo" TagPrefix="usr" Src="EnviarCorreo.ascx" %>
 
