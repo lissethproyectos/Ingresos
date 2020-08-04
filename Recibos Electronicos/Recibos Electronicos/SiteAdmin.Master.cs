@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 using System.IO;
 using CapaEntidad;
 using CapaNegocio;
-
+using System.Data;
 
 namespace Recibos_Electronicos
 {
@@ -21,6 +21,8 @@ namespace Recibos_Electronicos
         Comun comun = new Comun();
         CN_Menus CN_mnu = new CN_Menus();
         CN_Comun CN_comun = new CN_Comun();
+        CN_Calendario CNCalendario = new CN_Calendario();
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,6 +32,37 @@ namespace Recibos_Electronicos
 
         }
         #region <Funciones y Sub>
+        private void CargarGrid()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                grvCalendarPagos.DataSource = dt;
+                grvCalendarPagos.DataSource = GetList();
+                grvCalendarPagos.DataBind();                
+            }
+            catch (Exception ex)
+            {
+                lblMsjE.Text = ex.Message;
+            }
+        }
+
+        private List<Calendario> GetList()
+        {
+            try
+            {
+                List<Calendario> List = new List<Calendario>();
+                Calendario objCalendario = new Calendario();
+                objCalendario.NumMes = "07";
+                CNCalendario.ConsultarCalendario(objCalendario, ref List);
+
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         private void Inicializar()
         {
             string siteMap = string.Empty;
@@ -42,7 +75,16 @@ namespace Recibos_Electronicos
                 menu.Grupo = 14;
 
                 if (SesionUsu.Usu_TipoUsu == 3)
+                {
                     siteMap = "ArchivosMenu/Web" + SesionUsu.Usuario + ".sitemap";
+                    CargarGrid();
+                    //calPagosUNACH.SelectedDate.Day = "05";
+                    //for (int i = 0; i <= calPagosUNACH.SelectedDates.Count - 1; i++)
+                    //{
+                    //    calPagosUNACH.SelectedDate[i].bac
+                    //}
+                    //calPagosUNACH.SelectedDates=
+                }
 
                 else if (SesionUsu.Usu_TipoUsu == 1 || SesionUsu.Usu_TipoUsu == 2 || SesionUsu.Usu_TipoUsu == 4 || SesionUsu.Usu_TipoUsu == 6)
                     siteMap = "ArchivosMenuAlumno/WebAlumno.sitemap";

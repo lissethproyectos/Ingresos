@@ -44,6 +44,7 @@
     <Compile Include="Banco.cs" />
     <Compile Include="Bien.cs" />
     <Compile Include="CajaFactura.cs" />
+    <Compile Include="Calendario.cs" />
     <Compile Include="Comun.cs" />
     <Compile Include="ConceptoCuotaLibre.cs" />
     <Compile Include="ConceptoPago.cs" />

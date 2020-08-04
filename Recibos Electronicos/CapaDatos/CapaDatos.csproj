@@ -43,6 +43,7 @@
     <Compile Include="CD_Banco.cs" />
     <Compile Include="CD_Bien.cs" />
     <Compile Include="CD_CajaFactura.cs" />
+    <Compile Include="CD_Calendario.cs" />
     <Compile Include="CD_Comun.cs" />
     <Compile Include="CD_ConceptoPago.cs" />
     <Compile Include="CD_Control_Cierre.cs" />

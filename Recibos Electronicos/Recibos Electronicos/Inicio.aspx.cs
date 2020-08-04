@@ -350,6 +350,9 @@ namespace Recibos_Electronicos
 
         protected void bttnBuscar_Click(object sender, EventArgs e)
         {
+            grdDatosFactura.Visible = true;
+            pnlReciboOficial.Visible = false;
+            btnRegresar.Visible = false;
             CargarGrid();
         }
 

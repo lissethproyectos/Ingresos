@@ -20,17 +20,7 @@
 
 
     <script type="text/javascript" src="https://sysweb.unach.mx/resources/js/index.js" charset="iso-8859-1"></script>
-    <%--<script type="text/javascript" src="Js/jsGeneral.js"> </script>--%>
-<%--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-    <script src="//code.jquery.com/jqumeery-1.11.1.min.js"></script>--%>
-
-    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
-    </asp:ContentPlaceHolder>
-
-
-    <%--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">--%>
-    <style type="text/css">
+<style type="text/css">
         .dropdown-item:focus, .dropdown-item:hover {
             color: #16181b;
             text-decoration: none;
@@ -90,6 +80,8 @@
         }
     </style>
 
+    <asp:ContentPlaceHolder ID="HeadContent" runat="server">
+    </asp:ContentPlaceHolder>
 </head>
 <body>
     <a id="wrap"></a>
@@ -97,7 +89,7 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="True"></asp:ScriptManager>
         <div class="container-fluid">
             <div class=" menuprin navbar-inverse navbar-fixed-top">
-            <div class="row" style="width:100%; background-color: #18386b;"">
+            <div class="row" style="width:100%; background-color: #18386b; margin: 0 0 0 0;">
                                 <div class="col-md-4">
                                     <a href="https://sysweb.unach.mx/DSIA/">
                                         <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
@@ -116,7 +108,7 @@
                                     <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
                                 </div>
                     </div>           
-            <div class="row" style="width:100%">
+            <div class="row" style="width:100%; background-color: #275090; margin: 0 0 0 0;">
                 <div class="col">
                     
                             <nav class="navbar navbar-expand-lg navbar-dark primary-color" style="width: 100%">
@@ -197,7 +189,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close"></span>Content</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-area-chart" aria-hidden="true"></i> Dashboard</a>
                                 </h4>
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
@@ -205,25 +197,21 @@
                                     <table class="table">
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://www.jquery2dotnet.com">Articles</a>
+                                                Curso de Nivelación
+                                                <%--<i class="fa fa-tachometer" aria-hidden="true"></i>--%>
+
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-flash text-success"></span><a href="http://www.jquery2dotnet.com">News</a>
+                                                <a href="http://www.jquery2dotnet.com">Inscripción</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-file text-info"></span><a href="http://www.jquery2dotnet.com">Newsletters</a>
+                                                <span class="glyphicon glyphicon-file text-info"></span><a href="http://www.jquery2dotnet.com">Reinscripción</a>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span class="glyphicon glyphicon-comment text-success"></span><a href="http://www.jquery2dotnet.com">Comments</a>
-                                                <span class="badge">42</span>
-                                            </td>
-                                        </tr>
+                                        </tr>                                        
                                     </table>
                                 </div>
                             </div>
@@ -231,52 +219,55 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><span class="glyphicon glyphicon-th"></span>Modules</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-calendar" aria-hidden="true"></i> Calendario de Pagos</a>
                                 </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
                                 <div class="panel-body">
-                                    asas
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                        <ContentTemplate>
+                                            <asp:GridView ID="grvCalendarPagos" runat="server" AutoGenerateColumns="False" Font-Size="9px" Width="100%" GridLines="None" RowHeaderColumn="Dom">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="Mes">
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Mes") %>'></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("Mes") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:BoundField DataField="Dom" HeaderText="D" />
+                                                    <asp:BoundField DataField="Lun" HeaderText="L" />
+                                                    <asp:BoundField DataField="Mar" HeaderText="M" />
+                                                    <asp:BoundField DataField="Mie" HeaderText="M" />
+                                                    <asp:BoundField DataField="Jue" HeaderText="J" />
+                                                    <asp:BoundField DataField="Vie" HeaderText="V" />
+                                                    <asp:BoundField DataField="Sab" HeaderText="S" />
+                                                </Columns>
+                                                <HeaderStyle CssClass="alert alert-info" />
+                                            </asp:GridView>
+
+                                    <%--<asp:Calendar ID="calPagosUNACH" runat="server" CssClass="alert alert-info" SelectedDate="07/24/2020 23:02:18" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" style="left: 0px; top: 0px; width: 176px; height: 150px" ToolTip="Curso de Nivelación">
+                                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
+                                        <NextPrevStyle VerticalAlign="Bottom" />
+                                        <OtherMonthDayStyle ForeColor="#808080" />
+                                        <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
+                                            <SelectorStyle BackColor="#CCCCCC" />
+                                        <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
+                                        <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
+                                        <WeekendDayStyle BackColor="#FFFFCC" />
+                                            </asp:Calendar>--%>
+
+                                        </ContentTemplate>
+
+                                    </asp:UpdatePanel>
                                 </div>
                             </div>
-                        </div>
+                        </div>                        
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree"><span class="glyphicon glyphicon-user"></span>Account</a>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <table class="table">
-                                        <tr>
-                                            <td>
-                                                <a href="http://www.jquery2dotnet.com">Change Password</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="http://www.jquery2dotnet.com">Notifications</a> <span class="label label-info">5</span>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="http://www.jquery2dotnet.com">Import/Export</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span class="glyphicon glyphicon-trash text-danger"></span><a href="http://www.jquery2dotnet.com" class="text-danger">Delete Account</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><span class="glyphicon glyphicon-file"></span>Reports</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reportes Ciclo Actual</a>
                                 </h4>
                             </div>
                             <div id="collapseFour" class="panel-collapse collapse">
@@ -284,17 +275,17 @@
                                     <table class="table">
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Sales</a>
+                                                <span class="glyphicon glyphicon-usd"></span><a href="http://www.jquery2dotnet.com">Curso de Nivelación</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Customers</a>
+                                                <span class="glyphicon glyphicon-user"></span><a href="http://www.jquery2dotnet.com">Inscripción</a>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Products</a>
+                                                <span class="glyphicon glyphicon-tasks"></span><a href="http://www.jquery2dotnet.com">Reinscripción</a>
                                             </td>
                                         </tr>
                                         <tr>
@@ -306,6 +297,9 @@
                                 </div>
                             </div>
                         </div>
+                        <%--<div class="text-center">
+                        <img src="Imagenes/pngocean.com.png" />
+                            </div>--%>
                     </div>
                 </div>
                 <div class="col-md-10">

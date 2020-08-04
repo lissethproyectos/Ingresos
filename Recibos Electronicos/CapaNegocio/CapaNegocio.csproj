@@ -45,6 +45,7 @@
     <Compile Include="CN_Alumno.cs" />
     <Compile Include="CN_Banco.cs" />
     <Compile Include="CN_Bien.cs" />
+    <Compile Include="CN_Calendario.cs" />
     <Compile Include="CN_Control_Cierre.cs" />
     <Compile Include="CN_Cuotas_Lenguas_SIAE.cs" />
     <Compile Include="CN_DetFacturaEfectivo.cs" />
