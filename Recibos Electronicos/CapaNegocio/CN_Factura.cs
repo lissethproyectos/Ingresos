@@ -150,6 +150,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void FacturaEliminar(Factura ObjFactura, ref string Verificador)
+        {
+            try
+            {
+                CD_Factura DatosFactura = new CD_Factura();
+                DatosFactura.FacturaEliminar(ObjFactura, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void FacturaEditarDatos(Factura ObjFactura, string UsuarioNombre, ref string Verificador)
         {
             try

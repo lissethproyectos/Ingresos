@@ -3,7 +3,7 @@
 this.ObtenerQR = function (vIdFact, vIdQR) {
 var isIE = /*@cc_on!@*/false || !!document.documentMode;    
 var link;
-    if(isIE==true || vIdQR==0)
+    if (isIE === true || vIdQR === 0 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
     {
          var ruta = "Reportes/VisualizadorCrystal.aspx?idFact=" + vIdFact;
          window.open(ruta, 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');

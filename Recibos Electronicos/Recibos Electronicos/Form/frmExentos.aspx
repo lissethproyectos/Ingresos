@@ -287,6 +287,10 @@
                                                 <asp:TemplateField HeaderText="Ciclo">
                                                     <ItemTemplate>
                                                         <asp:Label ID="lblDetalle" runat="server" ToolTip='<%# Bind("Observaciones") %>' Text='<%# Bind("CicloEscolar") %>'></asp:Label>
+                                                        <asp:LinkButton ID="linkFechas" runat="server"><i class="fa fa-calendar" aria-hidden="true"></i>
+</asp:LinkButton>
+                                                        </i>
+
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                                 <asp:BoundField DataField="TipoDescuento" HeaderText="Tipo Descuento" ItemStyle-HorizontalAlign="Center">

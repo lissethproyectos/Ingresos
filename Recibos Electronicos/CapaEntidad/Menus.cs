@@ -42,4 +42,32 @@ public class Menus
         set { _Ejercicio = value; }
     }
 
+    private int _Id;
+    public int Id
+    {
+        get { return _Id; }
+        set { _Id = value; }
+    }
+
+    private int _Id_Padre;
+    public int Id_Padre
+    {
+        get { return _Id_Padre; }
+        set { _Id_Padre = value; }
+    }
+
+    private string _Descripcion;
+    public string Descripcion
+    {
+        get { return _Descripcion; }
+        set { _Descripcion = value; }
+    }
+
+    private string _Navigate_Url;
+    public string Navigate_Url
+    {
+        get { return _Navigate_Url; }
+        set { _Navigate_Url = value; }
+    }
+
 }

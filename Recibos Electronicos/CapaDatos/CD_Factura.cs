@@ -728,6 +728,32 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+
+        public void FacturaEliminar(Factura ObjFactura, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+
+
+                String[] Parametros = { "p_id_factura" };
+                Object[] Valores = { ObjFactura.ID_FACT };
+                String[] ParametrosOut = { "p_bandera" };
+                cmm = CDDatos.GenerarOracleCommand("DEL_FACTURA", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
+
         public void FacturaEditarDatos(Factura ObjFactura, string UsuarioNombre, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -803,7 +829,8 @@ namespace CapaDatos
                     ObjFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(3));
                     ObjFactura.FACT_FOLIO = Convert.ToString(dr.GetValue(4));
                     ObjFactura.FACT_FECHA_FACTURA = Convert.ToString(dr.GetValue(5));
-                    ObjFactura.Status_Carga = Convert.ToString(dr.GetValue(7));                   
+                    ObjFactura.Status_Carga = Convert.ToString(dr.GetValue(7));
+                    ObjFactura.FACT_BANCO = Convert.ToString(dr.GetValue(8));
                     List.Add(ObjFactura);
                 }
                 dr.Close();

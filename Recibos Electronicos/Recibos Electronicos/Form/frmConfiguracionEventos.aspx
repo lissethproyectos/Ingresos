@@ -137,7 +137,9 @@
                         </div>
 
                     </div>
-                    <div class="row">
+                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                        <ContentTemplate>
+<div class="row" id="divFiltros" runat="server">
                         <div class="col-md-2">
                             <asp:Label ID="lblStatus" runat="server" Text="Status: "></asp:Label>
                         </div>
@@ -168,6 +170,10 @@
 
                         </div>
                     </div>
+                        </ContentTemplate>
+
+                    </asp:UpdatePanel>
+                    
                 </div>
                 <div class="container-fluid">
                     <div class="row">

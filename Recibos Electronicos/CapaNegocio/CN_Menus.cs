@@ -34,7 +34,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void LlenarTree(ref TreeView Arbol, Menus objMenu, ref List<Menus> List)
+        {
+            try
+            {
+                CD_Menus claseCapaDatos = new CD_Menus();
+                claseCapaDatos.LlenarTree(ref Arbol, objMenu, ref List);
 
-
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

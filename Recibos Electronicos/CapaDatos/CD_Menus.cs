@@ -186,7 +186,7 @@ namespace CapaDatos
                     objXMLTW.WriteStartElement("siteMapNode");
                     objXMLTW.WriteAttributeString("title", "PASSWORD");
                     objXMLTW.WriteAttributeString("description", "PASSWORD");
-                    objXMLTW.WriteAttributeString("url", "http://www.sysweb.unach.mx/administrator/");
+                    objXMLTW.WriteAttributeString("url", "https://ldapauthmaster.unach.mx/pssform_resetaccount.php");
                     objXMLTW.WriteEndElement();
 
                     objXMLTW.WriteStartElement("siteMapNode");
@@ -261,5 +261,93 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+
+        public void LlenarTree(ref TreeView Arbolito, Menus objMenu, ref List<Menus> List)
+        {
+
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            
+            try
+            {
+                OracleDataReader dr = null;
+
+
+                string[] Parametros = {
+                                        "p_usuario",
+                                        "p_grupo",
+                                        "p_id_padre"
+                                      };
+                object[] Valores = {
+                                        objMenu.Usuario,
+                                        objMenu.Grupo,
+                                        objMenu.Id_Padre
+                                   };
+                string Usuario = objMenu.Usuario;
+                int Grupo = objMenu.Grupo;
+                Cmd = CDDatos.GenerarOracleCommandCursor("Pkg_Contratos.Obt_Sistemas", ref dr, Parametros, Valores);
+
+                if (dr.HasRows)
+                {
+
+                    while (dr.Read())
+                    {
+                        objMenu = new Menus();
+                        objMenu.Id = Convert.ToInt32(dr["id"].ToString());
+                        objMenu.Descripcion = Convert.ToString(dr["descripcion"].ToString());
+                        objMenu.Navigate_Url = Convert.ToString(dr["clave"].ToString());
+                        objMenu.Id_Padre = Convert.ToInt32(dr["id"].ToString());
+                        objMenu.Usuario = Usuario;
+                        objMenu.Grupo = Grupo;
+                        List.Add(objMenu);
+                        LlenarTree(ref Arbolito, objMenu, ref List);
+
+                    }
+                    dr.Close();
+                }
+
+
+                BindTree(List, null, Arbolito);
+                //Arbolito.CollapseAll();
+                dr.Close();
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
+        private void BindTree(IEnumerable<Menus> list, TreeNode parentNode, TreeView tree)
+        {
+            var nodes = list.Where(x => parentNode == null ? x.Id_Padre == 0 : x.Id_Padre == int.Parse(parentNode.Value));
+            foreach (var node in nodes)
+            {
+                //TreeNode newNode = new TreeNode(node.Descripcion_Proyecto, node.IdProy.ToString());
+                TreeNode newNode = new TreeNode(node.Descripcion, node.Id.ToString(),"",node.Navigate_Url,"");
+
+
+                if (parentNode == null)
+                {
+                    //if (node.Nivel > 6)
+                    //parentNode.ImageUrl = "../Imagenes/add.png";
+                    //newNode.Expand();
+                    tree.Nodes.Add(newNode);
+                    tree.CollapseAll();
+                }
+                else
+                {
+                    parentNode.ChildNodes.Add(newNode);
+                   
+                }
+                BindTree(list, newNode, tree);
+            }
+        }
+
+
     }
 }

@@ -181,8 +181,8 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] { 0, 10 };
-            Int32[] CeldasAdmin = new Int32[] { 0 };
+            Int32[] Celdas = new Int32[] { 0, 10, 12 };
+            Int32[] CeldasAdmin = new Int32[] { 0, 11 };
 
             try
             {
@@ -608,6 +608,30 @@ namespace Recibos_Electronicos.Form
             string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP050&idFact=" + grvFacturas.SelectedRow.Cells[0].Text;
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
+
+        protected void grvFacturas_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int fila = e.RowIndex;
+
+            try
+            {
+                ObjFactura.ID_FACT= Convert.ToString(grvFacturas.Rows[fila].Cells[0].Text);
+                CNFacturas.FacturaEliminar(ObjFactura, ref Verificador);
+                if (Verificador == "0")
+                    CargarGrid();
+                else
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+
+
+            }
+            catch (Exception ex)
+            {
+                string Msj = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Msj);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
+
+            }
         }
 
 

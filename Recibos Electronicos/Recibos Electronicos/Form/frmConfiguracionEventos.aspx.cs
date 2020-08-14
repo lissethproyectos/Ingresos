@@ -274,7 +274,8 @@ namespace Recibos_Electronicos.Form
             txtFecha_Evento_Ini.Text = string.Empty;
             txtFecha_Evento_Fin.Text = string.Empty;
             txtEspecificacion.Text = string.Empty;
-            DDLDependencia.Enabled = true;
+            DDLDependencia.Enabled = false;
+            divFiltros.Visible = false;
             ddlNivel.SelectedValue = "Z";
 
             lblUsuSolicitado.Text = string.Empty;
@@ -282,6 +283,8 @@ namespace Recibos_Electronicos.Form
             lblUsuAutorizado.Text = string.Empty;
             lblFechaAutorizado.Text = string.Empty;
             rbnExclusivo.SelectedValue = "N";
+
+
         }
 
         protected void ctrl_eliminar_Click(object sender, EventArgs e)
@@ -442,6 +445,7 @@ namespace Recibos_Electronicos.Form
                         {
                             MultiView1.ActiveViewIndex = 0;
                             DDLDependencia.Enabled = true;
+                            divFiltros.Visible = true;
                             CargarGriEventos();
                         }
 
@@ -461,6 +465,7 @@ namespace Recibos_Electronicos.Form
         {
             MultiView1.ActiveViewIndex = 0;
             DDLDependencia.Enabled = true;
+            divFiltros.Visible = true;
         }
 
         protected void ctrl_eliminar_Click(object sender, ImageClickEventArgs e)
@@ -884,6 +889,8 @@ namespace Recibos_Electronicos.Form
             {
                 if (Verificador == "0")
                 {
+                    divFiltros.Visible = false;
+                    DDLDependencia.Enabled = false;
                     lblCveDesc.Text = grdEventos.SelectedRow.Cells[1].Text;
                     CargarCombos();
                     DDLDependencia.SelectedValue = Objeventos.Dependencia;

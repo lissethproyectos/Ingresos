@@ -43,6 +43,17 @@ namespace Recibos_Electronicos
                         treeMenu.DataBind(); //Important or all is blank
                         //PlaceHolder1.Controls.Add(treeMenu);
                     }
+
+                    //Menus objMenu = new Menus();
+                    //objMenu.Usuario = SesionUsu.Usu_Nombre;
+                    //objMenu.Grupo = 14;
+                    //objMenu.Id_Padre = 15313;
+
+                    //List<Menus> List = new List<Menus>();
+                    //CNMenu.LlenarTree(ref treeMenu, objMenu, ref List);
+
+                    //treeMenu.DataSource = List;
+                    //treeMenu.DataBind();
                 }
             }
         }
