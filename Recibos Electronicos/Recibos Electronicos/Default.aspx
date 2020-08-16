@@ -21,6 +21,7 @@
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
                         <asp:TreeView ID="treeMenu" runat="server">
+                            <RootNodeStyle Font-Bold="True" Font-Size="Large" ImageUrl="~/Imagenes/mnu.png" />
                         </asp:TreeView>                        
                        
                     </ContentTemplate>

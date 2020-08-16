@@ -51,13 +51,13 @@
                             </ProgressTemplate>
                         </asp:UpdateProgress>
                     </div>
-                    <div class="col">
+                    <%--<div class="col">
                         <asp:UpdateProgress ID="updPgrCuotas" runat="server" AssociatedUpdatePanelID="updPnlCuotas">
                             <ProgressTemplate>
                                 <asp:Image ID="imgCuotas" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
                             </ProgressTemplate>
                         </asp:UpdateProgress>
-                    </div>
+                    </div>--%>
                 </div>
             </div>
         </ContentTemplate>
@@ -73,8 +73,8 @@
                                     <div class="row">
                                         <div class="col">
                                             <div style="overflow-x: auto;">
-                                                <asp:UpdatePanel ID="updPnlCuotas" runat="server">
-                                                    <ContentTemplate>
+                                          <%--      <asp:UpdatePanel ID="updPnlCuotas" runat="server">
+                                                    <ContentTemplate>--%>
                                                         <asp:GridView ID="grvCuotas" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnSelectedIndexChanged="grvCuotas_SelectedIndexChanged" Width="100%" OnRowDeleting="grvCuotas_RowDeleting" EmptyDataText="No hay cuotas registradas." AllowPaging="True" OnPageIndexChanging="grvCuotas_PageIndexChanging" ShowHeaderWhenEmpty="True">
                                                             <Columns>
                                                                 <asp:BoundField DataField="TipoRegistro" HeaderText="TIPO" />
@@ -110,8 +110,8 @@
                                                             <HeaderStyle CssClass="enc" />
                                                             <AlternatingRowStyle CssClass="alt" />
                                                         </asp:GridView>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
+                                                    <%--</ContentTemplate>
+                                                </asp:UpdatePanel>--%>
                                             </div>
                                         </div>
                                     </div>

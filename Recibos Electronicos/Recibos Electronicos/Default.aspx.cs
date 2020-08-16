@@ -17,6 +17,7 @@ namespace Recibos_Electronicos
         #region <Variables>
         Sesion SesionUsu = new Sesion();
         Menus menu = new Menus();
+        CN_Menus CNMenu = new CN_Menus();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -25,35 +26,42 @@ namespace Recibos_Electronicos
             {
                 if (SesionUsu.Usu_TipoUsu == 3)
                 {
-                    string siteMap = "ArchivosMenu/Web" + SesionUsu.Usu_Nombre + ".sitemap";
-                    string fullPath = Path.Combine(Server.MapPath("~"), siteMap);
-                    if (File.Exists(fullPath))
+
+                    if (Request.QueryString["mnu"] != null)
                     {
-                        //SiteMapDataSource1.SiteMapProvider = fullPath;
-                        XmlSiteMapProvider testXmlProvider = new XmlSiteMapProvider();
-                        NameValueCollection providerAttributes = new NameValueCollection(1);
-                        providerAttributes.Add("siteMapFile", siteMap);
-                        testXmlProvider.Initialize("MyXmlSiteMapProvider", providerAttributes);
-                        testXmlProvider.BuildSiteMap();
-                        SiteMapDataSource smd = new SiteMapDataSource();
-                        smd.ShowStartingNode = false;
-                        smd.Provider = testXmlProvider;
-                        //TreeView tv2 = new TreeView();
-                        treeMenu.DataSource = smd;
-                        treeMenu.DataBind(); //Important or all is blank
-                        //PlaceHolder1.Controls.Add(treeMenu);
+                        SesionUsu.Reporte = Request.QueryString["mnu"];
+
+                        Menus objMenu = new Menus();
+                        objMenu.Usuario = SesionUsu.Usu_Nombre;
+                        objMenu.Grupo = 14;
+                        objMenu.Padre = SesionUsu.Reporte; // "ADMIN";
+
+                        List<Menus> List = new List<Menus>();
+                        CNMenu.LlenarTree(ref treeMenu, objMenu, ref List);
+                        treeMenu.ExpandAll();
                     }
 
-                    //Menus objMenu = new Menus();
-                    //objMenu.Usuario = SesionUsu.Usu_Nombre;
-                    //objMenu.Grupo = 14;
-                    //objMenu.Id_Padre = 15313;
-
-                    //List<Menus> List = new List<Menus>();
-                    //CNMenu.LlenarTree(ref treeMenu, objMenu, ref List);
-
-                    //treeMenu.DataSource = List;
-                    //treeMenu.DataBind();
+                    else
+                    {
+                        string siteMap = "ArchivosMenu/Web" + SesionUsu.Usu_Nombre + ".sitemap";
+                        string fullPath = Path.Combine(Server.MapPath("~"), siteMap);
+                        if (File.Exists(fullPath))
+                        {
+                            //SiteMapDataSource1.SiteMapProvider = fullPath;
+                            XmlSiteMapProvider testXmlProvider = new XmlSiteMapProvider();
+                            NameValueCollection providerAttributes = new NameValueCollection(1);
+                            providerAttributes.Add("siteMapFile", siteMap);
+                            testXmlProvider.Initialize("MyXmlSiteMapProvider", providerAttributes);
+                            testXmlProvider.BuildSiteMap();
+                            SiteMapDataSource smd = new SiteMapDataSource();
+                            smd.ShowStartingNode = false;
+                            smd.Provider = testXmlProvider;
+                            //TreeView tv2 = new TreeView();
+                            treeMenu.DataSource = smd;
+                            treeMenu.DataBind(); //Important or all is blank
+                            //PlaceHolder1.Controls.Add(treeMenu);
+                        }
+                    }
                 }
             }
         }

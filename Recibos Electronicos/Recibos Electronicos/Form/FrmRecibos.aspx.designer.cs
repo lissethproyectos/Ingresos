@@ -15,13 +15,13 @@ namespace Recibos_Electronicos.Form
     {
 
         /// <summary>
-        /// Control UpdateProgress1.
+        /// Control UpdateProgress2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
 
         /// <summary>
         /// Control UpdatePanel4.
@@ -94,15 +94,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvFacturas;
-
-        /// <summary>
-        /// Control UpdateProgress2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress UpdateProgress2;
 
         /// <summary>
         /// Control PnlCorreo.
@@ -618,15 +609,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanel13;
 
         /// <summary>
-        /// Control hddnModal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddnModal;
-
-        /// <summary>
         /// Control pnlMsjReg.
         /// </summary>
         /// <remarks>
@@ -652,6 +634,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBttnAgregarConcepto0;
+
+        /// <summary>
+        /// Control hddnModal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddnModal;
 
         /// <summary>
         /// Control modal.
@@ -789,15 +780,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblMsjConc;
 
         /// <summary>
-        /// Control lblNivel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNivel;
-
-        /// <summary>
         /// Control UpdatePanel6.
         /// </summary>
         /// <remarks>
@@ -832,15 +814,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress23;
-
-        /// <summary>
-        /// Control lblConceptos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblConceptos;
 
         /// <summary>
         /// Control UpdatePanel7.
@@ -1003,6 +976,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelar_Concp;
+
+        /// <summary>
+        /// Control UpdateProgress25.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress25;
 
         /// <summary>
         /// Control UpdatePanel5.

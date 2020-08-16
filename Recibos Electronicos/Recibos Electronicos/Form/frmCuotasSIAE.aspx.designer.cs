@@ -78,15 +78,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.UpdateProgress updPrMultiview;
 
         /// <summary>
-        /// Control updPgrCuotas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress updPgrCuotas;
-
-        /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
         /// <remarks>
@@ -112,15 +103,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View View1;
-
-        /// <summary>
-        /// Control updPnlCuotas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updPnlCuotas;
 
         /// <summary>
         /// Control grvCuotas.

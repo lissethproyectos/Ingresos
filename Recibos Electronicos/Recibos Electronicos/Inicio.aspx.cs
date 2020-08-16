@@ -39,6 +39,8 @@ namespace Recibos_Electronicos
 
         protected void inicializar()
         {
+          
+
             CargarCombos();
 
             if (Convert.ToString(SesionUsu.Usu_TipoUsu) == "3")

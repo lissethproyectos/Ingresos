@@ -20,7 +20,12 @@ public class Menus
         set { _UsuarioNombre = value; }
     }
 
-
+    private string _Clave;
+    public string Clave
+    {
+        get { return _Clave; }
+        set { _Clave = value; }
+    }
     private string _Usuario;
     public string Usuario
     {
@@ -54,6 +59,13 @@ public class Menus
     {
         get { return _Id_Padre; }
         set { _Id_Padre = value; }
+    }
+
+    private string _Padre;
+    public string Padre
+    {
+        get { return _Padre; }
+        set { _Padre = value; }
     }
 
     private string _Descripcion;

@@ -171,7 +171,7 @@ namespace CapaDatos
                             if (dr["clave"].ToString().Contains(".aspx"))
                                 objXMLTW.WriteAttributeString("url", dr["clave"].ToString());
                             else
-                                objXMLTW.WriteAttributeString("url", "Default.aspx?cve=" + dr["id"].ToString());
+                                objXMLTW.WriteAttributeString("url", "Default.aspx?mnu=" + dr["cve"].ToString());
 
 
 
@@ -274,18 +274,18 @@ namespace CapaDatos
 
 
                 string[] Parametros = {
-                                        "p_usuario",
-                                        "p_grupo",
-                                        "p_id_padre"
+                                        "P_ID_SISTEMA",
+                                        "P_USUARIO",
+                                        "P_PADRE"
                                       };
                 object[] Valores = {
-                                        objMenu.Usuario,
                                         objMenu.Grupo,
-                                        objMenu.Id_Padre
+                                        objMenu.Usuario,
+                                        objMenu.Padre
                                    };
                 string Usuario = objMenu.Usuario;
                 int Grupo = objMenu.Grupo;
-                Cmd = CDDatos.GenerarOracleCommandCursor("Pkg_Contratos.Obt_Sistemas", ref dr, Parametros, Valores);
+                Cmd = CDDatos.GenerarOracleCommandCursor("Pkg_Contratos.Obt_Tree_Menu", ref dr, Parametros, Valores);
 
                 if (dr.HasRows)
                 {
@@ -296,11 +296,14 @@ namespace CapaDatos
                         objMenu.Id = Convert.ToInt32(dr["id"].ToString());
                         objMenu.Descripcion = Convert.ToString(dr["descripcion"].ToString());
                         objMenu.Navigate_Url = Convert.ToString(dr["clave"].ToString());
-                        objMenu.Id_Padre = Convert.ToInt32(dr["id"].ToString());
+                        objMenu.Padre = Convert.ToString(dr["padre"].ToString());
+                        objMenu.Clave = Convert.ToString(dr["clave"].ToString());
+                        objMenu.Id_Padre = Convert.ToInt32(dr["id_padre"].ToString());
+
                         objMenu.Usuario = Usuario;
                         objMenu.Grupo = Grupo;
                         List.Add(objMenu);
-                        LlenarTree(ref Arbolito, objMenu, ref List);
+                        //LlenarTree(ref Arbolito, objMenu, ref List);
 
                     }
                     dr.Close();
@@ -324,14 +327,14 @@ namespace CapaDatos
 
         private void BindTree(IEnumerable<Menus> list, TreeNode parentNode, TreeView tree)
         {
-            var nodes = list.Where(x => parentNode == null ? x.Id_Padre == 0 : x.Id_Padre == int.Parse(parentNode.Value));
+            var nodes = list.Where(x => parentNode == null ? x.Padre == "0" : x.Id_Padre == int.Parse(parentNode.Value));
             foreach (var node in nodes)
             {
                 //TreeNode newNode = new TreeNode(node.Descripcion_Proyecto, node.IdProy.ToString());
                 TreeNode newNode = new TreeNode(node.Descripcion, node.Id.ToString(),"",node.Navigate_Url,"");
 
 
-                if (parentNode == null)
+                if (node.Padre == "0")
                 {
                     //if (node.Nivel > 6)
                     //parentNode.ImageUrl = "../Imagenes/add.png";
