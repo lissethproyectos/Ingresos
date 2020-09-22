@@ -10862,12 +10862,13 @@ footer.page-footer h2 {
 
 
 .navbar {
-    padding: 1px 1px 0px 1px;
+    padding: 0px 1px 0px 1px;
 }
 
 .navbar-inverse {
-    background-color: #222;
-    border-color: #080808;
+    background-color: #18386b;
+    /*border-color: #080808;*/
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
 }
 
 .navbar-fixed-top {
@@ -10900,7 +10901,7 @@ footer.page-footer h2 {
 .navbar {
     position: relative;
     min-height: 50px;
-    margin-bottom: 1px;
+    /*margin-bottom: 1px;*/
     /*border: 1px solid transparent;*/
 }
 

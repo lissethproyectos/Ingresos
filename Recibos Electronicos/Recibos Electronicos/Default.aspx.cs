@@ -38,6 +38,7 @@ namespace Recibos_Electronicos
 
                         List<Menus> List = new List<Menus>();
                         CNMenu.LlenarTree(ref treeMenu, objMenu, ref List);
+                        
                         treeMenu.ExpandAll();
                     }
 

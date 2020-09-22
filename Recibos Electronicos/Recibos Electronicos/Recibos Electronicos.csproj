@@ -313,6 +313,7 @@
     <Content Include="Form\frmEventos2.aspx" />
     <Content Include="Form\frmExencionesAutomaticas.aspx" />
     <Content Include="Form\frmExentos_Copia.aspx" />
+    <Content Include="Form\FrmSolicitud_Facturas.aspx" />
     <Content Include="Form\FrmFacturas.aspx" />
     <Content Include="Form\FrmFacturasResp.aspx" />
     <Content Include="Form\FrmFacturas2.aspx" />
@@ -362,6 +363,7 @@
     <Content Include="Form\WebForm1.aspx" />
     <Content Include="Form\WebForm2.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Graficas\frmReportesConceptosSIAE.aspx" />
     <Content Include="Imagenes\ajax_loader_gray_512.gif" />
     <Content Include="Imagenes\attention.png" />
     <Content Include="Imagenes\banamex.png" />
@@ -678,6 +680,13 @@
     </Compile>
     <Compile Include="Form\frmExentos_Copia.aspx.designer.cs">
       <DependentUpon>frmExentos_Copia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FrmSolicitud_Facturas.aspx.cs">
+      <DependentUpon>FrmSolicitud_Facturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\FrmSolicitud_Facturas.aspx.designer.cs">
+      <DependentUpon>FrmSolicitud_Facturas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\FrmFacturas.aspx.cs">
       <DependentUpon>FrmFacturas.aspx</DependentUpon>
@@ -1004,6 +1013,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Graficas\frmReportesConceptosSIAE.aspx.cs">
+      <DependentUpon>frmReportesConceptosSIAE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Graficas\frmReportesConceptosSIAE.aspx.designer.cs">
+      <DependentUpon>frmReportesConceptosSIAE.aspx</DependentUpon>
+    </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1025,6 +1041,42 @@
     </Compile>
     <Compile Include="prueba.aspx.designer.cs">
       <DependentUpon>prueba.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ComprobanteFiscal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComprobanteFiscal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\InfAdicional_Tapachula.cs">
+      <DependentUpon>InfAdicional_Tapachula.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\InfAdicional.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InfAdicional.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\REP064.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>REP064.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RepComprobanteFiscal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepComprobanteFiscal.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RepComprobanteFiscal_Ref.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepComprobanteFiscal_Ref.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\RepComprobanteFiscal_QR.cs">
       <AutoGen>True</AutoGen>
@@ -1118,6 +1170,30 @@
     <Content Include="SiteAdmin.Master" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\ComprobanteFiscal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ComprobanteFiscal.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\InfAdicional_Tapachula.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InfAdicional_Tapachula.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\InfAdicional.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InfAdicional.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\REP064.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>REP064.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RepComprobanteFiscal_Ref.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepComprobanteFiscal_Ref.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RepComprobanteFiscal.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepComprobanteFiscal.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RepComprobanteFiscal_QR.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepComprobanteFiscal_QR.cs</LastGenOutput>

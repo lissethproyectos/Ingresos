@@ -29,25 +29,22 @@ namespace Recibos_Electronicos.Form
             txtFecha_Factura_Ini.Text = "01/01/" + System.DateTime.Now.Year.ToString();
             txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
             if(UrlReporte == "REP054")
-            {
-               
-                //lblFecha_Factura_Ini.Visible = false;
-                //txtFecha_Factura_Ini.Visible = false;
-                //lblFecha_Factura_Fin.Visible = false;
-                //txtFecha_Factura_Fin.Visible = false;
+            {                              
                 lblNivel.Visible = false;
                 DDLNivel.Visible = false;
                 lblOrdenar.Visible = false;
                 ddlOrden.Visible = false;
-                
-                //imgCalendarioIni.Visible = false;
-                //imgCalendarioFin.Visible = false;
-                
-
+                CargarCombos();
+            }
+            else if (UrlReporte == "REP064")
+            {
+                string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP064&enExcel=N";
+                string _open = "window.open('" + ruta + "', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
             }
 
 
-            CargarCombos();
+
         }
         protected void CargarCombos()
         {

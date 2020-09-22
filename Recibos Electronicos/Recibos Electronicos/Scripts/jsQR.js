@@ -22,20 +22,20 @@ var link;
                     xhr.open("POST", ruta, true);
                     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
                     xhr.onreadystatechange = function () {//Call a function when the state changes.
-                        if (xhr.readyState == XMLHttpRequest.DONE && xhr.status == 200) {
+                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                             var blob = new Blob([this.response], { type: "application/pdf" });
                             link = document.createElement('a');
                             link.href = window.URL.createObjectURL(blob);
                             window.open(link, "miniContenedor", "toolbar=yes", "location=no", "menubar=yes", "resizable=yes");
                             $('#precarga1').html('');
                         }
-                    }
+                    };
                     xhr.send("IdFact=" + vIdFact + "&Fichero=" + Imagen);
                     
 
                     break;
                 case "notgp":
-                    var ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP099&idFact=" + vIdFact;
+                    ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP099&idFact=" + vIdFact;
                     window.open(ruta, 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');
                     break;
                 default:

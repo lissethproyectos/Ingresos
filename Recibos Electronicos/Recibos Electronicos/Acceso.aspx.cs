@@ -35,25 +35,31 @@ namespace Recibos_Electronicos
         {
             try
             {
-                if (Request.QueryString["Token"] != null)
+                if (Request.QueryString["RGN"] != null)
                 {
-                    string TokenUsu = Convert.ToString(Request.QueryString["Token"]);
-                    ObjUsuario.Token = Convert.ToString(TokenUsu);
-                    CN_Usuario.ValidarToken(ref ObjUsuario, ref Verificador);
-                    if (Verificador == "0")
-                    {
-                        DDLTipoUsuario.SelectedValue = "3";
-                        txtCve.Text = ObjUsuario.Usu_Nombre;
-                        txtPassword.Text = ObjUsuario.Password;
-                        btnIngresar_Click(null, null);
-                    }
-                    else
-                    {
-                        pnlMsj.Visible = true;
-                        lblMensaje.Text = "El Token no es válido";
-                    }
-
+                    DDLTipoUsuario.SelectedValue = "1";
+                    txtCve.Visible = true;
+                    txtCve.Text = Convert.ToString(Request.QueryString["RGN"]);
                 }
+                //if (Request.QueryString["Token"] != null)
+                //{
+                //    string TokenUsu = Convert.ToString(Request.QueryString["Token"]);
+                //    ObjUsuario.Token = Convert.ToString(TokenUsu);
+                //    CN_Usuario.ValidarToken(ref ObjUsuario, ref Verificador);
+                //    if (Verificador == "0")
+                //    {
+                //        DDLTipoUsuario.SelectedValue = "3";
+                //        txtCve.Text = ObjUsuario.Usu_Nombre;
+                //        txtPassword.Text = ObjUsuario.Password;
+                //        btnIngresar_Click(null, null);
+                //    }
+                //    else
+                //    {
+                //        pnlMsj.Visible = true;
+                //        lblMensaje.Text = "El Token no es válido";
+                //    }
+
+                    //}
             }
             catch (Exception ex)
             {

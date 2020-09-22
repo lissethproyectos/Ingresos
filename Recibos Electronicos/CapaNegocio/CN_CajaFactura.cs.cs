@@ -35,6 +35,30 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void FacturaCajaConsultaGrid2(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, ref List<CajaFactura> List)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.FacturaCajaConsultaGrid2(ObjUsuario, ref ObjCjaFactura, Dependencia, FechaInicial, FechaFinal, Referencia, Status, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void FacturaCajaConsultaGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, String Dependencia, String FechaInicial, String FechaFinal, string Referencia, string Solicitados, ref List<CajaFactura> List)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.FacturaCajaConsultaGrid(ObjUsuario, ref ObjCjaFactura, Dependencia, FechaInicial, FechaFinal, Referencia, Solicitados, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public void FacturaDoctosConsultaGrid(Factura ObjFactura, ref List<Factura> List)
         {

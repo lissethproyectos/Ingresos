@@ -535,6 +535,19 @@ namespace Recibos_Electronicos.Reportes
                     Reporte = "Reportes\\RepComprobanteFiscal-Lote.rpt";
                     rptPDF_FE(Reporte, v63, "Recibos del Evento "+Evento);
                     break;
+                case "REP064":
+                    Reporte = "Reportes\\REP064.rpt";
+                    if (enExcel == "N")                    
+                        rptPDF_Ingresos(Reporte, "Escuelas que cobran cuota de mantenimiento");
+                    else
+                        rptExcel_Ingresos(Reporte, "Escuelas que cobran cuota de mantenimiento");
+                    break;
+                case "REP065":
+                    object[] v100 = { Referencia };
+                    Reporte = "Reportes\\RepComprobanteFiscal_Ref.rpt";
+                    rptPDF_FE(Reporte, v100, "Ficha Referenciada");
+                    break;
+
                 case "REP000":
                     object[] v39 = { TipoPersona, Referencia, Total, FechaIn, Conceptos, Observaciones };
                     Reporte = "Reportes\\Ficha_Referenciada.rpt";
@@ -738,6 +751,60 @@ namespace Recibos_Electronicos.Reportes
                 SetDBLogonForReport(connectionInfo, report);
                 report.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, false, NombreReporte);
 
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CR_ComprobanteFiscal.ReportSource = report;
+                report.Close();
+                report.Dispose();
+                CR_ComprobanteFiscal.Dispose();
+            }
+        }
+        private void rptPDF_Ingresos(String Reporte, string NombreReporte)
+        {
+            try
+            {
+
+                ConnectionInfo connectionInfo = new ConnectionInfo();
+                p = new System.Web.UI.Page();
+                report.Load(p.Server.MapPath("~") + "\\" + Reporte);             
+                connectionInfo.ServerName = "dsia";
+                connectionInfo.UserID = "ingresos";
+                connectionInfo.Password = "unach09";
+                SetDBLogonForReport(connectionInfo, report);
+                report.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, false, NombreReporte);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CR_ComprobanteFiscal.ReportSource = report;
+                report.Close();
+                report.Dispose();
+                CR_ComprobanteFiscal.Dispose();
+            }
+        }
+        private void rptExcel_Ingresos(String Reporte, string NombreReporte)
+        {
+            try
+            {
+
+                ConnectionInfo connectionInfo = new ConnectionInfo();
+                p = new System.Web.UI.Page();
+                report.Load(p.Server.MapPath("~") + "\\" + Reporte);
+                connectionInfo.ServerName = "dsia";
+                connectionInfo.UserID = "ingresos";
+                connectionInfo.Password = "unach09";
+                SetDBLogonForReport(connectionInfo, report);
+                report.ExportToHttpResponse(ExportFormatType.ExcelRecord, Response, false, NombreReporte);
 
             }
             catch (Exception ex)

@@ -238,7 +238,9 @@ namespace CapaDatos
                             if (reader["clave"].ToString().Contains(".aspx"))
                                 objXMLTW.WriteAttributeString("url", reader["clave"].ToString());
                             else
-                                objXMLTW.WriteAttributeString("url", "Default.aspx?cve=" + reader["id"].ToString());
+                                objXMLTW.WriteAttributeString("url", "Default.aspx?mnu=" + reader["cve"].ToString());
+
+                            //objXMLTW.WriteAttributeString("url", "Default.aspx?cve=" + reader["id"].ToString());
 
                             //if (reader["clave"].ToString().Contains("Monitor"))
                             //    objXMLTW.WriteAttributeString("url", reader["clave"].ToString()+"?mnt=001");

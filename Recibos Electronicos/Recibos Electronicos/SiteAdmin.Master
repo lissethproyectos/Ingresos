@@ -20,7 +20,7 @@
 
 
     <script type="text/javascript" src="https://sysweb.unach.mx/resources/js/index.js" charset="iso-8859-1"></script>
-<style type="text/css">
+    <style type="text/css">
         .dropdown-item:focus, .dropdown-item:hover {
             color: #16181b;
             text-decoration: none;
@@ -71,6 +71,16 @@
             width: 20px;
         }
 
+        .c_mnu_nav {
+            position: relative;
+            margin: 0 auto;
+            background-color: #fff;
+            color: #000;
+            text-shadow: white 0em 0.1em 0em;
+            font-size: 12px;
+            min-height: 30px;
+            max-height: 30px;
+        }
 
 
         @media (max-width:640px) {
@@ -88,108 +98,83 @@
     <form id="form1" runat="server" enctype="multipart/form-data">
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="True"></asp:ScriptManager>
         <div class="container-fluid">
-            <div class=" menuprin navbar-inverse navbar-fixed-top">
-            <div class="row" style="width:100%; background-color: #18386b; margin: 0 0 0 0;">
-                                <div class="col-md-4">
-                                    <a href="https://sysweb.unach.mx/DSIA/">
-                                        <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
-                                    </a>
-                                </div>
-                                <div class="col-md-4 text-center">
-                                    <h5 class="text-uppercase text-light font-weight-bold">
-                                        <div class="media-body">
-                                            <h4 class="media-heading">Recaudación de Pagos</h4>
-                                            <h6>Ingresos</h6>
-                                        </div>
-                                    </h5>
-                                </div>
-                                <div class="col-md-4">
+            <div class="navbar-inverse navbar-fixed-top">
+                <div class="row">
+                    <div class="col-md-4">
+                        <a href="https://sysweb.unach.mx/DSIA/">
+                            <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
+                        </a>
+                    </div>
+                    <div class="col-md-4 text-center">
+                            <div class="media-body">
+                                <h4 class="media-heading">Recaudación de Pagos</h4>
+                                <h6>Ingresos</h6>
+                            </div>
+                    </div>
+                    <div class="col-md-4">
 
-                                    <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
-                                </div>
-                    </div>           
-            <div class="row" style="width:100%; background-color: #275090; margin: 0 0 0 0;">
-                <div class="col">
-                    
-                            <nav class="navbar navbar-expand-lg navbar-dark primary-color" style="width: 100%">
-                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-                                    <span class="navbar-toggler-icon"></span>
-                                </button>
-                                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                                    <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
-                                        <ContentTemplate>
-                                            <asp:Menu ID="MenuTop" runat="server"
-                                                StaticMenuStyle-CssClass="nav navbar-nav secondary-color"
-                                                StaticSelectedStyle-CssClass="active"
-                                                Orientation="Horizontal" RenderingMode="List"
-                                                Sonmenuitemclick="MenuTop_MenuItemClick"
-                                                IncludeStyleBlock="False">
-                                                <DynamicMenuStyle CssClass="dropdown-menu"></DynamicMenuStyle>
-                                                <StaticMenuItemStyle CssClass="nav-link" Font-Names="Calibri" Font-Size="12px" />
-                                                <StaticMenuStyle CssClass="nav navbar-nav"></StaticMenuStyle>
-                                                <StaticSelectedStyle Font-Bold="true" />
-                                                <DynamicMenuItemStyle CssClass="dropdown-item" />
-                                                <Items>
-                                                    <asp:MenuItem Text="Ingresos" Value="Ingresos"></asp:MenuItem>
-                                                    <asp:MenuItem Text="Catálogos" Value="Catálogos"></asp:MenuItem>
-                                                </Items>
-                                                <StaticHoverStyle CssClass="dropdown-menu" />
-                                            </asp:Menu>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </div>
-                                <div class="btn-group dropdown my-2 my-lg-9" style="left: 0px; top: 0px">
-                                    <asp:Button ID="bttnCorreoUnach" runat="server" Text="Button" class="btn_usuario btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></asp:Button>
-                                    <div class="dropdown-menu dropdown-menu-sm-right" style="background-color: #4a769b">
-                                        <a class="dropdown-item">
-                                            <div style="color: #fff;">
-                                                <asp:Label ID="lblUsuario" runat="server"></asp:Label>
-                                            </div>
-                                        </a>
-                                        <a class="dropdown-item">
-                                            <input type="button" id="bttnActualiza" class="btn btn-info" value="Actualizar Datos" /></a>
-                                        <a class="dropdown-item">
-                                            <asp:Button ID="bttnCerrarSesion" runat="server" Text="Cerrar Sesión" CssClass="btn btn-light" OnClick="bttnCerrarSesion_Click" TabIndex="1000" /></a>
-                                    </div>
-                                </div>
-                            </nav>
-                        
-                     </div>
+                        <img id="imgUNACH" src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
                     </div>
                 </div>
-                    </div>
-        <%--<div class="collapse navbar-collapse navbar-ex1-collapse">
-            
-        </div>--%>
-        <div class="container-fluid" style="margin-top:150px">
-            <div class="row">
-                <div class="col">
-                    <div class="p_info">
-                        <div class="c_info">
-                            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                <ContentTemplate>
-                                    <asp:SiteMapPath ID="SiteMapPath1" runat="server" CssClass="SiteMap">
-                                        <RootNodeStyle Font-Bold="True" />
-                                    </asp:SiteMapPath>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                            <asp:Label ID="lblMsjE" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
-                        </div>
+                <div class="row">
+                    <div class="col">
+
+                        <nav class="navbar navbar-expand-lg navbar-dark primary-color" style="width: 100%">
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                                <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
+                                    <ContentTemplate>
+                                        <asp:Menu ID="MenuTop" runat="server"
+                                            StaticMenuStyle-CssClass="nav navbar-nav secondary-color"
+                                            StaticSelectedStyle-CssClass="active"
+                                            Orientation="Horizontal" RenderingMode="List"
+                                            Sonmenuitemclick="MenuTop_MenuItemClick"
+                                            IncludeStyleBlock="False">
+                                            <DynamicMenuStyle CssClass="dropdown-menu"></DynamicMenuStyle>
+                                            <StaticMenuItemStyle CssClass="nav-link" Font-Names="Calibri" Font-Size="12px" />
+                                            <StaticMenuStyle CssClass="nav navbar-nav"></StaticMenuStyle>
+                                            <StaticSelectedStyle Font-Bold="true" />
+                                            <DynamicMenuItemStyle CssClass="dropdown-item" />
+                                            <Items>
+                                                <asp:MenuItem Text="Ingresos" Value="Ingresos"></asp:MenuItem>
+                                                <asp:MenuItem Text="Catálogos" Value="Catálogos"></asp:MenuItem>
+                                            </Items>
+                                            <StaticHoverStyle CssClass="dropdown-menu" />
+                                        </asp:Menu>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="btn-group dropdown my-2 my-lg-9" style="left: 0px; top: 0px">
+                                <i class="fa fa-user-circle white-text fa-th-large" aria-hidden="true"></i>
+                                &nbsp;<asp:Button ID="bttnCorreoUnach" runat="server" Text="Button" class="btn_usuario btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></asp:Button>
+                                <div class="dropdown-menu dropdown-menu-sm-right" style="background-color: #4a769b">
+                                    <a class="dropdown-item">
+                                        <div style="color: #fff;">
+                                            <asp:Label ID="lblUsuario" runat="server"></asp:Label>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item">
+                                        <input type="button" id="bttnActualiza" class="btn btn-info" value="Actualizar Datos" /></a>
+                                    <a class="dropdown-item">
+                                        <asp:Button ID="bttnCerrarSesion" runat="server" Text="Cerrar Sesión" CssClass="btn btn-light" OnClick="bttnCerrarSesion_Click" TabIndex="1000" /></a>
+                                </div>
+                            </div>
+                        </nav>
+
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-        <div class="container-fluid">
+        <div class="container-fluid" style="margin-top: 150px">
             <div class="row">
-                <div class="col-md-2">
+                <div class="col-md-2 alert alert-secondary">
                     <div class="panel-group" id="accordion">
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-area-chart" aria-hidden="true"></i> Dashboard</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-area-chart" aria-hidden="true"></i> Reportes</a>
                                 </h4>
                             </div>
                             <div id="collapseOne" class="panel-collapse collapse in">
@@ -197,21 +182,9 @@
                                     <table class="table">
                                         <tr>
                                             <td>
-                                                Curso de Nivelación
-                                                <%--<i class="fa fa-tachometer" aria-hidden="true"></i>--%>
-
+                                                <a href="Graficas/frmReportesConceptosSIAE.aspx">SIAE pagados y exentos</a>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>
-                                                <a href="http://www.jquery2dotnet.com">Inscripción</a>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <span class="glyphicon glyphicon-file text-info"></span><a href="http://www.jquery2dotnet.com">Reinscripción</a>
-                                            </td>
-                                        </tr>                                        
                                     </table>
                                 </div>
                             </div>
@@ -219,7 +192,7 @@
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-calendar" aria-hidden="true"></i> Calendario de Pagos</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-calendar" aria-hidden="true"></i>Calendario de Pagos</a>
                                 </h4>
                             </div>
                             <div id="collapseTwo" class="panel-collapse collapse">
@@ -247,7 +220,7 @@
                                                 <HeaderStyle CssClass="alert alert-info" />
                                             </asp:GridView>
 
-                                    <%--<asp:Calendar ID="calPagosUNACH" runat="server" CssClass="alert alert-info" SelectedDate="07/24/2020 23:02:18" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" style="left: 0px; top: 0px; width: 176px; height: 150px" ToolTip="Curso de Nivelación">
+                                            <%--<asp:Calendar ID="calPagosUNACH" runat="server" CssClass="alert alert-info" SelectedDate="07/24/2020 23:02:18" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" style="left: 0px; top: 0px; width: 176px; height: 150px" ToolTip="Curso de Nivelación">
                                         <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
                                         <NextPrevStyle VerticalAlign="Bottom" />
                                         <OtherMonthDayStyle ForeColor="#808080" />
@@ -257,17 +230,16 @@
                                         <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
                                         <WeekendDayStyle BackColor="#FFFFCC" />
                                             </asp:Calendar>--%>
-
                                         </ContentTemplate>
 
                                     </asp:UpdatePanel>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Reportes Ciclo Actual</a>
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"><i class="fa fa-file-pdf-o" aria-hidden="true"></i>Reportes Ciclo Actual</a>
                                 </h4>
                             </div>
                             <div id="collapseFour" class="panel-collapse collapse">
@@ -303,6 +275,24 @@
                     </div>
                 </div>
                 <div class="col-md-10">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                <div class="p_info">
+                                    <div class="c_mnu_nav">
+                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                            <ContentTemplate>
+                                                <asp:SiteMapPath ID="SiteMapPath1" runat="server" CssClass="SiteMap">
+                                                    <RootNodeStyle Font-Bold="True" />
+                                                </asp:SiteMapPath>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                        <asp:Label ID="lblMsjE" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="well">
                         <asp:ContentPlaceHolder ID="MainContent" runat="server">
                         </asp:ContentPlaceHolder>

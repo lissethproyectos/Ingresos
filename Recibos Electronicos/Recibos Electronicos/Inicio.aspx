@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="Recibos_Electronicos.Inicio" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.Master" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="Recibos_Electronicos.Inicio" %>
 
 <%@ Register TagName="uCCorreo" TagPrefix="usr" Src="EnviarCorreo.ascx" %>
 
@@ -110,9 +110,12 @@
                 </div>
             </div>
         </div>
+
+
         <div class="container">
             <div class="row">
-                <div class="col-sm">
+                <div class="col">
+
                     <div class="card bg-light mb-3">
                         <div class="card-header">
                             <h7>

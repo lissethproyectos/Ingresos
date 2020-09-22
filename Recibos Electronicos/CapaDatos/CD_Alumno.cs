@@ -84,11 +84,13 @@ namespace CapaDatos
                     ObjAlumno.Correo = Convert.ToString(dr.GetValue(10));
                     ObjAlumno.Password = Convert.ToString(dr.GetValue(11));
                     if (ObjAlumno.TipoPersonaStr == "ALUMNO" && ObjAlumno.Nivel == "L" && ObjAlumno.Observaciones == "SAUCE")
-                        Ruta = "http://siae.unach.mx/login/";
+                        Ruta = "https://siae.unach.mx/accesos/alumnos/?a=1&m=0";
                     else if (ObjAlumno.TipoPersonaStr == "ALUMNO" && (ObjAlumno.Nivel == "M" || ObjAlumno.Nivel == "D" || ObjAlumno.Nivel == "E") && ObjAlumno.Observaciones == "POSGRADO")
-                        Ruta = "http://siae.unach.mx/posgrado/login/";
+                        Ruta = "https://siae.unach.mx/posgrado/login/";
                     else if (ObjAlumno.TipoPersonaStr == "ASPIRANTE" && (ObjAlumno.Nivel == "M" || ObjAlumno.Nivel == "D" || ObjAlumno.Nivel == "E") && ObjAlumno.Observaciones == "POSGRADO")
-                        Ruta = "http://siae.unach.mx/posgrado/aspirantes/";
+                        Ruta = "https://siae.unach.mx/posgrado/aspirantes/";
+                    else if (ObjAlumno.TipoPersonaStr == "ASPIRANTE" && ObjAlumno.Nivel == "L")
+                        Ruta = "https://siae.unach.mx/inscripciones/";
                     else
                         EsquemaAlu = "SYSWEB";
 

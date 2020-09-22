@@ -16,14 +16,14 @@ namespace Recibos_Electronicos.Reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class RepComprobanteFiscal : ReportClass {
+    public class RepComprobanteFiscal_Ref : ReportClass {
         
-        public RepComprobanteFiscal() {
+        public RepComprobanteFiscal_Ref() {
         }
         
         public override string ResourceName {
             get {
-                return "RepComprobanteFiscal.rpt";
+                return "RepComprobanteFiscal_Ref.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Recibos_Electronicos.Reportes {
         
         public override string FullResourceName {
             get {
-                return "Recibos_Electronicos.Reportes.RepComprobanteFiscal.rpt";
+                return "Recibos_Electronicos.Reportes.RepComprobanteFiscal_Ref.rpt";
             }
             set {
                 // Do nothing
@@ -154,7 +154,7 @@ namespace Recibos_Electronicos.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section DetailSection13 {
+        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[13];
             }
@@ -162,7 +162,7 @@ namespace Recibos_Electronicos.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section ReportFooterSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
             get {
                 return this.ReportDefinition.Sections[14];
             }
@@ -170,15 +170,7 @@ namespace Recibos_Electronicos.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section PageFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[15];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_idFactura {
+        public CrystalDecisions.Shared.IParameterField Parameter_P_Referencia {
             get {
                 return this.DataDefinition.ParameterFields[0];
             }
@@ -186,9 +178,9 @@ namespace Recibos_Electronicos.Reportes {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedRepComprobanteFiscal : Component, ICachedReport {
+    public class CachedRepComprobanteFiscal_Ref : Component, ICachedReport {
         
-        public CachedRepComprobanteFiscal() {
+        public CachedRepComprobanteFiscal_Ref() {
         }
         
         [Browsable(false)]
@@ -225,7 +217,7 @@ namespace Recibos_Electronicos.Reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            RepComprobanteFiscal rpt = new RepComprobanteFiscal();
+            RepComprobanteFiscal_Ref rpt = new RepComprobanteFiscal_Ref();
             rpt.Site = this.Site;
             return rpt;
         }
