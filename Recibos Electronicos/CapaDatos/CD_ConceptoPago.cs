@@ -506,6 +506,40 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void ConsultarVigenciasActSIAE(ConceptoPago ObjVigencias, ref List<ConceptoPago> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;               
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Fechas_Vigentes", ref dr);
+
+                while (dr.Read())
+                {
+                    ObjVigencias = new ConceptoPago();
+                    ObjVigencias.Descripcion = Convert.ToString(dr[0]);
+                    ObjVigencias.FechaInicial = Convert.ToString(dr[1]);
+                    ObjVigencias.FechaFinal = Convert.ToString(dr[2]);
+                    ObjVigencias.Periodo = Convert.ToChar(dr[3]);
+                    ObjVigencias.Nivel = Convert.ToString(dr[4]);
+                    ObjVigencias.ClaveConcepto = Convert.ToString(dr[5]);
+                    List.Add(ObjVigencias);
+
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void ConsultarExcpcionesVigenciasSIAE(ConceptoPago ObjVigencias, ref List<ConceptoPago> List)
         {
             CD_Datos CDDatos = new CD_Datos();

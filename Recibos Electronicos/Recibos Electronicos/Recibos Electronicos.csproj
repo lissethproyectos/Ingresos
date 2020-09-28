@@ -308,6 +308,7 @@
     <Content Include="Form\frmCuotasSIAE.aspx" />
     <Content Include="Form\frmDiasInhabiles.aspx" />
     <Content Include="Form\frmConfiguracionEventos.aspx" />
+    <Content Include="Form\frmEnvioCorreos.aspx" />
     <Content Include="Form\frmEventosResp.aspx" />
     <Content Include="Form\frmEventos.aspx" />
     <Content Include="Form\frmEventos2.aspx" />
@@ -645,6 +646,13 @@
     </Compile>
     <Compile Include="Form\frmConfiguracionEventos.aspx.designer.cs">
       <DependentUpon>frmConfiguracionEventos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmEnvioCorreos.aspx.cs">
+      <DependentUpon>frmEnvioCorreos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\frmEnvioCorreos.aspx.designer.cs">
+      <DependentUpon>frmEnvioCorreos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\frmEventosResp.aspx.cs">
       <DependentUpon>frmEventosResp.aspx</DependentUpon>

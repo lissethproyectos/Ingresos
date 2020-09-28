@@ -138,6 +138,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void ConsultarVigenciasActSIAE(ConceptoPago ObjVigencias, ref List<ConceptoPago> List)
+        {
+            try
+            {
+                CD_ConceptoPago CDConceptoPago = new CD_ConceptoPago();
+                CDConceptoPago.ConsultarVigenciasActSIAE(ObjVigencias, ref List);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void ConsultarExcepcionesVigenciasSIAE(ConceptoPago ObjVigencias, ref List<ConceptoPago> List)
         {
             try

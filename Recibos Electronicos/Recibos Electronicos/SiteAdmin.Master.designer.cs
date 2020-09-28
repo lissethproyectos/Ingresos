@@ -96,13 +96,13 @@ namespace Recibos_Electronicos
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Control grvCalendarPagos.
+        /// Control grdVigencias.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grvCalendarPagos;
+        protected global::System.Web.UI.WebControls.GridView grdVigencias;
 
         /// <summary>
         /// Control UpdatePanel2.

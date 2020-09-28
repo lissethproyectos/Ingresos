@@ -19,8 +19,10 @@ namespace Recibos_Electronicos
         Sesion SesionUsu = new Sesion();
         Menus menu = new Menus();
         Comun comun = new Comun();
+        ConceptoPago ObjVigencias = new ConceptoPago();
         CN_Menus CN_mnu = new CN_Menus();
         CN_Comun CN_comun = new CN_Comun();
+        CN_ConceptoPago CNConcepto = new CN_ConceptoPago();
         CN_Calendario CNCalendario = new CN_Calendario();
 
         #endregion
@@ -32,18 +34,50 @@ namespace Recibos_Electronicos
 
         }
         #region <Funciones y Sub>
+        //private void CargarGrid()
+        //{
+        //    try
+        //    {
+        //        DataTable dt = new DataTable();
+        //        grvCalendarPagos.DataSource = dt;
+        //        grvCalendarPagos.DataSource = GetList();
+        //        grvCalendarPagos.DataBind();                
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lblMsjE.Text = ex.Message;
+        //    }
+        //}
         private void CargarGrid()
         {
+
             try
             {
                 DataTable dt = new DataTable();
-                grvCalendarPagos.DataSource = dt;
-                grvCalendarPagos.DataSource = GetList();
-                grvCalendarPagos.DataBind();                
+                grdVigencias.DataSource = dt;
+                grdVigencias.DataSource = GetListVigencias();
+                grdVigencias.DataBind();
+                //if (grdVigencias.Rows.Count > 0)
+                //    CNComun.HideColumns(grdVigencias, Celdas);
             }
             catch (Exception ex)
             {
-                lblMsjE.Text = ex.Message;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message.Substring(0, 20) + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        private List<ConceptoPago> GetListVigencias()
+        {
+            try
+            {
+                List<ConceptoPago> List = new List<ConceptoPago>();
+                ObjVigencias.Nivel = "L";
+                CNConcepto.ConsultarVigenciasActSIAE(ObjVigencias, ref List);
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
 
@@ -77,7 +111,7 @@ namespace Recibos_Electronicos
                 if (SesionUsu.Usu_TipoUsu == 3)
                 {
                     siteMap = "ArchivosMenu/Web" + SesionUsu.Usuario + ".sitemap";
-                    CargarGrid();
+                    //CargarGrid();
                     //calPagosUNACH.SelectedDate.Day = "05";
                     //for (int i = 0; i <= calPagosUNACH.SelectedDates.Count - 1; i++)
                     //{
