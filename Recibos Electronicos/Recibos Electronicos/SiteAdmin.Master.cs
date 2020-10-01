@@ -111,7 +111,7 @@ namespace Recibos_Electronicos
                 if (SesionUsu.Usu_TipoUsu == 3)
                 {
                     siteMap = "ArchivosMenu/Web" + SesionUsu.Usuario + ".sitemap";
-                    //CargarGrid();
+                    CargarGrid();
                     //calPagosUNACH.SelectedDate.Day = "05";
                     //for (int i = 0; i <= calPagosUNACH.SelectedDates.Count - 1; i++)
                     //{

@@ -205,8 +205,7 @@
                                         <ContentTemplate>
                                             <asp:GridView ID="grdVigencias" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%">
                                                 <Columns>
-                                                    <asp:BoundField DataField="Descripcion" HeaderText="CONCEPTO" ReadOnly="True" />
-                                                    <%--  --%>
+                                                    <asp:BoundField DataField="Descripcion" HeaderText="CONCEPTO" />
                                                 </Columns>
                                                 <FooterStyle CssClass="enc" />
                                                 <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -214,37 +213,6 @@
                                                 <HeaderStyle CssClass="enc" />
                                                 <AlternatingRowStyle CssClass="alt" />
                                             </asp:GridView>
-                                            <%--<asp:GridView ID="grvCalendarPagos" runat="server" AutoGenerateColumns="False" Font-Size="9px" Width="100%" GridLines="None" RowHeaderColumn="Dom">
-                                                <Columns>
-                                                    <asp:TemplateField HeaderText="Mes">
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Mes") %>'></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label1" runat="server" Text='<%# Bind("Mes") %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:BoundField DataField="Dom" HeaderText="D" />
-                                                    <asp:BoundField DataField="Lun" HeaderText="L" />
-                                                    <asp:BoundField DataField="Mar" HeaderText="M" />
-                                                    <asp:BoundField DataField="Mie" HeaderText="M" />
-                                                    <asp:BoundField DataField="Jue" HeaderText="J" />
-                                                    <asp:BoundField DataField="Vie" HeaderText="V" />
-                                                    <asp:BoundField DataField="Sab" HeaderText="S" />
-                                                </Columns>
-                                                <HeaderStyle CssClass="alert alert-info" />
-                                            </asp:GridView>--%>
-
-                                            <%--<asp:Calendar ID="calPagosUNACH" runat="server" CssClass="alert alert-info" SelectedDate="07/24/2020 23:02:18" BackColor="White" BorderColor="#999999" CellPadding="4" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="Black" style="left: 0px; top: 0px; width: 176px; height: 150px" ToolTip="Curso de Nivelación">
-                                        <DayHeaderStyle BackColor="#CCCCCC" Font-Bold="True" Font-Size="7pt" />
-                                        <NextPrevStyle VerticalAlign="Bottom" />
-                                        <OtherMonthDayStyle ForeColor="#808080" />
-                                        <SelectedDayStyle BackColor="#666666" Font-Bold="True" ForeColor="White" />
-                                            <SelectorStyle BackColor="#CCCCCC" />
-                                        <TitleStyle BackColor="#999999" BorderColor="Black" Font-Bold="True" />
-                                        <TodayDayStyle BackColor="#CCCCCC" ForeColor="Black" />
-                                        <WeekendDayStyle BackColor="#FFFFCC" />
-                                            </asp:Calendar>--%>
                                         </ContentTemplate>
 
                                     </asp:UpdatePanel>
@@ -252,9 +220,9 @@
                             </div>
                         </div>
 
-                        <div class="text-center">
+                       <%-- <div class="text-center">
                             <img src="Imagenes/pngocean.com.png" />
-                        </div>
+                        </div>--%>
                     </div>
                 </div>
                 <div class="col-md-10">
