@@ -23,12 +23,12 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void FacturaCajaConsultaGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, ref List<CajaFactura> List)
+        public void FacturaCajaConsultaGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Comprobante, ref List<CajaFactura> List)
         {
             try
             {
                 CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
-                DatosCajaFactura.FacturaCajaConsultaGrid(ObjUsuario, ref ObjCjaFactura, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, ref List);
+                DatosCajaFactura.FacturaCajaConsultaGrid(ObjUsuario, ref ObjCjaFactura, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, Comprobante, ref List);
             }
             catch (Exception ex)
             {

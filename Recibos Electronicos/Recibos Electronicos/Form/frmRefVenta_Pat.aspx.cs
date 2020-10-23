@@ -810,7 +810,7 @@ namespace Recibos_Electronicos.Form
                 if (hddnIdFichaRef.Value == "0")
                 { 
                     ObjFichaReferenciada.IdFichaBancaria = GetID("FichaRef");
-                    ObjFichaReferenciada.NoControl = txtClaveSysweb.Text;
+                    ObjFichaReferenciada.NoControl = txtClaveSysweb.Text.ToUpper();
                     ObjFichaReferenciada.Nivel = "L";
                     ObjFichaReferenciada.Dependencia = DDLDependencia.SelectedValue;
                     ObjFichaReferenciada.Carrera = "000000";

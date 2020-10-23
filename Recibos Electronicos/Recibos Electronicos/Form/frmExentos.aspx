@@ -286,10 +286,9 @@
                                                     </asp:BoundField>
                                                     <asp:TemplateField HeaderText="Ciclo">
                                                         <ItemTemplate>
-                                                            <asp:Label ID="lblDetalle" runat="server" ToolTip='<%# Bind("Observaciones") %>' Text='<%# Bind("CicloEscolar") %>'></asp:Label>
-                                                            <asp:LinkButton ID="linkFechas" runat="server"><i class="fa fa-calendar" aria-hidden="true"></i>
-                                                            </asp:LinkButton>
-                                                            </i>
+                                                            <asp:Label ID="lblDetalle" runat="server" Text='<%# Bind("CicloEscolar") %>' CssClass="font-weight-bold"></asp:Label>
+
+                                                            &nbsp;<asp:Label ID="lblPeriodo"  runat="server"  Text='<%# Bind("Observaciones") %>'></asp:Label>
 
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
@@ -1141,8 +1140,8 @@
                                                                                                 </tr>
                                                                                                 <tr>
                                                                                                     <td align="center" colspan="3">
-                                                                                                        <asp:Button ID="bttnSalirEmp" runat="server" CssClass="btn btn-secondary" OnClick="bttnSalirEmp_Click" Text="SALIR" />
-                                                                                                        &nbsp;<asp:Button ID="bttnAgregarEmp" runat="server" CssClass="btn btn-secondary" OnClick="bttnAgregarEmp_Click" Text="AGREGAR" ValidationGroup="Empleado" />
+                                                                                                        <asp:Button ID="bttnSalirEmp" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalirEmp_Click" Text="SALIR" />
+                                                                                                        &nbsp;<asp:Button ID="bttnAgregarEmp" runat="server" CssClass="btn btn-primary" OnClick="bttnAgregarEmp_Click" Text="AGREGAR" ValidationGroup="Empleado" />
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 <tr>

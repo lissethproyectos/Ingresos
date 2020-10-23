@@ -91,7 +91,7 @@
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grdEventos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen eventos para esta dependencia." Width="100%" AllowPaging="True" OnPageIndexChanging="grdEventos_PageIndexChanging" PageSize="7" OnSelectedIndexChanged="grdEventos_SelectedIndexChanged">
+                        <asp:GridView ID="grdEventos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen eventos para esta dependencia." Width="100%" AllowPaging="True" OnPageIndexChanging="grdEventos_PageIndexChanging" PageSize="7" OnSelectedIndexChanged="grdEventos_SelectedIndexChanged" OnSelectedIndexChanging="grdEventos_SelectedIndexChanging">
                             <Columns>
                                 <asp:BoundField DataField="Eventos" HeaderText="CVE." />
                                 <asp:BoundField DataField="Dependencia" HeaderText="Dep.">

@@ -831,7 +831,7 @@ namespace Recibos_Electronicos.Form
             {                             
                 List<CajaFactura> List = new List<CajaFactura>();
                 Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
-                CNCjaFactura.FacturaCajaConsultaGrid(Usur, ref ObjCjaFactura, ddlDependencia.SelectedValue.ToString(), txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtReferencia.Text , ddlStatus.SelectedValue.ToString(), rdoStatusConfirmados.SelectedValue, ref List);
+                CNCjaFactura.FacturaCajaConsultaGrid(Usur, ref ObjCjaFactura, ddlDependencia.SelectedValue.ToString(), txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtReferencia.Text , ddlStatus.SelectedValue.ToString(), rdoStatusConfirmados.SelectedValue, "T", ref List);
                 return List;
             }
             catch (Exception ex)

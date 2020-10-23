@@ -98,6 +98,13 @@ namespace CapaEntidad
             set { _VISIBLE2 = value; }
         }
 
+        private bool _HABILITADO;
+        public bool HABILITADO
+        {
+            get { return _HABILITADO; }
+            set { _HABILITADO = value; }
+        }
+
 
 
 

@@ -102,8 +102,8 @@ namespace Recibos_Electronicos.Form
                     }
                     pnlBuscaRef.Visible = true;
                 }
-                else
-                    pnlBuscaRef.Visible = false;
+                //else
+                //    pnlBuscaRef.Visible = false;
 
             }
             catch (Exception ex)
@@ -194,6 +194,7 @@ namespace Recibos_Electronicos.Form
 
         protected void grdEventos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            
             CargarGridPagos();
         }
 
@@ -274,5 +275,12 @@ namespace Recibos_Electronicos.Form
         {
             CargarGridEventos();
         }
+
+        protected void grdEventos_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        {
+            txtReferencia.Text = string.Empty;
+        }
+
+       
     }
 }

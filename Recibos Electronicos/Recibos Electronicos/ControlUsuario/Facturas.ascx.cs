@@ -56,7 +56,7 @@ namespace Recibos_Electronicos.ControlUsuario
             {
                 List<CajaFactura> List = new List<CajaFactura>();
                 Usur.Usu_Nombre = RFC;
-                CNCjaFactura.FacturaCajaConsultaGrid(Usur, ref ObjCjaFactura, Dependencia, txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, RFC, "F", "S", ref List);
+                CNCjaFactura.FacturaCajaConsultaGrid(Usur, ref ObjCjaFactura, Dependencia, txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, RFC, "F", "S", "T", ref List);
                 return List;
             }
             catch (Exception ex)

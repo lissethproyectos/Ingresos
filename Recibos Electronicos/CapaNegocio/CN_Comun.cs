@@ -615,7 +615,8 @@ namespace CapaNegocio
             mmsg.IsBodyHtml = true; //Si no queremos que se envíe como HTML
 
             //Correo electronico desde la que enviamos el mensaje
-            mmsg.From = new System.Net.Mail.MailAddress("facturacion@unach.mx");
+            //mmsg.From = new System.Net.Mail.MailAddress("facturacion@unach.mx");
+            mmsg.From = new System.Net.Mail.MailAddress("sysweb@unach.mx");
 
             // Create  the file attachment for this e-mail message.
             for (int i = 0; i < ListArch.Count; i++)
@@ -643,8 +644,10 @@ namespace CapaNegocio
             System.Net.Mail.SmtpClient cliente = new System.Net.Mail.SmtpClient();
 
             //Hay que crear las credenciales del correo emisor
+     //       cliente.Credentials =
+     //new System.Net.NetworkCredential("facturacion@unach.mx", "Caja7504!");
             cliente.Credentials =
-                new System.Net.NetworkCredential("facturacion@unach.mx", "Caja7504!");
+                new System.Net.NetworkCredential("sysweb@unach.mx", "Dsia890#");
 
             cliente.Port = 587;
             cliente.EnableSsl = true;

@@ -329,7 +329,16 @@
                         </div>
                         <br />
                         <div class="row">
-                            <div class="col-md-11">
+                            <div class="col-md-2">
+                                Filtro
+                                </div>
+                            <div class="col-md-4">
+                                <asp:DropDownList ID="ddlFiltro" runat="server">
+                                    <asp:ListItem Value="S">Recibos con solicitud de factura</asp:ListItem>
+                                    <asp:ListItem Value="T">Todos los recibos</asp:ListItem>
+                                </asp:DropDownList>
+                                </div>
+                            <div class="col-md-5">
                                 <asp:TextBox ID="txtReferencia" runat="server" CssClass="box" OnTextChanged="txtReferencia_TextChanged" PlaceHolder="Referencia/Nombre" Visible="true" Width="98%"></asp:TextBox>
                             </div>
                             <div class="col-md-1">
@@ -350,8 +359,7 @@
                                         <asp:Panel ID="pnlMsg" runat="server" Width="40%">
                                             <div class="card text-white bg-dark mb-3">
                                                 <div class="card-header">
-                                                    ¿Confirmar Facturas?
-                                                </div>
+                                                    ¿Desea cambiar estatus de la solicitud?</div>
                                                 <div class="card-body">
                                                     <div class="container">
                                                         <div class="row">
@@ -426,7 +434,7 @@
                                                                     ¿REQUIERE FACTURA?
                                                                 </HeaderTemplate>
                                                                 <ItemTemplate>
-                                                                    <asp:CheckBox ID="chkConfirmado" runat="server" AutoPostBack="True" Checked='<%# Convert.ToBoolean(Eval("FACT_CONFIRMADO")) %>' OnCheckedChanged="chkConfirmado_CheckedChanged" Text="Si" />
+                                                                    <asp:CheckBox ID="chkConfirmado" runat="server" AutoPostBack="True" Checked='<%# Convert.ToBoolean(Eval("FACT_CONFIRMADO")) %>' Enabled='<%# Bind("HABILITADO") %>' OnCheckedChanged="chkConfirmado_CheckedChanged" Text="Si" />
 
 
                                                                 </ItemTemplate>
@@ -541,7 +549,7 @@
                             <td align="center" colspan="3">
                                 <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                                     <ContentTemplate>
-                                        <asp:Button ID="btnRegresar" runat="server" CssClass="btn3" Height="40px"
+                                        <asp:Button ID="btnRegresar" runat="server" CssClass="btn btn-blue-grey" Height="40px"
                                             OnClick="btnRegresar_Click" Text="REGRESAR" />
                                     </ContentTemplate>
                                 </asp:UpdatePanel>

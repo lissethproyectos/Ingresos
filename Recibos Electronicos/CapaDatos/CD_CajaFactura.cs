@@ -61,7 +61,7 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-        public void FacturaCajaConsultaGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, String Dependencia, String FechaInicial, String FechaFinal, string Referencia, string Status, string Confirmados, ref List<CajaFactura> List)
+        public void FacturaCajaConsultaGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Comprobante, ref List<CajaFactura> List)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
@@ -69,8 +69,8 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
 
-                String[] Parametros = { "p_usuario", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_referencia", "p_status", "p_confirmados" };
-                String[] Valores = { ObjUsuario.Usu_Nombre, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados };
+                String[] Parametros = { "p_usuario", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_referencia", "p_status", "p_confirmados", "p_comprobante_fiscal" };
+                String[] Valores = { ObjUsuario.Usu_Nombre, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, Comprobante };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Facturas_Caja", ref dr, Parametros, Valores);
                 while (dr.Read())
@@ -96,6 +96,7 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16))=="S"?false:true;
                     ObjCjaFactura.VISIBLE2 = Convert.ToString(dr.GetValue(16)) == "S" ? true : false;
+                    ObjCjaFactura.HABILITADO = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? false : true;
                     //ObjCjaFactura.Ruta = Convert.ToString(dr.GetValue(16));
                     List.Add(ObjCjaFactura);
                 }

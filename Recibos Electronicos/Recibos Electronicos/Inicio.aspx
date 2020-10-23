@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.Master" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="Recibos_Electronicos.Inicio" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="Recibos_Electronicos.Inicio" %>
 
 <%@ Register TagName="uCCorreo" TagPrefix="usr" Src="EnviarCorreo.ascx" %>
 
@@ -117,15 +117,22 @@
                 <div class="col">
 
                     <div class="card bg-light mb-3">
-                        <div class="card-header">
-                            <h7>
-                                <i class="fa fa-info-circle" aria-hidden="true"></i> IMPORTANTE</h7>
+                        <div class="card-header font-weight-bold">
+                            IMPORTANTE
                         </div>
                         <div class="card-body">
-                            <p class="card-text black-text">
-                                Si el pago se realizó en Sábado ó Domingo, el COMPROBANTE OFICIAL estará disponible a partir del Martes inmediato.Para días inhábiles, aplica el mismo criterio; el COMPROBANTE OFICIAL estará disponible un dia después al día hábil inmediato. Para dudas o aclaraciones al correo depfin@unach.mx ó sysweb@unach.mx.
+                            <div class="container black-text">
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <img src="Imagenes/ayuda.png" />
+                                    </div>
+                                    <div class="col-md-11">
+                                        Si el pago se realizó en Sábado ó Domingo, el COMPROBANTE OFICIAL estará disponible a partir del Martes inmediato.Para días inhábiles, aplica el mismo criterio; el COMPROBANTE OFICIAL estará disponible un dia después al día hábil inmediato. Para dudas o aclaraciones al correo depfin@unach.mx ó sysweb@unach.mx.
+                                    </div>
+                                </div>
+
                                 <%--<asp:Button ID="bttnBuscar" runat="server" OnClick="bttnBuscar_Click" CssClass="btn_buscar" Text="Buscar" Font-Size="14px" />--%>
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -251,7 +258,7 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                   <asp:UpdateProgress ID="UpdateProgressFactura" runat="server" AssociatedUpdatePanelID="UpdatePanelGrid">
+                    <asp:UpdateProgress ID="UpdateProgressFactura" runat="server" AssociatedUpdatePanelID="UpdatePanelGrid">
                         <ProgressTemplate>
                             <asp:Image ID="imgPrecargaFact" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
                                 ToolTip="Espere un momento, por favor.." Width="50px" Height="50px" />
