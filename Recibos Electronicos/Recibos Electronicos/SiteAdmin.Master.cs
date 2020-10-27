@@ -54,9 +54,9 @@ namespace Recibos_Electronicos
             try
             {
                 DataTable dt = new DataTable();
-                grdVigencias.DataSource = dt;
-                grdVigencias.DataSource = GetListVigencias();
-                grdVigencias.DataBind();
+                //grdVigencias.DataSource = dt;
+                //grdVigencias.DataSource = GetListVigencias();
+                //grdVigencias.DataBind();
                 //if (grdVigencias.Rows.Count > 0)
                 //    CNComun.HideColumns(grdVigencias, Celdas);
             }
@@ -143,7 +143,7 @@ namespace Recibos_Electronicos
                 MenuTop.DataSource = smd;
                 MenuTop.DataBind();
 
-                foreach (MenuItem item in MenuTop.Items)
+                foreach (TreeNode item in MenuTop.Nodes)
                 {
                     string NombreMenu = item.Text.ToUpper();
                     switch (NombreMenu)
@@ -196,7 +196,7 @@ namespace Recibos_Electronicos
             catch (Exception ex)
             {
 
-                lblMsjE.Text = ex.Message;
+                //lblMsjE.Text = ex.Message;
             }
         }
         #endregion

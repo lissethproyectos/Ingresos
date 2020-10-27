@@ -21,76 +21,90 @@
 
     <script type="text/javascript" src="https://sysweb.unach.mx/resources/js/index.js" charset="iso-8859-1"></script>
     <style type="text/css">
-        .dropdown-item:focus, .dropdown-item:hover {
-            color: #16181b;
-            text-decoration: none;
-            background-color: #829db8;
+        .sidebar-container {
+            position: fixed;
+            width: 220px;
+            height: 100%;
+            left: 0;
+            overflow-x: hidden;
+            overflow-y: auto;
+            background: #18386b; /*#1a1a1a;*/
+            color: #fff;
         }
 
-        .largefont {
-            color: #0066FF;
-            font-family: arial;
-            font-size: 6px;
+        .content-container {
+            padding-top: 20px;
         }
 
-        .navbar {
-            padding: 1px 1px 0px 1px;
+        .sidebar-logo {
+            padding: 55px 0 0 0;
+            /*padding: 10px 15px 10px 30px;*/
+            font-size: 20px;
+            background-color: #2574A9;
         }
 
-        .table td, .table th {
-            padding: .10rem;
-        }
-
-        .enc {
-            background-color: #d8d8d8;
-        }
-
-        .bg-dark {
-            background-color: #275090 !important;
-        }
-
-        .navbar-dark .navbar-nav .nav-link {
-            color: #ffffff;
-            font-size: 13px;
-        }
-
-        .TituloModalPopupMsg {
-            z-index: 2 !important;
-        }
-
-        .modalBackground_Proy {
-            z-index: 1 !important;
-        }
-
-        .quedate_en_casa {
-            position: absolute;
-            top: 0;
-            right: 0;
-            text-align: right;
-            margin: 0 auto;
-            width: 20px;
-        }
-
-        .c_mnu_nav {
+        .sidebar-navigation {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
             position: relative;
-            margin: 0 auto;
-            background-color: #fff;
-            color: #000;
-            text-shadow: white 0em 0.1em 0em;
-            font-size: 12px;
-            min-height: 30px;
-            max-height: 30px;
         }
 
-        a {
-            color: #444444;
-            text-decoration: none;
-        }
-
-        @media (max-width:640px) {
-            .image_section img:first-child {
-                display: none;
+            .sidebar-navigation li {
+                background-color: transparent;
+                position: relative;
+                display: inline-block;
+                width: 100%;
+                line-height: 20px;
             }
+
+                .sidebar-navigation li a {
+                    padding: 10px 15px 10px 30px;
+                    display: block;
+                    color: #fff;
+                }
+
+                .sidebar-navigation li .fa {
+                    margin-right: 10px;
+                }
+
+                .sidebar-navigation li a:active,
+                .sidebar-navigation li a:hover,
+                .sidebar-navigation li a:focus {
+                    text-decoration: none;
+                    outline: none;
+                }
+
+                .sidebar-navigation li::before {
+                    background-color: #2574A9;
+                    position: absolute;
+                    content: '';
+                    height: 100%;
+                    left: 0;
+                    top: 0;
+                    -webkit-transition: width 0.2s ease-in;
+                    transition: width 0.2s ease-in;
+                    width: 3px;
+                    z-index: -1;
+                }
+
+                .sidebar-navigation li:hover::before {
+                    width: 100%;
+                }
+
+            .sidebar-navigation .header {
+                font-size: 12px;
+                text-transform: uppercase;
+                background-color: #151515;
+                padding: 10px 15px 10px 30px;
+            }
+
+                .sidebar-navigation .header::before {
+                    background-color: transparent;
+                }
+
+        .content-container {
+            padding-left: 220px;
         }
     </style>
 
@@ -103,52 +117,33 @@
         <asp:ScriptManager ID="ScriptManager1" runat="server" EnableScriptGlobalization="True"></asp:ScriptManager>
         <div class="container-fluid">
             <div class="navbar-inverse navbar-fixed-top">
-                <div class="row">
+                <%--<div class="row">
                     <div class="col-md-4">
-                        <a href="https://sysweb.unach.mx/DSIA/">
-                            <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
-                        </a>
+                        
                     </div>
                     <div class="col-md-4 text-center">
                         <div class="media-body">
-                            <h4 class="media-heading">Recaudación de Pagos</h4>
-                            <h6>Ingresos</h6>
+                           
                         </div>
                     </div>
                     <div class="col-md-4">
 
                         <img id="imgUNACH" src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
                     </div>
-                </div>
+                </div>--%>
                 <div class="row">
-                    <div class="col">
-
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8 text-center" style="color:#fff">
+                        <h4 class="media-heading">Recaudación de Pagos</h4>
+                        <h6>Ingresos</h6>
+                    </div>
+                    <div class="col-md-2">
                         <nav class="navbar navbar-expand-lg navbar-dark primary-color" style="width: 100%">
                             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-                                <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
-                                    <ContentTemplate>
-                                        <asp:Menu ID="MenuTop" runat="server"
-                                            StaticMenuStyle-CssClass="nav navbar-nav secondary-color"
-                                            StaticSelectedStyle-CssClass="active"
-                                            Orientation="Horizontal" RenderingMode="List"
-                                            Sonmenuitemclick="MenuTop_MenuItemClick"
-                                            IncludeStyleBlock="False">
-                                            <DynamicMenuStyle CssClass="dropdown-menu"></DynamicMenuStyle>
-                                            <StaticMenuItemStyle CssClass="nav-link" Font-Names="Calibri" Font-Size="12px" />
-                                            <StaticMenuStyle CssClass="nav navbar-nav"></StaticMenuStyle>
-                                            <StaticSelectedStyle Font-Bold="true" />
-                                            <DynamicMenuItemStyle CssClass="dropdown-item" />
-                                            <Items>
-                                                <asp:MenuItem Text="Ingresos" Value="Ingresos"></asp:MenuItem>
-                                                <asp:MenuItem Text="Catálogos" Value="Catálogos"></asp:MenuItem>
-                                            </Items>
-                                            <StaticHoverStyle CssClass="dropdown-menu" />
-                                        </asp:Menu>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
                             </div>
                             <div class="btn-group dropdown my-2 my-lg-9" style="left: 0px; top: 0px">
                                 <i class="fa fa-user-circle white-text fa-th-large" aria-hidden="true"></i>
@@ -166,99 +161,59 @@
                                 </div>
                             </div>
                         </nav>
-
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container-fluid" style="margin-top: 150px">
-            <div class="row">
-                <div class="col-md-2 alert alert-secondary">
-                    <div class="panel-group" id="accordion">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><i class="fa fa-area-chart" aria-hidden="true"></i>Gráficas</a>
-                                </h4>
-                            </div>
-                            <div id="collapseOne" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <table class="table">
-                                        <tr>
-                                            <td>
-                                                <a href="Graficas/frmReportesConceptosSIAE.aspx">SIAE pagados, por pagar y exentos</a>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo"><i class="fa fa-calendar" aria-hidden="true"></i>Fechas de Pagos</a>
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse">
-                                <div class="panel-body">
-                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                        <ContentTemplate>
-                                            <asp:GridView ID="grdVigencias" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%">
-                                                <Columns>
-                                                    <asp:BoundField DataField="Descripcion" HeaderText="CONCEPTO" />
-                                                </Columns>
-                                                <FooterStyle CssClass="enc" />
-                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                <SelectedRowStyle CssClass="sel" />
-                                                <HeaderStyle CssClass="enc" />
-                                                <AlternatingRowStyle CssClass="alt" />
-                                            </asp:GridView>
-                                        </ContentTemplate>
+        <div class="sidebar-container">
+            <div class="sidebar-logo">
+                <a href="https://sysweb.unach.mx/DSIA/">
+                    <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
+                </a>
+            </div>
+            <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
+                <ContentTemplate>
+                    <asp:TreeView ID="MenuTop" runat="server">
+                            <ParentNodeStyle Font-Bold="True" ForeColor="#666666" />
+                            <RootNodeStyle Font-Bold="True" Font-Size="Large" ImageUrl="~/Imagenes/mnu.png" />
+                        </asp:TreeView>
+                    <asp:Menu ID="MenuTop2" runat="server"
+                        Orientation="Horizontal" RenderingMode="List"
+                        Sonmenuitemclick="MenuTop_MenuItemClick"
+                        IncludeStyleBlock="False" CssClass="sidebar-navigation" Visible="False">
+                        <DynamicMenuStyle CssClass="dropdown-menu"></DynamicMenuStyle>
+                        <StaticMenuItemStyle CssClass="nav-link" Font-Names="Calibri" Font-Size="12px" />
+                        <StaticMenuStyle CssClass="nav navbar-nav"></StaticMenuStyle>
+                        <StaticSelectedStyle Font-Bold="true" />
+                        <DynamicMenuItemStyle CssClass="dropdown-item" />
+                        <Items>
+                            <asp:MenuItem Text="Ingresos" Value="Ingresos"></asp:MenuItem>
+                            <asp:MenuItem Text="Catálogos" Value="Catálogos"></asp:MenuItem>
+                        </Items>
+                        <StaticHoverStyle CssClass="dropdown-menu" />
+                    </asp:Menu>
+                </ContentTemplate>
+            </asp:UpdatePanel>
 
-                                    </asp:UpdatePanel>
-                                </div>
-                            </div>
-                        </div>
-
-                       <%-- <div class="text-center">
-                            <img src="Imagenes/pngocean.com.png" />
-                        </div>--%>
+        </div>
+        <div class="content-container">
+            <div class="container-fluid">
+                <div class="p_info">
+                    <div class="c_mnu_nav">
+                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            <ContentTemplate>
+                                <asp:SiteMapPath ID="SiteMapPath1" runat="server" CssClass="SiteMap">
+                                    <RootNodeStyle Font-Bold="True" />
+                                </asp:SiteMapPath>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <asp:Label ID="lblMsjE" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
                     </div>
                 </div>
-                <div class="col-md-10">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <div class="p_info">
-                                    <div class="c_mnu_nav">
-                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                            <ContentTemplate>
-                                                <asp:SiteMapPath ID="SiteMapPath1" runat="server" CssClass="SiteMap">
-                                                    <RootNodeStyle Font-Bold="True" />
-                                                </asp:SiteMapPath>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                        <asp:Label ID="lblMsjE" runat="server" Font-Bold="True" ForeColor="Red"></asp:Label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="well">
-                        <asp:ContentPlaceHolder ID="MainContent" runat="server">
-                        </asp:ContentPlaceHolder>
-                    </div>
-                </div>
+                <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                </asp:ContentPlaceHolder>
             </div>
         </div>
-
-
-
-
-
-
-
-
         <div class="piePagina" style="width: 100%">
             <footer class="page-footer font-small pt-4" style="background-color: #585858; color: #fff">
 
@@ -307,8 +262,7 @@
     </form>
 </body>
 </html>
-<script language="javascript" type="text/javascript">
-
+<script>
     $(document).ready(function () {
         jQuery(document).ready(function () {
             $(".dropdown").hover(
@@ -320,20 +274,14 @@
                 });
         });
     });
-
     $('#MenuTop ul li a.selected').parent().addClass('fa fa-home');
-
-
     $("#bttnActualiza").click(function () {
         //alert("pasa");
         window.location.href = 'https://sysweb.unach.mx/administrator';
     });
-
-
     $("#imgSYSWEB").click(function () {
         window.location.href = 'https://sysweb.unach.mx';
     });
-
     $("#imgUNACH").click(function () {
         window.location.href = 'https://www.unach.mx/';
     });

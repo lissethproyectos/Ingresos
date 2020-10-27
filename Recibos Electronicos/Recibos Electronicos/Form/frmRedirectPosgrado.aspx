@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmRedirectPosgrado.aspx.cs" Inherits="Recibos_Electronicos.Form.frmRedirectPosgrado" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.Master" AutoEventWireup="true" CodeBehind="frmRedirectPosgrado.aspx.cs" Inherits="Recibos_Electronicos.Form.frmRedirectPosgrado" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">
@@ -17,7 +17,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
-        <div class="row">
+       <%-- <div class="row">
             <div class="col text-right">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
@@ -25,7 +25,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-        </div>
+        </div>--%>
     
         <div class="row">
             <div class="col">

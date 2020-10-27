@@ -2,39 +2,6 @@
 
 <%@ Register Assembly="CapaNegocio" Namespace="CapaNegocio" TagPrefix="customControl" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style type="text/css">
-        .auto-style1 {
-            width: 35%;
-        }
-
-        .auto-style4 {
-            width: 15%;
-        }
-
-        .auto-style11 {
-            width: 32%;
-        }
-
-        .auto-style12 {
-            width: 69%;
-        }
-
-        .auto-style13 {
-            width: 992px;
-        }
-
-        .auto-style14 {
-            width: 100%;
-        }
-
-        .auto-style17 {
-            width: 19%;
-        }
-
-        .auto-style18 {
-            width: 18%;
-        }
-    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%--    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
@@ -42,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                Dependencia:
+                Dependencia
             </div>
             <div class="col-md-9">
                 <asp:DropDownList ID="ddlDependencias" runat="server" CssClass="form-control">
@@ -50,11 +17,10 @@
             </div>
         </div>
     </div>
-    <br />
     <div class="container">
         <div class="row">
             <div class="col-md-2">
-                Tipo:
+                Tipo
             </div>
             <div class="col-md-3">
                 <asp:UpdatePanel ID="UpdatePanel8" runat="server">
@@ -80,7 +46,7 @@
 
             </div>
             <div class="col-md-1">
-                Ciclo:                
+                Ciclo              
             </div>
             <div class="col-md-4">
                 <asp:UpdatePanel ID="updPnlCiclo" runat="server">
@@ -101,11 +67,10 @@
             </div>
         </div>
     </div>
-    <br />
     <div class="container">
 
         <div class="row">
-            <div class="col-md-2">Nivel:</div>
+            <div class="col-md-2">Nivel</div>
             <div class="col-md-3">
                 <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                     <ContentTemplate>
@@ -124,7 +89,7 @@
 
 
             </div>
-            <div class="col-md-1">Buscar:</div>
+            <div class="col-md-1">Buscar</div>
             <div class="col-md-3">
                 <asp:TextBox ID="txtBuscar" runat="server" Width="100%" PlaceHolder="Matricula/Nombre" CssClass="form-control"></asp:TextBox>
             </div>
@@ -142,11 +107,6 @@
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
-        </div>
-    </div>
-    <br />
-    <div class="container">
-        <div class="row">
         </div>
     </div>
     <div class="container">

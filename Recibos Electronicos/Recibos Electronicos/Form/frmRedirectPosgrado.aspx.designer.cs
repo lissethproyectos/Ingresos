@@ -7,27 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Recibos_Electronicos.Form {
-    
-    
-    public partial class frmRedirectPosgrado {
-        
-        /// <summary>
-        /// Control UpdatePanel3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
-        /// <summary>
-        /// Control imgBttnRedirect.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnRedirect;
+namespace Recibos_Electronicos.Form
+{
+
+
+    public partial class frmRedirectPosgrado
+    {
     }
 }
