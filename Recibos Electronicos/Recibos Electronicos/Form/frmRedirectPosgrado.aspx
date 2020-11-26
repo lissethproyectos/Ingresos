@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SiteAdmin.Master" AutoEventWireup="true" CodeBehind="frmRedirectPosgrado.aspx.cs" Inherits="Recibos_Electronicos.Form.frmRedirectPosgrado" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmRedirectPosgrado.aspx.cs" Inherits="Recibos_Electronicos.Form.frmRedirectPosgrado" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript">

@@ -26,6 +26,7 @@ namespace CapaEntidad
         private string _FACT_CONFIRMADO;
         private string _CICLO_ESCOLAR;
         private string _PAGADO;
+        private string _FACT_RECEPTOR_FORMA_PAGO;
         private int _ID_CODIGO_QR;
 
         //Variable agregados por Lisseth
@@ -70,8 +71,25 @@ namespace CapaEntidad
         private int _FACT_DIAS_EMISION;
         private string _FACT_FOLIO_FACTURA;
         private string _FACT_MODIFICABLE;
-
+        private string _CFDI;
+        private string _FACT_TIPO_SERVICIO;
+        private int _FACT_DIAS_SOLICITUD;
         //Metodos agregados por Lisseth
+
+        private string _COLOR;
+
+        public string COLOR
+        {
+            get { return _COLOR; }
+            set { _COLOR = value; }
+        }
+
+        public int FACT_DIAS_SOLICITUD
+        {
+            get { return _FACT_DIAS_SOLICITUD; }
+            set { _FACT_DIAS_SOLICITUD = value; }
+        }
+
         public byte[] ADJUNTO
         {
             get { return _ADJUNTO; }
@@ -83,6 +101,23 @@ namespace CapaEntidad
             set { _PAGADO = value; }
         }
 
+        public string CFDI
+        {
+            get { return _CFDI; }
+            set { _CFDI = value; }
+        }
+
+        //public string FACT_METODO_PAGO
+        //{
+        //    get { return _FACT_METODO_PAGO; }
+        //    set { _FACT_METODO_PAGO = value; }
+        //}
+
+        public string FACT_TIPO_SERVICIO
+        {
+            get { return _FACT_TIPO_SERVICIO; }
+            set { _FACT_TIPO_SERVICIO = value; }
+        }
 
         private bool _VISIBLE1;
         public bool VISIBLE1
@@ -96,6 +131,13 @@ namespace CapaEntidad
         {
             get { return _VISIBLE2; }
             set { _VISIBLE2 = value; }
+        }
+
+        private bool _VISIBLE3=true;
+        public bool VISIBLE3
+        {
+            get { return _VISIBLE3; }
+            set { _VISIBLE3 = value; }
         }
 
         private bool _HABILITADO;
@@ -284,6 +326,12 @@ namespace CapaEntidad
         {
             get { return _FACT_RECEPTOR_METODO_PAGO; }
             set { _FACT_RECEPTOR_METODO_PAGO = value; }
+        }
+
+        public string FACT_RECEPTOR_FORMA_PAGO
+        {
+            get { return _FACT_RECEPTOR_FORMA_PAGO; }
+            set { _FACT_RECEPTOR_FORMA_PAGO = value; }
         }
         public string FACT_RECEPTOR_TELEFONO
         {

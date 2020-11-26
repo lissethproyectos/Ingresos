@@ -17,7 +17,7 @@ using System.Drawing.Drawing2D;
 
 using CapaNegocio;
 using CapaEntidad;
-
+using Facturapi;
 
 namespace Recibos_Electronicos.Form
 {
@@ -33,12 +33,14 @@ namespace Recibos_Electronicos.Form
         public Boolean strFactura;
         public Boolean strFactura_Xml;
         Int32[] Celdas = { 0, 11, 13, 14, 15, 16 };
-        CajaFactura ObjCjaFactura = new CajaFactura();        
+        CajaFactura ObjCjaFactura = new CajaFactura();
         Factura ObjFactura = new Factura();
         ConceptoPago ObjConcepto = new ConceptoPago();
         DetConcepto ObjConceptoDet = new DetConcepto();
+        DetFactura objDetFactura = new DetFactura();
         CN_CajaFactura CNCjaFactura = new CN_CajaFactura();
         CN_DetFacturaEfectivo CNDetFacturaEfec = new CN_DetFacturaEfectivo();
+        CN_DetFactura CNDetFactura = new CN_DetFactura();
         CN_Factura CNFactura = new CN_Factura();
         CN_Comun CNComun = new CN_Comun();
         CN_Usuario CNUsuario = new CN_Usuario();
@@ -49,11 +51,12 @@ namespace Recibos_Electronicos.Form
         List<Factura> ListConfirma = new List<Factura>();
         List<DetConcepto> ListDetConcepto = new List<DetConcepto>();
         ArrayList FactConfirmados = new ArrayList();
-        
+        static FacturapiClient facturapi { get; set; }
+
         //CajaFactura cjaFact = new CajaFactura();
         public Boolean BandFact = false;
-        
-        
+
+
         #endregion
 
         protected void Page_Load(object sender, EventArgs e)
@@ -61,24 +64,25 @@ namespace Recibos_Electronicos.Form
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
                 inicializar();
-            
-            
+
+
         }
 
         #region <Botones y Eventos>
 
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
-            
+
         }
         protected void grdDatosFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
             ObjCjaFactura.ItsOk = false;
-            txtFecha_Fact_Cja.Text=string.Empty;
+            txtFecha_Fact_Cja.Text = string.Empty;
             txtFolio_Fact_Cja.Text = string.Empty;
             chkConfirmaSolicitud.Checked = false;
-            ddlDependencia.Enabled = false;
+            //ddlDependencia.Enabled = false;
             LimipiarCampos();
+            rowSolicitarFactura.Visible = false;
             //grdArchivos.DataSource = null;
             //grdArchivos.DataBind();
             //Session["Archivos"] = null;
@@ -101,7 +105,9 @@ namespace Recibos_Electronicos.Form
 
                 if (Verificador == "0")
                 {
-
+                    ddlDependencia2.Enabled = false;
+                    ddlDependencia2.SelectedValue = ObjFactura.FACT_DEPENDENCIA;
+                    //lblDependencia.Text = ddlDependencia.SelectedItem.Text;
                     rdoBttnReceptorTipoPersona.SelectedValue = ObjFactura.FACT_RECEPTOR_TIPO_PERS;
                     txtReceptor_Nombre.Text = ObjFactura.FACT_NOMBRE;
                     txtReceptor_Rfc.Text = ObjFactura.FACT_RECEPTOR_RFC;
@@ -128,9 +134,22 @@ namespace Recibos_Electronicos.Form
                         ddlReceptor_Municipio.SelectedIndex = 0;
                     }
 
-                    ddlReceptor_MetodoPago.SelectedValue = ObjFactura.FACT_RECEPTOR_METODO_PAGO;
+                    try
+                    {
+                        ddlReceptor_MetodoPago.SelectedValue = ObjFactura.FACT_RECEPTOR_METODO_PAGO;
+                    }
+                    catch (Exception)
+                    {
+                        ddlReceptor_MetodoPago.SelectedIndex = 0;
+                    }
+
+                    ddlForma_Pago.SelectedValue = ObjFactura.FACT_RECEPTOR_FORMA_PAGO;
                     txtReceptor_Telefono.Text = ObjFactura.FACT_RECEPTOR_TELEFONO;
                     txtReceptor_Correo.Text = ObjFactura.FACT_RECEPTOR_CORREO;
+                    ddlCFDI.SelectedValue = ObjFactura.CFDI;
+                    ddlServicio.SelectedValue = ObjFactura.FACT_TIPO_SERVICIO;
+                    txtDescConcepto.Text = ObjFactura.FACT_OBSERVACIONES;
+                    chkSolicitar.Checked =ObjFactura.FACT_CONFIRMADO=="S"?true:false;
                     chkRechazado.Visible = (grdDatosFactura.SelectedRow.Cells[17].Text == "S") ? true : false;
 
                     if (ObjFactura.FACT_RECEPTOR_STATUS == "R")
@@ -139,36 +158,43 @@ namespace Recibos_Electronicos.Form
                         chkRechazado.Checked = true;
                         //----
                         //btnGuardarEditar.ValidationGroup = "DatosFiscales";
-                        txtObservaciones.Visible = true;
+                        //txtObservaciones.Visible = true;
+                        rowObservaciones.Visible = true;
                         //---
                         //chkRechazado_CheckedChanged(null, null);
-                        lblRechazado.Visible = true;
+                        //lblRechazado.Visible = true;
+                        rowObservaciones.Visible = true;
                         txtObservaciones.Text = ObjFactura.FACT_RECEPTOR_STATUS_NOTAS;
-                        txtObservaciones.Enabled = false;                        
+                        txtObservaciones.Enabled = false;
                         valCheck.ValidationGroup = "DatosFiscales";
 
                     }
                     else
                     {
-                        lblRechazado.Visible = false;
+                        //lblRechazado.Visible = false;
+                        rowObservaciones.Visible = true;
                         chkRechazado.Checked = false;
-                        if(ddlStatus.SelectedValue=="S")
+                        txtObservaciones.Enabled = true;
+                        if (ddlStatus.SelectedValue == "S")
                         {
                             btnGuardarEditar.ValidationGroup = string.Empty;
-                            valLongitudRFC0.ValidationGroup = string.Empty; 
+                            valLongitudRFC0.ValidationGroup = string.Empty;
                             validationSumGuardar.ValidationGroup = string.Empty;
                         }
+                        
                         else
                         {
+                            rowSolicitarFactura.Visible = ddlStatus.SelectedValue == "C"?true:false;
                             btnGuardarEditar.ValidationGroup = "RFC"; //string.Empty;
                             valLongitudRFC0.ValidationGroup = "RFC";
                             validationSumGuardar.ValidationGroup = "RFC";
                         }
 
 
-                        txtObservaciones.Visible = true;                        
-                        txtObservaciones.Text = string.Empty;
-                        txtObservaciones.Enabled = true;
+                        //txtObservaciones.Visible = false;
+                        rowObservaciones.Visible = false;
+                        //txtObservaciones.Text = string.Empty;
+                        //txtObservaciones.Enabled = true;
                         chkConfirmaSolicitud.Visible = false;
                         valCheck.ValidationGroup = string.Empty;
                     }
@@ -177,17 +203,18 @@ namespace Recibos_Electronicos.Form
 
                     if (grdDatosFactura.SelectedRow.Cells[21].Text == "T")
                     {
-                        ddlDependencia.SelectedValue= ObjFactura.FACT_DEPENDENCIA;
+
                         txtFolio.Text = ObjFactura.FACT_FOLIO;
                         txtFecha.Text = ObjFactura.FACT_FECHA_FACTURA;
                         txtImporte.Text = ObjFactura.FACT_SUBTOTAL;
-                        txtImporteConvenio.Text =Convert.ToString(ObjFactura.FACT_IMPORTE_CONVENIO);
+                        txtImporteConvenio.Text = Convert.ToString(ObjFactura.FACT_IMPORTE_CONVENIO);
                         txtIVA.Text = ObjFactura.FACT_IMPUESTO_TASA;
                         txtTotal.Text = ObjFactura.FACT_TOTAL;
                         txtNumOficio.Text = ObjFactura.OFICIO;
                         txtObservacionesConvenio.Text = ObjFactura.FACT_NOTAS;
                         tabFacturas.Tabs[1].Visible = true;
-                        tabFacturas.Tabs[2].Visible =(ddlStatus.SelectedValue == "C")? false : true;
+                        tabFacturas.Tabs[2].Visible = (ddlStatus.SelectedValue == "S") ? true : false;
+                        //  tabFacturas.Tabs[2].Visible = false;
                         valFolio.ValidationGroup = "DatosFiscales";
                         valFecha.ValidationGroup = "DatosFiscales";
                         valImporte.ValidationGroup = "DatosFiscales";
@@ -198,6 +225,7 @@ namespace Recibos_Electronicos.Form
                     }
                     else
                     {
+                        //lblDependencia.Text = ddlDependencia.SelectedItem.Text;
                         tabFacturas.Tabs[1].Visible = false;
                         valFolio.ValidationGroup = string.Empty;
                         valFecha.ValidationGroup = string.Empty;
@@ -223,17 +251,19 @@ namespace Recibos_Electronicos.Form
                 else
                 {
                     string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); 
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
                 }
             }
             catch (Exception ex)
             {
-                string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
-                MsjError = MsjError.Replace("\n", "");
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true); 
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Error en la recuperación de los datos.')", true);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
+
             }
         }
-        
+
         protected void grdDatosFactura_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             try
@@ -246,13 +276,13 @@ namespace Recibos_Electronicos.Form
             catch (Exception ex)
             {
                 string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); 
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
             }
         }
         protected void txtReferencia_TextChanged(object sender, EventArgs e)
         {
 
-        }       
+        }
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             mltViewFacturas.ActiveViewIndex = 0;
@@ -308,13 +338,13 @@ namespace Recibos_Electronicos.Form
             catch (Exception ex)
             {
                 string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); 
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
 
             }
 
 
-        } 
-       protected void btnCancelarEditar_Click(object sender, EventArgs e)
+        }
+        protected void btnCancelarEditar_Click(object sender, EventArgs e)
         {
             SesionUsu.Editar = 0;
             mltViewFacturas.ActiveViewIndex = 0;
@@ -339,15 +369,16 @@ namespace Recibos_Electronicos.Form
                 //else                
                 //    Guardar();
                 if (Page.IsValid)
-                        Guardar();
+                    Guardar();
 
             }
             catch (Exception ex)
             {
-                string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
             }
-        }        
+        }
         #endregion
 
         #region <Funciones>
@@ -369,7 +400,16 @@ namespace Recibos_Electronicos.Form
                 ObjFactura.FACT_RECEPTOR_TIPO_PERS = rdoBttnReceptorTipoPersona.SelectedValue;
                 ObjFactura.FACT_RECEPTOR_STATUS = (chkRechazado.Checked == true) ? (chkConfirmaSolicitud.Checked == true) ? string.Empty : "R" : string.Empty;
                 ObjFactura.FACT_RECEPTOR_STATUS_NOTAS = (chkRechazado.Checked == true) ? txtObservaciones.Text : string.Empty;
-                ObjFactura.FACT_CONFIRMADO = (chkRechazado.Checked == true) ? (chkConfirmaSolicitud.Checked == true) ? "S" : string.Empty : string.Empty;
+                if(chkRechazado.Checked == true)
+                    ObjFactura.FACT_CONFIRMADO = (chkRechazado.Checked == true) ? (chkConfirmaSolicitud.Checked == true) ? "S" : string.Empty : string.Empty;
+                else
+                    ObjFactura.FACT_CONFIRMADO = chkSolicitar.Checked == true ? "S" : "N";
+
+                ObjFactura.CFDI = ddlCFDI.SelectedValue;
+                ObjFactura.FACT_TIPO_SERVICIO = ddlServicio.SelectedValue;
+                ObjFactura.FACT_OBSERVACIONES = txtDescConcepto.Text.ToUpper();
+                ObjFactura.FACT_RECEPTOR_FORMA_PAGO = ddlForma_Pago.SelectedValue;
+                
                 //ObjFactura.FACT_TIPO = (SesionUsu.Editar!=3)?Convert.ToString(grdDatosFactura.SelectedRow.Cells[19].Text):"T";
                 ObjFactura.FACT_TIPO = ddlTipo.SelectedValue;
                 ObjFactura.OFICIO = txtNumOficio.Text;
@@ -383,7 +423,7 @@ namespace Recibos_Electronicos.Form
                 }
                 else
                 {
-                    ObjFactura.FACT_DEPENDENCIA = ddlDependencia.SelectedValue;
+                    ObjFactura.FACT_DEPENDENCIA = ddlDependencia2.SelectedValue;
                     ObjFactura.FACT_FOLIO = txtFolio.Text;
                     ObjFactura.FACT_SUBTOTAL = txtImporte.Text;
                     ObjFactura.FACT_IMPORTE_CONVENIO = (txtImporteConvenio.Text == string.Empty) ? 0 : Convert.ToDouble(txtImporteConvenio.Text);
@@ -492,8 +532,9 @@ namespace Recibos_Electronicos.Form
                     }
                     else
                     {
-                        string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'ERROR..');", true);
+                        //string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
+                        CNComun.VerificaTextoMensajeError(ref Verificador);
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal('"+Verificador+"', 'ERROR..');", true);
                     }
                 }
 
@@ -556,10 +597,11 @@ namespace Recibos_Electronicos.Form
             tabFacturas.ActiveTabIndex = 0;
             mltViewFacturas.ActiveViewIndex = 0;
             txtFecha_Factura_Ini.Text = "01" + System.DateTime.Now.ToString("/MM/yyyy");
-            txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");     
-                        
-            Usur.Usu_Nombre=SesionUsu.Usu_Nombre;
+            txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
+
+            Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
             Usur.Usu_IdModulo = 15355;
+            ddlTipo_SelectedIndexChanged(null, null);
             CargarCombos();
             imgBttnBuscar_Click(null, null);
         }
@@ -573,19 +615,21 @@ namespace Recibos_Electronicos.Form
                         rdoStatusConfirmados.Items[0].Enabled = false;
                         //lblTitulo1.Text = "DEPÓSITOS EN EFECTIVO / TRANSFERENCIAS";
                         mltViewTipo.ActiveViewIndex = 0;
-                        CargarGridEfectivo();                        
+                        CargarGridEfectivo();
                         break;
                     case "R":
                         rdoStatusConfirmados.Items[0].Enabled = true;
                         //lblTitulo1.Text = "REFERENCIADO";
                         mltViewTipo.ActiveViewIndex = 0;
-                        CargarGrid();                        
+                        CargarGrid();
+                        Button DDLAgregar = (Button)grdDatosFactura.HeaderRow.FindControl("bttnAdd");
+                        DDLAgregar.Visible = false;
                         break;
                     case "A":
                         rdoStatusConfirmados.Items[0].Enabled = false;
                         //lblTitulo1.Text = "FACTURAS ANTICIPADAS";
                         mltViewTipo.ActiveViewIndex = 0;
-                        CargarGridEfectivo();                        
+                        CargarGridEfectivo();
                         break;
 
                     default:
@@ -601,7 +645,7 @@ namespace Recibos_Electronicos.Form
         }
         protected bool VerificaConceptos()
         {
-            if (grvConceptos.Rows.Count >= 1 && ddlTipo.SelectedValue=="A")
+            if (grvConceptos.Rows.Count >= 1 && ddlTipo.SelectedValue == "A")
             {
                 if (lblArchivoConvenio.Text == string.Empty)
                 {
@@ -630,10 +674,18 @@ namespace Recibos_Electronicos.Form
             try
             {
                 if (Usur.Usu_TipoPermiso == "C")
+                {
                     CNComun.LlenaCombo("pkg_felectronica.Obt_Combo_UR_Factura", ref ddlDependencia);
-                else
-                    CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
+                    CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia2, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
 
+                }
+                else
+                {
+                    CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
+                    CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia2, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
+                }
+
+                    CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Tipo_Servicios_F", ref ddlServicio,"INGRESOS");
                 CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Niveles_Caja", ref ddlNivel, "INGRESOS");
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Status_Facturas", ref ddlStatus, "p_usuario", "p_tipo_factura", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue);
                 CNComun.LlenaCombo("pkg_felectronica.Obt_Combo_Avance_Factura", ref ddlAvance);
@@ -644,7 +696,7 @@ namespace Recibos_Electronicos.Form
             catch (Exception ex)
             {
                 string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); 
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
             }
         }
         private void CargarGrid()
@@ -652,9 +704,9 @@ namespace Recibos_Electronicos.Form
             /*Int32[] CeldasFacturados = { 0, 8, 10, 11, 13, 14, 15, 16, 17 };
             Int32[] CeldasSolicitados = { 0, 8, 10, 11, 12, 13, 14, 15, 16, 17 };
             Int32[] CeldasPorConfirmar = { 0, 10, 11, 12, 13, 14, 15, 17 };*/
-            Int32[] CeldasFacturados = { 0, 6, 7, 8, 10, 11, 13, 14, 16, 17, 18, 20, 21  };
-            Int32[] CeldasSolicitados = { 0, 7, 8, 10, 11, 13, 14, 15, 16, 17, 18, 20, 21, 22 };
-            Int32[] CeldasPorConfirmar = { 0, 6, 7, 8, 10, 13, 14, 15, 16, 17, 18, 21, 22 };
+            Int32[] CeldasFacturados = { 0, 6, 7, 8, 11, 13, 14, 16, 17, 18, 20, 21, 23 };
+            Int32[] CeldasSolicitados = { 0, 7, 8, 11, 13, 14, 14, 15, 16, 17, 18, 20, 21, 22, 23 };
+            Int32[] CeldasPorConfirmar = { 0, 6, 7, 8, 13, 14, 15, 16, 17, 18, 20, 21, 22 , 23};
 
 
             try
@@ -669,14 +721,14 @@ namespace Recibos_Electronicos.Form
                     switch (ddlStatus.SelectedValue)
                     {
                         case "F":
-                            CNComun.HideColumns(grdDatosFactura, CeldasFacturados);
+                            OcultaColumnas(grdDatosFactura, CeldasFacturados);
                             break;
                         case "C":
                             //grdDatosFactura.Columns[8].HeaderText = "Fecha Factura";
                             //grdDatosFactura.Columns[9].HeaderText = "Fecha de Pago";
                             grdDatosFactura.HeaderRow.Cells[8].Text = "Fecha Factura";
                             grdDatosFactura.HeaderRow.Cells[9].Text = "Fecha de Pago";
-                            CNComun.HideColumns(grdDatosFactura, CeldasPorConfirmar);
+                            OcultaColumnas(grdDatosFactura, CeldasPorConfirmar);
                             break;
                         case "S":
                             CNComun.HideColumns(grdDatosFactura, CeldasSolicitados);
@@ -692,17 +744,40 @@ namespace Recibos_Electronicos.Form
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
             }
         }
+
+
+        public void OcultaColumnas(GridView grdView, Int32[] Columnas)
+        {
+            for (int i = 0; i < Columnas.Length; i++)
+            {
+                grdView.HeaderRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                grdView.FooterRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                foreach (GridViewRow row in grdView.Rows)
+                {
+                    row.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                    //row.BackColor = Color.FromName("#ece260");
+                    if (row.Cells[23].Text != string.Empty)
+                    {
+                        if (Convert.ToInt32(row.Cells[23].Text) >= 2 && Convert.ToInt32(row.Cells[23].Text) <= 3)
+                            row.BackColor = Color.FromName("#ece260");                        
+                        else if (Convert.ToInt32(row.Cells[23].Text) >= 4)
+                            row.BackColor = Color.FromName("#f1bec2");
+                    }
+                }
+            }
+        }
+
         private void CargarGridEfectivo()
         {
 
 
-            Int32[] CeldasFacturados = { 0, 2, 4, 6, 7, 8, 10, 11, 13, 14, 16, 17, 18, 19, 20, 21 };
-            Int32[] CeldasSolicitados = { 0, 2, 4, 7, 10, 11, 13, 15, 16, 17, 18, 19, 21, 22 };
-            Int32[] CeldasPorConfirmar = { 0, 2, 3, 6, 10, 14, 15, 16, 17, 18, 19, 21, 22 };
+            Int32[] CeldasFacturados = { 0, 2, 4, 6, 7, 8, 10, 11, 13, 14, 16, 17, 18, 19, 20, 21, 23 };
+            Int32[] CeldasSolicitados = { 0, 2, 4, 7, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+            Int32[] CeldasPorConfirmar = { 0, 2, 3, 6, 10, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
 
-            Int32[] CeldasFacturados_Ant = { 0, 1, 2, 3, 4, 7, 10, 11, 13, 14, 16, 17, 18, 19, 20, 21 };
-            Int32[] CeldasSolicitados_Ant = { 0, 1, 2, 3, 4, 7, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22 };
-            Int32[] CeldasPorConfirmar_Ant = { 0, 1, 2, 3, 4, 7, 9, 10, 14, 15, 16, 17, 18, 19, 21, 22 };
+            Int32[] CeldasFacturados_Ant = { 0, 1, 2, 3, 4, 7, 10, 11, 13, 14, 16, 17, 18, 19, 20, 21, 23 };
+            Int32[] CeldasSolicitados_Ant = { 0, 1, 2, 3, 4, 7, 10, 11, 13, 14, 15, 16, 17, 18, 19,20,  21, 22, 23 };
+            Int32[] CeldasPorConfirmar_Ant = { 0, 1, 2, 3, 4, 7, 9, 10, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
 
 
             try
@@ -712,34 +787,57 @@ namespace Recibos_Electronicos.Form
                 grdDatosFactura.DataSource = GetListEfectivo();
                 grdDatosFactura.DataBind();
 
-                if (grdDatosFactura.Rows.Count > 0)
-                {
+                //if (grdDatosFactura.Rows.Count > 0)
+                //{
                     switch (ddlStatus.SelectedValue)
                     {
                         case "F":
-                            
-                            CNComun.HideColumns(grdDatosFactura, (ddlTipo.SelectedValue=="T")?CeldasFacturados:CeldasFacturados_Ant);
-                            break;
-                        case "P":                            
+                        if (grdDatosFactura.Rows.Count > 0)
                             CNComun.HideColumns(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasFacturados : CeldasFacturados_Ant);
-                            //grdDatosFactura.Columns[8].HeaderText = "Fecha Factura";
+                        else
+                            CNComun.HideEncabezado(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasFacturados : CeldasFacturados_Ant);
+                        break;
+                        case "P":
+                            if (grdDatosFactura.Rows.Count > 0) 
+                                CNComun.HideColumns(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasFacturados : CeldasFacturados_Ant);
+                            else
+                                CNComun.HideEncabezado(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasFacturados : CeldasFacturados_Ant);
+
+                            grdDatosFactura.Columns[8].HeaderText = "Fecha Factura";
                             grdDatosFactura.HeaderRow.Cells[8].Text = "Fecha Factura";
                             grdDatosFactura.HeaderRow.Cells[9].Text = "Fecha de Pago";
                             break;
-                        case "C":                            
-                            CNComun.HideColumns(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasPorConfirmar: CeldasPorConfirmar_Ant);
+                        case "C":
+                            if (grdDatosFactura.Rows.Count > 0)
+                            {
+                                CNComun.HideColumns(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasPorConfirmar : CeldasPorConfirmar_Ant);
+                            }
+                            else
+                            {
+                                CNComun.HideEncabezado(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasPorConfirmar : CeldasPorConfirmar_Ant);
+                            }
+
                             grdDatosFactura.HeaderRow.Cells[8].Text = "Fecha de Solicitud";
-                            //grdDatosFactura.Columns[8].HeaderText = "Fecha de Solicitud";
+                            grdDatosFactura.Columns[8].HeaderText = "Fecha de Solicitud";
                             break;
                         case "S":
-                            CNComun.HideColumns(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasSolicitados: CeldasSolicitados_Ant);
+                            if (grdDatosFactura.Rows.Count > 0)
+                            {
+                                CNComun.HideColumns(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasSolicitados : CeldasSolicitados_Ant);
+                            }
+                            else
+                            {
+                                CNComun.HideEncabezado(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasSolicitados : CeldasSolicitados_Ant);
+                            }      
                             grdDatosFactura.HeaderRow.Cells[8].Text = "Fecha de Solicitud";
                             break;
                         default:
                             break;
                     }
-                    
-                }
+
+                //}
+                Button DDLAgregar = (Button)grdDatosFactura.HeaderRow.FindControl("bttnAdd");
+                DDLAgregar.Visible = true;
             }
             catch (Exception ex)
             {
@@ -758,7 +856,7 @@ namespace Recibos_Electronicos.Form
                 grvConceptosDisp.DataBind();
                 //if (grvConceptosDisp.Rows.Count > 0)                
                 //    CNComun.HideColumns(grvConceptosDisp);
-                
+
             }
             catch (Exception ex)
             {
@@ -828,10 +926,10 @@ namespace Recibos_Electronicos.Form
         private List<CajaFactura> GetList()
         {
             try
-            {                             
+            {
                 List<CajaFactura> List = new List<CajaFactura>();
                 Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
-                CNCjaFactura.FacturaCajaConsultaGrid(Usur, ref ObjCjaFactura, ddlDependencia.SelectedValue.ToString(), txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtReferencia.Text , ddlStatus.SelectedValue.ToString(), rdoStatusConfirmados.SelectedValue, ddlFiltro.SelectedValue, ref List);
+                CNCjaFactura.FacturaCajaConsultaGrid(Usur, ref ObjCjaFactura, ddlDependencia.SelectedValue.ToString(), txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtReferencia.Text, ddlStatus.SelectedValue.ToString(), rdoStatusConfirmados.SelectedValue, ddlFiltro.SelectedValue, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -844,8 +942,8 @@ namespace Recibos_Electronicos.Form
         {
             try
             {
-                List<Factura> List = new List<Factura>();                
-                ObjFactura.ID_FACT= Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
+                List<Factura> List = new List<Factura>();
+                ObjFactura.ID_FACT = Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
                 CNCjaFactura.FacturaDoctosConsultaGrid(ObjFactura, ref List);
                 return List;
             }
@@ -922,7 +1020,7 @@ namespace Recibos_Electronicos.Form
                 txtImporteConvenio.Text = string.Empty;
                 txtIVA.Text = string.Empty;
                 txtTotal.Text = string.Empty;
-                txtObservacionesConvenio.Text= string.Empty;
+                txtObservacionesConvenio.Text = string.Empty;
                 ddlNivel.SelectedValue = "Z";
                 chkConfirmaSolicitud.Visible = false;
                 chkConfirmaSolicitud.Checked = false;
@@ -944,19 +1042,25 @@ namespace Recibos_Electronicos.Form
                 //lblDependencia.Visible = true;
                 ddlDependencia.Visible = true;
                 chkRechazado.Visible = false;
-                txtObservaciones.Visible = false;
+                //txtObservaciones.Visible = false;
+                rowObservaciones.Visible = false;
                 txtFecha_Fact_Cja.Enabled = true;
                 txtFolio_Fact_Cja.Enabled = true;
-
+                ddlCFDI.SelectedIndex = 0;
+                ddlServicio.SelectedIndex = 0;
+                txtDescConcepto.Text = string.Empty;
+                //ddlReceptor_MetodoPago.SelectedIndex = 0;
+                ddlForma_Pago.SelectedIndex = 0;
 
                 Session["Archivos"] = null;
                 grdArchivos.DataSource = null;
-                grdArchivos.DataBind();               
+                grdArchivos.DataBind();
                 Session["Conceptos"] = null;
                 ddlNivel_SelectedIndexChanged(null, null);
                 grvConceptos.DataSource = null;
                 grvConceptos.DataBind();
                 tabFacturas.ActiveTabIndex = 0;
+                chkSolicitar.Checked = false;
                 btnGuardarEditar.ValidationGroup = "DatosFiscales";
                 valLongitudRFC0.ValidationGroup = "DatosFiscales";
                 validationSumGuardar.ValidationGroup = "DatosFiscales";
@@ -1101,10 +1205,10 @@ namespace Recibos_Electronicos.Form
             ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "LoadPDF_Nuevo('" + Convert.ToString(DataBinder.Eval(sender, "CommandArgument").ToString()) + "');", true);
             //linkPdf.OnClientClick = "LoadPDF_Nuevo('" +  Convert.ToInt32(DataBinder.Eval(sender, "CommandArgument").ToString()) + "')";
             //SesionUsu.Id_Comprobante = Convert.ToInt32(DataBinder.Eval(sender, "CommandArgument").ToString());
-            
+
         }
 
- 
+
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
@@ -1123,7 +1227,7 @@ namespace Recibos_Electronicos.Form
                     hddnBandera.Value = "1";
                     tabFacturas.Tabs[2].Visible = false;
                     //bttnNuevo.Visible = (ddlTipo.SelectedValue == "T" || ddlTipo.SelectedValue == "A") ? true : false;
-                    Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue=="T") ? true : false;
+                    Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
                     Accordion1.Panes[1].Visible = (ddlTipo.SelectedValue == "T") ? false : true;
                     Accordion1.Panes[2].Visible = (ddlTipo.SelectedValue == "T") ? false : true;
 
@@ -1182,18 +1286,18 @@ namespace Recibos_Electronicos.Form
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            } 
+            }
         }
 
         protected void btnConfirmar_Sol_Click(object sender, EventArgs e)
         {
-             try
+            try
             {
                 //ArrayList FactConfirmados = new ArrayList();
                 if (Session["Facturas"] == null)
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'No se registro ningún movimiento.');", true);
                 else
-                    ModalPopup.Show();                
+                    ModalPopup.Show();
             }
             catch (Exception ex)
             {
@@ -1253,22 +1357,22 @@ namespace Recibos_Electronicos.Form
                     {
                         Boolean status = ((CheckBox)grdDatosFactura.Rows[rowindex].FindControl("chkConfirmado")).Checked;
                         string IdFactura = (Convert.ToString(grdDatosFactura.Rows[rowindex].Cells[16].Text) == "0") ? Convert.ToString(grdDatosFactura.Rows[rowindex].Cells[0].Text) : Convert.ToString(grdDatosFactura.Rows[rowindex].Cells[16].Text);
-                        
 
 
-                        if (status == true)                        
-                            confirmado_s = confirmado_s + IdFactura + ",";                        
-                        else                        
-                            confirmado_n = confirmado_n + IdFactura + ",";                        
+
+                        if (status == true)
+                            confirmado_s = confirmado_s + IdFactura + ",";
+                        else
+                            confirmado_n = confirmado_n + IdFactura + ",";
                     }
 
-                    if (confirmado_s != string.Empty)                    
+                    if (confirmado_s != string.Empty)
                         CNFactura.FacturasConfirmadas(confirmado_s, "S", ddlTipo.SelectedValue, ref Verificador);
-                    
 
-                    if (confirmado_n != string.Empty)                    
+
+                    if (confirmado_n != string.Empty)
                         CNFactura.FacturasConfirmadas(confirmado_n, "N", ddlTipo.SelectedValue, ref Verificador2);
-                    
+
 
                     string Msj = (Verificador != string.Empty) ? (Verificador != "0") ? Verificador : "" : "";
                     Msj = Msj + ((Verificador2 != string.Empty) ? (Verificador2 != "0") ? Verificador2 : "" : "");
@@ -1299,21 +1403,22 @@ namespace Recibos_Electronicos.Form
         {
             try
             {
-                //if(ddlTipo.SelectedValue=="R")
-                //    CargarGrid();
-                //else
-                //    CargarGridEfectivo();
+                if(ddlTipo.SelectedValue=="R")
+                    CargarGrid();
+                else
+                    CargarGridEfectivo();
                 //Tipo();
-                ddlStatus_SelectedIndexChanged(null, null);
+                //CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Status_Facturas", ref ddlStatus, "p_usuario", "p_tipo_factura", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue);
+                //ddlStatus_SelectedIndexChanged(null, null);
             }
             catch (Exception ex)
             {
                 string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); 
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
             }
         }
 
-        
+
 
         protected void ddlEstado_Fiscal_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1406,18 +1511,21 @@ namespace Recibos_Electronicos.Form
                 if (chkConfirmaSolicitud.Visible == false)
                 {
                     btnGuardarEditar.ValidationGroup = string.Empty;
-                    txtObservaciones.Visible = true;
+                    rowObservaciones.Visible = true;
+                    //txtObservaciones.Visible = true;
                 }
                 else
                 {
                     btnGuardarEditar.ValidationGroup = "DatosFiscales";
-                    txtObservaciones.Visible = true;
+                    rowObservaciones.Visible = true;
+                    //txtObservaciones.Visible = true;
                 }
             }
             else
             {
                 btnGuardarEditar.ValidationGroup = "DatosFiscales";
-                txtObservaciones.Visible = false;
+                //txtObservaciones.Visible = false;
+                rowObservaciones.Visible = false;
             }
         }
 
@@ -1433,7 +1541,7 @@ namespace Recibos_Electronicos.Form
             valImporte.ValidationGroup = "DatosFiscales";
             valIva.ValidationGroup = "DatosFiscales";
             valTotal.ValidationGroup = "DatosFiscales";
-            
+
         }
 
         protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)
@@ -1444,7 +1552,7 @@ namespace Recibos_Electronicos.Form
         protected void grvConceptosDisp_SelectedIndexChanged(object sender, EventArgs e)
         {
             ObjConceptoDet.ClaveConcepto = grvConceptosDisp.SelectedRow.Cells[0].Text;
-            ObjConceptoDet.Descripcion = grvConceptosDisp.SelectedRow.Cells[1].Text;            
+            ObjConceptoDet.Descripcion = grvConceptosDisp.SelectedRow.Cells[1].Text;
             if (Session["Conceptos"] == null)
             {
                 ListDetConcepto = new List<DetConcepto>();
@@ -1484,10 +1592,10 @@ namespace Recibos_Electronicos.Form
 
         protected void txtIVA_TextChanged(object sender, EventArgs e)
         {
-            txtTotal.Text = Convert.ToString(Convert.ToDouble(txtImporteConvenio.Text)+ Convert.ToDouble(txtIVA.Text));
+            txtTotal.Text = Convert.ToString(Convert.ToDouble(txtImporteConvenio.Text) + Convert.ToDouble(txtIVA.Text));
         }
 
-      
+
 
         protected void grdDatosFacturaEfectivo_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -1510,8 +1618,30 @@ namespace Recibos_Electronicos.Form
 
         protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            rowFiltro1.Visible = false;
+            rowFiltro2.Visible = false;
+         
+            if (ddlTipo.SelectedValue == "R")
+            {
+                lblNota.Text ="<strong>"+ ddlTipo.SelectedItem.Text+ ":</strong> son los pagos realizados a través de una ficha referenciada (SYSWEB).";
+                rowFiltro1.Visible = true;
+                rowFiltro2.Visible = true;
+                //DDLAgregar.Visible = false;
+
+            }
+            else if (ddlTipo.SelectedValue == "T")
+            {
+                ddlStatus.SelectedValue = "C";
+                lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> son los depósitos realizados directamente a la cuenta de la UNACH.";
+            }
+            else if (ddlTipo.SelectedValue == "A")
+            {
+                ddlStatus.SelectedValue = "C";
+                lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> para emitir facturas anticipadas con metodo de pago PUE(pago en una sola exhibicion) y forma de pago ( transferencia electronica, tarjeta de credito, tarjeta de debito etc.),la fecha limite de pago es el ultimo dia del mes en la que se haya emitido la factura, si el pago es realizado en el siguiente mes la factura se cancelara y se emitira una nueva factura con las siglas PPD (pago en parcialidades o diferido) y forma de pago (por definir).";
+            }
+
             CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Status_Facturas", ref ddlStatus, "p_usuario", "p_tipo_factura", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue);
-            ddlStatus_SelectedIndexChanged(null,null);
+            ddlStatus_SelectedIndexChanged(null, null);
         }
 
         protected void btnVoucher_Click(object sender, EventArgs e)
@@ -1522,26 +1652,26 @@ namespace Recibos_Electronicos.Form
                 if (fileVoucher.HasFile)
                 {
                     int fileSize = fileVoucher.PostedFile.ContentLength;
-                    fullPath = Path.Combine(Server.MapPath("../DoctosFacturasTemp/"), fileVoucher.FileName);                   
+                    fullPath = Path.Combine(Server.MapPath("../DoctosFacturasTemp/"), fileVoucher.FileName);
                     fileVoucher.SaveAs(fullPath);
                     lblArchivoVoucher.NavigateUrl = "../DoctosFacturasTemp/" + fileVoucher.FileName;
                     lblArchivoVoucher.Text = fileVoucher.FileName;
-                    lblArchivoVoucher.ToolTip=fullPath;
+                    lblArchivoVoucher.ToolTip = fullPath;
                     linkBttnEliminarVoucher.Visible = true;
                 }
 
             }
             catch (Exception ex)
             {
-                string MsjError = (ex.Message.Length>40)?ex.Message.Substring(0, 40): ex.Message;
+                string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
             }
 
 
         }
-  
 
-        
+
+
 
         protected void linkBttnEliminarVoucher_Click(object sender, EventArgs e)
         {
@@ -1560,7 +1690,7 @@ namespace Recibos_Electronicos.Form
             }
         }
 
- 
+
 
         protected void grdDatosFactura_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -1667,7 +1797,7 @@ namespace Recibos_Electronicos.Form
                 if (fileConvenio.HasFile)
                 {
                     int fileSize = fileConvenio.PostedFile.ContentLength;
-                    fullPath = Path.Combine(Server.MapPath("../DoctosFacturasTemp/"), fileConvenio.FileName);                  
+                    fullPath = Path.Combine(Server.MapPath("../DoctosFacturasTemp/"), fileConvenio.FileName);
                     fileConvenio.SaveAs(fullPath);
                     lblArchivoConvenio.NavigateUrl = "../DoctosFacturasTemp/" + fileConvenio.FileName;
                     lblArchivoConvenio.Text = fileConvenio.FileName;
@@ -1719,13 +1849,13 @@ namespace Recibos_Electronicos.Form
         {
             DropDownList DDL = e.Row.FindControl("ddlFacturas") as DropDownList;
             //DropDownList DDL2 = e.Row.FindControl("ddlVouchers") as DropDownList;
-            if (DDL != null)            
+            if (DDL != null)
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Facturas_Cja", ref DDL, "P_Id_Factura", "P_Tipo", e.Row.Cells[0].Text, ddlTipo.SelectedValue);
             //if (DDL2 != null)
             //    CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Facturas_Cja", ref DDL, "P_Id_Factura", "P_Tipo", e.Row.Cells[0].Text, ddlTipo.SelectedValue);
         }
 
-       
+
         protected void bttnVerFactura_Click(object sender, EventArgs e)
         {
             Button Bttn = (Button)(sender);
@@ -1783,7 +1913,7 @@ namespace Recibos_Electronicos.Form
         {
 
             Button cbi = (Button)(sender);
-            GridViewRow row = (GridViewRow)cbi.NamingContainer;            
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
             try
             {
                 grdDatosFactura.SelectedIndex = row.RowIndex;
@@ -1806,6 +1936,195 @@ namespace Recibos_Electronicos.Form
             modalDoctos.Hide();
         }
 
-        
+        protected void bttnGenFactura_Click(object sender, EventArgs e)
+        {
+            List<DetFactura> lst = new List<DetFactura>();
+            objDetFactura.ID_FACT = grdDatosFactura.SelectedRow.Cells[0].Text;
+            string Ruta=string.Empty;
+            CNDetFactura.ObtDetFactura(objDetFactura, ref lst);
+            try
+            {
+                var facturapi = new FacturapiClient("sk_test_eNJ362v0j4DkY4RYRe51vqmKErROlMBQ");
+                var invoice = facturapi.Invoice.CreateAsync(new Dictionary<string, object>
+                {
+                    ["customer"] = new Dictionary<string, object>
+                    {
+                        ["legal_name"] = txtReceptor_Nombre.Text.ToUpper(),
+                        ["email"] = txtReceptor_Correo.Text.ToUpper(),
+                        ["tax_id"] = txtReceptor_Rfc.Text.ToUpper(),
+                        ["address"] = new Dictionary<string, object>
+                        {
+                            ["street"] = txtReceptor_Domicilio.Text.ToUpper(),
+                            ["zip"] = txtReceptor_CP.Text.ToUpper(),
+                            ["neighborhood"] = txtReceptor_Colonia.Text.ToUpper(),
+                            ["municipality"] = ddlReceptor_Municipio.Text.ToUpper(),
+                            ["state"] = ddlReceptor_Estado.Text.ToUpper(),
+                            ["country"] = "MEXICO",
+                        }
+                    },
+
+
+                    ["payment_form"] = Facturapi.PaymentForm.DINERO_ELECTRONICO,
+
+
+                    ["items"] = new Dictionary<string, object>[]
+                    {
+
+                        new Dictionary<string, object>
+                        {
+                            ["quantity"] = lst.Count,
+
+                            ["tax_included"]= false,
+                            ["taxes"]=null,
+                            //CNDetFactura.DetFacturaAgregar
+                            ["product"] = new Dictionary<string, object>
+                            {
+                                ["description"] = lst[0].DescConcepto,
+                                ["product_key"] = "86121701",
+                                ["price"] = lst[0].Importe
+                            }
+                        }
+                    }
+
+                }).GetAwaiter().GetResult();
+                Ruta = "https://www.facturapi.io/web/organization/5f9334bf1ef9810026efe49c/invoices/"+ invoice.Id + "/pdf";
+                ScriptManager.RegisterStartupScript(this, GetType(), "PDF", "LoadPDF('"+Ruta+"');", true);
+
+            
+                //Console.WriteLine($"invoice created with Id {invoice.Id}");
+                //DownloadZip(invoice.Id);
+                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'Factura generada');", true);
+            }
+            catch (FacturapiException ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + ex.Message + "');", true);
+
+            }
+        }
+        static void DownloadZip(string invoiceId)
+        {
+
+            try
+            {
+                var stream = facturapi.Invoice.DownloadZipAsync(invoiceId).GetAwaiter().GetResult();
+                var file = new FileStream(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\factura.zip", FileMode.Create);
+                stream.CopyTo(file);
+                file.Close();
+                //Console.WriteLine("Invoice saved!");
+            }
+            catch (FacturapiException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            string Ruta = "https://www.facturapi.io/web/organization/5f9334bf1ef9810026efe49c/invoices/5f9f9e6d8f23c00026e8e69e/pdf";
+            ScriptManager.RegisterStartupScript(this, GetType(), "PDF", "LoadPDF('" + Ruta + "');", true);
+        }
+
+        protected void txtReceptor_Rfc_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void BuscaRFC()
+        {
+            try
+            {
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        protected void bttnAdd_Click(object sender, EventArgs e)
+        {
+            chkRechazado.Visible = false;
+            rowObservaciones.Visible = false;
+            ddlDependencia2.SelectedValue = ddlDependencia.SelectedValue;
+            ddlDependencia2.Enabled = true;
+            //lblDependencia.Text = ddlDependencia.SelectedItem.Text;
+
+            if (ddlTipo.SelectedValue == "T")
+            {
+
+                tabFacturas.Tabs[1].Visible = true;
+                if(ddlStatus.SelectedValue=="C")
+                    tabFacturas.Tabs[2].Visible = false;
+
+                LimipiarCampos();
+                //tabFacturas.Tabs[2].Visible = (ddlStatus.SelectedValue == "S") ? false : true;
+                valFolio.ValidationGroup = "DatosFiscales";
+                valFecha.ValidationGroup = "DatosFiscales";
+                valImporte.ValidationGroup = "DatosFiscales";
+                valIva.ValidationGroup = "DatosFiscales";
+                valTotal.ValidationGroup = "DatosFiscales";
+                //tabFacturas.Tabs[2].Visible = false;
+                //DatosFacturaEfectivo();
+                SesionUsu.Editar = 3;
+            }
+            else
+            {
+                //tabFacturas.Tabs[1].Visible = false;
+                if (ddlStatus.SelectedValue == "C")                
+                    tabFacturas.Tabs[2].Visible = false;
+
+
+                LimipiarCampos();
+
+                //txtReceptor_Rfc.Text = string.Empty;
+                //txtIVA.Text = string.Empty;
+                //txtTotal.Text = string.Empty;
+                //txtObservaciones.Text = string.Empty;
+                valFolio.ValidationGroup = string.Empty;
+                valFecha.ValidationGroup = string.Empty;
+                valImporte.ValidationGroup = string.Empty;
+                valIva.ValidationGroup = string.Empty;
+                valTotal.ValidationGroup = string.Empty;
+                SesionUsu.Editar = 3;
+            }
+
+            grdArchivos.DataSource = null;
+            grdArchivos.DataBind();
+            Session["Archivos"] = null;
+            mltViewFacturas.ActiveViewIndex = 2;
+        }
+
+        protected void linkBttnBuscarRFC_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                ObjFactura.FACT_RECEPTOR_RFC = txtReceptor_Rfc.Text.ToUpper();
+                CNFactura.ConsultarRFC(ref ObjFactura, ref Verificador);
+                if(Verificador=="0")
+                {
+                    txtReceptor_Nombre.Text = ObjFactura.FACT_NOMBRE;
+                }
+            }
+            catch (Exception ex)
+            { 
+            }
+        }
+
+        protected void linkBttnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (ddlTipo.SelectedValue == "R")
+                    CargarGrid();
+                else
+                    CargarGridEfectivo();
+            }
+            catch (Exception ex)
+            {
+                string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
+            }
+        }
     }
 }

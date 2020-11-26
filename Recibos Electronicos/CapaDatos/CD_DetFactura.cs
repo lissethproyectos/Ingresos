@@ -10,6 +10,56 @@ namespace CapaDatos
 {
     public class CD_DetFactura
     {
+        public void ObtDetFactura(DetFactura objDetFactura, ref List<DetFactura> lstFactDet)
+        {
+
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+
+            try
+            {
+                OracleDataReader dr = null;
+
+
+                string[] Parametros = { "p_id_factura" };
+                object[] Valores = { objDetFactura.ID_FACT };
+                Cmd = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA.Obt_Grid_Factura_Detalle", ref dr, Parametros, Valores);
+
+                if (dr.HasRows)
+                {
+
+                    while (dr.Read())
+                    {
+                        objDetFactura = new DetFactura();
+                        objDetFactura.IdDetFact = Convert.ToInt32(dr[0]);
+                        objDetFactura.DescConcepto= Convert.ToString(dr[2]);
+                        objDetFactura.ClaveConcepto = Convert.ToString(dr[1]);
+                        objDetFactura.Importe = Convert.ToString(dr[4]);
+                        objDetFactura.FACT_TOTAL = Convert.ToString(dr[5]);
+                        //objDetFactura.Clave = Convert.ToString(dr["clave"].ToString());
+                        //objDetFactura.Id_Padre = Convert.ToInt32(dr["id_padre"].ToString());
+
+                        //objMenu.Usuario = Usuario;
+                        //objMenu.Grupo = Grupo;
+                        lstFactDet.Add(objDetFactura);
+                        //LlenarTree(ref Arbolito, objMenu, ref List);
+
+                    }
+                    dr.Close();
+                }
+                dr.Close();
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void DetFacturaInsertar(ref DetFactura ObjDetFactura, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

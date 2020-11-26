@@ -61,6 +61,9 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Web, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Facturapi, Version=1.1.1.1030, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facturapi.1.1.1.1030\lib\net45\Facturapi.dll</HintPath>
+    </Reference>
     <Reference Include="FUA, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Lis\Programas\Herramientas .NET\FileUploadAJAX.Subgurim.NET\FUA.dll</HintPath>
@@ -72,6 +75,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.ContractResolverExtentions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Json.NET.ContractResolverExtentions.1.0.1\lib\net45\Newtonsoft.Json.ContractResolverExtentions.dll</HintPath>
     </Reference>
     <Reference Include="RestSharp, Version=106.11.4.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.106.11.4\lib\net452\RestSharp.dll</HintPath>
@@ -294,6 +300,7 @@
     <Content Include="Css\Style.css" />
     <Content Include="Css\Tab.css" />
     <Content Include="EnviarCorreo.ascx" />
+    <Content Include="facturapi.ico" />
     <Content Include="Form\Exencion_old.aspx" />
     <Content Include="Form\frmAdmonFichaRef.aspx" />
     <Content Include="Form\frmBanco.aspx" />
@@ -314,6 +321,7 @@
     <Content Include="Form\frmEventos2.aspx" />
     <Content Include="Form\frmExencionesAutomaticas.aspx" />
     <Content Include="Form\frmExentos_Copia.aspx" />
+    <Content Include="Form\frmFacturacion.aspx" />
     <Content Include="Form\FrmSolicitud_Facturas.aspx" />
     <Content Include="Form\FrmFacturas.aspx" />
     <Content Include="Form\FrmFacturasResp.aspx" />
@@ -422,6 +430,7 @@
     <Content Include="Imagenes\xml2.png" />
     <Content Include="index.aspx" />
     <Content Include="informacion.htm" />
+    <Content Include="frmInicio.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="Js\Calendario\calendar_date_select.js" />
     <Content Include="Js\Calendario\format_spanish.js" />
@@ -437,6 +446,7 @@
     <Content Include="Js\images\right2.gif" />
     <Content Include="Js\jsGeneral.js" />
     <Content Include="prueba.aspx" />
+    <Content Include="Reportes\frmReporteGrals.aspx" />
     <Content Include="Reportes\VisualizadorCrystal.aspx" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
@@ -688,6 +698,13 @@
     </Compile>
     <Compile Include="Form\frmExentos_Copia.aspx.designer.cs">
       <DependentUpon>frmExentos_Copia.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmFacturacion.aspx.cs">
+      <DependentUpon>frmFacturacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\frmFacturacion.aspx.designer.cs">
+      <DependentUpon>frmFacturacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\FrmSolicitud_Facturas.aspx.cs">
       <DependentUpon>FrmSolicitud_Facturas.aspx</DependentUpon>
@@ -1035,6 +1052,13 @@
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmInicio.aspx.cs">
+      <DependentUpon>frmInicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmInicio.aspx.designer.cs">
+      <DependentUpon>frmInicio.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1056,6 +1080,13 @@
       <DependentUpon>ComprobanteFiscal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\frmReporteGrals.aspx.cs">
+      <DependentUpon>frmReporteGrals.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\frmReporteGrals.aspx.designer.cs">
+      <DependentUpon>frmReporteGrals.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Reportes\InfAdicional_Tapachula.cs">
       <DependentUpon>InfAdicional_Tapachula.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -1072,6 +1103,24 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>REP038.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\REP038Excel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>REP038Excel.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\REP055_Excel.cs">
+      <DependentUpon>REP055_Excel.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\REP055.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>REP055.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\REP064.cs">
@@ -1205,6 +1254,18 @@
     <EmbeddedResource Include="Reportes\REP038.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>REP038.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\REP038Excel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>REP038Excel.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\REP055_Excel.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>REP055_Excel.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\REP055.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>REP055.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\REP064.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

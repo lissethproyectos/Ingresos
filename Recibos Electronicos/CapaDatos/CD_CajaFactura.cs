@@ -97,6 +97,66 @@ namespace CapaDatos
                     ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16))=="S"?false:true;
                     ObjCjaFactura.VISIBLE2 = Convert.ToString(dr.GetValue(16)) == "S" ? true : false;
                     ObjCjaFactura.HABILITADO = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? false : true;
+                    ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
+                    ObjCjaFactura.COLOR = "#ece260";                    
+                    if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
+                        ObjCjaFactura.COLOR = "#f1bec2";
+                    else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD)==0)
+                        ObjCjaFactura.VISIBLE3 = false;
+
+
+
+                    //ObjCjaFactura.Ruta = Convert.ToString(dr.GetValue(16));
+                    List.Add(ObjCjaFactura);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+        public void FacturApiGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Comprobante, ref List<CajaFactura> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                String[] Parametros = { "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_referencia" };
+                String[] Valores = { Dependencia, FechaInicial, FechaFinal, Referencia };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Solicitudes_Facturas", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    ObjCjaFactura = new CajaFactura();
+                    ObjCjaFactura.ID_FACT = Convert.ToString(dr.GetValue(0)); //Este obtiene el Id de la Tabla Factura o Factura_Caja
+                    ObjCjaFactura.FACT_FOLIO = Convert.ToString(dr.GetValue(1));
+                    ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(6));
+                    ObjCjaFactura.FACT_FECHA_FACTURA = Convert.ToString(dr.GetValue(2));
+                    ObjCjaFactura.FACT_TOTAL = Convert.ToString(dr.GetValue(3));
+                    ObjCjaFactura.FACT_NOMBRE = Convert.ToString(dr.GetValue(4));
+                    ObjCjaFactura.FACT_DEPENDENCIA = Convert.ToString(dr.GetValue(5));
+                    ObjCjaFactura.Avance = Convert.ToInt32(dr.GetValue(7));
+                    //ObjCjaFactura.IdCajaFact = Convert.ToInt32(dr.GetValue(9));
+                    ObjCjaFactura.FACT_BANCO = Convert.ToString(dr.GetValue(8));
+                    ObjCjaFactura.FACT_CONFIRMADO = Convert.ToString(dr.GetValue(9));
+                    ObjCjaFactura.FACT_RECEPTOR_CORREO = Convert.ToString(dr.GetValue(10));
+                    ObjCjaFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(11));
+                    ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
+                    ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(13));
+                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                    ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
+                    ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
+                    ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "0" ? false : true;
+                    ObjCjaFactura.VISIBLE2 = Convert.ToString(dr.GetValue(16)) == "0" ? true : false;
+                    ObjCjaFactura.ID_FACT_EFEC = Convert.ToString(dr.GetValue(16));
+                    ObjCjaFactura.HABILITADO = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? false : true;
                     //ObjCjaFactura.Ruta = Convert.ToString(dr.GetValue(16));
                     List.Add(ObjCjaFactura);
                 }
@@ -274,6 +334,12 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_FECHA_CAPTURA = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.FACT_DIAS_EMISION = Convert.ToInt32(dr.GetValue(16));
+                    ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(16));
+                    ObjCjaFactura.COLOR = "#ece260";
+                    if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
+                        ObjCjaFactura.COLOR = "#f1bec2";
+                    else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) == 0)
+                        ObjCjaFactura.VISIBLE3 = false;
                     List.Add(ObjCjaFactura);
                 }
                 dr.Close();
@@ -414,6 +480,28 @@ namespace CapaDatos
                     CDDatos.LimpiarOracleCommand(ref OracleCmd);
                 }
             }
+        }
+        public void FacturApiAgregar(string Referencia, int IdFactura, string IdFacturaApi, ref string Verificador)
+        {
+            
+                CD_Datos CDDatos = new CD_Datos();
+                OracleCommand OracleCmd = null;
+
+                try
+                {
+                        string[] Parametros = { "p_referencia", "p_id_factura", "p_id_facturapi" };
+                        string[] ParametrosOut = { "P_BANDERA" };
+                        object[] Valores = { Referencia, IdFactura, IdFacturaApi };
+                        OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURAPI", ref Verificador, Parametros, Valores, ParametrosOut);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    CDDatos.LimpiarOracleCommand(ref OracleCmd);
+                }
         }
         public void ConsultarPdfXmlFactura1(ref CajaFactura ObjCjaFactura, string Tipo, ref List<CajaFactura> List)
         {

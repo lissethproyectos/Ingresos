@@ -23,12 +23,37 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void FacturApiAgregar(string Referencia, int IdFactura, string IdFacturaApi, ref string Verificador)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.FacturApiAgregar(Referencia, IdFactura, IdFacturaApi, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void FacturaCajaConsultaGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Comprobante, ref List<CajaFactura> List)
         {
             try
             {
                 CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
                 DatosCajaFactura.FacturaCajaConsultaGrid(ObjUsuario, ref ObjCjaFactura, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, Comprobante, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void FacturApiGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Comprobante, ref List<CajaFactura> List)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.FacturApiGrid(ObjUsuario, ref ObjCjaFactura, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, Comprobante, ref List);
             }
             catch (Exception ex)
             {

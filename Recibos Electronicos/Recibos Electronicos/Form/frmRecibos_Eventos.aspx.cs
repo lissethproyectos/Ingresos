@@ -244,7 +244,7 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta1 = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP055&Evento=" + grdEventos.SelectedRow.Cells[0].Text + "&enExcel=N";
+            string ruta1 = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP055&Evento=" + grdEventos.SelectedRow.Cells[0].Text + "&Observaciones=" + grdEventos.SelectedRow.Cells[2].Text +"&enExcel=N";
             string _open1 = "window.open('" + ruta1 + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open1, true);
         }

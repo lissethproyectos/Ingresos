@@ -52,9 +52,9 @@
                                     </Columns>
                                     <FooterStyle CssClass="enc" />
                                     <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                    <RowStyle Font-Size="14px" />
+                                    <RowStyle Font-Size="10px" />
                                     <SelectedRowStyle CssClass="sel" />
-                                    <HeaderStyle CssClass="enc" Font-Size="12px" HorizontalAlign="Center" />
+                                    <HeaderStyle Font-Size="10px" HorizontalAlign="Center" />
                                     <AlternatingRowStyle CssClass="alt" />
                                 </asp:GridView>
                             </ContentTemplate>
@@ -103,7 +103,6 @@
                                 <asp:HiddenField ID="hddnBancos" runat="server" />
                                 <ajaxToolkit:ModalPopupExtender ID="modalBancos" runat="server" PopupControlID="pnlBancos" TargetControlID="hddnBancos" BackgroundCssClass="modalBackground_Proy" OkControlID="btnSalir">
                                 </ajaxToolkit:ModalPopupExtender>
-                                <br />
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -115,51 +114,47 @@
         <div class="container">
             <div class="row">
                 <div class="col">
+                    <p class="note note-warning" style="font-size: 14px">
+                        <span id="ctl00_MainContent_lblTitulo0">Si el pago se realizó en Sábado ó Domingo, el COMPROBANTE OFICIAL estará disponible a partir del Martes inmediato.Para días inhábiles, aplica el mismo criterio; el COMPROBANTE OFICIAL estará disponible un dia después al día hábil inmediato. Para dudas o aclaraciones al correo depfin@unach.mx ó sysweb@unach.mx.
+                        </span>
+                    </p>
+                </div>
+            </div>
 
+            <%--<div class="row">
+                <div class="col">
                     <div class="card bg-light mb-3">
-                        <div class="card-header font-weight-bold">
-                            IMPORTANTE
-                        </div>
                         <div class="card-body">
                             <div class="container black-text">
                                 <div class="row">
-                                    <div class="col-md-1">
-                                        <img src="Imagenes/ayuda.png" />
-                                    </div>
                                     <div class="col-md-11">
                                         Si el pago se realizó en Sábado ó Domingo, el COMPROBANTE OFICIAL estará disponible a partir del Martes inmediato.Para días inhábiles, aplica el mismo criterio; el COMPROBANTE OFICIAL estará disponible un dia después al día hábil inmediato. Para dudas o aclaraciones al correo depfin@unach.mx ó sysweb@unach.mx.
                                     </div>
                                 </div>
-
-                                <%--<asp:Button ID="bttnBuscar" runat="server" OnClick="bttnBuscar_Click" CssClass="btn_buscar" Text="Buscar" Font-Size="14px" />--%>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>--%>
         </div>
         <div class="container">
-
             <div class="row">
-                <div class="col-md-3">
-                    <asp:Label ID="lblDependencia" runat="server" Text="Dependencia:"></asp:Label>
+                <div class="col-md-2">
+                    <asp:Label ID="lblDependencia" runat="server" Text="Dependencia"></asp:Label>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     <asp:UpdatePanel ID="updPnlDep" runat="server">
                         <ContentTemplate>
-                            <asp:DropDownList ID="ddlDependencia" CssClass="form-control" runat="server" Width="100%">
+                            <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
                             </asp:DropDownList>
                         </ContentTemplate>
                     </asp:UpdatePanel>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="RequiredFieldValidator" InitialValue="0" ValidationGroup="Buscar" CssClass="alert alert-danger">*Elegir una Dependencia</asp:RequiredFieldValidator>
 
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="RequiredFieldValidator" InitialValue="0" ValidationGroup="Buscar" CssClass="alert alert-danger">*Elegir dependencia</asp:RequiredFieldValidator>
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="col">
-
                     <asp:UpdateProgress ID="updprgDep" runat="server" AssociatedUpdatePanelID="updPnlDep">
                         <ProgressTemplate>
                             <asp:Image ID="imgDep" runat="server" Height="25px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
@@ -171,10 +166,10 @@
         </div>
         <div class="container">
             <div class="row">
-                <div class="col">
-                    <asp:Label ID="lblFecha_Factura_Ini" runat="server" Text="Fecha Inicial:"></asp:Label>
+                <div class="col-md-2">
+                    <asp:Label ID="lblFecha_Factura_Ini" runat="server" Text="Fecha Inicial"></asp:Label>
                 </div>
-                <div class="col">
+                <div class="col-md-2">
                     <asp:UpdatePanel ID="UpdatePanel42" runat="server">
                         <ContentTemplate>
                             <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
@@ -183,11 +178,10 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-                <div class="col">
-                    <asp:Label ID="lblFecha_Factura_Fin" runat="server" Text="Fecha Final:"></asp:Label>
+                <div class="col-md-2">
+                    <asp:Label ID="lblFecha_Factura_Fin" runat="server" Text="Fecha Final"></asp:Label>
                 </div>
-                <div class="col">
-
+                <div class="col-md-2">
                     <asp:UpdatePanel ID="UpdatePanel43" runat="server">
                         <ContentTemplate>
                             <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Style="margin-left: 0px" Width="95px"></asp:TextBox>
@@ -196,23 +190,17 @@
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
-            </div>
-        </div>
-        <br />
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <asp:Label ID="lblReferencia" runat="server" Text="Referencia/nombre/folio:"></asp:Label>
-                </div>
-                <div class="col-md-9">
-
+                <%--            
+                <div class="col-md-1">
+                    <asp:Label ID="lblReferencia" runat="server" Text="Referencia/nombre/folio"></asp:Label>
+                </div>--%>
+                <div class="col-md-4">
                     <div class="input-group mb-3">
                         <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia, folio ó nombre" Visible="true"></asp:TextBox>
                         <div class="input-group-append">
                             <span class="input-group-text_buscar" id="basic-addon2">
                                 <asp:UpdatePanel ID="updPnlBuscar" runat="server">
                                     <ContentTemplate>
-                                        <%--<asp:Button ID="bttnBuscar" runat="server" OnClick="bttnBuscar_Click" CssClass="btn_buscar" Text="Buscar" Font-Size="14px" />--%>
                                         <button runat="server" id="bttnBuscar" onserverclick="bttnBuscar_Click" class="btn-buscar btn-primary" validationgroup="Buscar">
                                             <i class="fa fa-search" aria-hidden="true"></i>
                                         </button>
@@ -241,7 +229,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col-sm">
+                <div class="col">
                     <div class="alert alert-warning">
                         <asp:HiddenField ID="hddnImagenQR" runat="server" />
                         <asp:UpdatePanel ID="UpdatePanel5" runat="server">
@@ -473,7 +461,7 @@
                         <div class="col text-center">
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
-                                    <asp:GridView ID="grdDoctosFactura" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered" Width="100%" BackColor="#CCCCCC" OnPageIndexChanging="grdDoctosFactura_PageIndexChanging">
+                                    <asp:GridView ID="grdDoctosFactura" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" BackColor="#CCCCCC" OnPageIndexChanging="grdDoctosFactura_PageIndexChanging">
                                         <Columns>
                                             <asp:BoundField DataField="FACT_TIPO" HeaderText="TIPO" />
                                             <asp:TemplateField HeaderText="ARCHIVO">
@@ -484,9 +472,10 @@
                                         </Columns>
                                         <FooterStyle CssClass="enc" />
                                         <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                        <RowStyle BackColor="White" />
                                         <SelectedRowStyle CssClass="sel" />
-                                        <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
-                                        <AlternatingRowStyle CssClass="alt" />
+                                        <HeaderStyle CssClass="enc" />
+                                        <AlternatingRowStyle CssClass="alt" BackColor="#CCCCCC" />
                                     </asp:GridView>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
@@ -508,3 +497,4 @@
     <script type="text/javascript" src="Scripts/jsQR.js"></script>
     <script type="text/javascript" src="Scripts/QRModel.js"></script>
 </asp:Content>
+

@@ -9,6 +9,19 @@ namespace CapaNegocio
 {
     public class CN_DetFactura
     {
+        public void ObtDetFactura(DetFactura objDetFactura, ref List<DetFactura> lstFactDet)
+        {
+            try
+            {
+                CD_DetFactura CDDetFactura = new CD_DetFactura();
+                CDDetFactura.ObtDetFactura(objDetFactura, ref lstFactDet);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void DetFacturaInsertar(ref DetFactura DetFactura, ref string Verificador)
         {
             try

@@ -448,16 +448,18 @@ namespace Recibos_Electronicos.Reportes
                     }
                     break;
                 case "REP055":
-                    object[] v42 = { Evento };
+                    
                     if (enExcel == "N")
                     {
+                        object[] v42 = { Evento, Observaciones };
                         Reporte = "Reportes\\REP055.rpt";
                         rptPDF_FE(Reporte, v42, "Evento "+Evento);
 
                     }
                     else {
+                        object[] v70 = { Evento };
                         Reporte = "Reportes\\REP055_Excel.rpt";
-                        rptExcel_FE(Reporte, v42, "Evento " + Evento);
+                        rptExcel_FE(Reporte, v70, "Evento " + Evento);
                     }
                     break;
                 case "REP056":

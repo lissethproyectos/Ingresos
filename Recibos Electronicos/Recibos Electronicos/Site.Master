@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 text-right">
-                        <div class="btn-group dropdown my-2 my-lg-9" style="left: 0px; top: 10px">
+                        <div class="btn-group dropdown my-2 my-lg-9" style="left: 0px; top: 0px">
                                 <img src="https://sysweb.unach.mx/resources/imagenes/user.png">
                                 <%--<i class="fa fa-user-circle white-text fa-th-large" aria-hidden="true"></i>--%>
                                 &nbsp;<asp:Button ID="bttnCorreoUnach" runat="server" Text="Button" class="btn_usuario btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></asp:Button>
@@ -168,7 +168,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid" style="margin-top: 110px">
+        <div class="container-fluid" style="margin-top: 120px; min-height: 350px;">
             <div class="row">                
                 <div class="col">
                     <div class="container-fluid">

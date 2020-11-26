@@ -19,7 +19,7 @@ namespace CapaEntidad
         private bool _ItsOk;
         private string _NombreArchivo;
         private string _ExtensionArchivo;
-        
+
 
         public bool ItsOk
         {

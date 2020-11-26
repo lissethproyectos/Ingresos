@@ -398,5 +398,10 @@ namespace Recibos_Electronicos.Form
         {
             CargarGrid();
         }
+
+        protected void bttnNuevo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

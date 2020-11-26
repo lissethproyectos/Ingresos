@@ -52,13 +52,17 @@ namespace Recibos_Electronicos
                 if (Request.QueryString["reporte"] == null && Request.QueryString["modulo"] == null && Request.QueryString["Evento"] == null)
                     busca_informativa();
 
-                CargarGridMonitor(ref grdMonitor);
+                if(SesionUsu.Usu_Central=="S")
+                    CargarGridMonitor(ref grdMonitor);
+                else
+                    grdMonitor.Visible = false;
             }
             else
             {
                 SesionUsu.Usu_Central = "N";
                 txtFecha_Factura_Ini.Text = "01/01/" + System.DateTime.Now.Year.ToString();
                 txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
+                grdMonitor.Visible = false;
                 busca_informativa();
             }
 

@@ -433,6 +433,20 @@ namespace CapaNegocio
             }
         }
 
+        public void ConsultarRFC(ref Factura ObjFactura, ref string Verificador)
+        {
+            try
+            {
+                CD_Factura DatosFactura = new CD_Factura();
+                DatosFactura.ConsultarRFC(ref ObjFactura, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Generar_Recibo_Apirante(Factura ObjFactura, ref string Verificador)
         {
             try

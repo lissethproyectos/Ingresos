@@ -541,6 +541,15 @@ namespace CapaNegocio
                 }
             }
         }
+
+        public void HideEncabezado(GridView grdView, Int32[] Columnas)
+        {
+            for (int i = 0; i < Columnas.Length; i++)
+            {
+                grdView.HeaderRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                //grdView.FooterRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;                
+            }
+        }
         public void VerificaTextoMensajeError(ref string Mensaje)
         {
             Mensaje = Mensaje.Replace("\r", "");
