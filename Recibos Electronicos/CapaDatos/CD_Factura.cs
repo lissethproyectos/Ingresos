@@ -1094,14 +1094,14 @@ namespace CapaDatos
                 String[] Parametros = { "P_RECEPTOR_RFC", "P_RECEPTOR_NOMBRE", "P_RECEPTOR_DOMICILIO", "P_RECEPTOR_COLONIA",
                                         "P_RECEPTOR_CP", "P_RECEPTOR_ESTADO", "P_RECEPTOR_MUNICIPIO", "P_RECEPTOR_METODO_PAGO", "P_RECEPTOR_TELEFONO",
                                         "P_RECEPTOR_CORREO", "P_RECEPTOR_TIPO_PERS",  "P_RECEPTOR_STATUS", "P_USUARIO", "P_FOLIO", "P_IMPORTE", "P_IVA", "P_TOTAL", "P_DEPENDENCIA", "P_RUTA_ADJUNTO_VOUCHER", "P_RUTA_ADJUNTO_OFICIO","P_RUTA_ADJUNTO_CONVENIO", "P_OFICIO", "P_FECHA", "P_TIPO", "P_NOTAS", "P_IMPORTE_CONVENIO",
-                                        "P_CFDI", "P_RECEPTOR_TIPO_SERVICIO", "P_RECEPTOR_OBSERVACIONES"
+                                        "P_CFDI", "P_RECEPTOR_TIPO_SERVICIO", "P_RECEPTOR_OBSERVACIONES", "P_CONFIRMADO"
                 };
                 Object[] Valores = {ObjFactura.FACT_RECEPTOR_RFC, ObjFactura.FACT_NOMBRE, ObjFactura.FACT_RECEPTOR_DOMICILIO, ObjFactura.FACT_RECEPTOR_COLONIA,
                                     ObjFactura.FACT_RECEPTOR_CP, ObjFactura.FACT_RECEPTOR_ESTADO, ObjFactura.FACT_RECEPTOR_MUNICIPIO,
                                     ObjFactura.FACT_RECEPTOR_METODO_PAGO, ObjFactura.FACT_RECEPTOR_TELEFONO, ObjFactura.FACT_RECEPTOR_CORREO,
                                     ObjFactura.FACT_RECEPTOR_TIPO_PERS, ObjFactura.FACT_RECEPTOR_STATUS, UsuarioNombre,
                                     ObjFactura.FACT_FOLIO, ObjFactura.FACT_SUBTOTAL, ObjFactura.FACT_IMPUESTO_TASA, ObjFactura.FACT_TOTAL, ObjFactura.FACT_DEPENDENCIA, ObjFactura.RUTA_ADJUNTO, ObjFactura.RUTA_ADJUNTO_OFICIO,ObjFactura.RUTA_ADJUNTO_CONVENIO,ObjFactura.OFICIO, ObjFactura.FACT_FECHA_FACTURA, ObjFactura.FACT_TIPO, ObjFactura.FACT_NOTAS, ObjFactura.FACT_IMPORTE_CONVENIO,
-                                    ObjFactura.CFDI, ObjFactura.FACT_TIPO_SERVICIO, ObjFactura.FACT_OBSERVACIONES
+                                    ObjFactura.CFDI, ObjFactura.FACT_TIPO_SERVICIO, ObjFactura.FACT_OBSERVACIONES, ObjFactura.FACT_CONFIRMADO
                 };
                 String[] ParametrosOut = { "P_BANDERA", "P_ID_FACT_EFECT" };
                 //cmm = CDDatos.GenerarOracleCommand_Adjunto("INS_DATOS_FACTURA_CAJA", ref Verificador, Parametros, Valores, ParametrosOut);

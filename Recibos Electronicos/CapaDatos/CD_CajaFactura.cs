@@ -94,16 +94,30 @@ namespace CapaDatos
                     ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
-                    ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16))=="S"?false:true;
+                    ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "S" ? false : true;
                     ObjCjaFactura.VISIBLE2 = Convert.ToString(dr.GetValue(16)) == "S" ? true : false;
                     ObjCjaFactura.HABILITADO = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? false : true;
+                    ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
                     ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
-                    ObjCjaFactura.COLOR = "#ece260";                    
-                    if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
-                        ObjCjaFactura.COLOR = "#f1bec2";
-                    else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD)==0)
+                    ObjCjaFactura.COLOR = "#ece260";
+                    if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) >= 2 && Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) <= 3)
+                    { 
+                        
+                            ObjCjaFactura.VISIBLE4 = true;
+                            ObjCjaFactura.VISIBLE5 = false;
+                        
+                    }
+                    else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
+                    {
+                        ObjCjaFactura.VISIBLE4 = false;
+                        ObjCjaFactura.VISIBLE5 = true;
+                    }
+                    else
+                    {
                         ObjCjaFactura.VISIBLE3 = false;
-
+                        ObjCjaFactura.VISIBLE4 = false;
+                        ObjCjaFactura.VISIBLE5 = false;
+                    }
 
 
                     //ObjCjaFactura.Ruta = Convert.ToString(dr.GetValue(16));
@@ -334,12 +348,37 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_FECHA_CAPTURA = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.FACT_DIAS_EMISION = Convert.ToInt32(dr.GetValue(16));
-                    ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(16));
+                    //ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(16));
+                    //ObjCjaFactura.COLOR = "#ece260";
+                    //if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
+                    //    ObjCjaFactura.COLOR = "#f1bec2";
+                    //else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) == 0)
+                    //    ObjCjaFactura.VISIBLE3 = false;
+                    
+
+
+                    ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
+                    ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
                     ObjCjaFactura.COLOR = "#ece260";
-                    if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
-                        ObjCjaFactura.COLOR = "#f1bec2";
-                    else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) == 0)
+                    if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) >= 2 && Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) <= 3)
+                    {
+
+                        ObjCjaFactura.VISIBLE4 = true;
+                        ObjCjaFactura.VISIBLE5 = false;
+
+                    }
+                    else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
+                    {
+                        ObjCjaFactura.VISIBLE4 = false;
+                        ObjCjaFactura.VISIBLE5 = true;
+                    }
+                    else
+                    {
                         ObjCjaFactura.VISIBLE3 = false;
+                        ObjCjaFactura.VISIBLE4 = false;
+                        ObjCjaFactura.VISIBLE5 = false;
+                    }
+
                     List.Add(ObjCjaFactura);
                 }
                 dr.Close();
@@ -483,25 +522,25 @@ namespace CapaDatos
         }
         public void FacturApiAgregar(string Referencia, int IdFactura, string IdFacturaApi, ref string Verificador)
         {
-            
-                CD_Datos CDDatos = new CD_Datos();
-                OracleCommand OracleCmd = null;
 
-                try
-                {
-                        string[] Parametros = { "p_referencia", "p_id_factura", "p_id_facturapi" };
-                        string[] ParametrosOut = { "P_BANDERA" };
-                        object[] Valores = { Referencia, IdFactura, IdFacturaApi };
-                        OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURAPI", ref Verificador, Parametros, Valores, ParametrosOut);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    CDDatos.LimpiarOracleCommand(ref OracleCmd);
-                }
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand OracleCmd = null;
+
+            try
+            {
+                string[] Parametros = { "p_referencia", "p_id_factura", "p_id_facturapi" };
+                string[] ParametrosOut = { "P_BANDERA" };
+                object[] Valores = { Referencia, IdFactura, IdFacturaApi };
+                OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURAPI", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref OracleCmd);
+            }
         }
         public void ConsultarPdfXmlFactura1(ref CajaFactura ObjCjaFactura, string Tipo, ref List<CajaFactura> List)
         {
@@ -627,7 +666,7 @@ namespace CapaDatos
                     ObjCjaFactura = new CajaFactura();
                     ObjCjaFactura.Fecha_Fact_Cja = Convert.ToString(dr.GetValue(3));
                     ObjCjaFactura.Folio_Fact_Cja = Convert.ToString(dr.GetValue(2));
-                    ObjCjaFactura.Ruta = "../ArchivosFacturas/" + dr.GetValue(0) ; //Ruta + dr.GetValue(3) + dr.GetValue(5);
+                    ObjCjaFactura.Ruta = "../ArchivosFacturas/" + dr.GetValue(0); //Ruta + dr.GetValue(3) + dr.GetValue(5);
                     ObjCjaFactura.NombreArchivo = Convert.ToString(dr.GetValue(0));
                     ObjCjaFactura.ExtensionArchivo = Convert.ToString(dr.GetValue(4));
                     List.Add(ObjCjaFactura);

@@ -213,7 +213,11 @@ namespace Recibos_Electronicos.Form
                         txtNumOficio.Text = ObjFactura.OFICIO;
                         txtObservacionesConvenio.Text = ObjFactura.FACT_NOTAS;
                         tabFacturas.Tabs[1].Visible = true;
-                        tabFacturas.Tabs[2].Visible = (ddlStatus.SelectedValue == "S") ? true : false;
+                        if (ddlStatus.SelectedValue == "S" || ddlStatus.SelectedValue == "F")
+                            tabFacturas.Tabs[2].Visible = true;
+                        else
+                            tabFacturas.Tabs[2].Visible = false;
+
                         //  tabFacturas.Tabs[2].Visible = false;
                         valFolio.ValidationGroup = "DatosFiscales";
                         valFecha.ValidationGroup = "DatosFiscales";
@@ -616,6 +620,13 @@ namespace Recibos_Electronicos.Form
                         //lblTitulo1.Text = "DEPÓSITOS EN EFECTIVO / TRANSFERENCIAS";
                         mltViewTipo.ActiveViewIndex = 0;
                         CargarGridEfectivo();
+                        if (ddlStatus.SelectedValue == "S" || ddlStatus.SelectedValue == "F" || ddlStatus.SelectedValue == "P")
+                        {
+                            Button DDLAgregarA = (Button)grdDatosFactura.HeaderRow.FindControl("bttnAdd");
+                            Label lblEditarA = (Label)grdDatosFactura.HeaderRow.FindControl("lblEditar");
+                            DDLAgregarA.Visible = false;
+                            lblEditarA.Visible = true;
+                        }
                         break;
                     case "R":
                         rdoStatusConfirmados.Items[0].Enabled = true;
@@ -623,13 +634,22 @@ namespace Recibos_Electronicos.Form
                         mltViewTipo.ActiveViewIndex = 0;
                         CargarGrid();
                         Button DDLAgregar = (Button)grdDatosFactura.HeaderRow.FindControl("bttnAdd");
+                        Label lblEditar = (Label)grdDatosFactura.HeaderRow.FindControl("lblEditar");
                         DDLAgregar.Visible = false;
+                        lblEditar.Visible = true;
                         break;
                     case "A":
                         rdoStatusConfirmados.Items[0].Enabled = false;
                         //lblTitulo1.Text = "FACTURAS ANTICIPADAS";
                         mltViewTipo.ActiveViewIndex = 0;
                         CargarGridEfectivo();
+                        if (ddlStatus.SelectedValue == "S" || ddlStatus.SelectedValue == "F" || ddlStatus.SelectedValue == "P")
+                        {
+                            Button DDLAgregarA = (Button)grdDatosFactura.HeaderRow.FindControl("bttnAdd");
+                            Label lblEditarA = (Label)grdDatosFactura.HeaderRow.FindControl("lblEditar");
+                            DDLAgregarA.Visible = false;
+                            lblEditarA.Visible = true;
+                        }
                         break;
 
                     default:
@@ -756,13 +776,13 @@ namespace Recibos_Electronicos.Form
                 {
                     row.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
                     //row.BackColor = Color.FromName("#ece260");
-                    if (row.Cells[23].Text != string.Empty)
-                    {
-                        if (Convert.ToInt32(row.Cells[23].Text) >= 2 && Convert.ToInt32(row.Cells[23].Text) <= 3)
-                            row.BackColor = Color.FromName("#ece260");                        
-                        else if (Convert.ToInt32(row.Cells[23].Text) >= 4)
-                            row.BackColor = Color.FromName("#f1bec2");
-                    }
+                    //if (row.Cells[23].Text != string.Empty)
+                    //{
+                    //    if (Convert.ToInt32(row.Cells[23].Text) >= 2 && Convert.ToInt32(row.Cells[23].Text) <= 3)
+                    //        row.BackColor = Color.FromName("#ece260");                        
+                    //    else if (Convert.ToInt32(row.Cells[23].Text) >= 4)
+                    //        row.BackColor = Color.FromName("#f1bec2");
+                    //}
                 }
             }
         }
@@ -771,13 +791,13 @@ namespace Recibos_Electronicos.Form
         {
 
 
-            Int32[] CeldasFacturados = { 0, 2, 4, 6, 7, 8, 10, 11, 13, 14, 16, 17, 18, 19, 20, 21, 23 };
-            Int32[] CeldasSolicitados = { 0, 2, 4, 7, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
-            Int32[] CeldasPorConfirmar = { 0, 2, 3, 6, 10, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+            Int32[] CeldasFacturados = { 0, 2, 4, 6, 7, 8, 11, 13, 14, 16, 17, 18, 19, 20, 21, 23 };
+            Int32[] CeldasSolicitados = { 0, 2, 4, 7, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+            Int32[] CeldasPorConfirmar = { 0, 2, 3, 6, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
 
-            Int32[] CeldasFacturados_Ant = { 0, 1, 2, 3, 4, 7, 10, 11, 13, 14, 16, 17, 18, 19, 20, 21, 23 };
-            Int32[] CeldasSolicitados_Ant = { 0, 1, 2, 3, 4, 7, 10, 11, 13, 14, 15, 16, 17, 18, 19,20,  21, 22, 23 };
-            Int32[] CeldasPorConfirmar_Ant = { 0, 1, 2, 3, 4, 7, 9, 10, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+            Int32[] CeldasFacturados_Ant = { 0, 1, 2, 3, 4, 7, 11, 13, 14, 16, 17, 18, 19, 20, 21, 23 };
+            Int32[] CeldasSolicitados_Ant = { 0, 1, 2, 3, 4, 7, 11, 13, 14, 15, 16, 17, 18, 19,20,  21, 22, 23 };
+            Int32[] CeldasPorConfirmar_Ant = { 0, 1, 2, 3, 4, 7, 9, 4, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
 
 
             try
@@ -819,7 +839,9 @@ namespace Recibos_Electronicos.Form
 
                             grdDatosFactura.HeaderRow.Cells[8].Text = "Fecha de Solicitud";
                             grdDatosFactura.Columns[8].HeaderText = "Fecha de Solicitud";
-                            break;
+                            grdDatosFactura.HeaderRow.Cells[9].Text = "Fecha Depósito / Transferencia";
+                            grdDatosFactura.Columns[9].HeaderText = "Fecha Depósito / Transferencia";
+                        break;
                         case "S":
                             if (grdDatosFactura.Rows.Count > 0)
                             {
@@ -1236,13 +1258,15 @@ namespace Recibos_Electronicos.Form
                     pnlOpcConfirma.Visible = false;
                     hddnBandera.Value = "0";
                     tabFacturas.Tabs[2].Visible = true;
+                    Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
                     //bttnNuevo.Visible = false;
                     break;
                 case "F":
                     pnlOpcConfirma.Visible = false;
                     hddnBandera.Value = "0";
                     tabFacturas.Tabs[2].Visible = true;
-                    Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "A") ? true : false;
+                    //Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "A") ? true : false;
+                    Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
                     break;
                 case "P":
                     pnlOpcConfirma.Visible = false;

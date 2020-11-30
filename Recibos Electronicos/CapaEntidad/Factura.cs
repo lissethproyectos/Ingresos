@@ -74,7 +74,15 @@ namespace CapaEntidad
         private string _CFDI;
         private string _FACT_TIPO_SERVICIO;
         private int _FACT_DIAS_SOLICITUD;
+        private string _FACT_DESC_STATUS_SOLICITUD;
         //Metodos agregados por Lisseth
+
+
+        public string FACT_DESC_STATUS_SOLICITUD
+        {
+            get { return _FACT_DESC_STATUS_SOLICITUD; }
+            set { _FACT_DESC_STATUS_SOLICITUD = value; }
+        }
 
         private string _COLOR;
 
@@ -133,11 +141,25 @@ namespace CapaEntidad
             set { _VISIBLE2 = value; }
         }
 
-        private bool _VISIBLE3=true;
+        private bool _VISIBLE3=false;
         public bool VISIBLE3
         {
             get { return _VISIBLE3; }
             set { _VISIBLE3 = value; }
+        }
+
+        private bool _VISIBLE4 = false;
+        public bool VISIBLE4
+        {
+            get { return _VISIBLE4; }
+            set { _VISIBLE4 = value; }
+        }
+
+        private bool _VISIBLE5 = false;
+        public bool VISIBLE5
+        {
+            get { return _VISIBLE5; }
+            set { _VISIBLE5 = value; }
         }
 
         private bool _HABILITADO;

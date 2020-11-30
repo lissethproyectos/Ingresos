@@ -140,7 +140,7 @@
             padding: 5px;
             margin-top: 4px;
             cursor: pointer;
-            background-image: url("../Imagenes/new.png");
+            background-image: url("../Imagenes/ico-accordion.png");
             background-repeat: no-repeat;
             background-position: right;
             color: #fff
@@ -292,7 +292,7 @@
                             </div>
                             <div class="col-md-11">
                                 <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
-                                </asp:DropDownList>                           
+                                </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="*Dependencia" InitialValue="00000" ValidationGroup="New">*Requerido</asp:RequiredFieldValidator>
                             </div>
                         </div>
@@ -325,20 +325,23 @@
                                     </span>
                                 </div>
                             </div>
+                        </div>
+                        <%--<div class="row">
+                            <div class="col-md-8 font-weight-bold">
                             </div>
-                        <div class="row">
-                            <div class="col-md-1">Solicitado
+                            <div class="col-md-1 font-weight-bold">
+                                Solicitado
                             </div>
                             <div class="col-md-1">
                                 <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/ejemp_validado.png" Height="35px" Width="35px" />
                             </div>
-                            <div class="col-md-1">
-                                <h6>Rechazado</h6>
+                            <div class="col-md-1 font-weight-bold">
+                                Rechazado
                             </div>
                             <div class="col-md-1">
                                 <asp:Image ID="Image3" runat="server" ImageUrl="~/Imagenes/ejem_rechazado.png" Height="35px" Width="35px" />
                             </div>
-                        </div>
+                        </div>--%>
                     </div>
                     <asp:DropDownList ID="ddlAvance" runat="server" Visible="False">
                     </asp:DropDownList>
@@ -418,17 +421,20 @@
                                                                 <asp:BoundField DataField="FACT_FECHA_CAPTURA" HeaderText="Fecha Solicitud">
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle HorizontalAlign="Center" />
+                                                                    <ControlStyle Width="20px" />
+                                                                    <HeaderStyle Width="20px" />
                                                                 </asp:BoundField>
                                                                 <asp:BoundField DataField="FACT_FECHA_FACTURA" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha Factura" SortExpression="FECHA_FACTURA">
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle HorizontalAlign="Center" />
+                                                                    <ControlStyle Width="20px" />
+                                                                    <HeaderStyle Width="20px" />
                                                                 </asp:BoundField>
                                                                 <asp:TemplateField HeaderText="# Dias Solicitud">
-                                                                    <EditItemTemplate>
-                                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>'></asp:TextBox>
-                                                                    </EditItemTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:Label ID="Label1" runat="server" BackColor='<%# System.Drawing.ColorTranslator.FromHtml(Eval("COLOR").ToString())%>' Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' Font-Size="12px" Visible='<%# Bind("VISIBLE3") %>' BorderColor="White" Font-Bold="True"></asp:Label>
+                                                                        <asp:Button ID="bttnDiasSol" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn-floating btn-sm btn-warning" Style='left: 0px; top: 0px; width: 35px; height: 35px' Visible='<%# Bind("VISIBLE4") %>' />
+                                                                        <asp:Button ID="bttnDiasSol2" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn-floating btn-sm btn-danger" Style='left: 0px; top: 0px; width: 35px; height: 35px' Visible='<%# Bind("VISIBLE5") %>' />
+                                                                        <%--<asp:LinkButton ID="LinkButton1" runat="server" Text=' <%# Bind("FACT_DIAS_SOLICITUD") %> ' CssClass="btn-floating btn-sm btn-warning"></asp:LinkButton>--%>
                                                                     </ItemTemplate>
                                                                     <ControlStyle Width="20px" />
                                                                     <HeaderStyle Width="20px" />
@@ -441,8 +447,9 @@
                                                                     </HeaderTemplate>
                                                                     <ItemTemplate>
                                                                         <asp:CheckBox ID="chkConfirmado" runat="server" AutoPostBack="True" Checked='<%# Convert.ToBoolean(Eval("FACT_CONFIRMADO")) %>' Enabled='<%# Bind("HABILITADO") %>' OnCheckedChanged="chkConfirmado_CheckedChanged" Text="Si" Visible="False" />
-                                                                        <asp:Image ID="Image89" runat="server" ImageUrl="~/Imagenes/activo.png" Visible='<%# Convert.ToBoolean(Eval("FACT_CONFIRMADO")) %>' />
-                                                                        <asp:Image ID="imgRechazado" runat="server" ImageUrl='<%# Bind("Ruta") %>' />
+                                                                        <%--                                                                        <asp:Image ID="Image89" runat="server" ImageUrl="~/Imagenes/activo.png" Visible='<%# Convert.ToBoolean(Eval("FACT_CONFIRMADO")) %>' />
+                                                                        <asp:Image ID="imgRechazado" runat="server" ImageUrl='<%# Bind("Ruta") %>' />--%>
+                                                                        <asp:Label ID="lblSol" runat="server" Text='<%# Bind("FACT_DESC_STATUS_SOLICITUD") %>' Font-Bold="True" ForeColor="#333333" Font-Size="8"></asp:Label>
                                                                     </ItemTemplate>
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle HorizontalAlign="Center" />
@@ -452,6 +459,7 @@
                                                                         <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                                                                             <ContentTemplate>
                                                                                 <asp:Button ID="bttnAdd" runat="server" CssClass="btn btn-blue-grey" Text="Agregar" OnClick="bttnAdd_Click" Visible="False" ValidationGroup="New" />
+                                                                                <asp:Label ID="lblEditar" runat="server" ForeColor="White" Text="EDITAR" Visible="False"></asp:Label>
                                                                             </ContentTemplate>
                                                                         </asp:UpdatePanel>
                                                                     </HeaderTemplate>
@@ -467,6 +475,8 @@
                                                                     </ItemTemplate>
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle HorizontalAlign="Center" />
+                                                                    <ControlStyle Width="20px" />
+                                                                    <HeaderStyle Width="20px" />
                                                                 </asp:TemplateField>
                                                                 <asp:BoundField DataField="FACT_RECEPTOR_CORREO" />
                                                                 <asp:TemplateField HeaderText="ENVIAR XML/PDF">
@@ -614,7 +624,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="0" Width="100%" CssClass="mGrid" Height="550px" ScrollBars="Vertical">
+                                <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="1" Width="100%" CssClass="mGrid" Height="550px" ScrollBars="Vertical">
                                     <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                         <HeaderTemplate>
                                             <i class="fa fa-file-code-o" aria-hidden="true"></i>Información de Factura
@@ -839,7 +849,7 @@
                                                                     <Panes>
                                                                         <ajaxToolkit:AccordionPane runat="server">
                                                                             <Header>
-                                                                        <i class="fa fa-file-o" aria-hidden="true"></i> Datos del Voucher 
+                                                                         [1] Datos del Voucher 
                                                                             </Header>
                                                                             <Content>
                                                                                 <table style="width: 100%;">
@@ -1074,6 +1084,7 @@
                                                                                 </asp:UpdatePanel>
                                                                             </Content>
                                                                         </ajaxToolkit:AccordionPane>
+
                                                                     </Panes>
                                                                 </ajaxToolkit:Accordion>
                                                             </div>
