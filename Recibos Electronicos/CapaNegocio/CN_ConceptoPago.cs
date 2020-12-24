@@ -178,6 +178,33 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ActualizarVigenciasSYSWEB(ConceptoPago ObjVigencias, ref string Verificador)
+        {
+            try
+            {
+                CD_ConceptoPago CDConceptoPago = new CD_ConceptoPago();
+                CDConceptoPago.ActualizarVigenciasSYSWEB(ObjVigencias, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ActualizarVigenciasSIAECiclo(ConceptoPago ObjVigencias, string TipoCarrera, ref string Verificador)
+        {
+            try
+            {
+                CD_ConceptoPago CDConceptoPago = new CD_ConceptoPago();
+                CDConceptoPago.ActualizarVigenciasSIAECiclo(ObjVigencias, TipoCarrera, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void InsertarExcepcionesVigenciasSIAE(ConceptoPago ObjVigencias, ref string Verificador)
         {
             try

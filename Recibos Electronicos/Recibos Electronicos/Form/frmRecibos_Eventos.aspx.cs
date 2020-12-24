@@ -64,6 +64,12 @@ namespace Recibos_Electronicos.Form
                 grdEventos.DataSource = dt;
                 grdEventos.DataSource = GetListEventos();
                 grdEventos.DataBind();
+
+                if (grdEventos.Rows.Count >= 1)
+                {
+                    this.grdEventos.SelectedIndex = 0;
+                    grdEventos_SelectedIndexChanged(null, null);
+                }
             }
             catch (Exception ex)
             {
@@ -100,7 +106,7 @@ namespace Recibos_Electronicos.Form
                         lblLeyTot.Visible = false;
                         lblTot.Visible = false;
                     }
-                    pnlBuscaRef.Visible = true;
+                    //pnlBuscaRef.Visible = true;
                 }
                 //else
                 //    pnlBuscaRef.Visible = false;
@@ -281,6 +287,9 @@ namespace Recibos_Electronicos.Form
             txtReferencia.Text = string.Empty;
         }
 
-       
+        protected void linkBttnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarGridPagos();
+        }
     }
 }

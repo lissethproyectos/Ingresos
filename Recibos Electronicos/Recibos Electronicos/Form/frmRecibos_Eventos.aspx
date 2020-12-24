@@ -125,29 +125,34 @@
                 </asp:UpdatePanel>
             </div>
         </div>
-        <div class="row">
+        <%--<div class="row">
             <div class="col">
-                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+
+                <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                     <ContentTemplate>
-                        <asp:Panel ID="pnlBuscaRef" runat="server" Visible="False">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <asp:TextBox ID="txtReferencia" runat="server" CssClass="box" PlaceHolder="Nombre/Matricula/Folio" TabIndex="4" Visible="true" Width="98%"></asp:TextBox>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-                                            <ContentTemplate>
-                                                <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" />
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
-                            </div>
-                        </asp:Panel>
+                        <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
+
             </div>
+        </div>--%>
+        <br />
+        <div class="row">
+            <div class="col">
+                <div class="input-group mb-3">
+                <asp:TextBox ID="txtReferencia" runat="server"  CssClass="form-control"  PlaceHolder="Nombre/Matricula/Folio" TabIndex="4" Visible="true"></asp:TextBox>
+                    <div class="input-group-append">
+                        <span class="input-group-text_buscar" id="basic-addon2">
+                            <asp:UpdatePanel ID="updPnlBuscarRFC" runat="server">
+                                <ContentTemplate>
+                                    <asp:LinkButton ID="linkBttnBuscar" runat="server" class="btn-buscar btn-primary" Width="30px" OnClick="linkBttnBuscar_Click"><i class="fa fa-search" aria-hidden="true"></i></asp:LinkButton>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="row">
             <div class="col">
@@ -157,7 +162,7 @@
                             EmptyDataText="No existen pagos para este evento."
                             DataKeyNames="ID_FACT"
                             AutoGenerateColumns="False" AllowPaging="True"
-                            OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" CssClass="mGrid" Width="100%" PageSize="20" ShowFooter="True">
+                            OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" CssClass="mGrid" Width="100%" PageSize="20" ShowFooter="True" ShowHeaderWhenEmpty="True">
                             <Columns>
                                 <asp:BoundField DataField="ID_FACT" HeaderText="ID" SortExpression="ID"></asp:BoundField>
                                 <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">

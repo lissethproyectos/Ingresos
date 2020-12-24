@@ -10,6 +10,7 @@
     <title>Sistema de Ingresos</title>
     <link rel="stylesheet" href="~/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="~/bootstrap/css/mdb.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/Tab.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
     <link href="https://sysweb.unach.mx/resources/css/modal.css" type="text/css" rel="stylesheet" />
@@ -21,7 +22,7 @@
 
 
     <script type="text/javascript" src="https://sysweb.unach.mx/resources/js/index.js" charset="iso-8859-1"></script>
- <style type="text/css">
+    <style type="text/css">
         .dropdown-item:focus, .dropdown-item:hover {
             color: #16181b;
             text-decoration: none;
@@ -108,27 +109,27 @@
                     </div>
                     <div class="col-md-4 text-center">
                         <div class="text-light font-weight-bold">
-                                <h4 class="media-heading">Control de Ingresos</h4>
-                                <h5>COIN</h5>
+                            <h4 class="media-heading">Control de Ingresos</h4>
+                            <h5>COIN</h5>
                         </div>
                     </div>
                     <div class="col-md-4 text-right">
                         <div class="btn-group dropdown my-2 my-lg-9" style="left: 0px; top: 0px">
-                                <img src="https://sysweb.unach.mx/resources/imagenes/user.png">
-                                <%--<i class="fa fa-user-circle white-text fa-th-large" aria-hidden="true"></i>--%>
+                            <img src="https://sysweb.unach.mx/resources/imagenes/user.png">
+                            <%--<i class="fa fa-user-circle white-text fa-th-large" aria-hidden="true"></i>--%>
                                 &nbsp;<asp:Button ID="bttnCorreoUnach" runat="server" Text="Button" class="btn_usuario btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></asp:Button>
-                                <div class="dropdown-menu dropdown-menu-sm-right" style="background-color: #4a769b">
-                                    <a class="dropdown-item">
-                                        <div style="color: #fff;">
-                                            <asp:Label ID="lblUsuario" runat="server"></asp:Label>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item">
-                                        <input type="button" id="bttnActualiza" class="btn btn-info" value="Actualizar Datos" /></a>
-                                    <a class="dropdown-item">
-                                        <asp:Button ID="bttnCerrarSesion" runat="server" Text="Cerrar Sesión" CssClass="btn btn-light" OnClick="bttnCerrarSesion_Click" TabIndex="1000" /></a>
-                                </div>
+                            <div class="dropdown-menu dropdown-menu-sm-right" style="background-color: #4a769b">
+                                <a class="dropdown-item">
+                                    <div style="color: #fff;">
+                                        <asp:Label ID="lblUsuario" runat="server"></asp:Label>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item">
+                                    <input type="button" id="bttnActualiza" class="btn btn-info" value="Actualizar Datos" /></a>
+                                <a class="dropdown-item">
+                                    <asp:Button ID="bttnCerrarSesion" runat="server" Text="Cerrar Sesión" CssClass="btn btn-light" OnClick="bttnCerrarSesion_Click" TabIndex="1000" /></a>
                             </div>
+                        </div>
                         <%--<img  width="180px" id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />--%>
                     </div>
                 </div>
@@ -139,6 +140,11 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                        <asp:LinkButton ID="linkBttnInicio" runat="server" CssClass="btn btn-link white-text" OnClick="linkBttnInicio_Click"><i class="fa fa-home  fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
                                     <ContentTemplate>
                                         <asp:Menu ID="MenuTop" runat="server"
@@ -169,7 +175,7 @@
             </div>
         </div>
         <div class="container-fluid" style="margin-top: 120px; min-height: 350px;">
-            <div class="row">                
+            <div class="row">
                 <div class="col">
                     <div class="container-fluid">
                         <div class="row">

@@ -49,8 +49,8 @@ namespace Recibos_Electronicos
                 ddlDependencia.Visible = true;
                 txtFecha_Factura_Ini.Text = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
                 txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
-                if (Request.QueryString["reporte"] == null && Request.QueryString["modulo"] == null && Request.QueryString["Evento"] == null)
-                    busca_informativa();
+                //if (Request.QueryString["reporte"] == null && Request.QueryString["modulo"] == null && Request.QueryString["Evento"] == null)
+                //    busca_informativa();
 
                 if(SesionUsu.Usu_Central=="S")
                     CargarGridMonitor(ref grdMonitor);

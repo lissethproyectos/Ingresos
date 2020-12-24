@@ -20,13 +20,13 @@ namespace Recibos_Electronicos.Form
         CN_Usuario CNUsuario = new CN_Usuario();
         CN_Comun CNComun = new CN_Comun();
         CN_Bien CNBien = new CN_Bien();
-        CN_Alumno CNCliente =new CN_Alumno();
+        CN_Alumno CNCliente = new CN_Alumno();
         CN_Factura CNFactura = new CN_Factura();
 
 
         string Verificador = string.Empty;
         string WXI = string.Empty;
-        List<Bien>lstBien = new List<Bien>();
+        List<Bien> lstBien = new List<Bien>();
         private static List<Comun> lstBienGrupo = new List<Comun>();
 
         Alumno ObjMatricula = new Alumno();
@@ -59,7 +59,7 @@ namespace Recibos_Electronicos.Form
         {
             try
             {
-                CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_GrupoServicio", ref DDLGrupo, "p_dependencia", "p_tipo_venta",  DDLDependencia.SelectedValue, DDLTipoVenta.SelectedValue, "INGRESOS");
+                CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_GrupoServicio", ref DDLGrupo, "p_dependencia", "p_tipo_venta", DDLDependencia.SelectedValue, DDLTipoVenta.SelectedValue, "INGRESOS");
                 //DDLGrupo.SelectedIndex = 0;
                 //DDLGrupo.Items.Remove(ddlTipo.Items.FindByValue("ACT"));
                 DDLGrupo.Items.FindByValue(ViewState["Filter"].ToString()).Selected = true;
@@ -85,7 +85,7 @@ namespace Recibos_Electronicos.Form
                 }
                 else
                     CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref DDLDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
-                
+
                 //CNComun.LlenaCombo("pkg_pagos_2016.Obt_Combo_Conceptos", ref DDLConceptos, "INGRESOS");
                 CNComun.LlenaComboG("pkg_pagos_2016.Obt_Combo_Tipo_Ventas", ref DDLTipoVenta, ref lstBienGrupo, "INGRESOS");
 
@@ -101,7 +101,7 @@ namespace Recibos_Electronicos.Form
         private void CargarGridInicio()
         {
             Int32[] Celdas1;
-            if (SesionUsu.Usu_TipoUsu==6)
+            if (SesionUsu.Usu_TipoUsu == 6)
                 Celdas1 = new Int32[] { 0, 9, 8, 10, 12 };
             else
                 Celdas1 = new Int32[] { 0, 9, 10, 11, 12 };
@@ -169,7 +169,7 @@ namespace Recibos_Electronicos.Form
                 grvClientes.DataSource = dt;
                 grvClientes.DataSource = GetListClientes();
                 grvClientes.DataBind();
-                
+
 
             }
             catch (Exception ex)
@@ -181,7 +181,7 @@ namespace Recibos_Electronicos.Form
         {
             grvInventario.DataSource = null;
             grvInventario.DataBind();
-            if(Filtro=="N")
+            if (Filtro == "N")
                 ViewState["Filter"] = "T";
 
 
@@ -247,7 +247,7 @@ namespace Recibos_Electronicos.Form
             }
         }
 
-        private void CargarGridAgregados(List<Bien>lstBien)
+        private void CargarGridAgregados(List<Bien> lstBien)
         {
 
             grvInventarioAgregado.DataSource = null;
@@ -258,13 +258,13 @@ namespace Recibos_Electronicos.Form
                 grvInventarioAgregado.DataSource = dt;
                 grvInventarioAgregado.DataSource = lstBien;
                 grvInventarioAgregado.DataBind();
-                double Total=0;
+                double Total = 0;
 
                 if (grvInventarioAgregado.Rows.Count > 0)
                 {
                     if (DDLTipoVenta.SelectedValue == "ACT" /*|| DDLTipoVenta.SelectedValue == "LBT"*/)
                     {
-                        int[] Celdas1 = { 5,6,7,10,11,12,13,14 };
+                        int[] Celdas1 = { 5, 6, 7, 10, 11, 12, 13, 14 };
                         for (int i = 0; i < Celdas1.Length; i++)
                         {
                             grvInventarioAgregado.HeaderRow.Cells[Convert.ToInt32(Celdas1.GetValue(i))].Visible = false;
@@ -293,36 +293,36 @@ namespace Recibos_Electronicos.Form
                                 row.Cells[Convert.ToInt32(Celdas2.GetValue(i))].Visible = false;
                             }
                         }
-                        
+
 
                         foreach (GridViewRow row in grvInventarioAgregado.Rows)
                         {
                             //row.Cells[Convert.ToInt32(Celdas2.GetValue(i))].Visible = false;
                             DropDownList ddl = row.FindControl("DDLUnidadMedida") as DropDownList;
-                                ddl.SelectedValue = row.Cells[11].Text;
-                                if (ddl.SelectedValue == "0")
-                                    ddl.SelectedValue = "4";
+                            ddl.SelectedValue = row.Cells[11].Text;
+                            if (ddl.SelectedValue == "0")
+                                ddl.SelectedValue = "4";
 
-                                TextBox txt = row.FindControl("txtCantidad") as TextBox;
-                                txt.Text = row.Cells[12].Text;
-                                if (txt.Text == "0")
-                                    txt.Text = "1";
+                            TextBox txt = row.FindControl("txtCantidad") as TextBox;
+                            txt.Text = row.Cells[12].Text;
+                            if (txt.Text == "0")
+                                txt.Text = "1";
 
-                                if (txt.Text==string.Empty)                                
-                                    txt.Text = "1";
+                            if (txt.Text == string.Empty)
+                                txt.Text = "1";
 
-                                Label lbl = row.FindControl("lblTotU") as Label;
-                                if (row.Cells[4].Text != "0")
-                                    if (row.Cells[4].Text != string.Empty)
-                                        if (row.Cells[4].Text != "")
-                                        {
-                                            lbl.Text = Convert.ToString(Convert.ToInt32(row.Cells[4].Text) * Convert.ToInt32(txt.Text));
-                                            GranTotal = GranTotal + Convert.ToDouble(Convert.ToInt32(row.Cells[4].Text) * Convert.ToInt32(txt.Text));
+                            Label lbl = row.FindControl("lblTotU") as Label;
+                            if (row.Cells[4].Text != "0")
+                                if (row.Cells[4].Text != string.Empty)
+                                    if (row.Cells[4].Text != "")
+                                    {
+                                        lbl.Text = Convert.ToString(Convert.ToInt32(row.Cells[4].Text) * Convert.ToInt32(txt.Text));
+                                        GranTotal = GranTotal + Convert.ToDouble(Convert.ToInt32(row.Cells[4].Text) * Convert.ToInt32(txt.Text));
 
-                                        }
+                                    }
 
-                            }
-                        
+                        }
+
 
                         Total = GranTotal; //lstBien.Sum(x => Convert.ToDecimal(x.Total));
 
@@ -332,7 +332,7 @@ namespace Recibos_Electronicos.Form
 
                     else
                     {
-                        int[] Celdas2 = { 0, 1, 3, 10, 11,12,13,14 };
+                        int[] Celdas2 = { 0, 1, 3, 10, 11, 12, 13, 14 };
                         for (int i = 0; i < Celdas2.Length; i++)
                         {
                             grvInventarioAgregado.HeaderRow.Cells[Convert.ToInt32(Celdas2.GetValue(i))].Visible = false;
@@ -359,7 +359,7 @@ namespace Recibos_Electronicos.Form
 
                     }
 
-                    
+
                     Label lblTot = (Label)grvInventarioAgregado.FooterRow.FindControl("lblTotal");
                     lblTot.Text = Convert.ToString(Total.ToString("C"));
                     hddnTotal.Value = Convert.ToString(Total);
@@ -387,8 +387,8 @@ namespace Recibos_Electronicos.Form
                 Bien Parametros = new Bien();
                 if (DDLTipoVenta.SelectedValue == "ACT")
                 {
-                    if(lstCtasMayor.Count == 0) //if (lstCtasMayor[DDLCtaMayor.SelectedIndex].Etiqueta == null)
-                            Parametros.Cta_Mayor = "0";
+                    if (lstCtasMayor.Count == 0) //if (lstCtasMayor[DDLCtaMayor.SelectedIndex].Etiqueta == null)
+                        Parametros.Cta_Mayor = "0";
                     else
                         Parametros.Cta_Mayor = lstCtasMayor[DDLCtaMayor.SelectedIndex].Etiqueta;
                 }
@@ -397,7 +397,7 @@ namespace Recibos_Electronicos.Form
 
                 Parametros.Dependencia = DDLDependencia.SelectedValue;
                 Parametros.Estatus = "A";
-                if(Filtro=="S")
+                if (Filtro == "S")
                     CNBien.ConsultarGrid(DDLTipoVenta.SelectedValue, Parametros, txtBusqueda.Text.ToUpper(), ViewState["Filter"].ToString(), ref List);
                 else
                     CNBien.ConsultarGrid(DDLTipoVenta.SelectedValue, Parametros, txtBusqueda.Text.ToUpper(), "T", ref List);
@@ -412,7 +412,7 @@ namespace Recibos_Electronicos.Form
         private List<Bien> GetListDetalle()
         {
             try
-            {                
+            {
                 List<Bien> List = new List<Bien>();
                 Bien objBien = new Bien();
                 objBien.Id_Ficha_Bancaria = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[10].Text);
@@ -433,7 +433,7 @@ namespace Recibos_Electronicos.Form
                 //Factura objFactura = new Factura();
                 //objFactura.FACT_DEPENDENCIA = DDLDependencia.SelectedValue;
                 //objFactura.FACT_STATUS = DDLStatus.SelectedValue;                    
-                CNFactura.FacturaProductosConsultaGrid(DDLDependencia.SelectedValue, DDLPagado.SelectedValue, txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtBuscaRef.Text, SesionUsu.Usu_TipoUsu, SesionUsu.Usu_Nombre, ref List);                
+                CNFactura.FacturaProductosConsultaGrid(DDLDependencia.SelectedValue, DDLPagado.SelectedValue, txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtBuscaRef.Text, SesionUsu.Usu_TipoUsu, SesionUsu.Usu_Nombre, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -491,13 +491,13 @@ namespace Recibos_Electronicos.Form
                 ObjFichaReferenciada = new FichaReferenciada();
                 CNBien.GenerarID(ref ObjFichaReferenciada);
                 ID = ObjFichaReferenciada.IdFichaBancaria;
-                if (Tipo=="FichaRef")
+                if (Tipo == "FichaRef")
                     hddnIdFichaRef.Value = Convert.ToString(ObjFichaReferenciada.IdFichaBancaria);
 
             }
             catch (Exception ex)
             {
-                string MsjError= ex.Message;
+                string MsjError = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref MsjError);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true); //lblMsj.Text = ex.Message;
             }
@@ -526,8 +526,8 @@ namespace Recibos_Electronicos.Form
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopoverPDF();", true);
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "PopExcel", "openPopoverEXCEL();", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopoverPDF();", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "PopExcel", "openPopoverEXCEL();", true);
 
             if (!IsPostBack)
             {
@@ -558,7 +558,7 @@ namespace Recibos_Electronicos.Form
             lblError.Text = string.Empty;
             if (DDLTipoVenta.SelectedValue != "0")
             {
-            
+
                 Bien objBien = new Bien();
                 List<Bien> lstBien = new List<Bien>();
                 objBien.Tipo = DDLTipoVenta.SelectedValue; // lstBienGrupo[DDLTipoVenta.SelectedIndex].Clasificacion;// DDLTipoVenta.DataGroupField; //DDLTipoVenta.SelectedValue;
@@ -569,8 +569,8 @@ namespace Recibos_Electronicos.Form
                 objBien.Clave = grvInventario.SelectedRow.Cells[1].Text.Replace("&#209;", "NI");
                 objBien.Clave = objBien.Clave.Replace("&nbsp;", " ");
                 objBien.Descripcion = grvInventario.SelectedRow.Cells[7].Text;
-                objBien.Id_Concepto =Convert.ToInt32(grvInventario.SelectedRow.Cells[8].Text);
-                
+                objBien.Id_Concepto = Convert.ToInt32(grvInventario.SelectedRow.Cells[8].Text);
+
 
                 objBien.Poliza = grvInventario.SelectedRow.Cells[3].Text;
                 objBien.Costo = Convert.ToDouble(grvInventario.SelectedRow.Cells[4].Text);
@@ -627,11 +627,12 @@ namespace Recibos_Electronicos.Form
 
 
             //grvInventario_PageIndexChanging(null, null);
-            GridViewRow row = grvInventarioAgregado.Rows[e.RowIndex]; 
+            GridViewRow row = grvInventarioAgregado.Rows[e.RowIndex];
             double Costo = 0;
             if (((TextBox)(row.Cells[4].Controls[0])).Text == null || ((TextBox)(row.Cells[4].Controls[0])).Text == string.Empty)
                 lstBien[fila].Costo = 0;
-            else {
+            else
+            {
                 lstBien[fila].Costo = Convert.ToDouble(((TextBox)(row.Cells[4].Controls[0])).Text);
                 Costo = Convert.ToDouble(((TextBox)(row.Cells[4].Controls[0])).Text);
             }
@@ -639,8 +640,8 @@ namespace Recibos_Electronicos.Form
             DropDownList ddl = (DropDownList)(row.Cells[5].FindControl("DDLUnidadMedida"));
             TextBox txt = (TextBox)(row.Cells[6].FindControl("txtCantidad"));
             if (DDLTipoVenta.SelectedValue == "LBT" || DDLTipoVenta.SelectedValue == "CONSULTA" || DDLTipoVenta.SelectedValue == "SERVICIO")
-            {                
-                
+            {
+
                 double Cantidad = Convert.ToDouble(txt.Text);
                 double Tot = Costo * Cantidad;
                 if (ddl.SelectedValue != "0")
@@ -664,14 +665,14 @@ namespace Recibos_Electronicos.Form
                 else
                 {
                     lblError.Text = "Debe seleccionar una Unidad de Medida.";
-                    
+
                 }
 
             }
             else
             {
                 lstBien[fila].Unidad_Medida = ddl.SelectedValue;
-                lstBien[fila].Total = Convert.ToDouble(txt.Text)*Costo;
+                lstBien[fila].Total = Convert.ToDouble(txt.Text) * Costo;
                 lstBien[fila].Cantidad = Convert.ToDouble(txt.Text);
                 lstBien[fila].Costo = Costo;
                 grvInventarioAgregado.EditIndex = -1;
@@ -808,7 +809,7 @@ namespace Recibos_Electronicos.Form
             try
             {
                 if (hddnIdFichaRef.Value == "0")
-                { 
+                {
                     ObjFichaReferenciada.IdFichaBancaria = GetID("FichaRef");
                     ObjFichaReferenciada.NoControl = txtClaveSysweb.Text.ToUpper();
                     ObjFichaReferenciada.Nivel = "L";
@@ -831,7 +832,7 @@ namespace Recibos_Electronicos.Form
                     if (Verificador == "0")
                     {
                         List<Bien> ListPDet = new List<Bien>();
-                        lstBien = (List<Bien>)Session["Inventario"];                     
+                        lstBien = (List<Bien>)Session["Inventario"];
                         CNBien.InsertarDetalleConceptoPago(Convert.ToInt32(hddnIdFichaRef.Value), ref Verificador, ref lstBien);
                         if (Verificador == "0")
                         {
@@ -846,7 +847,14 @@ namespace Recibos_Electronicos.Form
                                 //grvInventario.Enabled = false;
                                 //grvInventarioAgregado.Enabled = false;
                                 lblRefGenerada.Text = hddnReferencia.Value;
-                                modalPagar.Show();
+                                txtBuscaRef.Text = hddnReferencia.Value;
+                                DDLTipoVenta.Enabled = true;
+                                CargarGridInicio();
+                                MultiView1.ActiveViewIndex = 1;
+
+
+
+                                //modalPagar.Show();
                             }
                             else
                             {
@@ -1121,10 +1129,10 @@ namespace Recibos_Electronicos.Form
             try
             {
                 //BuscaCveCliente();
-                    CNComun.LlenaLista("pkg_pagos_2016.Obt_Combo_Nivel_Alumno", ref ddlNivel, "p_matricula", "p_sistema", txtClaveSysweb.Text.ToUpper(), "SIST_ING", "INGRESOS");
-                    if (ddlNivel.Items.Count == 1)                    
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Dato no encontrado, si deseas registralo dar click por única vez.');", true); //lblMsj.Text = "Dato no encontrado, si deseas registralo dar click por única vez.";
-                    
+                CNComun.LlenaLista("pkg_pagos_2016.Obt_Combo_Nivel_Alumno", ref ddlNivel, "p_matricula", "p_sistema", txtClaveSysweb.Text.ToUpper(), "SIST_ING", "INGRESOS");
+                if (ddlNivel.Items.Count == 1)
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Dato no encontrado, si deseas registralo dar click por única vez.');", true); //lblMsj.Text = "Dato no encontrado, si deseas registralo dar click por única vez.";
+
 
             }
             catch (Exception ex)
@@ -1152,7 +1160,7 @@ namespace Recibos_Electronicos.Form
             //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
 
-            
+
             string ruta;
             if (SesionUsu.Editar == 1)
             {
@@ -1164,370 +1172,373 @@ namespace Recibos_Electronicos.Form
 
             }
             else
-                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP000-1&idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;            
-
-
-            string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-        }
-
-        protected void grdDatosFactura_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            grdDatosFactura.PageIndex = 0;
-            grdDatosFactura.PageIndex = e.NewPageIndex;
-            CargarGridInicio();
-        }
-
-        protected void grdDatosFactura_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        protected void btnVerFactRecibo_Click(object sender, EventArgs e)
-        {
-            MultiView1.ActiveViewIndex = 1;
-            CargarGrid("N");
-        }
-
-        protected void bttnGenerarRef_Click(object sender, EventArgs e)
-        {
-            DDLTipoVenta.Enabled = true;
-            imgBttnBuscar.Enabled = true;
-            imgBttnCatClientes.Enabled = true;
-            grvInventario.Enabled = true;
-            grvInventarioAgregado.Enabled = true;
-
-            if (SesionUsu.Usu_TipoUsu == 6)
             {
-                txtClaveSysweb.Text = SesionUsu.Usu_Nombre;
+                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP000-1&idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
+                //string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
+                string _open = "window.open('" + ruta + "', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                //string _open = "window.open('" + ruta + "', '_newtab');";                
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+            }
+        }
+            protected void grdDatosFactura_OnPageIndexChanging(object sender, GridViewPageEventArgs e)
+            {
+                grdDatosFactura.PageIndex = 0;
+                grdDatosFactura.PageIndex = e.NewPageIndex;
+                CargarGridInicio();
+            }
+
+            protected void grdDatosFactura_SelectedIndexChanged(object sender, EventArgs e)
+            {
+            }
+
+            protected void btnVerFactRecibo_Click(object sender, EventArgs e)
+            {
+                MultiView1.ActiveViewIndex = 1;
+                CargarGrid("N");
+            }
+
+            protected void bttnGenerarRef_Click(object sender, EventArgs e)
+            {
+                DDLTipoVenta.Enabled = true;
+                imgBttnBuscar.Enabled = true;
+                imgBttnCatClientes.Enabled = true;
+                grvInventario.Enabled = true;
+                grvInventarioAgregado.Enabled = true;
+
+                if (SesionUsu.Usu_TipoUsu == 6)
+                {
+                    txtClaveSysweb.Text = SesionUsu.Usu_Nombre;
+                    imgBttnBuscar_Click(null, null);
+                }
+                else
+                    txtClaveSysweb.Text = string.Empty;
+
+                Session["Inventario"] = null;
+                grvInventarioAgregado.DataSource = null;
+                grvInventarioAgregado.DataBind();
+
+                grvInventario.DataSource = null;
+                grvInventario.DataBind();
+
+                hddnIdFichaRef.Value = "0";
+                hddnReferencia.Value = "0";
+                hddnTotal.Value = "0";
+
+                /*Se limpian valores para multipagos*/
+                mp_account.Value = "0";
+                mp_product.Value = "0";
+                mp_order.Value = "0";
+                mp_reference.Value = "0";
+                mp_node.Value = "0";
+                mp_concept.Value = "0";
+                mp_amount.Value = "0";
+                mp_customername.Value = "0";
+                mp_currency.Value = "0";
+                mp_signature.Value = "0";
+                mp_urlsuccess.Value = "0";
+                mp_urlfailure.Value = "0";
+                /**/
+
+                SesionUsu.Editar = 1;
+                DDLTipoVenta.SelectedValue = "0";
+                ddlNivel.Items.Clear();
+                txtClaveSysweb.Text = string.Empty;
+                lblClienteNombre.Text = string.Empty;
+                lblRefGen.Text = string.Empty;
+                txtObservaciones.Text = string.Empty;
+                ddlNivel.Items.Clear();
+                //DDLConceptos.SelectedValue = "0";
+                Iniciar();
                 imgBttnBuscar_Click(null, null);
-            }
-            else
-                txtClaveSysweb.Text = string.Empty; 
-            
-            Session["Inventario"] = null;
-            grvInventarioAgregado.DataSource = null;
-            grvInventarioAgregado.DataBind();
 
-            grvInventario.DataSource = null;
-            grvInventario.DataBind();
-
-            hddnIdFichaRef.Value = "0";
-            hddnReferencia.Value = "0";
-            hddnTotal.Value = "0";
-
-            /*Se limpian valores para multipagos*/
-            mp_account.Value = "0";
-            mp_product.Value = "0";
-            mp_order.Value = "0";
-            mp_reference.Value = "0";
-            mp_node.Value = "0";
-            mp_concept.Value = "0";
-            mp_amount.Value = "0";
-            mp_customername.Value = "0";
-            mp_currency.Value = "0";
-            mp_signature.Value = "0";
-            mp_urlsuccess.Value = "0";
-            mp_urlfailure.Value = "0";
-            /**/
-
-            SesionUsu.Editar = 1;
-            DDLTipoVenta.SelectedValue = "0";
-            ddlNivel.Items.Clear();
-            txtClaveSysweb.Text = string.Empty;
-            lblClienteNombre.Text = string.Empty;
-            lblRefGen.Text = string.Empty;
-            txtObservaciones.Text = string.Empty;
-            ddlNivel.Items.Clear();
-            //DDLConceptos.SelectedValue = "0";
-            Iniciar();
-            imgBttnBuscar_Click(null, null);
-
-            MultiView1.ActiveViewIndex = 2;
-        }
-
-
-        protected void DDLUnidadMedida_SelectedIndexChanged(object sender, EventArgs e)
-        {
-           
-        }
-
-        protected void DDLDependencia_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            lblLeyDependencia.Text = DDLDependencia.SelectedItem.Text;
-            //CargarGridInicio();
-        }
-
-      
-
-        protected void bttnDetalle_Click(object sender, EventArgs e)
-        {
-            Button cbi = (Button)(sender);
-            GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            grdDatosFactura.SelectedIndex = row.RowIndex;
-            CargarGridDetalle();
-            modal.Show();
-        }
-
-        protected void btnCancelar_Detalle_Click(object sender, EventArgs e)
-        {
-            modal.Hide();
-        }
-
-        protected void bttnReimprimir_Click(object sender, EventArgs e)
-        {
-            SesionUsu.Editar = 0;
-            Button cbi = (Button)(sender);
-            GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            grdDatosFactura.SelectedIndex = row.RowIndex;
-
-
-            lblRefGenerada.Text = grdDatosFactura.SelectedRow.Cells[3].Text;
-            modalPagar.Show();
-            //Button cbi = (Button)(sender);
-            //GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            //grdDatosFactura.SelectedIndex = row.RowIndex;
-            //string Observaciones = "";
-            //string Conceptos = "L0606-RECUPERACION POR PRODUCCION 0AGRICOLAS Y GANADEROS";
-            //string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP000-1&idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
-            //string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-
-        }
-
-        protected void grvInventarioAgregado_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            try
-            {
-                int fila = e.RowIndex;
-                int pagina = grvInventario.PageSize * grvInventario.PageIndex;
-                fila = pagina + fila;
-                List<Bien> lstBien = new List<Bien>();
-                lstBien = (List<Bien>)Session["Inventario"];
-                lstBien.RemoveAt(fila);
-                Session["Inventario"] = lstBien;
-                CargarGridAgregados(lstBien);
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message.Substring(0, 30) + "');", true); //lblMsj.Text = ex.Message;
-                //lblMsj.Text = ex.Message;
-            }
-        }
-
-        protected void bttnVerRecibo_Click(object sender, EventArgs e)
-        {
-            Button cbi = (Button)(sender);
-            GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            grdDatosFactura.SelectedIndex = row.RowIndex;
-
-            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ObtenerQR(" + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text) + "," + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[12].Text) + ");", true);
-
-
-
-            //string ruta = "../Reportes/VisualizadorCrystal.aspx?idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
-            //string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-        }
-
-        protected void bttnBuscaRef_Click(object sender, ImageClickEventArgs e)
-        {
-            CargarGridInicio();
-        }
-
-        protected void btnPagar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        protected void imgBttnPagoTDC_Click(object sender, ImageClickEventArgs e)
-        {
-
-            //mp_account.Value = "952";
-            //mp_product.Value = "1";
-            //mp_order.Value = hddnIdFichaRef.Value;
-            //mp_reference.Value = hddnReferencia.Value;
-            //mp_node.Value = "0";
-            //mp_concept.Value = "99";
-            //mp_amount.Value = string.Format("{0:0.00}", hddnTotal.Value);
-            //mp_customername.Value = lblClienteNombre.Text;
-            //mp_currency.Value = "1";
-            //mp_signature.Value = CNComun.GetSHA256(Convert.ToString(mp_order.Value + mp_reference.Value + mp_amount.Value));
-            //mp_urlsuccess.Value = "https://sysweb.unach.mx/Ingresos/Form/frmRefVenta_Pat.aspx"; //"Registro_Participantes_P7.aspx";
-            //mp_urlfailure.Value = "https://sysweb.unach.mx/Ingresos/Form/frmRefVenta_Pat.aspx"; // "Registro_Participantes_P7.aspx";
-            //ClientScript.RegisterStartupScript(this.GetType(), "myScript", "PagBancomer();", true);
-            if (SesionUsu.Editar == 1)
-            {
-                string Total = string.Format("{0:0.00}", hddnTotal.Value);
-                string _open = "window.open('" + "https://sysweb.unach.mx/FichaReferenciada/Form/PagoenLinea.aspx?order_m=" + hddnIdFichaRef.Value + "&reference_m=" + hddnReferencia.Value + "&amount_m=" + Total + "&customername_m=" + lblClienteNombre.Text + "', '_newtab');";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-            }
-            else
-            {
-                int IdRef= Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
-                string Total = string.Format("{0:0.00}", grdDatosFactura.SelectedRow.Cells[5].Text);
-                string nombre = grdDatosFactura.SelectedRow.Cells[6].Text;
-                string _open = "window.open('" + "https://sysweb.unach.mx/FichaReferenciada/Form/PagoenLinea.aspx?order_m=" + grdDatosFactura.SelectedRow.Cells[0].Text + "&reference_m=" + grdDatosFactura.SelectedRow.Cells[3].Text + "&amount_m=" + Total + "&customername_m=" + grdDatosFactura.SelectedRow.Cells[6].Text + "', '_newtab');";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                MultiView1.ActiveViewIndex = 2;
             }
 
 
-        }
-
-        protected void bttnEliminar_Click(object sender, EventArgs e)
-        {
-            SesionUsu.Editar = 0;
-            Verificador = string.Empty;
-            Button cbi = (Button)(sender);
-            GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            grdDatosFactura.SelectedIndex = row.RowIndex;
-            int FichaBancaria = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
-            CNBien.EliminarDetallePago_Ventas(FichaBancaria, ref Verificador);
-            if (Verificador == "0")
+            protected void DDLUnidadMedida_SelectedIndexChanged(object sender, EventArgs e)
             {
-                CNBien.EliminarConceptoPago(FichaBancaria, ref Verificador);
-                if (Verificador == "0")
-                    CargarGridInicio();
-                else
+
+            }
+
+            protected void DDLDependencia_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                lblLeyDependencia.Text = DDLDependencia.SelectedItem.Text;
+                //CargarGridInicio();
+            }
+
+
+
+            protected void bttnDetalle_Click(object sender, EventArgs e)
+            {
+                Button cbi = (Button)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grdDatosFactura.SelectedIndex = row.RowIndex;
+                CargarGridDetalle();
+                modal.Show();
+            }
+
+            protected void btnCancelar_Detalle_Click(object sender, EventArgs e)
+            {
+                modal.Hide();
+            }
+
+            protected void bttnReimprimir_Click(object sender, EventArgs e)
+            {
+                SesionUsu.Editar = 0;
+                Button cbi = (Button)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grdDatosFactura.SelectedIndex = row.RowIndex;
+
+
+                lblRefGenerada.Text = grdDatosFactura.SelectedRow.Cells[3].Text;
+                modalPagar.Show();
+                //Button cbi = (Button)(sender);
+                //GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                //grdDatosFactura.SelectedIndex = row.RowIndex;
+                //string Observaciones = "";
+                //string Conceptos = "L0606-RECUPERACION POR PRODUCCION 0AGRICOLAS Y GANADEROS";
+                //string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP000-1&idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
+                //string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+            }
+
+            protected void grvInventarioAgregado_RowDeleting(object sender, GridViewDeleteEventArgs e)
+            {
+                try
                 {
-                    CNComun.VerificaTextoMensajeError(ref Verificador);
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
+                    int fila = e.RowIndex;
+                    int pagina = grvInventario.PageSize * grvInventario.PageIndex;
+                    fila = pagina + fila;
+                    List<Bien> lstBien = new List<Bien>();
+                    lstBien = (List<Bien>)Session["Inventario"];
+                    lstBien.RemoveAt(fila);
+                    Session["Inventario"] = lstBien;
+                    CargarGridAgregados(lstBien);
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message.Substring(0, 30) + "');", true); //lblMsj.Text = ex.Message;
+                                                                                                                                                               //lblMsj.Text = ex.Message;
                 }
             }
-            
-        }
 
-        protected void btnCancelar_CatClientes_Click(object sender, EventArgs e)
-        {
-            modalClientes.Hide();
-        }
-
-        protected void imgBttnCatClientes_Click(object sender, ImageClickEventArgs e)
-        {
-            modalClientes.Show();
-            CargarGridClientes();
-        }
-
-        protected void imgBttnBuscarCatCliente_Click(object sender, ImageClickEventArgs e)
-        {
-            modalClientes.Show();
-            CargarGridClientes();
-        }
-
-        protected void grvClientes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //modalClientes.Show();
-            txtClaveSysweb.Text = grvClientes.SelectedRow.Cells[0].Text;
-            imgBttnBuscarCliente_Click(null, null);
-            modalClientes.Hide();
-
-        }
-
-        protected void grvClientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            modalClientes.Show();
-            grvClientes.PageIndex = 0;
-            grvClientes.PageIndex = e.NewPageIndex;
-            CargarGridClientes();
-        }
-
-        protected void btnAgregar_Cliente_Click(object sender, EventArgs e)
-        {
-            txtClaveSysweb.Text = grvClientes.SelectedRow.Cells[0].Text;
-            imgBttnBuscarCliente_Click(null, null);
-            modalClientes.Hide();
-        }
-
-        protected void btnSi_Click(object sender, EventArgs e)
-        {
-            Session["Inventario"] = null;
-            grvInventario.DataSource = null;
-            grvInventario.DataBind();
-            grvInventarioAgregado.DataSource = null;
-            grvInventarioAgregado.DataBind();
-            CargarGrid("N");
-        }
-
-        protected void CancelAlert_Click(object sender, EventArgs e)
-        {
-            DDLTipoVenta.SelectedValue = "0";
-            modalTipo.Hide();
-        }
-
-        protected void ddlGrupo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList DDLGrupo = (DropDownList)sender;
-            string Tipo = DDLGrupo.SelectedValue;
-            ViewState["Filter"] = DDLGrupo.SelectedValue;
-            CargarGrid("S");
-
-        }
-
-        protected void btnCancelar_Click(object sender, EventArgs e)
-        {
-            DDLTipoVenta.Enabled = true;
-            CargarGridInicio();
-            MultiView1.ActiveViewIndex = 1;
-        }
-
-        protected void imgBttnExportar_Click(object sender, ImageClickEventArgs e)
-        {
-
-
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP060&dependencia=" + DDLDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&enExcel=S";
-            string _open = "window.open('" + ruta + "', '_newtab');";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-
-
-        }
-
-        protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
-        {
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP060&dependencia=" + DDLDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&enExcel=N";
-            string _open = "window.open('" + ruta + "', '_newtab');";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-
-        }
-
-        protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CN_Alumno CNAlumno = new CN_Alumno();
-            try
+            protected void bttnVerRecibo_Click(object sender, EventArgs e)
             {
-                ObjMatricula.Matricula = txtClaveSysweb.Text.ToUpper();
-                ObjMatricula.Evento = "ALUMNO";
-                ObjMatricula.TipoPersona = 1;
-                ObjMatricula.Nivel = ddlNivel.SelectedValue;
-                CNAlumno.ConsultarAlumno(ref ObjMatricula, ref Verificador);
-                if (Verificador == "0")
-                {
-                    //ddlDependencia_D.SelectedValue = ObjMatricula.Dependencia;
-                    //ddlDependencia_D_SelectedIndexChanged(null, null);
-                    //try
-                    //{
-                    //    ddlCarrera.SelectedValue = ObjMatricula.Carrera;
-                    //}
-                    //catch (Exception)
-                    //{
-                    //    ddlCarrera.SelectedValue = "000000";
-                    //}
-                    //ddlCarrera_SelectedIndexChanged(null, null);
-                    //txtCarrera.Text = ObjMatricula.DescCarrera;
-                    lblClienteNombre.Text = ObjMatricula.Nombre + ' ' + ObjMatricula.APaterno+' '+ ObjMatricula.AMaterno;
+                Button cbi = (Button)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grdDatosFactura.SelectedIndex = row.RowIndex;
 
-                    
+                ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ObtenerQR(" + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text) + "," + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[12].Text) + ");", true);
+
+
+
+                //string ruta = "../Reportes/VisualizadorCrystal.aspx?idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
+                //string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+            }
+
+            protected void bttnBuscaRef_Click(object sender, ImageClickEventArgs e)
+            {
+                CargarGridInicio();
+            }
+
+            protected void btnPagar_Click(object sender, EventArgs e)
+            {
+
+            }
+
+            protected void imgBttnPagoTDC_Click(object sender, ImageClickEventArgs e)
+            {
+
+                //mp_account.Value = "952";
+                //mp_product.Value = "1";
+                //mp_order.Value = hddnIdFichaRef.Value;
+                //mp_reference.Value = hddnReferencia.Value;
+                //mp_node.Value = "0";
+                //mp_concept.Value = "99";
+                //mp_amount.Value = string.Format("{0:0.00}", hddnTotal.Value);
+                //mp_customername.Value = lblClienteNombre.Text;
+                //mp_currency.Value = "1";
+                //mp_signature.Value = CNComun.GetSHA256(Convert.ToString(mp_order.Value + mp_reference.Value + mp_amount.Value));
+                //mp_urlsuccess.Value = "https://sysweb.unach.mx/Ingresos/Form/frmRefVenta_Pat.aspx"; //"Registro_Participantes_P7.aspx";
+                //mp_urlfailure.Value = "https://sysweb.unach.mx/Ingresos/Form/frmRefVenta_Pat.aspx"; // "Registro_Participantes_P7.aspx";
+                //ClientScript.RegisterStartupScript(this.GetType(), "myScript", "PagBancomer();", true);
+                if (SesionUsu.Editar == 1)
+                {
+                    string Total = string.Format("{0:0.00}", hddnTotal.Value);
+                    string _open = "window.open('" + "https://sysweb.unach.mx/FichaReferenciada/Form/PagoenLinea.aspx?order_m=" + hddnIdFichaRef.Value + "&reference_m=" + hddnReferencia.Value + "&amount_m=" + Total + "&customername_m=" + lblClienteNombre.Text + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
                 }
                 else
                 {
-                    string MsjError = "Verifique matrícula(" + txtClaveSysweb.Text + ") y/ó Nivel de Estudios(" + ddlNivel.SelectedItem.Text + ")";
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);  //lblMsjFam.Text = Verificador;
+                    int IdRef = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
+                    string Total = string.Format("{0:0.00}", grdDatosFactura.SelectedRow.Cells[5].Text);
+                    string nombre = grdDatosFactura.SelectedRow.Cells[6].Text;
+                    string _open = "window.open('" + "https://sysweb.unach.mx/FichaReferenciada/Form/PagoenLinea.aspx?order_m=" + grdDatosFactura.SelectedRow.Cells[0].Text + "&reference_m=" + grdDatosFactura.SelectedRow.Cells[3].Text + "&amount_m=" + Total + "&customername_m=" + grdDatosFactura.SelectedRow.Cells[6].Text + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
                 }
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + "La matrícula no corresponde a su Dependencia/Escuela/Facultad " + ex.Message + "');", true);  //lblMsjFam.Text = Verificador;
-                //lblMsj.Text = "La matrícula no corresponde a su Dependencia/Escuela/Facultad "+ex.Message;
+
+
             }
 
+            protected void bttnEliminar_Click(object sender, EventArgs e)
+            {
+                SesionUsu.Editar = 0;
+                Verificador = string.Empty;
+                Button cbi = (Button)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grdDatosFactura.SelectedIndex = row.RowIndex;
+                int FichaBancaria = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
+                CNBien.EliminarDetallePago_Ventas(FichaBancaria, ref Verificador);
+                if (Verificador == "0")
+                {
+                    CNBien.EliminarConceptoPago(FichaBancaria, ref Verificador);
+                    if (Verificador == "0")
+                        CargarGridInicio();
+                    else
+                    {
+                        CNComun.VerificaTextoMensajeError(ref Verificador);
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
+                    }
+                }
+
+            }
+
+            protected void btnCancelar_CatClientes_Click(object sender, EventArgs e)
+            {
+                modalClientes.Hide();
+            }
+
+            protected void imgBttnCatClientes_Click(object sender, ImageClickEventArgs e)
+            {
+                modalClientes.Show();
+                CargarGridClientes();
+            }
+
+            protected void imgBttnBuscarCatCliente_Click(object sender, ImageClickEventArgs e)
+            {
+                modalClientes.Show();
+                CargarGridClientes();
+            }
+
+            protected void grvClientes_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                //modalClientes.Show();
+                txtClaveSysweb.Text = grvClientes.SelectedRow.Cells[0].Text;
+                imgBttnBuscarCliente_Click(null, null);
+                modalClientes.Hide();
+
+            }
+
+            protected void grvClientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
+            {
+                modalClientes.Show();
+                grvClientes.PageIndex = 0;
+                grvClientes.PageIndex = e.NewPageIndex;
+                CargarGridClientes();
+            }
+
+            protected void btnAgregar_Cliente_Click(object sender, EventArgs e)
+            {
+                txtClaveSysweb.Text = grvClientes.SelectedRow.Cells[0].Text;
+                imgBttnBuscarCliente_Click(null, null);
+                modalClientes.Hide();
+            }
+
+            protected void btnSi_Click(object sender, EventArgs e)
+            {
+                Session["Inventario"] = null;
+                grvInventario.DataSource = null;
+                grvInventario.DataBind();
+                grvInventarioAgregado.DataSource = null;
+                grvInventarioAgregado.DataBind();
+                CargarGrid("N");
+            }
+
+            protected void CancelAlert_Click(object sender, EventArgs e)
+            {
+                DDLTipoVenta.SelectedValue = "0";
+                modalTipo.Hide();
+            }
+
+            protected void ddlGrupo_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                DropDownList DDLGrupo = (DropDownList)sender;
+                string Tipo = DDLGrupo.SelectedValue;
+                ViewState["Filter"] = DDLGrupo.SelectedValue;
+                CargarGrid("S");
+
+            }
+
+            protected void btnCancelar_Click(object sender, EventArgs e)
+            {
+                DDLTipoVenta.Enabled = true;
+                CargarGridInicio();
+                MultiView1.ActiveViewIndex = 1;
+            }
+
+            protected void imgBttnExportar_Click(object sender, ImageClickEventArgs e)
+            {
+
+
+                string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP060&dependencia=" + DDLDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&enExcel=S";
+                string _open = "window.open('" + ruta + "', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+
+            }
+
+            protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
+            {
+                string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP060&dependencia=" + DDLDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&enExcel=N";
+                string _open = "window.open('" + ruta + "', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+            }
+
+            protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)
+            {
+                CN_Alumno CNAlumno = new CN_Alumno();
+                try
+                {
+                    ObjMatricula.Matricula = txtClaveSysweb.Text.ToUpper();
+                    ObjMatricula.Evento = "ALUMNO";
+                    ObjMatricula.TipoPersona = 1;
+                    ObjMatricula.Nivel = ddlNivel.SelectedValue;
+                    CNAlumno.ConsultarAlumno(ref ObjMatricula, ref Verificador);
+                    if (Verificador == "0")
+                    {
+                        //ddlDependencia_D.SelectedValue = ObjMatricula.Dependencia;
+                        //ddlDependencia_D_SelectedIndexChanged(null, null);
+                        //try
+                        //{
+                        //    ddlCarrera.SelectedValue = ObjMatricula.Carrera;
+                        //}
+                        //catch (Exception)
+                        //{
+                        //    ddlCarrera.SelectedValue = "000000";
+                        //}
+                        //ddlCarrera_SelectedIndexChanged(null, null);
+                        //txtCarrera.Text = ObjMatricula.DescCarrera;
+                        lblClienteNombre.Text = ObjMatricula.Nombre + ' ' + ObjMatricula.APaterno + ' ' + ObjMatricula.AMaterno;
+
+
+                    }
+                    else
+                    {
+                        string MsjError = "Verifique matrícula(" + txtClaveSysweb.Text + ") y/ó Nivel de Estudios(" + ddlNivel.SelectedItem.Text + ")";
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);  //lblMsjFam.Text = Verificador;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + "La matrícula no corresponde a su Dependencia/Escuela/Facultad " + ex.Message + "');", true);  //lblMsjFam.Text = Verificador;
+                                                                                                                                                                                                                   //lblMsj.Text = "La matrícula no corresponde a su Dependencia/Escuela/Facultad "+ex.Message;
+                }
+
+            }
         }
     }
-}

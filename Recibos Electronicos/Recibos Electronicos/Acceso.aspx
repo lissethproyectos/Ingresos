@@ -36,9 +36,10 @@
                 <div class="col-md-4">
                     <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 text-center text-white">
                     <%--                    <h1><small style="color: #FFFFFF">Recaudación de Pagos </small></h1>--%>
-                    <h1 class="logo text-center" style="color: #FFFFFF"><small>Recaudación de Pagos </small>Ingresos</h1>
+                    <h4>Recaudación de Pagos</h4>
+                    <h5>Ingresos</h5>
                 </div>
                 <div class="col-md-4">
                     <img src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
@@ -48,9 +49,9 @@
         <div class="bg-light">
             <article class="card-body mx-auto" style="max-width: 450px;">	
 	                <div class="card">
-                        <div class="card-header">
-				            <h3>Iniciar Sesión</h3>
+                        <div class="card-header">				            
 				                <div class="d-flex justify-content-end social_icon">
+                                    <%--<h5>Iniciar Sesión</h5>--%>
 					                <span>
                                         <button id="imgFacebook" type="button" class="btn btn-primary btn-lg">
                                             <i class="fab fa-facebook-square"></i> 
@@ -63,6 +64,7 @@
 				                </div>
 			                </div>
 			            <div class="card-body">
+                            <h5>Iniciar Sesión</h5>
                             <div class="form-group input-group">
                                 <div class="input-group-prepend">
 		                <span class="input-group-text"> <i class="fa fa-cog"></i> </span>
@@ -109,7 +111,7 @@
                                 <br />
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
-                                    <asp:Button ID="btnIngresar" runat="server" OnClick="btnIngresar_Click" Text="Iniciar Sesión" TabIndex="5" CssClass="btn btn-mdb-color" />                                                
+                                    <asp:Button ID="btnIngresar" runat="server" OnClick="btnIngresar_Click" Text="Iniciar Sesión" TabIndex="5" CssClass="btn"  style="background-color:#d2af47; color:#fff"/>                                                
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                             <asp:UpdateProgress ID="updPrMultiview" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
@@ -141,7 +143,7 @@
         <!-- card.// -->
 
         <div class="piePagina" style="width: 100%">
-            <footer class="page-footer font-small pt-4" style="background-color: #d2af47; color: #7b6420">
+            <footer class="page-footer font-small pt-4"  style="background-color: #585858; color: #fff">
                 <div class="container-fluid text-center text-md-left">
                     <div class="row">
                         <hr class="clearfix w-100 d-md-none pb-3">
@@ -187,6 +189,7 @@
                 </div>
             </div>
         </div>
+        moradonegro&lt;3	
     </form>
 </body>
 </html>

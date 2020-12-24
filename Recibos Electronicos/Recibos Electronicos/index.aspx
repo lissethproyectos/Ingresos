@@ -37,9 +37,6 @@
         .auto-style7 {
             width: 680px;
         }
-        .auto-style9 {
-            height: 120px;
-        }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -47,95 +44,8 @@
     <table class="tabla_contenido">
         <tr>
             <td align="center">
-                <asp:GridView ID="grdStatus_Carga" runat="server" AutoGenerateColumns="False"
-                    PageSize="3" CssClass="table table-striped table-bordered" Width="100%" ShowFooter="True">
-                    <Columns>
-                        <asp:BoundField DataField="Etiqueta" HeaderText="FICHAS PAGADAS DEL"
-                            DataFormatString="{0:d}" />
-                        <asp:BoundField DataField="EtiquetaTres" HeaderImageUrl="Imagenes/santander.png" HeaderText="SANTANDER" FooterText="SANTANDER">
-                            <FooterStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
-                            <HeaderStyle HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Center" Width="15%" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="EtiquetaSiete" HeaderImageUrl="Imagenes/HSBC.png" HeaderText="HSBC" FooterText="HSBC">
-                            <FooterStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Center" Width="15%" />
-
-                        </asp:BoundField>
-                        <asp:BoundField DataField="EtiquetaCinco" HeaderImageUrl="Imagenes/bancomer.png" HeaderText="BANCOMER" FooterText="BANCOMER">
-                            <FooterStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />                            
-                            <ItemStyle HorizontalAlign="Center" Width="15%" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="EtiquetaDos" HeaderImageUrl="Imagenes/banamex.png" HeaderText="BANAMEX" FooterText="BANAMEX">
-                            <FooterStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />  
-                            <ItemStyle HorizontalAlign="Center" Width="15%" />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="EtiquetaCuatro" HeaderImageUrl="Imagenes/banorte.png" HeaderText="BANORTE" FooterText="BANORTE">
-                            <FooterStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Center" Width="15%"  />
-                        </asp:BoundField>
-                        <asp:BoundField DataField="EtiquetaSeis" HeaderImageUrl="Imagenes/visa.png" HeaderText="VISA" FooterText="VISA/MASTERCARD">
-                            <FooterStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
-                            <ItemStyle HorizontalAlign="Center" Width="15%"  />
-                        </asp:BoundField>
-                    </Columns>
-                    <FooterStyle CssClass="enc" />
-                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                    <RowStyle Font-Size="14px" />
-                    <SelectedRowStyle CssClass="sel" />
-                    <HeaderStyle CssClass="enc" Font-Size="12px" />
-                    <AlternatingRowStyle CssClass="alt" />
-                </asp:GridView>
-            </td>
-        </tr>
-        <tr>
-            <td align="center">
-                <asp:UpdatePanel ID="UpdatePanelGridMonitor" runat="server">
-                    <ContentTemplate>
-                        <asp:GridView ID="grdMonitor" runat="server" AllowPaging="True"
-                            AutoGenerateColumns="False" OnPageIndexChanging="grdMonitor_PageIndexChanging"
-                            Width="100%" PageSize="20" CssClass="mGrid" OnRowDeleting="grdMonitor_RowDeleting" CellSpacing="1">
-                            <Columns>
-                                <asp:BoundField DataField="Descripcion" HeaderText="REVISAR">
-                                    <HeaderStyle Font-Bold="True" Font-Size="14px" />
-                                </asp:BoundField>
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Form/FrmExentos.aspx" Visible='<%# Bind("Habil") %>'>VER SOLICITUDES</asp:HyperLink>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField DataField="EtiquetaDos" />
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-                                        <asp:LinkButton ID="linkbttnEliminar" runat="server" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar el registro?');"   Visible='<%# Bind("Inhabil") %>'>ELIMINAR</asp:LinkButton>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField DataField="EtiquetaTres" />
-                                <asp:ImageField>
-                                </asp:ImageField>
-                            </Columns>
-                            <FooterStyle CssClass="enc" />
-                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                            <RowStyle Font-Bold="False" />
-                            <SelectedRowStyle CssClass="sel" />
-                            <HeaderStyle CssClass="enc" />
-                            <AlternatingRowStyle CssClass="alt" />
-                        </asp:GridView>
-                        <asp:HiddenField ID="hddnBancos" runat="server" />
-                        <ajaxToolkit:ModalPopupExtender ID="modalBancos" runat="server" PopupControlID="pnlBancos" TargetControlID="hddnBancos" BackgroundCssClass="modalBackground_Proy" OkControlID="btnSalir">
-                        </ajaxToolkit:ModalPopupExtender>
-                        <br />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-                <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="UpdatePanelGridMonitor">
-                    <ProgressTemplate>
-                        <asp:Image ID="Image4" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                            ToolTip="Espere un momento, por favor.." />
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-                <br />
-            </td>
-        </tr>
+                &nbsp;</td>
+        </tr>       
         <tr>
             <td align="left">
                 <table style="width: 100%; height: auto;" __designer:mapid="23">
@@ -514,7 +424,7 @@
                 </asp:UpdateProgress>
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
-                        <asp:Button ID="btnRegresar" runat="server" CssClass="btn3" OnClick="btnRegresar_Click"
+                        <asp:Button ID="btnRegresar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnRegresar_Click"
                             Text="REGRESAR" Visible="False" />
                     </ContentTemplate>
                 </asp:UpdatePanel>

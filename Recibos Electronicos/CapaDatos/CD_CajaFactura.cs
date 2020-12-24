@@ -337,6 +337,7 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_FECHA_FACTURA = Convert.ToString(dr.GetValue(2));
                     ObjCjaFactura.FACT_TOTAL = Convert.ToString(dr.GetValue(3));
                     ObjCjaFactura.FACT_NOMBRE = Convert.ToString(dr.GetValue(4));
+                    ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(4));
                     ObjCjaFactura.FACT_DEPENDENCIA = Convert.ToString(dr.GetValue(5));
                     ObjCjaFactura.Avance = Convert.ToInt32(dr.GetValue(7));
                     //ObjCjaFactura.IdCajaFact = Convert.ToInt32(dr.GetValue(9));                    
@@ -348,13 +349,7 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_FECHA_CAPTURA = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.FACT_DIAS_EMISION = Convert.ToInt32(dr.GetValue(16));
-                    //ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(16));
-                    //ObjCjaFactura.COLOR = "#ece260";
-                    //if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
-                    //    ObjCjaFactura.COLOR = "#f1bec2";
-                    //else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) == 0)
-                    //    ObjCjaFactura.VISIBLE3 = false;
-                    
+                    ObjCjaFactura.FACT_BANCO = Convert.ToString(dr.GetValue(6));
 
 
                     ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
@@ -414,6 +409,50 @@ namespace CapaDatos
             {
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
+        }
+
+        public void ObtenerDatosFiscales(ref CajaFactura ObjCjaFactura, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                string[] Parametros = { "P_RFC" };
+                object[] Valores = { ObjCjaFactura.FACT_RECEPTOR_RFC };
+                string[] ParametrosOut ={
+                                          "P_TIPO_PERSONA",
+                                          "P_RAZON_SOCIAL",
+                                          "P_CALLE",
+                                          "P_COLONIA",
+                                          "P_CP",
+                                          "P_TELEFONO",
+                                          "P_CORREO",
+                                          "P_BANDERA"
+                };
+                cmm = CDDatos.GenerarOracleCommand("OBT_DATOS_FISCALES", ref Verificador, Parametros, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    ObjCjaFactura.FACT_RECEPTOR_TIPO_PERS = (Convert.ToString(cmm.Parameters["P_TIPO_PERSONA"].Value) == "99999") ? "1" : "3";
+                    ObjCjaFactura.FACT_NOMBRE= Convert.ToString(cmm.Parameters["P_RAZON_SOCIAL"].Value);
+                    ObjCjaFactura.FACT_RECEPTOR_DOMICILIO = Convert.ToString(cmm.Parameters["P_CALLE"].Value);
+                    ObjCjaFactura.FACT_RECEPTOR_COLONIA = Convert.ToString(cmm.Parameters["P_COLONIA"].Value);
+                    ObjCjaFactura.FACT_RECEPTOR_CP = Convert.ToString(cmm.Parameters["P_CP"].Value);
+                    ObjCjaFactura.FACT_RECEPTOR_TELEFONO = Convert.ToString(cmm.Parameters["P_TELEFONO"].Value);
+                    ObjCjaFactura.FACT_RECEPTOR_CORREO = Convert.ToString(cmm.Parameters["P_CORREO"].Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+
+
         }
         public void FacturaCajaBorrar(Factura ObjFactura, ref string Verificador)
         {

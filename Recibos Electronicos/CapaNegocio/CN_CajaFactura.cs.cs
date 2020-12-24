@@ -23,6 +23,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ObtenerDatosFiscales(ref CajaFactura ObjCjaFactura, ref string Verificador)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.ObtenerDatosFiscales(ref ObjCjaFactura, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void FacturApiAgregar(string Referencia, int IdFactura, string IdFacturaApi, ref string Verificador)
         {
             try

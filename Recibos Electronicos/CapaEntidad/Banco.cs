@@ -32,7 +32,7 @@ namespace CapaEntidad
         private float pago_importe;
         private string pago_fecha;
         private string pago_hora;
-
+        private string pago_tipo="VENTANILLA";
         private string bnt_formato_fecha = "yyyyMMdd";
         private string bnt_formato_hora = "HHmmss";
         private string std_formato_fecha = "ddMMyyyy";
@@ -369,6 +369,7 @@ namespace CapaEntidad
                     pago_importe = float.Parse(dato.Substring(150, 19) + "." + dato.Substring(170, 2));
                     pago_fecha = dato.Substring(172, 10);
                     notas = dato.Substring(137, 16);
+                    pago_tipo = "TDC";
                     if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))
                         return 0;
 
@@ -392,7 +393,7 @@ namespace CapaEntidad
                     pago_importe = float.Parse(dato.Substring(151, 19) + "." + dato.Substring(171, 2));
                     pago_fecha = dato.Substring(173, 10);
                     notas = "";
-
+                    pago_tipo = "TDC";
                     //pago_fecha = dato.Substring(172, 10);
 
                     if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))

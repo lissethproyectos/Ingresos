@@ -7,11 +7,22 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Recibos_Electronicos.Form {
-    
-    
-    public partial class FrmVigencias {
-        
+namespace Recibos_Electronicos.Form
+{
+
+
+    public partial class FrmVigencias
+    {
+
+        /// <summary>
+        /// Control UpdateProgress4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress4;
+
         /// <summary>
         /// Control lblNivel.
         /// </summary>
@@ -20,7 +31,25 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNivel;
-        
+
+        /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
+        /// Control DDLTipo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DDLTipo;
+
         /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
@@ -29,16 +58,16 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
+
         /// <summary>
-        /// Control DDLNivel.
+        /// Control DDLSubtipo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLNivel;
-        
+        protected global::System.Web.UI.WebControls.DropDownList DDLSubtipo;
+
         /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
@@ -47,7 +76,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
+
         /// <summary>
         /// Control grdVigencias.
         /// </summary>

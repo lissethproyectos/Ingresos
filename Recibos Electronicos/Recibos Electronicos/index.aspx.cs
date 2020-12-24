@@ -213,12 +213,12 @@ namespace Recibos_Electronicos
         {
 
         }
-        protected void grdMonitor_PageIndexChanging(object sender, GridViewPageEventArgs e)
-        {
-            grdMonitor.PageIndex = 0;
-            grdMonitor.PageIndex = e.NewPageIndex;
-            CargarGridMonitor(ref grdMonitor);
-        }        
+        //protected void grdMonitor_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        //{
+        //    grdMonitor.PageIndex = 0;
+        //    grdMonitor.PageIndex = e.NewPageIndex;
+        //    CargarGridMonitor(ref grdMonitor);
+        //}        
         #endregion
         #region <Funciones>
         protected void inicializar()
@@ -239,7 +239,7 @@ namespace Recibos_Electronicos
                 if (Request.QueryString["reporte"] == null && Request.QueryString["modulo"] == null && Request.QueryString["Evento"] == null)
                     busca_informativa();
 
-                CargarGridMonitor(ref grdMonitor);
+                //CargarGridMonitor(ref grdMonitor);
             }
             else
             {
@@ -385,14 +385,14 @@ namespace Recibos_Electronicos
                             grdStatus_Carga_Bancos.DataSource = dt;
                             grdStatus_Carga_Bancos.DataSource = ListAlumno;
                             grdStatus_Carga_Bancos.DataBind();
-                            modalBancos.Show();
+                            //modalBancos.Show();
                         }
                     }
                     //else
                     //{
-                        grdStatus_Carga.DataSource = dt;
-                        grdStatus_Carga.DataSource = ListUsuario;
-                        grdStatus_Carga.DataBind();
+                        //grdStatus_Carga.DataSource = dt;
+                        //grdStatus_Carga.DataSource = ListUsuario;
+                        //grdStatus_Carga.DataBind();
                     //}
                 }
             }
@@ -551,7 +551,7 @@ namespace Recibos_Electronicos
             lblTipo.Visible = false;
             lblStatus0.Visible = false;
             rdoListStatus.Visible = false;
-            grdMonitor.Visible = false;
+            //grdMonitor.Visible = false;
             //lblAvisos.Visible = false;            
             imgBttnReporte.Visible = false;
             imgBttnExportar.Visible = false;
@@ -581,7 +581,7 @@ namespace Recibos_Electronicos
                 lblReferencia.Visible = true;
                 txtReferencia.Visible = true;
                 grdDatosFactura.Visible = true;
-                grdMonitor.Visible = true;
+                //grdMonitor.Visible = true;
                 //lblAvisos.Visible = true;
             }
             else if (SesionUsu.Reporte == "REP004")//Fichas de Aspirantes
@@ -1007,7 +1007,7 @@ namespace Recibos_Electronicos
 
         protected void btnSalir_Click(object sender, EventArgs e)
         {
-            modalBancos.Hide();
+            //modalBancos.Hide();
         }
 
         protected void imgBttnCorreo_Click(object sender, ImageClickEventArgs e)
@@ -1099,61 +1099,35 @@ namespace Recibos_Electronicos
             modalRepRetenciones.Hide();
         }
 
-        protected void imgStatus_Click(object sender, ImageClickEventArgs e)
-        {
-            ImageButton cbi = (ImageButton)(sender);
-            GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            try
-            {
-                grdMonitor.SelectedIndex = row.RowIndex;
-                string Observaciones = grdMonitor.SelectedRow.Cells[4].Text;
-                CNFactura.FacturaEditarEstatusRevisado(Observaciones, SesionUsu.Usu_Nombre, ref Verificador);
-                if (Verificador == "0")
-                    CargarGridMonitor(ref grdMonitor);
-                else
-                {
-                    string Msj = Verificador;
-                    CNComun.VerificaTextoMensajeError(ref Msj);
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
-                }
+        //protected void imgStatus_Click(object sender, ImageClickEventArgs e)
+        //{
+        //    ImageButton cbi = (ImageButton)(sender);
+        //    GridViewRow row = (GridViewRow)cbi.NamingContainer;
+        //    try
+        //    {
+        //        grdMonitor.SelectedIndex = row.RowIndex;
+        //        string Observaciones = grdMonitor.SelectedRow.Cells[4].Text;
+        //        CNFactura.FacturaEditarEstatusRevisado(Observaciones, SesionUsu.Usu_Nombre, ref Verificador);
+        //        if (Verificador == "0")
+        //            CargarGridMonitor(ref grdMonitor);
+        //        else
+        //        {
+        //            string Msj = Verificador;
+        //            CNComun.VerificaTextoMensajeError(ref Msj);
+        //            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                string Msj = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Msj);
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
-            }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string Msj = ex.Message;
+        //        CNComun.VerificaTextoMensajeError(ref Msj);
+        //        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
+        //    }
 
-        }
+        //}
 
        
 
-        protected void grdMonitor_RowDeleting(object sender, GridViewDeleteEventArgs e)
-        {
-            int fila = e.RowIndex;
-
-            try
-            {
-                string Observaciones = Convert.ToString(grdMonitor.Rows[fila].Cells[4].Text); //grdMonitor.SelectedRow.Cells[4].Text;
-                CNFactura.FacturaEditarEstatusRevisado(Observaciones, SesionUsu.Usu_Nombre, ref Verificador);
-                if (Verificador == "0")
-                    CargarGridMonitor(ref grdMonitor);
-                else
-                {
-                    string Msj = Verificador;
-                    CNComun.VerificaTextoMensajeError(ref Msj);
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                string Msj = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Msj);
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
-            }
-
-        }
     }
 }

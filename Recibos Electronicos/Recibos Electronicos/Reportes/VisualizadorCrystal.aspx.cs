@@ -24,10 +24,10 @@ namespace Recibos_Electronicos.Reportes
         private ReportDocument report = new ReportDocument();
         private System.Web.UI.Page p;
         private CN_Comun CNComun = new CN_Comun();
-
+        private string Reporte = string.Empty;
         protected void Page_Load(object sender, EventArgs e)
         {
-            String Reporte = "";
+            //string Reporte =string.Empty;
             //object[] Vhttp://localhost:5141/Reportes/VisualizadorCrystal.aspx.csalores={};
 
             int idFact = Convert.ToInt32(Request.QueryString["idFact"]);

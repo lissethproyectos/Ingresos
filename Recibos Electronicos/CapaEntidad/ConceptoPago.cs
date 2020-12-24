@@ -30,6 +30,22 @@ namespace CapaEntidad
             set { _IdFichaBancaria = value; }
         }
         
+        private string _Tipo;
+
+        public string Tipo
+        {
+            get { return _Tipo; }
+            set { _Tipo = value; }
+        }
+
+        private string _SubTipo;
+
+        public string SubTipo
+        {
+            get { return _SubTipo; }
+            set { _SubTipo = value; }
+        }
+
         private string _ClaveConcepto;
 
         public string ClaveConcepto
@@ -37,6 +53,7 @@ namespace CapaEntidad
             get { return _ClaveConcepto; }
             set { _ClaveConcepto = value; }
         }
+
         private string _DescripcionConcepto;
 
         public string Descripcion
@@ -211,7 +228,7 @@ namespace CapaEntidad
             set { _CicloEscolar = value; }
         }
 
-        private string _Evento;
+        private string _Evento=string.Empty;
         public string Evento
         {
             get { return _Evento.Trim(); }

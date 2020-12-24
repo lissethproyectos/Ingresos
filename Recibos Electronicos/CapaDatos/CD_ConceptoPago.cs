@@ -474,26 +474,53 @@ namespace CapaDatos
 
                 OracleDataReader dr = null;
 
-                string[] ParametrosIn ={
-                                           "p_nivel"
-                                        };
+                string[] ParametrosIn ={ "P_NIVEL" };
                 Object[] Valores ={
                                     ObjVigencias.Nivel
 
                 };
-                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Vigencias", ref dr, ParametrosIn, Valores);
 
-                while (dr.Read())
+                if (ObjVigencias.Tipo == "SYSWEB")
                 {
-                    ObjVigencias = new ConceptoPago();
-                    ObjVigencias.Descripcion = Convert.ToString(dr[0]);
-                    ObjVigencias.FechaInicial = Convert.ToString(dr[1]);
-                    ObjVigencias.FechaFinal = Convert.ToString(dr[2]);
-                    ObjVigencias.Periodo = Convert.ToChar(dr[3]);
-                    ObjVigencias.Nivel = Convert.ToString(dr[4]);
-                    ObjVigencias.ClaveConcepto = Convert.ToString(dr[5]);
-                    List.Add(ObjVigencias);
+                    cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Vigencias_SYSWEB", ref dr);
+                    while (dr.Read())
+                    {
+                        ObjVigencias = new ConceptoPago();
+                        ObjVigencias.CicloEscolar = Convert.ToInt32(dr[0]);
+                        ObjVigencias.DiasVigencia = Convert.ToInt32(dr[1]);
+                        List.Add(ObjVigencias);
 
+                    }
+                }
+                else if (ObjVigencias.Tipo == "SIAE_ACT")
+                {
+                    cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Vigencias", ref dr, ParametrosIn, Valores);
+                    while (dr.Read())
+                    {
+                        ObjVigencias = new ConceptoPago();
+                        ObjVigencias.Descripcion = Convert.ToString(dr[0]);
+                        ObjVigencias.FechaInicial = Convert.ToString(dr[1]);
+                        ObjVigencias.FechaFinal = Convert.ToString(dr[2]);
+                        ObjVigencias.Periodo = Convert.ToChar(dr[3]);
+                        ObjVigencias.Nivel = Convert.ToString(dr[4]);
+                        ObjVigencias.ClaveConcepto = Convert.ToString(dr[5]);
+                        List.Add(ObjVigencias);
+                    }
+                }
+                else
+                {
+                    cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Vigencias_Ciclo", ref dr, ParametrosIn, Valores);
+                    while (dr.Read())
+                    {
+                        ObjVigencias = new ConceptoPago();
+                        ObjVigencias.Descripcion = Convert.ToString(dr[0]);
+                        ObjVigencias.FechaInicial = Convert.ToString(dr[1]);
+                        ObjVigencias.FechaFinal = Convert.ToString(dr[2]);
+                        ObjVigencias.Periodo = Convert.ToChar(dr[3]);
+                        ObjVigencias.Nivel = Convert.ToString(dr[4]);
+                        ObjVigencias.ClaveConcepto = Convert.ToString(dr[5]);
+                        List.Add(ObjVigencias);
+                    }
                 }
                 dr.Close();
             }
@@ -611,6 +638,66 @@ namespace CapaDatos
             }
 
         }
+        public void ActualizarVigenciasSYSWEB(ConceptoPago ObjVigencias, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand OracleCmd = null;
+            try
+            {
+
+
+                string[] Parametros = { "P_CICLO", "P_DIAS_VIGENCIA" };
+                string[] ParametrosOut = { "p_BANDERA" };
+
+                object[] Valores = { ObjVigencias.CicloEscolar, ObjVigencias.DiasVigencia };
+
+
+                OracleCmd = CDDatos.GenerarOracleCommand("UPD_VIGENCIAS_SYSWEB", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref OracleCmd);
+            }
+
+        }
+
+        public void ActualizarVigenciasSIAECiclo(ConceptoPago ObjVigencias, string TipoCarrera, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand OracleCmd = null;
+            try
+            {
+
+
+                string[] Parametros = { "P_TIPO", "P_CONCEPTO", "P_FECHA_INICIAL", "P_FECHA_FINAL", "P_EXTEMPORANEO", "P_TIPO_CARRERA" };
+                string[] ParametrosOut = { "p_BANDERA" };
+
+                object[] Valores = { ObjVigencias.Nivel, ObjVigencias.ClaveConcepto, ObjVigencias.FechaInicial, ObjVigencias.FechaFinal, ObjVigencias.Periodo, TipoCarrera };
+
+
+                OracleCmd = CDDatos.GenerarOracleCommand("UPD_SCE_VIGENCIAS_CICLO", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref OracleCmd);
+            }
+
+        }
+
         public void InsertarExcepcionesVigenciasSIAE(ConceptoPago ObjVigencias, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

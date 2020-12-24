@@ -63,6 +63,7 @@ namespace CapaEntidad
         private string _RUTA_ADJUNTO_OFICIO;
         private string _RUTA_ADJUNTO_CONVENIO;
         private string _OFICIO;
+        private string _FECHA_OFICIO;
         private string _FACT_TIPO;
         private string _FACT_NOTAS;
         private byte[] _ADJUNTO;
@@ -75,6 +76,7 @@ namespace CapaEntidad
         private string _FACT_TIPO_SERVICIO;
         private int _FACT_DIAS_SOLICITUD;
         private string _FACT_DESC_STATUS_SOLICITUD;
+        private string  _STATUS_REF_ANTICIPADA;
         //Metodos agregados por Lisseth
 
 
@@ -141,7 +143,7 @@ namespace CapaEntidad
             set { _VISIBLE2 = value; }
         }
 
-        private bool _VISIBLE3=false;
+        private bool _VISIBLE3 = false;
         public bool VISIBLE3
         {
             get { return _VISIBLE3; }
@@ -197,6 +199,18 @@ namespace CapaEntidad
         {
             get { return _OFICIO; }
             set { _OFICIO = value; }
+        }
+
+             public string FECHA_OFICIO
+        {
+            get { return _FECHA_OFICIO; }
+            set { _FECHA_OFICIO = value; }
+        }
+
+        public string STATUS_REF_ANTICIPADA
+        {
+            get { return _STATUS_REF_ANTICIPADA; }
+            set { _STATUS_REF_ANTICIPADA = value; }
         }
         public string EXTENSION_ADJUNTO
         {
@@ -286,7 +300,7 @@ namespace CapaEntidad
         public int FACT_DIAS_EMISION
         {
             get { return _FACT_DIAS_EMISION; }
-            set { _FACT_DIAS_EMISION = value;  }
+            set { _FACT_DIAS_EMISION = value; }
         }
         public string FACT_TOTAL
         {
@@ -476,7 +490,7 @@ namespace CapaEntidad
             set { _ID_CODIGO_QR = value; }
         }
 
-        
+
 
         /*CAMPOS MULTIPAGOS*/
         private MultiPago _multipago = new MultiPago();

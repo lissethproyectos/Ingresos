@@ -72,7 +72,7 @@ namespace Recibos_Electronicos
                     switch (NombreMenu)
                     {
                         case "INGRESOS":
-                            item.Text= "<i class='fa fa-home'></i> " + item.Text.ToUpper();
+                            item.Text= "<i class='fa fa-file'></i> " + item.Text.ToUpper();
                             //MenuTop.Items.[0].Text = "<span class='nav-link fa fa-home'> " + item.Text.ToUpper() + "</span>";
                             break;
                         case "CATÁLOGOS":
@@ -88,7 +88,7 @@ namespace Recibos_Electronicos
                             item.Text = "<i class='fa fa-file-image-o'></i> " + item.Text.ToUpper();
                             break;
                         case "FACTURAS":
-                            item.Text = "<i class='fa fa-file'></i> " + item.Text.ToUpper();
+                            item.Text = "<i class='fa fa-file-code-o'></i> " + item.Text.ToUpper();
                             break;
                         case "AYUDA":
                             item.Text = "<i class='fa fa-users'></i> " + item.Text.ToUpper();
@@ -139,6 +139,14 @@ namespace Recibos_Electronicos
         {
             Session.Abandon();
             Response.Redirect("~/Acceso.aspx", false);
+        }
+
+        protected void linkBttnInicio_Click(object sender, EventArgs e)
+        {
+            if(SesionUsu.Usu_TipoUsu==3)
+                Response.Redirect("~/frmInicio.aspx");
+            else
+                Response.Redirect("~/Inicio.aspx");
         }
     }
 
