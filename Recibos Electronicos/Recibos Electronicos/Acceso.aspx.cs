@@ -251,14 +251,19 @@ namespace Recibos_Electronicos
                 Session.Timeout = 120;
 
                 //Verifica que el usuario tenga correo unach
-                if (Sesion.Usu_TipoUsu == 3)                
-                    Response.Redirect("Inicio.aspx", false);                
-                else if (Sesion.Usu_TipoUsu == 6)                
-                    Response.Redirect("Form/frmRefVenta_Pat.aspx", false);                
+                if (Sesion.Usu_TipoUsu == 3)
+                {   
+                    if(Sesion.Usu_Central=="S")
+                        Response.Redirect("frmInicio.aspx", false);
+                    else
+                        Response.Redirect("Inicio.aspx", false);
+                }
+                else if (Sesion.Usu_TipoUsu == 6)
+                    Response.Redirect("Form/frmRefVenta_Pat.aspx", false);
                 else
                 {
-                    Sesion.Correo_UNACH=txtCve.Text.ToUpper();
-                    Sesion.Nombre_Completo= txtCve.Text.ToUpper();
+                    Sesion.Correo_UNACH = txtCve.Text.ToUpper();
+                    Sesion.Nombre_Completo = txtCve.Text.ToUpper();
                     Sesion.Usuario = "ALUMNO";
                     Response.Redirect("Inicio.aspx", false);
                 }

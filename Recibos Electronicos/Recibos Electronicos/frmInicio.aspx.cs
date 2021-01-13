@@ -33,8 +33,35 @@ namespace Recibos_Electronicos
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
-            //if (!IsPostBack)
-            //    inicializar();
+            if (!IsPostBack)
+                busca_informativa();
+        }
+
+        private void busca_informativa()
+        {
+            //lblMensaje.Text = string.Empty;
+
+            try
+            {
+                string Observaciones = string.Empty;
+                CNComun.Consultar_Observaciones(SesionUsu.Usu_Nombre, 14, Convert.ToString(SesionUsu.Usu_TipoUsu), ref Observaciones, SesionUsu.Usu_Central, ref Verificador);
+                if (Verificador == "0")
+                {
+                    if (Observaciones.Length > 1)
+                    {
+                        lblMsg_Observaciones.Text = Observaciones;
+                        //ModalPopupExtender.Show();
+                    }
+                }
+                else
+                {
+                    lblMsg_Observaciones.Text = Verificador;
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMsg_Observaciones.Text = ex.Message;
+            }
         }
     }
 }

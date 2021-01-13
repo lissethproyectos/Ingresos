@@ -13,7 +13,7 @@ namespace Recibos_Electronicos.Form
     public partial class FrmVigencias : System.Web.UI.Page
     {
         #region <Variables>
-        Int32[] Celdas = { 4, 5, 6, 7, 8 };
+        Int32[] Celdas = { 4, 5, 6, 7 };
         Sesion SesionUsu = new Sesion();
         ConceptoPago ObjVigencias = new ConceptoPago();
         CN_ConceptoPago CNConcepto = new CN_ConceptoPago();

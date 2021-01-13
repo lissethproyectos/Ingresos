@@ -105,6 +105,15 @@ namespace CapaEntidad
             get { return _Correo.Trim(); }
             set { _Correo = value.Trim(); }
         }
+
+        private string _Correo_Instituicional;
+
+        public string Correo_Instituicional
+        {
+            get { return _Correo_Instituicional.Trim(); }
+            set { _Correo_Instituicional = value.Trim(); }
+        }
+
         private string _NoControl;
 
         public string NoControl

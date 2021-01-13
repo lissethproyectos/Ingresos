@@ -28,7 +28,7 @@ namespace CapaEntidad
         private string _PAGADO;
         private string _FACT_RECEPTOR_FORMA_PAGO;
         private int _ID_CODIGO_QR;
-
+        private string _FACT_NIVEL;
         //Variable agregados por Lisseth
         private string _FACT_RECEPTOR_TIPO_PERS;
         private string _FACT_RECEPTOR_RFC;
@@ -79,7 +79,11 @@ namespace CapaEntidad
         private string  _STATUS_REF_ANTICIPADA;
         //Metodos agregados por Lisseth
 
-
+        public string FACT_NIVEL
+        {
+            get { return _FACT_NIVEL; }
+            set { _FACT_NIVEL = value; }
+        }
         public string FACT_DESC_STATUS_SOLICITUD
         {
             get { return _FACT_DESC_STATUS_SOLICITUD; }

@@ -57,8 +57,8 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
 
-                String[] Parametros = { "P_Ciclo_Escolar", "p_referencia" };
-                String[] Valores = { ObjFactura.CICLO_ESCOLAR.ToString(), ObjFactura.FACT_REFERENCIA };
+                String[] Parametros = { "P_Nivel", "P_Ciclo_Escolar", "p_referencia" };
+                String[] Valores = { ObjFactura.FACT_NIVEL, ObjFactura.CICLO_ESCOLAR.ToString(), ObjFactura.FACT_REFERENCIA };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Ref_SIAE", ref dr, Parametros, Valores);
                 while (dr.Read())
@@ -141,8 +141,8 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_ID", "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA_GEN", "P_REFERENCIA_PAGADA", "P_PAGO_CONFIRMADO", "P_USUARIO" };
-                object[] Valores = { ObjFactura.ID_FACT, ObjFactura.FACT_FOLIOBANCARIO, ObjFactura.FACT_FECHA_FACTURA, ObjFactura.FACT_BANCO, ObjFactura.FACT_REFERENCIA, ReferenciaPagada, ObjFactura.FACT_CONFIRMADO, Usuario };
+                String[] Parametros = { "P_ID", "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA_GEN", "P_REFERENCIA_PAGADA", "P_PAGO_CONFIRMADO", "P_CICLO", "P_USUARIO" };
+                object[] Valores = { ObjFactura.ID_FACT, ObjFactura.FACT_FOLIOBANCARIO, ObjFactura.FACT_FECHA_FACTURA, ObjFactura.FACT_BANCO, ObjFactura.FACT_REFERENCIA, ReferenciaPagada, ObjFactura.FACT_CONFIRMADO, ObjFactura.CICLO_ESCOLAR, Usuario };
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_DATOS_PAGO_SIAE", ref Verificador, Parametros, Valores, ParametrosOut);
             }
@@ -165,7 +165,7 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_ID" };
                 object[] Valores = { ObjFactura.ID_FACT };
-                String[] ParametrosOut = { "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA", "P_PAGO_CONFIRMADO", "P_BANDERA" };
+                String[] ParametrosOut = { "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA", "P_PAGO_CONFIRMADO", "P_CICLO", "P_BANDERA" };
                 Cmd = CDDatos.GenerarOracleCommand("OBT_DATOS_PAGO_SIAE", ref Verificador, Parametros, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
@@ -175,6 +175,7 @@ namespace CapaDatos
                     ObjFactura.FACT_BANCO = Convert.ToString(Cmd.Parameters["P_BANCO"].Value);
                     ObjFactura.FACT_REFERENCIA = Convert.ToString(Cmd.Parameters["P_REFERENCIA"].Value);
                     ObjFactura.FACT_CONFIRMADO = Convert.ToString(Cmd.Parameters["P_PAGO_CONFIRMADO"].Value);
+                    ObjFactura.CICLO_ESCOLAR = Convert.ToString(Cmd.Parameters["P_CICLO"].Value);
                 }
             }
             catch (Exception ex)

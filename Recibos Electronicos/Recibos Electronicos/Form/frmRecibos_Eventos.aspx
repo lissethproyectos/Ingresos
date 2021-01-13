@@ -2,38 +2,7 @@
 
 <%@ Register Src="../EnviarCorreo.ascx" TagName="uCCorreo" TagPrefix="usr" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style type="text/css">
-        .auto-style1 {
-            width: 111px;
-        }
-
-        .auto-style2 {
-            width: 149px;
-        }
-
-        .auto-style3 {
-            font-size: medium;
-        }
-
-        .auto-style6 {
-            width: 880px;
-        }
-
-        .auto-style8 {
-            text-align: left;
-            width: 133px;
-        }
-
-        .auto-style9 {
-            width: 86%;
-            text-align: right;
-        }
-
-        .auto-style10 {
-            width: 133px;
-        }
-    </style>
-</asp:Content>
+    </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="row">
@@ -189,6 +158,25 @@
                                 <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Dep." SortExpression="DEPENDENCIA"></asp:BoundField>
                                 <asp:TemplateField HeaderText="Enviar Recibo">
                                     <FooterTemplate>
+                                        
+                                    </FooterTemplate>
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="~/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />
+                                    </ItemTemplate>
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:CommandField SelectText="Ver" ShowSelectButton="True"
+                                    HeaderText="Ver Recibo" ButtonType="Image" SelectImageUrl="~/Imagenes/recibo2.png">
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:CommandField>
+                                <asp:BoundField DataField="FACT_MATRICULA" />
+                                <asp:TemplateField HeaderText="Correo">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FACT_RECEPTOR_CORREO") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <FooterTemplate>
                                         <table width="100%">
                                             <tr>
                                                 <td class="auto-style9">
@@ -207,18 +195,13 @@
                                             </tr>
                                         </table>
                                     </FooterTemplate>
+                                    <HeaderTemplate>
+                                        
+                                    </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="~/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />
+                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("FACT_RECEPTOR_CORREO") %>'></asp:Label>
                                     </ItemTemplate>
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:CommandField SelectText="Ver" ShowSelectButton="True"
-                                    HeaderText="Ver Recibo" ButtonType="Image" SelectImageUrl="~/Imagenes/recibo2.png">
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:CommandField>
-                                <asp:BoundField DataField="FACT_MATRICULA" />
                             </Columns>
                             <FooterStyle CssClass="enc" />
                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />

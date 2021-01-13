@@ -167,6 +167,7 @@
                                             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl='<%# Bind("LinkEsquema") %>' Text='<%# Bind("Esquema") %>' Target="_blank"></asp:HyperLink>
                                         </ItemTemplate>
                                     </asp:TemplateField>
+                                    <asp:BoundField DataField="Correo_Instituicional" HeaderText="Correo Instituicional" />
                                 </Columns>
                                 <FooterStyle CssClass="enc" />
                                 <PagerStyle CssClass="enc" HorizontalAlign="Center" />

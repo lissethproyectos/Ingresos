@@ -114,9 +114,9 @@ namespace Recibos_Electronicos
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
                 //if (hddnCveSysweb.Value == "0" )
                 //{
-                    ruta = "http://www.sysweb.unach.mx/Ingresos/Reportes/VisualizadorCrystal.aspx?idFact=" + hddnRecibo.Value;
+                    ruta = "https://www.sysweb.unach.mx/Ingresos/Reportes/VisualizadorCrystal.aspx?idFact=" + hddnRecibo.Value;
                     asunto = "Recibo UNACH-SYSWEB";
-                    contenido = "<img src='https://sysweb.unach.mx/resources/imagenes/logo_sysweb400px.png'><br /><div align=center><font size='4'><a href=\'" + ruta + "'>Recibo Oficial</a></font></div><br /><br />" + "<font size='2'>Para cualquier duda o aclaración te puedes comunicar a los siguientes telefonos:" + "<br /><br /><strong>DIRECCIÓN DE SISTEMAS DE INFORMACIÓN ADMINISTRATIVA</strong><br />Teléfono - (961) 617 80 00, Ext.: 5503, 5501, 5508 y 5509<br /><br />" +
+                    contenido = "<img src='https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png'><br /><div align=center><font size='4'><a href=\'" + ruta + "'>Recibo Oficial</a></font></div><br /><br />" + "<font size='2'>Para cualquier duda o aclaración te puedes comunicar a los siguientes telefonos:" + "<br /><br /><strong>DIRECCIÓN DE SISTEMAS DE INFORMACIÓN ADMINISTRATIVA</strong><br />Teléfono - (961) 617 80 00, Ext.: 5503, 5501, 5508 y 5509<br /><br />" +
                     "<strong>DEPARTAMENTO DE FINANZAS</strong><br />Teléfono - (961) 617 80 00, Ext.: 5108</font>";
                
                 string MsjError = string.Empty;

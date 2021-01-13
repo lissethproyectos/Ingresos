@@ -184,6 +184,7 @@ namespace CapaDatos
                     ObjFactura.VISIBLE1= Convert.ToInt32(dr.GetValue(9))==0?false:true;
                     ObjFactura.VISIBLE2 = Convert.ToInt32(dr.GetValue(9)) == 0 ? true : false;
                     ObjFactura.RUTA_ADJUNTO= Convert.ToInt32(dr.GetValue(9)) == 0 ? "" : "~/Imagenes/fact_xml.png";
+                    ObjFactura.FACT_RECEPTOR_CORREO= Convert.ToString(dr.GetValue(10));
                     List.Add(ObjFactura);
 
                 }
@@ -221,6 +222,7 @@ namespace CapaDatos
                     ObjFactura.FACT_NOMBRE = Convert.ToString(dr.GetValue(5));
                     ObjFactura.FACT_DEPENDENCIA = Convert.ToString(dr.GetValue(6));
                     ObjFactura.FACT_MATRICULA = Convert.ToString(dr.GetValue(7));
+                    ObjFactura.FACT_RECEPTOR_CORREO = Convert.ToString(dr.GetValue(8));
                     List.Add(ObjFactura);
 
                 }

@@ -27,6 +27,9 @@ namespace Recibos_Electronicos
         CN_Alumno CNAlumno = new CN_Alumno();
         CN_Evento CNEvento = new CN_Evento();
         CN_CajaFactura CNCjaFactura = new CN_CajaFactura();
+        List<Factura> lstRecibosSel = new List<Factura>();
+
+
         string Verificador = "";
 
         #endregion
@@ -39,7 +42,7 @@ namespace Recibos_Electronicos
 
         protected void inicializar()
         {
-          
+
 
             CargarCombos();
 
@@ -52,7 +55,7 @@ namespace Recibos_Electronicos
                 //if (Request.QueryString["reporte"] == null && Request.QueryString["modulo"] == null && Request.QueryString["Evento"] == null)
                 //    busca_informativa();
 
-                if(SesionUsu.Usu_Central=="S")
+                if (SesionUsu.Usu_Central == "S")
                     CargarGridMonitor(ref grdMonitor);
                 else
                     grdMonitor.Visible = false;
@@ -91,12 +94,12 @@ namespace Recibos_Electronicos
                             modalBancos.Show();
                         }
                     }
-                    //else
-                    ////{
-                    //grdStatus_Carga.DataSource = dt;
-                    //grdStatus_Carga.DataSource = ListUsuario;
-                    //grdStatus_Carga.DataBind();
-                    //}
+                    else
+                    {
+                        grdStatus_Carga.DataSource = dt;
+                        grdStatus_Carga.DataSource = ListUsuario;
+                        grdStatus_Carga.DataBind();
+                    }
                 }
             }
             catch (Exception ex)
@@ -206,21 +209,21 @@ namespace Recibos_Electronicos
                         Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
                         Usur.Usu_IdModulo = 15314;
                         CNUsuario.PermisoUsuario(ref Usur, ref Verificador);
-                        grdDatosFactura.Columns[9].Visible = false;
+                        //grdDatosFactura.Columns[9].Visible = false;
                         if (SesionUsu.Usu_Central == "S")
                         {
-                            Int32[] Celdas = { 0, 9, 10, 11 };
+                            Int32[] Celdas = { 0, 10, 11, 12, 14 };
                             CNComun.HideColumns(grdDatosFactura, Celdas);
                         }
                         else
                         {
-                            Int32[] Celdas = { 0, 7, 9, 10, 11 };
+                            Int32[] Celdas = { 0, 10, 11, 12, 14 };
                             CNComun.HideColumns(grdDatosFactura, Celdas);
                         }
 
                     }
                     else
-                    {                        
+                    {
                         Int32[] Celdas = { 0, 9, 10, 11 };
                         CNComun.HideColumns(grdDatosFactura, Celdas);
                     }
@@ -279,7 +282,7 @@ namespace Recibos_Electronicos
             try
             {
                 grdDatosFactura.SelectedIndex = row.RowIndex;
-                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[10].Text;
+                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[11].Text;
                 PnlCorreo.Recibo = grdDatosFactura.SelectedRow.Cells[0].Text;
                 PnlCorreo.Muestra();
             }
@@ -303,7 +306,7 @@ namespace Recibos_Electronicos
             pnlReciboOficial.Visible = true;
             btnRegresar.Visible = true;
             grdDatosFactura.Visible = false;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ObtenerQR(" + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text) + "," + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[11].Text) + ");", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ObtenerQR(" + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text) + "," + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[12].Text) + ");", true);
         }
 
         protected void grdMonitor_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -425,6 +428,54 @@ namespace Recibos_Electronicos
                 string Msj = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Msj);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void linkEnviarRecibos_Click(object sender, EventArgs e)
+        {
+            //LinkButton cbi = (LinkButton)(sender);
+            //GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            Factura objFactura = new Factura();
+            try
+            {
+                //grdDatosFactura.SelectedIndex = row.RowIndex;
+
+                Session["RecibosSeleccionados"] = null;
+                lstRecibosSel.Clear();
+
+                foreach (GridViewRow row in grdDatosFactura.Rows)
+                {
+                    if (row.RowIndex > 1)
+                    {
+                        //row.Cells[7]
+                        //row.Cells[13].Text = false;
+                        
+                        //CheckBox link = row.FindControl("chkEnviar") as CheckBox;
+                        CheckBox link = (CheckBox)(row.Cells[14].FindControl("chkEnviar"));
+                        if (link.Checked == true)
+                        {
+                            ObjFactura.ID_FACT = row.Cells[0].Text;
+                            ObjFactura.FACT_RECEPTOR_CORREO = row.Cells[13].Text;
+
+                            if (Session["RecibosSeleccionados"] != null)
+                                lstRecibosSel = (List<Factura>)Session["RecibosSeleccionados"];
+
+                            lstRecibosSel.Add(objFactura);
+                            Session["RecibosSeleccionados"] = lstRecibosSel;
+                        }
+                    }
+                }
+
+                lblMensaje.Text = Convert.ToString(lstRecibosSel.Count);
+
+
+            }
+            catch (Exception ex)
+            {
+                string Msj = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Msj);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
+
             }
         }
     }

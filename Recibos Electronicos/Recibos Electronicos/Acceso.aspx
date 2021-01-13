@@ -69,12 +69,20 @@
                                 <div class="input-group-prepend">
 		                <span class="input-group-text"> <i class="fa fa-cog"></i> </span>
 		            </div>
+                              <%-- <select class="form-control" id="DDLTipoUsuario" runat="server">
+  <option class="special" value="5">Seleccionar</option>
+  <option value="1">Alumno ó Aspirante</option>
+                                     <option value="3">Usuario Dependencia</option>
+
+  <option value="4" style="background: #5cb85c; color: #fff;">Comprobantes oficiales de EVENTOS</option>
+</select>--%>
+
                           
                                         <asp:DropDownList ID="DDLTipoUsuario" runat="server" class="form-control">
                                             <asp:ListItem Value="5">Seleccionar</asp:ListItem>
                                             <asp:ListItem Value="1">Alumno ó Aspirante</asp:ListItem>   
                                             <asp:ListItem Value="3">Usuario Dependencia</asp:ListItem>                    
-                                            <asp:ListItem Value="4">Referencia Bancaria (recibo de pago de EVENTO)</asp:ListItem>
+                                            <asp:ListItem Value="4">Referencia Bancaria</asp:ListItem>                                            
                                             <asp:ListItem Value="6">Cliente UNACH</asp:ListItem>
                                         </asp:DropDownList>
 	                        </div> <!-- form-group end.// -->
@@ -124,9 +132,12 @@
                             </div> <!-- form-group// -->      
 
 
-                            <div id="divMsjGral" class="alert alert-info hide" role="alert" >
+<%--                            <div id="divMsjGral" class="alert alert-info hide" role="alert" >
                                El acceso a esta página es para imprimir y consultar el comprobante oficial de alguno de los servicios que proporciona la universidad.             
-</div>
+</div>--%>
+                            <p class="note note-warning">
+                                El acceso a esta página es para obtener el comprobante oficial de alguno de los servicios que proporciona la universidad.             
+                                </p>
 <div id="divMsjUsuDep" class="alert alert-warning" role="alert">
                   <strong>El acceso al sistema es con la cta. y la contraseña del correo unach,</strong> si no actualizaste tu información dar click en el siguiente enlace.
     <button id="bttnModalActualizar" type="button" class="btn btn-link">Actualizar datos</button>
@@ -143,7 +154,7 @@
         <!-- card.// -->
 
         <div class="piePagina" style="width: 100%">
-            <footer class="page-footer font-small pt-4"  style="background-color: #585858; color: #fff">
+            <footer class="page-footer font-small pt-4" style="background-color: #585858; color: #fff">
                 <div class="container-fluid text-center text-md-left">
                     <div class="row">
                         <hr class="clearfix w-100 d-md-none pb-3">
@@ -279,6 +290,6 @@
         $("#bttnModalActualizar").click(function () {
             window.location = "https://sysweb.unach.mx/actualiza_correo/frmactualiza_datos.aspx?sistema=14";
         });
-        
+
     });
 </script>

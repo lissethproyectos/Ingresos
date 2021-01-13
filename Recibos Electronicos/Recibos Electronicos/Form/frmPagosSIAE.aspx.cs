@@ -46,8 +46,10 @@ namespace Recibos_Electronicos.Form
                 //CNComun.LlenaCombo("pkg_pagos_2016.Obt_Ciclos_Escolares", ref ddlCiclo, "INGRESOS");
                 //ddlCiclo.SelectedValue = System.DateTime.Now.ToString("yyyy");
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Bancos", ref ddlBanco);
+                //CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
 
-                
+
+
             }
 
             catch (Exception ex)
@@ -66,6 +68,7 @@ namespace Recibos_Electronicos.Form
 
                 //string s=SesionUsu.Usu_Central_Tipo;
                 Cargarcombos();
+                ddlNivel_SelectedIndexChanged(null, null);
                 txtReferencia.Focus();
             }
             catch (Exception ex)
@@ -101,7 +104,8 @@ namespace Recibos_Electronicos.Form
             try
             {
                 List<Factura> List = new List<Factura>();
-                objFactura.CICLO_ESCOLAR = "20"; //ddlCiclo.SelectedValue;
+                objFactura.CICLO_ESCOLAR = ddlCicloEscolar.SelectedValue;
+                objFactura.FACT_NIVEL = ddlNivel.SelectedValue;
                 objFactura.FACT_REFERENCIA = txtReferencia.Text;
                 //CNSIAE.SIAEConsultaGrid(objFactura, ref List);
                 CNSIAE.RefSIAEConsultaGrid(objFactura, ref List);                
@@ -143,6 +147,7 @@ namespace Recibos_Electronicos.Form
             {
                 txtFolioBanco.Text = objFactura.FACT_FOLIOBANCARIO;
                 txtFechaPago.Text = objFactura.FACT_FECHA_FACTURA;
+                txtCiclo.Text = objFactura.CICLO_ESCOLAR;
                 try
                 {
                     ddlBanco.SelectedValue = objFactura.FACT_BANCO;
@@ -254,7 +259,8 @@ namespace Recibos_Electronicos.Form
             objFactura.FACT_BANCO = ddlBanco.SelectedValue;
             objFactura.FACT_REFERENCIA = txtReferenciaOrig.Text;
             objFactura.FACT_CONFIRMADO = (chkPagoAplicado.Checked == true) ? "S" : "N";
-            RefPag= (txtReferenciaPagada.Text == string.Empty) ? txtReferenciaOrig.Text : txtReferenciaPagada.Text;   
+            objFactura.CICLO_ESCOLAR = txtCiclo.Text;
+            RefPag = (txtReferenciaPagada.Text == string.Empty) ? txtReferenciaOrig.Text : txtReferenciaPagada.Text;   
             CNSIAE.ActualizarDatosSIAE(objFactura, RefPag, SesionUsu.Usu_Nombre, ref Verificador);
             return Verificador;
         }
@@ -309,6 +315,16 @@ namespace Recibos_Electronicos.Form
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
             }
+        }
+
+        protected void ddlCicloEscolar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_AlumnosUnachCiclo", ref ddlCicloEscolar, "p_nivel", "p_tipo", ddlNivel.SelectedValue, "TODOS", "INGRESOS");
         }
     }
 }

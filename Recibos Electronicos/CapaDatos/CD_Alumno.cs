@@ -91,12 +91,14 @@ namespace CapaDatos
                         Ruta = "https://siae.unach.mx/posgrado/aspirantes/";
                     else if (ObjAlumno.TipoPersonaStr == "ASPIRANTE" && ObjAlumno.Nivel == "L")
                         Ruta = "https://siae.unach.mx/inscripciones/";
+                    else if (ObjAlumno.TipoPersonaStr == "ALUMNO LENGUAS " && ObjAlumno.Nivel == "N")
+                        Ruta = "https://siae.unach.mx/acceso/?m=0&a=2";
                     else
                         EsquemaAlu = "SYSWEB";
 
                     ObjAlumno.LinkEsquema = Ruta;
                     ObjAlumno.Esquema = EsquemaAlu;
-
+                    ObjAlumno.Correo_Instituicional = Convert.ToString(dr.GetValue(12));
                     List.Add(ObjAlumno);
                 }
                 dr.Close();

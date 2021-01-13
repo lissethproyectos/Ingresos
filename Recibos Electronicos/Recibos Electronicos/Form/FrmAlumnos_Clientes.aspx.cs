@@ -401,7 +401,7 @@ namespace Recibos_Electronicos.Form
                 System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
                 ruta = "https://sysweb.unach.mx/FichaReferenciada/Form/Activacion_Cuenta.aspx?ActCtaM=" + grvAlumnos.SelectedRow.Cells[2].Text + "&ActCtaN=" + grvAlumnos.SelectedRow.Cells[1].Text;
                 asunto = "Confirma tu correo/Activa tu cuenta - SYSWEB";
-                contenido = "<img src='https://sysweb.unach.mx/resources/imagenes/logo_sysweb400px.png'><br /><div align=center><font size='4'><a href=\'" + ruta + "'>Pagos Referenciados SYSWEB</a></font></div><br /><br />" + "<font size='2'>Se ha generado un usuario para el Sistema de Pagos Referenciados SYSWEB con esta dirección de correo electrónico.</br>" +
+                contenido = "<img src='https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png'><br /><div align=center><font size='4'><a href=\'" + ruta + "'>Pagos Referenciados SYSWEB</a></font></div><br /><br />" + "<font size='2'>Se ha generado un usuario para el Sistema de Pagos Referenciados SYSWEB con esta dirección de correo electrónico.</br>" +
                             "Si tú hiciste esta solicitud, haz clic en el enlace de abajo para confirmar tu dirección de correo electrónico, activar tu cuenta y conlcuir tu proceso de registro:</br>" +
                             "<a href=\'" + ruta + "'>Confirmar tu dirección de correo electrónico </a></br></br>" +
                             "Si tú no realizaste esta solicitud, ignora este correo electrónico y no recibirás mas notificaciones al respecto.</br></br>" +

@@ -1,18 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmCatReportes.aspx.cs" Inherits="Recibos_Electronicos.Form.frmCatReportes" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
         .auto-style2 {
             width: 139px;
         }
+
         .auto-style3 {
             width: 282px;
         }
+
         .auto-style4 {
             width: 171px;
         }
+
         .auto-style5 {
             width: 245px;
         }
+
         .auto-style6 {
             width: 282px;
             text-align: right;
@@ -20,15 +25,17 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <table class="tabla_contenido">
-        <tr>
-            <td>
+    <div class="container">
+        <div class="row">
+            <div class="col">
                 <asp:MultiView ID="MultiView1" runat="server">
                     <asp:View ID="View1" runat="server">
-                        <table style="width: 100%;">
-                            <tr valign="top">
-                                <td class="auto-style2">Dependencia:</td>
-                                <td colspan="3">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    Dependencia
+                                </div>
+                                <div class="col-md-10">
                                     <asp:UpdatePanel ID="updPnlDep" runat="server">
                                         <ContentTemplate>
                                             <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
@@ -36,17 +43,23 @@
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="RequiredFieldValidator" InitialValue="0" ValidationGroup="Buscar">*Elegir una Dependencia</asp:RequiredFieldValidator>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
-                                </td>
-                                <td><asp:UpdateProgress ID="updprgDep" runat="server" AssociatedUpdatePanelID="updPnlDep">
-                                <ProgressTemplate>
-                                    <asp:Image ID="imgDep" runat="server" Height="36px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                                        ToolTip="Espere un momento, por favor.." Width="36px" />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress></td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style2">Fecha Inicial:</td>
-                                <td class="auto-style4">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <asp:UpdateProgress ID="updprgDep" runat="server" AssociatedUpdatePanelID="updPnlDep">
+                                        <ProgressTemplate>
+                                            <asp:Image ID="imgDep" runat="server" Height="36px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                                                ToolTip="Espere un momento, por favor.." Width="36px" />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    Fecha Inicial
+                                </div>
+                                <div class="col-md-4">
                                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
@@ -54,9 +67,11 @@
                                             <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
-                                </td>
-                                <td align="right" class="auto-style5">Fecha Final:</td>
-                                <td class="auto-style3">
+                                </div>
+                                <div class="col-md-2">
+                                    Fecha Final
+                                </div>
+                                <div class="col-md-4">
                                     <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                                         <ContentTemplate>
                                             <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Style="margin-left: 0px" Width="95px"></asp:TextBox>
@@ -64,62 +79,32 @@
                                             <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
-                                </td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style2">Tipo:</td>
-                                <td colspan="2">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2">
+                                    Tipo
+                                </div>
+                                <div class="col-md-8">
                                     <asp:DropDownList ID="ddlTipo" runat="server">
                                         <asp:ListItem Value="1">Por Dependencia</asp:ListItem>
                                         <asp:ListItem Value="2">Por Dependencia y Carreras</asp:ListItem>
                                     </asp:DropDownList>
-                                </td>
-                                <td class="auto-style3">
-                                    <asp:Button ID="bttnCatReembolsables" runat="server" Cssclass="btn btn-blue-grey" Text="Catálogo de Conceptos Reembolsables" OnClick="bttnCatReembolsables_Click" />
-                                </td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style2">&nbsp;</td>
-                                <td class="auto-style4">&nbsp;</td>
-                                <td class="auto-style5">&nbsp;</td>
-                                <td class="auto-style6" align="right">
-                                    &nbsp;</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                            <tr>
-                                <td class="auto-style2">&nbsp;</td>
-                                <td class="auto-style4">&nbsp;</td>
-                                <td class="auto-style5">&nbsp;</td>
-                                <td align="right" class="auto-style6">
+                                </div>
+                                <div class="col-md-2">
+                                    <asp:Button ID="bttnCatReembolsables" runat="server" CssClass="btn btn-blue-grey" Text="Catálogo de Conceptos Reembolsables" OnClick="bttnCatReembolsables_Click" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col text-right">
                                     <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />
                                     &nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
-                                </td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </table>
-                    </asp:View>
-                    <asp:View ID="View2" runat="server">
-                    </asp:View>
-                    <asp:View ID="View3" runat="server">
-                    </asp:View>
-                    <asp:View ID="View4" runat="server">
-                    </asp:View>
-                    <asp:View ID="View5" runat="server">
-                    </asp:View>
-                    <asp:View ID="View6" runat="server">
-                    </asp:View>
-                    <asp:View ID="View7" runat="server">
+                                </div>
+                            </div>
+                        </div>
                     </asp:View>
                 </asp:MultiView>
-            </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 </asp:Content>

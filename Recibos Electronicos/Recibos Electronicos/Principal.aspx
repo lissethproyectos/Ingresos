@@ -141,8 +141,58 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="nav-bancos" role="tabpanel" aria-labelledby="nav-bancos-tab">
-                        Bancos
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div style="overflow-x: auto; display: block;">
+                                        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                                            <ContentTemplate>
+                                                <asp:GridView ID="grdStatus_Carga" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-bordered table-sm" PageSize="3" Width="100%">
+                                                    <Columns>
+                                                        <asp:BoundField DataField="Etiqueta" DataFormatString="{0:d}" HeaderText="FICHAS PAGADAS DEL">
+                                                            <HeaderStyle ForeColor="#333333" HorizontalAlign="Center" Font-Bold="True" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="EtiquetaTres" FooterText="SANTANDER" HeaderText="SANTANDER">
+                                                            <FooterStyle HorizontalAlign="Center" />
+                                                            <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="EtiquetaSiete" FooterText="HSBC" HeaderText="HSBC">
+                                                            <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="EtiquetaCinco" FooterText="BANCOMER" HeaderText="BANCOMER">
+                                                            <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="EtiquetaDos" FooterText="BANAMEX" HeaderText="BANAMEX">
+                                                            <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="EtiquetaCuatro" FooterText="BANORTE" HeaderText="BANORTE">
+                                                            <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="EtiquetaSeis" FooterText="VISA/MASTERCARD" HeaderText="VISA">
+                                                            <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                    </Columns>
+                                                    <FooterStyle CssClass="enc" />
+                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                    <RowStyle Font-Size="9px" />
+                                                    <SelectedRowStyle CssClass="sel" />
+                                                    <HeaderStyle Font-Size="9px" HorizontalAlign="Center" />
+                                                    <AlternatingRowStyle CssClass="alt" />
+                                                </asp:GridView>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         <div class="container">
                             <div class="row">
@@ -186,10 +236,10 @@
                             </div>
                             <br />
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-1">
                                     <asp:Label ID="lblDependencia" runat="server" Text="Dependencia"></asp:Label>
                                 </div>
-                                <div class="col-md-10">
+                                <div class="col-md-11">
                                     <asp:UpdatePanel ID="updPnlDep" runat="server">
                                         <ContentTemplate>
                                             <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
@@ -211,20 +261,21 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-2">
-                                    <asp:Label ID="lblFecha_Factura_Ini" runat="server" Text="Fecha Inicial"></asp:Label>
+                                <div class="col-md-1">
+                                    <asp:Label ID="lblFecha_Factura_Ini" runat="server" Text="Pagos del "></asp:Label>
                                 </div>
                                 <div class="col-md-2">
                                     <asp:UpdatePanel ID="UpdatePanel42" runat="server">
                                         <ContentTemplate>
-                                            <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
+                                            <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
                                             <ajaxToolkit:CalendarExtender ID="CalendarExtenderIni" runat="server" TargetControlID="txtFecha_Factura_Ini" PopupButtonID="imgCalendarioIni" />
                                             <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
+                                    
                                 </div>
-                                <div class="col-md-2">
-                                    <asp:Label ID="lblFecha_Factura_Fin" runat="server" Text="Fecha Final"></asp:Label>
+                                <div class="col-md-1">
+                                    <asp:Label ID="lblFecha_Factura_Fin" runat="server" Text="-"></asp:Label> 
                                 </div>
                                 <div class="col-md-2">
                                     <asp:UpdatePanel ID="UpdatePanel43" runat="server">
@@ -239,7 +290,7 @@
                 <div class="col-md-1">
                     <asp:Label ID="lblReferencia" runat="server" Text="Referencia/nombre/folio"></asp:Label>
                 </div>--%>
-                                <div class="col-md-4">
+                                <div class="col-md-6">
                                     <div class="input-group mb-3">
                                         <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia, folio ó nombre" Visible="true"></asp:TextBox>
                                         <div class="input-group-append">
@@ -295,13 +346,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm">
+                                <div class="col">
                                     <div style="overflow-x: auto;">
                                         <asp:UpdatePanel ID="UpdatePanelGrid" runat="server">
                                             <ContentTemplate>
                                                 <asp:GridView ID="grdDatosFactura" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" DataKeyNames="ID_FACT" EmptyDataText="El banco no reporto pagos, para el rango de fecha especificado..." OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" PageSize="20" ShowHeaderWhenEmpty="True" Width="100%">
                                                     <Columns>
                                                         <asp:BoundField DataField="ID_FACT" HeaderText="ID" SortExpression="ID"></asp:BoundField>
+                                                        <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Dep." SortExpression="DEPENDENCIA"></asp:BoundField>
                                                         <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" />
@@ -322,9 +374,14 @@
                                                             <HeaderStyle HorizontalAlign="Left" />
                                                             <ItemStyle HorizontalAlign="Left" />
                                                         </asp:BoundField>
-                                                        <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Dep." SortExpression="DEPENDENCIA"></asp:BoundField>
+                                                        <asp:BoundField DataField="FACT_RECEPTOR_CORREO" HeaderText="Correo" />
                                                         <asp:TemplateField HeaderText="Enviar Recibo">
+                                                           <%-- <HeaderTemplate>
+                                                                    <asp:Button ID="btnEnviarRecibo" CssClass="btn btn-blue-grey" runat="server" Text="ENVIAR RECIBO" />
+                                                                    <asp:LinkButton ID="linkEnviarRecibos"  CssClass="btn btn-blue-grey" Font-Size="Smaller" runat="server" OnClick="linkEnviarRecibos_Click" >ENVIAR <br />RECIBO(S)</asp:LinkButton>
+                                                                </HeaderTemplate>--%>
                                                             <ItemTemplate>
+                                                                <%--<asp:CheckBox ID="chkEnviar" runat="server" />--%>
                                                                 <asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="~/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />
                                                             </ItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Center" />
@@ -353,6 +410,15 @@
                                                             <HeaderStyle HorizontalAlign="Center" />
                                                             <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Enviar Recibo(s)">
+                                                            <HeaderTemplate>                                                                    
+                                                                    <asp:LinkButton ID="linkEnviarRecibos"  CssClass="btn btn-blue-grey" Font-Size="Smaller" runat="server" OnClick="linkEnviarRecibos_Click" >ENVIAR <br />RECIBO(S)</asp:LinkButton>
+                                                                </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:CheckBox ID="chkEnviar" runat="server" />
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Recibo Enviado"></asp:TemplateField>
                                                     </Columns>
                                                     <FooterStyle CssClass="enc" />
                                                     <PagerStyle CssClass="enc" HorizontalAlign="Center" />

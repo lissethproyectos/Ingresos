@@ -544,10 +544,13 @@ namespace Recibos_Electronicos.Reportes
                     else
                         rptExcel_Ingresos(Reporte, "Escuelas que cobran cuota de mantenimiento");
                     break;
-                case "REP065":
-                    object[] v100 = { Referencia };
-                    Reporte = "Reportes\\RepComprobanteFiscal_Ref.rpt";
-                    rptPDF_FE(Reporte, v100, "Ficha Referenciada");
+                case "REP067":
+                    object[] v100 = { ciclo, TipoDesc, dependencia };
+                    Reporte = "Reportes\\REP067.rpt";
+                    if (enExcel == "N")                    
+                        rptPDF_FE(Reporte, v100, "Faltan por Pagar");
+                    else
+                        rptExcel_FE(Reporte, v100, "Faltan por Pagar");
                     break;
 
                 case "REP000":
