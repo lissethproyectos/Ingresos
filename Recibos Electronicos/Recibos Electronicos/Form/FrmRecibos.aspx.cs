@@ -21,10 +21,10 @@ namespace Recibos_Electronicos.Form
 
         CN_Comun CNComun = new CN_Comun();
         private static List<Comun> ListConceptos = new List<Comun>();
-        Sesion SesionUsu = new Sesion();        
+        Sesion SesionUsu = new Sesion();
         Factura ObjFactura = new Factura();
         Alumno ObjAlumno = new Alumno();
-        DetFactura ObjDetFactura = new DetFactura();        
+        DetFactura ObjDetFactura = new DetFactura();
         CN_Factura CNFacturas = new CN_Factura();
         CN_DetFactura CNDetFacturas = new CN_DetFactura();
         CN_Alumno CNAlumno = new CN_Alumno();
@@ -35,8 +35,8 @@ namespace Recibos_Electronicos.Form
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
-            
-            if (!IsPostBack)            
+
+            if (!IsPostBack)
                 Inicializar();
             //else
             //{
@@ -58,9 +58,9 @@ namespace Recibos_Electronicos.Form
         protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }        
+        }
         protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)
-        {            
+        {
             if (SesionUsu.Editar == 1)
             {
                 modal.Show();
@@ -72,10 +72,10 @@ namespace Recibos_Electronicos.Form
         }
         protected void grvFacturas_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
-            
+
         }
         protected void imgbtnBuscar_Click(object sender, ImageClickEventArgs e)
-        {            
+        {
             CargarGrid();
 
         }
@@ -98,7 +98,7 @@ namespace Recibos_Electronicos.Form
         protected void btnGuardar_Concep_Click(object sender, EventArgs e)
         {
             //ModalPopupExtender1.Show();
-            GuardarDatos_FacturaDet();            
+            GuardarDatos_FacturaDet();
             LimpiarCampos();
             modal.Hide();
         }
@@ -131,11 +131,12 @@ namespace Recibos_Electronicos.Form
 
         #region <Funciones y Sub>
         private void Inicializar()
-        {            
+        {
             CargarCombos();
             var Usu = SesionUsu.Usu_Nombre;
             var usuAdmin = Array.FindAll(UsuariosSuper, s => s.Equals(Usu));
-            if (usuAdmin.Length > 0)
+            //if (usuAdmin.Length > 0)
+            if (SesionUsu.Usu_Central == "S")
             {
                 txtFecha_Cfd1.Enabled = true;
                 txtFecha_Dispersion.Enabled = true;
@@ -181,7 +182,7 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] { 0, 10, 11,12 };
+            Int32[] Celdas = new Int32[] { 0, 10, 11, 12 };
             Int32[] CeldasAdmin = new Int32[] { 0 };
 
             try
@@ -189,7 +190,7 @@ namespace Recibos_Electronicos.Form
                 DataTable dt = new DataTable();
                 grvFacturas.DataSource = dt;
                 grvFacturas.DataSource = GetList();
-                grvFacturas.DataBind();                
+                grvFacturas.DataBind();
                 if (grvFacturas.Rows.Count > 0 && (SesionUsu.Usu_Central_Tipo == "A" || SesionUsu.Usu_Central_Tipo == "N"))
                     CNComun.HideColumns(grvFacturas, Celdas);
                 else
@@ -240,7 +241,7 @@ namespace Recibos_Electronicos.Form
         private void CargarCombos()
         {
             try
-            {                
+            {
                 //CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Carrera_Posgrado", ref ddlCarrera, "INGRESOS");
                 CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
                 //txtValor_unitario.Text = ListConceptos[ddlConcepto.SelectedIndex].EtiquetaDos;
@@ -268,7 +269,7 @@ namespace Recibos_Electronicos.Form
             }
             //txtTotal.Text =(grdView.ID == "grvFacturas_Detalle")? Convert.ToString(Total):"0";
             txtSubtotal.Text = (grdView.ID == "grvFacturas_Detalle") ? Convert.ToString(SubTotal) : "0";
-            txtTotal.Text =(grdView.ID == "grvFacturas_Detalle") ? Convert.ToString(SubTotal + Convert.ToDouble(txtImpuesto_Tasa.Text)):"0";
+            txtTotal.Text = (grdView.ID == "grvFacturas_Detalle") ? Convert.ToString(SubTotal + Convert.ToDouble(txtImpuesto_Tasa.Text)) : "0";
 
 
         }
@@ -347,17 +348,17 @@ namespace Recibos_Electronicos.Form
             ObjFactura.ID_FACT = grvFacturas.SelectedRow.Cells[0].Text; //grvFacturas.Rows[grvFacturas.SelectedIndex].Cells[0].Text;
             ObjFactura.FACT_NOMBRE = txtReceptor_Nombre.Text;
             ObjFactura.FACT_RECEPTOR_RFC = txtReceptor_Rfc.Text;
-            ObjFactura.FACT_RECEPTOR_DOMICILIO=txtReceptor_Domicilio.Text;
-            ObjFactura.FACT_RECEPTOR_COLONIA=txtReceptor_Colonia.Text;
-            ObjFactura.FACT_RECEPTOR_LUGAR=txtReceptor_Pais.Text;
-            ObjFactura.FACT_MATRICULA=txtMatricula.Text;
-            ObjFactura.FACT_CARRERA=txtCarrera.Text;
-            ObjFactura.FACT_DEPENDENCIA=txtDesc_Dependencia.Text;
-            ObjFactura.FACT_EXPEDIDO_DOMICILIO=txtExpedido_Domicilio.Text;
-            ObjFactura.FACT_EXPEDIDO_COLONIA=txtExpedido_Colonia.Text;
+            ObjFactura.FACT_RECEPTOR_DOMICILIO = txtReceptor_Domicilio.Text;
+            ObjFactura.FACT_RECEPTOR_COLONIA = txtReceptor_Colonia.Text;
+            ObjFactura.FACT_RECEPTOR_LUGAR = txtReceptor_Pais.Text;
+            ObjFactura.FACT_MATRICULA = txtMatricula.Text;
+            ObjFactura.FACT_CARRERA = txtCarrera.Text;
+            ObjFactura.FACT_DEPENDENCIA = txtDesc_Dependencia.Text;
+            ObjFactura.FACT_EXPEDIDO_DOMICILIO = txtExpedido_Domicilio.Text;
+            ObjFactura.FACT_EXPEDIDO_COLONIA = txtExpedido_Colonia.Text;
             ObjFactura.FACT_EXPEDIDO_PAIS = txtExpedido_Pais.Text;
-            ObjFactura.FACT_OBSERVACIONES=txtNotas.Text;
-            ObjFactura.FACT_SUBTOTAL =txtSubtotal.Text;
+            ObjFactura.FACT_OBSERVACIONES = txtNotas.Text;
+            ObjFactura.FACT_SUBTOTAL = txtSubtotal.Text;
             ObjFactura.FACT_IMPUESTO_TASA = txtImpuesto_Tasa.Text;
             ObjFactura.FACT_TOTAL = txtTotal.Text;
             ObjFactura.FACT_STATUS = rdoListStatus.SelectedValue;
@@ -410,7 +411,7 @@ namespace Recibos_Electronicos.Form
             }
             catch (Exception ex)
             {
-                string Msj=ex.Message;
+                string Msj = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Msj);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
             }
@@ -455,7 +456,7 @@ namespace Recibos_Electronicos.Form
         #endregion
 
         protected void btnCancelar_Concp_Click(object sender, EventArgs e)
-        {            
+        {
             LimpiarCampos();
             modal.Hide();
         }
@@ -547,7 +548,7 @@ namespace Recibos_Electronicos.Form
             SesionUsu.Id_Comprobante = Convert.ToInt32(DataBinder.Eval(sender, "CommandArgument").ToString());
             //pnlContenor.Visible = false;
             //btnRegresar.Visible = true;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerReporteRecibo(" + SesionUsu.Id_Comprobante + ");", true);            
+            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerReporteRecibo(" + SesionUsu.Id_Comprobante + ");", true);
         }
 
         protected void imgBttnCorreo_Click(object sender, ImageClickEventArgs e)
@@ -573,7 +574,7 @@ namespace Recibos_Electronicos.Form
         {
             ImageButton cbi = (ImageButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            grvFacturas.SelectedIndex = row.RowIndex;            
+            grvFacturas.SelectedIndex = row.RowIndex;
             ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerReporteRecibo(" + grvFacturas.SelectedRow.Cells[0].Text + ");", true);
 
         }
@@ -593,7 +594,7 @@ namespace Recibos_Electronicos.Form
         {
             modal.Show();
             GuardarDatos_FacturaDet();
-            txtValor_unitario.Text =string.Empty;
+            txtValor_unitario.Text = string.Empty;
             txtCantidad.Text = string.Empty;
             modal.Show();
             //LimpiarCampos();
@@ -616,7 +617,7 @@ namespace Recibos_Electronicos.Form
 
             try
             {
-                ObjFactura.ID_FACT= Convert.ToString(grvFacturas.Rows[fila].Cells[0].Text);
+                ObjFactura.ID_FACT = Convert.ToString(grvFacturas.Rows[fila].Cells[0].Text);
                 CNFacturas.FacturaEliminar(ObjFactura, ref Verificador);
                 if (Verificador == "0")
                     CargarGrid();
