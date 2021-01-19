@@ -126,6 +126,11 @@ namespace CapaEntidad
             get { return notas; }
         }
 
+        public string Pago_Tipo
+        {
+            get { return pago_tipo; }
+        }
+
         public string Hora
         {
             get { return hora; }
@@ -369,7 +374,7 @@ namespace CapaEntidad
                     pago_importe = float.Parse(dato.Substring(150, 19) + "." + dato.Substring(170, 2));
                     pago_fecha = dato.Substring(172, 10);
                     notas = dato.Substring(137, 16);
-                    pago_tipo = "TDC";
+                    pago_tipo = "MULTIPAGOS";
                     if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))
                         return 0;
 
@@ -393,7 +398,7 @@ namespace CapaEntidad
                     pago_importe = float.Parse(dato.Substring(151, 19) + "." + dato.Substring(171, 2));
                     pago_fecha = dato.Substring(173, 10);
                     notas = "";
-                    pago_tipo = "TDC";
+                    pago_tipo = "MULTIPAGOS";
                     //pago_fecha = dato.Substring(172, 10);
 
                     if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))

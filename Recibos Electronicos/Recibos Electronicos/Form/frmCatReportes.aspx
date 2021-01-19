@@ -81,17 +81,18 @@
                                     </asp:UpdatePanel>
                                 </div>
                             </div>
+                            <br />
                             <div class="row">
                                 <div class="col-md-2">
                                     Tipo
                                 </div>
-                                <div class="col-md-8">
-                                    <asp:DropDownList ID="ddlTipo" runat="server">
+                                <div class="col-md-7">
+                                    <asp:DropDownList ID="ddlTipo" runat="server" Width="100%">
                                         <asp:ListItem Value="1">Por Dependencia</asp:ListItem>
                                         <asp:ListItem Value="2">Por Dependencia y Carreras</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <asp:Button ID="bttnCatReembolsables" runat="server" CssClass="btn btn-blue-grey" Text="Catálogo de Conceptos Reembolsables" OnClick="bttnCatReembolsables_Click" />
                                 </div>
                             </div>

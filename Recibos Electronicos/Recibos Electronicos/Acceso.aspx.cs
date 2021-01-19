@@ -227,7 +227,10 @@ namespace Recibos_Electronicos
 
                 //Extracting Node element using Getvalue method
                 string Autorizado = jObject.GetValue("valido").ToString();
-                Nombre = jObject.GetValue("gecos").ToString();
+                if (jObject.GetValue("gecos").ToString() == string.Empty)
+                    Nombre = ""; 
+                else
+                    Nombre = jObject.GetValue("gecos").ToString();
 
                 if (Autorizado == "0")
                     return true;

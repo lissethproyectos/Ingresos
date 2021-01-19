@@ -16,36 +16,35 @@
             margin-left: 40px;
         }
 
-        /*.overlay  
-        {
-          position: fixed;
-          z-index: 98;
-          top: 0px;
-          left: 0px;
-          right: 0px;
-          bottom: 0px;
-          background-color: #aaa; 
-          filter: alpha(opacity=80); 
-          opacity: 0.8; 
+        .overlay {
+            position: fixed;
+            z-index: 98;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            background-color: #aaa;
+            filter: alpha(opacity=80);
+            opacity: 0.8;
         }
-        .overlayContent
-        {
-          z-index: 99;
-          margin: 250px auto;
-          width: 80px;
-          height: 80px;
+
+        .overlayContent {
+            z-index: 99;
+            margin: 250px auto;
+            width: 80px;
+            height: 80px;
         }
-        .overlayContent h2
-        {
-            font-size: 18px;
-            font-weight: bold;
-            color: #000;
-        }
-        .overlayContent img
-        {
-          width: 30px;
-          height: 30px;
-        }*/
+
+            .overlayContent h2 {
+                font-size: 18px;
+                font-weight: bold;
+                color: #000;
+            }
+
+            .overlayContent img {
+                width: 30px;
+                height: 30px;
+            }
 
         .auto-style40 {
             width: 14%;
@@ -159,12 +158,21 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col text-center">
-                <asp:UpdateProgress ID="updPrMultiview" runat="server" AssociatedUpdatePanelID="updPnlMultiview">
+                <%--<asp:UpdateProgress ID="updPrMultiview" runat="server" AssociatedUpdatePanelID="updPnlMultiview">
                     <ProgressTemplate>
                         <asp:Image ID="imgMultiview" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>--%>
+                <asp:UpdateProgress ID="updPrMultiview" runat="server" AssociatedUpdatePanelID="updPnlMultiview">
+                    <ProgressTemplate>
+                        <div class="overlay">
+                            <div class="overlayContent">
+                                <asp:Image ID="img1" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
+                            </div>
+                        </div>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
@@ -202,7 +210,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <asp:Label ID="lblDependencia" runat="server" Text="Dependencia:"></asp:Label>
+                                            <asp:Label ID="lblDependencia" runat="server" Text="Dependencia"></asp:Label>
                                         </div>
 
                                         <div class="col-md-10">
@@ -214,7 +222,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <asp:Label ID="lblNivel1" runat="server" Text="Nivel:"></asp:Label>
+                                            <asp:Label ID="lblNivel1" runat="server" Text="Nivel"></asp:Label>
                                         </div>
                                         <div class="col-md-4">
                                             <asp:DropDownList ID="ddlNivel1" runat="server" ClientIDMode="Predictable" Width="100%">
@@ -222,7 +230,7 @@
                                         </div>
 
                                         <div class="col-md-2">
-                                            <asp:Label ID="lblCiclo" runat="server" Text="Ciclo Escolar:"></asp:Label>
+                                            <asp:Label ID="lblCiclo" runat="server" Text="Ciclo Escolar"></asp:Label>
                                         </div>
                                         <div class="col-md-4">
                                             <asp:DropDownList ID="ddlCiclo" runat="server" Width="100%">
@@ -233,7 +241,7 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-2">
-                                            <asp:Label ID="lblSubTipo1" runat="server" Text="Tipo:"></asp:Label>
+                                            <asp:Label ID="lblSubTipo1" runat="server" Text="Tipo"></asp:Label>
                                         </div>
                                         <div class="col-md-4">
                                             <asp:DropDownList ID="ddlSubTipo1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSubTipo_SelectedIndexChanged">
@@ -245,7 +253,7 @@
                                             </asp:DropDownList>
                                         </div>
                                         <div class="col-md-2">
-                                            <asp:Label ID="lblStatus_Ini" runat="server" Text="Status:"></asp:Label>
+                                            <asp:Label ID="lblStatus_Ini" runat="server" Text="Status"></asp:Label>
                                         </div>
                                         <div class="col-md-4">
                                             <asp:DropDownList ID="ddlStatus_Ini" runat="server" AutoPostBack="False" TabIndex="3" Width="100%">
@@ -288,7 +296,7 @@
                                                         <ItemTemplate>
                                                             <asp:Label ID="lblDetalle" runat="server" Text='<%# Bind("CicloEscolar") %>' CssClass="font-weight-bold"></asp:Label>
 
-                                                            &nbsp;<asp:Label ID="lblPeriodo"  runat="server"  Text='<%# Bind("Observaciones") %>'></asp:Label>
+                                                            &nbsp;<asp:Label ID="lblPeriodo" runat="server" Text='<%# Bind("Observaciones") %>'></asp:Label>
 
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
@@ -439,33 +447,22 @@
                                     </table>
                                 </asp:Panel>
                                 <asp:Panel ID="pnl_Alert" runat="server" CssClass="TituloModalPopupMsg" Style="width: 40%; position: fixed; z-index: 100; left: 405px; top: 73.5px;">
-                                    <table width="100%" class="card text-white bg-dark mb-3">
-                                        <tr>
-                                            <td align="left">&nbsp;</td>
-                                            <td>
-                                                <div>
-                                                    AVISO
-                                                </div>
-                                                <center>
-                                                                    </center>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left">&nbsp;</td>
-                                            <td align="center">¿Esta seguro que desea generar el recibo en cero? </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left">&nbsp;</td>
-                                            <td align="center">
+                                    <div class="container card text-white bg-dark mb-3">
+                                        <div class="row">
+                                            <div class="col font-weight-bold">
+                                                AVISO
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">¿Esta seguro que desea generar el recibo en cero?</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
                                                 <img src="https://sysweb.unach.mx/resources/imagenes/informacion.png" />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="left">&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" colspan="2">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
                                                 <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel227">
                                                     <ProgressTemplate>
                                                         <div class="overlay">
@@ -475,6 +472,10 @@
                                                         </div>
                                                     </ProgressTemplate>
                                                 </asp:UpdateProgress>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-center">
                                                 <asp:UpdatePanel ID="UpdatePanel227" runat="server">
                                                     <ContentTemplate>
                                                         <asp:Button ID="btnNueva" runat="server" CssClass="btn btn-info" OnClick="btnNueva_Click" Text="SI" />
@@ -482,12 +483,9 @@
                                                         &nbsp;
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" colspan="2">&nbsp;</td>
-                                        </tr>
-                                    </table>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </asp:Panel>
 
                                 <usr:uCCorreo ID="PnlCorreo" runat="server" />
@@ -496,13 +494,13 @@
                                 <table style="width: 100%;">
                                     <tr>
                                         <td>
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" CssClass="classic-tabs">
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" CssClass="classic-tabs">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
-                                                        <i class="fa fa-user-circle" aria-hidden="true"></i>Datos del Alumno
+                                                        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>Datos del Alumno
                                                     </HeaderTemplate>
                                                     <ContentTemplate>
-                                                        <div class="container">
+                                                        <div class="container-fluid">
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <div class="alert alert-info">
@@ -512,10 +510,10 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblGrupo" runat="server" Text="Evento:"></asp:Label>
+                                                                    <asp:Label ID="lblGrupo" runat="server" Text="Evento"></asp:Label>
                                                                 </div>
                                                                 <div class="col-md-10">
-                                                                    <asp:DropDownList ID="ddlEvento" runat="server" AutoPostBack="True" TabIndex="4" Width="85%">
+                                                                    <asp:DropDownList ID="ddlEvento" runat="server" AutoPostBack="True" TabIndex="4" Width="100%">
                                                                     </asp:DropDownList>
                                                                 </div>
                                                             </div>
@@ -527,16 +525,16 @@
                                                                     <asp:TextBox ID="txtMatricula" runat="server" CssClass="box" MaxLength="8" TabIndex="4" Width="100%"></asp:TextBox>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtMatricula" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
                                                                 </div>
-                                                                <div class="col-md-2">
+                                                                <div class="col-md-1">
                                                                     <asp:ImageButton ID="imgBttnBuscarMat" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscarMat_Click" />
-                                                                    <asp:Button ID="Registrar" runat="server" CssClass="btn3" OnClick="Registrar_Click" Text="Registrar Matrícula" Visible="False" />
+                                                                    <asp:Button ID="Registrar" runat="server" CssClass="btn btn-primary" OnClick="Registrar_Click" Text="Registrar Matrícula" Visible="False" />
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblNivel0" runat="server" Text="Nivel:"></asp:Label>
+                                                                    <asp:Label ID="lblNivel0" runat="server" Text="Nivel"></asp:Label>
                                                                 </div>
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-4">
                                                                     <asp:UpdatePanel ID="UpdatePanel6" runat="server">
                                                                         <ContentTemplate>
                                                                             <asp:ListBox ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%"></asp:ListBox>
@@ -546,86 +544,84 @@
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblDependencia_D" runat="server" Text="Dependencia:"></asp:Label>
+                                                                    <asp:Label ID="lblDependencia_D" runat="server" Text="Dependencia"></asp:Label>
                                                                 </div>
                                                                 <div class="col-md-10">
-                                                                    <asp:DropDownList ID="ddlDependencia_D" runat="server" AutoPostBack="True" ClientIDMode="Predictable" Enabled="False" OnSelectedIndexChanged="ddlDependencia_D_SelectedIndexChanged" TabIndex="1" Width="85%">
+                                                                    <asp:DropDownList ID="ddlDependencia_D" runat="server" AutoPostBack="True" ClientIDMode="Predictable" Enabled="False" OnSelectedIndexChanged="ddlDependencia_D_SelectedIndexChanged" TabIndex="1" Width="100%">
                                                                     </asp:DropDownList>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlDependencia_D" CssClass="MsjError" ErrorMessage="*Requerido" InitialValue="00000" ValidationGroup="guardar"></asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblCarrera0" runat="server" Text="Carrera:"></asp:Label>
+                                                                    <asp:Label ID="lblCarrera0" runat="server" Text="Carrera"></asp:Label>
                                                                 </div>
                                                                 <div class="col-md-10">
-                                                                    <asp:DropDownList ID="ddlCarrera" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged" TabIndex="6" Width="85%">
+                                                                    <asp:DropDownList ID="ddlCarrera" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged" TabIndex="6" Width="100%">
                                                                     </asp:DropDownList>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblOtraCarrera" runat="server" Text="Especificar:" Visible="False"></asp:Label>
+                                                                    <asp:Label ID="lblOtraCarrera" runat="server" Text="Especificar" Visible="False"></asp:Label>
                                                                 </div>
                                                                 <div class="col-md-10">
-                                                                    <asp:TextBox ID="txtCarrera" runat="server" CssClass="box" Visible="False" Width="85%"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtCarrera" runat="server" CssClass="box" Visible="False" Width="100%"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblNombre" runat="server" Text="Nombre:"></asp:Label>
+                                                                    <asp:Label ID="lblNombre" runat="server" Text="Nombre"></asp:Label>
                                                                 </div>
                                                                 <div class="col-md-10">
-                                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="box" Enabled="False" MaxLength="700" ReadOnly="True" TabIndex="5" Width="85%"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="box" Enabled="False" MaxLength="700" ReadOnly="True" TabIndex="5" Width="100%"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblPaterno" runat="server" Text="Apellido Paterno:"></asp:Label>
+                                                                    Apellido Paterno
                                                                 </div>
-                                                                <div class="col-md-10">
-                                                                    <asp:TextBox ID="txtPaterno" runat="server" Enabled="False" TabIndex="4" Width="85%"></asp:TextBox>
+                                                                <div class="col-md-4">
+                                                                    <asp:TextBox ID="txtPaterno" runat="server" Enabled="False" TabIndex="4" Width="100%"></asp:TextBox>
+                                                                </div>
+
+
+                                                                <div class="col-md-2 text-right">
+                                                                    Apellido Materno
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <asp:TextBox ID="txtMaterno" runat="server" Enabled="False" TabIndex="5" Width="100%"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblMaterno" runat="server" Text="Apellido Materno:"></asp:Label>
+                                                                    <asp:Label ID="lblFechaNacimiento" runat="server" Text="Fecha de Nacimiento"></asp:Label>
                                                                 </div>
-                                                                <div class="col-md-10">
-                                                                    <asp:TextBox ID="txtMaterno" runat="server" Enabled="False" TabIndex="5" Width="85%"></asp:TextBox>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblFechaNacimiento" runat="server" Text="Fecha de Nacimiento:"></asp:Label>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <asp:TextBox ID="txtFechaNacimiento" runat="server" Enabled="False"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtFechaNacimiento" runat="server" Enabled="False" Width="80%"></asp:TextBox>
                                                                     <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" TargetControlID="txtFechaNacimiento" PopupButtonID="imgCalNac" BehaviorID="_content_CalendarExtender1" />
                                                                     <asp:ImageButton ID="imgCalNac" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                                                 </div>
-                                                                <div class="col-md-1">
-                                                                    <asp:Label ID="lblGenero" runat="server" Text="Sexo:"></asp:Label>
+                                                                <div class="col-md-1 text-right">
+                                                                    Sexo
                                                                 </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <asp:RadioButtonList ID="rdoBttnLstGenero" runat="server" Enabled="False" RepeatDirection="Horizontal">
                                                                         <asp:ListItem Value="M">Masculino</asp:ListItem>
                                                                         <asp:ListItem Value="F">Femenino</asp:ListItem>
                                                                     </asp:RadioButtonList>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-2">
-                                                                    <asp:Label ID="lblSemestre" runat="server" Text="Semestre:"></asp:Label>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <asp:TextBox ID="txtSemestre" runat="server" CssClass="box" TabIndex="7" Width="50px"></asp:TextBox>
+                                                                <div class="col-md-1 text-right">
+                                                                    Semestre
                                                                 </div>
                                                                 <div class="col-md-1">
-                                                                    Grupo:
+                                                                    <asp:TextBox ID="txtSemestre" runat="server" CssClass="box" TabIndex="7" Width="100%"></asp:TextBox>
                                                                 </div>
-                                                                <div class="col-md-4">
-                                                                    <asp:TextBox ID="txtGrupo" runat="server" CssClass="box" TabIndex="8" Width="50px"></asp:TextBox>
+                                                                <div class="col-md-1 text-right">
+                                                                    Grupo
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <asp:TextBox ID="txtGrupo" runat="server" CssClass="box" TabIndex="8" Width="100%"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -636,239 +632,179 @@
                                                         <i class="fa fa-cog" aria-hidden="true"></i>Datos de la Exención
                                                     </HeaderTemplate>
                                                     <ContentTemplate>
-                                                        <table style="width: 100%;">
-                                                            <tr valign="top">
-                                                                <td valign="top" class="auto-style14">
-                                                                    <asp:Label ID="lblNivel_D" runat="server" Text="Ciclo Escolar:"></asp:Label>
-                                                                </td>
-                                                                <td valign="top" class="auto-style40">
-                                                                    <customControl:GroupDropDownList ID="ddlCiclo_D" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCiclo_D_SelectedIndexChanged" Width="300px"></customControl:GroupDropDownList>
-                                                                </td>
-                                                                <td align="right" valign="top">&#160;</td>
-                                                                <td align="left" valign="top" class="auto-style47">
-                                                                    <asp:Label ID="lblFechaInicial" runat="server" Text="Fecha Ini:"></asp:Label>
-                                                                </td>
-                                                                <td valign="top" colspan="2">
-                                                                    <table width="100%">
-                                                                        <tr>
-                                                                            <td class="auto-style41">
-                                                                                <asp:TextBox ID="txtFechaInicial" runat="server" Enabled="False" Width="80px"></asp:TextBox>
-                                                                            </td>
-                                                                            <td>
-                                                                                <ajaxToolkit:CalendarExtender ID="CalendarExtenderIni" runat="server" TargetControlID="txtFechaInicial" PopupButtonID="imgCalendarioIni" BehaviorID="_content_CalendarExtenderIni" />
-                                                                                <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                                                            </td>
-                                                                            <td class="auto-style42" align="right">
-                                                                                <asp:Label ID="lblFechaFinal" runat="server" Text="Fecha Fin:"></asp:Label>
-                                                                            </td>
-                                                                            <td class="auto-style49">
-                                                                                <asp:TextBox ID="txtFechaFinal" runat="server" Enabled="False" Width="80px"></asp:TextBox>
-                                                                            </td>
-                                                                            <td>
-                                                                                <ajaxToolkit:CalendarExtender ID="CalendarExtenderFin" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFechaFinal" BehaviorID="_content_CalendarExtenderFin" />
-                                                                                <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </td>
-                                                                <td>&#160;</td>
-                                                            </tr>
-                                                            <tr valign="top">
-                                                                <td class="auto-style14" valign="top">
-                                                                    <asp:Label ID="lblSubTipo" runat="server" Text="Tipo:"></asp:Label>
-                                                                </td>
-                                                                <td class="auto-style40" valign="top">
-                                                                    <asp:DropDownList ID="ddlSubTipo" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSubTipo_SelectedIndexChanged" Width="300px">
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <div class="col-md-1">Ciclo Escolar</div>
+                                                                <div class="col-md-3">
+                                                                    <customControl:GroupDropDownList ID="ddlCiclo_D" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCiclo_D_SelectedIndexChanged" Width="100%"></customControl:GroupDropDownList>
+                                                                </div>
+                                                                <div class="col-md-1 text-right">Fecha Ini</div>
+                                                                <div class="col-md-3">
+                                                                    <asp:TextBox ID="txtFechaInicial" runat="server" Enabled="False" Width="80px"></asp:TextBox>
+                                                                    <ajaxToolkit:CalendarExtender ID="CalendarExtenderIni" runat="server" TargetControlID="txtFechaInicial" PopupButtonID="imgCalendarioIni" BehaviorID="_content_CalendarExtenderIni" />
+                                                                    <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+
+                                                                </div>
+                                                                <div class="col-md-2 text-right">Fecha Fin</div>
+                                                                <div class="col-md-2">
+                                                                    <asp:TextBox ID="txtFechaFinal" runat="server" Enabled="False" Width="80px"></asp:TextBox>
+                                                                    <ajaxToolkit:CalendarExtender ID="CalendarExtenderFin" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFechaFinal" BehaviorID="_content_CalendarExtenderFin" />
+                                                                    <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-1">Tipo</div>
+                                                                <div class="col-md-3">
+                                                                    <asp:DropDownList ID="ddlSubTipo" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlSubTipo_SelectedIndexChanged" Width="100%">
                                                                         <asp:ListItem Value="X">--SELECCIONAR--</asp:ListItem>
                                                                         <asp:ListItem>RECARGO</asp:ListItem>
                                                                         <asp:ListItem>EXENTO</asp:ListItem>
                                                                         <asp:ListItem>DESCUENTO</asp:ListItem>
                                                                         <asp:ListItem Value="CUOTA_NORMAL">CUOTA NORMAL</asp:ListItem>
                                                                     </asp:DropDownList>
-                                                                </td>
-                                                                <td align="right" valign="top">&#160;</td>
-                                                                <td align="left" valign="top" class="auto-style47">
-                                                                    <asp:Label ID="lblTipo" runat="server" Text="SubTipo:"></asp:Label>
-                                                                </td>
-                                                                <td valign="top">
+                                                                </div>
+                                                                <div class="col-md-1 text-right">SubTipo</div>
+                                                                <div class="col-md-3">
                                                                     <asp:DropDownList ID="ddlTipo" runat="server" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" Width="300px" AutoPostBack="True">
                                                                     </asp:DropDownList>
-                                                                </td>
-                                                                <td align="right">&#160;</td>
-                                                                <td>&#160;</td>
-                                                            </tr>
-                                                            <tr valign="top">
-                                                                <td valign="top" class="auto-style14">
-                                                                    <asp:Label ID="lblStatus1" runat="server" Font-Bold="False" Text="Estatus:"></asp:Label>
-                                                                </td>
-                                                                <td valign="top" class="auto-style40">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-1">Estatus</div>
+                                                                <div class="col-md-3">
                                                                     <asp:UpdatePanel ID="UpdatePanel231" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:DropDownList ID="ddlStatus" runat="server" TabIndex="11" Width="300px">
+                                                                            <asp:DropDownList ID="ddlStatus" runat="server" TabIndex="11" Width="100%">
                                                                             </asp:DropDownList>
                                                                             <asp:Label ID="lblEstatusA" runat="server" Font-Bold="True" Font-Size="16px"></asp:Label>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
-                                                                </td>
-                                                                <td align="right" valign="top">&nbsp;</td>
-                                                                <td align="left" valign="top" colspan="2">
-                                                                    <asp:UpdatePanel ID="UpdatePanel233" runat="server">
+                                                                </div>
+                                                                <div class="col-md-1 text-right">
+                                                                    <asp:UpdatePanel ID="UpdatePanel234" runat="server">
                                                                         <ContentTemplate>
-                                                                            <table width="100%">
-                                                                                <tr>
-                                                                                    <td class="auto-style47" valign="top">
-                                                                                        <asp:UpdatePanel ID="UpdatePanel234" runat="server">
-                                                                                            <ContentTemplate>
-                                                                                                <asp:Label ID="lblPorcentaje" runat="server" Text="% Descuento:"></asp:Label>
-                                                                                            </ContentTemplate>
-                                                                                        </asp:UpdatePanel>
-                                                                                    </td>
-                                                                                    <td class="auto-style13" valign="top">
-                                                                                        <asp:TextBox ID="txtPorcentaje" runat="server" CssClass="box" TabIndex="13" Width="50px">100</asp:TextBox>
-                                                                                    </td>
-                                                                                    <td class="auto-style13" valign="top">
-                                                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtPorcentaje" CssClass="MsjError" ErrorMessage="*Requerido" SetFocusOnError="True" ValidationGroup="guardar"></asp:RequiredFieldValidator>
-                                                                                        <asp:RegularExpressionValidator ID="RangeValidator3" runat="server" ControlToValidate="txtPorcentaje" SetFocusOnError="True" ValidationExpression="^-?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9]{0,2})?$">*Formato (999.99)</asp:RegularExpressionValidator>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
+                                                                            <asp:Label ID="lblPorcentaje" runat="server" Text="% Descuento"></asp:Label>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
-                                                                </td>
-                                                                <td align="right">&#160;</td>
-                                                                <td>&#160;</td>
-                                                            </tr>
-                                                            <tr valign="top">
-                                                                <td class="auto-style14" valign="top">
-                                                                    <asp:Label ID="lblEmpleado" runat="server" Font-Bold="False" Text="Padre/Madre:"></asp:Label>
-                                                                </td>
-                                                                <td class="auto-style40" valign="top">
-                                                                    <asp:DropDownList ID="ddlEmpleado" runat="server" Width="300px">
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                                        <ContentTemplate>
+                                                                            <asp:TextBox ID="txtPorcentaje" runat="server" CssClass="box" TabIndex="13" Width="50px">100</asp:TextBox>
+                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtPorcentaje" CssClass="MsjError" ErrorMessage="*Requerido" SetFocusOnError="True" ValidationGroup="guardar"></asp:RequiredFieldValidator>
+                                                                        </ContentTemplate>
+                                                                    </asp:UpdatePanel>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-1">
+                                                                    <asp:Label ID="lblEmpleado" runat="server" Font-Bold="False" Text="Empleado UNACH"></asp:Label>
+                                                                </div>
+                                                                <div class="col-md-3">
+                                                                    <asp:DropDownList ID="ddlEmpleado" runat="server" Width="100%">
                                                                         <asp:ListItem Value="0">AGREGAR--&gt;</asp:ListItem>
                                                                     </asp:DropDownList>
                                                                     <asp:HiddenField ID="hddnEmp" runat="server" />
-                                                                </td>
-                                                                <td align="left" valign="top" colspan="3">
+                                                                </div>
+
+                                                                <ajaxToolkit:ModalPopupExtender ID="modalEmpleado" runat="server" TargetControlID="hddnEmp" PopupControlID="pnlEmpleado" BehaviorID="_content_modalEmpleado" DynamicServicePath="" BackgroundCssClass="modalBackground_Proy">
+                                                                </ajaxToolkit:ModalPopupExtender>
+                                                                <div class="col-md-2 text-left">
+                                                                    <asp:LinkButton ID="linkBttnEmpleado" CssClass="btn btn-dark btn-rounded" runat="server" OnClick="linkBttnEmpleado_Click"><i class="fa fa-user-plus fa-2x white-text" aria-hidden="true"></i></asp:LinkButton>                                                                
+                                                                    <asp:LinkButton ID="linkBttnBorrarEmpleado" CssClass="btn btn-dark btn-rounded" runat="server" OnClick="linkBttnBorrarEmpleado_Click"><i class="fa fa-user-times fa-2x white-text" aria-hidden="true"></i></asp:LinkButton>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <asp:UpdatePanel ID="UpdatePanel244" runat="server">
+                                                                        <ContentTemplate>
+                                                                            <asp:Label ID="lblErrorBuscEmp" runat="server" CssClass="mensaje_rojo" Visible="False" Width="100%"></asp:Label>
+                                                                        </ContentTemplate>
+                                                                    </asp:UpdatePanel>
+                                                                </div>
+                                                            </div>
+                                                            <asp:UpdatePanel ID="updPnlConceptos" runat="server">
+                                                                <ContentTemplate>
                                                                     <table style="width: 100%;">
                                                                         <tr>
-                                                                            <td class="auto-style70">
-                                                                                <ajaxToolkit:ModalPopupExtender ID="modalEmpleado" runat="server" TargetControlID="hddnEmp" PopupControlID="pnlEmpleado" BehaviorID="_content_modalEmpleado" DynamicServicePath="" BackgroundCssClass="modalBackground_Proy">
-                                                                                </ajaxToolkit:ModalPopupExtender>
-                                                                                <asp:ImageButton ID="imgBttnEmpleado" runat="server" ImageUrl="~/Imagenes/2.png" OnClick="imgBttnEmpleado_Click" ToolTip="Asociar" />
+                                                                            <td align="center" colspan="2" valign="top">
+                                                                                <asp:Label ID="lblMsjGuardar" runat="server" Font-Bold="False" Font-Size="12pt" ForeColor="Red"></asp:Label>
                                                                             </td>
-                                                                            <td class="auto-style78">
-                                                                                <asp:ImageButton ID="imgBttnBorrarEmpleado" runat="server" ImageUrl="~/Imagenes/1.png" OnClick="imgBttnBorrarEmpleado_Click" ToolTip="Eliminar Asociación" Visible="False" />
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="center" valign="top">
+                                                                                <div class="alert alert-dark font-weight-bold">
+                                                                                    Conceptos Disponibles
+                                                                                </div>
                                                                             </td>
-                                                                            <td>
-                                                                                <asp:UpdatePanel ID="UpdatePanel244" runat="server">
-                                                                                    <ContentTemplate>
-                                                                                        <asp:Label ID="lblErrorBuscEmp" runat="server" CssClass="mensaje_rojo" Visible="False" Width="100%"></asp:Label>
-                                                                                    </ContentTemplate>
-                                                                                </asp:UpdatePanel>
+                                                                            <td align="center" valign="top">
+                                                                                <div class="alert alert-dark font-weight-bold">
+                                                                                    Conceptos Agregados
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="left" style="width: 50%;" valign="top">
+                                                                                <div id="divGrid" style="border-style: none none solid none; overflow: auto; height: 230px; border-bottom-color: #D9D9D9; border-bottom-width: 1px;">
+                                                                                    <asp:GridView ID="grvConceptosCat" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnSelectedIndexChanged="grvConceptosCat_SelectedIndexChanged" Width="100%">
+                                                                                        <Columns>
+                                                                                            <asp:BoundField DataField="ClaveDetalle" HeaderText="Cve.">
+                                                                                                <HeaderStyle HorizontalAlign="Left" />
+                                                                                                <ItemStyle HorizontalAlign="Left" />
+                                                                                            </asp:BoundField>
+                                                                                            <asp:BoundField DataField="DescripcionDetalle" HeaderText="Descripción">
+                                                                                                <HeaderStyle HorizontalAlign="Left" />
+                                                                                                <ItemStyle HorizontalAlign="Left" Width="70%" />
+                                                                                            </asp:BoundField>
+                                                                                            <asp:TemplateField HeaderText="Importe">
+                                                                                                <ItemTemplate>
+                                                                                                    <asp:TextBox ID="txtImporte" runat="server" Visible='<%# Bind("VisibleTxtImporte") %>' Enabled='<%# Bind("Habilita") %>' TabIndex="14" Text='<%# Bind("ImporteDetalle") %>' Width="80px"></asp:TextBox>
+                                                                                                    <asp:Label ID="lblImporte" runat="server" Visible='<%# Bind("VisibleLblImporte") %>' Text="----"></asp:Label>
+                                                                                                </ItemTemplate>
+                                                                                            </asp:TemplateField>
+                                                                                            <asp:BoundField DataField="ImporteDetalle" />
+                                                                                            <asp:CommandField SelectText="Agregar" ShowSelectButton="True" />
+                                                                                        </Columns>
+                                                                                        <FooterStyle CssClass="enc" />
+                                                                                        <HeaderStyle CssClass="enc" />
+                                                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                                                        <SelectedRowStyle CssClass="sel" />
+                                                                                    </asp:GridView>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td align="right" style="width: 50%;" valign="top">
+                                                                                <div id="divGrid2" style="border-style: none none solid none; overflow: auto; height: 230px; border-bottom-color: #D9D9D9; border-bottom-width: 1px;">
+                                                                                    <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptos_PageIndexChanging" OnRowDeleting="grvConceptos_RowDeleting" Width="100%">
+                                                                                        <Columns>
+                                                                                            <asp:BoundField DataField="ClaveDetalle" HeaderText="Cve.">
+                                                                                                <HeaderStyle HorizontalAlign="Left" />
+                                                                                                <ItemStyle HorizontalAlign="Left" />
+                                                                                            </asp:BoundField>
+                                                                                            <asp:BoundField DataField="DescripcionDetalle" HeaderText="Descripción">
+                                                                                                <HeaderStyle HorizontalAlign="Left" />
+                                                                                                <ItemStyle HorizontalAlign="Left" Width="70%" />
+                                                                                            </asp:BoundField>
+                                                                                            <asp:BoundField DataField="ImporteDetalleInicio" HeaderText="Importe Original">
+                                                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                                            </asp:BoundField>
+                                                                                            <asp:BoundField DataField="ImporteDetalle" HeaderText="Importe">
+                                                                                                <HeaderStyle HorizontalAlign="Right" />
+                                                                                                <ItemStyle HorizontalAlign="Right" />
+                                                                                            </asp:BoundField>
+                                                                                            <asp:BoundField DataField="TipoRegistro" />
+                                                                                            <asp:CommandField ShowDeleteButton="True" />
+                                                                                        </Columns>
+                                                                                        <FooterStyle CssClass="enc" />
+                                                                                        <HeaderStyle CssClass="enc" />
+                                                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                                                        <SelectedRowStyle CssClass="sel" />
+                                                                                    </asp:GridView>
+                                                                                </div>
                                                                             </td>
                                                                         </tr>
                                                                     </table>
-                                                                </td>
-                                                                <td align="right">&#160;</td>
-                                                                <td>&#160;</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="7" valign="top">
-                                                                    <asp:UpdatePanel ID="updPnlConceptos" runat="server">
-                                                                        <ContentTemplate>
-                                                                            <table style="width: 100%;">
-                                                                                <tr>
-                                                                                    <td align="center" colspan="2" valign="top">
-                                                                                        <asp:Label ID="lblMsjGuardar" runat="server" Font-Bold="False" Font-Size="12pt" ForeColor="Red"></asp:Label>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td align="center" valign="top">
-                                                                                        <div class="alert alert-secondary">
-                                                                                            CONCEPTOS DISPONIBLES
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td align="center" valign="top">
-                                                                                        <div class="alert alert-secondary">
-                                                                                            CONCEPTOS AGREGADOS
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td align="left" style="width: 50%;" valign="top">
-                                                                                        <div id="divGrid" style="border-style: none none solid none; overflow: auto; height: 230px; border-bottom-color: #D9D9D9; border-bottom-width: 1px;">
-                                                                                            <asp:GridView ID="grvConceptosCat" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnSelectedIndexChanged="grvConceptosCat_SelectedIndexChanged" Width="100%">
-                                                                                                <Columns>
-                                                                                                    <asp:BoundField DataField="ClaveDetalle" HeaderText="Cve.">
-                                                                                                        <HeaderStyle HorizontalAlign="Left" />
-                                                                                                        <ItemStyle HorizontalAlign="Left" />
-                                                                                                    </asp:BoundField>
-                                                                                                    <asp:BoundField DataField="DescripcionDetalle" HeaderText="Descripción">
-                                                                                                        <HeaderStyle HorizontalAlign="Left" />
-                                                                                                        <ItemStyle HorizontalAlign="Left" Width="70%" />
-                                                                                                    </asp:BoundField>
-                                                                                                    <asp:TemplateField HeaderText="Importe">
-                                                                                                        <ItemTemplate>
-                                                                                                            <asp:TextBox ID="txtImporte" runat="server" Visible='<%# Bind("VisibleTxtImporte") %>' Enabled='<%# Bind("Habilita") %>' TabIndex="14" Text='<%# Bind("ImporteDetalle") %>' Width="80px"></asp:TextBox>
-                                                                                                            <asp:Label ID="lblImporte" runat="server" Visible='<%# Bind("VisibleLblImporte") %>' Text="----"></asp:Label>
-                                                                                                        </ItemTemplate>
-                                                                                                    </asp:TemplateField>
-                                                                                                    <asp:BoundField DataField="ImporteDetalle" />
-                                                                                                    <asp:CommandField SelectText="Agregar" ShowSelectButton="True" />
-                                                                                                </Columns>
-                                                                                                <FooterStyle CssClass="enc" />
-                                                                                                <HeaderStyle CssClass="enc" />
-                                                                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                                                <SelectedRowStyle CssClass="sel" />
-                                                                                            </asp:GridView>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td align="right" style="width: 50%;" valign="top">
-                                                                                        <div id="divGrid2" style="border-style: none none solid none; overflow: auto; height: 230px; border-bottom-color: #D9D9D9; border-bottom-width: 1px;">
-                                                                                            <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptos_PageIndexChanging" OnRowDeleting="grvConceptos_RowDeleting" Width="100%">
-                                                                                                <Columns>
-                                                                                                    <asp:BoundField DataField="ClaveDetalle" HeaderText="Cve.">
-                                                                                                        <HeaderStyle HorizontalAlign="Left" />
-                                                                                                        <ItemStyle HorizontalAlign="Left" />
-                                                                                                    </asp:BoundField>
-                                                                                                    <asp:BoundField DataField="DescripcionDetalle" HeaderText="Descripción">
-                                                                                                        <HeaderStyle HorizontalAlign="Left" />
-                                                                                                        <ItemStyle HorizontalAlign="Left" Width="70%" />
-                                                                                                    </asp:BoundField>
-                                                                                                    <asp:BoundField DataField="ImporteDetalleInicio" HeaderText="Importe Original">
-                                                                                                        <ItemStyle HorizontalAlign="Right" />
-                                                                                                    </asp:BoundField>
-                                                                                                    <asp:BoundField DataField="ImporteDetalle" HeaderText="Importe">
-                                                                                                        <HeaderStyle HorizontalAlign="Right" />
-                                                                                                        <ItemStyle HorizontalAlign="Right" />
-                                                                                                    </asp:BoundField>
-                                                                                                    <asp:BoundField DataField="TipoRegistro" />
-                                                                                                    <asp:CommandField ShowDeleteButton="True" />
-                                                                                                </Columns>
-                                                                                                <FooterStyle CssClass="enc" />
-                                                                                                <HeaderStyle CssClass="enc" />
-                                                                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                                                <SelectedRowStyle CssClass="sel" />
-                                                                                            </asp:GridView>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </ContentTemplate>
-                                                                    </asp:UpdatePanel>
-                                                                    <div align="center">
-                                                                        <asp:UpdateProgress ID="updProgConceptos" runat="server" AssociatedUpdatePanelID="updPnlConceptos">
-                                                                            <ProgressTemplate>
-                                                                                <asp:Image ID="imgddlTipo0" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                                                            </ProgressTemplate>
-                                                                        </asp:UpdateProgress>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td align="center" colspan="7">&nbsp;</td>
-                                                            </tr>
-                                                        </table>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </div>
                                                     </ContentTemplate>
                                                 </ajaxToolkit:TabPanel>
                                                 <ajaxToolkit:TabPanel ID="TabPanel3" runat="server" HeaderText="TabPanel3">
@@ -980,14 +916,7 @@
                                     </tr>
                                     <caption>
 
-                                        <%-- <tr>
-                                                    <td align="center">
-                                                        <asp:UpdateProgress ID="upd44" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-            <progresstemplate>
-                <asp:Image ID="imgMultiview" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-            </progresstemplate>
-        </asp:UpdateProgress></td>
-                                                </tr>--%>
+
                                         <tr>
                                             <td align="center">
                                                 <div class="cuadro_botones">

@@ -9,7 +9,7 @@ using System.Web.UI.HtmlControls;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 //using ClosedXML.Excel;
-using ClosedXML.Excel;
+//using ClosedXML.Excel;
 using System.IO;
 using CapaNegocio;
 using CapaEntidad;

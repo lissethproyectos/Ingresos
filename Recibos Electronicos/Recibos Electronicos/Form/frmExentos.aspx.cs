@@ -931,8 +931,8 @@ namespace Recibos_Electronicos.Form
         {
             lblEmpleado.Visible = false;
             ddlEmpleado.Visible = false;
-            imgBttnEmpleado.Visible = false;
-            imgBttnBorrarEmpleado.Visible = false;
+            linkBttnEmpleado.Visible = false;
+            linkBttnBorrarEmpleado.Visible = false;
             try
             {
                 if (ddlTipo.SelectedValue != "La opción no contiene datos")
@@ -941,8 +941,8 @@ namespace Recibos_Electronicos.Form
                     {
                         lblEmpleado.Visible = true;
                         ddlEmpleado.Visible = true;
-                        imgBttnEmpleado.Visible = true;
-                        imgBttnBorrarEmpleado.Visible = true;
+                        linkBttnEmpleado.Visible = true;
+                        linkBttnBorrarEmpleado.Visible = true;
                     }
                     //else if (ddlTipo.SelectedItem.Text.Contains("SPAUNACH"))
                     //    rdoBttnTipoPersonal.SelectedValue = "D";
@@ -1810,6 +1810,25 @@ namespace Recibos_Electronicos.Form
             string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP062&idFact=" + grvAlumnos.SelectedRow.Cells[0].Text;
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
+
+        protected void linkBttnEmpleado_Click(object sender, EventArgs e)
+        {
+            BuscaEmpleado();
+            BuscaHijo("N");
+            mltViewFamiliares.ActiveViewIndex = 0;
+            lblAlumno.Text = "<strong>ALUMNO: </strong>" + txtNombre.Text + " " + txtPaterno.Text + " " + txtMaterno.Text;
+            modalEmpleado.Show();
+        }
+
+        protected void linkBttnBorrarEmpleado_Click(object sender, EventArgs e)
+        {
+            ddlEmpleado.Items.Clear();
+            ddlEmpleado.Items.Insert(0, new ListItem("AGREGAR-->", "0"));
+            grvEmpleados.DataSource = null;
+            grvEmpleados.DataBind();
+            ddlHijo.Items.Clear();
+            ddlParentesco.Items.Clear();
         }
 
 

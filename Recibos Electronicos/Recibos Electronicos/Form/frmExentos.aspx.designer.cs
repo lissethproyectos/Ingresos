@@ -555,15 +555,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
 
         /// <summary>
-        /// Control lblPaterno.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPaterno;
-
-        /// <summary>
         /// Control txtPaterno.
         /// </summary>
         /// <remarks>
@@ -571,15 +562,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPaterno;
-
-        /// <summary>
-        /// Control lblMaterno.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMaterno;
 
         /// <summary>
         /// Control txtMaterno.
@@ -627,15 +609,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.ImageButton imgCalNac;
 
         /// <summary>
-        /// Control lblGenero.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblGenero;
-
-        /// <summary>
         /// Control rdoBttnLstGenero.
         /// </summary>
         /// <remarks>
@@ -643,15 +616,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rdoBttnLstGenero;
-
-        /// <summary>
-        /// Control lblSemestre.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSemestre;
 
         /// <summary>
         /// Control txtSemestre.
@@ -681,15 +645,6 @@ namespace Recibos_Electronicos.Form
         protected global::AjaxControlToolkit.TabPanel TabPanel2;
 
         /// <summary>
-        /// Control lblNivel_D.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNivel_D;
-
-        /// <summary>
         /// Control ddlCiclo_D.
         /// </summary>
         /// <remarks>
@@ -697,15 +652,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::CapaNegocio.GroupDropDownList ddlCiclo_D;
-
-        /// <summary>
-        /// Control lblFechaInicial.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaInicial;
 
         /// <summary>
         /// Control txtFechaInicial.
@@ -735,15 +681,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.ImageButton imgCalendarioIni;
 
         /// <summary>
-        /// Control lblFechaFinal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaFinal;
-
-        /// <summary>
         /// Control txtFechaFinal.
         /// </summary>
         /// <remarks>
@@ -771,15 +708,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.ImageButton imgCalendarioFin;
 
         /// <summary>
-        /// Control lblSubTipo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblSubTipo;
-
-        /// <summary>
         /// Control ddlSubTipo.
         /// </summary>
         /// <remarks>
@@ -789,15 +717,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlSubTipo;
 
         /// <summary>
-        /// Control lblTipo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTipo;
-
-        /// <summary>
         /// Control ddlTipo.
         /// </summary>
         /// <remarks>
@@ -805,15 +724,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlTipo;
-
-        /// <summary>
-        /// Control lblStatus1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblStatus1;
 
         /// <summary>
         /// Control UpdatePanel231.
@@ -843,15 +753,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblEstatusA;
 
         /// <summary>
-        /// Control UpdatePanel233.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel233;
-
-        /// <summary>
         /// Control UpdatePanel234.
         /// </summary>
         /// <remarks>
@@ -870,6 +771,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblPorcentaje;
 
         /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
+        /// <summary>
         /// Control txtPorcentaje.
         /// </summary>
         /// <remarks>
@@ -886,15 +796,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
-
-        /// <summary>
-        /// Control RangeValidator3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RangeValidator3;
 
         /// <summary>
         /// Control lblEmpleado.
@@ -933,22 +834,22 @@ namespace Recibos_Electronicos.Form
         protected global::AjaxControlToolkit.ModalPopupExtender modalEmpleado;
 
         /// <summary>
-        /// Control imgBttnEmpleado.
+        /// Control linkBttnEmpleado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnEmpleado;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnEmpleado;
 
         /// <summary>
-        /// Control imgBttnBorrarEmpleado.
+        /// Control linkBttnBorrarEmpleado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnBorrarEmpleado;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnBorrarEmpleado;
 
         /// <summary>
         /// Control UpdatePanel244.
@@ -1003,15 +904,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvConceptos;
-
-        /// <summary>
-        /// Control updProgConceptos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress updProgConceptos;
 
         /// <summary>
         /// Control TabPanel3.

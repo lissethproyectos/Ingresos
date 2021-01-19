@@ -16,11 +16,11 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "p_banco", "p_dependencia", "p_importe", "p_referencia", "p_ficha", "p_folio", "p_sucursal", "p_cajero", "p_pago_fecha", "p_notas" };
-                object[] Valores = { banco.Nombre, banco.Dependencia, banco.Importe, banco.Referencia, banco.Ficha, banco.Folio, banco.Sucursal, banco.Cajero, banco.Fecha, banco.Notas };
+                String[] Parametros = { "p_banco", "p_dependencia", "p_importe", "p_referencia", "p_ficha", "p_folio", "p_sucursal", "p_cajero", "p_pago_fecha", "p_notas", "p_forma_pago" };
+                object[] Valores = { banco.Nombre, banco.Dependencia, banco.Importe, banco.Referencia, banco.Ficha, banco.Folio, banco.Sucursal, banco.Cajero, banco.Fecha, banco.Notas, banco.Pago_Tipo };
                 String[] ParametrosOut = { "p_Bandera" };
 
-                Cmd = CDDatos.GenerarOracleCommand("ins_pagos", ref salida, Parametros, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("ins_pagos_layout", ref salida, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {
