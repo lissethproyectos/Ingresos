@@ -214,16 +214,49 @@
             border: 1px solid #ced4da;
             border-radius: .25rem;
         }
+
+        .overlay {
+            position: fixed;
+            z-index: 98;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            background-color: #aaa;
+            filter: alpha(opacity=80);
+            opacity: 0.8;
+        }
+
+        .overlayContent {
+            z-index: 99;
+            margin: 250px auto;
+            width: 80px;
+            height: 80px;
+        }
+
+        .overlayContent h2 {
+                font-size: 18px;
+                font-weight: bold;
+                color: #000;
+            }
+
+        .overlayContent img {
+                width: 30px;
+                height: 30px;
+            }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col text-center">
                 <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
                     <ProgressTemplate>
-                        <asp:Image ID="Image85" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                        <div class="overlay">
+                            <div class="overlayContent">
+                                <asp:Image ID="img1" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
+                                </div>
+                            </div>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
@@ -233,7 +266,7 @@
         <ContentTemplate>
             <asp:MultiView ID="mltViewFacturas" runat="server">
                 <asp:View ID="Datos" runat="server">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col">
                                 <div class="note note-warning" style="font-size: 14px">
@@ -293,7 +326,7 @@
                             <div class="col-md-11">
                                 <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
                                 </asp:DropDownList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="*Dependencia" InitialValue="00000" ValidationGroup="New">*Requerido</asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="reqDep" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="*Dependencia" InitialValue="00000" ValidationGroup="New">*Requerido</asp:RequiredFieldValidator>
                             </div>
                         </div>
                         <div class="row">
@@ -346,7 +379,7 @@
                     <asp:DropDownList ID="ddlAvance" runat="server" Visible="False">
                     </asp:DropDownList>
                     <asp:HiddenField ID="hddnBandera" runat="server" />
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col">
                                 <asp:MultiView ID="mltViewTipo" runat="server">
@@ -417,10 +450,12 @@
                                                                 </asp:BoundField>
                                                                 <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Depen" SortExpression="DEPENDENCIA">
                                                                     <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" />                                                                </asp:BoundField>
-                                                                <asp:BoundField DataField="FACT_BANCO" HeaderText="Banco" >
+                                                                    <ItemStyle HorizontalAlign="Center" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="FACT_BANCO" HeaderText="Banco">
                                                                     <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" /></asp:BoundField>
+                                                                    <ItemStyle HorizontalAlign="Center" />
+                                                                </asp:BoundField>
                                                                 <asp:BoundField DataField="FACT_FECHA_CAPTURA" HeaderText="Fecha Solicitud">
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle HorizontalAlign="Center" />
@@ -610,7 +645,7 @@
                     </table>
                 </asp:View>
                 <asp:View ID="Facturas" runat="server">
-                    <div class="container">
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-2">
                                 Dependencia
@@ -627,13 +662,13 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="0" Width="100%" CssClass="mGrid" Height="550px" ScrollBars="Vertical">
+                                <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="0" Width="100%" CssClass="mGrid" Height="614px" ScrollBars="Vertical">
                                     <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                         <HeaderTemplate>
                                             <i class="fa fa-file-code-o" aria-hidden="true"></i>Información de Factura
                                         </HeaderTemplate>
                                         <ContentTemplate>
-                                            <div class="container">
+                                            <div class="container-fluid">
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         RFC
@@ -685,10 +720,10 @@
                                                         <asp:TextBox ID="txtReceptor_Domicilio" runat="server" MaxLength="500" TabIndex="4" Width="100%"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="valCalle_Fiscal" runat="server" ControlToValidate="txtReceptor_Domicilio" ErrorMessage="*Calle" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-1">
                                                         Colonia
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-5">
                                                         <asp:TextBox ID="txtReceptor_Colonia" runat="server" TabIndex="5" Width="100%"></asp:TextBox>
                                                         <asp:RequiredFieldValidator ID="valColonia_Fiscal" runat="server" ControlToValidate="txtReceptor_Colonia" ErrorMessage="*Colonia" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                     </div>
@@ -714,7 +749,7 @@
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="ddlReceptor_Municipio" ErrorMessage="*Municipio" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                     </div>
-                                                    <div class="col-md-1">
+                                                    <div class="col-md-1 text-right">
                                                         CP
                                                     </div>
                                                     <div class="col-md-1">
@@ -757,8 +792,8 @@
                                                     <div class="col-md-2">
                                                         Uso de CFDI
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <asp:DropDownList ID="ddlCFDI" runat="server" TabIndex="11">
+                                                    <div class="col-md-3">
+                                                        <asp:DropDownList ID="ddlCFDI" runat="server" TabIndex="11" Width="100%">
                                                             <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
                                                             <asp:ListItem Value="G01">Adquisición de mercancias</asp:ListItem>
                                                             <asp:ListItem Value="G02">Devolución, descuento o bonificaciones</asp:ListItem>
@@ -768,31 +803,45 @@
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="valCFDI" runat="server" ControlToValidate="ddlCFDI" ErrorMessage="*Requerido" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales"></asp:RequiredFieldValidator>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        Nombre del Servicio
+                                                    <div class="col-md-1">
+                                                        Teléfono
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <asp:DropDownList ID="ddlServicio" runat="server" TabIndex="12" Width="100%">
-                                                        </asp:DropDownList>
-                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlServicio" ErrorMessage="*Nombre del Servicio" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
+                                                    <div class="col-md-2">
+                                                        <asp:TextBox ID="txtReceptor_Telefono" runat="server" TabIndex="13" Width="100%"></asp:TextBox>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        Email
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <asp:TextBox ID="txtReceptor_Correo" runat="server" TabIndex="14" Width="100%"></asp:TextBox>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-2">
-                                                        Teléfono
+                                                        Inf del Pago
+                                                        </div>
+                                                    <div class="col-md-10">
+                                                <div class="alert alert-info" id="rowInfAdicional" runat="server">
+                                                    
+                                                <div class="row">
+                                                    <div class="col-md-2 font-weight-bold">
+                                                        Total
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <asp:TextBox ID="txtReceptor_Telefono" runat="server" TabIndex="13" Width="100%"></asp:TextBox>
-                                                    </div>
-
-                                                    <div class="col-md-2">
-                                                        Correo Electrónico
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <asp:TextBox ID="txtReceptor_Correo" runat="server" TabIndex="14" Width="100%"></asp:TextBox>
+                                                    <div class="col-md-10">
+                                                        <asp:Label ID="lblImporte" runat="server"></asp:Label>
                                                     </div>
                                                 </div>
-                                                <br />
+                                                <div class="row">
+                                                    <div class="col-md-2 font-weight-bold">
+                                                        Conceptos
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <asp:Label ID="lblConceptosFac" runat="server"></asp:Label>
+                                                    </div>
+                                                </div>
+                                                    </div>
+                                                        </div>
+                                                    </div>
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         Descripción
@@ -841,7 +890,7 @@
                                         <ContentTemplate>
                                             <asp:UpdatePanel ID="UpdatePanel147" runat="server">
                                                 <ContentTemplate>
-                                                    <div class="container">                                                        
+                                                    <div class="container">
                                                         <div class="row">
                                                             <div class="col">
                                                                 <ajaxToolkit:Accordion ID="Accordion1" runat="server" ContentCssClass="alert alert-dark" FadeTransitions="True" FramesPerSecond="50" HeaderCssClass="accordionCabecera" HeaderSelectedCssClass="cssHeaderSelected" Height="700px" RequireOpenedPane="False" SelectedIndex="-1" TransitionDuration="200" Width="100%">
@@ -1096,7 +1145,7 @@
                                                     </div>
                                                     <br />
                                                     <div class="container">
-                                                        <div class="row">
+                                                        <%--<div class="row">
                                                             <div class="col-md-1">
                                                                 Nivel
                                                             </div>
@@ -1104,7 +1153,7 @@
                                                                 <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%">
                                                                 </asp:DropDownList>
                                                             </div>
-                                                        </div>
+                                                        </div>--%>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <asp:CustomValidator ID="valConceptos" runat="server" ErrorMessage="*Se debe asignar al menor un concepto" OnServerValidate="ConceptosAsignados" ValidationGroup="DatosFiscales">*Conceptos Requeridos</asp:CustomValidator>
@@ -1249,12 +1298,15 @@
                                             </asp:UpdatePanel>
                                         </ContentTemplate>
                                     </ajaxToolkit:TabPanel>
+
                                 </ajaxToolkit:TabContainer>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col text-right">
-                                <asp:Button ID="btnGuardarEditar" runat="server" CssClass="btn btn-info" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="GUARDAR" ValidationGroup="DatosFiscales" />
+                                <%--<asp:LinkButton ID="linkBttnVerRecibo" runat="server" CssClass="btn btn-warning" OnClick="linkBttnVerRecibo_Click"><i class="fa fa-file"></i> VER RECIBO</asp:LinkButton>--%>
+                                <asp:Button ID="bttnVerRecibo" runat="server" CssClass="btn btn-warning" Text="VER RECIBO" OnClick="bttnVerRecibo_Click" />
+                                &nbsp;<asp:Button ID="btnGuardarEditar" runat="server" CssClass="btn btn-info" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="GUARDAR" ValidationGroup="DatosFiscales" />
                                 &nbsp;<asp:Button ID="btnCancelarEditar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnCancelarEditar_Click" TabIndex="15" Text="CANCELAR" />
                             </div>
                         </div>
@@ -1263,12 +1315,9 @@
             </asp:MultiView>
         </ContentTemplate>
     </asp:UpdatePanel>
-
     <asp:HiddenField ID="hddnCorreo" runat="server" />
     <ajaxToolkit:ModalPopupExtender ID="modalCorreo" runat="server" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlCorreo" TargetControlID="hddnCorreo">
     </ajaxToolkit:ModalPopupExtender>
-
-
     <asp:Panel ID="pnlCorreo" runat="server" CssClass="TituloModalPopupMsg" Width="65%">
         <div class="card text-white bg-dark mb-3">
             <div class="card-header">

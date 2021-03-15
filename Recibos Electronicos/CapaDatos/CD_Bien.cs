@@ -317,6 +317,29 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref OracleCmd);
             }
         }
+        public void EditarProducto(Bien ObjBien, ref string Verificador)
+        {
+
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand OracleCmd = null;
+            try
+            {
+                string[] Parametros = { "P_ID_BASICOS", "P_DESCRIPCION"
+                                      };
+                string[] ParametrosOut = { "P_BANDERA" };
+
+                object[] Valores = { ObjBien.Id_Inventario, ObjBien.Descripcion };
+                OracleCmd = CDDatos.GenerarOracleCommand("UPD_PRODUCTO", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref OracleCmd);
+            }
+        }
 
         public void EliminarServicio(Bien ObjBien, ref string Verificador)
         {
@@ -376,7 +399,7 @@ namespace CapaDatos
             {
                 string[] ParametrosIn = { "P_ID" };
                 object[] Valores = { ObjBien.Id_Inventario };
-                string[] ParametrosOut = { "P_DEPENDENCIA", "P_RUBRO", "P_CLAVE", "P_DESCRIPCION", "P_IMPORTE", "P_CLAVE_CONCEPTO", "P_GRUPO", "P_BANDERA" };
+                string[] ParametrosOut = { "P_DEPENDENCIA", "P_RUBRO", "P_CLAVE", "P_DESCRIPCION", "P_IMPORTE", "P_CLAVE_CONCEPTO", "P_GRUPO", "P_ID_CONCEPTO", "P_BANDERA" };
                 cmm = CDDatos.GenerarOracleCommand("SEL_SERVICIO", ref Verificador, ParametrosIn, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
@@ -388,6 +411,7 @@ namespace CapaDatos
                     ObjBien.Costo = Convert.ToDouble(cmm.Parameters["P_IMPORTE"].Value);
                     ObjBien.Concepto = Convert.ToString(cmm.Parameters["P_CLAVE_CONCEPTO"].Value);
                     ObjBien.Grupo = Convert.ToString(cmm.Parameters["P_GRUPO"].Value);
+                    ObjBien.Id_Concepto = Convert.ToInt32(cmm.Parameters["P_ID_CONCEPTO"].Value);
                 }
             }
             catch (Exception ex)

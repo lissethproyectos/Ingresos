@@ -77,6 +77,9 @@ namespace CapaEntidad
         private int _FACT_DIAS_SOLICITUD;
         private string _FACT_DESC_STATUS_SOLICITUD;
         private string  _STATUS_REF_ANTICIPADA;
+        private string _FACT_SEMESTRE;
+        private string _FACT_CONCEPTOS;
+        private string _FACT_IMPORTE;
         //Metodos agregados por Lisseth
 
         public string FACT_NIVEL
@@ -256,6 +259,12 @@ namespace CapaEntidad
             get { return _FACT_CARRERA; }
             set { _FACT_CARRERA = value; }
         }
+
+        public string FACT_SEMESTRE
+        {
+            get { return _FACT_SEMESTRE; }
+            set { _FACT_SEMESTRE = value; }
+        }
         public string FACT_NOMBRE
         {
             get { return _FACT_NOMBRE; }
@@ -373,6 +382,13 @@ namespace CapaEntidad
             get { return _FACT_RECEPTOR_FORMA_PAGO; }
             set { _FACT_RECEPTOR_FORMA_PAGO = value; }
         }
+
+
+        public string FACT_CONCEPTOS
+        {
+            get { return _FACT_CONCEPTOS; }
+            set { _FACT_CONCEPTOS = value; }
+        }
         public string FACT_RECEPTOR_TELEFONO
         {
             get { return _FACT_RECEPTOR_TELEFONO; }
@@ -452,6 +468,12 @@ namespace CapaEntidad
         {
             get { return _FACT_IMPUESTO_TASA; }
             set { _FACT_IMPUESTO_TASA = value; }
+        }
+
+        public string FACT_IMPORTE
+        {
+            get { return _FACT_IMPORTE; }
+            set { _FACT_IMPORTE = value; }
         }
         public string FACT_SELLO_DIGITAL
         {

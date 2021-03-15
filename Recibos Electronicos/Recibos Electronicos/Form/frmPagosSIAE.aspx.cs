@@ -148,6 +148,9 @@ namespace Recibos_Electronicos.Form
                 txtFolioBanco.Text = objFactura.FACT_FOLIOBANCARIO;
                 txtFechaPago.Text = objFactura.FACT_FECHA_FACTURA;
                 txtCiclo.Text = objFactura.CICLO_ESCOLAR;
+                txtEscuela.Text = objFactura.FACT_DEPENDENCIA;
+                txtIdCarrera.Text = objFactura.FACT_CARRERA;
+                txtSemestre.Text = objFactura.FACT_SEMESTRE;
                 try
                 {
                     ddlBanco.SelectedValue = objFactura.FACT_BANCO;
@@ -240,7 +243,10 @@ namespace Recibos_Electronicos.Form
                     CargarGrid();
                 }
                 else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
+                }
             }
             catch (Exception ex)
             {
@@ -260,6 +266,9 @@ namespace Recibos_Electronicos.Form
             objFactura.FACT_REFERENCIA = txtReferenciaOrig.Text;
             objFactura.FACT_CONFIRMADO = (chkPagoAplicado.Checked == true) ? "S" : "N";
             objFactura.CICLO_ESCOLAR = txtCiclo.Text;
+            objFactura.FACT_DEPENDENCIA = txtEscuela.Text;
+            objFactura.FACT_CARRERA = txtIdCarrera.Text;
+            objFactura.FACT_SEMESTRE = txtSemestre.Text;
             RefPag = (txtReferenciaPagada.Text == string.Empty) ? txtReferenciaOrig.Text : txtReferenciaPagada.Text;   
             CNSIAE.ActualizarDatosSIAE(objFactura, RefPag, SesionUsu.Usu_Nombre, ref Verificador);
             return Verificador;

@@ -43,7 +43,7 @@ namespace Recibos_Electronicos
                 if (SesionUsu.Usu_TipoUsu == 3)
                     siteMap = "ArchivosMenu/Web" + SesionUsu.Usuario + ".sitemap";
 
-                else if (SesionUsu.Usu_TipoUsu == 1 || SesionUsu.Usu_TipoUsu == 2 || SesionUsu.Usu_TipoUsu == 4 || SesionUsu.Usu_TipoUsu == 6)
+                else if (SesionUsu.Usu_TipoUsu == 1 || SesionUsu.Usu_TipoUsu == 2 || SesionUsu.Usu_TipoUsu == 4 || SesionUsu.Usu_TipoUsu == 6 || SesionUsu.Usu_TipoUsu == 7)
                     siteMap = "ArchivosMenuAlumno/WebAlumno.sitemap";
 
                 else

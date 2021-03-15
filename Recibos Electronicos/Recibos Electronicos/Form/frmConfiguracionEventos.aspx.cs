@@ -229,7 +229,7 @@ namespace Recibos_Electronicos.Form
             grdEventos.SelectedIndex = row.RowIndex;
             string ruta = string.Empty;
             if (grdEventos.SelectedRow.Cells[10].Text == "S")
-                ruta = "https://sysweb.unach.mx/FichaReferenciadaNew/Form/Registro_Participantes.aspx?evento=" + grdEventos.SelectedRow.Cells[1].Text;
+                ruta = "https://sysweb.unach.mx/FichaReferenciada/Form/Registro_Participantes.aspx?evento=" + grdEventos.SelectedRow.Cells[1].Text;
             else
                 ruta = "https://sysweb.unach.mx/FichaReferenciada/Form/Registro_Participantes.aspx?evento=" + grdEventos.SelectedRow.Cells[1].Text;
 

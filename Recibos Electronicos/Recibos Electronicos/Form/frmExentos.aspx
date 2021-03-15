@@ -35,13 +35,13 @@
             height: 80px;
         }
 
-            .overlayContent h2 {
+        .overlayContent h2 {
                 font-size: 18px;
                 font-weight: bold;
                 color: #000;
             }
 
-            .overlayContent img {
+        .overlayContent img {
                 width: 30px;
                 height: 30px;
             }
@@ -72,17 +72,13 @@
 
         .auto-style51 {
             background-color: #d9edf7;
-            color: #31708f; /*background-color:#F8CBAD;
-    color:#C55A11;*/
-            ;
+            color: #31708f;
             font-size: 12px;
             margin-left: 1px;
             padding: 8px 10px 8px 10px;
             box-sizing: border-box;
-            -moz-box-sizing: border-box; /*Firefox*/
-            ;
-            -webkit-box-sizing: border-box; /*Safari*/
-            ;
+            -moz-box-sizing: border-box; /*Firefox*/            
+            -webkit-box-sizing: border-box; /*Safari*/            
             border-radius: 3px 3px 3px 3px;
             -moz-border-radius: 3px 3px 3px 3px;
             -webkit-border-radius: 3px 3px 3px 3px;
@@ -158,7 +154,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col text-center">
                 <%--<asp:UpdateProgress ID="updPrMultiview" runat="server" AssociatedUpdatePanelID="updPnlMultiview">
@@ -183,7 +179,7 @@
                     <ContentTemplate>
                         <asp:MultiView ID="MultiView1" runat="server">
                             <asp:View ID="View1" runat="server">
-                                <div class="container">
+                                <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
                                             <asp:GridView ID="grvStatus" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="grvStatus_PageIndexChanging" PageSize="5" Width="100%" BorderColor="#D8D8D8" BorderStyle="Solid" BorderWidth="1px">
@@ -491,13 +487,13 @@
                                 <usr:uCCorreo ID="PnlCorreo" runat="server" />
                             </asp:View>
                             <asp:View ID="View2" runat="server">
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td>
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" CssClass="classic-tabs">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col">
+<ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" CssClass="classic-tabs">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
-                                                        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>Datos del Alumno
+                                                        <i class="fa fa-user-circle" aria-hidden="true"></i>Datos del Alumno
                                                     </HeaderTemplate>
                                                     <ContentTemplate>
                                                         <div class="container-fluid">
@@ -912,47 +908,21 @@
                                                     </ContentTemplate>
                                                 </ajaxToolkit:TabPanel>
                                             </ajaxToolkit:TabContainer>
-                                        </td>
-                                    </tr>
-                                    <caption>
-
-
-                                        <tr>
-                                            <td align="center">
-                                                <div class="cuadro_botones">
-                                                    <%-- <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                                                <ContentTemplate>--%>
+                                        </div>
+                                    </div>
+                                            <div class="row">
+                                                <div class="col text-right">
                                                     <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-info" OnClick="btnGuardar_Click" TabIndex="20" Text="GUARDAR" ValidationGroup="guardar" />
                                                     &nbsp;<asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnCancelar_Click" TabIndex="21" Text="CANCELAR" />
-                                                    <%--                                                                </ContentTemplate>
-                                                            </asp:UpdatePanel>--%>
+
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <table style="width: 100%;">
-                                                    <tr valign="top">
-                                                        <td class="auto-style46">&nbsp;</td>
-                                                        <td>
-                                                            <asp:UpdatePanel ID="UpdatePanel238" runat="server">
-                                                                <ContentTemplate>
-                                                                    <br />
-                                                                </ContentTemplate>
-                                                            </asp:UpdatePanel>
-                                                        </td>
-                                                    </tr>
-                                                    <tr valign="top">
-                                                        <td class="auto-style46">
+                                            </div>
+                                       
+                                         
                                                             <asp:Label ID="lblObservaciones" runat="server" Text="Observaciones:"></asp:Label>
-                                                        </td>
-                                                        <td>
+                                                       
                                                             <asp:TextBox ID="txtObservaciones" runat="server" CssClass="box" Height="80px" MaxLength="1024" TabIndex="19" TextMode="MultiLine" Width="100%"></asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr valign="top">
-                                                        <td align="center" class="auto-style46">&nbsp;</td>
-                                                        <td>
+                                                       
                                                             <asp:Panel ID="pnlEmpleado" runat="server" CssClass="TituloModalPopupMsg" Height="420px" Width="694px">
                                                                 <div align="center">
                                                                     <asp:UpdateProgress ID="updProEmpleados" runat="server" AssociatedUpdatePanelID="updPnlEmpleados">
@@ -1133,16 +1103,8 @@
                                                                     </ContentTemplate>
                                                                 </asp:UpdatePanel>
                                                             </asp:Panel>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>
+                                                     
+                                       
                                                 <div class="card-deck">
                                                     <div class="card">
                                                         <div class="card-body">
@@ -1182,25 +1144,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="auto-style16"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                    </caption>
-                                </table>
+ </div>
+                                       
                             </asp:View>
                             <asp:View ID="View3" runat="server">
                                 <div align="center">

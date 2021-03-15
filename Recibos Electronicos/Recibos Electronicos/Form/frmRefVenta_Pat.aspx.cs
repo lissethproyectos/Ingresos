@@ -328,8 +328,6 @@ namespace Recibos_Electronicos.Form
 
 
                     }
-
-
                     else
                     {
                         int[] Celdas2 = { 0, 1, 3, 10, 11, 12, 13, 14 };
@@ -1145,10 +1143,10 @@ namespace Recibos_Electronicos.Form
 
         protected void btnCancelar_C_Click(object sender, EventArgs e)
         {
-            txtBuscaRef.Text = hddnReferencia.Value;
-            DDLTipoVenta.Enabled = true;
-            CargarGridInicio();
-            MultiView1.ActiveViewIndex = 1;
+            //txtBuscaRef.Text = hddnReferencia.Value;
+            //DDLTipoVenta.Enabled = true;
+            //CargarGridInicio();
+            //MultiView1.ActiveViewIndex = 1;
             modalPagar.Hide();
         }
 
@@ -1287,7 +1285,7 @@ namespace Recibos_Electronicos.Form
             protected void bttnReimprimir_Click(object sender, EventArgs e)
             {
                 SesionUsu.Editar = 0;
-                Button cbi = (Button)(sender);
+                LinkButton cbi = (LinkButton)(sender);
                 GridViewRow row = (GridViewRow)cbi.NamingContainer;
                 grdDatosFactura.SelectedIndex = row.RowIndex;
 
@@ -1327,7 +1325,7 @@ namespace Recibos_Electronicos.Form
 
             protected void bttnVerRecibo_Click(object sender, EventArgs e)
             {
-                Button cbi = (Button)(sender);
+                LinkButton cbi = (LinkButton)(sender);
                 GridViewRow row = (GridViewRow)cbi.NamingContainer;
                 grdDatosFactura.SelectedIndex = row.RowIndex;
 
@@ -1388,7 +1386,7 @@ namespace Recibos_Electronicos.Form
             {
                 SesionUsu.Editar = 0;
                 Verificador = string.Empty;
-                Button cbi = (Button)(sender);
+                LinkButton cbi = (LinkButton)(sender);
                 GridViewRow row = (GridViewRow)cbi.NamingContainer;
                 grdDatosFactura.SelectedIndex = row.RowIndex;
                 int FichaBancaria = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
@@ -1540,5 +1538,7 @@ namespace Recibos_Electronicos.Form
                 }
 
             }
-        }
+
+       
+    }
     }

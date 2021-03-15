@@ -310,6 +310,7 @@
     <Content Include="Css\Style.css" />
     <Content Include="Css\Tab.css" />
     <Content Include="EnviarCorreo.ascx" />
+    <Content Include="Eventos_Ingenieria.html" />
     <Content Include="facturapi.ico" />
     <Content Include="Form\Exencion_old.aspx" />
     <Content Include="Form\frmAdmonFichaRef.aspx" />
@@ -1240,6 +1241,12 @@
       <DependentUpon>REP067.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\REP068.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>REP068.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\RepComprobanteFiscal.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1364,6 +1371,7 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <None Include="Properties\PublishProfiles\ProyLis.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reportes\ComprobanteFiscal.rpt">
@@ -1409,6 +1417,10 @@
     <EmbeddedResource Include="Reportes\REP067.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>REP067.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\REP068.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>REP068.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RepComprobanteFiscal_Ref.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

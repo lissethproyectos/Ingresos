@@ -17,7 +17,7 @@ namespace Recibos_Electronicos
 {
     public partial class Acceso : System.Web.UI.Page
     {
-        //pruebas
+        //pruebas 2
 
         #region <Variables>
         string Verificador = string.Empty;
@@ -37,11 +37,16 @@ namespace Recibos_Electronicos
         {
             try
             {
-                if (Request.QueryString["RGN"] != null)
+                if (Request.QueryString["origen"] != null)
                 {
-                    DDLTipoUsuario.SelectedValue = "1";
-                    txtCve.Visible = true;
-                    txtCve.Text = Convert.ToString(Request.QueryString["RGN"]);
+                    if (Convert.ToString(Request.QueryString["origen"]) == "evento")
+                    {
+                        ScriptManager.RegisterStartupScript(this, GetType(), "OrigenEvento", "OrigenEvento();", true);
+
+                        //DDLTipoUsuario.SelectedValue = "4";
+                        //txtCve.Visible = true;
+                        //txtCve.Text = Convert.ToString(Request.QueryString["evento"]);
+                    }
                 }
                 //if (Request.QueryString["Token"] != null)
                 //{
@@ -61,7 +66,7 @@ namespace Recibos_Electronicos
                 //        lblMensaje.Text = "El Token no es válido";
                 //    }
 
-                    //}
+                //}
             }
             catch (Exception ex)
             {
@@ -175,13 +180,13 @@ namespace Recibos_Electronicos
                             Sesion.Nombre_Completo = NombreUsu;
                             Sesion.Usu_TipoUsu = Convert.ToInt32("3");
                             Sesion.Correo_UNACH = txtCve.Text;
-                            
+
                         }
                     }
                     else
                         Verificador = "No fue posible realizar la autenticación, correo o contraseña no validos.";
 
-                    
+
                 }
                 else if (Sesion.Usu_TipoUsu == 6)
                 {
@@ -230,7 +235,7 @@ namespace Recibos_Electronicos
                 //Extracting Node element using Getvalue method
                 string Autorizado = jObject.GetValue("valido").ToString();
                 if (jObject.GetValue("gecos").ToString() == string.Empty)
-                    Nombre = ""; 
+                    Nombre = "";
                 else
                     Nombre = jObject.GetValue("gecos").ToString();
 
@@ -239,7 +244,7 @@ namespace Recibos_Electronicos
                 else
                     return false;
             }
-            catch
+            catch (Exception ex)
             {
                 return false;
             }
@@ -257,8 +262,8 @@ namespace Recibos_Electronicos
 
                 //Verifica que el usuario tenga correo unach
                 if (Sesion.Usu_TipoUsu == 3)
-                {   
-                    if(Sesion.Usu_Central=="S")
+                {
+                    if (Sesion.Usu_Central == "S")
                         Response.Redirect("frmInicio.aspx", false);
                     else
                         Response.Redirect("Inicio.aspx", false);
@@ -286,5 +291,6 @@ namespace Recibos_Electronicos
 
         }
 
+        
     }
 }

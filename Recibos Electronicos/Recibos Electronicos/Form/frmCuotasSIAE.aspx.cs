@@ -325,5 +325,10 @@ namespace Recibos_Electronicos.Form
         {
             CargarGrid();
         }
+
+        protected void bttnBuscar_Click(object sender, ImageClickEventArgs e)
+        {
+            CargarGrid();
+        }
     }
 }

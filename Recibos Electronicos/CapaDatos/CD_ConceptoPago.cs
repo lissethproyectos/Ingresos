@@ -60,6 +60,55 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+
+        public void ConsultarTipoServicio(ConceptoPago ObjConceptoPago, ref List<ConceptoPago> List)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+
+                //string[] ParametrosIn ={
+                //                           "p_nivel",
+                //                           "p_status",
+                //                           "p_orden",
+                //                           "p_tipo",
+                //                           "p_Busqueda"
+                //                        };
+                //Object[] Valores ={
+                //                    ObjConceptoPago.Nivel,
+                //                    ObjConceptoPago.Status,
+                //                    Orden,
+                //                    Tipo,
+                //                    Busca
+
+                //};
+                //cmm = CDDatos.GenerarOracleCommandCursor("pkg_pagos.Obt_Grid_Cat_Conceptos", ref dr, ParametrosIn, Valores);
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Combo_Tipo_Servicios_F", ref dr);
+
+
+                while (dr.Read())
+                {
+                    ObjConceptoPago = new ConceptoPago();
+                    ObjConceptoPago.ClaveConcepto = Convert.ToString(dr["clave"]);
+                    ObjConceptoPago.Descripcion = Convert.ToString(dr["descripcion"]);
+                    List.Add(ObjConceptoPago);
+
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void ConsultarConceptoPago(ref ConceptoPago ObjConceptoPago, string Orden, bool Habilitado, string Tipo, string Busca, ref List<ConceptoPago> List)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");

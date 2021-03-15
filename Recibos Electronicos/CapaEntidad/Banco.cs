@@ -254,6 +254,7 @@ namespace CapaEntidad
                         pago_fecha = dato.Substring(251, 8);
                         pago_hora = dato.Substring(241, 6);
                         notas = "";
+                        pago_tipo = "VENTANILLA";
                         if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))
                             return 0;
 
@@ -285,7 +286,7 @@ namespace CapaEntidad
                         pago_fecha = dato.Substring(16, 8);
                         pago_hora = dato.Substring(87, 4);
                         notas = "";
-
+                        pago_tipo = "VENTANILLA";
                         if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))
                             return 0;
 
@@ -315,7 +316,7 @@ namespace CapaEntidad
                         pago_fecha = dato.Substring(1, 6);
                         pago_hora = "";
                         notas = "";
-
+                        pago_tipo = "VENTANILLA";
 
                         if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))
                             return 0;
@@ -349,6 +350,7 @@ namespace CapaEntidad
                         pago_fecha = dato.Substring(114, 10);
                         pago_hora = "";
                         notas = "";
+                        pago_tipo = "VENTANILLA";
 
                         if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))
                             return 0;
@@ -426,7 +428,7 @@ namespace CapaEntidad
                     pago_fecha = dato.Substring(10, 8);
                     pago_hora = dato.Substring(18, 6);
                     notas = "";
-
+                    pago_tipo = "VENTANILLA";
                     if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))
                         return 0;
 

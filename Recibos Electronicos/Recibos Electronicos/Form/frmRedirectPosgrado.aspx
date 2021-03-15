@@ -29,7 +29,7 @@
     
         <div class="row">
             <div class="col">
-                <iframe id="frmPosgrado" style="width: 100%; height: 700px" frameborder="NO" name="frmPosgrado"></iframe>
+                <iframe id="frmPosgrado" style="width: 100%; height: 1400px" frameborder="NO" name="frmPosgrado"></iframe>
 
             </div>
         </div>

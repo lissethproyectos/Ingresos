@@ -36,6 +36,19 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ConsultarTipoServicio(ConceptoPago ObjConceptoPago, ref List<ConceptoPago> List)
+        {
+            try
+            {
+                CD_ConceptoPago CDConceptoPago = new CD_ConceptoPago();
+                CDConceptoPago.ConsultarTipoServicio(ObjConceptoPago, ref List);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void ConsultarConceptoPago(ref string Verificador, ref ConceptoPago objConcepto)
         {
             try

@@ -36,11 +36,12 @@
                 <div class="col-md-4">
                     <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
                 </div>
-                <div class="col-md-4 text-center text-white">
-                    <%--                    <h1><small style="color: #FFFFFF">Recaudación de Pagos </small></h1>--%>
-                    <h4>Recaudación de Pagos</h4>
-                    <h5>Ingresos</h5>
-                </div>
+                <div class="col-md-4 text-center">
+                        <div class="text-light font-weight-bold">
+                            <h4 class="media-heading">Control de Ingresos</h4>
+                            <h5>COIN</h5>
+                        </div>
+                    </div>
                 <div class="col-md-4">
                     <img src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
                 </div>
@@ -84,6 +85,7 @@
                                             <asp:ListItem Value="3">Usuario Dependencia</asp:ListItem>                    
                                             <asp:ListItem Value="4">Referencia Bancaria</asp:ListItem>                                            
                                             <asp:ListItem Value="6">Cliente UNACH</asp:ListItem>
+                                            <asp:ListItem Value="4">Facturas</asp:ListItem>
                                         </asp:DropDownList>
 	                        </div> <!-- form-group end.// -->
                             <div class="form-group input-group">
@@ -139,9 +141,7 @@
                                 El acceso a esta página es para obtener el comprobante oficial de alguno de los servicios que proporciona la universidad.             
                                 </p>
 <div id="divMsjUsuDep" class="alert alert-warning" role="alert">
-                  <strong>El acceso al sistema es con la cta. y la contraseña del correo unach,</strong> si no actualizaste tu información dar click en el siguiente enlace.
-    <button id="bttnModalActualizar" type="button" class="btn btn-link">Actualizar datos</button>
-    <br /><a href="https://ldapauthmaster.unach.mx/pssform_resetaccount.php" target="_blank">¿Olvidó  la contraseña del correo institucional?</a>
+                  <strong>El acceso al sistema es con la cta. y la contraseña del correo unach,</strong> si no actualizaste tu información dar click en el siguiente enlace.<br /><a href="https://ldapauthmaster.unach.mx/pssform_resetaccount.php" target="_blank">¿Olvidó  la contraseña del correo institucional?</a>
     
               </div>                         
                         </div>     
@@ -208,6 +208,9 @@
 
 
 <script language="javascript" type="text/javascript">
+    
+
+
     $(document).ready(function () {
         $("#divPassword").hide();
         $("#txtPassword").hide();
@@ -221,6 +224,7 @@
         $("#DDLTipoUsuario").change(function () {
             //Todo: write your javascript code here.
             //$("#listCve").show();
+            //alert($("#DDLTipoUsuario").val());
             $("#divPassword").hide();
             $("#txtPassword").hide();
             $("#listCve").hide();
@@ -232,7 +236,7 @@
             $("#divMsjGral").show();
             $("#divMsjUsuDep").hide();
 
-            if ($("#DDLTipoUsuario").val() == "1" || $("#DDLTipoUsuario").val() == "2" || $("#DDLTipoUsuario").val() == "4" || $("#DDLTipoUsuario").val() == "6") {
+            if ($("#DDLTipoUsuario").val() == "1" || $("#DDLTipoUsuario").val() == "2" || $("#DDLTipoUsuario").val() == "4" || $("#DDLTipoUsuario").val() == "6" || $("#DDLTipoUsuario").val() == "7") {
                 $("#divPassword").hide();
                 $("#txtPassword").hide();
                 $("#txtCve").focus();
@@ -248,6 +252,12 @@
                     $("#listUser").show();
                 }
                 else if ($("#DDLTipoUsuario").val() == "4") {
+                    $("#listReferencia").show();
+                    $("#listCve").hide();
+                    $("#txtCve").attr("placeholder", "Referencia");
+                    $('.txtCve').css('cursor', 'pointer');
+                }
+                else if ($("#DDLTipoUsuario").val() == "7") {
                     $("#listReferencia").show();
                     $("#listCve").hide();
                     $("#txtCve").attr("placeholder", "Referencia");
@@ -292,4 +302,6 @@
         });
 
     });
+
+
 </script>

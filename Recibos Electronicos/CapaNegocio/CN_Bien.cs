@@ -185,6 +185,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void EditarProducto(Bien ObjBien, ref string Verificador)
+        {
+            try
+            {
+                CD_Bien CDBien = new CD_Bien();
+                CDBien.EditarProducto(ObjBien, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void EliminarServicio(Bien ObjBien, ref string Verificador)
         {
             try

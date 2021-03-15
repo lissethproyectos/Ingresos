@@ -36,17 +36,21 @@ namespace Recibos_Electronicos.Form
         }
         private string GuardarServicio()
         {
-            Verificador = string.Empty;            
+            Verificador = string.Empty;
+            ListConceptos = (List<Comun>)Session["Conceptos"];
             objServicio.Dependencia = DDLDependencia.SelectedValue;
             objServicio.Clave = txtClave.Text;
             objServicio.Descripcion = txtDescripcion2.Text;
             objServicio.Total = Convert.ToDouble(txtImporte.Text);
             objServicio.Estatus = "A";
-            objServicio.Concepto = DDLConcepto.SelectedValue; //"L0609";
+            //objServicio.Concepto = DDLConcepto.SelectedValue; //"L0609";
+            objServicio.Concepto = ListConceptos[DDLConcepto.SelectedIndex].Etiqueta;
+
             objServicio.Grupo= DDLGrupo.SelectedValue;
             objServicio.TipoGrupo = DDLRubro.SelectedValue;
-            ListConceptos = (List<Comun>)Session["Conceptos"];
-            objServicio.Id_Concepto =Convert.ToInt32(ListConceptos[DDLConcepto.SelectedIndex].Etiqueta);
+            //objServicio.Id_Concepto =Convert.ToInt32(ListConceptos[DDLConcepto.SelectedIndex].Etiqueta);
+            objServicio.Id_Concepto = Convert.ToInt32(DDLConcepto.SelectedValue);
+
             CNBien.InsertarServicio(objServicio, ref Verificador);
             return Verificador;
            
@@ -55,17 +59,18 @@ namespace Recibos_Electronicos.Form
         private string ModificarServicio()
         {
             Verificador = string.Empty;
+            ListConceptos = (List<Comun>)Session["Conceptos"];
+
             objServicio.Id_Inventario = grvServicios.SelectedRow.Cells[0].Text;
             objServicio.Dependencia = DDLDependencia2.SelectedValue;
             objServicio.Clave = txtClave.Text;
             objServicio.Descripcion = txtDescripcion2.Text;
             objServicio.Total = Convert.ToDouble(txtImporte.Text);
-            //objServicio.Estatus = "A";
-            objServicio.Concepto = DDLConcepto.SelectedValue;
+            objServicio.Concepto = Convert.ToString(ListConceptos[DDLConcepto.SelectedIndex].Etiqueta);  //DDLConcepto.SelectedValue;
             objServicio.Grupo = DDLGrupo.SelectedValue;
             objServicio.TipoGrupo = DDLRubro.SelectedValue;
-            ListConceptos = (List<Comun>)Session["Conceptos"];
-            objServicio.Id_Concepto = Convert.ToInt32(ListConceptos[DDLConcepto.SelectedIndex].Etiqueta);
+            string pruebas = DDLConcepto.SelectedItem.Text;
+            objServicio.Id_Concepto =Convert.ToInt32(DDLConcepto.SelectedValue); // Convert.ToInt32(ListConceptos[DDLConcepto.SelectedIndex].Etiqueta);
             CNBien.EditarBien(objServicio, ref Verificador);
             return Verificador;
 
@@ -172,6 +177,10 @@ namespace Recibos_Electronicos.Form
             SesionUsu.Editar = 0;
             btnGuardar_Salir2.Text = "GUARDAR Y SALIR";
             btnGuardar2.Visible = true;
+            DDLDependencia.SelectedValue = DDLDependencia2.SelectedValue;
+            txtClave.Text = string.Empty;
+            txtDescripcion2.Text = string.Empty;
+            txtImporte.Text = string.Empty;
             multiview.ActiveViewIndex = 1;
             modal.Show();
         }
@@ -289,7 +298,7 @@ namespace Recibos_Electronicos.Form
             objBien.Id_Inventario = grvProductos.Rows[e.RowIndex].Cells[1].Text.ToString();
             TextBox txt = (TextBox)grvProductos.Rows[e.RowIndex].Cells[2].Controls[0];
             objBien.Descripcion = txt.Text;
-            CNBien.EditarBien(objBien, ref Verificador);
+            CNBien.EditarProducto(objBien, ref Verificador);
             if (Verificador == "0")
             {
                 grvProductos.EditIndex = -1;
@@ -421,7 +430,8 @@ namespace Recibos_Electronicos.Form
                     DDLGrupo.SelectedValue = objBien.Grupo;
                     DDLRubro.SelectedValue = objBien.TipoGrupo;
                     txtClave.Text = objBien.Clave;
-                    DDLConcepto.SelectedValue = objBien.Concepto;
+                    //DDLConcepto.SelectedIndex
+                    DDLConcepto.SelectedValue =Convert.ToString(objBien.Id_Concepto); //.Concepto;
                     txtDescripcion2.Text = objBien.Descripcion;
                     txtImporte.Text = Convert.ToString(objBien.Costo);
                     btnGuardar_Salir2.Text = "MODIFICAR";
@@ -462,6 +472,24 @@ namespace Recibos_Electronicos.Form
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
+        }
+
+        protected void linkEliminar_Click(object sender, EventArgs e)
+        {
+            LinkButton imgBttn = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)imgBttn.NamingContainer;
+            grvProductos.SelectedIndex = row.RowIndex;
+            Verificador = string.Empty;
+            Bien objBien = new Bien();
+            objBien.Id_Inventario = grvProductos.SelectedRow.Cells[1].Text;
+            CNBien.EliminarBien(objBien, ref Verificador);
+            if (Verificador == "0")
+                CargarGrid();
+            else
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
         }
     }
 }

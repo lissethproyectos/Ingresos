@@ -1,99 +1,86 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="RepFacturas.aspx.cs" Inherits="Recibos_Electronicos.Form.RepFacturas" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-<script type="text/javascript" src="../Js/jsGeneral.js"> </script>
+    <script type="text/javascript" src="../Js/jsGeneral.js"> </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <table style="width:700px;" align="center">
-        <tr>
-            <td colspan="3">
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td>
-
-                Ejercicio:</td>
-            <td colspan="2">
-
-                <asp:DropDownList ID="DDLEjercicio" runat="server" 
-                    onselectedindexchanged="DDLEjercicio_SelectedIndexChanged">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                Dependencia Inicial
+            </div>
+            <div class="col-md-10">
+                <asp:DropDownList
+                    ID="ddlDependencia" runat="server" Width="100%"
+                    OnSelectedIndexChanged="ddlDependencia_SelectedIndexChanged">
                 </asp:DropDownList>
-
-            </td>
-        </tr>
-        <tr>
-            <td align="right">
-
-                Dependencia:</td>
-            
-            <td align="left" colspan="2">
-                <asp:DropDownList 
-                    ID="ddlDependencia" runat="server" Width="600px" 
-                    onselectedindexchanged="ddlDependencia_SelectedIndexChanged">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                Dependencia Final
+            </div>
+            <div class="col-md-10">
+                <asp:DropDownList
+                    ID="ddlDependenciaFinal" runat="server" Width="100%"
+                    OnSelectedIndexChanged="ddlDependencia_SelectedIndexChanged">
                 </asp:DropDownList>
-
-            </td>
-            
-        </tr>
-        <tr>
-            <td valign="top">
-
-                Status:</td>
-            <td valign="top">
-
-                <asp:DropDownList ID="ddlStatus" runat="server" Width="250px">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                Ejercicio
+            </div>
+            <div class="col-md-3">
+                <asp:DropDownList ID="DDLEjercicio" runat="server"
+                    OnSelectedIndexChanged="DDLEjercicio_SelectedIndexChanged">
+                </asp:DropDownList>
+            </div>
+            <div class="col-md-1">
+                Status
+            </div>
+            <div class="col-md-3">
+                <asp:DropDownList ID="ddlStatus" runat="server">
                     <asp:ListItem>SOLICITADO</asp:ListItem>
                     <asp:ListItem>FACTURADO</asp:ListItem>
                 </asp:DropDownList>
-
-            </td>
-            <td valign="top">
-
+            </div>
+            <div class="col-md-3">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-                        <asp:Button ID="btn_Aceptar" runat="server" CssClass="button" Height="45px" 
-                            onclick="Button1_Click" Text="Ver reporte" />
+                        <asp:LinkButton ID="linkBttnReporte" runat="server" CssClass="btn btn-primary" OnClick="linkBttnReporte_Click"><i class="fa fa-print" aria-hidden="true"></i> Reporte</asp:LinkButton>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" valign="top">
-
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <asp:Label ID="lblMsj1" runat="server" Text="Label" Visible="False"></asp:Label>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-
-            </td>
-        </tr>
-        <tr>
-            <td valign="top">
-
-                &nbsp;</td>
-            <td valign="top">
-
-                &nbsp;</td>
-            <td valign="top">
-
-                &nbsp;</td>
-        </tr>
-        <tr>
-            <td colspan="3">
-
-                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                            <ContentTemplate>
-                                 <iframe id="miniContenedor" frameborder="0" marginheight="0" marginwidth="0" name="miniContenedor"
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="UpdateProgress1" AssociatedUpdatePanelID="UpdatePanel2" runat="server">
+                    <ProgressTemplate>
+                        <asp:Image ID="Image85" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                            ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <iframe id="miniContenedor" frameborder="0" marginheight="0" marginwidth="0" name="miniContenedor"
                             style="height: 500px" width="100%"></iframe>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </td>
-        </tr>
-        <tr>
-            <td colspan="3">
-
-                &nbsp;</td>
-        </tr>
-        </table>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
+    </div>
 </asp:Content>

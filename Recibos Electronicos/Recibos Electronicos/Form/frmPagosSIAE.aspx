@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPagosSIAE.aspx.cs" Inherits="Recibos_Electronicos.Form.frmPagosSIAE" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    </asp:Content>
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
         <div class="row">
@@ -33,7 +33,7 @@
                         <asp:Image ID="img3" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
                     </ProgressTemplate>
                 </asp:UpdateProgress>
-                </div>
+            </div>
             <div class="col-md-2">
                 Ciclo Escolar
             </div>
@@ -148,7 +148,7 @@
                 <tr>
                     <td align="left">&nbsp;</td>
                     <td>
-                        <div class="titulo_pop">
+                        <div class="card text-white bg-warning mb-3">
                             AVISO
                         </div>
                         <center>
@@ -174,7 +174,7 @@
                         <asp:UpdatePanel ID="UpdatePanel227" runat="server">
                             <ContentTemplate>
                                 <asp:Button ID="CancelAlert" runat="server" CssClass="btn btn-blue-grey" OnClick="CancelAlert_Click" Text="NO" />
-                                &nbsp;<asp:Button ID="btnNueva" runat="server" CssClass="btn btn-blue-grey" OnClick="btnNueva_Click" Text="SI" />
+                                &nbsp;<asp:Button ID="btnNueva" runat="server" CssClass="btn btn-primary" OnClick="btnNueva_Click" Text="SI" />
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </td>
@@ -190,114 +190,112 @@
     </asp:Panel>
 
     <asp:Panel ID="pnlDatosBanco" runat="server" CssClass="TituloModalPopupMsg">
-        <table>
-            <tr>
-                <td>
-                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                        <ContentTemplate>
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td class="titulo_pop" colspan="2">DATOS DEL PAGO</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        Ciclo</td>
-                                    <td>
-                                        <asp:TextBox ID="txtCiclo" runat="server"></asp:TextBox>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label ID="lblBanco" runat="server" Text="Banco"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:DropDownList ID="ddlBanco" runat="server">
-                                        </asp:DropDownList>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label ID="lblFolioBanco" runat="server" Text="Folio Empresa"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtFolioBanco" runat="server"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtFolioBanco" ErrorMessage="*Folio de Banco" ValidationGroup="Multipagos">*Requerido</asp:RequiredFieldValidator>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label ID="lblFechaPago" runat="server" Text="Fecha de Pago"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtFechaPago" runat="server"></asp:TextBox>
-                                        <ajaxToolkit:CalendarExtender ID="CalendarExtender" runat="server" TargetControlID="txtFechaPago" PopupButtonID="imgCalendario" />
-                                        <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtFechaPago" ErrorMessage="*Fecha de Pago" ValidationGroup="Multipagos">*Requerido</asp:RequiredFieldValidator>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia Generada"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtReferenciaOrig" runat="server" Enabled="False" Width="200px"></asp:TextBox>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label ID="lblPagoAplicado" runat="server" Text="Pago Aplicado"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:CheckBox ID="chkPagoAplicado" runat="server" Text="Si" />
-                                        &nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td align="center" colspan="2">&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
 
-                                <tr>
-                                    <td class="text-center" colspan="2">
-
-                                        <asp:Button ID="bttnSalir" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalir_Click" Text="SALIR" />
-                                        &nbsp;<asp:Button ID="bttnConfirmaPago" runat="server" CssClass="btn btn-info" OnClick="bttnConfirmaPago_Click" Text="GUARDAR" ValidationGroup="Guardar" />
-                                        &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos" Visible="False" />
-
-                                        &nbsp;&nbsp;</td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Pagada:" Visible="False"></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:TextBox ID="txtReferenciaPagada" runat="server" Visible="False" Width="200px"></asp:TextBox>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="txtReferenciaPagada" ErrorMessage="* La referencia debe ser de 26 digitos" ValidationExpression="[\S\s]{26,26}" ValidationGroup="Guardar"></asp:RegularExpressionValidator>
-                                    </td>
-                                    <td>&nbsp;</td>
-                                </tr>
-                            </table>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </td>
-            </tr>
-            <tr>
-                <td class="text-center">
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <div class="container">
+                    <div class="row alert alert-warning">
+                        <div class="col font-weight-bold">
+                            <h7>Información de la Referencia</h7>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Escuela</div>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtEscuela" runat="server" Width="100%"></asp:TextBox>
+                        </div>
+                        <div class="col-md-2">
+                            Carrera
+                        </div>
+                        <div class="col-md-4">
+                            <asp:TextBox ID="txtIdCarrera" runat="server" Width="100%"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">Ciclo</div>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtCiclo" runat="server" Width="100%"></asp:TextBox>
+                        </div>
+                        <div class="col-md-2">
+                            Semestre
+                        </div>
+                        <div class="col-md-4">
+                            <asp:TextBox ID="txtSemestre" runat="server" Width="100%"></asp:TextBox>
+                        </div>
+                    </div>
+                    <hr>                    
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:Label ID="lblBanco" runat="server" Text="Banco"></asp:Label>
+                        </div>
+                        <div class="col-md-3">
+                            <asp:DropDownList ID="ddlBanco" runat="server">
+                            </asp:DropDownList>
+                        </div>
+                        <div class="col-md-3">
+                            <asp:Label ID="lblFolioBanco" runat="server" Text="Folio Empresa"></asp:Label>
+                        </div>
+                        <div class="col-md-2">
+                            <asp:TextBox ID="txtFolioBanco" runat="server" Width="100%"></asp:TextBox>
+                        </div>
+                        <div class="col-md-1">
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtFolioBanco" ErrorMessage="*Folio de Banco" ValidationGroup="Multipagos">*Requerido</asp:RequiredFieldValidator>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:Label ID="lblFechaPago" runat="server" Text="Fecha de Pago"></asp:Label>
+                        </div>
+                        <div class="col-md-3">
+                            <asp:TextBox ID="txtFechaPago" runat="server" Width="80%"></asp:TextBox>
+                            <ajaxToolkit:CalendarExtender ID="CalendarExtender" runat="server" TargetControlID="txtFechaPago" PopupButtonID="imgCalendario" />
+                            <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtFechaPago" ErrorMessage="*Fecha de Pago" ValidationGroup="Multipagos">*Requerido</asp:RequiredFieldValidator>
+                        </div>
+                        
+                        <div class="col-md-3">
+                            <asp:Label ID="lblPagoAplicado" runat="server" Text="Pago Aplicado"></asp:Label>
+                        </div>
+                        <div class="col-md-2">
+                            <asp:CheckBox ID="chkPagoAplicado" runat="server" Text="Si" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia"></asp:Label>
+                        </div>
+                        <div class="col-md-9">
+                            <asp:TextBox ID="txtReferenciaOrig" runat="server" Enabled="False" Width="100%"></asp:TextBox>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col text-right">
+                            <asp:Button ID="bttnSalir" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalir_Click" Text="SALIR" />
+                            &nbsp;<asp:Button ID="bttnConfirmaPago" runat="server" CssClass="btn btn-info" OnClick="bttnConfirmaPago_Click" Text="GUARDAR" ValidationGroup="Guardar" />
+                            &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos" Visible="False" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Pagada:" Visible="False"></asp:Label>
+                            <asp:TextBox ID="txtReferenciaPagada" runat="server" Visible="False" Width="200px"></asp:TextBox>
+                        </div>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <div class="container">
+            <div class="row">
+                <div class="col">
                     <asp:UpdateProgress ID="updPrReferencias0" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
                         <ProgressTemplate>
                             <asp:Image ID="imgMultiview0" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
                         </ProgressTemplate>
                     </asp:UpdateProgress>
-                </td>
-            </tr>
-        </table>
+                </div>
+            </div>
+        </div>
+
 
 
     </asp:Panel>
