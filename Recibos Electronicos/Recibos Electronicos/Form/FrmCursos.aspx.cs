@@ -141,9 +141,9 @@ namespace Recibos_Electronicos.Form
             //ddlEvento.SelectedIndex = 0;
             //ddlConcepto.SelectedIndex = 0;
             txtImporte.Text = string.Empty;
-            imgBttnEliminar.Visible = false;
-            LinkNombreArchivo.Text = string.Empty;
-            LinkNombreArchivo.NavigateUrl = string.Empty;
+            //imgBttnEliminar.Visible = false;
+            //LinkNombreArchivo.Text = string.Empty;
+            //LinkNombreArchivo.NavigateUrl = string.Empty;
             //rdoListStatus.SelectedValue = "A";
         }
         private void LimpiarCamposGuarda()
@@ -176,13 +176,13 @@ namespace Recibos_Electronicos.Form
             ObjCurso.Importe = Convert.ToDouble(txtImporte.Text);            
             ObjCurso.Plan = ddlPlan.SelectedValue;
             ObjCurso.IdMateriaOpt =Convert.ToInt32(ddlMateria_Opt.SelectedValue);
-            if (LinkNombreArchivo.Text != string.Empty)
-            {
-                Copiar_a_Oficios(LinkNombreArchivo.Text);
-                ObjCurso.Oficio = LinkNombreArchivo.Text;
-            }
-            else
-                ObjCurso.Oficio = "";
+            //if (LinkNombreArchivo.Text != string.Empty)
+            //{
+            //    Copiar_a_Oficios(LinkNombreArchivo.Text);
+            //    ObjCurso.Oficio = LinkNombreArchivo.Text;
+            //}
+            //else
+            //    ObjCurso.Oficio = "";
             try
             {
                 
@@ -294,9 +294,9 @@ namespace Recibos_Electronicos.Form
         {
             btnGuardar_Nuevo.Visible = false;
             btnGuardar_Salir.Text = "MODIFICAR";
-            LinkNombreArchivo.Text = string.Empty;
-            LinkNombreArchivo.NavigateUrl = string.Empty;
-            imgBttnEliminar.Visible = false;
+            //LinkNombreArchivo.Text = string.Empty;
+            //LinkNombreArchivo.NavigateUrl = string.Empty;
+            //imgBttnEliminar.Visible = false;
 
             try
             {
@@ -307,7 +307,7 @@ namespace Recibos_Electronicos.Form
                 {
                     SesionUsu.Editar = 1;
                     MultiView1.ActiveViewIndex = 1;
-                    TabContainer1.ActiveTabIndex = 0;
+                    //TabContainer1.ActiveTabIndex = 0;
                     //imgBttnNuevo.Visible = false;
                     ddlDependencia.SelectedValue = ObjCurso.Dependencia;
                     ddlDependencia_SelectedIndexChanged(null, null);
@@ -324,15 +324,15 @@ namespace Recibos_Electronicos.Form
                     //ddlEvento.SelectedValue = ObjCurso.Evento;
                     txtImporte.Text = Convert.ToString(ObjCurso.Importe);
                     rdoListStatus.SelectedValue = Convert.ToString(ObjCurso.Status);
-                    if (ObjCurso.Oficio != string.Empty)
-                        if (ObjCurso.Oficio != null)
-                            if (ObjCurso.Oficio != "")
-                            {
-                                Copiar_a_OficiosTemp(ObjCurso.Oficio);
-                                LinkNombreArchivo.Text = ObjCurso.Oficio;
-                                LinkNombreArchivo.NavigateUrl = "../OficiosTemp/Verano/" + ObjCurso.Oficio;
-                                imgBttnEliminar.Visible = true;
-                            }
+                    //if (ObjCurso.Oficio != string.Empty)
+                    //    if (ObjCurso.Oficio != null)
+                    //        if (ObjCurso.Oficio != "")
+                    //        {
+                    //            Copiar_a_OficiosTemp(ObjCurso.Oficio);
+                    //            LinkNombreArchivo.Text = ObjCurso.Oficio;
+                    //            LinkNombreArchivo.NavigateUrl = "../OficiosTemp/Verano/" + ObjCurso.Oficio;
+                    //            imgBttnEliminar.Visible = true;
+                    //        }
 
                 }
                 else
@@ -397,8 +397,8 @@ namespace Recibos_Electronicos.Form
                 //ddlCarrera_SelectedIndexChanged(null, null);
                 ddlSemestre.SelectedValue = "0";
                 txtImporte.Text = string.Empty;
-                LinkNombreArchivo.Text = string.Empty;
-                LinkNombreArchivo.NavigateUrl = string.Empty;
+                //LinkNombreArchivo.Text = string.Empty;
+                //LinkNombreArchivo.NavigateUrl = string.Empty;
             }
             else            
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
@@ -568,40 +568,40 @@ namespace Recibos_Electronicos.Form
 
         }
 
-        protected void bttnAgregaOficio_Click(object sender, EventArgs e)
-        {
-            try
-            {
+        //protected void bttnAgregaOficio_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
 
-                if (FileOficio.HasFile)
-                {
-                    int fileSize = FileOficio.PostedFile.ContentLength;
-                    fullPathOficio = Path.Combine(Server.MapPath("../OficiosTemp/Verano/"), ddlCiclo.SelectedValue + "-" + ddlDependencia.SelectedValue + "-" + FileOficio.FileName);
-                    FileOficio.SaveAs(fullPathOficio);
-                    LinkNombreArchivo.Text = ddlCiclo.SelectedValue + "-"+ddlDependencia.SelectedValue+"-"+ FileOficio.FileName;
-                    LinkNombreArchivo.NavigateUrl= "../OficiosTemp/Verano/" + ddlCiclo.SelectedValue + "-" + ddlDependencia.SelectedValue + "-" + FileOficio.FileName;
-                    imgBttnEliminar.Visible = true;
-                }
+        //        if (FileOficio.HasFile)
+        //        {
+        //            int fileSize = FileOficio.PostedFile.ContentLength;
+        //            fullPathOficio = Path.Combine(Server.MapPath("../OficiosTemp/Verano/"), ddlCiclo.SelectedValue + "-" + ddlDependencia.SelectedValue + "-" + FileOficio.FileName);
+        //            FileOficio.SaveAs(fullPathOficio);
+        //            LinkNombreArchivo.Text = ddlCiclo.SelectedValue + "-"+ddlDependencia.SelectedValue+"-"+ FileOficio.FileName;
+        //            LinkNombreArchivo.NavigateUrl= "../OficiosTemp/Verano/" + ddlCiclo.SelectedValue + "-" + ddlDependencia.SelectedValue + "-" + FileOficio.FileName;
+        //            imgBttnEliminar.Visible = true;
+        //        }
 
-            }
-            catch (Exception ex)
-            {
-                string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
+        //        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
 
-            }
+        //    }
 
 
-        }
+        //}
 
-        protected void imgBttnEliminar_Click(object sender, ImageClickEventArgs e)
-        {            
-            string OrigenArchivo = Path.Combine(Server.MapPath("~/OficiosTemp/Verano/"), ddlCiclo.SelectedValue + "-" + ddlDependencia.SelectedValue + "-" + LinkNombreArchivo.Text);
-            System.IO.File.Delete(OrigenArchivo);
-            LinkNombreArchivo.Text = string.Empty;
-            LinkNombreArchivo.NavigateUrl = string.Empty;
-            imgBttnEliminar.Visible = false;
-        }
+        //protected void imgBttnEliminar_Click(object sender, ImageClickEventArgs e)
+        //{            
+        //    string OrigenArchivo = Path.Combine(Server.MapPath("~/OficiosTemp/Verano/"), ddlCiclo.SelectedValue + "-" + ddlDependencia.SelectedValue + "-" + LinkNombreArchivo.Text);
+        //    System.IO.File.Delete(OrigenArchivo);
+        //    LinkNombreArchivo.Text = string.Empty;
+        //    LinkNombreArchivo.NavigateUrl = string.Empty;
+        //    imgBttnEliminar.Visible = false;
+        //}
 
         protected void bttnNuevo_Click(object sender, EventArgs e)
         {
@@ -612,7 +612,7 @@ namespace Recibos_Electronicos.Form
             Session["Cursos"] = null;
             //imgBttnNuevo.Visible = false;
             MultiView1.ActiveViewIndex = 1;
-            TabContainer1.ActiveTabIndex = 0;
+//            TabContainer1.ActiveTabIndex = 0;
             LimpiarCampos();
         }
 

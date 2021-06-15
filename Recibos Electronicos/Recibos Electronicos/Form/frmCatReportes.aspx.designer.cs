@@ -159,6 +159,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Button bttnCatReembolsables;
 
         /// <summary>
+        /// Control updPnlReportes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlReportes;
+
+        /// <summary>
         /// Control imgBttnReporte.
         /// </summary>
         /// <remarks>

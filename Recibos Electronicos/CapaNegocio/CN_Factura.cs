@@ -48,6 +48,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void Obt_Grid_Status_Bancos_Monitor(Comun ObjComun, ref List<Comun> List)
+        {
+            try
+            {
+                CD_Factura DatosFactura = new CD_Factura();
+                DatosFactura.Obt_Grid_Status_Bancos_Monitor(ObjComun, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void FacturaTempConsultaGrid(ref DataTable _tabla)
         {
             try

@@ -80,6 +80,7 @@ namespace CapaEntidad
         private string _FACT_SEMESTRE;
         private string _FACT_CONCEPTOS;
         private string _FACT_IMPORTE;
+        private string _TOOLTIP;
         //Metodos agregados por Lisseth
 
         public string FACT_NIVEL
@@ -253,6 +254,12 @@ namespace CapaEntidad
         {
             get { return _FACT_REFERENCIA; }
             set { _FACT_REFERENCIA = value; }
+        }
+
+        public string TOOLTIP
+        {
+            get { return _TOOLTIP; }
+            set { _TOOLTIP = value; }
         }
         public string FACT_CARRERA
         {

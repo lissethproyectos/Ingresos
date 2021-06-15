@@ -350,7 +350,12 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_FECHA_CAPTURA = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.FACT_DIAS_EMISION = Convert.ToInt32(dr.GetValue(16));
                     ObjCjaFactura.FACT_BANCO = Convert.ToString(dr.GetValue(6));
+                    if(Convert.ToString(dr.GetValue(18)).Length>25)
+                        ObjCjaFactura.FACT_REFERENCIA= Convert.ToString(dr.GetValue(18)).Substring(1,25)+"...";
+                    else
+                        ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(18));
 
+                    ObjCjaFactura.TOOLTIP = Convert.ToString(dr.GetValue(18));
 
                     ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
                     ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));

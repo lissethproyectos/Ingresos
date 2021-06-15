@@ -34,7 +34,13 @@ namespace Recibos_Electronicos
         {
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
+            {
                 busca_informativa();
+                CargarGridStatus();
+                CargarGridMonitor(ref grdMonitor);
+                CargarGridBancos();
+
+            }
         }
 
         private void busca_informativa()
@@ -63,5 +69,108 @@ namespace Recibos_Electronicos
                 lblMsg_Observaciones.Text = ex.Message;
             }
         }
+        private void CargarGridMonitor(ref GridView grd)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                grd.DataSource = dt;
+                grd.DataSource = GetDatos_Monitor();
+                grd.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+                string Msj = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Msj);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+        public List<Comun> GetDatos_Monitor()
+        {
+
+            try
+            {
+                List<Comun> List = new List<Comun>();
+                CNFactura.ErroresConsultaGrid(SesionUsu.Usu_Nombre, ref List);
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private void CargarGridBancos()
+        {
+            try
+            {
+                List<Comun> ListAlumno = new List<Comun>();
+                List<Comun> ListUsuario = new List<Comun>();
+                DataTable dt = new DataTable();
+                GetListBancos(ref ListUsuario);
+                if (ListUsuario.Count >= 1)
+                {
+                    grdStatus_Carga_Bancos.DataSource = dt;
+                    grdStatus_Carga_Bancos.DataSource = ListUsuario;
+                    grdStatus_Carga_Bancos.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                string Msj = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Msj);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        private void CargarGridStatus()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                grvStatus.DataSource = dt;
+                grvStatus.DataSource = GetListStatus();
+                grvStatus.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        private List<Alumno> GetListStatus()
+        {
+            try
+            {
+                List<Alumno> List = new List<Alumno>();
+                CNAlumno.ConsultarStatusDescuento(ref ObjAlumno, SesionUsu.Usu_Nombre, ref List);
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private void GetListBancos(ref List<Comun> ListUsuario)
+        {
+            try
+            {
+                CNFactura.Obt_Grid_Status_Bancos_Monitor(ObjComun, ref ListUsuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        protected void grdMonitor_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grdMonitor.PageIndex = 0;
+            grdMonitor.PageIndex = e.NewPageIndex;
+            CargarGridMonitor(ref grdMonitor);
+        }
+
     }
 }

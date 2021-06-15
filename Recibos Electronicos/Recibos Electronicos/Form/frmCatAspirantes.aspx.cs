@@ -39,7 +39,9 @@ namespace Recibos_Electronicos.Form
             try
             {
                 //CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
-                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencias, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
+                //CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencias, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Grid_Combo_Cat_Depcias", ref ddlDependencias);
+
 
                 //if (ddlNivel.Items.Count >= 1)
                 //{

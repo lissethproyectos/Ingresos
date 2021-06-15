@@ -31,11 +31,11 @@ namespace CapaEntidad
             get { return _Inhabil; }
             set { _Inhabil = value; }
         }
-        public string Etiqueta
-        {
-            get { return _Etiqueta; }
-            set { _Etiqueta = value; }
-        }
+            public string Etiqueta
+            {
+                get { return _Etiqueta; }
+                set { _Etiqueta = value; }
+            }
         public string EtiquetaTres
         {
             get { return _EtiquetaTres; }

@@ -91,12 +91,12 @@ namespace Recibos_Electronicos
                             modalBancos.Show();
                         }
                     }
-                    //else
-                    //{
-                    grdStatus_Carga.DataSource = dt;
-                    grdStatus_Carga.DataSource = ListUsuario;
-                    grdStatus_Carga.DataBind();
-                    //}
+                    else
+                    {
+                        grdStatus_Carga.DataSource = dt;
+                        grdStatus_Carga.DataSource = ListUsuario;
+                        grdStatus_Carga.DataBind();
+                    }
                 }
             }
             catch (Exception ex)
@@ -221,8 +221,8 @@ namespace Recibos_Electronicos
                     //}
                     //else
                     //{
-                        //Int32[] Celdas = { 0, 10, 11 };
-                        //CNComun.HideColumns(grdDatosFactura, Celdas);
+                    //Int32[] Celdas = { 0, 10, 11 };
+                    //CNComun.HideColumns(grdDatosFactura, Celdas);
                     //}
 
                     if (SesionUsu.Usu_TipoUsu == 4 || SesionUsu.Usu_TipoUsu == 7)//Muestra la columna Editar
@@ -593,15 +593,15 @@ namespace Recibos_Electronicos
                 ObjFactura.FACT_RECEPTOR_TELEFONO = txtReceptor_Telefono.Text;
                 ObjFactura.FACT_RECEPTOR_CORREO = txtReceptor_Correo.Text;
                 ObjFactura.FACT_RECEPTOR_TIPO_PERS = rdoBttnReceptorTipoPersona.SelectedValue;
-                ObjFactura.FACT_RECEPTOR_STATUS = "R"; //string.Empty;
+                ObjFactura.FACT_RECEPTOR_STATUS = string.Empty; //"R";
                 ObjFactura.FACT_RECEPTOR_STATUS_NOTAS = string.Empty;
-                ObjFactura.FACT_CONFIRMADO = string.Empty; //"S";
+                ObjFactura.FACT_CONFIRMADO = "N"; // "S"; //string.Empty; ;
                 ObjFactura.CFDI = ddlCFDI.SelectedValue;
                 ObjFactura.FACT_TIPO_SERVICIO = "0"; // ddlServicio.SelectedValue;
                 ObjFactura.FACT_OBSERVACIONES = txtDescConcepto.Text.ToUpper();
                 ObjFactura.FACT_RECEPTOR_FORMA_PAGO = ddlForma_Pago.SelectedValue;
-                if(SesionUsu.Usu_TipoUsu==4 || SesionUsu.Usu_TipoUsu == 7)
-                    Usuario=Convert.ToString(grdDatosFactura.SelectedRow.Cells[7].Text);
+                if (SesionUsu.Usu_TipoUsu == 4 || SesionUsu.Usu_TipoUsu == 7)
+                    Usuario = Convert.ToString(grdDatosFactura.SelectedRow.Cells[7].Text);
                 else
                     Usuario = SesionUsu.Usu_Nombre;
 
@@ -623,7 +623,7 @@ namespace Recibos_Electronicos
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true); //lblMensaje.Text = Verificador;

@@ -100,6 +100,38 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+
+        public void Obt_Grid_Status_Bancos_Monitor(Comun ObjComun, ref List<Comun> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Status_Bancos_Monitor", ref dr);
+                while (dr.Read())
+                {
+                    ObjComun = new Comun();
+                    ObjComun.Etiqueta = Convert.ToString(dr.GetValue(0));
+                    ObjComun.EtiquetaDos = Convert.ToString(dr.GetValue(1));
+                    ObjComun.EtiquetaTres = Convert.ToString(dr.GetValue(2));
+                    ObjComun.EtiquetaCuatro = Convert.ToString(dr.GetValue(3));
+                    List.Add(ObjComun);
+
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void FacturaTempConsultaGrid(ref DataTable _tabla)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -591,7 +623,7 @@ namespace CapaDatos
                 Object[] Valores = { ObjFactura.ID_FACT };
                 String[] ParametrosOut = { "p_receptor_nombre", "p_receptor_rfc", "p_receptor_domicilio", "p_receptor_colonia", "p_receptor_lugar", "p_matricula", "p_carrera", "p_dependencia", 
                                            "p_expedido_domicilio", "p_expedido_colonia", "p_expedido_pais","p_fecha_cfd","p_total_letras","p_notas","p_certificado",
-                                           "p_subtotal","p_impuesto_tasa","p_total","p_sello_digital","p_folio","p_no_certificado","p_anio_aprobacion","p_status","p_status_notas","p_receptor_municipio","p_fecha_dispersion", "p_modificable", "p_Bandera" };
+                                           "p_subtotal","p_impuesto_tasa","p_total","p_sello_digital","p_folio","p_no_certificado","p_anio_aprobacion","p_status","p_status_notas","p_receptor_municipio","p_fecha_dispersion", "p_modificable", "p_fecha_factura","p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("Sel_Factura_Datos", ref Verificador, Parametros, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
@@ -621,6 +653,8 @@ namespace CapaDatos
                     ObjFactura.FACT_RECEPTOR_MUNICIPIO = Convert.ToString(Cmd.Parameters["p_receptor_municipio"].Value);
                     ObjFactura.FACT_FECHA_DISPERSION = Convert.ToString(Cmd.Parameters["p_fecha_dispersion"].Value);
                     ObjFactura.FACT_MODIFICABLE = Convert.ToString(Cmd.Parameters["p_modificable"].Value);
+                    ObjFactura.FACT_FECHA_FACTURA = Convert.ToString(Cmd.Parameters["p_fecha_factura"].Value);
+
                 }
             }
             catch (Exception ex)
@@ -830,12 +864,12 @@ namespace CapaDatos
                                         "p_receptor_colonia", "p_receptor_pais", 
                                         "p_matricula", "p_carrera", "p_dependencia", "p_expedido_domicilio",
                                         "p_expedido_colonia", "p_expedido_pais", "p_notas", "p_subtotal",
-                                         "p_impuesto_tasa", "p_total","p_status","p_status_notas", "p_fecha_cfd", "p_fecha_dispersion", "p_usuario"};
+                                         "p_impuesto_tasa", "p_total","p_status","p_status_notas", "p_fecha_cfd", "p_fecha_dispersion", "p_usuario", "p_fecha_factura"};
                 Object[] Valores = {ObjFactura.ID_FACT, ObjFactura.FACT_NOMBRE, ObjFactura.FACT_RECEPTOR_RFC, ObjFactura.FACT_RECEPTOR_DOMICILIO, 
                                      ObjFactura.FACT_RECEPTOR_COLONIA, ObjFactura.FACT_RECEPTOR_LUGAR,
                                      ObjFactura.FACT_MATRICULA, ObjFactura.FACT_CARRERA,ObjFactura.FACT_DEPENDENCIA, ObjFactura.FACT_EXPEDIDO_DOMICILIO,
                                      ObjFactura.FACT_EXPEDIDO_COLONIA,ObjFactura.FACT_EXPEDIDO_PAIS,ObjFactura.FACT_OBSERVACIONES,ObjFactura.FACT_SUBTOTAL,
-                                     ObjFactura.FACT_IMPUESTO_TASA,ObjFactura.FACT_TOTAL,ObjFactura.FACT_STATUS,ObjFactura.FACT_STATUS_NOTAS,ObjFactura.FACT_FECHA_CFD,ObjFactura.FACT_FECHA_DISPERSION, UsuarioNombre};
+                                     ObjFactura.FACT_IMPUESTO_TASA,ObjFactura.FACT_TOTAL,ObjFactura.FACT_STATUS,ObjFactura.FACT_STATUS_NOTAS,ObjFactura.FACT_FECHA_CFD,ObjFactura.FACT_FECHA_DISPERSION, UsuarioNombre, ObjFactura.FACT_FECHA_FACTURA};
                 String[] ParametrosOut = { "p_bandera" };
                 cmm = CDDatos.GenerarOracleCommand("UPD_DATOS_FACTURA_2016", ref Verificador, Parametros, Valores, ParametrosOut);
             }

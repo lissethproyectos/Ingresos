@@ -365,6 +365,7 @@ namespace Recibos_Electronicos.Form
             ObjFactura.FACT_STATUS_NOTAS = txtStatus_Notas.Text;
             ObjFactura.FACT_FECHA_CFD = txtFecha_Cfd1.Text;
             ObjFactura.FACT_FECHA_DISPERSION = txtFecha_Dispersion.Text;
+            ObjFactura.FACT_FECHA_FACTURA = txtFecha_Cfd1.Text;
             //ObjFactura.FACT_FECHA_CFD
 
             try
@@ -492,7 +493,8 @@ namespace Recibos_Electronicos.Form
                 pnlRecibos.Visible = false;
                 pnlModificacion_Recibo.Visible = true;
                 txtFolio.Text = ObjFactura.FACT_FOLIO;
-                txtFecha_Cfd1.Text = ObjFactura.FACT_FECHA_CFD;
+                //txtFecha_Cfd1.Text = ObjFactura.FACT_FECHA_CFD;
+                txtFecha_Cfd1.Text = ObjFactura.FACT_FECHA_FACTURA;
                 txtNo_Certificado.Text = ObjFactura.FACT_NO_CERTIFICADO;
                 txtAnio_Aprobacion.Text = ObjFactura.FACT_ANIO_APROBACION;
                 txtReceptor_Nombre.Text = ObjFactura.FACT_NOMBRE;

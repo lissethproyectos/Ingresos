@@ -179,7 +179,20 @@ namespace Recibos_Electronicos.Reportes
                         Reporte = "Reportes\\REP022_por_Carreras_Excel.rpt";
                         rptExcel_FE(Reporte, v46, "Ingresos Propios Reembolsables");
                     }
-                    break;                
+                    break;
+                case "REP022-Nivel":
+                    object[] v51 = { dependencia, FechaIn, FechaFi };
+                    if (enExcel == "N")
+                    {
+                        Reporte = "Reportes\\REP022-Nivel.rpt";
+                        rptPDF_FE(Reporte, v51, "Ingresos Propios Reembolsables");
+                    }
+                    else
+                    {
+                        Reporte = "Reportes\\REP022-Nivel_Excel.rpt";
+                        rptExcel_FE(Reporte, v51, "Ingresos Propios Reembolsables");
+                    }
+                    break;
                 case "REP023":
                     Reporte = "Reportes\\REP023.rpt";
                     object[] v6 = {  };

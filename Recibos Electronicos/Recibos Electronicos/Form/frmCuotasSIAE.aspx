@@ -33,7 +33,7 @@
                         <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-control">
                             <asp:ListItem Value="T">--TODOS--</asp:ListItem>
                             <asp:ListItem Value="0">PROPEDEUTICO</asp:ListItem>
-                            <asp:ListItem Value="99	">PREUNIVERSITARIO</asp:ListItem>
+                            <asp:ListItem Value="99">PREUNIVERSITARIO</asp:ListItem>
                             <asp:ListItem Value="98">CURSO DE NIVELACIÓN</asp:ListItem>
                             <asp:ListItem Value="1">INSCRIPCIÓN</asp:ListItem>
                             <asp:ListItem Value="2">REINSCRIPCIÓN	</asp:ListItem>

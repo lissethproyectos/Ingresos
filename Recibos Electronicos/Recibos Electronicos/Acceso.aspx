@@ -1,4 +1,5 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Acceso.aspx.cs" Inherits="Recibos_Electronicos.Acceso" %>
+﻿
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Acceso.aspx.cs" Inherits="Recibos_Electronicos.Acceso" %>
 
 <%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     Namespace="System.Web.UI" TagPrefix="asp" %>
@@ -221,6 +222,11 @@
         $("#divMsjGral").show();
         $("#divMsjUsuDep").hide();
 
+
+        //if (window.location.protocol != 'https:') {
+        //    location.href = location.href.replace("http://", "https://");
+        //}
+
         $("#DDLTipoUsuario").change(function () {
             //Todo: write your javascript code here.
             //$("#listCve").show();
@@ -300,6 +306,9 @@
         $("#bttnModalActualizar").click(function () {
             window.location = "https://sysweb.unach.mx/actualiza_correo/frmactualiza_datos.aspx?sistema=14";
         });
+
+
+
 
     });
 

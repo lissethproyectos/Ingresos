@@ -68,6 +68,10 @@ namespace Recibos_Electronicos.Form
                 case "2":
                     ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP022-Carreras&dependencia=" + ddlDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&enExcel=N";
                     break;
+                case "3":
+                    ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP022-Nivel&dependencia=" + ddlDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&enExcel=N";
+                    break;
+
 
             }
 

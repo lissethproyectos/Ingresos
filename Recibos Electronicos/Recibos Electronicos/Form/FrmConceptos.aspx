@@ -13,7 +13,7 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col text-center">
                 <asp:UpdateProgress ID="UpdateProgress1" AssociatedUpdatePanelID="UpdatePanel1" runat="server">
@@ -30,7 +30,7 @@
                     <ContentTemplate>
                         <asp:MultiView ID="mltViewConceptos" runat="server">
                             <asp:View ID="Hoja1" runat="server">
-                                <div class="container">
+                                <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-2">
                                             Nivel de Estudios
@@ -170,7 +170,7 @@
                                     </asp:Panel>
                             </asp:View>
                             <asp:View ID="Hoja2" runat="server">
-                                <div class="container">
+                                <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-2">
                                             Clave
@@ -284,8 +284,7 @@
                                             <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                         </div>
                                         <div class="col-md-2">
-                                            Porcentaje para aplicar la Ley 80-20
-                                        </div>
+                                            Porcentaje para aplicar la Ley 80-20 Institucional</div>
                                         <div class="col-md-2">
                                             <asp:TextBox ID="txtPorcentaje" runat="server" Width="50px" CssClass="box"
                                                 Rows="3" TabIndex="13"></asp:TextBox>

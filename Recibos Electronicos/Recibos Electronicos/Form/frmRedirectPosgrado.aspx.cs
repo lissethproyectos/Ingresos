@@ -34,8 +34,16 @@ namespace Recibos_Electronicos.Form
 
                 if (Verificador == "0" && Formulario != "0")
                 {
+                    //Ruta = "https://sysweb.unach.mx/INGRESOS_MVC/Home/Index?WXI=" + WXI + "&Formulario=" + Formulario;
+                    //frmPosgrado.Src = Ruta;
+                    //frmPosgrado.
+                    //this.frmPosgrado.Attributes.Add("src", Ruta);
+                    //this.Master.iframe.Attributes.Add("src", "some.aspx");
+
+
+
                     ScriptManager.RegisterStartupScript(this, GetType(), "Usuarios", "RedirectSysPosgrado('" + WXI + "', '"+ Formulario + "');", true);
-                    Ruta = "RedirectIngMVC('" + WXI + "', '" + Formulario + "')";
+                    //Ruta = "RedirectIngMVC('" + WXI + "', '" + Formulario + "')";
                 }
                 else
                     Response.Redirect("../index.aspx", false);

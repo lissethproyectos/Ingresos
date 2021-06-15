@@ -258,7 +258,7 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] { 4 };
+            Int32[] Celdas = new Int32[] { 4, 12, 16, 17, 18, 19, 20 };
 
             try
             {
@@ -489,16 +489,24 @@ namespace Recibos_Electronicos.Form
             grdView.HeaderRow.Cells[1].Visible = false;
             grdView.HeaderRow.Cells[3].Visible = false;
             grdView.HeaderRow.Cells[10].Visible = false;
+            grdView.HeaderRow.Cells[12].Visible = false;
             grdView.HeaderRow.Cells[16].Visible = false;
             grdView.HeaderRow.Cells[17].Visible = false;
+            //grdView.HeaderRow.Cells[18].Visible = false;
+            grdView.HeaderRow.Cells[19].Visible = false;
+            grdView.HeaderRow.Cells[20].Visible = false;
             grdView.HeaderRow.Cells[13].Visible = (SesionUsu.Usu_Central=="S") ? true : false;
-
+            //4, 12, 16, 17, 18, 19, 20
             grdView.FooterRow.Cells[0].Visible = false;
             grdView.FooterRow.Cells[1].Visible = false;
             grdView.FooterRow.Cells[3].Visible = false;
             grdView.FooterRow.Cells[10].Visible = false;
+            grdView.FooterRow.Cells[12].Visible = false;
             grdView.FooterRow.Cells[16].Visible = false;
             grdView.FooterRow.Cells[17].Visible = false;
+            //grdView.FooterRow.Cells[18].Visible = false;
+            grdView.FooterRow.Cells[19].Visible = false;
+            grdView.FooterRow.Cells[20].Visible = false;
             grdView.FooterRow.Cells[13].Visible = (SesionUsu.Usu_Central == "S") ? true : false;
 
 
@@ -510,9 +518,13 @@ namespace Recibos_Electronicos.Form
                 row.Cells[1].Visible = false;
                 row.Cells[3].Visible = false;
                 row.Cells[10].Visible = false;
+                row.Cells[12].Visible = false;
                 row.Cells[13].Visible = (SesionUsu.Usu_Central == "S") ? true : false; //(usuAdmin.Length != 0) ? true : false;
                 row.Cells[16].Visible = false;
                 row.Cells[17].Visible = false;
+                //row.Cells[18].Visible = false;
+                row.Cells[19].Visible = false;
+                row.Cells[20].Visible = false;
             }
 
         }
@@ -719,8 +731,8 @@ namespace Recibos_Electronicos.Form
             ddlSubTipo.SelectedIndex = 0;
             ddlSubTipo_SelectedIndexChanged(null, null);
             grvConceptosCat.Enabled = true;
-            LinkNombreArchivo.NavigateUrl = string.Empty;
-            LinkNombreArchivo.Text = string.Empty;
+            //LinkNombreArchivo.NavigateUrl = string.Empty;
+            //LinkNombreArchivo.Text = string.Empty;
             if (ddlEvento.SelectedValue == "NINGUNO")
             {
                 ddlCiclo_D.Enabled = true;
@@ -1829,6 +1841,78 @@ namespace Recibos_Electronicos.Form
             grvEmpleados.DataBind();
             ddlHijo.Items.Clear();
             ddlParentesco.Items.Clear();
+        }
+
+        protected void linkBttnCancelar_Click(object sender, EventArgs e)
+        {
+            txtObservaciones_C.Text = string.Empty;
+            Verificador = string.Empty;
+            try
+            {
+                LinkButton cbi = (LinkButton)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grvAlumnos.SelectedIndex = row.RowIndex;
+                ddlStatusRegistro.SelectedIndex = 0;
+                modalCancelar.Show();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message.Substring(0, 30) + "');", true); //lblMsj.Text = ex.Message;
+                //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void linkBttnCorreo_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                LinkButton cbi = (LinkButton)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grvAlumnos.SelectedIndex = row.RowIndex;
+                PnlCorreo.Matricula = grvAlumnos.SelectedRow.Cells[4].Text;
+                ObjFactura.FACT_REFERENCIA = grvAlumnos.SelectedRow.Cells[9].Text;
+                CNFactura.FacturaConsultaId(ref ObjFactura, ref Verificador);
+                if (Verificador == "0")
+                {
+                    PnlCorreo.Recibo = ObjFactura.ID_FACT;
+                    PnlCorreo.Muestra();
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador.Substring(0, 30) + "');", true); //lblMsj.Text = Verificador;
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message.Substring(0, 30) + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void linkBttnRecibo_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                LinkButton cbi = (LinkButton)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grvAlumnos.SelectedIndex = row.RowIndex;
+                ObjFactura.FACT_REFERENCIA = grvAlumnos.SelectedRow.Cells[9].Text;
+                CNFactura.FacturaConsultaId(ref ObjFactura, ref Verificador);
+                if (Verificador == "0")
+                {
+                    string ruta = "../Reportes/VisualizadorCrystal.aspx?idFact=" + Convert.ToInt32(ObjFactura.ID_FACT);
+                    string _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+                    //ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerReporte(" + ObjFactura.ID_FACT + ");", true);
+                }
+
+                else
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador.Substring(0, 30) + "');", true); //lblMsj.Text = Verificador;
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message.Substring(0, 30) + "');", true); //lblMsj.Text = ex.Message;
+            }
         }
 
 

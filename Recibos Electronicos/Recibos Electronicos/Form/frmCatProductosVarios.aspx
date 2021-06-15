@@ -277,6 +277,16 @@
                                                                 <asp:ListItem>MAQUILA</asp:ListItem>
                                                                 <asp:ListItem>SERVICIO</asp:ListItem>
                                                                 <asp:ListItem>RENTA DE ESPACIO</asp:ListItem>
+                                                                <asp:ListItem>TERRACERÍAS</asp:ListItem>
+                                                                <asp:ListItem>PAVIMENTOS</asp:ListItem>
+                                                                <asp:ListItem>CONCRETO</asp:ListItem>
+                                                                <asp:ListItem>ACERO</asp:ListItem>
+                                                                <asp:ListItem>TABIQUES</asp:ListItem>
+                                                                <asp:ListItem>LADRILLOS</asp:ListItem>
+                                                                <asp:ListItem>BLOQUES</asp:ListItem>
+                                                                <asp:ListItem>TABIQUES, LADRILLOS Y BLOQUES</asp:ListItem>
+                                                                <asp:ListItem>MECANICA DE SUELOS</asp:ListItem>
+                                                                <asp:ListItem>TECNOLOGIA DE CONCRETO</asp:ListItem>
                                                             </asp:DropDownList>
                                                         </div>
                                                         <div class="col-md-1">Clave</div>

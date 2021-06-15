@@ -25,7 +25,7 @@ namespace CapaEntidad
         private string _Grupo;
         private string _Plan;
         private int _IdMateriaOpt;
-        private string _Oficio;
+        private string _Oficio=string.Empty;
 
 
         public string Oficio

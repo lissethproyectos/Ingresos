@@ -25,12 +25,12 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <asp:MultiView ID="MultiView1" runat="server">
                     <asp:View ID="View1" runat="server">
-                        <div class="container">
+                        <div class="container-fluid">
                             <div class="row">
                                 <div class="col-md-2">
                                     Dependencia
@@ -89,6 +89,7 @@
                                 <div class="col-md-7">
                                     <asp:DropDownList ID="ddlTipo" runat="server" Width="100%">
                                         <asp:ListItem Value="1">Por Dependencia</asp:ListItem>
+                                        <asp:ListItem Value="3">Por Dependencia y Nivel</asp:ListItem>
                                         <asp:ListItem Value="2">Por Dependencia y Carreras</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
@@ -98,8 +99,12 @@
                             </div>
                             <div class="row">
                                 <div class="col text-right">
-                                    <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />
-                                    &nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
+                                    <asp:UpdatePanel ID="updPnlReportes" runat="server">
+                                        <ContentTemplate>
+                                            <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />
+                                            &nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </div>
                             </div>
                         </div>

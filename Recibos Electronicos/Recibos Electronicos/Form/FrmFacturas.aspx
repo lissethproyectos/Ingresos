@@ -6,8 +6,10 @@
 <%@ Register Src="../EnviarCorreo.ascx" TagName="uccorreo" TagPrefix="usr" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script language="javascript">
-        //Creo una función que imprimira en la hoja el valor del porcentanje asi como el relleno de la barra de progreso
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+
         function callprogress(vValor) {
             //vValor = vValor + 40;
             document.getElementById("getProgressBarFill").style.width = vValor + '%';
@@ -40,17 +42,6 @@
                 'scrollbars=no,menubar=no,height=600,width=800,resizable=yes,toolbar=no,location=no,status=no');
         }
 
-       <%-- function ValidateCheckBox(sender, args) {
-
-            //alert(document.getElementById('<%=chkConfirmaSolicitud.ClientID %>').checked);
-            if (document.getElementById('<%=chkConfirmaSolicitud.ClientID %>').checked == true) {
-                args.IsValid = true;
-            } else {
-                args.IsValid = false;
-            }
-        }--%>
-
-
         function ValidateTipoPersona(sender, args) {
             var RBL = document.getElementById('<%=rdoBttnReceptorTipoPersona.ClientID %>');
             var radiobuttonlist = RBL.getElementsByTagName("input");
@@ -78,11 +69,9 @@
                 }
             }
         }
+
+
     </script>
-
-
-
-
     <style type="text/css">
         /* Ahora creo el estilo que hara que aparesca el porcentanje y relleno del mismoo*/
         .ProgressBar { /*height: 1.25em; display: block; width:85%*/
@@ -234,16 +223,50 @@
             height: 80px;
         }
 
-        .overlayContent h2 {
+            .overlayContent h2 {
                 font-size: 18px;
                 font-weight: bold;
                 color: #000;
             }
 
-        .overlayContent img {
+            .overlayContent img {
                 width: 30px;
                 height: 30px;
             }
+
+        .tabstyle .ajax__tab_header {
+            font-size: 13px;
+            font-weight: bold;
+            color: #000;
+            font-family: sans-serif;
+        }
+
+            .tabstyle .ajax__tab_active .ajax__tab_inner, .tabstyle .ajax__tab_header .ajax__tab_inner, .tabstyle .ajax__tab_hover .ajax__tab_inner {
+                height: 46px;
+                margin-left: 16px;
+            }
+
+            .tabstyle .ajax__tab_active .ajax__tab_tab, .tabstyle .ajax__tab_hover .ajax__tab_tab, .tabstyle .ajax__tab_header .ajax__tab_tab {
+                margin: 16px 16px 0px 0px;
+            }
+
+        .tabstyle .ajax__tab_active .ajax__tab_outer {
+            border-left: solid 1px #999999;
+            border-top: solid 1px #999999;
+            border-right: solid 1px #999999;
+            background-color: #d7d7d7;
+            font-weight: bold;
+            border-style: outset;
+        }
+
+        .tabstyle .ajax__tab_body {
+            font-family: Arial;
+            font-size: 10pt;
+            border-top: 0;
+            border: 1px solid #999999;
+            padding: 8px;
+            background-color: #ffffff;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -255,8 +278,8 @@
                         <div class="overlay">
                             <div class="overlayContent">
                                 <asp:Image ID="img1" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
-                                </div>
                             </div>
+                        </div>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
@@ -390,7 +413,7 @@
                                                     ¿Desea cambiar estatus de la solicitud?
                                                 </div>
                                                 <div class="card-body">
-                                                    <div class="container">
+                                                    <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col text-center">
                                                                 <asp:UpdatePanel ID="UpdatePanel7" runat="server">
@@ -422,28 +445,40 @@
                                             <div class="col">
                                                 <asp:UpdatePanel ID="UpdatePanel13" runat="server">
                                                     <ContentTemplate>
-                                                        <br />
-                                                        <asp:GridView ID="grdDatosFactura" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="3" CssClass="mGrid" DataKeyNames="Id_Fact" EmptyDataText="No existen facturas, para el rango de fecha especificado..." OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" PageSize="15" Width="100%" OnRowDeleting="grdDatosFactura_RowDeleting" ShowHeaderWhenEmpty="True">
+                                                        <asp:GridView ID="grdDatosFactura" runat="server" AutoGenerateColumns="False" CellPadding="3" CssClass="sem table table-striped table-bordered table-hover" DataKeyNames="Id_Fact" EmptyDataText="No existen facturas, para el rango de fecha especificado..." OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" PageSize="15" Width="100%" OnRowDeleting="grdDatosFactura_RowDeleting" ShowHeaderWhenEmpty="True">
                                                             <Columns>
                                                                 <asp:BoundField DataField="Id_Fact" HeaderText="Id_Fact" SortExpression="ID"></asp:BoundField>
                                                                 <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
                                                                     <HeaderStyle HorizontalAlign="Left" />
                                                                     <ItemStyle HorizontalAlign="Left" />
                                                                 </asp:BoundField>
-                                                                <asp:BoundField DataField="FACT_REFERENCIA" HeaderText="Referencia" SortExpression="REFERENCIA">
+                                                                <asp:TemplateField HeaderText="Referencia" SortExpression="REFERENCIA">
+                                                                    <EditItemTemplate>
+                                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FACT_REFERENCIA") %>'></asp:TextBox>
+                                                                    </EditItemTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("FACT_REFERENCIA") %>' ToolTip='<%# Bind("TOOLTIP") %>'></asp:Label>
+
+                                                                    </ItemTemplate>
                                                                     <HeaderStyle HorizontalAlign="Left" />
                                                                     <ItemStyle HorizontalAlign="Left" />
-                                                                </asp:BoundField>
+                                                                </asp:TemplateField>
                                                                 <asp:BoundField DataField="FACT_TOTAL" DataFormatString="{0:c}" HeaderText="Importe" ItemStyle-HorizontalAlign="Right" SortExpression="Importe">
                                                                     <HeaderStyle HorizontalAlign="Right" />
-                                                                    <ItemStyle HorizontalAlign="Right" />
+                                                                    <ItemStyle HorizontalAlign="Right" Font-Bold="True" Font-Size="12px" />
                                                                     <ControlStyle Width="30px" />
                                                                     <HeaderStyle Width="30px" />
                                                                 </asp:BoundField>
-                                                                <asp:BoundField DataField="FACT_CLIENTE" HeaderText="Nombre">
+                                                                <asp:TemplateField HeaderText="Nombre">
+                                                                    <EditItemTemplate>
+                                                                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("FACT_CLIENTE") %>'></asp:TextBox>
+                                                                    </EditItemTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("FACT_CLIENTE") %>'></asp:Label>
+                                                                    </ItemTemplate>
                                                                     <HeaderStyle HorizontalAlign="Left" />
                                                                     <ItemStyle HorizontalAlign="Left" />
-                                                                </asp:BoundField>
+                                                                </asp:TemplateField>
                                                                 <asp:BoundField DataField="FACT_NOMBRE" HeaderText="Beneficiario Factura" SortExpression="NOMBRE">
                                                                     <HeaderStyle HorizontalAlign="Left" />
                                                                     <ItemStyle HorizontalAlign="Left" />
@@ -470,8 +505,8 @@
                                                                 </asp:BoundField>
                                                                 <asp:TemplateField HeaderText="# Dias Solicitud">
                                                                     <ItemTemplate>
-                                                                        <asp:Button ID="bttnDiasSol" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn-floating btn-sm btn-warning" Style='left: 0px; top: 0px; width: 35px; height: 35px' Visible='<%# Bind("VISIBLE4") %>' />
-                                                                        <asp:Button ID="bttnDiasSol2" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn-floating btn-sm btn-danger" Style='left: 0px; top: 0px; width: 35px; height: 35px' Visible='<%# Bind("VISIBLE5") %>' />
+                                                                        <asp:Button ID="bttnDiasSol" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn btn-warning" Style='left: 0px; top: 0px; width: 50px; height: 30px; font-size: 10px' Visible='<%# Bind("VISIBLE4") %>' />
+                                                                        <asp:Button ID="bttnDiasSol2" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn btn-danger" Style='left: 0px; top: 0px; width: 50px; height: 30px; font-size: 10px' Visible='<%# Bind("VISIBLE5") %>' />
                                                                         <%--<asp:LinkButton ID="LinkButton1" runat="server" Text=' <%# Bind("FACT_DIAS_SOLICITUD") %> ' CssClass="btn-floating btn-sm btn-warning"></asp:LinkButton>--%>
                                                                     </ItemTemplate>
                                                                     <ControlStyle Width="20px" />
@@ -496,20 +531,24 @@
                                                                     <HeaderTemplate>
                                                                         <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                                                                             <ContentTemplate>
-                                                                                <asp:Button ID="bttnAdd" runat="server" CssClass="btn btn-blue-grey" Text="Agregar" OnClick="bttnAdd_Click" Visible="False" ValidationGroup="New" />
-                                                                                <asp:Label ID="lblEditar" runat="server" ForeColor="White" Text="EDITAR" Visible="False"></asp:Label>
+                                                                                <asp:Button ID="bttnAdd" runat="server" CssClass="btn btn-blue-grey" Text=" + " OnClick="bttnAdd_Click" Visible="False" ValidationGroup="New" />
+                                                                                <asp:Label ID="lblEditar" runat="server" ForeColor="White" Text="EDITAR"></asp:Label>
                                                                             </ContentTemplate>
                                                                         </asp:UpdatePanel>
                                                                     </HeaderTemplate>
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Select" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" Text="Factura" />
+                                                                        <%--<asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Select" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" Text="Factura" />--%>
+                                                                        <asp:LinkButton ID="linkBttnEditar" runat="server" CausesValidation="false" CommandName="Select"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></asp:LinkButton>
+
                                                                     </ItemTemplate>
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle HorizontalAlign="Center" Width="20px" Wrap="False" />
                                                                 </asp:TemplateField>
                                                                 <asp:TemplateField HeaderText="Eliminar">
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="imgBttnCancelar" runat="server" CommandName="Delete" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/del.png" OnClientClick="return confirm('¿Desea eliminar el registro?');" />
+                                                                        <%--                                                                        <asp:ImageButton ID="imgBttnCancelar" runat="server" CommandName="Delete" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/del.png" OnClientClick="return confirm('¿Desea eliminar el registro?');" />--%>
+                                                                        <asp:LinkButton ID="linkBttnCancelar" runat="server" CausesValidation="false" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
+
                                                                     </ItemTemplate>
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle HorizontalAlign="Center" />
@@ -519,7 +558,9 @@
                                                                 <asp:BoundField DataField="FACT_RECEPTOR_CORREO" />
                                                                 <asp:TemplateField HeaderText="ENVIAR XML/PDF">
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />
+                                                                        <%--<asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />--%>
+                                                                        <asp:LinkButton ID="linkBttnCorreo" runat="server" OnClick="linkBttnCorreo_Click"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></asp:LinkButton>
+
                                                                     </ItemTemplate>
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle HorizontalAlign="Center" Width="20px" />
@@ -529,7 +570,8 @@
                                                                 <asp:BoundField DataField="FACT_RECEPTOR_STATUS" />
                                                                 <asp:TemplateField HeaderText="RECIBO">
                                                                     <ItemTemplate>
-                                                                        <asp:ImageButton ID="imgBttnRecibo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/recibo2.png" OnClick="imgBttnRecibo_Click" />
+                                                                        <%--                                                                        <asp:ImageButton ID="imgBttnRecibo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/recibo2.png" OnClick="imgBttnRecibo_Click" />--%>
+                                                                        <asp:LinkButton ID="linkBttnRecibo" runat="server" OnClick="linkBttnRecibo_Click"><i class="fa fa-sticky-note fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                                     </ItemTemplate>
                                                                     <HeaderStyle HorizontalAlign="Center" />
                                                                     <ItemStyle HorizontalAlign="Center" />
@@ -570,7 +612,7 @@
                                                     Documentos
                                                 </div>
                                                 <div class="card-body">
-                                                    <div class="container">
+                                                    <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col text-center">
                                                                 <asp:GridView ID="grdDoctosFactura" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" BackColor="#CCCCCC">
@@ -662,7 +704,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="0" Width="100%" CssClass="mGrid" Height="614px" ScrollBars="Vertical">
+                                <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="1" Width="100%" Height="614px" ScrollBars="Vertical">
                                     <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                         <HeaderTemplate>
                                             <i class="fa fa-file-code-o" aria-hidden="true"></i>Información de Factura
@@ -795,11 +837,27 @@
                                                     <div class="col-md-3">
                                                         <asp:DropDownList ID="ddlCFDI" runat="server" TabIndex="11" Width="100%">
                                                             <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
-                                                            <asp:ListItem Value="G01">Adquisición de mercancias</asp:ListItem>
-                                                            <asp:ListItem Value="G02">Devolución, descuento o bonificaciones</asp:ListItem>
-                                                            <asp:ListItem Value="G03">Gastos en general</asp:ListItem>
-                                                            <asp:ListItem Value="D04">Donativos</asp:ListItem>
-                                                            <asp:ListItem Value="P01">Por definir</asp:ListItem>
+                                                            <asp:ListItem Value="G01">ADQUISICION DE MERCANCIAS</asp:ListItem>
+                                                            <asp:ListItem Value="G02">DEVOLUCIONES, DESCUENTOS O BONIFICACIONES</asp:ListItem>
+                                                            <asp:ListItem Value="G03">GASTOS EN GENERAL</asp:ListItem>
+                                                            <asp:ListItem Value="I01">CONSTRUCCIONES</asp:ListItem>
+                                                            <asp:ListItem Value="I02">MOBILIARIO Y EQUIPO DE OFICINA POR INVERSIONES</asp:ListItem>
+                                                            <asp:ListItem Value="I03">EQUIPO DE TRANSPORTE</asp:ListItem>
+                                                            <asp:ListItem Value="I04">EQUIPO DE COMPUTO Y ACCESORIOS</asp:ListItem>
+                                                            <asp:ListItem Value="I05">DADOS, TROQUELES, MOLDES, MATRICES Y HERRAMENTAL</asp:ListItem>
+                                                            <asp:ListItem Value="I06">COMUNICACIONES TELEFONICAS</asp:ListItem>
+                                                            <asp:ListItem Value="I07">COMUNICACIONES SATELITALES</asp:ListItem>
+                                                            <asp:ListItem Value="I08">OTRA MAQUINARIA Y EQUIPO</asp:ListItem>
+                                                            <asp:ListItem Value="D01">HONORARIOS MEDICOS, DENTALES Y GASTOS HOSPITALARIOS</asp:ListItem>
+                                                            <asp:ListItem Value="D02">GASTOS MEDICOS POR INCAPACIDAD O DISCAPACIDAD</asp:ListItem>
+                                                            <asp:ListItem Value="D03">GASTOS FUNERALES</asp:ListItem>
+                                                            <asp:ListItem Value="D04">DONATIVOS</asp:ListItem>
+                                                            <asp:ListItem Value="D05">INTERESES REALES EFECTIVAMENTE PAGADAS POR CREDITOS HIPOTECARIOS (CASA HABITACION)</asp:ListItem>
+                                                            <asp:ListItem Value="D06">APORTACIONES VOLUNTARIAS AL SAR</asp:ListItem>
+                                                            <asp:ListItem Value="D07">PRIMAS POR SEGUROS DE GASTOS MEDICOS</asp:ListItem>
+                                                            <asp:ListItem Value="D08">GASTOS DE TRANSPORTACION ESCOLAR OBLIGATORIA</asp:ListItem>
+                                                            <asp:ListItem Value="D09">DEPOSITOS EN C</asp:ListItem>
+                                                            <asp:ListItem Value="P01">POR DEFINIR</asp:ListItem>
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="valCFDI" runat="server" ControlToValidate="ddlCFDI" ErrorMessage="*Requerido" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales"></asp:RequiredFieldValidator>
                                                     </div>
@@ -819,29 +877,29 @@
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         Inf del Pago
-                                                        </div>
-                                                    <div class="col-md-10">
-                                                <div class="alert alert-info" id="rowInfAdicional" runat="server">
-                                                    
-                                                <div class="row">
-                                                    <div class="col-md-2 font-weight-bold">
-                                                        Total
                                                     </div>
                                                     <div class="col-md-10">
-                                                        <asp:Label ID="lblImporte" runat="server"></asp:Label>
+                                                        <div class="alert alert-info" id="rowInfAdicional" runat="server">
+
+                                                            <div class="row">
+                                                                <div class="col-md-2 font-weight-bold">
+                                                                    Total
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <asp:Label ID="lblImporte" runat="server"></asp:Label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-2 font-weight-bold">
+                                                                    Conceptos
+                                                                </div>
+                                                                <div class="col-md-10">
+                                                                    <asp:Label ID="lblConceptosFac" runat="server"></asp:Label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col-md-2 font-weight-bold">
-                                                        Conceptos
-                                                    </div>
-                                                    <div class="col-md-10">
-                                                        <asp:Label ID="lblConceptosFac" runat="server"></asp:Label>
-                                                    </div>
-                                                </div>
-                                                    </div>
-                                                        </div>
-                                                    </div>
                                                 <div class="row">
                                                     <div class="col-md-2">
                                                         Descripción
@@ -890,18 +948,22 @@
                                         <ContentTemplate>
                                             <asp:UpdatePanel ID="UpdatePanel147" runat="server">
                                                 <ContentTemplate>
-                                                    <div class="container">
+                                                    <div class="container-fluid">
+
                                                         <div class="row">
                                                             <div class="col">
-                                                                <ajaxToolkit:Accordion ID="Accordion1" runat="server" ContentCssClass="alert alert-dark" FadeTransitions="True" FramesPerSecond="50" HeaderCssClass="accordionCabecera" HeaderSelectedCssClass="cssHeaderSelected" Height="700px" RequireOpenedPane="False" SelectedIndex="-1" TransitionDuration="200" Width="100%">
+
+
+
+                                                                <ajaxToolkit:Accordion ID="Accordion1" runat="server" ContentCssClass="accordion" FadeTransitions="True" FramesPerSecond="50" HeaderCssClass="accordionCabecera" HeaderSelectedCssClass="cssHeaderSelected" Height="700px" RequireOpenedPane="False" SelectedIndex="-1" TransitionDuration="200" Width="100%">
                                                                     <Panes>
                                                                         <ajaxToolkit:AccordionPane runat="server">
                                                                             <Header>
-                                                                         Datos del Voucher <i class="fa fa-sticky-note" aria-hidden="true"></i>
+                                                                         Datos del Voucher
                                                                             </Header>
                                                                             <Content>
                                                                                 <table style="width: 100%;">
-                                                                                    <div class="container">
+                                                                                    <div class="container-fluid">
                                                                                         <div class="row">
                                                                                             <div class="col-md-1">Folio</div>
                                                                                             <div class="col-md-2">
@@ -932,7 +994,7 @@
                                                                                             <div class="alert-warning">
                                                                                                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                                                                     <ContentTemplate>
-                                                                                                        <div class="container">
+                                                                                                        <div class="container-fluid">
                                                                                                             <div class="note note-warning" style="font-size: 14px">
                                                                                                                 <div class="row">
                                                                                                                     <div class="col">
@@ -988,7 +1050,7 @@
                                                                             <Content>
                                                                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                                                                     <ContentTemplate>
-                                                                                        <div class="container">
+                                                                                        <div class="container-fluid">
                                                                                             <div class="row">
                                                                                                 <div class="col-md-2">
                                                                                                     Núm. de Oficio
@@ -1010,7 +1072,7 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="container">
+                                                                                        <div class="container-fluid">
                                                                                             <div class="note note-warning" style="font-size: 14px">
                                                                                                 <div class="row">
                                                                                                     <div class="col">
@@ -1056,7 +1118,7 @@
                                                                             <Content>
                                                                                 <asp:UpdatePanel ID="updPnlConvenio" runat="server">
                                                                                     <ContentTemplate>
-                                                                                        <div class="container">
+                                                                                        <div class="container-fluid">
                                                                                             <div class="row">
                                                                                                 <div class="col-md-1">
                                                                                                     Importe
@@ -1144,7 +1206,7 @@
                                                         </div>
                                                     </div>
                                                     <br />
-                                                    <div class="container">
+                                                    <div class="container-fluid">
                                                         <%--<div class="row">
                                                             <div class="col-md-1">
                                                                 Nivel
@@ -1175,7 +1237,16 @@
 
                                                         <div class="row">
                                                             <div class="col-md-6">
-                                                                <asp:GridView ID="grvConceptosDisp" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptosDisp_PageIndexChanging" OnSelectedIndexChanged="grvConceptosDisp_SelectedIndexChanged" Width="100%" AllowPaging="True">
+
+                                                                <%--<div id="example_filter" class="dataTables_filter">--%>
+                                                                <%-- <div id="ctl00_MainContent_tabFacturas_TabPanel3_grvConceptosDisp" class="dataTables_filter"><label>Buscar:<input type="search" class="" placeholder="" aria-controls="ContentPlaceHolder1_TablaFinanciadores"></label></div>
+                                                                    <label>Buscar<input type="search" class="" placeholder="" aria-controls="example"></label></div>--%>
+                                                                <%--<div id="ctl00_MainContent_tabFacturas_TabPanel3_grvConceptosDisp_filter" class="dataTables_filter">
+                                                                    <label>
+                                                                        Buscar:
+    <input type="search" class="" placeholder="" aria-controls="ctl00_MainContent_tabFacturas_TabPanel3_grvConceptosDisp"></label>
+                                                                </div>--%>
+                                                                <asp:GridView ID="grvConceptosDisp" runat="server" AutoGenerateColumns="False" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptosDisp_PageIndexChanging" OnSelectedIndexChanged="grvConceptosDisp_SelectedIndexChanged" Width="100%" AllowPaging="True" OnRowDataBound="grvConceptosDisp_RowDataBound">
                                                                     <Columns>
                                                                         <asp:BoundField DataField="ClaveConcepto" HeaderText="Cve.">
                                                                             <HeaderStyle HorizontalAlign="Left" />
@@ -1192,6 +1263,12 @@
                                                                     <PagerStyle CssClass="enc" HorizontalAlign="Center" />
                                                                     <SelectedRowStyle CssClass="sel" />
                                                                 </asp:GridView>
+                                                                <script type="text/javascript">
+                                                                    $(document).ready(function () {
+                                                                        $('#<%= grvConceptosDisp.ClientID %>').DataTable();
+                                                                     });
+                                                                </script>
+
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnRowDeleting="grvConceptos_RowDeleting" Width="100%">
@@ -1225,7 +1302,7 @@
                                         <ContentTemplate>
                                             <asp:UpdatePanel ID="UpdatePanelFoto" runat="server">
                                                 <ContentTemplate>
-                                                    <div class="container">
+                                                    <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col-md-2">
                                                                 Folio de la Factura
@@ -1307,7 +1384,7 @@
                                 <%--<asp:LinkButton ID="linkBttnVerRecibo" runat="server" CssClass="btn btn-warning" OnClick="linkBttnVerRecibo_Click"><i class="fa fa-file"></i> VER RECIBO</asp:LinkButton>--%>
                                 <asp:Button ID="bttnVerRecibo" runat="server" CssClass="btn btn-warning" Text="VER RECIBO" OnClick="bttnVerRecibo_Click" />
                                 &nbsp;<asp:Button ID="btnGuardarEditar" runat="server" CssClass="btn btn-info" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="GUARDAR" ValidationGroup="DatosFiscales" />
-                                &nbsp;<asp:Button ID="btnCancelarEditar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnCancelarEditar_Click" TabIndex="15" Text="CANCELAR" />
+                                &nbsp;<asp:Button ID="btnCancelarEditar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnCancelarEditar_Click" TabIndex="15" Text="SALIR" />
                             </div>
                         </div>
                     </div>
@@ -1324,7 +1401,7 @@
                 Enviar Recibo Oficial
             </div>
             <div class="card-body">
-                <div class="container">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col text-center">
                             <asp:UpdatePanel ID="UpdatePanel35" runat="server">
@@ -1380,4 +1457,38 @@
 
 
     </asp:Panel>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".sem").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable({
+                "bPaginate": true,
+
+                "columnDefs": [{
+                    "defaultContent": "-",
+                    "targets": "_all"
+                }],
+                "bLengthChange": false,
+                "iDisplayLength": 5,
+                "bInfo": false,
+                "language": {
+                    "sSearch": "Buscar",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast": "Último",
+                        "sNext": "Siguiente",
+                        "sPrevious": "Anterior"
+                    }
+                }
+            });
+        });
+
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+
+        if (prm != null) {
+            prm.add_endRequest(function (sender, e) {
+                if (sender._postBackSettings.panelsToUpdae != null) {
+                    $(".ctl00_MainContent_grdDatosFactura").DataTable();
+                }
+            });
+        }
+    </script>
 </asp:Content>
