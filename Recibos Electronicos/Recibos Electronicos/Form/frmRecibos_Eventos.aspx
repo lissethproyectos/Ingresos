@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-md-2">
                 Dependencia
@@ -56,6 +56,17 @@
                 </asp:UpdatePanel>
             </div>
         </div>
+        <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="updPrgBuscarDatos" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
+                    <ProgressTemplate>
+                        <asp:Image ID="imgBuscarDatos" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                            ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">

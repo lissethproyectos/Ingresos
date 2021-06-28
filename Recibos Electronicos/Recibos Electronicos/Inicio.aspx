@@ -238,7 +238,7 @@
                                         <span class="input-group-text_buscar" id="basic-addon2">
                                             <asp:UpdatePanel ID="updPnlBuscar" runat="server">
                                                 <ContentTemplate>
-                                                    <button runat="server" id="bttnBuscar" onserverclick="bttnBuscar_Click" class="btn-buscar btn-primary" validationgroup="Buscar">
+                                                    <button runat="server" id="bttnBuscar" onserverclick="bttnBuscar_Click" class="btn-buscar btn-primary" validationgroup="Buscar" style="width: 10px">
                                                         <i class="fa fa-search" aria-hidden="true"></i>
                                                     </button>
                                                 </ContentTemplate>

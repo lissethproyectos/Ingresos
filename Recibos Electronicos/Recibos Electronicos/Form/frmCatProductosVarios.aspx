@@ -34,57 +34,67 @@
                                     Productos
                                 </HeaderTemplate>
                                 <ContentTemplate>
-                                    <table style="width: 100%;">
-                                        <tr>
-                                            <td>
-
-                                                <asp:GridView ID="grvProductos" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No hay productos registrados." OnPageIndexChanging="grvProductos_PageIndexChanging" OnRowCancelingEdit="grvProductos_RowCancelingEdit" OnRowEditing="grvProductos_RowEditing" OnRowUpdating="grvProductos_RowUpdating" Width="100%" ShowHeaderWhenEmpty="True">
-                                                    <AlternatingRowStyle CssClass="alt" />
-                                                    <Columns>
-                                                        <asp:TemplateField>
-                                                            <HeaderTemplate>
-                                                                <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
-                                                                </asp:DropDownList>
-                                                            </HeaderTemplate>
-                                                            <ItemTemplate>
-                                                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("Tipo") %>'></asp:Label>
-                                                            </ItemTemplate>
-                                                            <HeaderStyle HorizontalAlign="Left" />
-                                                            <ItemStyle HorizontalAlign="Left" />
-                                                        </asp:TemplateField>
-                                                        <asp:BoundField DataField="Id_Inventario" HeaderText="# Producto" ReadOnly="True">
-                                                            <HeaderStyle HorizontalAlign="Left" />
-                                                            <ItemStyle HorizontalAlign="Left" />
-                                                        </asp:BoundField>
-                                                        <asp:BoundField DataField="Descripcion" HeaderText="Descripción">
-                                                            <ItemStyle Width="45%" />
-                                                        </asp:BoundField>
-                                                        <asp:CommandField ShowEditButton="True" EditImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" />
-                                                        <asp:TemplateField>
-                                                            <HeaderTemplate>
-                                                                <asp:Button ID="bttnAgregar" runat="server" CssClass="btn btn-blue-grey" Font-Size="X-Small" OnClick="bttnAgregar_Click" Text="AGREGAR" />
-                                                            </HeaderTemplate>
-                                                            <ItemTemplate>
-                                                                <asp:LinkButton ID="linkEliminar" runat="server" OnClick="linkEliminar_Click" OnClientClick="return confirm('¿Eliminar registro?');">Eliminar</asp:LinkButton>
-                                                            </ItemTemplate>
-                                                            <HeaderStyle HorizontalAlign="Center" />
-                                                            <ItemStyle HorizontalAlign="Center" />
-                                                        </asp:TemplateField>
-                                                    </Columns>
-                                                    <FooterStyle CssClass="enc" />
-                                                    <HeaderStyle CssClass="enc" />
-                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                    <SelectedRowStyle CssClass="sel" />
-                                                </asp:GridView>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td>&nbsp;</td>
-                                        </tr>
-                                    </table>
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col text-center">
+                                                <asp:UpdateProgress ID="updPgrProductos" runat="server"
+                                                    AssociatedUpdatePanelID="updPnlProductos">
+                                                    <ProgressTemplate>
+                                                        <asp:Image ID="Image86" runat="server"
+                                                            AlternateText="Espere un momento, por favor.." Height="50px"
+                                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                            ToolTip="Espere un momento, por favor.." />
+                                                    </ProgressTemplate>
+                                                </asp:UpdateProgress>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <asp:UpdatePanel ID="updPnlProductos" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:GridView ID="grvProductos" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No hay productos registrados." OnPageIndexChanging="grvProductos_PageIndexChanging" OnRowCancelingEdit="grvProductos_RowCancelingEdit" OnRowEditing="grvProductos_RowEditing" OnRowUpdating="grvProductos_RowUpdating" Width="100%" ShowHeaderWhenEmpty="True">
+                                                            <AlternatingRowStyle CssClass="alt" />
+                                                            <Columns>
+                                                                <asp:TemplateField>
+                                                                    <HeaderTemplate>
+                                                                        <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged">
+                                                                        </asp:DropDownList>
+                                                                    </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Tipo") %>'></asp:Label>
+                                                                    </ItemTemplate>
+                                                                    <HeaderStyle HorizontalAlign="Left" />
+                                                                    <ItemStyle HorizontalAlign="Left" />
+                                                                </asp:TemplateField>
+                                                                <asp:BoundField DataField="Id_Inventario" HeaderText="# Producto" ReadOnly="True">
+                                                                    <HeaderStyle HorizontalAlign="Left" />
+                                                                    <ItemStyle HorizontalAlign="Left" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="Descripcion" HeaderText="Descripción">
+                                                                    <ItemStyle Width="45%" />
+                                                                </asp:BoundField>
+                                                                <asp:CommandField ShowEditButton="True" EditImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" />
+                                                                <asp:TemplateField>
+                                                                    <HeaderTemplate>
+                                                                        <asp:Button ID="bttnAgregar" runat="server" CssClass="btn btn-blue-grey" Font-Size="X-Small" OnClick="bttnAgregar_Click" Text="AGREGAR" />
+                                                                    </HeaderTemplate>
+                                                                    <ItemTemplate>
+                                                                        <asp:LinkButton ID="linkEliminar" runat="server" OnClick="linkEliminar_Click" OnClientClick="return confirm('¿Eliminar registro?');">Eliminar</asp:LinkButton>
+                                                                    </ItemTemplate>
+                                                                    <HeaderStyle HorizontalAlign="Center" />
+                                                                    <ItemStyle HorizontalAlign="Center" />
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                            <FooterStyle CssClass="enc" />
+                                                            <HeaderStyle CssClass="enc" />
+                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                            <SelectedRowStyle CssClass="sel" />
+                                                        </asp:GridView>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </ContentTemplate>
                             </ajaxToolkit:TabPanel>
                             <ajaxToolkit:TabPanel ID="TabPanel2" runat="server" HeaderText="TabPanel2">
@@ -335,18 +345,18 @@
                                                     </div>
                                                     <div class="row">
                                                         <div class="col text-center">
-                                                    <asp:UpdateProgress ID="UpdateProgress2" runat="server"
-                                                        AssociatedUpdatePanelID="UpdatePanel3">
-                                                        <ProgressTemplate>
-                                                            <asp:Image ID="Image86" runat="server"
-                                                                AlternateText="Espere un momento, por favor.." Height="50px"
-                                                                ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                                                ToolTip="Espere un momento, por favor.." />
-                                                        </ProgressTemplate>
-                                                    </asp:UpdateProgress>
-                                                   </div>
+                                                            <asp:UpdateProgress ID="UpdateProgress2" runat="server"
+                                                                AssociatedUpdatePanelID="UpdatePanel3">
+                                                                <ProgressTemplate>
+                                                                    <asp:Image ID="Image86" runat="server"
+                                                                        AlternateText="Espere un momento, por favor.." Height="50px"
+                                                                        ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                                                        ToolTip="Espere un momento, por favor.." />
+                                                                </ProgressTemplate>
+                                                            </asp:UpdateProgress>
                                                         </div>
-                                                   </div>
+                                                    </div>
+                                                </div>
                                             </asp:View>
                                         </asp:MultiView>
                                     </ContentTemplate>

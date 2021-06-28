@@ -45,7 +45,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-muted">
-                        <a href="frmExentos.aspx" class="btn btn-warning btn-rounded">Continuar</a>
+                        <a href="Form/frmExentos.aspx" class="btn btn-warning btn-rounded">Continuar</a>
                     </div>
                 </div>
             </div>

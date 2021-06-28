@@ -275,11 +275,11 @@
             <div class="col text-center">
                 <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
                     <ProgressTemplate>
-                        <div class="overlay">
-                            <div class="overlayContent">
-                                <asp:Image ID="img1" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
-                            </div>
-                        </div>
+                        <%-- <div class="overlay">
+                            <div class="overlayContent">--%>
+                        <asp:Image ID="img1" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
+                        <%--</div>
+                        </div>--%>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
@@ -341,47 +341,288 @@
                                 </asp:UpdatePanel>
                             </div>
                         </div>
-                        <hr />
                         <div class="row">
                             <div class="col-md-1">
                                 Depcia
                             </div>
-                            <div class="col-md-11">
+                            <div class="col-md-6">
                                 <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="reqDep" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="*Dependencia" InitialValue="00000" ValidationGroup="New">*Requerido</asp:RequiredFieldValidator>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-1">
-                                Del
-                            </div>
                             <div class="col-md-2">
-                                <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" CssClass="box" MaxLength="10" Width="95px"></asp:TextBox>
+                                Pago del 
+                                <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" Width="100px"></asp:TextBox>
                                 <ajaxToolkit:CalendarExtender ID="txtFecha_Factura_Ini_CalendarExtender" runat="server" PopupButtonID="imgCalendarioIni" TargetControlID="txtFecha_Factura_Ini" />
                                 <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                             </div>
-                            <div class="col-md-1">
-                                al
-                            </div>
                             <div class="col-md-2">
-                                <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" CssClass="box" MaxLength="10" Width="95px"></asp:TextBox>
+                                al               
+                                <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" Width="100px"></asp:TextBox>
                                 <ajaxToolkit:CalendarExtender ID="txtFecha_Factura_Fin_CalendarExtender" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFecha_Factura_Fin" />
                                 <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                             </div>
-                            <div class="input-group col-md-6">
+                            <div class="col-md-1">
+                                <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                                    <ContentTemplate>
+                                        <asp:LinkButton ID="linkBttnBuscar" runat="server" class="btn btn-primary" OnClick="linkBttnBuscar_Click" Width="100%"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <%--<div class="input-group col-md-6">
                                 <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia/Nombre"></asp:TextBox>
                                 <div class="input-group-append">
                                     <span class="input-group-text_buscar" id="basic-addon2">
-                                        <asp:UpdatePanel ID="UpdatePanel9" runat="server">
-                                            <ContentTemplate>
-                                                <asp:LinkButton ID="linkBttnBuscar" runat="server" class="btn-buscar btn-primary" OnClick="linkBttnBuscar_Click" Width="30px"><i class="fa fa-search" aria-hidden="true"></i></asp:LinkButton>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
+                                        <asp:LinkButton ID="linkBttnBuscar" runat="server" class="btn-buscar btn-primary" OnClick="linkBttnBuscar_Click" Width="30px"><i class="fa fa-search" aria-hidden="true"></i></asp:LinkButton>                                       
                                     </span>
                                 </div>
-                            </div>
+                            </div>--%>
                         </div>
+                        <asp:MultiView ID="mltViewTipo" runat="server">
+                            <asp:View ID="View1" runat="server">
+                                <asp:Panel ID="pnlMsg" runat="server" Width="40%">
+                                    <div class="card text-white bg-dark mb-3" style="left: 0px; top: 0px; width: 881px">
+                                        <div class="card-header">
+                                            ¿Desea cambiar estatus de la solicitud?
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col text-center">
+                                                        <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                                            <ContentTemplate>
+                                                                <br />
+                                                                &nbsp;&nbsp;<asp:Button ID="btnSi" runat="server" CssClass="btn btn-info" Height="40px" OnClick="btnSi_Click" Text="Si" Width="70px" />
+                                                                &nbsp;<asp:Button ID="btnNo" runat="server" CssClass="btn btn-blue-grey" Height="40px" Text="No" Width="70px" OnClick="btnNo_Click" />
+                                                                <br />
+                                                            </ContentTemplate>
+                                                        </asp:UpdatePanel>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </asp:Panel>
+                                <asp:HiddenField ID="hddnModal" runat="server" />
+                                <ajaxToolkit:ModalPopupExtender ID="ModalPopup" runat="server" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlMsg" TargetControlID="hddnModal">
+                                </ajaxToolkit:ModalPopupExtender>
+                                <asp:Panel ID="pnlOpcConfirma" runat="server" Visible="False">
+                                    <asp:RadioButtonList ID="rdoStatusConfirmados" runat="server" AutoPostBack="True" Font-Bold="True" Font-Size="12px" OnSelectedIndexChanged="rdoStatusConfirmados_SelectedIndexChanged" RepeatDirection="Horizontal" Width="95%" Height="19px" Visible="False">
+                                        <asp:ListItem Value="T" Selected="True">&nbsp;TODOS</asp:ListItem>
+                                        <asp:ListItem Value="N">&nbsp;(1). FALTA POR CONFIRMAR</asp:ListItem>
+                                        <asp:ListItem Value="S">&nbsp;(2). CONFIRMADOS</asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </asp:Panel>
+                                <div class="row" id="rowAgregar" runat="server" visible="false">
+                                    <div class="col text-right">
+                                        <asp:LinkButton ID="linkBttnAgregarReg" runat="server" OnClick="linkBttnAgregarReg_Click" CssClass="btn btn-grey" ValidationGroup="new"><i class="fa fa-plus-circle"></i> Agregar</asp:LinkButton>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <asp:UpdatePanel ID="UpdatePanel13" runat="server">
+                                            <ContentTemplate>
+                                                <asp:GridView ID="grdDatosFactura" runat="server" AutoGenerateColumns="False" CellPadding="3" CssClass="sem table table-striped table-bordered table-hover" DataKeyNames="Id_Fact" EmptyDataText="No existen facturas, para el rango de fecha especificado..." OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" PageSize="15" Width="100%" OnRowDeleting="grdDatosFactura_RowDeleting" ShowHeaderWhenEmpty="True">
+                                                    <Columns>
+                                                        <asp:BoundField DataField="Id_Fact" HeaderText="Id_Fact" SortExpression="ID"></asp:BoundField>
+                                                        <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
+                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                        </asp:BoundField>
+                                                        <asp:TemplateField HeaderText="Referencia" SortExpression="REFERENCIA">
+                                                            <EditItemTemplate>
+                                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FACT_REFERENCIA") %>'></asp:TextBox>
+                                                            </EditItemTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("FACT_REFERENCIA") %>' ToolTip='<%# Bind("TOOLTIP") %>'></asp:Label>
+
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="FACT_TOTAL" DataFormatString="{0:c}" HeaderText="Importe" ItemStyle-HorizontalAlign="Right" SortExpression="Importe">
+                                                            <HeaderStyle HorizontalAlign="Right" />
+                                                            <ItemStyle HorizontalAlign="Right" Font-Bold="True" Font-Size="12px" />
+                                                            <ControlStyle Width="30px" />
+                                                            <HeaderStyle Width="30px" />
+                                                        </asp:BoundField>
+                                                        <asp:TemplateField HeaderText="Nombre">
+                                                            <EditItemTemplate>
+                                                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("FACT_CLIENTE") %>'></asp:TextBox>
+                                                            </EditItemTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("FACT_CLIENTE") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="FACT_NOMBRE" HeaderText="Beneficiario Factura" SortExpression="NOMBRE">
+                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Depen" SortExpression="DEPENDENCIA">
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="FACT_BANCO" HeaderText="Banco">
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="FACT_FECHA_CAPTURA" HeaderText="Fecha Solicitud">
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                            <ControlStyle Width="20px" />
+                                                            <HeaderStyle Width="20px" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="FACT_FECHA_FACTURA" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha Factura" SortExpression="FECHA_FACTURA">
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                            <ControlStyle Width="20px" />
+                                                            <HeaderStyle Width="20px" />
+                                                        </asp:BoundField>
+                                                        <asp:TemplateField HeaderText="# Dias Solicitud">
+                                                            <ItemTemplate>
+                                                                <asp:Button ID="bttnDiasSol" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn btn-warning" Style='left: 0px; top: 0px; width: 50px; height: 30px; font-size: 10px' Visible='<%# Bind("VISIBLE4") %>' />
+                                                                <asp:Button ID="bttnDiasSol2" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn btn-danger" Style='left: 0px; top: 0px; width: 50px; height: 30px; font-size: 10px' Visible='<%# Bind("VISIBLE5") %>' />
+                                                                <%--<asp:LinkButton ID="LinkButton1" runat="server" Text=' <%# Bind("FACT_DIAS_SOLICITUD") %> ' CssClass="btn-floating btn-sm btn-warning"></asp:LinkButton>--%>
+                                                            </ItemTemplate>
+                                                            <ControlStyle Width="20px" />
+                                                            <HeaderStyle Width="20px" />
+                                                            <ItemStyle Font-Bold="True" HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Status">
+                                                            <HeaderTemplate>
+                                                                <asp:Button ID="btnConfirmar_Sol" runat="server" CssClass="btn btn-blue-grey" Height="35px" OnClick="btnConfirmar_Sol_Click" Text="CONFIRMAR" Visible="False" />
+                                                                STATUS
+                                                            </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:CheckBox ID="chkConfirmado" runat="server" AutoPostBack="True" Checked='<%# Convert.ToBoolean(Eval("FACT_CONFIRMADO")) %>' Enabled='<%# Bind("HABILITADO") %>' OnCheckedChanged="chkConfirmado_CheckedChanged" Text="Si" Visible="False" />
+                                                                <%--                                                                        <asp:Image ID="Image89" runat="server" ImageUrl="~/Imagenes/activo.png" Visible='<%# Convert.ToBoolean(Eval("FACT_CONFIRMADO")) %>' />
+                                                                        <asp:Image ID="imgRechazado" runat="server" ImageUrl='<%# Bind("Ruta") %>' />--%>
+                                                                <asp:Label ID="lblSol" runat="server" Text='<%# Bind("FACT_DESC_STATUS_SOLICITUD") %>' Font-Bold="True" ForeColor="#333333" Font-Size="8"></asp:Label>
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Editar" ShowHeader="False">
+                                                            <HeaderTemplate>
+                                                                <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+                                                                    <ContentTemplate>
+                                                                        <%--<asp:Button ID="bttnAdd" runat="server" CssClass="btn btn-blue-grey" Text=" + " OnClick="bttnAdd_Click" Visible="False" ValidationGroup="New" />--%>
+                                                                        <asp:Label ID="lblEditar" runat="server" ForeColor="White" Text="EDITAR"></asp:Label>
+                                                                    </ContentTemplate>
+                                                                </asp:UpdatePanel>
+                                                            </HeaderTemplate>
+                                                            <ItemTemplate>
+                                                                <%--<asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Select" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" Text="Factura" />--%>
+                                                                <asp:LinkButton ID="linkBttnEditar" runat="server" CausesValidation="false" CommandName="Select"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></asp:LinkButton>
+
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" Width="20px" Wrap="False" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Eliminar">
+                                                            <ItemTemplate>
+                                                                <%--                                                                        <asp:ImageButton ID="imgBttnCancelar" runat="server" CommandName="Delete" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/del.png" OnClientClick="return confirm('¿Desea eliminar el registro?');" />--%>
+                                                                <asp:LinkButton ID="linkBttnCancelar" runat="server" CausesValidation="false" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
+
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                            <ControlStyle Width="20px" />
+                                                            <HeaderStyle Width="20px" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="FACT_RECEPTOR_CORREO" />
+                                                        <asp:TemplateField HeaderText="ENVIAR XML/PDF">
+                                                            <ItemTemplate>
+                                                                <%--<asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />--%>
+                                                                <asp:LinkButton ID="linkBttnCorreo" runat="server" OnClick="linkBttnCorreo_Click"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></asp:LinkButton>
+
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" Width="20px" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="ID_FICHA_BANCARIA" />
+                                                        <asp:BoundField DataField="FACT_STATUS_CAJA" />
+                                                        <asp:BoundField DataField="FACT_RECEPTOR_STATUS" />
+                                                        <asp:TemplateField HeaderText="RECIBO">
+                                                            <ItemTemplate>
+                                                                <%--                                                                        <asp:ImageButton ID="imgBttnRecibo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/recibo2.png" OnClick="imgBttnRecibo_Click" />--%>
+                                                                <asp:LinkButton ID="linkBttnRecibo" runat="server" OnClick="linkBttnRecibo_Click"><i class="fa fa-sticky-note fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="RECHAZADO">
+                                                            <ItemTemplate>
+                                                                <asp:Image ID="imgRechazado2" runat="server" ImageUrl='<%# Bind("Ruta") %>' />
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" Width="20px" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="FACT_TIPO" />
+                                                        <asp:TemplateField HeaderText="DOCUMENTOS">
+                                                            <ItemTemplate>
+                                                                <asp:Button ID="bttnDoctos" runat="server" CssClass="btn btn-blue-grey" Text="Ver" OnClick="bttnDoctos_Click" />
+                                                            </ItemTemplate>
+                                                            <ItemStyle HorizontalAlign="Center" Width="20px" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="FACT_DIAS_SOLICITUD" />
+                                                    </Columns>
+                                                    <FooterStyle CssClass="enc" />
+                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                    <SelectedRowStyle CssClass="sel" />
+                                                    <HeaderStyle CssClass="enc" />
+                                                    <AlternatingRowStyle CssClass="alt" />
+                                                </asp:GridView>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+
+                                <asp:HiddenField ID="hddnDoctos" runat="server" />
+                                <ajaxToolkit:ModalPopupExtender ID="modalDoctos" runat="server" TargetControlID="hddnDoctos" PopupControlID="pnlDoctos" BackgroundCssClass="modalBackground_Proy">
+                                </ajaxToolkit:ModalPopupExtender>
+                                <asp:Panel ID="pnlDoctos" runat="server" Width="40%">
+                                    <div class="card text-white">
+                                        <div class="card-header">
+                                            Documentos
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col text-center">
+                                                        <asp:GridView ID="grdDoctosFactura" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" BackColor="#CCCCCC">
+                                                            <Columns>
+                                                                <asp:BoundField DataField="FACT_TIPO" HeaderText="TIPO" />
+                                                                <asp:TemplateField HeaderText="ARCHIVO">
+                                                                    <ItemTemplate>
+                                                                        <asp:HyperLink ID="linkDocto" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "RUTA_ADJUNTO") %>' Target="_blank"><%# DataBinder.Eval(Container.DataItem, "OFICIO") %></asp:HyperLink>
+                                                                    </ItemTemplate>
+                                                                </asp:TemplateField>
+                                                            </Columns>
+                                                            <FooterStyle CssClass="enc" />
+                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                            <SelectedRowStyle CssClass="sel" />
+                                                            <HeaderStyle CssClass="enc" />
+                                                            <AlternatingRowStyle CssClass="alt" />
+                                                        </asp:GridView>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col text-center">
+                                                        <asp:Button ID="bttnSalir" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalir_Click" Text="SALIR" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </asp:Panel>
+                            </asp:View>
+                            <asp:View ID="View2" runat="server">
+                            </asp:View>
+                        </asp:MultiView>
+
                         <%--<div class="row">
                             <div class="col-md-8 font-weight-bold">
                             </div>
@@ -402,252 +643,6 @@
                     <asp:DropDownList ID="ddlAvance" runat="server" Visible="False">
                     </asp:DropDownList>
                     <asp:HiddenField ID="hddnBandera" runat="server" />
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col">
-                                <asp:MultiView ID="mltViewTipo" runat="server">
-                                    <asp:View ID="View1" runat="server">
-                                        <asp:Panel ID="pnlMsg" runat="server" Width="40%">
-                                            <div class="card text-white bg-dark mb-3">
-                                                <div class="card-header">
-                                                    ¿Desea cambiar estatus de la solicitud?
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col text-center">
-                                                                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                                                                    <ContentTemplate>
-                                                                        <br />
-                                                                        &nbsp;&nbsp;<asp:Button ID="btnSi" runat="server" CssClass="btn btn-info" Height="40px" OnClick="btnSi_Click" Text="Si" Width="70px" />
-                                                                        &nbsp;<asp:Button ID="btnNo" runat="server" CssClass="btn btn-blue-grey" Height="40px" Text="No" Width="70px" OnClick="btnNo_Click" />
-                                                                        <br />
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </asp:Panel>
-                                        <asp:HiddenField ID="hddnModal" runat="server" />
-                                        <ajaxToolkit:ModalPopupExtender ID="ModalPopup" runat="server" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlMsg" TargetControlID="hddnModal">
-                                        </ajaxToolkit:ModalPopupExtender>
-                                        <asp:Panel ID="pnlOpcConfirma" runat="server" Visible="False">
-                                            <asp:RadioButtonList ID="rdoStatusConfirmados" runat="server" AutoPostBack="True" Font-Bold="True" Font-Size="12px" OnSelectedIndexChanged="rdoStatusConfirmados_SelectedIndexChanged" RepeatDirection="Horizontal" Width="95%" Height="19px" Visible="False">
-                                                <asp:ListItem Value="T" Selected="True">&nbsp;TODOS</asp:ListItem>
-                                                <asp:ListItem Value="N">&nbsp;(1). FALTA POR CONFIRMAR</asp:ListItem>
-                                                <asp:ListItem Value="S">&nbsp;(2). CONFIRMADOS</asp:ListItem>
-                                            </asp:RadioButtonList>
-                                        </asp:Panel>
-
-                                        <div class="row">
-                                            <div class="col">
-                                                <asp:UpdatePanel ID="UpdatePanel13" runat="server">
-                                                    <ContentTemplate>
-                                                        <asp:GridView ID="grdDatosFactura" runat="server" AutoGenerateColumns="False" CellPadding="3" CssClass="sem table table-striped table-bordered table-hover" DataKeyNames="Id_Fact" EmptyDataText="No existen facturas, para el rango de fecha especificado..." OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" PageSize="15" Width="100%" OnRowDeleting="grdDatosFactura_RowDeleting" ShowHeaderWhenEmpty="True">
-                                                            <Columns>
-                                                                <asp:BoundField DataField="Id_Fact" HeaderText="Id_Fact" SortExpression="ID"></asp:BoundField>
-                                                                <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
-                                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                                    <ItemStyle HorizontalAlign="Left" />
-                                                                </asp:BoundField>
-                                                                <asp:TemplateField HeaderText="Referencia" SortExpression="REFERENCIA">
-                                                                    <EditItemTemplate>
-                                                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FACT_REFERENCIA") %>'></asp:TextBox>
-                                                                    </EditItemTemplate>
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("FACT_REFERENCIA") %>' ToolTip='<%# Bind("TOOLTIP") %>'></asp:Label>
-
-                                                                    </ItemTemplate>
-                                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                                    <ItemStyle HorizontalAlign="Left" />
-                                                                </asp:TemplateField>
-                                                                <asp:BoundField DataField="FACT_TOTAL" DataFormatString="{0:c}" HeaderText="Importe" ItemStyle-HorizontalAlign="Right" SortExpression="Importe">
-                                                                    <HeaderStyle HorizontalAlign="Right" />
-                                                                    <ItemStyle HorizontalAlign="Right" Font-Bold="True" Font-Size="12px" />
-                                                                    <ControlStyle Width="30px" />
-                                                                    <HeaderStyle Width="30px" />
-                                                                </asp:BoundField>
-                                                                <asp:TemplateField HeaderText="Nombre">
-                                                                    <EditItemTemplate>
-                                                                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("FACT_CLIENTE") %>'></asp:TextBox>
-                                                                    </EditItemTemplate>
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="lblNombre" runat="server" Text='<%# Bind("FACT_CLIENTE") %>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                                    <ItemStyle HorizontalAlign="Left" />
-                                                                </asp:TemplateField>
-                                                                <asp:BoundField DataField="FACT_NOMBRE" HeaderText="Beneficiario Factura" SortExpression="NOMBRE">
-                                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                                    <ItemStyle HorizontalAlign="Left" />
-                                                                </asp:BoundField>
-                                                                <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Depen" SortExpression="DEPENDENCIA">
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" />
-                                                                </asp:BoundField>
-                                                                <asp:BoundField DataField="FACT_BANCO" HeaderText="Banco">
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" />
-                                                                </asp:BoundField>
-                                                                <asp:BoundField DataField="FACT_FECHA_CAPTURA" HeaderText="Fecha Solicitud">
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" />
-                                                                    <ControlStyle Width="20px" />
-                                                                    <HeaderStyle Width="20px" />
-                                                                </asp:BoundField>
-                                                                <asp:BoundField DataField="FACT_FECHA_FACTURA" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha Factura" SortExpression="FECHA_FACTURA">
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" />
-                                                                    <ControlStyle Width="20px" />
-                                                                    <HeaderStyle Width="20px" />
-                                                                </asp:BoundField>
-                                                                <asp:TemplateField HeaderText="# Dias Solicitud">
-                                                                    <ItemTemplate>
-                                                                        <asp:Button ID="bttnDiasSol" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn btn-warning" Style='left: 0px; top: 0px; width: 50px; height: 30px; font-size: 10px' Visible='<%# Bind("VISIBLE4") %>' />
-                                                                        <asp:Button ID="bttnDiasSol2" runat="server" Text='<%# Bind("FACT_DIAS_SOLICITUD") %>' CssClass="btn btn-danger" Style='left: 0px; top: 0px; width: 50px; height: 30px; font-size: 10px' Visible='<%# Bind("VISIBLE5") %>' />
-                                                                        <%--<asp:LinkButton ID="LinkButton1" runat="server" Text=' <%# Bind("FACT_DIAS_SOLICITUD") %> ' CssClass="btn-floating btn-sm btn-warning"></asp:LinkButton>--%>
-                                                                    </ItemTemplate>
-                                                                    <ControlStyle Width="20px" />
-                                                                    <HeaderStyle Width="20px" />
-                                                                    <ItemStyle Font-Bold="True" HorizontalAlign="Center" />
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Status">
-                                                                    <HeaderTemplate>
-                                                                        <asp:Button ID="btnConfirmar_Sol" runat="server" CssClass="btn btn-blue-grey" Height="35px" OnClick="btnConfirmar_Sol_Click" Text="CONFIRMAR" Visible="False" />
-                                                                        STATUS
-                                                                    </HeaderTemplate>
-                                                                    <ItemTemplate>
-                                                                        <asp:CheckBox ID="chkConfirmado" runat="server" AutoPostBack="True" Checked='<%# Convert.ToBoolean(Eval("FACT_CONFIRMADO")) %>' Enabled='<%# Bind("HABILITADO") %>' OnCheckedChanged="chkConfirmado_CheckedChanged" Text="Si" Visible="False" />
-                                                                        <%--                                                                        <asp:Image ID="Image89" runat="server" ImageUrl="~/Imagenes/activo.png" Visible='<%# Convert.ToBoolean(Eval("FACT_CONFIRMADO")) %>' />
-                                                                        <asp:Image ID="imgRechazado" runat="server" ImageUrl='<%# Bind("Ruta") %>' />--%>
-                                                                        <asp:Label ID="lblSol" runat="server" Text='<%# Bind("FACT_DESC_STATUS_SOLICITUD") %>' Font-Bold="True" ForeColor="#333333" Font-Size="8"></asp:Label>
-                                                                    </ItemTemplate>
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" />
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Editar" ShowHeader="False">
-                                                                    <HeaderTemplate>
-                                                                        <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                                                                            <ContentTemplate>
-                                                                                <asp:Button ID="bttnAdd" runat="server" CssClass="btn btn-blue-grey" Text=" + " OnClick="bttnAdd_Click" Visible="False" ValidationGroup="New" />
-                                                                                <asp:Label ID="lblEditar" runat="server" ForeColor="White" Text="EDITAR"></asp:Label>
-                                                                            </ContentTemplate>
-                                                                        </asp:UpdatePanel>
-                                                                    </HeaderTemplate>
-                                                                    <ItemTemplate>
-                                                                        <%--<asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Select" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" Text="Factura" />--%>
-                                                                        <asp:LinkButton ID="linkBttnEditar" runat="server" CausesValidation="false" CommandName="Select"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></asp:LinkButton>
-
-                                                                    </ItemTemplate>
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" Width="20px" Wrap="False" />
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Eliminar">
-                                                                    <ItemTemplate>
-                                                                        <%--                                                                        <asp:ImageButton ID="imgBttnCancelar" runat="server" CommandName="Delete" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/del.png" OnClientClick="return confirm('¿Desea eliminar el registro?');" />--%>
-                                                                        <asp:LinkButton ID="linkBttnCancelar" runat="server" CausesValidation="false" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
-
-                                                                    </ItemTemplate>
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" />
-                                                                    <ControlStyle Width="20px" />
-                                                                    <HeaderStyle Width="20px" />
-                                                                </asp:TemplateField>
-                                                                <asp:BoundField DataField="FACT_RECEPTOR_CORREO" />
-                                                                <asp:TemplateField HeaderText="ENVIAR XML/PDF">
-                                                                    <ItemTemplate>
-                                                                        <%--<asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />--%>
-                                                                        <asp:LinkButton ID="linkBttnCorreo" runat="server" OnClick="linkBttnCorreo_Click"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></asp:LinkButton>
-
-                                                                    </ItemTemplate>
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" Width="20px" />
-                                                                </asp:TemplateField>
-                                                                <asp:BoundField DataField="ID_FICHA_BANCARIA" />
-                                                                <asp:BoundField DataField="FACT_STATUS_CAJA" />
-                                                                <asp:BoundField DataField="FACT_RECEPTOR_STATUS" />
-                                                                <asp:TemplateField HeaderText="RECIBO">
-                                                                    <ItemTemplate>
-                                                                        <%--                                                                        <asp:ImageButton ID="imgBttnRecibo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/recibo2.png" OnClick="imgBttnRecibo_Click" />--%>
-                                                                        <asp:LinkButton ID="linkBttnRecibo" runat="server" OnClick="linkBttnRecibo_Click"><i class="fa fa-sticky-note fa-2x" aria-hidden="true"></i></asp:LinkButton>
-                                                                    </ItemTemplate>
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" />
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="RECHAZADO">
-                                                                    <ItemTemplate>
-                                                                        <asp:Image ID="imgRechazado2" runat="server" ImageUrl='<%# Bind("Ruta") %>' />
-                                                                    </ItemTemplate>
-                                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                                    <ItemStyle HorizontalAlign="Center" Width="20px" />
-                                                                </asp:TemplateField>
-                                                                <asp:BoundField DataField="FACT_TIPO" />
-                                                                <asp:TemplateField HeaderText="DOCUMENTOS">
-                                                                    <ItemTemplate>
-                                                                        <asp:Button ID="bttnDoctos" runat="server" CssClass="btn btn-blue-grey" Text="Ver" OnClick="bttnDoctos_Click" />
-                                                                    </ItemTemplate>
-                                                                    <ItemStyle HorizontalAlign="Center" Width="20px" />
-                                                                </asp:TemplateField>
-                                                                <asp:BoundField DataField="FACT_DIAS_SOLICITUD" />
-                                                            </Columns>
-                                                            <FooterStyle CssClass="enc" />
-                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                            <SelectedRowStyle CssClass="sel" />
-                                                            <HeaderStyle CssClass="enc" />
-                                                            <AlternatingRowStyle CssClass="alt" />
-                                                        </asp:GridView>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-                                            </div>
-                                        </div>
-
-                                        <asp:HiddenField ID="hddnDoctos" runat="server" />
-                                        <ajaxToolkit:ModalPopupExtender ID="modalDoctos" runat="server" TargetControlID="hddnDoctos" PopupControlID="pnlDoctos" BackgroundCssClass="modalBackground_Proy">
-                                        </ajaxToolkit:ModalPopupExtender>
-                                        <asp:Panel ID="pnlDoctos" runat="server" Width="40%">
-                                            <div class="card text-white">
-                                                <div class="card-header">
-                                                    Documentos
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col text-center">
-                                                                <asp:GridView ID="grdDoctosFactura" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" BackColor="#CCCCCC">
-                                                                    <Columns>
-                                                                        <asp:BoundField DataField="FACT_TIPO" HeaderText="TIPO" />
-                                                                        <asp:TemplateField HeaderText="ARCHIVO">
-                                                                            <ItemTemplate>
-                                                                                <asp:HyperLink ID="linkDocto" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "RUTA_ADJUNTO") %>' Target="_blank"><%# DataBinder.Eval(Container.DataItem, "OFICIO") %></asp:HyperLink>
-                                                                            </ItemTemplate>
-                                                                        </asp:TemplateField>
-                                                                    </Columns>
-                                                                    <FooterStyle CssClass="enc" />
-                                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                    <SelectedRowStyle CssClass="sel" />
-                                                                    <HeaderStyle CssClass="enc" />
-                                                                    <AlternatingRowStyle CssClass="alt" />
-                                                                </asp:GridView>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col text-center">
-                                                                <asp:Button ID="bttnSalir" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalir_Click" Text="SALIR" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </asp:Panel>
-                                    </asp:View>
-                                    <asp:View ID="View2" runat="server">
-                                    </asp:View>
-                                </asp:MultiView>
-                            </div>
-                        </div>
-                    </div>
                 </asp:View>
                 <asp:View ID="Reporte" runat="server">
                     <table style="width: 100%;">
@@ -827,7 +822,7 @@
                                                             <asp:ListItem Value="29">[29] Tarjeta de Servicio</asp:ListItem>
                                                             <asp:ListItem Value="99">[99] Por Definir</asp:ListItem>
                                                         </asp:DropDownList>
-                                                        <asp:RequiredFieldValidator ID="valFP" runat="server" ControlToValidate="ddlForma_Pago" ErrorMessage="*Requerido" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales"></asp:RequiredFieldValidator>
+                                                        <asp:RequiredFieldValidator ID="valFP" runat="server" ControlToValidate="ddlForma_Pago" ErrorMessage="*Forma de Pago" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -859,7 +854,7 @@
                                                             <asp:ListItem Value="D09">DEPOSITOS EN C</asp:ListItem>
                                                             <asp:ListItem Value="P01">POR DEFINIR</asp:ListItem>
                                                         </asp:DropDownList>
-                                                        <asp:RequiredFieldValidator ID="valCFDI" runat="server" ControlToValidate="ddlCFDI" ErrorMessage="*Requerido" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales"></asp:RequiredFieldValidator>
+                                                        <asp:RequiredFieldValidator ID="valCFDI" runat="server" ControlToValidate="ddlCFDI" ErrorMessage="*Uso de CFDI" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
                                                     </div>
                                                     <div class="col-md-1">
                                                         Teléfono
@@ -879,7 +874,7 @@
                                                         Inf del Pago
                                                     </div>
                                                     <div class="col-md-10">
-                                                        <div class="alert alert-info" id="rowInfAdicional" runat="server">
+                                                        <div class="alert alert-warning" id="rowInfAdicional" runat="server">
 
                                                             <div class="row">
                                                                 <div class="col-md-2 font-weight-bold">
@@ -914,7 +909,7 @@
                                                         Solicitar Factura
                                                     </div>
                                                     <div class="col-md-10">
-                                                        <asp:CheckBox ID="chkSolicitar" runat="server" Text="Si" />
+                                                        <asp:CheckBox ID="chkSolicitar" runat="server" Text="Si" ValidationGroup="DatosFiscales" />
                                                     </div>
                                                 </div>
                                                 <br />
@@ -935,7 +930,7 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <asp:CheckBox ID="chkConfirmaSolicitud" runat="server" CssClass="alert alert-warning" Text="*Si los datos ya han sido corregidos, puede CONFIRMAR LA SOLICITUD" ValidationGroup="DatosFiscales" Visible="False" />
-                                                        <asp:CustomValidator ID="valCheck" runat="server" AutoPostBack="False" ClientValidationFunction="ValidateCheckBox" ErrorMessage="*Confirmar Solicitud" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:CustomValidator>
+                                                        <asp:CustomValidator ID="valCheck" runat="server" AutoPostBack="False" ErrorMessage="*Confirmar Solicitud" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:CustomValidator>
                                                     </div>
                                                 </div>
                                             </div>
@@ -952,9 +947,6 @@
 
                                                         <div class="row">
                                                             <div class="col">
-
-
-
                                                                 <ajaxToolkit:Accordion ID="Accordion1" runat="server" ContentCssClass="accordion" FadeTransitions="True" FramesPerSecond="50" HeaderCssClass="accordionCabecera" HeaderSelectedCssClass="cssHeaderSelected" Height="700px" RequireOpenedPane="False" SelectedIndex="-1" TransitionDuration="200" Width="100%">
                                                                     <Panes>
                                                                         <ajaxToolkit:AccordionPane runat="server">
@@ -962,7 +954,6 @@
                                                                          Datos del Voucher
                                                                             </Header>
                                                                             <Content>
-                                                                                <table style="width: 100%;">
                                                                                     <div class="container-fluid">
                                                                                         <div class="row">
                                                                                             <div class="col-md-1">Folio</div>
@@ -988,9 +979,39 @@
                                                                                                 <asp:RequiredFieldValidator ID="valImporte" runat="server" ControlToValidate="txtImporte" ErrorMessage="*Importe(Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                             </div>
                                                                                         </div>
+                                                                                        <%--<div class="row">
+                                                                                            <div class="col-md-10">
+                                                                                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                                                                    <ContentTemplate>
+                                                                                                        <div class="input-group mb-3">
+                                                                                                            <div class="input-group-prepend">
+                                                                                                                <span class="input-group-text">PDF</span>
+                                                                                                            </div>
+                                                                                                            <div class="custom-file" style="width: 70%">
+                                                                                                                <asp:FileUpload ID="fileVoucher" runat="server" class="form-control" Height="40px" Width="100%" />
+
+                                                                                                            </div>
+                                                                                                            <div class="input-group-append">
+                                                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="fileVoucher" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
+                                                                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="FileFactura" Text="* Requerido" ValidationGroup="DatosFiscales"></asp:RequiredFieldValidator>
+                                                                                                                <asp:Button ID="btnVoucher" runat="server" CssClass="btn btn-blue-grey" OnClick="btnVoucher_Click" Text="ADJUNTAR" ValidationGroup="DatosFiscales" />
+                                                                                                                <asp:HyperLink ID="lblArchivoVoucher" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
+                                                                                                                
+                                                                                                                                <asp:LinkButton ID="linkBttnEliminarVoucher" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarVoucher_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
+                                                                                                                        
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </ContentTemplate>
+                                                                                                    <Triggers>
+                                                                                                        <asp:PostBackTrigger ControlID="btnVoucher" />
+                                                                                                    </Triggers>
+                                                                                                </asp:UpdatePanel>
+                                                                                            </div>
+                                                                                        </div>--%>
+
                                                                                     </div>
-                                                                                    <tr>
-                                                                                        <td colspan="10">
+                                                                                 <div class="row">
+                                                                                     <div class="col">
                                                                                             <div class="alert-warning">
                                                                                                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                                                                     <ContentTemplate>
@@ -1006,6 +1027,7 @@
                                                                                                                         <div class="col font-weight-bold">
                                                                                                                             *Solo formatos PNG, JPG y PDF
                                                                                                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="fileVoucher" ErrorMessage="Archivo incorrecto, debe ser un PNG, JPG ó PDF" ValidationExpression="(.*?)\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator>
+                                                                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="fileVoucher" Text="* Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
                                                                                                                         </div>
                                                                                                                     </div>
                                                                                                                 </div>
@@ -1038,9 +1060,8 @@
                                                                                                     </Triggers>
                                                                                                 </asp:UpdatePanel>
                                                                                             </div>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </table>
+                                                                                        </div>
+                                                                                     </div>
                                                                             </Content>
                                                                         </ajaxToolkit:AccordionPane>
                                                                         <ajaxToolkit:AccordionPane runat="server" ID="AccordionPane1" CssClass="note-info">
@@ -1246,32 +1267,27 @@
                                                                         Buscar:
     <input type="search" class="" placeholder="" aria-controls="ctl00_MainContent_tabFacturas_TabPanel3_grvConceptosDisp"></label>
                                                                 </div>--%>
-                                                                <asp:GridView ID="grvConceptosDisp" runat="server" AutoGenerateColumns="False" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptosDisp_PageIndexChanging" OnSelectedIndexChanged="grvConceptosDisp_SelectedIndexChanged" Width="100%" AllowPaging="True" OnRowDataBound="grvConceptosDisp_RowDataBound">
+                                                                <asp:GridView ID="grvConceptosDisp" runat="server" AutoGenerateColumns="False" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptosDisp_PageIndexChanging" OnSelectedIndexChanged="grvConceptosDisp_SelectedIndexChanged" Width="100%" AllowPaging="True" OnRowDataBound="grvConceptosDisp_RowDataBound" CssClass="mGrid table table-striped">
                                                                     <Columns>
-                                                                        <asp:BoundField DataField="ClaveConcepto" HeaderText="Cve.">
+                                                                        <asp:BoundField DataField="ClaveConcepto" HeaderText="CVE">
                                                                             <HeaderStyle HorizontalAlign="Left" />
                                                                             <ItemStyle HorizontalAlign="Left" />
                                                                         </asp:BoundField>
-                                                                        <asp:BoundField DataField="Descripcion" HeaderText="Descripción">
+                                                                        <asp:BoundField DataField="Descripcion" HeaderText="DESCRIPCIÓN">
                                                                             <HeaderStyle HorizontalAlign="Left" />
                                                                             <ItemStyle HorizontalAlign="Left" Width="70%" />
                                                                         </asp:BoundField>
                                                                         <asp:CommandField SelectText="Agregar" ShowSelectButton="True" />
                                                                     </Columns>
-                                                                    <FooterStyle CssClass="enc" />
+                                                                    <HeaderStyle CssClass="enc" />
+                                                                    <%--<FooterStyle CssClass="enc" />
                                                                     <HeaderStyle CssClass="enc" />
                                                                     <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                    <SelectedRowStyle CssClass="sel" />
+                                                                    <SelectedRowStyle CssClass="sel" />--%>
                                                                 </asp:GridView>
-                                                                <script type="text/javascript">
-                                                                    $(document).ready(function () {
-                                                                        $('#<%= grvConceptosDisp.ClientID %>').DataTable();
-                                                                     });
-                                                                </script>
-
                                                             </div>
                                                             <div class="col-md-6">
-                                                                <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnRowDeleting="grvConceptos_RowDeleting" Width="100%">
+                                                                <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" CssClass="mGrid table table-striped" EmptyDataText="No se encontro ningún registro" OnRowDeleting="grvConceptos_RowDeleting" Width="100%">
                                                                     <Columns>
                                                                         <asp:BoundField DataField="ClaveConcepto" HeaderText="Cve.">
                                                                             <HeaderStyle HorizontalAlign="Left" />
@@ -1283,10 +1299,10 @@
                                                                         </asp:BoundField>
                                                                         <asp:CommandField ShowDeleteButton="True" />
                                                                     </Columns>
-                                                                    <FooterStyle CssClass="enc" />
+                                                                    <%--<FooterStyle CssClass="enc" />
                                                                     <HeaderStyle CssClass="enc" />
                                                                     <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                    <SelectedRowStyle CssClass="sel" />
+                                                                    <SelectedRowStyle CssClass="sel" />--%>
                                                                 </asp:GridView>
                                                             </div>
                                                         </div>
@@ -1346,7 +1362,7 @@
 
                                                         <div class="row">
                                                             <div class="col">
-                                                                <asp:GridView ID="grdArchivos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdArchivos_RowDeleting" Width="100%">
+                                                                <asp:GridView ID="grdArchivos" runat="server" AutoGenerateColumns="False" CssClass="mGrid table table-striped" OnRowDeleting="grdArchivos_RowDeleting" Width="100%">
                                                                     <Columns>
                                                                         <asp:BoundField DataField="Fecha_Fact_Cja" HeaderText="Fecha" />
                                                                         <asp:BoundField DataField="Folio_Fact_Cja" HeaderText="Folio" />
@@ -1359,11 +1375,11 @@
                                                                         <asp:BoundField DataField="ExtensionArchivo" Visible="False" />
                                                                         <asp:CommandField ShowDeleteButton="True" />
                                                                     </Columns>
-                                                                    <FooterStyle CssClass="enc" />
+                                                                    <%-- <FooterStyle CssClass="enc" />
                                                                     <PagerStyle CssClass="enc" HorizontalAlign="Center" />
                                                                     <SelectedRowStyle CssClass="sel" />
                                                                     <HeaderStyle CssClass="enc" />
-                                                                    <AlternatingRowStyle CssClass="alt" />
+                                                                    <AlternatingRowStyle CssClass="alt" />--%>
                                                                 </asp:GridView>
                                                             </div>
                                                         </div>
@@ -1383,7 +1399,7 @@
                             <div class="col text-right">
                                 <%--<asp:LinkButton ID="linkBttnVerRecibo" runat="server" CssClass="btn btn-warning" OnClick="linkBttnVerRecibo_Click"><i class="fa fa-file"></i> VER RECIBO</asp:LinkButton>--%>
                                 <asp:Button ID="bttnVerRecibo" runat="server" CssClass="btn btn-warning" Text="VER RECIBO" OnClick="bttnVerRecibo_Click" />
-                                &nbsp;<asp:Button ID="btnGuardarEditar" runat="server" CssClass="btn btn-info" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="GUARDAR" ValidationGroup="DatosFiscales" />
+                                &nbsp;<asp:Button ID="btnGuardarEditar" runat="server" CssClass="btn btn-primary" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="GUARDAR" ValidationGroup="DatosFiscales" />
                                 &nbsp;<asp:Button ID="btnCancelarEditar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnCancelarEditar_Click" TabIndex="15" Text="SALIR" />
                             </div>
                         </div>
@@ -1457,38 +1473,48 @@
 
 
     </asp:Panel>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $(".sem").prepend($("<thead></thead>").append($(this).find("tr:first"))).dataTable({
-                "bPaginate": true,
-
-                "columnDefs": [{
-                    "defaultContent": "-",
-                    "targets": "_all"
-                }],
-                "bLengthChange": false,
-                "iDisplayLength": 5,
-                "bInfo": false,
-                "language": {
-                    "sSearch": "Buscar",
-                    "oPaginate": {
-                        "sFirst": "Primero",
-                        "sLast": "Último",
-                        "sNext": "Siguiente",
-                        "sPrevious": "Anterior"
+    <script type="text/javascript">   
+       <%-- $(document).ready(function () {
+            var prm = Sys.WebForms.PageRequestManager.getInstance();
+            if (prm != null) {
+                prm.add_endRequest(function (sender, e) {
+                    if (sender._postBackSettings.panelsToUpdate != null) {
+                        createDataTable();
                     }
-                }
+                });
+            };
+
+            createDataTable();
+            function createDataTable() {
+                $('#<%= grdDatosFactura.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdDatosFactura.ClientID %>').find("tr:first"))).DataTable();
+            }
+        });--%>
+
+        function Referencias() {
+            $('#<%= grdDatosFactura.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdDatosFactura.ClientID %>').find("tr:first"))).DataTable();
+
+        }
+
+       <%-- $(function () {
+            $('#<%= grdDatosFactura.ClientID %>').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
+                "responsive": true,
+                "sPaginationType": "full_numbers",
+                "paging": false,
             });
         });
 
+        //On UpdatePanel Refresh
         var prm = Sys.WebForms.PageRequestManager.getInstance();
-
         if (prm != null) {
             prm.add_endRequest(function (sender, e) {
-                if (sender._postBackSettings.panelsToUpdae != null) {
-                    $(".ctl00_MainContent_grdDatosFactura").DataTable();
+                if (sender._postBackSettings.panelsToUpdate != null) {
+                    $('#<%= grdDatosFactura.ClientID %>').prepend($("<thead></thead>").append($(this).find("tr:first"))).DataTable({
+                        "responsive": true,
+                        "sPaginationType": "full_numbers",
+                        "paging": false,
+                    });
                 }
             });
-        }
+        };--%>
     </script>
 </asp:Content>

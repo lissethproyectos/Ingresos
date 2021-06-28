@@ -534,7 +534,7 @@ namespace CapaNegocio
             for (int i = 0; i < Columnas.Length; i++)
             {
                 grdView.HeaderRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
-                grdView.FooterRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                //grdView.FooterRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
                 foreach (GridViewRow row in grdView.Rows)
                 {
                     row.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
@@ -555,6 +555,9 @@ namespace CapaNegocio
             Mensaje = Mensaje.Replace("\r", "");
             Mensaje = Mensaje.Replace("\n", "");
             Mensaje = Mensaje.Replace("'", "");
+            if (Mensaje.Contains("ORA-28000"))
+                Mensaje = "En mantenimiento...<br>Disculpe las molestias, estamos realizando tareas de mantenimiento en este momento, volveremos a estar en línea en breve!";
+
             if (Mensaje.Length >= 70)
                 Mensaje.Substring(0, 45);
 

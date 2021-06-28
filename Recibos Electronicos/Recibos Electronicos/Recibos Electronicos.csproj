@@ -112,6 +112,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="503.aspx" />
     <Content Include="About.aspx" />
     <Content Include="Acceso.aspx" />
     <Content Include="Acceso2.aspx" />
@@ -810,6 +811,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="503.aspx.cs">
+      <DependentUpon>503.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="503.aspx.designer.cs">
+      <DependentUpon>503.aspx</DependentUpon>
+    </Compile>
     <Compile Include="About.aspx.cs">
       <DependentUpon>About.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1429,6 +1437,12 @@
       <DependentUpon>ComprobanteFiscal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\datos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>datos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\Ficha_Referenciada_SIAE.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1656,6 +1670,10 @@
     <EmbeddedResource Include="Reportes\ComprobanteFiscal.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ComprobanteFiscal.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\datos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>datos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Ficha_Referenciada_SIAE.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

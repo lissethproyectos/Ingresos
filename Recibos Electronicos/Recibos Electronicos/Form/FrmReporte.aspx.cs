@@ -97,11 +97,11 @@ namespace Recibos_Electronicos.Form
             {
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependenciaIni, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependenciaFin, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
-                if(ddlDependenciaIni.SelectedValue== "00000")
-                    ddlDependenciaIni.Items.RemoveAt(0);
+                //if(ddlDependenciaIni.SelectedValue== "00000")
+                //    ddlDependenciaIni.Items.RemoveAt(0);
 
-                if (ddlDependenciaFin.SelectedValue == "00000")
-                    ddlDependenciaFin.Items.RemoveAt(0);
+                //if (ddlDependenciaFin.SelectedValue == "00000")
+                //    ddlDependenciaFin.Items.RemoveAt(0);
 
                 ddlDependenciaFin_SelectedIndexChanged(null, null);
             }

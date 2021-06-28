@@ -42,6 +42,24 @@ namespace Recibos_Electronicos.Form
         protected global::AjaxControlToolkit.TabPanel TabPanel1;
 
         /// <summary>
+        /// Control updPgrProductos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrProductos;
+
+        /// <summary>
+        /// Control updPnlProductos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlProductos;
+
+        /// <summary>
         /// Control grvProductos.
         /// </summary>
         /// <remarks>

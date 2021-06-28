@@ -204,15 +204,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.ImageButton imgCalendarioFin;
 
         /// <summary>
-        /// Control txtReferencia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReferencia;
-
-        /// <summary>
         /// Control UpdatePanel9.
         /// </summary>
         /// <remarks>
@@ -229,24 +220,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton linkBttnBuscar;
-
-        /// <summary>
-        /// Control ddlAvance.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAvance;
-
-        /// <summary>
-        /// Control hddnBandera.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddnBandera;
 
         /// <summary>
         /// Control mltViewTipo.
@@ -339,6 +312,24 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.RadioButtonList rdoStatusConfirmados;
 
         /// <summary>
+        /// Control rowAgregar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowAgregar;
+
+        /// <summary>
+        /// Control linkBttnAgregarReg.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnAgregarReg;
+
+        /// <summary>
         /// Control UpdatePanel13.
         /// </summary>
         /// <remarks>
@@ -409,6 +400,24 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View View2;
+
+        /// <summary>
+        /// Control ddlAvance.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAvance;
+
+        /// <summary>
+        /// Control hddnBandera.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hddnBandera;
 
         /// <summary>
         /// Control Reporte.
@@ -958,6 +967,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
+
+        /// <summary>
+        /// Control RequiredFieldValidator4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
 
         /// <summary>
         /// Control fileVoucher.
