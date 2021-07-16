@@ -744,7 +744,7 @@ namespace Recibos_Electronicos.Reportes
                 connectionInfo.UserID = "felectronica";
                 connectionInfo.Password = "unach09";
                 SetDBLogonForReport(connectionInfo, report);
-                report.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, false, NombreReporte);
+                report.ExportToHttpResponse(ExportFormatType.ExcelRecord, Response, false, NombreReporte);
                 
 
             }
@@ -772,7 +772,7 @@ namespace Recibos_Electronicos.Reportes
                 connectionInfo.UserID = "felectronica";
                 connectionInfo.Password = "unach09";
                 SetDBLogonForReport(connectionInfo, report);
-                report.ExportToHttpResponse(ExportFormatType.ExcelWorkbook, Response, false, NombreReporte);
+                report.ExportToHttpResponse(ExportFormatType.ExcelRecord, Response, false, NombreReporte);
 
 
             }

@@ -59,23 +59,25 @@ namespace Recibos_Electronicos.Form
             txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
             if(UrlReporte == "REP045" || UrlReporte == "REP046")
             {
-                lblCiclo.Visible = true;
-                ddlCiclo.Visible = true;
+                //lblCiclo.Visible = true;
+                //ddlCiclo.Visible = true;
+                rowCiclo.Visible = true;
                 lblFecha_Factura_Ini.Visible = false;
                 txtFecha_Factura_Ini.Visible = false;
                 lblFecha_Factura_Fin.Visible = false;
                 txtFecha_Factura_Fin.Visible = false;
                 lblNivel.Visible = false;
                 DDLNivel.Visible = false;
-                lblOrdenar.Visible = false;
-                ddlOrden.Visible = false;
-                lblConceptos.Visible = false;
+                //lblOrdenar.Visible = false;
+                //ddlOrden.Visible = false;
+                //lblConceptos.Visible = false;
                 grvConceptos.Visible = false;
                 imgCalendarioIni.Visible = false;
                 imgCalendarioFin.Visible = false;
-                divGrid.Style.Add("display", "none");
-                txtBuscar.Visible = false;
-                imgBttnBuscar.Visible = false;
+                //divGrid.Style.Add("display", "none");
+                //txtBuscar.Visible = false;
+                linBttnBuscar.Visible = false;
+                //imgBttnBuscar.Visible = false;
 
             }
 
@@ -105,7 +107,8 @@ namespace Recibos_Electronicos.Form
                 List<ConceptoPago> List = new List<ConceptoPago>();
                 ObjConceptos.Nivel = DDLNivel.SelectedValue;
                 ObjConceptos.Status = 'A';
-                CNConceptos.ConceptoConsultaGrid(ref ObjConceptos, ddlOrden.SelectedValue, Habilitado, txtBuscar.Text.ToUpper(), ref List);
+                //CNConceptos.ConceptoConsultaGrid(ref ObjConceptos, ddlOrden.SelectedValue, Habilitado, txtBuscar.Text.ToUpper(), ref List);
+                CNConceptos.ConceptoConsultaGrid(ref ObjConceptos, "1", Habilitado, string.Empty, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -131,6 +134,23 @@ namespace Recibos_Electronicos.Form
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
             }
         }
+        //private void CargarGridCatConceptos2(bool Habilitado)
+        //{
+        //    //Int32[] Celdas1 = new Int32[] { 2, 3 };
+        //    //Int32[] Celdas2 = new Int32[] { 3 };
+        //    try
+        //    {
+        //        DataTable dt = new DataTable();
+        //        grvConceptos.DataSource = dt;
+        //        grvConceptos.DataSource = GetListConceptos();
+        //        grvConceptos.DataBind();
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
+        //    }
+        //}
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
@@ -140,6 +160,9 @@ namespace Recibos_Electronicos.Form
 
             if (!IsPostBack)
                 Inicializar();
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "Grid", "Conceptos();", true);
+
         }
 
         protected void DDLNivel_SelectedIndexChanged(object sender, EventArgs e)
@@ -248,7 +271,7 @@ namespace Recibos_Electronicos.Form
             bool ValorActual;
             CheckBox chkTodosConc = (CheckBox)sender;
             ValorActual = chkTodosConc.Checked;
-            CargarGridCatConceptos(chkTodosConc.Checked);
+            CargarGridCatConceptos(ValorActual);
 
             CheckBox chkTodosConceptos = (CheckBox)grvConceptos.HeaderRow.FindControl("chkTodosConc");
             chkTodosConceptos.Checked = ValorActual;
@@ -258,7 +281,12 @@ namespace Recibos_Electronicos.Form
             //chkTodosConc.Checked = ValorActual;                       
         }
 
-        protected void imgBttnBuscar_Click(object sender, ImageClickEventArgs e)
+        //protected void imgBttnBuscar_Click(object sender, ImageClickEventArgs e)
+        //{
+        //    CargarGridCatConceptos(false);
+        //}
+
+        protected void linBttnBuscar_Click(object sender, EventArgs e)
         {
             CargarGridCatConceptos(false);
         }

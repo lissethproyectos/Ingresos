@@ -149,6 +149,7 @@
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
+                                <asp:BoundField DataField="FACT_MATRICULA" HeaderText="Cve" />
                                 <asp:BoundField DataField="FACT_REFERENCIA" HeaderText="Referencia" SortExpression="REFERENCIA">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
@@ -166,23 +167,7 @@
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Dep." SortExpression="DEPENDENCIA"></asp:BoundField>
-                                <asp:TemplateField HeaderText="Enviar Recibo">
-                                    <FooterTemplate>
-                                        
-                                    </FooterTemplate>
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="~/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />
-                                    </ItemTemplate>
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:TemplateField>
-                                <asp:CommandField SelectText="Ver" ShowSelectButton="True"
-                                    HeaderText="Ver Recibo" ButtonType="Image" SelectImageUrl="~/Imagenes/recibo2.png">
-                                    <HeaderStyle HorizontalAlign="Center" />
-                                    <ItemStyle HorizontalAlign="Center" />
-                                </asp:CommandField>
-                                <asp:BoundField DataField="FACT_MATRICULA" />
+                                <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Depcia" SortExpression="DEPENDENCIA"></asp:BoundField>
                                 <asp:TemplateField HeaderText="Correo">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FACT_RECEPTOR_CORREO") %>'></asp:TextBox>
@@ -213,6 +198,21 @@
                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("FACT_RECEPTOR_CORREO") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:TemplateField HeaderText="Enviar Recibo">
+                                    <FooterTemplate>
+                                        
+                                    </FooterTemplate>
+                                    <ItemTemplate>
+                                        <asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="~/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />
+                                    </ItemTemplate>
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:TemplateField>
+                                <asp:CommandField SelectText="Ver" ShowSelectButton="True"
+                                    HeaderText="Ver Recibo" ButtonType="Image" SelectImageUrl="~/Imagenes/recibo2.png">
+                                    <HeaderStyle HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Center" />
+                                </asp:CommandField>
                             </Columns>
                             <FooterStyle CssClass="enc" />
                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />

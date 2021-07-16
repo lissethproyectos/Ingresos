@@ -275,11 +275,11 @@
             <div class="col text-center">
                 <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
                     <ProgressTemplate>
-                        <%-- <div class="overlay">
-                            <div class="overlayContent">--%>
+                         <div class="overlay">
+                            <div class="overlayContent">
                         <asp:Image ID="img1" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
-                        <%--</div>
-                        </div>--%>
+                        </div>
+                        </div>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
@@ -345,38 +345,46 @@
                             <div class="col-md-1">
                                 Depcia
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
                                 </asp:DropDownList>
                                 <asp:RequiredFieldValidator ID="reqDep" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="*Dependencia" InitialValue="00000" ValidationGroup="New">*Requerido</asp:RequiredFieldValidator>
                             </div>
                             <div class="col-md-2">
-                                Pago del 
-                                <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" Width="100px"></asp:TextBox>
+                                <asp:UpdatePanel ID="UpdatePanel14" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Label ID="lblEtFormaBusqueda" runat="server" Text="Pago del" Font-Bold="True"></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>    
+                                </div>
+                            <div class="col-md-2">
+                                <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" Width="80%"></asp:TextBox>
                                 <ajaxToolkit:CalendarExtender ID="txtFecha_Factura_Ini_CalendarExtender" runat="server" PopupButtonID="imgCalendarioIni" TargetControlID="txtFecha_Factura_Ini" />
                                 <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 font-weight-bold">
                                 al               
-                                <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" Width="100px"></asp:TextBox>
+                                <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" Width="70%"></asp:TextBox>
                                 <ajaxToolkit:CalendarExtender ID="txtFecha_Factura_Fin_CalendarExtender" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFecha_Factura_Fin" />
                                 <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                            </div>
+                            </div>
+                        <div class="row">                            
+                            <div class="col-md-11">
+                                <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia/Nombre"></asp:TextBox>
+                                <%--<div class="input-group-append">
+                                    <span class="input-group-text_buscar" id="basic-addon2">
+                                        <asp:LinkButton ID="linkBttnBuscar" runat="server" class="btn-buscar btn-primary" OnClick="linkBttnBuscar_Click" Width="30px"><i class="fa fa-search" aria-hidden="true"></i></asp:LinkButton>                                       
+                                    </span>
+                                </div>--%>
                             </div>
                             <div class="col-md-1">
                                 <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                     <ContentTemplate>
-                                        <asp:LinkButton ID="linkBttnBuscar" runat="server" class="btn btn-primary" OnClick="linkBttnBuscar_Click" Width="100%"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" class="btn btn-primary" OnClick="linkBttnBuscar_Click" Width="100%"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                            <%--<div class="input-group col-md-6">
-                                <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia/Nombre"></asp:TextBox>
-                                <div class="input-group-append">
-                                    <span class="input-group-text_buscar" id="basic-addon2">
-                                        <asp:LinkButton ID="linkBttnBuscar" runat="server" class="btn-buscar btn-primary" OnClick="linkBttnBuscar_Click" Width="30px"><i class="fa fa-search" aria-hidden="true"></i></asp:LinkButton>                                       
-                                    </span>
-                                </div>
-                            </div>--%>
                         </div>
                         <asp:MultiView ID="mltViewTipo" runat="server">
                             <asp:View ID="View1" runat="server">
@@ -415,7 +423,7 @@
                                 </asp:Panel>
                                 <div class="row" id="rowAgregar" runat="server" visible="false">
                                     <div class="col text-right">
-                                        <asp:LinkButton ID="linkBttnAgregarReg" runat="server" OnClick="linkBttnAgregarReg_Click" CssClass="btn btn-grey" ValidationGroup="new"><i class="fa fa-plus-circle"></i> Agregar</asp:LinkButton>
+                                        <asp:LinkButton ID="linkBttnAgregarReg" runat="server" OnClick="linkBttnAgregarReg_Click" CssClass="btn btn-grey" ValidationGroup="New"><i class="fa fa-plus-circle"></i> Agregar</asp:LinkButton>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -502,14 +510,14 @@
                                                                 <asp:Label ID="lblSol" runat="server" Text='<%# Bind("FACT_DESC_STATUS_SOLICITUD") %>' Font-Bold="True" ForeColor="#333333" Font-Size="8"></asp:Label>
                                                             </ItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Center" />
-                                                            <ItemStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" ForeColor="#000099" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField HeaderText="Editar" ShowHeader="False">
+                                                        <asp:TemplateField HeaderText="Editar">
                                                             <HeaderTemplate>
                                                                 <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                                                                     <ContentTemplate>
                                                                         <%--<asp:Button ID="bttnAdd" runat="server" CssClass="btn btn-blue-grey" Text=" + " OnClick="bttnAdd_Click" Visible="False" ValidationGroup="New" />--%>
-                                                                        <asp:Label ID="lblEditar" runat="server" ForeColor="White" Text="EDITAR"></asp:Label>
+                                                                        EDITAR
                                                                     </ContentTemplate>
                                                                 </asp:UpdatePanel>
                                                             </HeaderTemplate>
@@ -961,14 +969,14 @@
                                                                                                 <asp:TextBox ID="txtFolio" runat="server" Width="100px"></asp:TextBox>
                                                                                             </div>
                                                                                             <div class="col-md-1">
-                                                                                                <asp:RequiredFieldValidator ID="valFolio" runat="server" ControlToValidate="txtFolio" ErrorMessage="*Folio(Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                                <asp:RequiredFieldValidator ID="valFolio" runat="server" ControlToValidate="txtFolio" ErrorMessage="*Folio(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                             </div>
-                                                                                            <div class="col-md-1">Fecha</div>
+                                                                                            <div class="col-md-1">Fecha de Pago</div>
                                                                                             <div class="col-md-3">
                                                                                                 <asp:TextBox ID="txtFecha" runat="server" Width="100px"></asp:TextBox>
                                                                                                 <ajaxToolkit:CalendarExtender ID="txtFecha_CalendarExtender" runat="server" PopupButtonID="imgFecha" TargetControlID="txtFecha" />
                                                                                                 <asp:ImageButton ID="imgFecha" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                                                                                <asp:RequiredFieldValidator ID="valFecha" runat="server" ControlToValidate="txtFecha" ErrorMessage="*Fecha(Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                                <asp:RequiredFieldValidator ID="valFecha" runat="server" ControlToValidate="txtFecha" ErrorMessage="*Fecha(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
 
                                                                                             </div>
                                                                                             <div class="col-md-1">Importe</div>
@@ -976,7 +984,7 @@
                                                                                                 <asp:TextBox ID="txtImporte" runat="server"></asp:TextBox>
                                                                                             </div>
                                                                                             <div class="col-md-1">
-                                                                                                <asp:RequiredFieldValidator ID="valImporte" runat="server" ControlToValidate="txtImporte" ErrorMessage="*Importe(Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                                <asp:RequiredFieldValidator ID="valImporte" runat="server" ControlToValidate="txtImporte" ErrorMessage="*Importe(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                             </div>
                                                                                         </div>
                                                                                         <%--<div class="row">

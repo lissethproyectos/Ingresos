@@ -107,18 +107,14 @@
                     <ContentTemplate>
                         <asp:MultiView ID="MultiView1" runat="server">
                             <asp:View ID="View1" runat="server">
-                                <table class="auto-style21">
-                                    <tr>
-                                        <td>&nbsp;</td>
-                                    </tr>
-                                </table>
                             </asp:View>
                             <asp:View ID="View2" runat="server">
-                                <table style="width: 100%;">
-                                    <tr>
-                                        <td class="auto-style15">Dependencia
-                                        </td>
-                                        <td>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            Dependencia
+                                        </div>
+                                        <div class="col-md-10">
                                             <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                                                 <ContentTemplate>
                                                     <asp:DropDownList ID="DDLDependencia" runat="server" ClientIDMode="Predictable" Width="95%" AutoPostBack="True" OnSelectedIndexChanged="DDLDependencia_SelectedIndexChanged">
@@ -126,78 +122,67 @@
                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="DDLDependencia" ErrorMessage="* Seleccionar Dependencia" InitialValue="00000" ValidationGroup="GenRef">*</asp:RequiredFieldValidator>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style15">
-                                            <asp:Label ID="lblPagado" runat="server" Text="Status"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <table style="width: 100%;">
-                                                <tr>
-                                                    <td class="auto-style22">
-                                                        <asp:UpdatePanel ID="UpdatePanel15" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:DropDownList ID="DDLPagado" runat="server">
-                                                                    <asp:ListItem Value="T">TODOS</asp:ListItem>
-                                                                    <asp:ListItem Value="S">PAGADOS</asp:ListItem>
-                                                                    <asp:ListItem Value="N">SIN PAGAR</asp:ListItem>
-                                                                </asp:DropDownList>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                    </td>
-                                                    <td class="auto-style24">
-                                                        <asp:Label ID="lblFecha_Factura_Ini" runat="server" Text="Fecha Inicial"></asp:Label>
-                                                    </td>
-                                                    <td class="auto-style23">
-                                                        <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
-                                                        <ajaxToolkit:CalendarExtender ID="CalendarExtenderIni" runat="server" PopupButtonID="imgCalendarioIni" TargetControlID="txtFecha_Factura_Ini" />
-                                                        <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                                    </td>
-                                                    <td class="auto-style25">
-                                                        <asp:Label ID="lblFecha_Factura_Fin" runat="server" Text="Fecha Final"></asp:Label>
-                                                    </td>
-                                                    <td>
-                                                        <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Style="margin-left: 0px" Width="95px"></asp:TextBox>
-                                                        <ajaxToolkit:CalendarExtender ID="CalendarExtenderFin" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFecha_Factura_Fin" />
-                                                        <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="auto-style15">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            Status
+                                        </div>
+                                        <div class="col-md-2">
+                                            <asp:UpdatePanel ID="UpdatePanel15" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:DropDownList ID="DDLPagado" runat="server">
+                                                        <asp:ListItem Value="T">TODOS</asp:ListItem>
+                                                        <asp:ListItem Value="S">PAGADOS</asp:ListItem>
+                                                        <asp:ListItem Value="N">SIN PAGAR</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+                                        <div class="col-md-2">
+                                            Fecha Inicial
+                                        </div>
+                                        <div class="col-md-2">
+                                            <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
+                                            <ajaxToolkit:CalendarExtender ID="CalendarExtenderIni" runat="server" PopupButtonID="imgCalendarioIni" TargetControlID="txtFecha_Factura_Ini" />
+                                            <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                        </div>
+                                        <div class="col-md-2">
+                                            Fecha Final
+                                        </div>
+                                        <div class="col-md-2">
+                                            <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Style="margin-left: 0px" Width="95px"></asp:TextBox>
+                                            <ajaxToolkit:CalendarExtender ID="CalendarExtenderFin" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFecha_Factura_Fin" />
+                                            <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
                                             <asp:HiddenField ID="hddnModal" runat="server" />
                                             <ajaxToolkit:ModalPopupExtender ID="modal" runat="server" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlDetalle" TargetControlID="hddnModal"></ajaxToolkit:ModalPopupExtender>
-                                        </td>
-                                        <td>
-                                            <table style="width: 98%;">
-                                                <tr>
-                                                    <td valign="top">
-                                                        <asp:TextBox ID="txtBuscaRef" runat="server" PlaceHolder="Referencia/Folio" Width="98%"></asp:TextBox>
-                                                    </td>
-                                                    <td valign="top">
-                                                        <asp:ImageButton ID="bttnBuscaRef" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="bttnBuscaRef_Click" ValidationGroup="Busca" />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="GenRef" />
-                                                    </td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                            </table>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <asp:TextBox ID="txtBuscaRef" runat="server" PlaceHolder="Referencia/Folio" Width="98%"></asp:TextBox>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <asp:ImageButton ID="bttnBuscaRef" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="bttnBuscaRef_Click" ValidationGroup="Busca" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="GenRef" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
                                             <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                                                 <ContentTemplate>
                                                     <asp:GridView ID="grdDatosFactura" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid mGrid10px" DataKeyNames="ID_FACT" EmptyDataText="No existen registros." OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" Width="100%" ShowHeaderWhenEmpty="True" ShowFooter="True" PageSize="11">
                                                         <Columns>
                                                             <asp:BoundField DataField="ID_FACT" HeaderText="ID" SortExpression="ID" />
-                                                            <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Dep." SortExpression="DEPENDENCIA" />
+                                                            <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Depcia" SortExpression="DEPENDENCIA" />
                                                             <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
                                                                 <HeaderStyle HorizontalAlign="Left" />
                                                                 <ItemStyle HorizontalAlign="Left" />
@@ -262,75 +247,68 @@
                                                     </asp:GridView>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
                                             <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                                 <ContentTemplate>
                                                     <iframe id="miniContenedor" frameborder="0" marginheight="0" marginwidth="0" name="miniContenedor" style="height: 500px" width="100%"></iframe>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <asp:Panel ID="pnlDetalle" runat="server" CssClass="TituloModalPopupMsg" Width="50%">
-                                                <table style="width: 100%;">
-                                                    <tr>
-                                                        <td width="20%">&nbsp;</td>
-                                                        <td align="center" width="60%">&nbsp;</td>
-                                                        <td width="20%">&nbsp;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="auto-style17" colspan="3">
-                                                            <asp:GridView ID="grvDetPago" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" Width="100%">
-                                                                <Columns>
-                                                                    <asp:BoundField DataField="No_Inventario" HeaderText="# Inventario">
-                                                                        <HeaderStyle HorizontalAlign="Left" />
-                                                                        <ItemStyle HorizontalAlign="Left" />
-                                                                    </asp:BoundField>
-                                                                    <asp:BoundField DataField="Descripcion" HeaderText="Descripción">
-                                                                        <HeaderStyle HorizontalAlign="Left" />
-                                                                        <ItemStyle HorizontalAlign="Left" Width="70%" />
-                                                                    </asp:BoundField>
-                                                                    <asp:BoundField DataField="Total" HeaderText="Importe" DataFormatString="{0:C}">
-                                                                        <HeaderStyle HorizontalAlign="Right" />
-                                                                        <ItemStyle HorizontalAlign="Right" />
-                                                                    </asp:BoundField>
-                                                                </Columns>
-                                                                <FooterStyle CssClass="enc" />
-                                                                <HeaderStyle CssClass="enc" />
-                                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                <SelectedRowStyle CssClass="sel" />
-                                                            </asp:GridView>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td width="20%">&nbsp;</td>
-                                                        <td align="center" width="60%">
-                                                            <asp:Button ID="btnCancelar_Detalle" runat="server" CssClass="btn btn-blue-grey" Height="45px" OnClick="btnCancelar_Detalle_Click" Text="SALIR" />
-                                                        </td>
-                                                        <td width="20%">&nbsp;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td width="20%">&nbsp;</td>
-                                                        <td align="center" width="60%">&nbsp;</td>
-                                                        <td width="20%">&nbsp;</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td width="20%">&nbsp;</td>
-                                                        <td align="center" width="60%">&nbsp;</td>
-                                                        <td width="20%">&nbsp;</td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">&nbsp;</td>
-                                    </tr>
-                                </table>
+                                        </div>
+                                    </div>
+                                    <asp:Panel ID="pnlDetalle" runat="server" CssClass="TituloModalPopupMsg" Width="50%">
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td width="20%">&nbsp;</td>
+                                                <td align="center" width="60%">&nbsp;</td>
+                                                <td width="20%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="auto-style17" colspan="3">
+                                                    <asp:GridView ID="grvDetPago" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" Width="100%">
+                                                        <Columns>
+                                                            <asp:BoundField DataField="No_Inventario" HeaderText="# Inventario">
+                                                                <HeaderStyle HorizontalAlign="Left" />
+                                                                <ItemStyle HorizontalAlign="Left" />
+                                                            </asp:BoundField>
+                                                            <asp:BoundField DataField="Descripcion" HeaderText="Descripción">
+                                                                <HeaderStyle HorizontalAlign="Left" />
+                                                                <ItemStyle HorizontalAlign="Left" Width="70%" />
+                                                            </asp:BoundField>
+                                                            <asp:BoundField DataField="Total" HeaderText="Importe" DataFormatString="{0:C}">
+                                                                <HeaderStyle HorizontalAlign="Right" />
+                                                                <ItemStyle HorizontalAlign="Right" />
+                                                            </asp:BoundField>
+                                                        </Columns>
+                                                        <FooterStyle CssClass="enc" />
+                                                        <HeaderStyle CssClass="enc" />
+                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                        <SelectedRowStyle CssClass="sel" />
+                                                    </asp:GridView>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%">&nbsp;</td>
+                                                <td align="center" width="60%">
+                                                    <asp:Button ID="btnCancelar_Detalle" runat="server" CssClass="btn btn-blue-grey" Height="45px" OnClick="btnCancelar_Detalle_Click" Text="SALIR" />
+                                                </td>
+                                                <td width="20%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%">&nbsp;</td>
+                                                <td align="center" width="60%">&nbsp;</td>
+                                                <td width="20%">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td width="20%">&nbsp;</td>
+                                                <td align="center" width="60%">&nbsp;</td>
+                                                <td width="20%">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </div>
                             </asp:View>
                             <asp:View ID="View3" runat="server">
                                 <div class="container-fluid">

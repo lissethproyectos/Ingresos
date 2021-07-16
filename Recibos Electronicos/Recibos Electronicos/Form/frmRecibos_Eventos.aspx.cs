@@ -93,7 +93,7 @@ namespace Recibos_Electronicos.Form
                 grdDatosFactura.DataBind();
                 if (grdDatosFactura.Rows.Count >= 1)
                 {
-                    CNComun.HideColumns(grdDatosFactura, Celdas);
+                    //CNComun.HideColumns(grdDatosFactura, Celdas);
                     Label lblLeyTot = (Label)grdDatosFactura.FooterRow.FindControl("lblLeyTotPagos");
                     Label lblTot = (Label)grdDatosFactura.FooterRow.FindControl("lblTotPagos");
 
@@ -211,7 +211,7 @@ namespace Recibos_Electronicos.Form
             try
             {
                 grdDatosFactura.SelectedIndex = row.RowIndex;
-                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[10].Text;
+                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[7].Text;
                 PnlCorreo.Recibo = grdDatosFactura.SelectedRow.Cells[0].Text;
                 PnlCorreo.Muestra();
             }

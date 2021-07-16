@@ -41,7 +41,7 @@ namespace Recibos_Electronicos.Form
 
         private void CargarGriEventos()
         {
-            Int32[] Celdas1 = new Int32[] { 10, 13 };
+            Int32[] Celdas1 = new Int32[] { 10, 11, 13 };
             grdEventos.DataSource = null;
             grdEventos.DataBind();
             try
@@ -443,10 +443,10 @@ namespace Recibos_Electronicos.Form
                         }
                         else
                         {
-                            MultiView1.ActiveViewIndex = 0;
-                            DDLDependencia.Enabled = true;
+                            MultiView1.ActiveViewIndex = 0;                            
                             divFiltros.Visible = true;
                             CargarGriEventos();
+                            DDLDependencia.Enabled = true;
                         }
 
                     }

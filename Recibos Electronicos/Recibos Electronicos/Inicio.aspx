@@ -233,12 +233,12 @@
                             <%--<div id="precarga1" class="align-content-lg-center hidden"><input type="image" class="center" Height="50px" src="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" />Cargando recibo...</div>--%>
                             <div class="col-md-4">
                                 <div class="input-group mb-3">
-                                    <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia, folio ó nombre" Visible="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia, folio ó nombre" Width="80%" Visible="true"></asp:TextBox>
                                     <div class="input-group-append">
                                         <span class="input-group-text_buscar" id="basic-addon2">
                                             <asp:UpdatePanel ID="updPnlBuscar" runat="server">
                                                 <ContentTemplate>
-                                                    <button runat="server" id="bttnBuscar" onserverclick="bttnBuscar_Click" class="btn-buscar btn-primary" validationgroup="Buscar" style="width: 10px">
+                                                    <button runat="server" id="bttnBuscar" onserverclick="bttnBuscar_Click" class="btn-buscar btn-primary" validationgroup="Buscar" style="width: 100%">
                                                         <i class="fa fa-search" aria-hidden="true"></i>
                                                     </button>
                                                 </ContentTemplate>
@@ -725,7 +725,7 @@
             </div>
         </div>
     </asp:Panel>
-    <script type="text/javascript" src="Scripts/jsQR.js"></script>
+    <script type="text/javascript" src="Scripts/jsQR2.js"></script>
     <script type="text/javascript" src="Scripts/QRModel.js"></script>
 </asp:Content>
 

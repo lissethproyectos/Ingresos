@@ -114,7 +114,7 @@
                         </div>
                     </div>
                     <div class="card-footer text-muted">
-                        <br />
+                        <a href="Reportes/frmReporteGrals.aspx?reporte=REP012" class="btn btn-warning btn-rounded">Continuar</a>
                     </div>
                 </div>
             </div>
@@ -128,6 +128,6 @@
 
 
 
-    <script type="text/javascript" src="Scripts/jsQR.js"></script>
+    <script type="text/javascript" src="Scripts/jsQR2.js"></script>
     <script type="text/javascript" src="Scripts/QRModel.js"></script>
 </asp:Content>

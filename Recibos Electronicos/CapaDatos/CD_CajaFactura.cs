@@ -72,7 +72,8 @@ namespace CapaDatos
                 String[] Parametros = { "p_usuario", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_referencia", "p_status", "p_confirmados", "p_comprobante_fiscal" };
                 String[] Valores = { ObjUsuario.Usu_Nombre, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, Comprobante };
 
-                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Facturas_Caja", ref dr, Parametros, Valores);
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Facturas_Caja", ref dr, Parametros, Valores);//int total = dr.FieldCount();
+
                 while (dr.Read())
                 {
                     ObjCjaFactura = new CajaFactura();

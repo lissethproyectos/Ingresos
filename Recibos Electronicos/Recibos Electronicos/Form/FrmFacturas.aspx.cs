@@ -193,10 +193,10 @@ namespace Recibos_Electronicos.Form
                         txtFechaOficio.Text = ObjFactura.FECHA_OFICIO;
                         txtObservacionesConvenio.Text = ObjFactura.FACT_NOTAS;
                         tabFacturas.Tabs[1].Visible = true;
-                        if (ddlStatus.SelectedValue == "S" || ddlStatus.SelectedValue == "F")
-                            tabFacturas.Tabs[2].Visible = true;
-                        else
-                            tabFacturas.Tabs[2].Visible = false;
+                        //if (ddlStatus.SelectedValue == "S" || ddlStatus.SelectedValue == "F")
+                        //    tabFacturas.Tabs[2].Visible = true;
+                        //else
+                        //    tabFacturas.Tabs[2].Visible = false;
 
                         //  tabFacturas.Tabs[2].Visible = false;
                         DatosFacturaEfectivo();
@@ -336,6 +336,11 @@ namespace Recibos_Electronicos.Form
                 if (Page.IsValid)
                 {
                     Guardar();
+                    //int Tot = ddlStatus.SelectedIndex;
+                    //Tot = Tot + 1;
+                    //if (Tot <= ddlStatus.Items.Count)
+                    //    ddlStatus.SelectedIndex = Tot;
+                    //ddlTipo_SelectedIndexChanged(null,null);
                     linkBttnBuscar_Click(null, null);
                 }
             }
@@ -569,7 +574,7 @@ namespace Recibos_Electronicos.Form
         {
             tabFacturas.ActiveTabIndex = 0;
             mltViewFacturas.ActiveViewIndex = 0;
-            txtFecha_Factura_Ini.Text = DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy"); //"01" + System.DateTime.Now.ToString("/MM/yyyy");
+            txtFecha_Factura_Ini.Text =  "01" + System.DateTime.Now.ToString("/MM/yyyy"); //DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
             txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
 
             Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
@@ -755,10 +760,10 @@ namespace Recibos_Electronicos.Form
             Int32[] CeldasPorConfirmar = { 0, 4, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
 
             //Int32[] CeldasFacturados_Ant = { 0, 4, 5, 7, 8, 10, 11, 13, 14, 16, 17, 18, 19, 20, 21, 23 };
-            Int32[] CeldasFacturados_Ant = { 0, 4, 5, 8, 9, 4, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23 };
+            Int32[] CeldasFacturados_Ant = { 0, 4, 5, 4, 13, 14, 15, 16, 17, 18, 19, 20, 21, 23 };
             //Int32[] CeldasSolicitados_Ant = { 0, 4, 5, 7, 8, 10, 11, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
-            Int32[] CeldasSolicitados_Ant = { 0, 4, 5, 8, 9, 4, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
-            Int32[] CeldasPorConfirmar_Ant = { 0, 4, 5, 8, 9, 4, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+            Int32[] CeldasSolicitados_Ant = { 0, 4, 5, 4, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
+            Int32[] CeldasPorConfirmar_Ant = { 0, 4, 5, 4, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
 
 
             try
@@ -778,13 +783,17 @@ namespace Recibos_Electronicos.Form
                         else
                             CNComun.HideEncabezado(grdDatosFactura, (ddlTipo.SelectedValue == "T") ? CeldasFacturados : CeldasFacturados_Ant);
 
-                        grdDatosFactura.Columns[8].HeaderText = "FECHA FACTURA";
+                        //grdDatosFactura.Columns[8].HeaderText = "FECHA FACTURA";
                         grdDatosFactura.HeaderRow.Cells[1].Text = "RFC";
                         grdDatosFactura.HeaderRow.Cells[2].Text = "DESCRIPCIÓN PAGO"; //"RAZÓN SOCIAL";
                         if (ddlTipo.SelectedValue == "T")
                             grdDatosFactura.HeaderRow.Cells[7].Text = "# FOLIO";
                         else
+                        {
+
                             grdDatosFactura.HeaderRow.Cells[7].Text = "# OFICIO";
+                            
+                        }
 
                         grdDatosFactura.HeaderRow.Cells[8].Text = "FECHA FACTURA";
                         grdDatosFactura.HeaderRow.Cells[9].Text = "FECHA DE PAGO";
@@ -822,13 +831,19 @@ namespace Recibos_Electronicos.Form
                         grdDatosFactura.HeaderRow.Cells[1].Text = "RFC";
                         grdDatosFactura.HeaderRow.Cells[2].Text = "DESCRIPCIÓN PAGO";
                         if (ddlTipo.SelectedValue == "T")
+                        {
                             grdDatosFactura.HeaderRow.Cells[7].Text = "# FOLIO";
+                            grdDatosFactura.HeaderRow.Cells[9].Text = "FECHA DEPÓSITO / TRANSFERENCIA";
+                        }
                         else
+                        {
                             grdDatosFactura.HeaderRow.Cells[7].Text = "# OFICIO";
+                            grdDatosFactura.HeaderRow.Cells[9].Text = "FECHA OFICIO";
+                        }
                         //grdDatosFactura.HeaderRow.Cells[7].Text = "# OFICIO";
 
                         //grdDatosFactura.Columns[8].HeaderText = "Fecha de Solicitud";
-                        grdDatosFactura.HeaderRow.Cells[9].Text = "FECHA DEPÓSITO / TRANSFERENCIA";
+                        
                         //grdDatosFactura.Columns[9].HeaderText = "Fecha Depósito / Transferencia";
                         break;
                     case "S":
@@ -855,27 +870,9 @@ namespace Recibos_Electronicos.Form
 
                 //}
                 //Button DDLAgregar = (Button)grdDatosFactura.HeaderRow.FindControl("bttnAdd");
-                Label lblEditarT = (Label)grdDatosFactura.HeaderRow.FindControl("lblEditar");
+                //Label lblEditarT = (Label)grdDatosFactura.HeaderRow.FindControl("lblEditar");
 
-                if (ddlTipo.SelectedValue == "R")
-                {
-                    //DDLAgregar.Visible = false;
-                    lblEditarT.Visible = true;
-                }
-                else
-                {
-                    if (ddlStatus.SelectedValue == "C")
-                    {
-                        //DDLAgregar.Visible = true;
-                        lblEditarT.Visible = false;
-                    }
-                    else
-                    {
-                        //DDLAgregar.Visible = false;
-                        lblEditarT.Visible = true;
-                    }
-
-                }
+                
 
 
 
@@ -973,7 +970,7 @@ namespace Recibos_Electronicos.Form
             {
                 List<CajaFactura> List = new List<CajaFactura>();
                 Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
-                CNCjaFactura.FacturaCajaConsultaGrid(Usur, ref ObjCjaFactura, ddlDependencia.SelectedValue.ToString(), txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, "" /*txtReferencia.Text*/, ddlStatus.SelectedValue.ToString(), rdoStatusConfirmados.SelectedValue, ddlFiltro.SelectedValue, ref List);
+                CNCjaFactura.FacturaCajaConsultaGrid(Usur, ref ObjCjaFactura, ddlDependencia.SelectedValue.ToString(), txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtReferencia.Text, ddlStatus.SelectedValue.ToString(),  ddlFiltro.SelectedValue, ddlFiltro.SelectedValue, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -1270,9 +1267,14 @@ namespace Recibos_Electronicos.Form
                     Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
                     Accordion1.Panes[1].Visible = (ddlTipo.SelectedValue == "T") ? false : true;
                     Accordion1.Panes[2].Visible = (ddlTipo.SelectedValue == "T") ? false : true;
-                    rowAgregar.Visible = (ddlTipo.SelectedValue == "T") ? true : false;
+                    if (ddlTipo.SelectedValue == "T" || ddlTipo.SelectedValue == "A")
+                        rowAgregar.Visible = true;
+                    else
+                        rowAgregar.Visible=false;
+
                     break;
                 case "S":
+                    rowAgregar.Visible = false;
                     pnlOpcConfirma.Visible = false;
                     hddnBandera.Value = "0";
                     if (ddlTipo.SelectedValue == "T" || ddlTipo.SelectedValue == "A")
@@ -1281,7 +1283,28 @@ namespace Recibos_Electronicos.Form
                         tabFacturas.Tabs[1].Visible = false;
 
                     tabFacturas.Tabs[2].Visible = true;
-                    Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
+
+                    if (ddlTipo.SelectedValue == "T")
+                    {
+                        Accordion1.Panes[0].Visible = true;
+                        Accordion1.Panes[1].Visible = false;
+                        Accordion1.Panes[2].Visible = false;
+                        rowAgregar.Visible = true;
+                    }
+                    else if (ddlTipo.SelectedValue == "A")
+                    {
+                        Accordion1.Panes[0].Visible = false;
+                        Accordion1.Panes[1].Visible = true;
+                        Accordion1.Panes[2].Visible = true;
+                        rowAgregar.Visible = true;
+                    }
+                    else
+                    {
+                        Accordion1.Panes[0].Visible = true;
+                        Accordion1.Panes[1].Visible = false;
+                        Accordion1.Panes[2].Visible = false;
+                    }
+
                     //bttnNuevo.Visible = false;
                     break;
                 case "F":
@@ -1290,7 +1313,7 @@ namespace Recibos_Electronicos.Form
                     if (ddlTipo.SelectedValue == "T" || ddlTipo.SelectedValue == "A")
                     {
                         tabFacturas.Tabs[1].Visible = true;
-                        Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
+                        Accordion1.Panes[0].Visible = true; //(ddlTipo.SelectedValue == "T") ? true : false;
                         Accordion1.Panes[1].Visible = (ddlTipo.SelectedValue == "A") ? true : false;
                         Accordion1.Panes[2].Visible = (ddlTipo.SelectedValue == "A") ? true : false;
 
@@ -1303,8 +1326,21 @@ namespace Recibos_Electronicos.Form
                 case "P":
                     pnlOpcConfirma.Visible = false;
                     hddnBandera.Value = "0";
-                    tabFacturas.Tabs[2].Visible = true;
-                    Accordion1.Panes[0].Visible = true;
+                    if (ddlTipo.SelectedValue == "T" || ddlTipo.SelectedValue == "A")
+                    {
+                        tabFacturas.Tabs[1].Visible = true;
+                        tabFacturas.Tabs[2].Visible = true;
+                        Accordion1.Panes[0].Visible = true; //(ddlTipo.SelectedValue == "T") ? true : false;
+                        Accordion1.Panes[1].Visible = (ddlTipo.SelectedValue == "A") ? true : false;
+                        Accordion1.Panes[2].Visible = (ddlTipo.SelectedValue == "A") ? true : false;
+
+                    }
+                    else
+                        tabFacturas.Tabs[1].Visible = false;
+
+
+                    //tabFacturas.Tabs[2].Visible = true;
+                    //Accordion1.Panes[0].Visible = true;
                     break;
                 default:
                     break;
@@ -1314,53 +1350,121 @@ namespace Recibos_Electronicos.Form
         {
             grdDatosFactura.DataSource = null;
             grdDatosFactura.DataBind();
-            //Status();
-            //switch (ddlStatus.SelectedValue)
-            //{
-            //    case "C":
-            //        pnlOpcConfirma.Visible = true;
-            //        hddnBandera.Value = "1";
-            //        tabFacturas.Tabs[2].Visible = false;
-            //        //bttnNuevo.Visible = (ddlTipo.SelectedValue == "T" || ddlTipo.SelectedValue == "A") ? true : false;
-            //        //Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "R") ? false : true;
-            //        Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
-            //        Accordion1.Panes[1].Visible = (ddlTipo.SelectedValue == "T") ? false : true;
-            //        Accordion1.Panes[2].Visible = (ddlTipo.SelectedValue == "T") ? false : true;
-
-            //        break;
-            //    case "S":
-            //        pnlOpcConfirma.Visible = false;
-            //        hddnBandera.Value = "0";
-            //        tabFacturas.Tabs[2].Visible = true;
-            //        Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
-            //        //bttnNuevo.Visible = false;
-            //        break;
-            //    case "F":
-            //        pnlOpcConfirma.Visible = false;
-            //        hddnBandera.Value = "0";
-            //        tabFacturas.Tabs[2].Visible = true;
-            //        //Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "A") ? true : false;
-            //        Accordion1.Panes[0].Visible = true;
-            //        //(ddlTipo.SelectedValue == "T") ? true : false;
-            //        break;
-            //    case "P":
-            //        pnlOpcConfirma.Visible = false;
-            //        hddnBandera.Value = "0";
-            //        tabFacturas.Tabs[2].Visible = true;
-            //        Accordion1.Panes[0].Visible = true;
-            //        break;
-            //    default:
-            //        break;
-            //}
 
 
-            //Tipo();
 
+            //grdDatosFactura.DataSource = null;
+            //grdDatosFactura.DataBind();
+            rowFiltro1.Visible = false;
+            rowFiltro2.Visible = false;
+            rowInfAdicional.Visible = false;
+            rowAgregar.Visible = false;
+            //tabFacturas.Tabs[3].Visible = false;
+            try
+            {
+
+
+
+                if (ddlTipo.SelectedValue == "R")
+                {
+                    lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> son los pagos realizados a través de una ficha referenciada (SYSWEB).";
+                    rowFiltro1.Visible = true;
+                    rowFiltro2.Visible = true;
+                    //tabFacturas.Tabs[3].Visible = true;
+                    rowInfAdicional.Visible = true;
+                    rowAgregar.Visible = false;
+                    lblEtFormaBusqueda.Text = "Fecha de Pago";
+                    //DDLAgregar.Visible = false;
+
+                }
+                else if (ddlTipo.SelectedValue == "T")
+                {
+                    //ddlStatus.SelectedValue = "C";
+                    lblEtFormaBusqueda.Text = "Fecha Depósito";
+                    //ddlStatus.SelectedIndex = 0;
+                    lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> son los depósitos realizados directamente a la cuenta de la UNACH.";
+                }
+                else if (ddlTipo.SelectedValue == "A")
+                {
+                    if (ddlStatus.SelectedValue == "F")
+                        lblEtFormaBusqueda.Text = "Fecha Factura";
+                    else
+                        lblEtFormaBusqueda.Text = "Fecha de Solicitud";
+
+                    //ddlStatus.SelectedIndex = 0;
+                    lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> para emitir facturas anticipadas con método de pago PUE(pago en una sola exhibición) y forma de pago ( transferencia electrónica, tarjeta de crédito, tarjeta de débito etc.),la fecha límite de pago es el último día del mes en la que se haya emitido la factura, si el pago es realizado en el siguiente mes la factura se cancelara y se emitirá una nueva factura con las siglas PPD (pago en parcialidades o diferido) y forma de pago (por definir).";
+                }
+
+
+                if (ddlStatus.SelectedValue == "C")
+                    rowAgregar.Visible = true;
+                //CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Status_Facturas", ref ddlStatus, "p_usuario", "p_tipo_factura", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue);
+                //ddlStatus_SelectedIndexChanged(null, null);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Status_Facturas", ref ddlStatus, "p_usuario", "p_tipo_factura", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue);
+            ddlStatus_SelectedIndexChanged(null, null);
         }
 
 
 
-        protected void grdArchivos_RowDeleting(object sender, GridViewDeleteEventArgs e)
+
+        //Status();
+        //switch (ddlStatus.SelectedValue)
+        //{
+        //    case "C":
+        //        pnlOpcConfirma.Visible = true;
+        //        hddnBandera.Value = "1";
+        //        tabFacturas.Tabs[2].Visible = false;
+        //        //bttnNuevo.Visible = (ddlTipo.SelectedValue == "T" || ddlTipo.SelectedValue == "A") ? true : false;
+        //        //Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "R") ? false : true;
+        //        Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
+        //        Accordion1.Panes[1].Visible = (ddlTipo.SelectedValue == "T") ? false : true;
+        //        Accordion1.Panes[2].Visible = (ddlTipo.SelectedValue == "T") ? false : true;
+
+        //        break;
+        //    case "S":
+        //        pnlOpcConfirma.Visible = false;
+        //        hddnBandera.Value = "0";
+        //        tabFacturas.Tabs[2].Visible = true;
+        //        Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "T") ? true : false;
+        //        //bttnNuevo.Visible = false;
+        //        break;
+        //    case "F":
+        //        pnlOpcConfirma.Visible = false;
+        //        hddnBandera.Value = "0";
+        //        tabFacturas.Tabs[2].Visible = true;
+        //        //Accordion1.Panes[0].Visible = (ddlTipo.SelectedValue == "A") ? true : false;
+        //        Accordion1.Panes[0].Visible = true;
+        //        //(ddlTipo.SelectedValue == "T") ? true : false;
+        //        break;
+        //    case "P":
+        //        pnlOpcConfirma.Visible = false;
+        //        hddnBandera.Value = "0";
+        //        tabFacturas.Tabs[2].Visible = true;
+        //        Accordion1.Panes[0].Visible = true;
+        //        break;
+        //    default:
+        //        break;
+        //}
+
+
+        //Tipo();
+
+    
+
+
+
+    protected void grdArchivos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
             {
@@ -1706,54 +1810,60 @@ namespace Recibos_Electronicos.Form
 
         }
 
-        protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            grdDatosFactura.DataSource = null;
-            grdDatosFactura.DataBind();
-            rowFiltro1.Visible = false;
-            rowFiltro2.Visible = false;
-            rowInfAdicional.Visible = false;
-            rowAgregar.Visible = true;
-            //tabFacturas.Tabs[3].Visible = false;
-            try
-            {
+        //protected void ddlTipo_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    grdDatosFactura.DataSource = null;
+        //    grdDatosFactura.DataBind();
+        //    rowFiltro1.Visible = false;
+        //    rowFiltro2.Visible = false;
+        //    rowInfAdicional.Visible = false;
+        //    rowAgregar.Visible = true;
+        //    //tabFacturas.Tabs[3].Visible = false;
+        //    try
+        //    {
 
 
 
-                if (ddlTipo.SelectedValue == "R")
-                {
-                    lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> son los pagos realizados a través de una ficha referenciada (SYSWEB).";
-                    rowFiltro1.Visible = true;
-                    rowFiltro2.Visible = true;
-                    //tabFacturas.Tabs[3].Visible = true;
-                    rowInfAdicional.Visible = true;
-                    rowAgregar.Visible = false;
-                    //DDLAgregar.Visible = false;
+        //        if (ddlTipo.SelectedValue == "R")
+        //        {
+        //            lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> son los pagos realizados a través de una ficha referenciada (SYSWEB).";
+        //            rowFiltro1.Visible = true;
+        //            rowFiltro2.Visible = true;
+        //            //tabFacturas.Tabs[3].Visible = true;
+        //            rowInfAdicional.Visible = true;
+        //            rowAgregar.Visible = false;
+        //            lblEtFormaBusqueda.Text = "Fecha de Pago";
+        //            //DDLAgregar.Visible = false;
 
-                }
-                else if (ddlTipo.SelectedValue == "T")
-                {
-                    //ddlStatus.SelectedValue = "C";
-                    ddlStatus.SelectedIndex = 0;
-                    lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> son los depósitos realizados directamente a la cuenta de la UNACH.";
-                }
-                else if (ddlTipo.SelectedValue == "A")
-                {
-                    //ddlStatus.SelectedValue = "C";
-                    ddlStatus.SelectedIndex = 0;
-                    lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> para emitir facturas anticipadas con método de pago PUE(pago en una sola exhibición) y forma de pago ( transferencia electrónica, tarjeta de crédito, tarjeta de débito etc.),la fecha límite de pago es el último día del mes en la que se haya emitido la factura, si el pago es realizado en el siguiente mes la factura se cancelara y se emitirá una nueva factura con las siglas PPD (pago en parcialidades o diferido) y forma de pago (por definir).";
-                }
+        //        }
+        //        else if (ddlTipo.SelectedValue == "T")
+        //        {
+        //            //ddlStatus.SelectedValue = "C";
+        //            lblEtFormaBusqueda.Text = "Fecha Oficio";
+        //            ddlStatus.SelectedIndex = 0;
+        //            lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> son los depósitos realizados directamente a la cuenta de la UNACH.";
+        //        }
+        //        else if (ddlTipo.SelectedValue == "A")
+        //        {
+        //            if (ddlStatus.SelectedValue == "F")
+        //                lblEtFormaBusqueda.Text = "Fecha Factura";
+        //            else
+        //                lblEtFormaBusqueda.Text = "Fecha de Solicitud";
 
-                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Status_Facturas", ref ddlStatus, "p_usuario", "p_tipo_factura", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue);
-                //ddlStatus_SelectedIndexChanged(null, null);
-            }
-            catch (Exception ex)
-            {
-                Verificador = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
-            }
-        }
+        //            ddlStatus.SelectedIndex = 0;
+        //            lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> para emitir facturas anticipadas con método de pago PUE(pago en una sola exhibición) y forma de pago ( transferencia electrónica, tarjeta de crédito, tarjeta de débito etc.),la fecha límite de pago es el último día del mes en la que se haya emitido la factura, si el pago es realizado en el siguiente mes la factura se cancelara y se emitirá una nueva factura con las siglas PPD (pago en parcialidades o diferido) y forma de pago (por definir).";
+        //        }
+
+        //        CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Status_Facturas", ref ddlStatus, "p_usuario", "p_tipo_factura", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue);
+        //        //ddlStatus_SelectedIndexChanged(null, null);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Verificador = ex.Message;
+        //        CNComun.VerificaTextoMensajeError(ref Verificador);
+        //        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
+        //    }
+        //}
 
         protected void btnVoucher_Click(object sender, EventArgs e)
         {
@@ -2232,11 +2342,21 @@ namespace Recibos_Electronicos.Form
             {
 
                 //Tipo();
+                //rowAgregar.Visible = false;
                 mltViewTipo.ActiveViewIndex = 0;
                 if (ddlTipo.SelectedValue == "R")
+                {
                     CargarGrid();
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "Grid", "Referencias();", true);
+                }
                 else
+                {
+                    //if (ddlStatus.SelectedValue == "C")
+                    //    rowAgregar.Visible = true;
+
                     CargarGridEfectivo();
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "Grid", "Referencias();", true);
+                }
             }
             catch (Exception ex)
             {
