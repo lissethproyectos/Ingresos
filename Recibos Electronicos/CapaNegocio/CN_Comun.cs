@@ -542,6 +542,18 @@ namespace CapaNegocio
             }
         }
 
+        public void HideColumns2(GridView grdView, Int32[] Columnas)
+        {
+            for (int i = 0; i < Columnas.Length; i++)
+            {
+                //grdView.HeaderRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                //grdView.FooterRow.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                foreach (GridViewRow row in grdView.Rows)
+                {
+                    row.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                }
+            }
+        }
         public void HideEncabezado(GridView grdView, Int32[] Columnas)
         {
             for (int i = 0; i < Columnas.Length; i++)

@@ -7,6 +7,12 @@ namespace CapaEntidad
 {
     public class Evento
     {
+        private int _TotPagados;
+        public int TotPagados
+        {
+            get { return _TotPagados; }
+            set { _TotPagados = value; }
+        }
         private string _Status;
         public string Status
         {
@@ -170,6 +176,13 @@ namespace CapaEntidad
             set { _Tipo = value; }
         }
 
+
+        private int _Anio;
+        public int Anio
+        {
+            get { return _Anio; }
+            set { _Anio = value; }
+        }
 
         private string _Usuario_Solicita;
         public string Usuario_Solicita

@@ -204,7 +204,7 @@
             border-radius: .25rem;
         }
 
-        .overlay {
+/*        .overlay {
             position: fixed;
             z-index: 98;
             top: 0px;
@@ -232,7 +232,7 @@
             .overlayContent img {
                 width: 30px;
                 height: 30px;
-            }
+            }*/
 
         .tabstyle .ajax__tab_header {
             font-size: 13px;

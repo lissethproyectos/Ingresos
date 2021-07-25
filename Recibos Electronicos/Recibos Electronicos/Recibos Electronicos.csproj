@@ -486,8 +486,9 @@
     <Content Include="Form\frmDiasInhabiles.aspx" />
     <Content Include="Form\frmConfiguracionEventos.aspx" />
     <Content Include="Form\frmEnvioCorreos.aspx" />
-    <Content Include="Form\frmEventosResp.aspx" />
     <Content Include="Form\frmEventos.aspx" />
+    <Content Include="Form\frmEventosResp.aspx" />
+    <Content Include="Form\frmEventos3.aspx" />
     <Content Include="Form\frmEventos2.aspx" />
     <Content Include="Form\frmExencionesAutomaticas.aspx" />
     <Content Include="Form\frmExentos_Copia.aspx" />
@@ -1007,6 +1008,13 @@
     <Compile Include="Form\frmEnvioCorreos.aspx.designer.cs">
       <DependentUpon>frmEnvioCorreos.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmEventos.aspx.cs">
+      <DependentUpon>frmEventos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\frmEventos.aspx.designer.cs">
+      <DependentUpon>frmEventos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmEventosResp.aspx.cs">
       <DependentUpon>frmEventosResp.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1014,12 +1022,12 @@
     <Compile Include="Form\frmEventosResp.aspx.designer.cs">
       <DependentUpon>frmEventosResp.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmEventos.aspx.cs">
-      <DependentUpon>frmEventos.aspx</DependentUpon>
+    <Compile Include="Form\frmEventos3.aspx.cs">
+      <DependentUpon>frmEventos3.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Form\frmEventos.aspx.designer.cs">
-      <DependentUpon>frmEventos.aspx</DependentUpon>
+    <Compile Include="Form\frmEventos3.aspx.designer.cs">
+      <DependentUpon>frmEventos3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\frmEventos2.aspx.cs">
       <DependentUpon>frmEventos2.aspx</DependentUpon>

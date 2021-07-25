@@ -37,6 +37,9 @@ namespace Recibos_Electronicos.Form
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
                 CargarCombos();
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "Grid1", "Eventos();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "Grid2", "Pagos();", true);
         }
         #region <Funciones>
         protected void CargarCombos()
@@ -68,6 +71,7 @@ namespace Recibos_Electronicos.Form
                 if (grdEventos.Rows.Count >= 1)
                 {
                     this.grdEventos.SelectedIndex = 0;
+                    //grdEventos.SelectedRow.Cells[1].Text;
                     grdEventos_SelectedIndexChanged(null, null);
                 }
             }
@@ -83,7 +87,7 @@ namespace Recibos_Electronicos.Form
         {
             //var usuAdmin = Array.FindAll(UsuariosSuper, s => s.Equals(SesionUsu.Usu_Nombre));
             MsjError = string.Empty;
-            Int32[] Celdas = { 9 };
+            Int32[] Celdas = { 0, 8};
 
             try
             {
@@ -93,19 +97,19 @@ namespace Recibos_Electronicos.Form
                 grdDatosFactura.DataBind();
                 if (grdDatosFactura.Rows.Count >= 1)
                 {
-                    //CNComun.HideColumns(grdDatosFactura, Celdas);
-                    Label lblLeyTot = (Label)grdDatosFactura.FooterRow.FindControl("lblLeyTotPagos");
-                    Label lblTot = (Label)grdDatosFactura.FooterRow.FindControl("lblTotPagos");
+                    CNComun.HideColumns(grdDatosFactura, Celdas);
+                    //Label lblLeyTot = (Label)grdDatosFactura.FooterRow.FindControl("lblLeyTotPagos");
+                    //Label lblTot = (Label)grdDatosFactura.FooterRow.FindControl("lblTotPagos");
 
-                    if (SesionUsu.Usu_TipoUsu == 3)
-                    {
-                        lblTot.Text = TotalPagos.ToString("C");
-                    }
-                    else
-                    {
-                        lblLeyTot.Visible = false;
-                        lblTot.Visible = false;
-                    }
+                    //if (SesionUsu.Usu_TipoUsu == 3)
+                    //{
+                    //    lblTot.Text = TotalPagos.ToString("C");
+                    //}
+                    //else
+                    //{
+                    //    lblLeyTot.Visible = false;
+                    //    lblTot.Visible = false;
+                    //}
                     //pnlBuscaRef.Visible = true;
                 }
                 //else
@@ -128,7 +132,7 @@ namespace Recibos_Electronicos.Form
                 List<Evento> ListEvento = new List<Evento>();
                 ObjEvento.Dependencia = ddlDependencia.SelectedValue;
                 ObjEvento.Tipo = ddlDirigido.SelectedValue;
-                CNEvento.ConsultarEventosTipoUsu(ObjEvento, SesionUsu.Usu_Nombre, Convert.ToString(SesionUsu.Usu_TipoUsu), "A" , txtBuscarEvento.Text.ToUpper(), ref ListEvento);
+                CNEvento.ConsultarEventosTipoUsu(ObjEvento, SesionUsu.Usu_Nombre, Convert.ToString(SesionUsu.Usu_TipoUsu), "A" , "", ref ListEvento);
                 return ListEvento;
             }
             catch (Exception ex)
@@ -146,7 +150,7 @@ namespace Recibos_Electronicos.Form
                 Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
                 Usur.Usu_NoControl = SesionUsu.Usu_NoControl;
                 Usur.Usu_TipoUsu = SesionUsu.Usu_TipoUsu;
-                CNFactura.FacturaEventosConsultaGrid(ref ObjFactura, Usur, grdEventos.SelectedRow.Cells[0].Text , txtReferencia.Text, ref List);
+                CNFactura.FacturaEventosConsultaGrid(ref ObjFactura, Usur, grdEventos.SelectedRow.Cells[1].Text , "", ref List);
                 TotalPagos = List.Sum(item =>Convert.ToDouble(item.FACT_TOTAL));
                 return List;
             }
@@ -194,7 +198,7 @@ namespace Recibos_Electronicos.Form
             ImageButton cbi = (ImageButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdEventos.SelectedIndex = row.RowIndex;
-            string Ruta = grdEventos.SelectedRow.Cells[6].Text;
+            string Ruta = grdEventos.SelectedRow.Cells[7].Text;
             Response.Redirect(Ruta, false);
         }
 
@@ -250,21 +254,22 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta1 = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP055&Evento=" + grdEventos.SelectedRow.Cells[0].Text + "&Observaciones=" + grdEventos.SelectedRow.Cells[2].Text +"&enExcel=N";
+            string obs = "";
+            string ruta1 = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP055&Evento=" + grdEventos.SelectedRow.Cells[1].Text + "&Observaciones=" + obs + "&enExcel=N";
             string _open1 = "window.open('" + ruta1 + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open1, true);
         }
 
         protected void imgBttnReporteLote_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta1 = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP063&Evento=" + grdEventos.SelectedRow.Cells[0].Text + "&enExcel=N";
+            string ruta1 = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP063&Evento=" + grdEventos.SelectedRow.Cells[1].Text + "&enExcel=N";
             string _open1 = "window.open('" + ruta1 + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open1, true);
         }
 
         protected void imgBttnExportar_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta1 = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP055&Evento=" + grdEventos.SelectedRow.Cells[0].Text + "&enExcel=S";
+            string ruta1 = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP055&Evento=" + grdEventos.SelectedRow.Cells[1].Text + "&enExcel=S";
             string _open1 = "window.open('" + ruta1 + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open1, true);
 
@@ -284,10 +289,15 @@ namespace Recibos_Electronicos.Form
 
         protected void grdEventos_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
-            txtReferencia.Text = string.Empty;
+            //txtReferencia.Text = string.Empty;
         }
 
         protected void linkBttnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarGridPagos();
+        }
+
+        protected void linkBttnBuscar_Click1(object sender, EventArgs e)
         {
             CargarGridPagos();
         }

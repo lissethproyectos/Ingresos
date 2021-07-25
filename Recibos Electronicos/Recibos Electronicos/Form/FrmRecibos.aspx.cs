@@ -191,10 +191,14 @@ namespace Recibos_Electronicos.Form
                 grvFacturas.DataSource = dt;
                 grvFacturas.DataSource = GetList();
                 grvFacturas.DataBind();
-                if (grvFacturas.Rows.Count > 0 && (SesionUsu.Usu_Central_Tipo == "A" || SesionUsu.Usu_Central_Tipo == "N"))
-                    CNComun.HideColumns(grvFacturas, Celdas);
-                else
-                    CNComun.HideColumns(grvFacturas, CeldasAdmin);
+
+                if (grvFacturas.Rows.Count > 0)
+                {
+                    if (SesionUsu.Usu_Central_Tipo == "A" || SesionUsu.Usu_Central_Tipo == "N")
+                        CNComun.HideColumns(grvFacturas, Celdas);
+                    else
+                        CNComun.HideColumns(grvFacturas, CeldasAdmin);
+                }
             }
             catch (Exception ex)
             {
@@ -495,8 +499,8 @@ namespace Recibos_Electronicos.Form
                 txtFolio.Text = ObjFactura.FACT_FOLIO;
                 //txtFecha_Cfd1.Text = ObjFactura.FACT_FECHA_CFD;
                 txtFecha_Cfd1.Text = ObjFactura.FACT_FECHA_FACTURA;
-                txtNo_Certificado.Text = ObjFactura.FACT_NO_CERTIFICADO;
-                txtAnio_Aprobacion.Text = ObjFactura.FACT_ANIO_APROBACION;
+                //txtNo_Certificado.Text = ObjFactura.FACT_NO_CERTIFICADO;
+                //txtAnio_Aprobacion.Text = ObjFactura.FACT_ANIO_APROBACION;
                 txtReceptor_Nombre.Text = ObjFactura.FACT_NOMBRE;
                 txtReceptor_Rfc.Text = ObjFactura.FACT_RECEPTOR_RFC;
                 txtReceptor_Domicilio.Text = ObjFactura.FACT_RECEPTOR_DOMICILIO;
@@ -636,6 +640,47 @@ namespace Recibos_Electronicos.Form
 
             }
         }
+
+        protected void linkBttnRecibo_Click(object sender, EventArgs e)
+        {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            grvFacturas.SelectedIndex = row.RowIndex;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerReporteRecibo(" + grvFacturas.SelectedRow.Cells[0].Text + ");", true);
+
+        }
+
+        protected void linkBttnCorreo_Click(object sender, EventArgs e)
+        {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            try
+            {
+                grvFacturas.SelectedIndex = row.RowIndex;
+                PnlCorreo.Matricula = grvFacturas.SelectedRow.Cells[2].Text;
+                PnlCorreo.Recibo = grvFacturas.SelectedRow.Cells[0].Text;
+                PnlCorreo.Muestra();
+            }
+            catch (Exception ex)
+            {
+                string Msj = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Msj);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void linkBttnHistorico_Click(object sender, EventArgs e)
+        {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            grvFacturas.SelectedIndex = row.RowIndex;
+
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP050&idFact=" + grvFacturas.SelectedRow.Cells[0].Text;
+            string _open = "window.open('" + ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
+
+
 
 
 

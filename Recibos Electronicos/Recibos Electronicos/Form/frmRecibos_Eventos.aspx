@@ -2,14 +2,16 @@
 
 <%@ Register Src="../EnviarCorreo.ascx" TagName="uCCorreo" TagPrefix="usr" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    </asp:Content>
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+</asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 Dependencia
             </div>
-            <div class="col-md-5">
+            <div class="col-md-6">
                 <asp:UpdatePanel ID="updPnlDep" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlDependencia_SelectedIndexChanged">
@@ -18,18 +20,24 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-
             <div class="col-md-2">
                 Tipo de Evento
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlDirigido" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlDirigido_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlDirigido" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlDirigido_SelectedIndexChanged">
                             <asp:ListItem Value="P">Eventos Especiales</asp:ListItem>
                             <asp:ListItem Value="A">Servicios Extraordinarios</asp:ListItem>
                             <asp:ListItem Value="C">Complemento Cursos de Verano</asp:ListItem>
                         </asp:DropDownList>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+            <div class="col-md-1">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <asp:LinkButton ID="linkBttnBuscar" runat="server" Width="100%" CssClass="btn btn-info" OnClick="linkBttnBuscar_Click1"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -38,13 +46,19 @@
             <div class="col text-center">
                 <asp:UpdateProgress ID="updprgDep" runat="server" AssociatedUpdatePanelID="UpdatePanel3">
                     <ProgressTemplate>
-                        <asp:Image ID="imgDep" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                            ToolTip="Espere un momento, por favor.." />
+                        <div class="overlay">
+                            <div class="overlayContent">
+                                <asp:Image ID="img1" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
+                            </div>
+                        </div>
+
+                        <%--<asp:Image ID="imgDep" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                            ToolTip="Espere un momento, por favor.." />--%>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
         </div>
-        <div class="row">
+        <%--<div class="row">
             <div class="col-md-10">
                 <asp:TextBox ID="txtBuscarEvento" runat="server" CssClass="box" PlaceHolder="Cve/Descripción" TabIndex="4" Visible="true" Width="98%"></asp:TextBox>
             </div>
@@ -55,7 +69,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-        </div>
+        </div>--%>
         <div class="row">
             <div class="col text-center">
                 <asp:UpdateProgress ID="updPrgBuscarDatos" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
@@ -71,24 +85,28 @@
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grdEventos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen eventos para esta dependencia." Width="100%" AllowPaging="True" OnPageIndexChanging="grdEventos_PageIndexChanging" PageSize="7" OnSelectedIndexChanged="grdEventos_SelectedIndexChanged" OnSelectedIndexChanging="grdEventos_SelectedIndexChanging">
+                        <asp:GridView ID="grdEventos" runat="server" AutoGenerateColumns="False" CssClass="sem table table-striped table-bordered table-hover" EmptyDataText="No existen eventos para esta dependencia." Width="100%" OnSelectedIndexChanged="grdEventos_SelectedIndexChanged">
                             <Columns>
-                                <asp:BoundField DataField="Eventos" HeaderText="CVE." />
-                                <asp:BoundField DataField="Dependencia" HeaderText="Dep.">
+                                <asp:BoundField DataField="ID" HeaderText="ID" />
+                                <asp:BoundField DataField="Eventos" HeaderText="CVE" />
+                                <asp:BoundField DataField="Dependencia" HeaderText="DEP">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Descripcion" HeaderText="Descripcion">
+                                <asp:BoundField DataField="Descripcion" HeaderText="DESCRIPCIÓN">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Fecha_inicial" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha Inicial">
+                                <asp:BoundField DataField="Fecha_inicial" DataFormatString="{0:dd/MM/yyyy}" HeaderText="INICIA">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="Fecha_final" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha Final">
+                                <asp:BoundField DataField="Fecha_final" DataFormatString="{0:dd/MM/yyyy}" HeaderText="TERMINA">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="TotPagados" HeaderText="TOT PAGADOS">
+                                    <ItemStyle HorizontalAlign="Center" />
                                 </asp:BoundField>
                                 <asp:CommandField HeaderText="Recibos" SelectImageUrl="~/Imagenes/search_icon.PNG" ShowSelectButton="True" SelectText="VER" ButtonType="Image">
                                     <HeaderStyle HorizontalAlign="Center" />
@@ -117,10 +135,10 @@
             </div>
         </div>--%>
         <br />
-        <div class="row">
+        <%--<div class="row">
             <div class="col">
                 <div class="input-group mb-3">
-                <asp:TextBox ID="txtReferencia" runat="server"  CssClass="form-control"  PlaceHolder="Nombre/Matricula/Folio" TabIndex="4" Visible="true"></asp:TextBox>
+                    <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Nombre/Matricula/Folio" TabIndex="4" Visible="true"></asp:TextBox>
                     <div class="input-group-append">
                         <span class="input-group-text_buscar" id="basic-addon2">
                             <asp:UpdatePanel ID="updPnlBuscarRFC" runat="server">
@@ -133,7 +151,21 @@
                 </div>
             </div>
 
+        </div>--%>
+        <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="updPgrPagos" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+                    <ProgressTemplate>
+                        <div class="overlay">
+                            <div class="overlayContent">
+                                <asp:Image ID="imgLoaderPagos" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
+                            </div>
+                        </div>
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
         </div>
+
         <div class="row">
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
@@ -141,8 +173,8 @@
                         <asp:GridView ID="grdDatosFactura" runat="server" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged"
                             EmptyDataText="No existen pagos para este evento."
                             DataKeyNames="ID_FACT"
-                            AutoGenerateColumns="False" AllowPaging="True"
-                            OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" CssClass="mGrid" Width="100%" PageSize="20" ShowFooter="True" ShowHeaderWhenEmpty="True">
+                            AutoGenerateColumns="False"
+                            OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" CssClass="sem table table-striped table-bordered table-hover" Width="100%" ShowHeaderWhenEmpty="True">
                             <Columns>
                                 <asp:BoundField DataField="ID_FACT" HeaderText="ID" SortExpression="ID"></asp:BoundField>
                                 <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
@@ -159,10 +191,16 @@
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="FACT_TOTAL" DataFormatString="{0:c}" ItemStyle-HorizontalAlign="Right" HeaderText="Importe" SortExpression="Importe">
+                                <asp:TemplateField HeaderText="Importe" SortExpression="Importe">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("FACT_TOTAL") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("FACT_TOTAL", "{0:c}") %>'></asp:Label>
+                                    </ItemTemplate>
                                     <HeaderStyle HorizontalAlign="Right" />
                                     <ItemStyle HorizontalAlign="Right" />
-                                </asp:BoundField>
+                                </asp:TemplateField>
                                 <asp:BoundField DataField="FACT_NOMBRE" HeaderText="Nombre" SortExpression="NOMBRE">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
@@ -172,36 +210,13 @@
                                     <EditItemTemplate>
                                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FACT_RECEPTOR_CORREO") %>'></asp:TextBox>
                                     </EditItemTemplate>
-                                    <FooterTemplate>
-                                        <table width="100%">
-                                            <tr>
-                                                <td class="auto-style9">
-                                                    <asp:Label ID="lblLeyTotPagos" runat="server" CssClass="auto-style3" Font-Bold="True" Font-Size="Small" ForeColor="Black" Text="Importe Total: "></asp:Label>
-                                                </td>
-                                                <td class="izquierda" width="80%">
-                                                    <asp:Label ID="lblTotPagos" runat="server" CssClass="auto-style3" Font-Bold="True" ForeColor="Black" Text="0"></asp:Label>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="derecha" colspan="2">
-                                                    <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />
-                                                    <asp:ImageButton ID="imgBttnReporteLote" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf2.png" OnClick="imgBttnReporteLote_Click" />
-                                                    &nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </FooterTemplate>
                                     <HeaderTemplate>
-                                        
                                     </HeaderTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label1" runat="server" Text='<%# Bind("FACT_RECEPTOR_CORREO") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Enviar Recibo">
-                                    <FooterTemplate>
-                                        
-                                    </FooterTemplate>
                                     <ItemTemplate>
                                         <asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="~/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" />
                                     </ItemTemplate>
@@ -217,7 +232,7 @@
                             <FooterStyle CssClass="enc" />
                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
                             <SelectedRowStyle CssClass="sel" />
-                            <HeaderStyle CssClass="enc" />
+                            <HeaderStyle CssClass="enc" BackColor="#595959" ForeColor="White" Font-Size="10px" BorderColor="White" />
                             <AlternatingRowStyle CssClass="alt" />
                         </asp:GridView>
                     </ContentTemplate>
@@ -225,9 +240,43 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-3">
+                </div>
+            <div class="col-md-1">
+                <asp:Label ID="lblLeyTotPagos" runat="server" Font-Bold="True" Font-Size="14px" ForeColor="Black" Text="TOTAL:"></asp:Label>
+            </div>
+            <div class="col-md-1 text-right">
+                <asp:Label ID="lblTotPagos" runat="server" Font-Bold="True" Font-Size="14px" ForeColor="Black" Text="0"></asp:Label>
+            </div>
+            <div class="col-md-7 text-right">
+                <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />
+                <asp:ImageButton ID="imgBttnReporteLote" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf2.png" OnClick="imgBttnReporteLote_Click" />
+                &nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col">
                 <usr:uCCorreo ID="PnlCorreo" runat="server" />
             </div>
         </div>
     </div>
+
+
+    <script type="text/javascript">
+        function Eventos() {
+
+            $('#<%= grdEventos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdEventos.ClientID %>').find("tr:first"))).DataTable({
+                "stateSave": true,
+                "ordering": false
+            });
+
+        }
+        function Pagos() {
+            $('#<%= grdDatosFactura.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdDatosFactura.ClientID %>').find("tr:first"))).DataTable({
+                "stateSave": true
+            });
+
+        }
+    </script>
 </asp:Content>

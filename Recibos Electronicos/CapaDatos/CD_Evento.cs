@@ -16,8 +16,8 @@ namespace CapaDatos
             {
 
                 OracleDataReader dr = null;
-                String[] Parametros = { "p_dependencia", "p_status", "p_busqueda", "p_tipo_acceso" };
-                Object[] Valores = { Objeventos.Dependencia, Objeventos.Status, Busqueda, Objeventos.Tipo };
+                String[] Parametros = { "p_dependencia", "p_status", "p_busqueda", "p_tipo_acceso", "p_anio" };
+                Object[] Valores = { Objeventos.Dependencia, Objeventos.Status, Busqueda, Objeventos.Tipo, Objeventos.Anio };
                 //String[] ParametrosOut = { "p_dependencia", "p_evento", "p_descripcion", "p_fecha_inicial", "p_fecha_final", "p_nivel" };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_pagos.Obt_Grid_Evento", ref dr, Parametros, Valores);
@@ -1036,6 +1036,8 @@ namespace CapaDatos
                     Objeventos.Descripcion = Convert.ToString(dr[2]);
                     Objeventos.Fecha_inicial = Convert.ToString(dr[3]);
                     Objeventos.Fecha_final = Convert.ToString(dr[4]);
+                    Objeventos.TotPagados = Convert.ToInt32(dr[5]);
+                    Objeventos.Id = Convert.ToInt32(dr[6]);
                     List.Add(Objeventos);
                 }
                 dr.Close();

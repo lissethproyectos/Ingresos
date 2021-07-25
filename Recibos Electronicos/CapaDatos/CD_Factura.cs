@@ -928,6 +928,8 @@ namespace CapaDatos
                     ObjFactura.FACT_FECHA_FACTURA = Convert.ToString(dr.GetValue(5));
                     ObjFactura.Status_Carga = Convert.ToString(dr.GetValue(7));
                     ObjFactura.FACT_BANCO = Convert.ToString(dr.GetValue(8));
+                    ObjFactura.FACT_CARRERA = Convert.ToString(dr.GetValue(9));
+                    ObjFactura.FACT_FECHA_DISPERSION = Convert.ToString(dr.GetValue(10));
                     List.Add(ObjFactura);
                 }
                 dr.Close();

@@ -4,7 +4,7 @@
 <%@ Register Src="../EnviarCorreo.ascx" TagName="uCCorreo" TagPrefix="usr" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
-        .overlay {
+    .overlay {
             position: fixed;
             z-index: 98;
             top: 0px;
@@ -16,31 +16,31 @@
             opacity: 0.8;
         }
 
-        .overlayContent {
+    .overlayContent {
             z-index: 99;
             margin: 250px auto;
             width: 80px;
             height: 80px;
         }
 
-            .overlayContent h2 {
+    .overlayContent h2 {
                 font-size: 18px;
                 font-weight: bold;
                 color: #000;
             }
 
-            .overlayContent img {
+    .overlayContent img {
                 width: 30px;
                 height: 30px;
             }
 
-        .ajax__myTab .ajax__tab_header {
+    /*.ajax__myTab .ajax__tab_header {
             font-family: verdana;
             font-size: 16px;
             border-bottom: solid 2px #aaaaaa
         }
 
-        .ajax__myTab .ajax__tab_outer {
+    .ajax__myTab .ajax__tab_outer {
             padding-right: 2px;
             height: 20px;
             background-color: #C0C0C0;
@@ -49,48 +49,122 @@
             border-top: solid 1px #999999
         }
 
-        .ajax__myTab .ajax__tab_inner {
+    .ajax__myTab .ajax__tab_inner {
             padding-left: 3px;
             background-color: #C0C0C0;
-        }
+    }
 
-        .ajax__myTab .ajax__tab_tab {
+    .ajax__myTab .ajax__tab_tab {
             height: 13px;
             padding: 4px;
             margin: 0;
         }
 
-        .ajax__myTab .ajax__tab_hover .ajax__tab_outer {
+    .ajax__myTab .ajax__tab_hover .ajax__tab_outer {
             background-color: #cccccc
         }
 
-        .ajax__myTab .ajax__tab_hover .ajax__tab_inner {
+    .ajax__myTab .ajax__tab_hover .ajax__tab_inner {
             background-color: #cccccc
         }
 
-        .ajax__myTab .ajax__tab_hover .ajax__tab_tab {
+    .ajax__myTab .ajax__tab_hover .ajax__tab_tab {
             background-color: Green;
-        }
+    }
 
-        .ajax__myTab .ajax__tab_active .ajax__tab_outer {
+    .ajax__myTab .ajax__tab_active .ajax__tab_outer {
             background-color: #fff;
             border-left: solid 1px #999999;
-        }
+    }
 
-        .ajax__myTab .ajax__tab_active .ajax__tab_inner {
+    .ajax__myTab .ajax__tab_active .ajax__tab_inner {
             background-color: #fff;
-        }
+    }*/
 
-        .ajax__myTab .ajax__tab_active .ajax__tab_tab {
-        }
+  /*  .ajax__myTab .ajax__tab_active .ajax__tab_tab {
+    }
 
-        .ajax__myTab .ajax__tab_body {
+    .ajax__myTab .ajax__tab_body {
             font-family: verdana;
             font-size: 11pt;
             border: 2px solid #999999;
             padding: 6px;
             background-color: #ffffff;
-        }
+    }*/
+
+.Tab .ajax__tab_header
+{
+    color: #4682b4;
+    font-family:Calibri;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #ffffff;
+    margin-left: 0px;
+}
+/*Body*/
+.Tab .ajax__tab_body
+{
+    border:1px solid #b4cbdf;
+    padding-top:0px;
+}
+/*Tab Active*/
+.Tab .ajax__tab_active .ajax__tab_tab
+{
+    color: #ffffff;
+    background:url("../../tab_active.gif") repeat-x;
+    height:20px;
+}
+.Tab .ajax__tab_active .ajax__tab_inner
+{
+    color: #ffffff;
+    background:url("../../tab_left_active.gif") no-repeat left;
+    padding-left:10px;
+}
+.Tab .ajax__tab_active .ajax__tab_outer
+{
+    color: #ffffff;
+    background:url("../../tab_right_active.gif") no-repeat right;
+    padding-right:6px;
+}
+/*Tab Hover*/
+.Tab .ajax__tab_hover .ajax__tab_tab
+{
+    color: #000000;
+    background:url("../../tab_hover.gif") repeat-x;
+    height:20px;
+}
+.Tab .ajax__tab_hover .ajax__tab_inner
+{
+    color: #000000;
+    background:url("../../tab_left_hover.gif") no-repeat left;
+    padding-left:10px;
+}
+.Tab .ajax__tab_hover .ajax__tab_outer
+{
+    color: #000000;
+    background:url("../../tab_right_hover.gif") no-repeat right;
+    padding-right:6px;
+}
+/*Tab Inactive*/
+.Tab .ajax__tab_tab
+{
+    color: #666666;
+    background:url("../../tab_Inactive.gif") repeat-x;
+    height:20px;
+}
+.Tab .ajax__tab_inner
+{
+    color: #666666;
+    background:url("../../tab_left_inactive.gif") no-repeat left;
+    padding-left:10px;
+}
+.Tab .ajax__tab_outer
+{
+    color: #666666;
+    background:url("../../tab_right_inactive.gif") no-repeat right;
+    padding-right:6px;
+    margin-right: 2px;
+}
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -434,7 +508,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" Font-Names="Century Gothic" ScrollBars="Both">
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" Font-Names="Century Gothic" ScrollBars="Both" CssClass="Tab">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
                                                         <i class="fa fa-user-circle" aria-hidden="true"></i>Datos del Alumno
