@@ -299,6 +299,39 @@ namespace CapaDatos
         #endregion
         #region ExecuteNonQuery
 
+        public OracleCommand GenerarOracleCommand(string SP, ref string Verificador, string[] ParametrosOut)
+        {
+
+            OracleCommand cmd = new OracleCommand(SP, Cnn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            string valor = "";
+
+
+
+            for (int i = 0; i < ParametrosOut.Length; i++)
+            {
+                cmd.Parameters.Add(ParametrosOut[i], OracleType.VarChar, 1024).Direction = ParameterDirection.Output;
+            }
+
+
+            try
+            {
+                if (trans != null) cmd.Transaction = trans;
+                if (trans == null) Cnn.Open();
+                cmd.ExecuteNonQuery();
+                Verificador = cmd.Parameters["p_Bandera"].Value.ToString();
+                return cmd;
+            }
+
+
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+
+        }
+
         public OracleCommand GenerarOracleCommand(string SP, ref string Verificador, string[] ParametrosIn, object[] Valores, string[] ParametrosOut)
         {
 

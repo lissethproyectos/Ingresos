@@ -78,6 +78,13 @@ namespace CapaEntidad
             set { _Status = value; }
         }
 
+        private string _StatusDet;
+        public string StatusDet
+        {
+            get { return _StatusDet; }
+            set { _StatusDet = value; }
+        }
+
         private string _Observaciones;
         public string Observaciones
         {

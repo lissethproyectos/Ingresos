@@ -183,6 +183,75 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void ConsultarEventoDetParticipantes(ConceptoCuotaLibre ObjParticipantes, ref List<ConceptoCuotaLibre> List)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "p_evento" };
+                Object[] Valores = { ObjParticipantes.Evento };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_Temp_Det_Part", ref dr, Parametros, Valores);
+
+                while (dr.Read())
+                {
+                    ObjParticipantes = new ConceptoCuotaLibre();
+                    ObjParticipantes.Id_Tipo_Participante  = Convert.ToInt32(dr[1]);
+                    ObjParticipantes.Tipo_Participante = Convert.ToString(dr[2]);
+                    ObjParticipantes.Participante = Convert.ToString(dr[3]);
+                    ObjParticipantes.Es_Ponente = Convert.ToString(dr[4]);
+                    ObjParticipantes.Requiere_Constancia = Convert.ToString(dr[5]);
+                    ObjParticipantes.Id = Convert.ToString(dr[6]);
+                    List.Add(ObjParticipantes);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+        public void ConsultarEventoDetConceptos(ConceptoCuotaLibre ObjParticipantes, ref List<ConceptoCuotaLibre> List)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "P_ID" };
+                Object[] Valores = { ObjParticipantes.Id };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_Temp_Det_Conc", ref dr, Parametros, Valores);
+
+                while (dr.Read())
+                {
+                    ObjParticipantes = new ConceptoCuotaLibre();
+                    ObjParticipantes.Id_Concepto = Convert.ToInt32(dr[1]);
+                    ObjParticipantes.Importe = Convert.ToDouble(dr[2]);
+                    ObjParticipantes.DescCarrera = Convert.ToString(dr[3]);
+                    ObjParticipantes.DescConcepto = Convert.ToString(dr[4]);
+                    List.Add(ObjParticipantes);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void ConsultarEventoParticipantes(string Evento, ref TipoParticipante ObjParticipantes, ref List<TipoParticipante> List)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -285,6 +354,77 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        public void ConsultarCveEvento(ref Evento objeventos, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] ParametrosOut = { "P_EVENTO", "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("OBT_CVE_EVENTO", ref Verificador, ParametrosOut);
+
+                if (Verificador == "0")
+                {
+                    objeventos.Eventos = Convert.ToString(Cmd.Parameters["P_EVENTO"].Value);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
+        public void EventoInsertarDetPart(ref ConceptoCuotaLibre objeventos, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_EVENTO", "P_ID_PARTICIPANTE", "P_TIPO_PARTICIPANTE", "P_PONENTE", "P_CONSTANCIA", "P_STATUS" };
+                object[] Valores = { objeventos.Evento, objeventos.Id_Tipo_Participante, objeventos.Tipo_Participante, objeventos.Es_Ponente, objeventos.Requiere_Constancia, objeventos.StatusDet };
+                String[] ParametrosOut = { "P_ID","p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("INS_TEMP_PARTICIPANTES_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
+                if (Verificador == "0")
+                    objeventos.Id = Convert.ToString(Cmd.Parameters["P_ID"].Value);
+                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+        public void EventoInsertarDetConcept(ConceptoCuotaLibre objConceptos, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = {"P_ID_PARTICIPANTE", "P_ID_CONCEPTO", "P_IMPORTE", "P_OBSERVACIONES", " P_EVENTO" };
+                object[] Valores = { objConceptos.Id_Tipo_Participante, objConceptos.Id_Concepto, objConceptos.Importe, objConceptos.Observaciones, objConceptos.Evento };
+                String[] ParametrosOut = { "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("INS_TEMP_PARTICIPANTES_CONCEP", ref Verificador, Parametros, Valores, ParametrosOut);               
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
+
         public void EventoEspecialInsertar(Evento objeventos, string Usuario, string VersionNueva, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");

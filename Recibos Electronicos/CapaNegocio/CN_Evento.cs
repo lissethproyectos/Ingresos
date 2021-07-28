@@ -81,6 +81,33 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void EventoInsertarDetPart(ref ConceptoCuotaLibre Eventos, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.EventoInsertarDetPart(ref Eventos, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void EventoInsertarDetConcept(ConceptoCuotaLibre Eventos, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.EventoInsertarDetConcept(Eventos, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void EventoEspecialInsertar(Evento Eventos, string Usuario, string VersionNueva, ref string Verificador)
         {
             try
@@ -277,6 +304,19 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ConsultarCveEvento(ref Evento objeventos, ref string Verificador)
+        {
+            try
+            {
+                CD_Evento CDevento = new CD_Evento();
+                CDevento.ConsultarCveEvento(ref objeventos, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void ConsultarEventos_conceptos(ref ConceptoCuotaLibre ObjConceptoCuotaLibre, ref List<ConceptoCuotaLibre> List)
         {
             try
@@ -312,7 +352,33 @@ namespace CapaNegocio
             {
                 throw new Exception(ex.Message);
             }
-        }        
+        }
+
+        public void ConsultarEventoDetParticipantes(ConceptoCuotaLibre ObjParticipantes, ref List<ConceptoCuotaLibre> List)
+        {
+            try
+            {
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.ConsultarEventoDetParticipantes(ObjParticipantes, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ConsultarEventoDetConceptos(ConceptoCuotaLibre ObjParticipantes, ref List<ConceptoCuotaLibre> List)
+        {
+            try
+            {
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.ConsultarEventoDetConceptos(ObjParticipantes, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void ConsultarEventoParticipantes(string Evento, ref TipoParticipante ObjParticipantes, ref List<TipoParticipante> List)
         {
             try
