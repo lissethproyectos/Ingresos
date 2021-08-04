@@ -285,7 +285,7 @@ namespace CapaEntidad
             set { _IdEmpleado = value; }
         }
 
-        private int _IdFamiliar;
+        private int _IdFamiliar=0;
         public int IdFamiliar
         {
             get { return _IdFamiliar; }

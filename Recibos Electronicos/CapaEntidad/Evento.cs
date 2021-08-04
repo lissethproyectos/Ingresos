@@ -176,6 +176,18 @@ namespace CapaEntidad
             set { _Tipo = value; }
         }
 
+        private string _Tipo_Acceso;
+        public string Tipo_Acceso
+        {
+            get { return _Tipo_Acceso; }
+            set { _Tipo_Acceso = value; }
+        }
+        private string _Telefono_Responsable;
+        public string Telefono_Responsable
+        {
+            get { return _Telefono_Responsable; }
+            set { _Telefono_Responsable = value; }
+        }
 
         private int _Anio;
         public int Anio
@@ -191,11 +203,18 @@ namespace CapaEntidad
             set { _Usuario_Solicita = value; }
         }
 
-        private string _Usuario_Autoriza;
+        private string _Usuario_Autoriza=string.Empty;
         public string Usuario_Autoriza
         {
             get { return _Usuario_Autoriza; }
             set { _Usuario_Autoriza = value; }
+        }
+
+        private string _Usuario_Modifica;
+        public string Usuario_Modifica
+        {
+            get { return _Usuario_Modifica; }
+            set { _Usuario_Modifica = value; }
         }
 
         private string _Fecha_Solicitud;

@@ -6,7 +6,7 @@ using System.Text;
 using CapaEntidad;
 namespace CapaDatos
 {
-   public class CD_Evento
+    public class CD_Evento
     {
         public void ConsultarEventos(ref Evento Objeventos, ref List<Evento> List, string Busqueda)
         {
@@ -27,18 +27,18 @@ namespace CapaDatos
                     Objeventos = new Evento();
                     Objeventos.Dependencia = Convert.ToString(dr[0]);
                     Objeventos.Eventos = Convert.ToString(dr[1]);
-                    Objeventos.Descripcion = Convert.ToString(dr[2]);       
+                    Objeventos.Descripcion = Convert.ToString(dr[2]);
                     Objeventos.Fecha_inicial = Convert.ToString(dr[3]);
                     Objeventos.Fecha_final = Convert.ToString(dr[4]);
                     Objeventos.Nivel = Convert.ToString(dr[5]);
                     Objeventos.Status = Convert.ToString(dr[6]);
-                    Objeventos.Usuario_Solicita= Convert.ToString(dr[8]);
+                    Objeventos.Usuario_Solicita = Convert.ToString(dr[8]);
                     Objeventos.Fecha_Solicitud = Convert.ToString(dr[9]);
                     Objeventos.Usuario_Autoriza = Convert.ToString(dr[10]);
                     Objeventos.Fecha_Autorizacion = Convert.ToString(dr[11]);
-                    Objeventos.NoOficio =Convert.ToString(dr[12])+" DOCTO(S)";
+                    Objeventos.NoOficio = Convert.ToString(dr[12]) + " DOCTO(S)";
                     Objeventos.Nueva_Version = Convert.ToString(dr[13]);
-                    Objeventos.EsVisible = (Convert.ToString(dr[13])=="S") ? true : false;
+                    Objeventos.EsVisible = (Convert.ToString(dr[13]) == "S") ? true : false;
                     Objeventos.EsVisible2 = (Convert.ToString(dr[13]) == "S") ? false : true;
                     Objeventos.VisibleAutorizacion = (Convert.ToString(dr[14]) == "S") ? true : false;
                     if (Convert.ToString(dr[7]) != "")
@@ -49,11 +49,11 @@ namespace CapaDatos
                     else
                     {
                         Objeventos.Oficio_s = "";
-                        Objeventos.Oficio ="";
+                        Objeventos.Oficio = "";
                     }
 
                     List.Add(Objeventos);
-                }                
+                }
                 dr.Close();
             }
             catch (Exception ex)
@@ -112,8 +112,8 @@ namespace CapaDatos
 
                 OracleDataReader dr = null;
                 String[] Parametros = { "p_evento" };
-                Object[] Valores = { ObjConceptoCuotaLibre.Evento};
-               
+                Object[] Valores = { ObjConceptoCuotaLibre.Evento };
+
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_Evento_Conceptos", ref dr, Parametros, Valores);
 
                 while (dr.Read())
@@ -127,7 +127,7 @@ namespace CapaDatos
                     ObjConceptoCuotaLibre.Dependencia = Convert.ToInt32(dr[5]);
                     ObjConceptoCuotaLibre.Importe = Convert.ToInt32(dr[6]);
                     ObjConceptoCuotaLibre.Status = Convert.ToChar(dr[7]);
-                    ObjConceptoCuotaLibre.Observaciones= Convert.ToString(dr[8]);
+                    ObjConceptoCuotaLibre.Observaciones = Convert.ToString(dr[8]);
                     ObjConceptoCuotaLibre.Es_Ponente = Convert.ToString(dr[9]);
                     ObjConceptoCuotaLibre.Requiere_Constancia = Convert.ToString(dr[10]);
                     ObjConceptoCuotaLibre.Concepto = Convert.ToString(dr[11]);
@@ -192,19 +192,21 @@ namespace CapaDatos
 
                 OracleDataReader dr = null;
                 String[] Parametros = { "p_evento" };
-                Object[] Valores = { ObjParticipantes.Evento };
+                Object[] Valores = { ObjParticipantes.IdEvento };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_Temp_Det_Part", ref dr, Parametros, Valores);
 
                 while (dr.Read())
                 {
                     ObjParticipantes = new ConceptoCuotaLibre();
-                    ObjParticipantes.Id_Tipo_Participante  = Convert.ToInt32(dr[1]);
-                    ObjParticipantes.Tipo_Participante = Convert.ToString(dr[2]);
+                    ObjParticipantes.Id_Tipo_Participante = Convert.ToInt32(dr[1]);
+                    ObjParticipantes.Desc_Tipo_Participante = Convert.ToString(dr[2]);
                     ObjParticipantes.Participante = Convert.ToString(dr[3]);
                     ObjParticipantes.Es_Ponente = Convert.ToString(dr[4]);
                     ObjParticipantes.Requiere_Constancia = Convert.ToString(dr[5]);
                     ObjParticipantes.Id = Convert.ToString(dr[6]);
+                    ObjParticipantes.Status = Convert.ToChar(dr[7]);
+                    ObjParticipantes.Tipo_Participante = Convert.ToString(dr[8]);
                     List.Add(ObjParticipantes);
                 }
                 dr.Close();
@@ -218,6 +220,39 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void ConsultarCatParticipantes(ConceptoCuotaLibre ObjParticipantes, ref List<ConceptoCuotaLibre> List)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                String[] Parametros = { "P_TIPO" };
+                Object[] Valores = { ObjParticipantes.Tipo_Participante };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_Cat_Participantes", ref dr, Parametros, Valores);
+
+                while (dr.Read())
+                {
+                    ObjParticipantes = new ConceptoCuotaLibre();
+                    ObjParticipantes.Id_Tipo_Participante = Convert.ToInt32(dr[0]);
+                    ObjParticipantes.Desc_Tipo_Participante = Convert.ToString(dr[1]);
+                    ObjParticipantes.Participante = Convert.ToString(dr[6]);
+                    List.Add(ObjParticipantes);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void ConsultarEventoDetConceptos(ConceptoCuotaLibre ObjParticipantes, ref List<ConceptoCuotaLibre> List)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -226,18 +261,21 @@ namespace CapaDatos
             {
 
                 OracleDataReader dr = null;
-                String[] Parametros = { "P_ID" };
-                Object[] Valores = { ObjParticipantes.Id };
+                String[] Parametros = { "P_ID", "P_EVENTO" };
+                Object[] Valores = { ObjParticipantes.Id, ObjParticipantes.IdEvento };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_Temp_Det_Conc", ref dr, Parametros, Valores);
 
                 while (dr.Read())
                 {
                     ObjParticipantes = new ConceptoCuotaLibre();
+                    ObjParticipantes.Id = Convert.ToString(dr[6]);
+                    ObjParticipantes.Id_Tipo_Participante = Convert.ToInt32(dr[0]);
                     ObjParticipantes.Id_Concepto = Convert.ToInt32(dr[1]);
                     ObjParticipantes.Importe = Convert.ToDouble(dr[2]);
                     ObjParticipantes.DescCarrera = Convert.ToString(dr[3]);
                     ObjParticipantes.DescConcepto = Convert.ToString(dr[4]);
+                    ObjParticipantes.Status = Convert.ToChar(dr[7]);
                     List.Add(ObjParticipantes);
                 }
                 dr.Close();
@@ -276,7 +314,7 @@ namespace CapaDatos
                     ObjParticipantes.Nuevo = "N";
                     ObjParticipantes.Eliminar = "N";
                     ObjParticipantes.Id = Convert.ToString(dr[6]);
-                    ConsultarEventoConceptos(ref ObjParticipantes, Evento, Convert.ToInt32(dr[6]));                    
+                    ConsultarEventoConceptos(ref ObjParticipantes, Evento, Convert.ToInt32(dr[6]));
                     List.Add(ObjParticipantes);
                 }
                 dr.Close();
@@ -314,7 +352,7 @@ namespace CapaDatos
                     ObjConcepto.Status = Convert.ToString(dr[4]);
                     ObjConcepto.Nuevo = "N";
                     ObjConcepto.Eliminar = "N";
-                    objParticipante.Conceptos.Add(ObjConcepto);                    
+                    objParticipante.Conceptos.Add(ObjConcepto);
                 }
                 dr.Close();
             }
@@ -333,7 +371,7 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = {  "p_descripcion", "p_escuela", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_concepto", "p_status", "p_nivel", "p_ini_matricula", "p_autorizacion", "p_tipo_periodo", "p_tipo", "p_usuario", "p_observaciones" };
+                String[] Parametros = { "p_descripcion", "p_escuela", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_concepto", "p_status", "p_nivel", "p_ini_matricula", "p_autorizacion", "p_tipo_periodo", "p_tipo", "p_usuario", "p_observaciones" };
                 object[] Valores = { objeventos.Descripcion, objeventos.Dependencia, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, objeventos.Email_Corres, objeventos.Concepto, objeventos.Status, objeventos.Nivel, objeventos.Ini_Matricula, objeventos.Autorizacion, objeventos.Tipo_Periodo, objeventos.Tipo, Usuario, objeventos.Observaciones };
                 String[] ParametrosOut = { "p_evento", "P_ANO", "p_Bandera" };
 
@@ -344,7 +382,7 @@ namespace CapaDatos
                     objeventos.Eventos = Convert.ToString(Cmd.Parameters["p_evento"].Value);
                 }
 
-                }
+            }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -354,6 +392,36 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        public void EventoInsertar(Evento objeventos, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "p_id_evento","p_descripcion", "p_escuela", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_status", "p_nivel", "p_autorizacion", "p_tipo_acceso", 
+                    "p_usuario_solicita", "p_usuario_autoriza", "p_observaciones", "p_tel_res" };
+                object[] Valores = { objeventos.Id, objeventos.Descripcion, objeventos.Dependencia, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, "", objeventos.Status, objeventos.Nivel, objeventos.Autorizacion, objeventos.Tipo_Acceso,
+                    objeventos.Usuario_Solicita, objeventos.Usuario_Autoriza, objeventos.Observaciones, objeventos.Telefono_Responsable };
+                String[] ParametrosOut = { "p_evento", "p_Bandera" };
+
+                Cmd = CDDatos.GenerarOracleCommand("INS_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
+
+                if (Verificador == "0")
+                {
+                    objeventos.Eventos = Convert.ToString(Cmd.Parameters["p_evento"].Value);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void ConsultarCveEvento(ref Evento objeventos, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -379,6 +447,31 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        public void ConsultarIdEvento(ref Evento objeventos, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] ParametrosOut = { "P_ID", "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("OBT_ID_EVENTO", ref Verificador, ParametrosOut);
+
+                if (Verificador == "0")
+                {
+                    objeventos.Id = Convert.ToInt32(Cmd.Parameters["P_ID"].Value);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
 
         public void EventoInsertarDetPart(ref ConceptoCuotaLibre objeventos, ref string Verificador)
         {
@@ -386,13 +479,13 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_EVENTO", "P_ID_PARTICIPANTE", "P_TIPO_PARTICIPANTE", "P_PONENTE", "P_CONSTANCIA", "P_STATUS" };
-                object[] Valores = { objeventos.Evento, objeventos.Id_Tipo_Participante, objeventos.Tipo_Participante, objeventos.Es_Ponente, objeventos.Requiere_Constancia, objeventos.StatusDet };
-                String[] ParametrosOut = { "P_ID","p_Bandera" };
+                String[] Parametros = { "P_ID_EVENTO", "P_ID_PARTICIPANTE", "P_TIPO_PARTICIPANTE", "P_PONENTE", "P_CONSTANCIA", "P_STATUS" };
+                object[] Valores = { objeventos.IdEvento, objeventos.Id_Tipo_Participante, objeventos.Tipo_Participante, objeventos.Es_Ponente, objeventos.Requiere_Constancia, objeventos.Status };
+                String[] ParametrosOut = { "P_ID", "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("INS_TEMP_PARTICIPANTES_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
                 if (Verificador == "0")
                     objeventos.Id = Convert.ToString(Cmd.Parameters["P_ID"].Value);
-                
+
             }
             catch (Exception ex)
             {
@@ -409,10 +502,10 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = {"P_ID_PARTICIPANTE", "P_ID_CONCEPTO", "P_IMPORTE", "P_OBSERVACIONES", " P_EVENTO" };
-                object[] Valores = { objConceptos.Id_Tipo_Participante, objConceptos.Id_Concepto, objConceptos.Importe, objConceptos.Observaciones, objConceptos.Evento };
+                String[] Parametros = { "P_ID_PARTICIPANTE", "P_ID_CONCEPTO", "P_IMPORTE", "P_OBSERVACIONES", "P_ID_EVENTO", "P_STATUS" };
+                object[] Valores = { objConceptos.Id_Tipo_Participante, objConceptos.Id_Concepto, objConceptos.Importe, objConceptos.Observaciones, objConceptos.IdEvento, objConceptos.StatusDet };
                 String[] ParametrosOut = { "p_Bandera" };
-                Cmd = CDDatos.GenerarOracleCommand("INS_TEMP_PARTICIPANTES_CONCEP", ref Verificador, Parametros, Valores, ParametrosOut);               
+                Cmd = CDDatos.GenerarOracleCommand("INS_TEMP_PARTICIPANTES_CONCEP", ref Verificador, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {
@@ -460,7 +553,7 @@ namespace CapaDatos
             List<ConceptoCuotaLibre> lstParticipantes = (
                     from p in lstConfiguracion
                     group p by p.Id_Tipo_Participante into g
-                    select new ConceptoCuotaLibre()          
+                    select new ConceptoCuotaLibre()
                     ).ToList();
 
             //groupedTipoParticipante
@@ -476,7 +569,7 @@ namespace CapaDatos
                     object[] Valores = { Evento, lst.Key.Id_Tipo_Participante, lst.Key.Requiere_Constancia
                     };
                     String[] ParametrosOut = { "p_Bandera" };
-                    Cmd = CDDatos.GenerarOracleCommand("INS_EVENTO_TIPO_PARTICIPANTE", ref Verificador, Parametros, Valores, ParametrosOut);                   
+                    Cmd = CDDatos.GenerarOracleCommand("INS_EVENTO_TIPO_PARTICIPANTE", ref Verificador, Parametros, Valores, ParametrosOut);
                 }
                 catch (Exception ex)
                 {
@@ -486,7 +579,7 @@ namespace CapaDatos
                 {
                     CDDatos.LimpiarOracleCommand(ref Cmd);
                 }
-            }            
+            }
         }
         public void EventoInsertarConfiguracionDetalle(List<ConceptoCuotaLibre> lstConfiguracion, string Evento, ref string Verificador)
         {
@@ -522,7 +615,7 @@ namespace CapaDatos
         {
             //List<TipoParticipante> lstConceptos = new List<TipoParticipante>();
             //lstConceptos = lstParticipantes;
-            List<TipoParticipante> lstNewParticipantes = lstParticipantes.Where(x => x.Nuevo == "S" && x.Eliminar=="N").ToList();
+            List<TipoParticipante> lstNewParticipantes = lstParticipantes.Where(x => x.Nuevo == "S" && x.Eliminar == "N").ToList();
             int indexParticipante = 0;
             foreach (TipoParticipante lst in lstNewParticipantes)
             {
@@ -537,10 +630,10 @@ namespace CapaDatos
                     String[] ParametrosOut = { "p_Bandera", "P_ID_TIPO_PERSONA" };
 
                     Cmd = CDDatos.GenerarOracleCommand("INS_EVENTO_TIPO_PERSONA", ref Verificador, Parametros, Valores, ParametrosOut);
-                    if (Verificador == "0")                    
+                    if (Verificador == "0")
                         lstParticipantes[indexParticipante].Id = Convert.ToString(Cmd.Parameters["P_ID_TIPO_PERSONA"].Value);
 
-                    
+
 
                 }
                 catch (Exception ex)
@@ -563,7 +656,7 @@ namespace CapaDatos
                 //OracleCommand Cmd = null;
                 List<Concepto> lstConceptosVarios = new List<Concepto>();
                 var Conceptos = lstNewParticipantes[index].Conceptos;
-                lstConceptosVarios=Conceptos.ToList<Concepto>();
+                lstConceptosVarios = Conceptos.ToList<Concepto>();
                 List<Concepto> lstConceptos = lstConceptosVarios.Where(x => x.Nuevo == "S" && x.Eliminar == "N").ToList();
 
 
@@ -634,7 +727,7 @@ namespace CapaDatos
                 lstConceptosVarios = Conceptos.ToList<Concepto>();
 
                 List<Concepto> lstConceptos = lstConceptosVarios.Where(x => x.Nuevo == "N").ToList();
-                List<Concepto> lstConceptosNew = lstConceptosVarios.Where(x => x.Nuevo == "S" && x.Eliminar=="N").ToList();
+                List<Concepto> lstConceptosNew = lstConceptosVarios.Where(x => x.Nuevo == "S" && x.Eliminar == "N").ToList();
 
                 IdPersona = lstParticipantes[index].Id;
                 foreach (Concepto lstConcepto in lstConceptos)
@@ -689,50 +782,50 @@ namespace CapaDatos
         }
         public void EventoEliminarDetalle(string Evento, ref string Verificador)
         {
-           
 
-                CD_Datos CDDatos = new CD_Datos("INGRESOS");
-                OracleCommand Cmd = null;
-                try
-                {
-                    String[] Parametros = { "P_EVENTO" };
-                    object[] Valores = { Evento };
-                    String[] ParametrosOut = { "P_BANDERA" };
 
-                    Cmd = CDDatos.GenerarOracleCommand("DEL_EVENTO_DETALLE", ref Verificador, Parametros, Valores, ParametrosOut);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    CDDatos.LimpiarOracleCommand(ref Cmd);
-                }
-            
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_EVENTO" };
+                object[] Valores = { Evento };
+                String[] ParametrosOut = { "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("DEL_EVENTO_DETALLE", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+
         }
         public void EventoEliminarEventoParticipante(string Evento, ref string Verificador)
         {
 
-           
-                CD_Datos CDDatos = new CD_Datos("INGRESOS");
-                OracleCommand Cmd = null;
-                try
-                {
-                    String[] Parametros = { "P_EVENTO" };
-                    object[] Valores = { Evento };
-                    String[] ParametrosOut = { "p_Bandera" };
 
-                    Cmd = CDDatos.GenerarOracleCommand("DEL_EVENTO_DETALLE", ref Verificador, Parametros, Valores, ParametrosOut);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    CDDatos.LimpiarOracleCommand(ref Cmd);
-                }            
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_EVENTO" };
+                object[] Valores = { Evento };
+                String[] ParametrosOut = { "p_Bandera" };
+
+                Cmd = CDDatos.GenerarOracleCommand("DEL_EVENTO_DETALLE", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
 
 
         }
@@ -768,7 +861,7 @@ namespace CapaDatos
         public void EventoEliminarDetalleConcepto(List<Concepto> lstConceptos, ref string Verificador)
         {
 
-            List<Concepto> list = lstConceptos.Where(x => x.Eliminar == "S" && x.IdConcepto>0).ToList();
+            List<Concepto> list = lstConceptos.Where(x => x.Eliminar == "S" && x.IdConcepto > 0).ToList();
             foreach (Concepto lst in list)
             {
 
@@ -777,7 +870,7 @@ namespace CapaDatos
                 try
                 {
                     String[] Parametros = { "P_EVENTO", "P_DEPENDENCIA", "P_TIPO_PARTICIPANTE", "P_ID_CONCEPTO" };
-                    object[] Valores = { lst.Evento, lst.Dependencia, lst.Tipo_Participante, lst.IdConcepto };                    
+                    object[] Valores = { lst.Evento, lst.Dependencia, lst.Tipo_Participante, lst.IdConcepto };
                     String[] ParametrosOut = { "p_Bandera" };
 
                     Cmd = CDDatos.GenerarOracleCommand("DEL_EVENTO_DET_CONCEPTO", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -794,13 +887,56 @@ namespace CapaDatos
 
 
         }
+        public void EventoEliminarDetalleConcepto(ConceptoCuotaLibre objDetConcepto, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID" };
+                object[] Valores = { objDetConcepto.Id };
+                String[] ParametrosOut = { "p_Bandera" };
+
+                Cmd = CDDatos.GenerarOracleCommand("DEL_TEMP_DET_CONC_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+        public void EventoEliminarDetallePart(ConceptoCuotaLibre objDetConcepto, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID", "P_EVENTO" };
+                object[] Valores = { objDetConcepto.Id, objDetConcepto.IdEvento };
+                String[] ParametrosOut = { "p_Bandera" };
+
+                Cmd = CDDatos.GenerarOracleCommand("DEL_TEMP_DET_PART_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void Insertar_oficio(Evento objeventos, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "p_evento", "P_NOMBRE_OFICIO", "P_FIRMA", "P_NO_OFICIO", "P_OBSERVACIONES", "P_FECHA"};
+                String[] Parametros = { "p_evento", "P_NOMBRE_OFICIO", "P_FIRMA", "P_NO_OFICIO", "P_OBSERVACIONES", "P_FECHA" };
                 object[] Valores = { objeventos.Eventos, objeventos.Oficio, objeventos.Firma, objeventos.NoOficio, objeventos.Observaciones, objeventos.FechaOficio };
                 String[] ParametrosOut = { "p_Bandera" };
 
@@ -841,6 +977,33 @@ namespace CapaDatos
                 }
             }
         }
+        public void Insertar_Autorizados(string Evento, string Nivel, List<Alumno> lstAutorizados, ref string Verificador)
+        {
+            foreach (Alumno lst in lstAutorizados)
+            {
+                CD_Datos CDDatos = new CD_Datos("INGRESOS");
+
+                OracleCommand Cmd = null;
+                try
+                {
+                    String[] Parametros = { "p_evento", "p_matricula", "p_nombre", "p_status", "p_usuario", "p_externo", "p_Sede", "p_Nivel" };
+                    object[] Valores = { Evento, lst.Matricula, lst.Nombre, "A", "N", "TUXTLA", Nivel };
+                    String[] ParametrosOut = { "p_Bandera" };
+
+                    Cmd = CDDatos.GenerarOracleCommand("INS_AUTORIZADOS", ref Verificador, Parametros, Valores, ParametrosOut);
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    CDDatos.LimpiarOracleCommand(ref Cmd);
+                }
+            }
+        }
+
         public void Editar_oficio(Evento objeventos, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -869,7 +1032,7 @@ namespace CapaDatos
             try
             {
                 for (int i = 0; i < List.Count; i++) // Loop through List with for
-	            {
+                {
                     CD_Datos CDDatos = new CD_Datos("INGRESOS");
                     OracleCommand Cmd = null;
                     String[] Parametros = { "p_evento", "p_carrera", "p_id_concepto", "p_dependencia", "p_importe", "p_status", "p_observaciones", "p_extemporaneo_dia" };
@@ -896,8 +1059,8 @@ namespace CapaDatos
             try
             {
                 String[] Parametros = { "p_evento", "p_carrera", "p_concepto", "p_dependencia", "p_importe", "p_status", "p_observaciones" };
-                object[] Valores = { objConceptoCuotaLibre.Evento, objConceptoCuotaLibre.Carrera, objConceptoCuotaLibre.Concepto, objConceptoCuotaLibre.Dependencia, objConceptoCuotaLibre.Importe, objConceptoCuotaLibre.Status, objConceptoCuotaLibre.Observaciones};
-                String[] ParametrosOut = {"p_id_concepto", "p_Bandera" };
+                object[] Valores = { objConceptoCuotaLibre.Evento, objConceptoCuotaLibre.Carrera, objConceptoCuotaLibre.Concepto, objConceptoCuotaLibre.Dependencia, objConceptoCuotaLibre.Importe, objConceptoCuotaLibre.Status, objConceptoCuotaLibre.Observaciones };
+                String[] ParametrosOut = { "p_id_concepto", "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("INS_DETALLE_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
 
             }
@@ -916,10 +1079,10 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "p_descripcion", "p_escuela", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_concepto", "p_status","p_nivel", "p_ini_matricula", "p_autorizacion", "p_evento", "p_tipo", "p_usuario", "p_observaciones" };
+                String[] Parametros = { "p_descripcion", "p_escuela", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_concepto", "p_status", "p_nivel", "p_ini_matricula", "p_autorizacion", "p_evento", "p_tipo", "p_usuario", "p_observaciones" };
 
-                object[] Valores = {  objeventos.Descripcion, objeventos.Dependencia, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, objeventos.Email_Corres, objeventos.Concepto, objeventos.Status, objeventos.Nivel, objeventos.Ini_Matricula, objeventos.Autorizacion, objeventos.Eventos, objeventos.Tipo, Usuario, objeventos.Observaciones };
-                
+                object[] Valores = { objeventos.Descripcion, objeventos.Dependencia, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, objeventos.Email_Corres, objeventos.Concepto, objeventos.Status, objeventos.Nivel, objeventos.Ini_Matricula, objeventos.Autorizacion, objeventos.Eventos, objeventos.Tipo, Usuario, objeventos.Observaciones };
+
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_EVENTOS", ref Verificador, Parametros, Valores, ParametrosOut);
             }
@@ -932,13 +1095,36 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        public void EventoEditar(Evento objeventos, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "p_evento", "p_id_evento", "p_escuela", "p_descripcion", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_status", "p_nivel", "p_autorizacion",  "p_tipo", "p_usuario", "p_observaciones" };
+
+                object[] Valores = { objeventos.Eventos, objeventos.Id, objeventos.Dependencia, objeventos.Descripcion, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, objeventos.Email_Corres, objeventos.Status, objeventos.Nivel, objeventos.Autorizacion, objeventos.Tipo_Acceso, objeventos.Usuario_Modifica, objeventos.Observaciones };
+
+                String[] ParametrosOut = { "p_Bandera" };
+                Cmd = CDDatos.GenerarOracleCommand("UPD_DATOS_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void EventoEditarStatus(ref Evento objeventos, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = {  "p_status", "p_evento" };
+                String[] Parametros = { "p_status", "p_evento" };
 
                 object[] Valores = { objeventos.Status, objeventos.Eventos };
 
@@ -962,22 +1148,22 @@ namespace CapaDatos
             {
                 string[] ParametrosIn = { "p_evento" };
                 object[] Valores = { Objeventos.Eventos };
-                string[] ParametrosOut ={"p_descripcion", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_concepto", "p_status","p_nivel", "p_ini_matricula", "p_autorizacion", "p_tipo", "p_usuario_solicita", "p_fecha_solicitud", "p_usuario_autoriza", "p_fecha_autorizacion", "p_observaciones", "p_bandera"};
+                string[] ParametrosOut = { "p_descripcion", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_concepto", "p_status", "p_nivel", "p_ini_matricula", "p_autorizacion", "p_tipo", "p_usuario_solicita", "p_fecha_solicitud", "p_usuario_autoriza", "p_fecha_autorizacion", "p_observaciones", "p_bandera" };
 
                 Cmd = CDDatos.GenerarOracleCommand("SEL_EVENTO", ref Verificador, ParametrosIn, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
-                    Objeventos = new Evento ();
-                    Objeventos.Eventos= Convert.ToString(Cmd.Parameters["p_evento"].Value);
+                    Objeventos = new Evento();
+                    Objeventos.Eventos = Convert.ToString(Cmd.Parameters["p_evento"].Value);
                     Objeventos.Descripcion = Convert.ToString(Cmd.Parameters["p_descripcion"].Value);
                     Objeventos.Dependencia = Convert.ToString(Cmd.Parameters["p_dependencia"].Value);
                     Objeventos.Fecha_inicial = Convert.ToString(Cmd.Parameters["p_fecha_inicial"].Value);
                     Objeventos.Fecha_final = Convert.ToString(Cmd.Parameters["p_fecha_final"].Value);
                     Objeventos.Email_Res = Convert.ToString(Cmd.Parameters["p_email_res"].Value);
                     Objeventos.Email_Corres = Convert.ToString(Cmd.Parameters["p_email_corres"].Value);
-                    Objeventos.Status= Convert.ToString(Cmd.Parameters["p_status"].Value);
-                    Objeventos.Nivel = Convert.ToString(Cmd.Parameters["p_nivel"].Value);                    
-                    Objeventos.Concepto = Convert.ToString(Cmd.Parameters["p_concepto"].Value);                    
+                    Objeventos.Status = Convert.ToString(Cmd.Parameters["p_status"].Value);
+                    Objeventos.Nivel = Convert.ToString(Cmd.Parameters["p_nivel"].Value);
+                    Objeventos.Concepto = Convert.ToString(Cmd.Parameters["p_concepto"].Value);
                     Objeventos.Ini_Matricula = Convert.ToString(Cmd.Parameters["p_ini_matricula"].Value);
                     Objeventos.Autorizacion = Convert.ToString(Cmd.Parameters["p_autorizacion"].Value);
                     Objeventos.Tipo = Convert.ToString(Cmd.Parameters["p_tipo"].Value);
@@ -997,6 +1183,53 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        public void ObtEvento(ref Evento Objeventos, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                string[] ParametrosIn = { "p_evento" };
+                object[] Valores = { Objeventos.Eventos };
+                string[] ParametrosOut = { "p_descripcion", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_concepto", "p_status", "p_nivel", "p_ini_matricula", "p_autorizacion", "p_tipo", "p_usuario_solicita", "p_fecha_solicitud", "p_usuario_autoriza", "p_fecha_autorizacion", "p_observaciones", "p_id", "p_bandera" };
+
+                Cmd = CDDatos.GenerarOracleCommand("SEL_DATOS_EVENTO", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    Objeventos = new Evento();
+                    Objeventos.Eventos = Convert.ToString(Cmd.Parameters["p_evento"].Value);
+                    Objeventos.Descripcion = Convert.ToString(Cmd.Parameters["p_descripcion"].Value);
+                    Objeventos.Dependencia = Convert.ToString(Cmd.Parameters["p_dependencia"].Value);
+                    Objeventos.Fecha_inicial = Convert.ToString(Cmd.Parameters["p_fecha_inicial"].Value);
+                    Objeventos.Fecha_final = Convert.ToString(Cmd.Parameters["p_fecha_final"].Value);
+                    Objeventos.Email_Res = Convert.ToString(Cmd.Parameters["p_email_res"].Value);
+                    Objeventos.Email_Corres = Convert.ToString(Cmd.Parameters["p_email_corres"].Value);
+                    Objeventos.Status = Convert.ToString(Cmd.Parameters["p_status"].Value);
+                    Objeventos.Nivel = Convert.ToString(Cmd.Parameters["p_nivel"].Value);
+                    Objeventos.Concepto = Convert.ToString(Cmd.Parameters["p_concepto"].Value);
+                    Objeventos.Ini_Matricula = Convert.ToString(Cmd.Parameters["p_ini_matricula"].Value);
+                    Objeventos.Autorizacion = Convert.ToString(Cmd.Parameters["p_autorizacion"].Value);
+                    Objeventos.Tipo = Convert.ToString(Cmd.Parameters["p_tipo"].Value);
+                    Objeventos.Usuario_Solicita = Convert.ToString(Cmd.Parameters["p_usuario_solicita"].Value);
+                    Objeventos.Fecha_Solicitud = Convert.ToString(Cmd.Parameters["p_fecha_solicitud"].Value);
+                    Objeventos.Usuario_Autoriza = Convert.ToString(Cmd.Parameters["p_usuario_autoriza"].Value);
+                    Objeventos.Fecha_Autorizacion = Convert.ToString(Cmd.Parameters["p_fecha_autorizacion"].Value);
+                    Objeventos.Observaciones = Convert.ToString(Cmd.Parameters["p_observaciones"].Value);
+                    Objeventos.Id = Convert.ToInt32(Cmd.Parameters["p_id"].Value);
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void ConsultarOficio(ref Evento Objeventos, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -1017,7 +1250,7 @@ namespace CapaDatos
                     Objeventos.NoOficio = Convert.ToString(Cmd.Parameters["P_NO_OFICIO"].Value);
                     Objeventos.Firma = Convert.ToString(Cmd.Parameters["P_FIRMA"].Value);
                     Objeventos.Observaciones = Convert.ToString(Cmd.Parameters["P_OBSERVACIONES"].Value);
-                  
+
                 }
             }
             catch (Exception ex)
@@ -1097,6 +1330,31 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+
+        public void Eliminar_Autorizados(Evento Objeventos, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+
+            try
+            {
+                String[] Parametros = { "p_evento" };
+                object[] Valores = { Objeventos.Eventos };
+                String[] ParametrosOut = { "p_Bandera" };
+
+                Cmd = CDDatos.GenerarOracleCommand("DEL_EVENTO_AUTORIZADOS", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void Editar_VigenciaEvento(Evento Objeventos, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -1120,6 +1378,54 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        public void Editar_PartDet(ConceptoCuotaLibre objEvento, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+
+            try
+            {
+                String[] Parametros = { "P_ID", "P_ID_PARTICIPANTE", "P_CONSTANCIA", "P_EVENTO", "P_STATUS" };
+                object[] Valores = { objEvento.Id, objEvento.Id_Tipo_Participante, objEvento.Requiere_Constancia, objEvento.IdEvento, objEvento.StatusDet };
+                String[] ParametrosOut = { "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("UPD_TEMP_PART_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
+        public void Editar_ConcepDet(ConceptoCuotaLibre objEvento, int idConc, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+
+            try
+            {
+                String[] Parametros = { "P_ID", "P_STATUS", "P_IMPORTE", "P_DESCRIPCION" };
+                object[] Valores = { idConc, objEvento.StatusDet, objEvento.Importe, objEvento.DescConcepto };
+                String[] ParametrosOut = { "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("UPD_TEMP_CONC_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void ConsultarEventosRef(Evento Objeventos, string Usuario, string Status, string Reporte, ref List<Evento> List)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -1141,7 +1447,7 @@ namespace CapaDatos
                     Objeventos.Descripcion = Convert.ToString(dr[2]);
                     Objeventos.Fecha_inicial = Convert.ToString(dr[3]);
                     Objeventos.Fecha_final = Convert.ToString(dr[4]);
-                    Objeventos.Ruta= Convert.ToString(dr[5]);
+                    Objeventos.Ruta = Convert.ToString(dr[5]);
                     List.Add(Objeventos);
                 }
                 dr.Close();
@@ -1249,7 +1555,7 @@ namespace CapaDatos
                     ObjOficio.NumOficio = Convert.ToString(dr[1]);
                     ObjOficio.FechaOficio = Convert.ToString(dr[2]);
                     ObjOficio.FirmaOficio = Convert.ToString(dr[3]);
-                    ObjOficio.LinkArchivo= "~/Oficios/Eventos/" + Convert.ToString(dr[4]);
+                    ObjOficio.LinkArchivo = "~/Oficios/Eventos/" + Convert.ToString(dr[4]);
                     ObjOficio.NombreArchivo = Convert.ToString(dr[4]);
                     ObjOficio.Observaciones = Convert.ToString(dr[5]);
                     List.Add(ObjOficio);
@@ -1267,25 +1573,25 @@ namespace CapaDatos
         }
         public void Insertar_TipoPersona(ConceptoCuotaLibre objParticipante, ref string Verificador)
         {
-            
-                CD_Datos CDDatos = new CD_Datos("INGRESOS");
-                OracleCommand Cmd = null;
-                try
-                {
-                    String[] Parametros = { "P_DESC_TIPO_PARTICIPANTE", "P_TIPO_PARTICIPANTE", "P_ES_PONENTE" };
-                    object[] Valores = { objParticipante.Desc_Tipo_Participante, objParticipante.Tipo_Participante, objParticipante.Es_Ponente };
-                    String[] ParametrosOut = { "P_BANDERA" };
-                    Cmd = CDDatos.GenerarOracleCommand("INS_TIPO_PERSONA", ref Verificador, Parametros, Valores, ParametrosOut);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    CDDatos.LimpiarOracleCommand(ref Cmd);
-                }
-            
+
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_DESC_TIPO_PARTICIPANTE", "P_TIPO_PARTICIPANTE", "P_ES_PONENTE" };
+                object[] Valores = { objParticipante.Desc_Tipo_Participante, objParticipante.Tipo_Participante, objParticipante.Es_Ponente };
+                String[] ParametrosOut = { "P_BANDERA" };
+                Cmd = CDDatos.GenerarOracleCommand("INS_TIPO_PERSONA", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+
         }
 
     }

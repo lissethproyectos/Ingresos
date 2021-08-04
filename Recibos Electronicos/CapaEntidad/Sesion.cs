@@ -65,7 +65,14 @@ namespace CapaEntidad
             get { return _Evento; }
             set { _Evento = value; }
         }
-        
+
+        private int _IdEvento;
+        public int IdEvento
+        {
+            get { return _IdEvento; }
+            set { _IdEvento = value; }
+        }
+
         private string _Matricula;
         public string Matricula
         {
@@ -144,6 +151,13 @@ namespace CapaEntidad
         {
             get { return _Usu_Central_Tipo; }
             set { _Usu_Central_Tipo = value; }
+        }
+
+        private string _Usu_Admon;//(S,N) Si es un Usuario de Finanzas
+        public string Usu_Admon
+        {
+            get { return _Usu_Admon; }
+            set { _Usu_Admon = value; }
         }
 
         private String _Usu_NoControl;//(Matricula, RFC, Usuario)

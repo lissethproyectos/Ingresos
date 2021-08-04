@@ -14,6 +14,13 @@ namespace CapaEntidad
             set { _Id = value; }
         }
 
+        private int _IdEvento;
+        public int IdEvento
+        {
+            get { return _IdEvento; }
+            set { _IdEvento = value; }
+        }
+
         private int _Id_Concepto;
         public int Id_Concepto
         {

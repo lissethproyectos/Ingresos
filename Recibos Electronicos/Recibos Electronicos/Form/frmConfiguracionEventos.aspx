@@ -186,7 +186,7 @@
                                     </div>
                                 </asp:View>
                                 <asp:View ID="View2" runat="server">
-                                    <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" CssClass="styleTab" ScrollBars="Horizontal">
+                                    <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" Width="100%" CssClass="styleTab" ScrollBars="Horizontal">
                                         <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                             <HeaderTemplate>
                                                 (1) Datos Generales

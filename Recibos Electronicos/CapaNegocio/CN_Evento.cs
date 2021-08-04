@@ -56,6 +56,19 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void EventoEditar(Evento objeventos, ref string Verificador)
+        {
+            try
+            {
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.EventoEditar(objeventos, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void EventoEditarStatus(ref Evento objeventos, ref string Verificador)
         {
             try
@@ -81,6 +94,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void EventoInsertar(Evento Eventos, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.EventoInsertar(Eventos, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void EventoInsertarDetPart(ref ConceptoCuotaLibre Eventos, ref string Verificador)
         {
             try
@@ -175,6 +202,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void Insertar_Autorizados(string Evento, string Nivel, List<Alumno> lstAutorizados, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.Insertar_Autorizados(Evento, Nivel, lstAutorizados, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void EventoEliminarDetalle(string Evento, ref string Verificador)
         {
             try
@@ -227,6 +268,35 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void EventoEliminarDetalleConcepto(ConceptoCuotaLibre objDetConcepto, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.EventoEliminarDetalleConcepto(objDetConcepto, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void EventoEliminarDetallePart(ConceptoCuotaLibre objDetConcepto, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.EventoEliminarDetallePart(objDetConcepto, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Insertar_oficio(Evento Eventos, ref string Verificador)
         {
             try
@@ -291,6 +361,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ObtEvento(ref Evento objeventos, ref string Verificador)
+        {
+            try
+            {
+                CD_Evento CDevento = new CD_Evento();
+                CDevento.ObtEvento(ref objeventos, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void ConsultarOficio(ref Evento objeventos, ref string Verificador)
         {
             try
@@ -317,6 +401,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ConsultarIdEvento(ref Evento objeventos, ref string Verificador)
+        {
+            try
+            {
+                CD_Evento CDevento = new CD_Evento();
+                CDevento.ConsultarIdEvento(ref objeventos, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void ConsultarEventos_conceptos(ref ConceptoCuotaLibre ObjConceptoCuotaLibre, ref List<ConceptoCuotaLibre> List)
         {
             try
@@ -360,6 +458,19 @@ namespace CapaNegocio
             {
                 CD_Evento CDeventos = new CD_Evento();
                 CDeventos.ConsultarEventoDetParticipantes(ObjParticipantes, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ConsultarCatParticipantes(ConceptoCuotaLibre ObjParticipantes, ref List<ConceptoCuotaLibre> List)
+        {
+            try
+            {
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.ConsultarCatParticipantes(ObjParticipantes, ref List);
             }
             catch (Exception ex)
             {
@@ -430,6 +541,21 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void Eliminar_Autorizados(Evento objeventos, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDEvento = new CD_Evento();
+                CDEvento.Eliminar_Autorizados(objeventos, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void ConsultarEventosRef(Evento Objeventos, string Usuario, string Status, string Reporte, ref List<Evento> List)
         {
             try
@@ -469,6 +595,34 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void Editar_PartDet(ConceptoCuotaLibre objEvento, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDEvento = new CD_Evento();
+                CDEvento.Editar_PartDet(objEvento, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void Editar_ConcepDet(ConceptoCuotaLibre objEvento, int idConc, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDEvento = new CD_Evento();
+                CDEvento.Editar_ConcepDet(objEvento, idConc, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Insertar_TipoPersona(ConceptoCuotaLibre objParticipante, ref string Verificador)
         {
             try

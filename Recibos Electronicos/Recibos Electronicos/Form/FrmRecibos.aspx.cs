@@ -182,7 +182,7 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] { 0, 10, 11, 12 };
+            Int32[] Celdas = new Int32[] { 0, 9, 14, 15 };
             Int32[] CeldasAdmin = new Int32[] { 0 };
 
             try
@@ -680,35 +680,52 @@ namespace Recibos_Electronicos.Form
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
         }
 
+        protected void grvFacturas_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            grvFacturas.EditIndex = e.NewEditIndex;
+            CargarGrid();
+        }
 
+        protected void grvFacturas_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            Verificador = string.Empty;
+            int fila = e.RowIndex;
+            int pagina = grvFacturas.PageSize * grvFacturas.PageIndex;
+            fila = pagina + fila;
+            GridViewRow row = grvFacturas.Rows[e.RowIndex];
+            try
+            {
+                //Evento objEvento = new Evento();
+                ObjFactura.ID_FACT = row.Cells[0].Text;
+                TextBox txtFechaPagado = (TextBox)(row.Cells[6].FindControl("txtFechaPagado"));
+                ObjFactura.FACT_FECHA_FACTURA = txtFechaPagado.Text; // row.Cells[3].Text;
+                TextBox txtFechaDispersado = (TextBox)(row.Cells[7].FindControl("txtFechaDispersado"));
+                ObjFactura.FACT_FECHA_DISPERSION = txtFechaDispersado.Text;
+                CNFacturas.Editar_VigenciaRecibo(ObjFactura, SesionUsu.Usu_Nombre, ref Verificador);
+                if (Verificador == "0")
+                {
+                    grvFacturas.EditIndex = -1;
+                    CargarGrid();
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
 
+            }
+        }
 
-
-
-
-
-        //protected void linkBttnEnviarCorreo_Click(object sender, EventArgs e)
-        //{
-        //    LinkButton cbi = (LinkButton)(sender);
-        //    GridViewRow row = (GridViewRow)cbi.NamingContainer;
-        //    lblMsj.Text = string.Empty;
-        //    try
-        //    {
-        //        grvFacturas.SelectedIndex = row.RowIndex;
-        //        PnlCorreo.Matricula = grvFacturas.SelectedRow.Cells[2].Text;
-        //        PnlCorreo.Recibo = grvFacturas.SelectedRow.Cells[0].Text;
-        //        PnlCorreo.Muestra();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        lblMsj.Text = ex.Message;
-        //    }
-        //}
-
-
-
-
-
-
-    }
+        protected void grvFacturas_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            grvFacturas.EditIndex = -1;
+            CargarGrid();
+        }
+    }    
 }

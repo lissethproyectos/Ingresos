@@ -40,6 +40,31 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+
+        public void Editar_VigenciaRecibo(Factura objFactura, string UsuarioNombre, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+
+            try
+            {
+                String[] Parametros = { "P_ID", "P_FECHA_RECIBO", "P_FECHA_DISPERSION", "P_USUARIO" };
+                object[] Valores = { objFactura.ID_FACT, objFactura.FACT_FECHA_FACTURA, objFactura.FACT_FECHA_DISPERSION, UsuarioNombre };
+                String[] ParametrosOut = { "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("UPD_VIGENCIA_RECIBO", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void Obt_Grid_Status_Bancos_Usu(Comun ObjComun, ref List<Comun> List)
         {
             CD_Datos CDDatos = new CD_Datos();

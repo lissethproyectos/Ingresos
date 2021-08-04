@@ -24,6 +24,21 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void Editar_VigenciaRecibo(Factura objFactura, string UsuarioNombre, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Factura CDFactura = new CD_Factura();
+                CDFactura.Editar_VigenciaRecibo(objFactura, UsuarioNombre, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void Obt_Grid_Status_Bancos_Usu(Comun ObjComun, ref List<Comun> List)
         {
             try

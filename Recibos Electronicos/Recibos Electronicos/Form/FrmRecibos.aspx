@@ -53,42 +53,66 @@
                                             OnSelectedIndexChanging="grvFacturas_SelectedIndexChanging"
                                             OnPageIndexChanging="grvFacturas_PageIndexChanging"
                                             OnSelectedIndexChanged="grvFacturas_SelectedIndexChanged"
-                                            EmptyDataText="No se encontró el recibo." CssClass="sem table table-striped table-bordered table-hover" Width="100%" OnRowDeleting="grvFacturas_RowDeleting">
+                                            EmptyDataText="No se encontró el recibo." CssClass="mGrid" Width="100%" OnRowDeleting="grvFacturas_RowDeleting" OnRowEditing="grvFacturas_RowEditing" OnRowUpdating="grvFacturas_RowUpdating" OnRowCancelingEdit="grvFacturas_RowCancelingEdit">
                                             <Columns>
-                                                <asp:BoundField DataField="ID_FACT" HeaderText="Id" />
-                                                <asp:BoundField DataField="FACT_MATRICULA" HeaderText="Matricula">
+                                                <asp:BoundField DataField="ID_FACT" HeaderText="Id" ReadOnly="True" />
+                                                <asp:BoundField DataField="FACT_MATRICULA" HeaderText="Matricula" ReadOnly="True">
                                                     <HeaderStyle HorizontalAlign="Left" />
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="FACT_NOMBRE" HeaderText="Nombre">
+                                                <asp:BoundField DataField="FACT_NOMBRE" HeaderText="Nombre" ReadOnly="True">
                                                     <HeaderStyle HorizontalAlign="Left" />
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="FACT_CARRERA" HeaderText="Carrera" />
-                                                <asp:BoundField DataField="FACT_REFERENCIA" HeaderText="Referencia">
+                                                <asp:BoundField DataField="FACT_CARRERA" HeaderText="Carrera" ReadOnly="True" />
+                                                <asp:BoundField DataField="FACT_REFERENCIA" HeaderText="Referencia" ReadOnly="True">
                                                     <HeaderStyle HorizontalAlign="Left" />
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="FACT_FOLIO" HeaderText="Recibo">
+                                                <asp:BoundField DataField="FACT_FOLIO" HeaderText="Recibo" ReadOnly="True">
                                                     <HeaderStyle HorizontalAlign="Left" />
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="FACT_FECHA_FACTURA" HeaderText="Pagado" DataFormatString="{0:d}">
+                                                <asp:TemplateField HeaderText="Pagado">
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtFechaPagado" runat="server" Text='<%# Bind("FACT_FECHA_FACTURA") %>'></asp:TextBox>
+                                                        <ajaxToolkit:CalendarExtender ID="calExtFechaPagado" runat="server" TargetControlID="txtFechaPagado" />
+                                                    </EditItemTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("FACT_FECHA_FACTURA", "{0:d}") %>'></asp:Label>
+                                                    </ItemTemplate>
                                                     <HeaderStyle HorizontalAlign="Left" />
                                                     <ItemStyle HorizontalAlign="Left" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="FACT_FECHA_DISPERSION" HeaderText="Dispersado" />
-                                                <asp:BoundField DataField="Status_Carga" HeaderText="Status">
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Dispersado">
+                                                    <EditItemTemplate>
+                                                        <asp:TextBox ID="txtFechaDispersado" runat="server" Text='<%# Bind("FACT_FECHA_DISPERSION") %>'></asp:TextBox>
+                                                        <ajaxToolkit:CalendarExtender ID="calExtFechaDispersado" runat="server" TargetControlID="txtFechaDispersado" />
+                                                    </EditItemTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("FACT_FECHA_DISPERSION") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField HeaderText="Editar Fecha" ShowHeader="False">
+                                                    <EditItemTemplate>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Actualizar"></asp:LinkButton>
+                                                        &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar"></asp:LinkButton>
+                                                    </EditItemTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit"><i class="fa fa-calendar fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:BoundField DataField="Status_Carga" HeaderText="Status" ReadOnly="True">
                                                     <ItemStyle HorizontalAlign="Center" />
                                                 </asp:BoundField>
-                                                <asp:BoundField DataField="FACT_BANCO" HeaderText="Banco" />
+                                                <asp:BoundField DataField="FACT_BANCO" HeaderText="Banco" ReadOnly="True"></asp:BoundField>
                                                 <asp:TemplateField HeaderText="Editar" ShowHeader="False">
                                                     <ItemTemplate>
                                                         <%--<asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="~/Imagenes/edit.png" CausesValidation="False" CommandName="Select" Text="Editar" />--%>
                                                         <asp:LinkButton ID="linBttnEditar" runat="server" CausesValidation="False" CommandName="Select"><i class="fa fa-pencil fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                     </ItemTemplate>
                                                     <HeaderStyle HorizontalAlign="Center" />
-                                                    <ItemStyle HorizontalAlign="Center" />
+                                                    <ItemStyle HorizontalAlign="Center" Font-Bold="True" />
                                                 </asp:TemplateField>
                                                 <asp:TemplateField HeaderText="Ver">
                                                     <ItemTemplate>
