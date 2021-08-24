@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Recibos_Electronicos.Form {
-    
-    
-    public partial class frmFichaRef_Eventos {
-        
+namespace Recibos_Electronicos.Form
+{
+
+
+    public partial class frmFichaRef_Eventos
+    {
+
         /// <summary>
         /// Control updPnlDep.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updPnlDep;
-        
+
         /// <summary>
         /// Control ddlDependencia.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDependencia;
-        
+
         /// <summary>
         /// Control RequiredFieldValidator2.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
-        
+
         /// <summary>
         /// Control ddlDirigido.
         /// </summary>
@@ -47,7 +49,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDirigido;
-        
+
         /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
@@ -56,7 +58,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
+
         /// <summary>
         /// Control imgBttnBuscar.
         /// </summary>
@@ -65,7 +67,16 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBttnBuscar;
-        
+
+        /// <summary>
+        /// Control updPrg4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPrg4;
+
         /// <summary>
         /// Control updprgDep.
         /// </summary>
@@ -74,7 +85,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress updprgDep;
-        
+
         /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
@@ -83,7 +94,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
+
         /// <summary>
         /// Control grdEventos.
         /// </summary>

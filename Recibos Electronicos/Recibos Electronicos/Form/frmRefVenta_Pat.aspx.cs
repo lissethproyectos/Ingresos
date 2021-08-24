@@ -1506,7 +1506,7 @@ namespace Recibos_Electronicos.Form
                     ObjMatricula.Evento = "ALUMNO";
                     ObjMatricula.TipoPersona = 1;
                     ObjMatricula.Nivel = ddlNivel.SelectedValue;
-                    CNAlumno.ConsultarAlumno(ref ObjMatricula, ref Verificador);
+                    CNAlumno.ConsultarDatosAlumno(ref ObjMatricula, ref Verificador);
                     if (Verificador == "0")
                     {
                         //ddlDependencia_D.SelectedValue = ObjMatricula.Dependencia;

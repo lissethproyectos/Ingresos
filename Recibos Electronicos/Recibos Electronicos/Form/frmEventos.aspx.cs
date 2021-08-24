@@ -75,7 +75,7 @@ namespace Recibos_Electronicos.Form
 
         private void CargarGriEventos()
         {
-            Int32[] Celdas1 = new Int32[] { 10, 11, 13 };
+            Int32[] Celdas1 = new Int32[] { 10 };
             grdEventos.DataSource = null;
             grdEventos.DataBind();
             try
@@ -84,8 +84,8 @@ namespace Recibos_Electronicos.Form
                 grdEventos.DataSource = dt;
                 grdEventos.DataSource = GetListEventos();
                 grdEventos.DataBind();
-                //if (grdEventos.Rows.Count > 0)
-                //    CNComun.HideColumns(grdEventos, Celdas1);
+                if (grdEventos.Rows.Count > 0)
+                    CNComun.HideColumns(grdEventos, Celdas1);
 
             }
             catch (Exception ex)
@@ -573,6 +573,29 @@ namespace Recibos_Electronicos.Form
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'Ocurrió un problema al cargar los datos: " + MsjError + "');", true);
             }
         }
+
+        private void CargarGridOficiosSec(List<Oficio> ListOficios)
+        {
+            Int32[] Celdas1 = new Int32[] { 5, 6 };
+
+            grdOficiosAdj.DataSource = null;
+            grdOficiosAdj.DataBind();
+            try
+            {
+                DataTable dt = new DataTable();
+                grdOficiosAdj.DataSource = dt;
+                grdOficiosAdj.DataSource = ListOficios;
+                grdOficiosAdj.DataBind();
+                //CNComun.HideColumns(grdOficiosAdj, Celdas1);
+            }
+            catch (Exception ex)
+            {
+                MsjError = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref MsjError);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'Ocurrió un problema al cargar los datos: " + MsjError + "');", true);
+            }
+        }
+
         private void CargarGridAutorizados(List<Alumno> ListAutorizados)
         {
             Int32[] Celdas1 = new Int32[] { 5, 6 };
@@ -641,7 +664,8 @@ namespace Recibos_Electronicos.Form
         {
             SesionUsu.Id_Persona = Convert.ToInt32(grdEventoDetalle.SelectedRow.Cells[0].Text);
             CNComun.LlenaCombo("pkg_pagos_2016.Obt_Combo_Conceptos_Eventos", ref ddlConceptoFil, "p_nivel", "p_dependencia", "p_id_participante", "p_id_evento", ddlNivel.SelectedValue, DDLDependencia.SelectedValue, Convert.ToString(SesionUsu.Id_Persona), Convert.ToString(SesionUsu.IdEvento), "INGRESOS");
-
+            txtObservacion.Text = string.Empty;
+            txtImporte.Text = string.Empty;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopup", "$('#exampleModal').modal('show')", true);
 
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", " $('#linkBttnAgregarConcep').modal('show');", true);
@@ -758,6 +782,7 @@ namespace Recibos_Electronicos.Form
                         }
                         else
                         {
+
                             CNComun.VerificaTextoMensajeError(ref Verificador);
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
                         }
@@ -1305,21 +1330,21 @@ namespace Recibos_Electronicos.Form
             try
             {
                 ConceptoCuotaLibre objParticipante = new ConceptoCuotaLibre();
-                //TextBox txtFechaIni_Evento = (TextBox)(row.Cells[1].FindControl("txtFechaIniG"));
-                //objEvento.Fecha_inicial = txtFechaIni_Evento.Text; // row.Cells[3].Text;
-                //TextBox txtFechaFin_Evento = (TextBox)(row.Cells[4].FindControl("txtFechaFinG"));
-                //objEvento.Fecha_final = txtFechaFin_Evento.Text;
-                //CNeventos.Editar_VigenciaEvento(objEvento, ref Verificador);
-                //if (Verificador == "0")
-                //{
-                //    grdEventos.EditIndex = -1;
-                //    CargarGriEventos();
-                //}
-                //else
-                //{
-                //    CNComun.VerificaTextoMensajeError(ref Verificador);
-                //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
-                //}
+                objParticipante.Id_Tipo_Participante =Convert.ToInt32(row.Cells[0].Text);
+                TextBox txtDesc_Tipo_Participante = (TextBox)(row.Cells[1].FindControl("txtDesc_Tipo_Participante"));
+                objParticipante.Desc_Tipo_Participante = txtDesc_Tipo_Participante.Text; // row.Cells[3].Text;                
+                CNeventos.Editar_DescParticipante(objParticipante, ref Verificador);
+                if (Verificador == "0")
+                {
+                    grvCatParticipantes.EditIndex = -1;
+                    CargarGriCatPart();
+                    CargarGridDetPart();
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);
+                }
             }
             catch (Exception ex)
             {
@@ -1332,12 +1357,33 @@ namespace Recibos_Electronicos.Form
 
         protected void bttnBuscarPart_Click(object sender, EventArgs e)
         {
+            grvCatParticipantes.EditIndex = -1;            
             CargarGriCatPart();
         }
 
         protected void bttnCrearPart_Click(object sender, EventArgs e)
         {
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupNewPart", "$('#modalCatPart').modal('show')", true);
+        }
+
+        protected void btnOficios_Click(object sender, EventArgs e)
+        {
+            Button cbi = (Button)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            int fila = row.RowIndex;
+            List<Oficio> lstOficiosAdj = new List<Oficio>();
+            grdEventos.SelectedIndex = row.RowIndex;
+
+
+            CNeventos.ConsultarOficiosEvento(grdEventos.SelectedRow.Cells[2].Text, ref lstOficiosAdj);
+            if (lstOficiosAdj.Count >= 1)
+            {
+
+                //modalDoctosAdj.Show();
+                CargarGridOficiosSec(lstOficiosAdj);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupOficios", "$('#modalOficios').modal('show')", true);
+
+            }
         }
     }
 }

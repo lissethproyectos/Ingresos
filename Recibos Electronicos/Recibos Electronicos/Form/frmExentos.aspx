@@ -4,7 +4,7 @@
 <%@ Register Src="../EnviarCorreo.ascx" TagName="uCCorreo" TagPrefix="usr" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <style type="text/css">
-    .overlay {
+        .overlay {
             position: fixed;
             z-index: 98;
             top: 0px;
@@ -16,25 +16,25 @@
             opacity: 0.8;
         }
 
-    .overlayContent {
+        .overlayContent {
             z-index: 99;
             margin: 250px auto;
             width: 80px;
             height: 80px;
         }
 
-    .overlayContent h2 {
+            .overlayContent h2 {
                 font-size: 18px;
                 font-weight: bold;
                 color: #000;
             }
 
-    .overlayContent img {
+            .overlayContent img {
                 width: 30px;
                 height: 30px;
             }
 
-    /*.ajax__myTab .ajax__tab_header {
+        /*.ajax__myTab .ajax__tab_header {
             font-family: verdana;
             font-size: 16px;
             border-bottom: solid 2px #aaaaaa
@@ -81,7 +81,7 @@
             background-color: #fff;
     }*/
 
-  /*  .ajax__myTab .ajax__tab_active .ajax__tab_tab {
+        /*  .ajax__myTab .ajax__tab_active .ajax__tab_tab {
     }
 
     .ajax__myTab .ajax__tab_body {
@@ -92,79 +92,74 @@
             background-color: #ffffff;
     }*/
 
-.Tab .ajax__tab_header
-{
-    color: #4682b4;
-    font-family:Calibri;
-    font-size: 14px;
-    font-weight: bold;
-    background-color: #ffffff;
-    margin-left: 0px;
-}
-/*Body*/
-.Tab .ajax__tab_body
-{
-    border:1px solid #b4cbdf;
-    padding-top:0px;
-}
-/*Tab Active*/
-.Tab .ajax__tab_active .ajax__tab_tab
-{
-    color: #ffffff;
-    background:url("../../tab_active.gif") repeat-x;
-    height:20px;
-}
-.Tab .ajax__tab_active .ajax__tab_inner
-{
-    color: #ffffff;
-    background:url("../../tab_left_active.gif") no-repeat left;
-    padding-left:10px;
-}
-.Tab .ajax__tab_active .ajax__tab_outer
-{
-    color: #ffffff;
-    background:url("../../tab_right_active.gif") no-repeat right;
-    padding-right:6px;
-}
-/*Tab Hover*/
-.Tab .ajax__tab_hover .ajax__tab_tab
-{
-    color: #000000;
-    background:url("../../tab_hover.gif") repeat-x;
-    height:20px;
-}
-.Tab .ajax__tab_hover .ajax__tab_inner
-{
-    color: #000000;
-    background:url("../../tab_left_hover.gif") no-repeat left;
-    padding-left:10px;
-}
-.Tab .ajax__tab_hover .ajax__tab_outer
-{
-    color: #000000;
-    background:url("../../tab_right_hover.gif") no-repeat right;
-    padding-right:6px;
-}
-/*Tab Inactive*/
-.Tab .ajax__tab_tab
-{
-    color: #666666;
-    background:url("../../tab_Inactive.gif") repeat-x;
-    height:20px;
-}
-.Tab .ajax__tab_inner
-{
-    color: #666666;
-    background:url("../../tab_left_inactive.gif") no-repeat left;
-    padding-left:10px;
-}
-.Tab .ajax__tab_outer
-{
-    color: #666666;
-    background:url("../../tab_right_inactive.gif") no-repeat right;
-    padding-right:6px;
-    margin-right: 2px;
-}
+        .Tab .ajax__tab_header {
+            color: #4682b4;
+            font-family: Calibri;
+            font-size: 14px;
+            font-weight: bold;
+            background-color: #ffffff;
+            margin-left: 0px;
+        }
+        /*Body*/
+        .Tab .ajax__tab_body {
+            border: 1px solid #b4cbdf;
+            padding-top: 0px;
+        }
+        /*Tab Active*/
+        .Tab .ajax__tab_active .ajax__tab_tab {
+            color: #ffffff;
+            background: url("../../tab_active.gif") repeat-x;
+            height: 20px;
+        }
+
+        .Tab .ajax__tab_active .ajax__tab_inner {
+            color: #ffffff;
+            background: url("../../tab_left_active.gif") no-repeat left;
+            padding-left: 10px;
+        }
+
+        .Tab .ajax__tab_active .ajax__tab_outer {
+            color: #ffffff;
+            background: url("../../tab_right_active.gif") no-repeat right;
+            padding-right: 6px;
+        }
+        /*Tab Hover*/
+        .Tab .ajax__tab_hover .ajax__tab_tab {
+            color: #000000;
+            background: url("../../tab_hover.gif") repeat-x;
+            height: 20px;
+        }
+
+        .Tab .ajax__tab_hover .ajax__tab_inner {
+            color: #000000;
+            background: url("../../tab_left_hover.gif") no-repeat left;
+            padding-left: 10px;
+        }
+
+        .Tab .ajax__tab_hover .ajax__tab_outer {
+            color: #000000;
+            background: url("../../tab_right_hover.gif") no-repeat right;
+            padding-right: 6px;
+        }
+        /*Tab Inactive*/
+        .Tab .ajax__tab_tab {
+            color: #666666;
+            background: url("../../tab_Inactive.gif") repeat-x;
+            height: 20px;
+        }
+
+        .Tab .ajax__tab_inner {
+            color: #666666;
+            background: url("../../tab_left_inactive.gif") no-repeat left;
+            padding-left: 10px;
+        }
+
+        .Tab .ajax__tab_outer {
+            color: #666666;
+            background: url("../../tab_right_inactive.gif") no-repeat right;
+            padding-right: 6px;
+            margin-right: 2px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -274,118 +269,119 @@
                                     <div class="row">
                                         <div class="col">
                                             <div style="overflow-x: auto;">
-                                            <asp:GridView ID="grvAlumnos" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" GridLines="None" OnPageIndexChanging="grvAlumnos_PageIndexChanging" OnRowDeleting="grvAlumnos_RowDeleting" OnSelectedIndexChanged="grvAlumnos_SelectedIndexChanged" PageSize="12" Width="100%" ShowFooter="True">
-                                                <Columns>
-                                                    <%--<asp:TemplateField HeaderText="Detalle">
+                                                <asp:GridView ID="grvAlumnos" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" GridLines="None" OnPageIndexChanging="grvAlumnos_PageIndexChanging" OnRowDeleting="grvAlumnos_RowDeleting" OnSelectedIndexChanged="grvAlumnos_SelectedIndexChanged" PageSize="12" Width="100%" ShowFooter="True">
+                                                    <Columns>
+                                                        <%--<asp:TemplateField HeaderText="Detalle">
                                                                         <ItemTemplate>
                                                                             <asp:Label runat="server"  name="ligaDet" ID="linkDetalle" Text="<i class='fa fa-cog'></i>" CssClass="btn btn-light" data-placement="left" data-toggle="tooltip" ToolTip='<%# Bind("registro.EtiquetaSeis") %>' onmouseover="openPopoverDetalle(this)" />
                                                                         </ItemTemplate>
                                                                         <FooterStyle HorizontalAlign="Center" />
                                                                     </asp:TemplateField>--%>
-                                                    <asp:BoundField DataField="IdPersona" HeaderText="id" />
-                                                    <asp:BoundField DataField="GenerarPermiso" SortExpression="GenerarPermiso" />
-                                                    <asp:BoundField DataField="Dependencia" HeaderText="Dep." />
-                                                    <asp:BoundField DataField="ConceptoDescuento" HeaderText="ConceptoDescuento" />
-                                                    <asp:BoundField DataField="Matricula" HeaderText="Matric">
-                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    </asp:BoundField>
-                                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre">
-                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    </asp:BoundField>
-                                                    <asp:TemplateField HeaderText="Ciclo">
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="lblDetalle" runat="server" Text='<%# Bind("CicloEscolar") %>' CssClass="font-weight-bold"></asp:Label>
-                                                            &nbsp;<asp:Label ID="lblPeriodo" runat="server" Text='<%# Bind("Observaciones") %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:BoundField DataField="TipoDescuento" HeaderText="Tipo Descuento" ItemStyle-HorizontalAlign="Center">
-                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    </asp:BoundField>
-                                                    <asp:BoundField DataField="StatusMatricula" HeaderText="Status">
-                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    </asp:BoundField>
-                                                    <asp:BoundField DataField="Referencia" HeaderText="Referencia">
-                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                    <ItemStyle HorizontalAlign="Left" />
-                                                    </asp:BoundField>
-                                                    <asp:BoundField DataField="PorcentajeDescuento" HeaderText="Porcentaje" />
-                                                    <asp:TemplateField HeaderText="Recibo en Cero">
-                                                        <ItemTemplate>
-                                                            <asp:CheckBox ID="ckbGenerar" runat="server" AutoPostBack="true" Checked='<%# Bind("GenerarRecibo") %>' Enabled="true" OnCheckedChanged="ckbGenerar_CheckedChanged" Text="Generar" ValidationGroup='<%# DataBinder.Eval(Container.DataItem, "IdPersona") %>' />
-                                                        </ItemTemplate>
-                                                        <EditItemTemplate>
-                                                            <asp:CheckBox ID="ckbGenerar0" runat="server" Checked='<%# Bind("GenerarRecibo") %>' />
-                                                        </EditItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Adj">
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("OficioTiene") %>'></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
+                                                        <asp:BoundField DataField="IdPersona" HeaderText="id" />
+                                                        <asp:BoundField DataField="GenerarPermiso" SortExpression="GenerarPermiso" />
+                                                        <asp:BoundField DataField="Dependencia" HeaderText="Dep." />
+                                                        <asp:BoundField DataField="ConceptoDescuento" HeaderText="ConceptoDescuento" />
+                                                        <asp:BoundField DataField="Matricula" HeaderText="Matric">
+                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="Nombre" HeaderText="Nombre">
+                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                        </asp:BoundField>
+                                                        <asp:TemplateField HeaderText="Ciclo">
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblDetalle" runat="server" Text='<%# Bind("CicloEscolar") %>' CssClass="font-weight-bold"></asp:Label>
+                                                                &nbsp;<asp:Label ID="lblPeriodo" runat="server" Text='<%# Bind("Observaciones") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="TipoDescuento" HeaderText="Tipo Descuento" ItemStyle-HorizontalAlign="Center">
+                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="StatusMatricula" HeaderText="Status">
+                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="Referencia" HeaderText="Referencia">
+                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                            <ItemStyle HorizontalAlign="Left" />
+                                                        </asp:BoundField>
+                                                        <asp:BoundField DataField="PorcentajeDescuento" HeaderText="Porcentaje" />
+                                                        <asp:TemplateField HeaderText="Recibo en Cero">
+                                                            <ItemTemplate>
+                                                                <asp:CheckBox ID="ckbGenerar" runat="server" AutoPostBack="true" Checked='<%# Bind("GenerarRecibo") %>' Enabled="true" OnCheckedChanged="ckbGenerar_CheckedChanged" Text="Generar" ValidationGroup='<%# DataBinder.Eval(Container.DataItem, "IdPersona") %>' />
+                                                            </ItemTemplate>
+                                                            <EditItemTemplate>
+                                                                <asp:CheckBox ID="ckbGenerar0" runat="server" Checked='<%# Bind("GenerarRecibo") %>' />
+                                                            </EditItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Adj">
+                                                            <EditItemTemplate>
+                                                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("OficioTiene") %>'></asp:TextBox>
+                                                            </EditItemTemplate>
+                                                            <ItemTemplate>
 
-                                                            <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("OficioTiene", "~/Imagenes/Adjunto{0}.png") %>' />
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField ShowHeader="False" HeaderText="Editar">
-                                                        <ItemTemplate>
-                                                            <%--                                                            <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Select" ImageUrl="~/Imagenes/edit.png" Text="Editar" />--%>
-                                                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select"><i aria-hidden="true" class="fa fa-pencil-square-o fa-2x"></i></asp:LinkButton>
-                                                        </ItemTemplate>
-                                                        <HeaderStyle HorizontalAlign="Center" />
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Conf">
-                                                        <ItemTemplate>
-                                                            <%--                                                            <asp:ImageButton ID="imgBttnCancelar" runat="server" ImageUrl="~/Imagenes/actualizar.PNG" OnClick="imgBttnCancelar_Click" Style="width: 20px" ToolTip="Modifica status del registro." />--%>
-                                                            <asp:LinkButton ID="linkBttnCancelar" runat="server" OnClick="linkBttnCancelar_Click"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></asp:LinkButton>
-                                                        </ItemTemplate>
-                                                        <HeaderStyle HorizontalAlign="Center" />
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Enviar">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="linkBttnCorreo" runat="server" Visible='<%# Bind("registro.Habil") %>' OnClick="linkBttnCorreo_Click"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></asp:LinkButton>
-                                                            <%--<asp:LinkButton ID="linkBttnCorreo2" runat="server" Visible='<%# Bind("registro.Inhabil") %>'><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></asp:LinkButton>--%>
-<%--                                                            <asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="~/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" Visible='<%# Bind("registro.Habil") %>' />--%>
-<%--                                                            <asp:Image ID="imgBttnCorreo2" runat="server" ImageUrl="~/Imagenes/correo2_enabled.png" Visible='<%# Bind("registro.Inhabil") %>' />--%>
-                                                        </ItemTemplate>
-                                                        <HeaderStyle HorizontalAlign="Center" />
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:BoundField DataField="Nivel" />
-                                                    <asp:BoundField DataField="Carrera" HeaderText="Carrera" />
-                                                    <asp:TemplateField HeaderText="Recibo">
-                                                        <ItemTemplate>
-                                                            <asp:LinkButton ID="linkBttnRecibo" runat="server" OnClick="linkBttnRecibo_Click"  Visible='<%# Bind("registro.Habil") %>'><i class="fa fa-file fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                                <asp:Image ID="Image1" runat="server" ImageUrl='<%# Eval("OficioTiene", "~/Imagenes/Adjunto{0}.png") %>' />
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField ShowHeader="False" HeaderText="Editar">
+                                                            <ItemTemplate>
+                                                                <%--                                                            <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Select" ImageUrl="~/Imagenes/edit.png" Text="Editar" />--%>
+                                                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select"><i aria-hidden="true" class="fa fa-pencil-square-o fa-2x"></i></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Conf">
+                                                            <ItemTemplate>
+                                                                <%--                                                            <asp:ImageButton ID="imgBttnCancelar" runat="server" ImageUrl="~/Imagenes/actualizar.PNG" OnClick="imgBttnCancelar_Click" Style="width: 20px" ToolTip="Modifica status del registro." />--%>
+                                                                <asp:LinkButton ID="linkBttnCancelar" runat="server" OnClick="linkBttnCancelar_Click"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Enviar">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="linkBttnCorreo" runat="server" Visible='<%# Bind("registro.Habil") %>' OnClick="linkBttnCorreo_Click"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                                <%--<asp:LinkButton ID="linkBttnCorreo2" runat="server" Visible='<%# Bind("registro.Inhabil") %>'><i class="fa fa-envelope-o fa-2x" aria-hidden="true"></i></asp:LinkButton>--%>
+                                                                <%--                                                            <asp:ImageButton ID="imgBttnCorreo" runat="server" ImageUrl="~/Imagenes/correo2.png" OnClick="imgBttnCorreo_Click" Visible='<%# Bind("registro.Habil") %>' />--%>
+                                                                <%--                                                            <asp:Image ID="imgBttnCorreo2" runat="server" ImageUrl="~/Imagenes/correo2_enabled.png" Visible='<%# Bind("registro.Inhabil") %>' />--%>
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="Nivel" />
+                                                        <asp:BoundField DataField="Carrera" HeaderText="Carrera" />
+                                                        <asp:TemplateField HeaderText="Recibo">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="linkBttnRecibo" runat="server" OnClick="linkBttnRecibo_Click" Visible='<%# Bind("registro.Habil") %>'><i class="fa fa-file fa-2x" aria-hidden="true"></i></asp:LinkButton>
 
-                                                            <%--<asp:ImageButton ID="imgBttnRecibo" runat="server" ImageUrl="~/Imagenes/recibo.png" OnClick="imgBttnRecibo_Click" Visible='<%# Bind("registro.Habil") %>' />--%>
-                                                            <%--<asp:Image ID="imgBttnRecibo2" runat="server" ImageUrl="~/Imagenes/recibo2_enabled.png" Visible='<%# Bind("registro.Inhabil") %>' />--%>
-                                                        </ItemTemplate>
-                                                        <HeaderStyle HorizontalAlign="Center" />
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                    <asp:BoundField DataField="registro.EtiquetaSiete" HeaderText="Asociado">
-                                                    <HeaderStyle HorizontalAlign="Center" />
-                                                    <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:BoundField>
-                                                    <asp:TemplateField HeaderText="Reporte">
-                                                        <ItemTemplate>
-                                                            <asp:ImageButton ID="imgBttnReporteDesc" runat="server" Height="20px" ImageUrl="~/Imagenes/ico-pdf2.png" OnClick="imgBttnReporteDesc_Click" />
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                                <FooterStyle CssClass="enc" />
-                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                <RowStyle Font-Size="14px" />
-                                                <SelectedRowStyle CssClass="sel" />
-                                                <HeaderStyle CssClass="enc" Font-Size="12px" HorizontalAlign="Center" />
-                                                <AlternatingRowStyle CssClass="alt" />
-                                            </asp:GridView>
-                                                </div>
+                                                                <%--<asp:ImageButton ID="imgBttnRecibo" runat="server" ImageUrl="~/Imagenes/recibo.png" OnClick="imgBttnRecibo_Click" Visible='<%# Bind("registro.Habil") %>' />--%>
+                                                                <%--<asp:Image ID="imgBttnRecibo2" runat="server" ImageUrl="~/Imagenes/recibo2_enabled.png" Visible='<%# Bind("registro.Inhabil") %>' />--%>
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="registro.EtiquetaSiete" HeaderText="Asociado">
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:BoundField>
+                                                        <asp:TemplateField HeaderText="Reporte">
+                                                            <ItemTemplate>
+                                                                <asp:ImageButton ID="imgBttnReporteDesc" runat="server" Height="20px" ImageUrl="~/Imagenes/ico-pdf2.png" OnClick="imgBttnReporteDesc_Click" />
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="CicloAlu" />
+                                                    </Columns>
+                                                    <FooterStyle CssClass="enc" />
+                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                    <RowStyle Font-Size="14px" />
+                                                    <SelectedRowStyle CssClass="sel" />
+                                                    <HeaderStyle CssClass="enc" Font-Size="12px" HorizontalAlign="Center" />
+                                                    <AlternatingRowStyle CssClass="alt" />
+                                                </asp:GridView>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -508,7 +504,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" Font-Names="Century Gothic" ScrollBars="Both" CssClass="Tab">
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" Font-Names="Century Gothic" ScrollBars="Both" CssClass="Tab">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
                                                         <i class="fa fa-user-circle" aria-hidden="true"></i>Datos del Alumno
@@ -544,16 +540,40 @@
                                                                     <asp:Button ID="Registrar" runat="server" CssClass="btn btn-primary" OnClick="Registrar_Click" Text="Registrar Matrícula" Visible="False" />
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
+                                                            <div class="row">                                                               
                                                                 <div class="col-md-2">
-                                                                    <asp:Label ID="lblNivel0" runat="server" Text="Nivel"></asp:Label>
+                                                                    Ciclo del Alumno/Asp
                                                                 </div>
-                                                                <div class="col-md-4">
-                                                                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                                                                <div class="col-md-2">
+                                                                    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:ListBox ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%"></asp:ListBox>
+                                                                            <asp:DropDownList ID="ddlCicloAlum" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlCicloAlum_SelectedIndexChanged">
+                                                                                <asp:ListItem Value="0">--NINGÚN REGISTRO--</asp:ListItem>
+                                                                            </asp:DropDownList>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <asp:RequiredFieldValidator ID="req1" runat="server" ControlToValidate="ddlCicloAlum" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="BuscarAlu" InitialValue="0" TabIndex="3"></asp:RequiredFieldValidator>
+                                                                </div>
+                                                                 <div class="col-md-2">
+                                                                    <asp:Label ID="lblNivel0" runat="server" Text="Nivel"></asp:Label>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                                                                        <ContentTemplate>
+                                                                            <asp:DropDownList ID="ddlNivel" runat="server" Width="100%">
+                                                                                <asp:ListItem Value="Z">--NINGÚN REGISTRO--</asp:ListItem>
+                                                                            </asp:DropDownList>
+                                                                            <%--<asp:ListBox ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%"></asp:ListBox>--%>
+                                                                        </ContentTemplate>
+                                                                    </asp:UpdatePanel>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <asp:RequiredFieldValidator ID="req2" runat="server" ControlToValidate="ddlNivel" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="BuscarAlu" InitialValue="Z"></asp:RequiredFieldValidator>
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <asp:LinkButton ID="linkBuscarDatos" CssClass="btn btn-info" runat="server" Width="100%" OnClick="linkBuscarDatos_Click" ValidationGroup="BuscarAlu">Buscar</asp:LinkButton>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -648,7 +668,7 @@
                                                     <ContentTemplate>
                                                         <div class="container-fluid">
                                                             <div class="row">
-                                                                <div class="col-md-1">Ciclo Escolar</div>
+                                                                <div class="col-md-1">Ciclo de Exención</div>
                                                                 <div class="col-md-3">
                                                                     <customControl:GroupDropDownList ID="ddlCiclo_D" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlCiclo_D_SelectedIndexChanged" Width="100%"></customControl:GroupDropDownList>
                                                                 </div>
@@ -839,7 +859,7 @@
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     <asp:TextBox ID="txtFechaO" runat="server" CssClass="form-control" onkeyup="javascript:this.value='';" TabIndex="17" Width="100%"></asp:TextBox>
-                                                                    </div>
+                                                                </div>
                                                                 <div class="col-md-2">
                                                                     <ajaxToolkit:CalendarExtender ID="calendarioFechaOficio" runat="server" BehaviorID="_content_calendarioFechaOficio" PopupButtonID="imgCalendarioOficio" TargetControlID="txtFechaO" />
                                                                     <asp:ImageButton ID="imgCalendarioOficio" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
@@ -920,7 +940,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col text-right">
-                                            <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-info" OnClick="btnGuardar_Click" TabIndex="20" Text="GUARDAR" ValidationGroup="guardar" />
+                                            <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary" OnClick="btnGuardar_Click" TabIndex="20" Text="GUARDAR" ValidationGroup="guardar" />
                                             &nbsp;<asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnCancelar_Click" TabIndex="21" Text="CANCELAR" />
 
                                         </div>
@@ -1117,47 +1137,47 @@
 
                                     <div class="row">
                                         <div class="col">
-                                    <div class="card-deck">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Solicitó</h5>
-                                                <p class="card-text">
-                                                    <asp:Label ID="lblUsuSolicitado" runat="server"></asp:Label>
-                                                </p>
-                                                <p class="card-text">
-                                                    <small class="text-muted">
-                                                        <asp:Label ID="lblFechaSolicitado" runat="server"></asp:Label>
-                                                    </small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Autorizó</h5>
-                                                <p class="card-text">
-                                                    <asp:Label ID="lblUsuAutorizado" runat="server"></asp:Label>
-                                                </p>
-                                                <p class="card-text">
-                                                    <small class="text-muted">
-                                                        <asp:Label ID="lblFechaAutorizado" runat="server"></asp:Label>
-                                                    </small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Generó Recibo</h5>
-                                                <p class="card-text">
-                                                    <asp:Label ID="lblUsuGenerar" runat="server"></asp:Label>
-                                                </p>
-                                                <p class="card-text">
-                                                    <asp:Label ID="lblFechaGenerar" runat="server"></asp:Label>
-                                                </p>
+                                            <div class="card-deck">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Solicitó</h5>
+                                                        <p class="card-text">
+                                                            <asp:Label ID="lblUsuSolicitado" runat="server"></asp:Label>
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <small class="text-muted">
+                                                                <asp:Label ID="lblFechaSolicitado" runat="server"></asp:Label>
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Autorizó</h5>
+                                                        <p class="card-text">
+                                                            <asp:Label ID="lblUsuAutorizado" runat="server"></asp:Label>
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <small class="text-muted">
+                                                                <asp:Label ID="lblFechaAutorizado" runat="server"></asp:Label>
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Generó Recibo</h5>
+                                                        <p class="card-text">
+                                                            <asp:Label ID="lblUsuGenerar" runat="server"></asp:Label>
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <asp:Label ID="lblFechaGenerar" runat="server"></asp:Label>
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                            </div>
-                                        </div>
                                 </div>
 
                             </asp:View>

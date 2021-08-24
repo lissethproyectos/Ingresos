@@ -28,12 +28,18 @@ namespace Recibos_Electronicos.Form
         CN_Usuario CNUsuario = new CN_Usuario();
         CN_Alumno CNAlumno = new CN_Alumno();
         CN_Evento CNEvento = new CN_Evento();
+        String Verificador = string.Empty;
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
                 CargarCombos();
+
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "Grid", "Eventos();", true);
+
         }
         #region <Funciones>
         protected void CargarCombos()
@@ -115,8 +121,22 @@ namespace Recibos_Electronicos.Form
             ImageButton cbi = (ImageButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdEventos.SelectedIndex = row.RowIndex;
-            string Ruta = grdEventos.SelectedRow.Cells[6].Text;
-            Response.Redirect(Ruta, false);
+            string WXI=string.Empty;
+            try
+            {
+                Usuario objUsuario = new Usuario();
+                objUsuario.Usu_Nombre = SesionUsu.Usu_Nombre;
+                CNUsuario.EncriptarUsuario(objUsuario, ref WXI, ref Verificador);
+                string Ruta = "https://sysweb.unach.mx/FichaReferenciada/Form/Registro_Participantes.aspx?Evento=" + grdEventos.SelectedRow.Cells[0].Text + "&WXIEvento="+WXI;
+                Response.Redirect(Ruta, false);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+
+            }
         }
     }
 }

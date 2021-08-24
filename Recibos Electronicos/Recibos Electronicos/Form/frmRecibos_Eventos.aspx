@@ -29,6 +29,7 @@
                         <asp:DropDownList ID="ddlDirigido" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlDirigido_SelectedIndexChanged">
                             <asp:ListItem Value="P">Eventos Especiales</asp:ListItem>
                             <asp:ListItem Value="A">Servicios Extraordinarios</asp:ListItem>
+                            <asp:ListItem Value="Z">Eventos Privados</asp:ListItem>
                             <asp:ListItem Value="C">Complemento Cursos de Verano</asp:ListItem>
                         </asp:DropDownList>
                     </ContentTemplate>
@@ -241,12 +242,16 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                </div>
+            </div>
             <div class="col-md-1">
-                <asp:Label ID="lblLeyTotPagos" runat="server" Font-Bold="True" Font-Size="14px" ForeColor="Black" Text="TOTAL:"></asp:Label>
+                <asp:Label ID="lblLeyTotPagos" runat="server" Font-Bold="True" Font-Size="14px" ForeColor="Black" Text="T O T A L"></asp:Label>
             </div>
             <div class="col-md-1 text-right">
-                <asp:Label ID="lblTotPagos" runat="server" Font-Bold="True" Font-Size="14px" ForeColor="Black" Text="0"></asp:Label>
+                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                    <ContentTemplate>
+                        <asp:Label ID="lblTotPagos" runat="server" Font-Bold="True" Font-Size="14px" ForeColor="Black" Text="0"></asp:Label>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
             <div class="col-md-7 text-right">
                 <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />

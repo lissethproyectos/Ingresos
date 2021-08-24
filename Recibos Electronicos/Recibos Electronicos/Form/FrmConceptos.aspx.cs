@@ -29,9 +29,9 @@ namespace Recibos_Electronicos.Form
         {
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
-            {
                 Inicializar();
-            }
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "Grid", "Conceptos();", true);
         }
 
         #region <Botones y Eventos>
@@ -39,42 +39,42 @@ namespace Recibos_Electronicos.Form
         {
             try
             {
-                string IP=Request.ServerVariables["REMOTE_ADDR"].ToString();
+                string IP = Request.ServerVariables["REMOTE_ADDR"].ToString();
                 string Host = Request.ServerVariables["REMOTE_HOST"].ToString();
                 string User = Request.ServerVariables["REMOTE_USER"].ToString();
 
-                
+
                 ObjConcepto.IdConcepto = SesionUsu.Id_Concepto;
-                ObjConcepto.ClaveConcepto= txtClave.Text;
-                ObjConcepto.Descripcion= txtConcepto.Text;
-                ObjConcepto.ImporteConcepto= Convert.ToDouble(txtImporte.Text);
-                ObjConcepto.Status= Convert.ToChar(rdoStatus.SelectedValue);
+                ObjConcepto.ClaveConcepto = txtClave.Text;
+                ObjConcepto.Descripcion = txtConcepto.Text;
+                ObjConcepto.ImporteConcepto = Convert.ToDouble(txtImporte.Text);
+                ObjConcepto.Status = Convert.ToChar(rdoStatus.SelectedValue);
                 //ObjConcepto.Usu_Nombre = SesionUsu.Usu_Nombre + ' ' + IP + ' ' + Host + ' ' + User;
-                if(chkEmitir_Via_Web.Checked)
-                    ObjConcepto.EmitirWeb='S';
+                if (chkEmitir_Via_Web.Checked)
+                    ObjConcepto.EmitirWeb = 'S';
                 else
-                    ObjConcepto.EmitirWeb='N';
-                if(chkCobro_x_Materia.Checked)
-                    ObjConcepto.CobroXMateria='S';
+                    ObjConcepto.EmitirWeb = 'N';
+                if (chkCobro_x_Materia.Checked)
+                    ObjConcepto.CobroXMateria = 'S';
                 else
-                    ObjConcepto.CobroXMateria='N';
-                ObjConcepto.MaxMateria= txtMaximo_Materias.Text;
-                if(chkPermite_Duplicidad.Checked)
-                    ObjConcepto.PermiteDuplicidad='S';
+                    ObjConcepto.CobroXMateria = 'N';
+                ObjConcepto.MaxMateria = txtMaximo_Materias.Text;
+                if (chkPermite_Duplicidad.Checked)
+                    ObjConcepto.PermiteDuplicidad = 'S';
                 else
-                    ObjConcepto.PermiteDuplicidad='N';
-                if(chkAplica_Descuento.Checked)
-                    ObjConcepto.AplicaDescuento='S';
+                    ObjConcepto.PermiteDuplicidad = 'N';
+                if (chkAplica_Descuento.Checked)
+                    ObjConcepto.AplicaDescuento = 'S';
                 else
-                    ObjConcepto.AplicaDescuento='N';
+                    ObjConcepto.AplicaDescuento = 'N';
                 if (chkSeleccionable.Checked)
                     ObjConcepto.Bloqueado = 'N'; //'S';
                 else
                     ObjConcepto.Bloqueado = 'S'; //'N';
-                ObjConcepto.FechaInicial= txtFecha_Inicial.Text;
-                ObjConcepto.FechaFinal= txtFecha_Final.Text;
-                ObjConcepto.Porcentaje= txtPorcentaje.Text;
-                ObjConcepto.Observaciones= txtObservaciones.Text;
+                ObjConcepto.FechaInicial = txtFecha_Inicial.Text;
+                ObjConcepto.FechaFinal = txtFecha_Final.Text;
+                ObjConcepto.Porcentaje = txtPorcentaje.Text;
+                ObjConcepto.Observaciones = txtObservaciones.Text;
                 ObjConcepto.Usu_Nombre = SesionUsu.Usu_Nombre;
 
                 if (SesionUsu.Editar == 0)
@@ -94,11 +94,11 @@ namespace Recibos_Electronicos.Form
                 else
                 {
                     //lblMsj.Text = Verificador;
-                    Verificador= Verificador.Substring(0, 30);
+                    Verificador = Verificador.Substring(0, 30);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 string MsjError = ex.Message.Substring(0, 30);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
@@ -113,15 +113,15 @@ namespace Recibos_Electronicos.Form
         }
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
         {
-           
-            string status=(CkbEstatus.Checked==true) ? "S" : "N";            
+
+            string status = "S"; // (CkbEstatus.Checked==true) ? "S" : "N";            
             string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP024&Nivel=" + ddlNivel.SelectedValue + "&status=" + status;
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
         }
         protected void imgBttnExportar_Click(object sender, ImageClickEventArgs e)
         {
-            string status = (CkbEstatus.Checked == true) ? "S" : "N";
+            string status = "S"; //(CkbEstatus.Checked == true) ? "S" : "N";
             string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP025&Nivel=" + ddlNivel.SelectedValue + "&status=" + status;
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
@@ -144,10 +144,10 @@ namespace Recibos_Electronicos.Form
         }
         protected void grvConceptos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-                grvConceptos.PageIndex = 0;
-                grvConceptos.PageIndex = e.NewPageIndex;
-                CargarGrid();
-           
+            grvConceptos.PageIndex = 0;
+            grvConceptos.PageIndex = e.NewPageIndex;
+            CargarGrid();
+
         }
         protected void grvConceptos_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
@@ -158,7 +158,7 @@ namespace Recibos_Electronicos.Form
                 CNConcepto.ConsultarConceptoPago(ref Verificador, ref ObjConcepto);
                 if (Verificador == "0")
                 {
-                   
+
                     txtClave.Text = ObjConcepto.ClaveConcepto;
                     txtConcepto.Text = ObjConcepto.Descripcion;
                     txtImporte.Text = Convert.ToString(ObjConcepto.ImporteConcepto);
@@ -192,7 +192,7 @@ namespace Recibos_Electronicos.Form
                     SesionUsu.Editar = 1;
                 }
                 else
-                {                    
+                {
                     txtClave.Text = string.Empty;
                     txtConcepto.Text = string.Empty;
                     txtImporte.Text = string.Empty;
@@ -256,28 +256,29 @@ namespace Recibos_Electronicos.Form
             txtPorcentaje.Text = string.Empty;
             txtObservaciones.Text = string.Empty;
             chkTipo.Checked = false;
-        
+
         }
         private List<ConceptoPago> GetList()
         {
-            
+
             try
             {
                 List<ConceptoPago> List = new List<ConceptoPago>();
-                string Tipo = string.Empty;                
-                    ObjConcepto.Nivel = ddlNivel.SelectedValue;
-                    if (CkbEstatus.Checked)
-                        ObjConcepto.Status = 'S';
-                    else
-                        ObjConcepto.Status = 'N';
+                string Tipo = string.Empty;
+                ObjConcepto.Nivel = ddlNivel.SelectedValue;
+                //if (CkbEstatus.Checked)
+                //    ObjConcepto.Status = 'S';
+                //else
+                //    ObjConcepto.Status = 'N';
 
-                    
-                        Tipo = (chkTipo.Checked == true) ? "N" : "S";
+                ObjConcepto.Status = 'S';
 
-                    CNConcepto.ConsultarConceptoPago(ref ObjConcepto, ddlOrden.SelectedValue, false, Tipo, txtBuscar.Text.ToUpper(), ref List);
-                   
+                Tipo = (chkTipo.Checked == true) ? "N" : "S";
 
-                
+                CNConcepto.ConsultarConceptoPago(ref ObjConcepto, "1", false, Tipo, "", ref List);
+
+
+
                 return List;
             }
             catch (Exception ex)
@@ -308,14 +309,14 @@ namespace Recibos_Electronicos.Form
         {
 
             grdView.HeaderRow.Cells[0].Visible = false;
-              foreach (GridViewRow row in grdView.Rows)
+            foreach (GridViewRow row in grdView.Rows)
             {
                 row.Cells[0].Visible = false;
             }
 
         }
 
-        
+
         #endregion
 
         protected void ddlOrden_SelectedIndexChanged(object sender, EventArgs e)
@@ -323,55 +324,28 @@ namespace Recibos_Electronicos.Form
             CargarGrid();
         }
 
-        protected void GetListFilter()
-        {
-            if (Session["GridConceptos"] != null)
-            {
-                List<ConceptoPago> List = new List<ConceptoPago>();
-                List = (List<ConceptoPago>)Session["GridConceptos"];
-                string status = (CkbEstatus.Checked == true) ? "S" : "N";
-                if (ddlOrden.SelectedValue == "1")
-                {
-                    var ordenar = from c in List
-                                  where (c.Nivel==ddlNivel.SelectedValue && c.StatusStr == status)
-                                  orderby c.ClaveConcepto
-                                  select c;
-                    var content = ordenar.ToList<ConceptoPago>();
-                    grvConceptos.DataSource = content;
-                }
-                else
-                {
-                    var ordenar = from c in List
-                                  orderby c.Descripcion
-                                  select c;
-                    var content = ordenar.ToList<ConceptoPago>();
-                    grvConceptos.DataSource = content;
-
-                }
-                
-            }
-        }
 
         protected void imgBttnCopiar_Click(object sender, ImageClickEventArgs e)
         {
             ImageButton cbi = (ImageButton)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grvConceptos.SelectedIndex = row.RowIndex;
-            lblMsjCopia.Text = "Se copia el número de concepto "+grvConceptos.SelectedRow.Cells[2].Text;
-            modal.Show();
+            lblMsjCopia.Text = "Se copia el número de concepto " + grvConceptos.SelectedRow.Cells[2].Text;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupClonar", "$('#modalClonar').modal('show')", true);
+            //modal.Show();
         }
 
         protected void btnGuardar_C_Click(object sender, EventArgs e)
         {
-            ObjConcepto.Id =Convert.ToInt32(grvConceptos.SelectedRow.Cells[0].Text);
+            ObjConcepto.Id = Convert.ToInt32(grvConceptos.SelectedRow.Cells[0].Text);
             ObjConcepto.ClaveConcepto = Convert.ToString(grvConceptos.SelectedRow.Cells[2].Text);
-            ObjConcepto.Seleccionable=(chkTipoC.Checked==true)?"N" : "S";
+            ObjConcepto.Seleccionable = (chkTipoC.Checked == true) ? "N" : "S";
             Verificador = string.Empty;
             CNConcepto.ClonarConcepto(ObjConcepto, SesionUsu.Usu_Nombre, ref Verificador);
             if (Verificador == "0")
             {
                 Inicializar();
-                modal.Hide();
+                //modal.Hide();
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(1, 'El registro fue duplicado correctamente.');", true);
 
             }
@@ -391,7 +365,7 @@ namespace Recibos_Electronicos.Form
 
         protected void btnCancelar_C_Click(object sender, EventArgs e)
         {
-            modal.Hide();
+            //modal.Hide();
         }
 
         protected void imgBttnBuscar_Click(object sender, ImageClickEventArgs e)

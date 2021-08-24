@@ -170,6 +170,7 @@
     <script type="text/javascript">         
         function Conceptos() {
             $('#<%= grvConceptos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvConceptos.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
                 "stateSave": true
             });
         }

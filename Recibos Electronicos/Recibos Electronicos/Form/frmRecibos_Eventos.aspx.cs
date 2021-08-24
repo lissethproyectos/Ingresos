@@ -101,15 +101,7 @@ namespace Recibos_Electronicos.Form
                     //Label lblLeyTot = (Label)grdDatosFactura.FooterRow.FindControl("lblLeyTotPagos");
                     //Label lblTot = (Label)grdDatosFactura.FooterRow.FindControl("lblTotPagos");
 
-                    //if (SesionUsu.Usu_TipoUsu == 3)
-                    //{
-                    //    lblTot.Text = TotalPagos.ToString("C");
-                    //}
-                    //else
-                    //{
-                    //    lblLeyTot.Visible = false;
-                    //    lblTot.Visible = false;
-                    //}
+                    
                     //pnlBuscaRef.Visible = true;
                 }
                 //else
@@ -152,6 +144,11 @@ namespace Recibos_Electronicos.Form
                 Usur.Usu_TipoUsu = SesionUsu.Usu_TipoUsu;
                 CNFactura.FacturaEventosConsultaGrid(ref ObjFactura, Usur, grdEventos.SelectedRow.Cells[1].Text , "", ref List);
                 TotalPagos = List.Sum(item =>Convert.ToDouble(item.FACT_TOTAL));
+                if (SesionUsu.Usu_TipoUsu == 3)                
+                    lblTotPagos.Text = TotalPagos.ToString("C");                
+                else                
+                    lblTotPagos.Visible = false;
+
                 return List;
             }
             catch (Exception ex)

@@ -129,6 +129,13 @@ namespace CapaEntidad
             set { _CicloEscolar = value; }
         }
 
+        private string _CicloAlu;
+        public string CicloAlu
+        {
+            get { return _CicloAlu; }
+            set { _CicloAlu = value; }
+        }
+
         private string _Nivel;
         public string Nivel
         {

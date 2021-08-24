@@ -141,8 +141,8 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "P_ID", "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA_GEN", "P_REFERENCIA_PAGADA", "P_PAGO_CONFIRMADO", "P_CICLO", "P_USUARIO", "P_ESCUELA", "P_CARRERA", "P_SEMESTRE" };
-                object[] Valores = { ObjFactura.ID_FACT, ObjFactura.FACT_FOLIOBANCARIO, ObjFactura.FACT_FECHA_FACTURA, ObjFactura.FACT_BANCO, ObjFactura.FACT_REFERENCIA, ReferenciaPagada, ObjFactura.FACT_CONFIRMADO, ObjFactura.CICLO_ESCOLAR, Usuario, ObjFactura.FACT_DEPENDENCIA, ObjFactura.FACT_CARRERA, ObjFactura.FACT_SEMESTRE };
+                String[] Parametros = { "P_ID", "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA_GEN", "P_REFERENCIA_PAGADA", "P_PAGO_CONFIRMADO", "P_CICLO", "P_USUARIO", "P_ESCUELA", "P_CARRERA", "P_SEMESTRE", "P_MATRICULA" };
+                object[] Valores = { ObjFactura.ID_FACT, ObjFactura.FACT_FOLIOBANCARIO, ObjFactura.FACT_FECHA_FACTURA, ObjFactura.FACT_BANCO, ObjFactura.FACT_REFERENCIA, ReferenciaPagada, ObjFactura.FACT_CONFIRMADO, ObjFactura.CICLO_ESCOLAR, Usuario, ObjFactura.FACT_DEPENDENCIA, ObjFactura.FACT_CARRERA, ObjFactura.FACT_SEMESTRE, ObjFactura.FACT_MATRICULA };
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_DATOS_PAGO_SIAE", ref Verificador, Parametros, Valores, ParametrosOut);
             }
@@ -165,7 +165,7 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_ID" };
                 object[] Valores = { ObjFactura.ID_FACT };
-                String[] ParametrosOut = { "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA", "P_PAGO_CONFIRMADO", "P_CICLO", "P_ESCUELA", "P_CARRERA", "P_SEMESTRE", "P_BANDERA" };
+                String[] ParametrosOut = { "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA", "P_PAGO_CONFIRMADO", "P_CICLO", "P_ESCUELA", "P_CARRERA", "P_SEMESTRE", "P_MATRICULA", "P_BANDERA" };
                 Cmd = CDDatos.GenerarOracleCommand("OBT_DATOS_PAGO_SIAE", ref Verificador, Parametros, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
@@ -179,6 +179,8 @@ namespace CapaDatos
                     ObjFactura.FACT_DEPENDENCIA = Convert.ToString(Cmd.Parameters["P_ESCUELA"].Value);
                     ObjFactura.FACT_CARRERA = Convert.ToString(Cmd.Parameters["P_CARRERA"].Value);
                     ObjFactura.FACT_SEMESTRE = Convert.ToString(Cmd.Parameters["P_SEMESTRE"].Value);
+                    ObjFactura.FACT_MATRICULA = Convert.ToString(Cmd.Parameters["P_MATRICULA"].Value);
+
                 }
             }
             catch (Exception ex)

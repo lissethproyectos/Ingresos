@@ -213,14 +213,20 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">Ciclo</div>
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                             <asp:TextBox ID="txtCiclo" runat="server" Width="100%"></asp:TextBox>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             Semestre
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-2">
                             <asp:TextBox ID="txtSemestre" runat="server" Width="100%"></asp:TextBox>
+                        </div>
+                        <div class="col-md-2">
+                            Matricula
+                        </div>
+                        <div class="col-md-2">
+                            <asp:TextBox ID="txtMatricula" runat="server" Width="100%"></asp:TextBox>
                         </div>
                     </div>
                     <hr>                    

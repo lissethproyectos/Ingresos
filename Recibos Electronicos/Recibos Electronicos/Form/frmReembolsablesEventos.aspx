@@ -36,6 +36,7 @@
                 <asp:DropDownList runat="server" ID="ddlDirigido" OnSelectedIndexChanged="ddlDirigido_SelectedIndexChanged">
                     <asp:ListItem Value="P">Eventos Especiales</asp:ListItem>
                     <asp:ListItem Value="A">Servicios Extraordinarios</asp:ListItem>
+                    <asp:ListItem Value="Z">Eventos Privados</asp:ListItem>
                     <asp:ListItem Value="C">Complemento Cursos de Verano</asp:ListItem>
                 </asp:DropDownList>
             </td>

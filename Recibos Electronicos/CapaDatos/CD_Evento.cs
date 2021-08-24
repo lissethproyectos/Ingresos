@@ -238,6 +238,7 @@ namespace CapaDatos
                     ObjParticipantes = new ConceptoCuotaLibre();
                     ObjParticipantes.Id_Tipo_Participante = Convert.ToInt32(dr[0]);
                     ObjParticipantes.Desc_Tipo_Participante = Convert.ToString(dr[1]);
+                    ObjParticipantes.Es_Ponente = Convert.ToString(dr[3]);
                     ObjParticipantes.Participante = Convert.ToString(dr[6]);
                     List.Add(ObjParticipantes);
                 }
@@ -1367,6 +1368,30 @@ namespace CapaDatos
                 String[] ParametrosOut = { "P_BANDERA" };
 
                 Cmd = CDDatos.GenerarOracleCommand("UPD_VIGENCIA_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
+        public void Editar_DescParticipante(ConceptoCuotaLibre objParticipante, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+
+            try
+            {
+                String[] Parametros = { "P_ID", "P_DESCRIPCION" };
+                object[] Valores = { objParticipante.Id_Tipo_Participante, objParticipante.Desc_Tipo_Participante };
+                String[] ParametrosOut = { "P_BANDERA" };
+
+                Cmd = CDDatos.GenerarOracleCommand("UPD_TIPO_PERSONA", ref Verificador, Parametros, Valores, ParametrosOut);
 
             }
             catch (Exception ex)

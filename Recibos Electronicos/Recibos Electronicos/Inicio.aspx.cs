@@ -278,6 +278,7 @@ namespace Recibos_Electronicos
         }
         protected void imgBttnBuscar_Click(object sender, ImageClickEventArgs e)
         {
+            lblMensaje.Text = string.Empty;
             CargarGrid();
 
         }

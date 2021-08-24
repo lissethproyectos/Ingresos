@@ -151,6 +151,7 @@ namespace Recibos_Electronicos.Form
                 txtEscuela.Text = objFactura.FACT_DEPENDENCIA;
                 txtIdCarrera.Text = objFactura.FACT_CARRERA;
                 txtSemestre.Text = objFactura.FACT_SEMESTRE;
+                txtMatricula.Text = objFactura.FACT_MATRICULA;
                 try
                 {
                     ddlBanco.SelectedValue = objFactura.FACT_BANCO;
@@ -269,6 +270,7 @@ namespace Recibos_Electronicos.Form
             objFactura.FACT_DEPENDENCIA = txtEscuela.Text;
             objFactura.FACT_CARRERA = txtIdCarrera.Text;
             objFactura.FACT_SEMESTRE = txtSemestre.Text;
+            objFactura.FACT_MATRICULA = txtMatricula.Text;
             RefPag = (txtReferenciaPagada.Text == string.Empty) ? txtReferenciaOrig.Text : txtReferenciaPagada.Text;   
             CNSIAE.ActualizarDatosSIAE(objFactura, RefPag, SesionUsu.Usu_Nombre, ref Verificador);
             return Verificador;

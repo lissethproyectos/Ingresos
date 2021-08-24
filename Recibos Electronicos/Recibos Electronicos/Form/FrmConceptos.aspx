@@ -2,15 +2,8 @@
     CodeBehind="FrmConceptos.aspx.cs" Inherits="Recibos_Electronicos.Form.FrmConceptos" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <!--Datos para el calendario-->
-    <link href='../Css/plain.css' media='screen' rel='Stylesheet' type='text/css' />
-    <script src="../Js/Calendario/Validacion.js" type="text/javascript"></script>
-    <script src="../Js/Calendario/prototype.js?1195078948" type="text/javascript"></script>
-    <script src="../Js/Calendario/calendar_date_select.js?1196707120" type="text/javascript"></script>
-    <script src="../Js/Calendario/format_spanish.js?1195078948" type="text/javascript">        function DIV1_onclick() { }
-    </script>
-    <!--Fin de datos para el calendario-->
-
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
@@ -38,75 +31,54 @@
                                         <div class="col-4">
                                             <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" TabIndex="1" Width="100%">
                                             </asp:DropDownList>
-                                        </div>
+                                        </div>                                                                       
                                         <div class="col-2">
-                                            Ordenar por
-                                        </div>
-                                        <div class="col-4">
-                                            <asp:DropDownList ID="ddlOrden" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlOrden_SelectedIndexChanged" Width="100%">
-                                                <asp:ListItem Value="1">Clave</asp:ListItem>
-                                                <asp:ListItem Value="2">Descripción</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-3">
                                             Exclusivos para eventos
                                         </div>
                                         <div class="col-1 text-left">
                                             <asp:CheckBox ID="chkTipo" runat="server" AutoPostBack="True" OnCheckedChanged="chkTipo_CheckedChanged" Text="Si" />
                                         </div>
-                                        <div class="col-1">
-                                            Buscar
-                                        </div>
-                                        <div class="col-5">
-                                            <asp:TextBox ID="txtBuscar" runat="server" Width="100%" PlaceHolder="Por Clave, Descripcion o Id"></asp:TextBox>
-                                        </div>
-                                        <div class="col-1">
+                                        <%--<div class="col-1">
                                             <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" />
-                                        </div>
+                                        </div>--%>
                                         <div class="col-1">
                                             <asp:ImageButton ID="imgBttnNuevo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="imgBttnNuevo_Click" />
                                         </div>
+                                        <div class="col-1">
+                                            </div>
                                     </div>
-                                    <asp:Label ID="lblStatus0" runat="server" Text="Estatus:" Visible="False"></asp:Label>
-                                    <asp:CheckBox ID="CkbEstatus" runat="server" AutoPostBack="True" Checked="True" Enabled="False" OnCheckedChanged="CkbEstatus_CheckedChanged" TabIndex="2" Text="Mostrar los conceptos Activos" Visible="False" />
-
                                     <div class="row">
                                         <div class="col">
-                                            <div style="overflow-y: scroll; height: 300px;">
-                                                <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False"
-                                                    OnPageIndexChanging="grvConceptos_PageIndexChanging"
-                                                    OnSelectedIndexChanging="grvConceptos_SelectedIndexChanging" CssClass="mGrid" Width="100%">
-                                                    <Columns>
-                                                        <asp:BoundField DataField="Id" HeaderText="Id" />
-                                                        <asp:BoundField DataField="DescNivel" HeaderText="Nivel" />
-                                                        <asp:BoundField DataField="ClaveConcepto" HeaderText="Clave" />
-                                                        <asp:BoundField DataField="Descripcion" HeaderText="Concepto" />
-                                                        <asp:BoundField DataField="ImporteConcepto" HeaderText="Importe" />
-                                                        <asp:BoundField DataField="StatusStr" HeaderText="Status" />
-                                                        <asp:BoundField DataField="CobroXMateriaStr" HeaderText="Cobro por Materia" />
-                                                        <asp:BoundField DataField="Nivel" HeaderText="Nivel" />
-                                                        <asp:BoundField DataField="Status" HeaderText="Status" />
-                                                        <asp:CommandField ShowSelectButton="True" SelectText="Editar" ButtonType="Image" SelectImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" HeaderText="Editar">
-                                                            <HeaderStyle HorizontalAlign="Center" />
-                                                            <ItemStyle HorizontalAlign="Center" />
-                                                        </asp:CommandField>
-                                                        <asp:TemplateField HeaderText="Clonar">
-                                                            <ItemTemplate>
-                                                                <asp:ImageButton ID="imgBttnCopiar" runat="server" ImageUrl="~/Imagenes/copiar_y_pegar.png" OnClick="imgBttnCopiar_Click" />
-                                                            </ItemTemplate>
-                                                            <HeaderStyle HorizontalAlign="Center" />
-                                                            <ItemStyle HorizontalAlign="Center" />
-                                                        </asp:TemplateField>
-                                                    </Columns>
-                                                    <FooterStyle CssClass="enc" />
-                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                    <SelectedRowStyle CssClass="sel" />
-                                                    <HeaderStyle CssClass="enc" />
-                                                    <AlternatingRowStyle CssClass="alt" />
-                                                </asp:GridView>
-                                            </div>
+                                            <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False"
+                                                OnSelectedIndexChanging="grvConceptos_SelectedIndexChanging" CssClass="mGrid" Width="100%" ShowHeaderWhenEmpty="True">
+                                                <Columns>
+                                                    <asp:BoundField DataField="Id" HeaderText="Id" />
+                                                    <asp:BoundField DataField="DescNivel" HeaderText="Nivel" />
+                                                    <asp:BoundField DataField="ClaveConcepto" HeaderText="Clave" />
+                                                    <asp:BoundField DataField="Descripcion" HeaderText="Concepto" />
+                                                    <asp:BoundField DataField="ImporteConcepto" HeaderText="Importe" />
+                                                    <asp:BoundField DataField="StatusStr" HeaderText="Status" />
+                                                    <asp:BoundField DataField="CobroXMateriaStr" HeaderText="Cobro por Materia" />
+                                                    <asp:BoundField DataField="Nivel" HeaderText="Nivel" />
+                                                    <asp:BoundField DataField="Status" HeaderText="Status" />
+                                                    <asp:CommandField ShowSelectButton="True" SelectText="Editar" ButtonType="Image" SelectImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" HeaderText="Editar">
+                                                        <HeaderStyle HorizontalAlign="Center" />
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:CommandField>
+                                                    <asp:TemplateField HeaderText="Clonar">
+                                                        <ItemTemplate>
+                                                            <asp:ImageButton ID="imgBttnCopiar" runat="server" ImageUrl="~/Imagenes/copiar_y_pegar.png" OnClick="imgBttnCopiar_Click" />
+                                                        </ItemTemplate>
+                                                        <HeaderStyle HorizontalAlign="Center" />
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                                <FooterStyle CssClass="enc" />
+                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                <SelectedRowStyle CssClass="sel" />
+                                                <HeaderStyle CssClass="enc" />
+                                                <AlternatingRowStyle CssClass="alt" />
+                                            </asp:GridView>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -116,58 +88,11 @@
                                         </div>
                                     </div>
 
-                                    <asp:HiddenField ID="hddnModal" runat="server" />
+                                    <%--<asp:HiddenField ID="hddnModal" runat="server" />
                                     <ajaxToolkit:ModalPopupExtender ID="modal" runat="server" PopupControlID="pnlClonarConcepto" TargetControlID="hddnModal" BackgroundCssClass="modalBackground_Proy">
-                                    </ajaxToolkit:ModalPopupExtender>
+                                    </ajaxToolkit:ModalPopupExtender>--%>
 
-                                    <asp:Panel ID="pnlClonarConcepto" runat="server" CssClass="TituloModalPopupMsg" Width="40%">
-                                        <table style="width: 100%;">
-                                            <tr>
-                                                <td class="auto-style20" colspan="3">
-                                                    <div class="titulo_pop">
-                                                        <asp:Label ID="lblMsjCopia" runat="server" Text="Se copia el número de concepto "></asp:Label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="auto-style6">&nbsp;</td>
-                                                <td width="60%">&nbsp;</td>
-                                                <td width="20%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td align="right" class="auto-style6" valign="top">
-                                                    <asp:Label ID="lblTipo_C" runat="server" Text="¿Concepto exclusivo para evento?"></asp:Label>
-                                                </td>
-                                                <td width="60%">
-                                                    <asp:CheckBox ID="chkTipoC" runat="server" Text="Si" />
-                                                </td>
-                                                <td width="20%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td align="right" class="auto-style6" valign="top">&nbsp;</td>
-                                                <td width="60%">&nbsp;</td>
-                                                <td width="20%">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td align="center" colspan="3">
-                                                    <asp:Button ID="btnGuardar_C" runat="server" CssClass="btn btn-info" Height="45px" OnClick="btnGuardar_C_Click" Text="CLONAR" />
-                                                    &nbsp;<asp:Button ID="btnCancelar_C" runat="server" CssClass="btn btn-blue-grey" Height="45px" OnClick="btnCancelar_C_Click" Text="CANCELAR" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="auto-style6">&nbsp;</td>
-                                                <td width="60%">&nbsp;</td>
-                                                <td width="20%">
-                                                    <br />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="auto-style6">&nbsp;</td>
-                                                <td width="60%">&nbsp;</td>
-                                                <td width="20%">&nbsp;</td>
-                                            </tr>
-                                        </table>
-                                    </asp:Panel>
+                                    
                             </asp:View>
                             <asp:View ID="Hoja2" runat="server">
                                 <div class="container-fluid">
@@ -284,7 +209,8 @@
                                             <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                         </div>
                                         <div class="col-md-2">
-                                            Porcentaje para aplicar la Ley 80-20 Institucional</div>
+                                            Porcentaje para aplicar la Ley 80-20 Institucional
+                                        </div>
                                         <div class="col-md-2">
                                             <asp:TextBox ID="txtPorcentaje" runat="server" Width="50px" CssClass="box"
                                                 Rows="3" TabIndex="13"></asp:TextBox>
@@ -322,4 +248,58 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="modalClonar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modOficios">Clonar</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col font-weight-bold">
+                                                                <asp:Label ID="lblMsjCopia" runat="server" Text="Se copia el número de concepto "></asp:Label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <asp:Label ID="lblTipo_C" runat="server" Text="¿Concepto exclusivo para evento?"></asp:Label>
+                                                                </div>
+                                                            <div class="col-md-2">
+                                                                <asp:CheckBox ID="chkTipoC" runat="server" Text="Si" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col text-right">
+                                                                <asp:Button ID="btnGuardar_C" runat="server" CssClass="btn btn-info" Height="45px" OnClick="btnGuardar_C_Click" Text="CLONAR" />
+<%--                                                                &nbsp;<asp:Button ID="btnCancelar_C" runat="server" CssClass="btn btn-blue-grey" Height="45px" OnClick="btnCancelar_C_Click" Text="CANCELAR" />--%>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+      <script type="text/javascript">
+          <%--function Conceptos() {
+              $('#<%= grvConceptos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvConceptos.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
+          }--%>
+          function Conceptos() {
+              //$('input[type=search]').val('');
+              $('#<%= grvConceptos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvConceptos.ClientID %>').find("tr:first"))).DataTable({
+                  "destroy": true,
+                  "stateSave": true
+               });
+          };
+      </script>
+
 </asp:Content>
+
+

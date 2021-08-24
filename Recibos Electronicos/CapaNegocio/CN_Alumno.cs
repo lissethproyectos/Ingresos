@@ -59,6 +59,19 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ConsultarDatosAlumno(ref Alumno Alumno, ref string Verificador)
+        {
+            try
+            {
+                CD_Alumno CDAlumno = new CD_Alumno();
+                CDAlumno.ConsultarDatosAlumno(ref Alumno, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void ConsultarCatClientes(ref Alumno objCliente, string Buscar, ref List<Alumno> List)
         {
             try

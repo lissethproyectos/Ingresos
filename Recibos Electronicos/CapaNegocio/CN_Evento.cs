@@ -595,6 +595,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void Editar_DescParticipante(ConceptoCuotaLibre objParticipante, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDEvento = new CD_Evento();
+                CDEvento.Editar_DescParticipante(objParticipante, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void Editar_PartDet(ConceptoCuotaLibre objEvento, ref string Verificador)
         {
             try

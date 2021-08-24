@@ -94,6 +94,24 @@ namespace Recibos_Electronicos.Form
                 ddlHijo.Items.Clear();
 
         }
+
+        private void BuscaDatosAlumno()
+        {
+            BuscaMatricula();
+            EmpleadoMatricula();
+            if (SesionUsu.Editar == 0)
+            {
+                ddlSubTipo.SelectedValue = "X";
+                if (ddlCiclo_D.Items.Count >= 1)
+                {
+                    if (ddlNivel.SelectedValue == "M" || ddlNivel.SelectedValue == "D" || ddlNivel.SelectedValue == "E")
+                    {
+                        ddlCiclo_D.SelectedValue = "20";
+                        ddlCiclo_D_SelectedIndexChanged(null, null);
+                    }
+                }
+            }
+        }
         private void BuscaMatricula()
         {
             //lblMsj.Text = string.Empty;
@@ -103,6 +121,7 @@ namespace Recibos_Electronicos.Form
                 ObjMatricula.Evento = ddlEvento.SelectedValue;
                 ObjMatricula.TipoPersona = 1;
                 ObjMatricula.Nivel = ddlNivel.SelectedValue;
+                ObjMatricula.CicloEscolar = ddlCicloAlum.SelectedValue;
                 CNAlumno.ConsultarAlumno(ref ObjMatricula, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -142,7 +161,7 @@ namespace Recibos_Electronicos.Form
                     rdoBttnLstGenero.ClearSelection();
                     Registrar.Visible = true;
                     string MsjError="Verifique matrícula(" + txtMatricula.Text + ") y/ó Nivel de Estudios(" + ddlNivel.SelectedItem.Text + ") ó de Click en el botón Registrar Matrícula";
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);  //lblMsjFam.Text = Verificador;
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
                     //lblMsj.Text = "Verifique matrícula(" + txtMatricula.Text + ") y/ó Nivel de Estudios(" + ddlNivel.SelectedItem.Text + ") ó de Click en el botón Registrar Matrícula";
                 }
             }
@@ -186,7 +205,7 @@ namespace Recibos_Electronicos.Form
             {
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Familiares", ref ddlParentescoFam);
                 CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel1, "INGRESOS");
-                ddlNivel.Items.Insert(0, new ListItem("NINGUNO", "0"));
+                //ddlNivel.Items.Insert(0, new ListItem("NINGUNO", "0"));
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia_D, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
                 CNComun.LlenaCombo("pkg_pagos_2016.Obt_Ciclos_Escolares", ref ddlCiclo, "INGRESOS");
@@ -258,7 +277,7 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] { 4, 12, 16, 17, 18, 19, 20 };
+            Int32[] Celdas = new Int32[] { 4, 12, 16, 17, 18, 19, 20, 21 };
 
             try
             {
@@ -532,6 +551,7 @@ namespace Recibos_Electronicos.Form
         {
             if (grvConceptos.Rows.Count > 0)
             {
+                ObjAlumno.CicloAlu = ddlCicloAlum.SelectedValue;
                 ObjAlumno.Matricula = txtMatricula.Text.ToUpper();
                 ObjAlumno.Nombre = txtNombre.Text.ToUpper();
                 ObjAlumno.APaterno = txtPaterno.Text.ToUpper();
@@ -775,7 +795,7 @@ namespace Recibos_Electronicos.Form
             Session["Oficios"] = null;
             grvOficios.DataSource = null;
             grvOficios.DataBind();
-            ddlNivel.Items.Clear();
+            //ddlNivel.Items.Clear();
             ddlEmpleado.Items.Clear();
             ddlEmpleado.Items.Insert(0, new ListItem("AGREGAR-->", "0"));
             grvEmpleados.DataSource = null;
@@ -856,7 +876,8 @@ namespace Recibos_Electronicos.Form
             //LimpiaDatosAlumno();
             try
             {
-                CNComun.LlenaLista("pkg_pagos_2016.Obt_Combo_Nivel_Alumno", ref ddlNivel, "p_matricula", "p_sistema", txtMatricula.Text.ToUpper(), "SIST_ING", "INGRESOS");
+                CNComun.LlenaCombo("pkg_pagos_2016.Obt_Combo_Nivel_Alumno", ref ddlNivel, "p_matricula", "p_sistema", txtMatricula.Text.ToUpper(), "SIST_ING", "INGRESOS");
+                CNComun.LlenaCombo("pkg_pagos_2016.Obt_Combo_Ciclo_Alum", ref ddlCicloAlum, "p_matricula", txtMatricula.Text.ToUpper(), "INGRESOS");
                 if (ddlNivel.Items.Count == 1)
                 {
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Dato no encontrado, si deseas registralo dar click por única vez.');", true); //lblMsj.Text = "Dato no encontrado, si deseas registralo dar click por única vez.";
@@ -1105,6 +1126,7 @@ namespace Recibos_Electronicos.Form
             {
                 ObjAlumno.IdPersona = Convert.ToInt32(grvAlumnos.SelectedRow.Cells[0].Text);  //Convert.ToInt32(grvAlumnos.Rows[v].Cells[0].Text);
                 SesionUsu.Id_Persona = ObjAlumno.IdPersona;
+                ObjAlumno.CicloAlu= Convert.ToString(grvAlumnos.SelectedRow.Cells[21].Text);
                 CNAlumno.ConsultarAlumnoDescuento(ref ObjAlumno, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -1112,10 +1134,18 @@ namespace Recibos_Electronicos.Form
                     txtMatricula.Text = ObjAlumno.Matricula;
                     imgBttnBuscarMat_Click(null, null);
                     //txtMatricula_TextChanged(null, null);
+                    try
+                    {
+                        ddlCicloAlum.SelectedValue = ObjAlumno.CicloAlu;
+                    }
+                    catch
+                    {
+                        ddlCicloAlum.SelectedIndex = 0;
+                    }
                     ddlNivel.SelectedValue = ObjAlumno.Nivel;
                     ddlEvento.SelectedValue = ObjAlumno.Evento;
-
-                    ddlNivel_SelectedIndexChanged(null, null);
+                    BuscaDatosAlumno();
+                    //ddlNivel_SelectedIndexChanged(null, null);
                     ddlCarrera.SelectedValue = ObjAlumno.Carrera;
                     if (ddlCarrera.SelectedValue == "000000")
                     {
@@ -1913,6 +1943,33 @@ namespace Recibos_Electronicos.Form
             {
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message.Substring(0, 30) + "');", true); //lblMsj.Text = ex.Message;
             }
+        }
+
+        protected void linkBuscarDatos_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                BuscaDatosAlumno();
+            }
+            catch (Exception ex)
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void ddlCicloAlum_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlNivel.SelectedIndex = 0;
+            //ddlDependencia_D.Items.Clear();
+            ddlCarrera.SelectedIndex = 0;
+            txtNombre.Text = string.Empty;
+            txtPaterno.Text = string.Empty;
+            txtMaterno.Text = string.Empty;
+            txtFechaNacimiento.Text = string.Empty;
+            txtSemestre.Text = string.Empty;
+            txtGrupo.Text = string.Empty;
         }
 
 

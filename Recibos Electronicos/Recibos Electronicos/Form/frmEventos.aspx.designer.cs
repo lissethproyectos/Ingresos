@@ -1068,6 +1068,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Button bttnBuscarPart;
 
         /// <summary>
+        /// Control updPgrBuscaPart.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrBuscaPart;
+
+        /// <summary>
         /// Control updPnlCatPart.
         /// </summary>
         /// <remarks>
@@ -1086,21 +1095,30 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.GridView grvCatParticipantes;
 
         /// <summary>
-        /// Control UpdatePanel11.
+        /// Control UpdatePanel9.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel11;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel9;
 
         /// <summary>
-        /// Control Button3.
+        /// Control grdOficiosAdj.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        protected global::System.Web.UI.WebControls.GridView grdOficiosAdj;
+
+        /// <summary>
+        /// Control RequiredFieldValidator1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
     }
 }

@@ -234,11 +234,9 @@
                 </div>
             </div>
         </div>
-        <div class="piePagina" style="width: 100%">
-            <footer class="page-footer font-small pt-4" style="background-color: #585858; color: #fff">
-
-
-                <!-- Footer Text -->
+        <div class="row">
+            <div class="col piePagina page-footer font-small pt-4" style="background-color: #585858; color: #fff">
+                
                 <div class="container-fluid text-center text-md-left">
 
                     <!-- Grid row -->
@@ -272,12 +270,13 @@
                 <!-- Footer Text -->
 
                 <!-- Copyright -->
-                <div class="footer-copyright text-center py-3">
+               
+            </div>
+        </div>
+        <div class="row">
+             <div class="col footer-copyright text-center py-3 font-weight-bold alert alert-secondary">
                     Universidad Autónoma de Chiapas
                 </div>
-                <!-- Copyright -->
-
-            </footer>
         </div>
     </form>
 </body>

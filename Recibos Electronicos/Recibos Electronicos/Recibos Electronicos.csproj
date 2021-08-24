@@ -1572,6 +1572,12 @@
       <DependentUpon>rptEventos_Excel.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\rptHistoricoRecibos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptHistoricoRecibos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\VisualizadorCrystal.aspx.cs">
       <DependentUpon>VisualizadorCrystal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1758,6 +1764,10 @@
     <EmbeddedResource Include="Reportes\rptEventos_Excel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptEventos_Excel.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rptHistoricoRecibos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptHistoricoRecibos.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

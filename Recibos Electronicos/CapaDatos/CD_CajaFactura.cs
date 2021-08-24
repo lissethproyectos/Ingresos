@@ -99,23 +99,25 @@ namespace CapaDatos
                     ObjCjaFactura.VISIBLE2 = Convert.ToString(dr.GetValue(16)) == "S" ? true : false;
                     ObjCjaFactura.HABILITADO = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? false : true;
                     ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
+                    string p = Convert.ToString(dr.GetValue(17));
                     ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
+                    ObjCjaFactura.FACT_FECHA_SOLICITUD = Convert.ToString(dr.GetValue(18));
                     ObjCjaFactura.COLOR = "#ece260";
                     if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) >= 2 && Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) <= 3)
-                    { 
-                        
-                            ObjCjaFactura.VISIBLE4 = true;
-                            ObjCjaFactura.VISIBLE5 = false;
-                        
+                    {
+                        ObjCjaFactura.VISIBLE3 = false;
+                        ObjCjaFactura.VISIBLE4 = true;
+                        ObjCjaFactura.VISIBLE5 = false;
                     }
                     else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
                     {
+                        ObjCjaFactura.VISIBLE3 = false;
                         ObjCjaFactura.VISIBLE4 = false;
                         ObjCjaFactura.VISIBLE5 = true;
                     }
                     else
                     {
-                        ObjCjaFactura.VISIBLE3 = false;
+                        ObjCjaFactura.VISIBLE3 = true;
                         ObjCjaFactura.VISIBLE4 = false;
                         ObjCjaFactura.VISIBLE5 = false;
                     }
@@ -351,10 +353,13 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_FECHA_CAPTURA = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.FACT_DIAS_EMISION = Convert.ToInt32(dr.GetValue(16));
                     ObjCjaFactura.FACT_BANCO = Convert.ToString(dr.GetValue(6));
-                    if(Convert.ToString(dr.GetValue(18)).Length>25)
-                        ObjCjaFactura.FACT_REFERENCIA= Convert.ToString(dr.GetValue(18)).Substring(1,25)+"...";
+                    ObjCjaFactura.FACT_FECHA_SOLICITUD = Convert.ToString(dr.GetValue(15));
+                    string s = Convert.ToString(dr.GetValue(4));
+                    //if (Convert.ToString(dr.GetValue(18)).Length > 25)
+                        if (Convert.ToString(dr.GetValue(4)).Length > 25)
+                            ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(4)).Substring(1, 25) + "...";
                     else
-                        ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(18));
+                        ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(4));
 
                     ObjCjaFactura.TOOLTIP = Convert.ToString(dr.GetValue(18));
 
@@ -363,19 +368,20 @@ namespace CapaDatos
                     ObjCjaFactura.COLOR = "#ece260";
                     if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) >= 2 && Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) <= 3)
                     {
-
+                        ObjCjaFactura.VISIBLE3 = false;
                         ObjCjaFactura.VISIBLE4 = true;
                         ObjCjaFactura.VISIBLE5 = false;
 
                     }
                     else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
                     {
+                        ObjCjaFactura.VISIBLE3 = false;
                         ObjCjaFactura.VISIBLE4 = false;
                         ObjCjaFactura.VISIBLE5 = true;
                     }
                     else
                     {
-                        ObjCjaFactura.VISIBLE3 = false;
+                        ObjCjaFactura.VISIBLE3 = true;
                         ObjCjaFactura.VISIBLE4 = false;
                         ObjCjaFactura.VISIBLE5 = false;
                     }
@@ -441,7 +447,7 @@ namespace CapaDatos
                 if (Verificador == "0")
                 {
                     ObjCjaFactura.FACT_RECEPTOR_TIPO_PERS = (Convert.ToString(cmm.Parameters["P_TIPO_PERSONA"].Value) == "99999") ? "1" : "3";
-                    ObjCjaFactura.FACT_NOMBRE= Convert.ToString(cmm.Parameters["P_RAZON_SOCIAL"].Value);
+                    ObjCjaFactura.FACT_NOMBRE = Convert.ToString(cmm.Parameters["P_RAZON_SOCIAL"].Value);
                     ObjCjaFactura.FACT_RECEPTOR_DOMICILIO = Convert.ToString(cmm.Parameters["P_CALLE"].Value);
                     ObjCjaFactura.FACT_RECEPTOR_COLONIA = Convert.ToString(cmm.Parameters["P_COLONIA"].Value);
                     ObjCjaFactura.FACT_RECEPTOR_CP = Convert.ToString(cmm.Parameters["P_CP"].Value);

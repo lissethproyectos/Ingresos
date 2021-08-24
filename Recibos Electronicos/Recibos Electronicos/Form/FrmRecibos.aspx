@@ -137,7 +137,7 @@
                                                 <asp:TemplateField HeaderText="Borrar" ShowHeader="False">
                                                     <ItemTemplate>
                                                         <%--<asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Imagenes/del.png" OnClientClick="return confirm('¿Eliminar registro?');" Text="Eliminar" />--%>
-                                                        <asp:LinkButton ID="linkBttnBorrar" runat="server" CausesValidation="False" CommandName="Delete"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="linkBttnBorrar" runat="server" CausesValidation="False" CommandName="Delete"  OnClientClick="return confirm('¿Eliminar registro?');" ><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

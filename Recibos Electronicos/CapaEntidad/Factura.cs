@@ -81,6 +81,7 @@ namespace CapaEntidad
         private string _FACT_CONCEPTOS;
         private string _FACT_IMPORTE;
         private string _TOOLTIP;
+        private string _FACT_FECHA_SOLICITUD;
         //Metodos agregados por Lisseth
 
         public string FACT_NIVEL
@@ -209,10 +210,16 @@ namespace CapaEntidad
             set { _OFICIO = value; }
         }
 
-             public string FECHA_OFICIO
+        public string FECHA_OFICIO
         {
             get { return _FECHA_OFICIO; }
             set { _FECHA_OFICIO = value; }
+        }
+
+        public string FACT_FECHA_SOLICITUD
+        {
+            get { return _FACT_FECHA_SOLICITUD; }
+            set { _FACT_FECHA_SOLICITUD = value; }
         }
 
         public string STATUS_REF_ANTICIPADA
