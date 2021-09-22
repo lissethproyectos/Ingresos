@@ -851,6 +851,9 @@ namespace Recibos_Electronicos.Form
 
             if (!IsPostBack)
                 Inicializar();
+
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "Eventos", "FiltEventos();", true);
         }
 
         protected void imgBttnNuevo_Click(object sender, ImageClickEventArgs e)

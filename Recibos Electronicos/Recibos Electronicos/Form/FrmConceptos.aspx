@@ -3,7 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
-    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />  
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
@@ -31,7 +31,7 @@
                                         <div class="col-4">
                                             <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" TabIndex="1" Width="100%">
                                             </asp:DropDownList>
-                                        </div>                                                                       
+                                        </div>
                                         <div class="col-2">
                                             Exclusivos para eventos
                                         </div>
@@ -45,7 +45,7 @@
                                             <asp:ImageButton ID="imgBttnNuevo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="imgBttnNuevo_Click" />
                                         </div>
                                         <div class="col-1">
-                                            </div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -91,8 +91,6 @@
                                     <%--<asp:HiddenField ID="hddnModal" runat="server" />
                                     <ajaxToolkit:ModalPopupExtender ID="modal" runat="server" PopupControlID="pnlClonarConcepto" TargetControlID="hddnModal" BackgroundCssClass="modalBackground_Proy">
                                     </ajaxToolkit:ModalPopupExtender>--%>
-
-                                    
                             </asp:View>
                             <asp:View ID="Hoja2" runat="server">
                                 <div class="container-fluid">
@@ -249,41 +247,41 @@
         </div>
     </div>
     <div class="modal fade" id="modalClonar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="modOficios">Clonar</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="container">
-                                                        <div class="row">
-                                                            <div class="col font-weight-bold">
-                                                                <asp:Label ID="lblMsjCopia" runat="server" Text="Se copia el número de concepto "></asp:Label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-8">
-                                                                <asp:Label ID="lblTipo_C" runat="server" Text="¿Concepto exclusivo para evento?"></asp:Label>
-                                                                </div>
-                                                            <div class="col-md-2">
-                                                                <asp:CheckBox ID="chkTipoC" runat="server" Text="Si" />
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col text-right">
-                                                                <asp:Button ID="btnGuardar_C" runat="server" CssClass="btn btn-info" Height="45px" OnClick="btnGuardar_C_Click" Text="CLONAR" />
-<%--                                                                &nbsp;<asp:Button ID="btnCancelar_C" runat="server" CssClass="btn btn-blue-grey" Height="45px" OnClick="btnCancelar_C_Click" Text="CANCELAR" />--%>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-      <script type="text/javascript">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modOficios">Clonar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col font-weight-bold">
+                                <asp:Label ID="lblMsjCopia" runat="server" Text="Se copia el número de concepto "></asp:Label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <asp:Label ID="lblTipo_C" runat="server" Text="¿Concepto exclusivo para evento?"></asp:Label>
+                            </div>
+                            <div class="col-md-2">
+                                <asp:CheckBox ID="chkTipoC" runat="server" Text="Si" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <asp:Button ID="btnGuardar_C" runat="server" CssClass="btn btn-info" Height="45px" OnClick="btnGuardar_C_Click" Text="CLONAR" />
+                                <%--                                                                &nbsp;<asp:Button ID="btnCancelar_C" runat="server" CssClass="btn btn-blue-grey" Height="45px" OnClick="btnCancelar_C_Click" Text="CANCELAR" />--%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
           <%--function Conceptos() {
               $('#<%= grvConceptos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvConceptos.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
@@ -291,14 +289,14 @@
                 "ordering": false
             });
           }--%>
-          function Conceptos() {
-              //$('input[type=search]').val('');
-              $('#<%= grvConceptos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvConceptos.ClientID %>').find("tr:first"))).DataTable({
-                  "destroy": true,
-                  "stateSave": true
-               });
-          };
-      </script>
+        function Conceptos() {
+            //$('input[type=search]').val('');
+            $('#<%= grvConceptos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvConceptos.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": false
+            });
+        };
+    </script>
 
 </asp:Content>
 

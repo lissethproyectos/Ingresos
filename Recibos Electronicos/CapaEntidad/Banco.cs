@@ -42,10 +42,13 @@ namespace CapaEntidad
         private string bcmm_formato_fecha = "yyyy-MM-dd";
         private string bcmm_formato_hora = "HH:mm:ss";
         private string hsbc_formato_fecha = "yyyyMMdd";
+        private string azt_formato_fecha = "yyyy-MM-dd";
         private string hsbc_formato_hora = "HHmmss";
+        private string azt_formato_hora = "HHmmss";
 
         private static UInt16 bnt_longitud = 336;
         private static UInt16 std_longitud = 149;
+        private static UInt16 azt_longitud = 436;
         private static UInt16 stdnew_longitud = 199;
 
         private static UInt16 bnx_longitud = 120;
@@ -219,6 +222,14 @@ namespace CapaEntidad
                     if (pago_fecha != null && pago_hora != null)
                     {
                         try { return DateTime.ParseExact($"{pago_fecha} {pago_hora}", $"{hsbc_formato_fecha} {hsbc_formato_hora}", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm"); }
+                        catch { return null; }
+                    }
+                }
+                else if (nombre == "AZ")
+                {
+                    if (pago_fecha != null && pago_hora != null)
+                    {
+                        try { return DateTime.ParseExact($"{pago_fecha} {pago_hora}", $"{azt_formato_fecha} {azt_formato_hora}", System.Globalization.CultureInfo.InvariantCulture).ToString("yyyy-MM-dd HH:mm"); }
                         catch { return null; }
                     }
                 }
@@ -437,7 +448,31 @@ namespace CapaEntidad
 
                 return 2;
             }
+            else if (azt_longitud == dato.Length)
+            {
+                nombre = "AZ";
+                referencia = dato.Substring(177, 26).Trim() + nombre;
 
+                if (referencia.Length == 28)
+                {
+                    dependencia = Int32.Parse(referencia.Substring(0, 5));
+                    ficha = referencia.Substring(5, 8).TrimStart('0');
+                    folio = dato.Substring(80, 9).Trim(); //9 digitos
+                    sucursal = "";
+                    cajero = "";
+                    pago_importe = float.Parse(dato.Substring(420, 13) + "." + dato.Substring(434, 2));
+                    pago_fecha = dato.Substring(25, 10);
+                    pago_hora = "000000";
+                    notas = "";
+                    pago_tipo = "VENTANILLA";
+                    if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))
+                        return 0;
+
+                    return 1;
+                }
+
+                return 2;
+            }
             return 0;
         }
         public Byte AgregarDatosCaja(string dato)

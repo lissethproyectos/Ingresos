@@ -195,6 +195,14 @@ namespace Recibos_Electronicos.Form
                         txtFechaOficio.Text = ObjFactura.FECHA_OFICIO;
                         txtObservacionesConvenio.Text = ObjFactura.FACT_NOTAS;
                         tabFacturas.Tabs[1].Visible = true;
+                        if (ObjFactura.FACT_IMPUESTO_TASA != string.Empty)
+                        {
+                            chkIvaDes.Checked = true;
+                            chkIvaDes_CheckedChanged(null, null);
+                            txtIvaDes.Text=ObjFactura.FACT_IMPUESTO_TASA;
+                            txtTotalDes.Text=ObjFactura.FACT_TOTAL;
+                        }
+
                         //if (ddlStatus.SelectedValue == "S" || ddlStatus.SelectedValue == "F")
                         //    tabFacturas.Tabs[2].Visible = true;
                         //else
@@ -413,6 +421,11 @@ namespace Recibos_Electronicos.Form
                     ObjFactura.FACT_FECHA_FACTURA = txtFecha.Text;
                     ObjFactura.EXTENSION_ADJUNTO = string.Empty;
                     ObjFactura.FACT_NOTAS = txtObservacionesConvenio.Text;
+                    if (ddlTipo.SelectedValue == "T" && chkIvaDes.Checked == true)
+                    {
+                        ObjFactura.FACT_IMPUESTO_TASA = txtIvaDes.Text;
+                        ObjFactura.FACT_TOTAL = txtTotalDes.Text;
+                    }
                     if (lblArchivoVoucher.NavigateUrl != string.Empty)
                         ObjFactura.RUTA_ADJUNTO = lblArchivoVoucher.Text;
                     else
@@ -701,7 +714,7 @@ namespace Recibos_Electronicos.Form
             /*Int32[] CeldasFacturados = { 0, 8, 10, 11, 13, 14, 15, 16, 17 };
             Int32[] CeldasSolicitados = { 0, 8, 10, 11, 12, 13, 14, 15, 16, 17 };
             Int32[] CeldasPorConfirmar = { 0, 10, 11, 12, 13, 14, 15, 17 };*/
-            Int32[] CeldasFacturados = { 0, 6, 7, 8, 11, 13, 14, 16, 17, 18, 20, 21, 23 };
+            Int32[] CeldasFacturados = { 0, 6, 7, 9, 10, 11, 13, 14, 16, 17, 18, 20, 21, 23 };
             Int32[] CeldasSolicitados = { 0, 7, 8, 11, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23 };
             Int32[] CeldasPorConfirmar = { 0, 6, 7, 13, 14, 15, 16, 17, 18, 20, 21, 22, 23 };
 
@@ -718,7 +731,8 @@ namespace Recibos_Electronicos.Form
                 switch (ddlStatus.SelectedValue)
                 {
                     case "F":
-                        CNComun.HideColumns(grdDatosFactura, CeldasFacturados);
+                        if(grdDatosFactura.Rows.Count>=1)
+                            CNComun.HideColumns(grdDatosFactura, CeldasFacturados);
                         //OcultaColumnas(grdDatosFactura, CeldasFacturados);
                         break;
                     case "C":
@@ -1087,6 +1101,8 @@ namespace Recibos_Electronicos.Form
                 //ddlNivel.SelectedValue = "Z";
                 chkConfirmaSolicitud.Visible = false;
                 chkConfirmaSolicitud.Checked = false;
+                chkIvaDes.Checked = false;
+                chkIvaDes_CheckedChanged(null, null);
                 lblArchivoVoucher.NavigateUrl = string.Empty;
                 lblArchivoVoucher.Text = string.Empty;
                 linkBttnEliminarVoucher.Visible = false;
@@ -2515,6 +2531,23 @@ namespace Recibos_Electronicos.Form
             grdArchivos.DataBind();
             Session["Archivos"] = null;
             mltViewFacturas.ActiveViewIndex = 2;
+        }
+
+        protected void chkIvaDes_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkIvaDes.Checked == true)
+                rowIvaDesglozado.Visible = true;
+            else
+            {
+                txtIvaDes.Text = string.Empty;
+                txtTotalDes.Text = string.Empty;
+                rowIvaDesglozado.Visible = false;
+            }
+        }
+
+        protected void chkIvaDes_CheckedChanged1(object sender, EventArgs e)
+        {
+
         }
     }
 }

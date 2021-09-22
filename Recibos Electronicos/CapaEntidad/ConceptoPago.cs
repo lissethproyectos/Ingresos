@@ -133,7 +133,7 @@ namespace CapaEntidad
             get { return _Periodo; }
             set { _Periodo = value; }
         }
-        private string _MaxMateria;
+        private string _MaxMateria="99";
 
         public string MaxMateria
         {

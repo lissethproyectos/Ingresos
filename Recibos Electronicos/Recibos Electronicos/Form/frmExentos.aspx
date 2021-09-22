@@ -3,6 +3,9 @@
 <%@ Register Assembly="CapaNegocio" Namespace="CapaNegocio" TagPrefix="customControl" %>
 <%@ Register Src="../EnviarCorreo.ascx" TagName="uCCorreo" TagPrefix="usr" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script src="../Scripts/jquery/jquery-3.1.1.min.js"></script>
+    <script src="../Scripts/select2/js/select2.min.js"></script>
+    <link href="../Scripts/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
     <style type="text/css">
         .overlay {
             position: fixed;
@@ -531,7 +534,7 @@
                                                                 <div class="col-md-2">
                                                                     <asp:Label ID="lblMatricula" runat="server" Text="No. de Ficha / Matricula / Id Sysweb"></asp:Label>
                                                                 </div>
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-2">
                                                                     <asp:TextBox ID="txtMatricula" runat="server" CssClass="box" MaxLength="8" TabIndex="4" Width="100%"></asp:TextBox>
                                                                     <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtMatricula" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
                                                                 </div>
@@ -539,9 +542,7 @@
                                                                     <asp:ImageButton ID="imgBttnBuscarMat" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscarMat_Click" />
                                                                     <asp:Button ID="Registrar" runat="server" CssClass="btn btn-primary" OnClick="Registrar_Click" Text="Registrar Matrícula" Visible="False" />
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">                                                               
-                                                                <div class="col-md-2">
+                                                                <div class="col-md-1">
                                                                     Ciclo del Alumno/Asp
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -553,10 +554,8 @@
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
                                                                 </div>
+
                                                                 <div class="col-md-1">
-                                                                    <asp:RequiredFieldValidator ID="req1" runat="server" ControlToValidate="ddlCicloAlum" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="BuscarAlu" InitialValue="0" TabIndex="3"></asp:RequiredFieldValidator>
-                                                                </div>
-                                                                 <div class="col-md-2">
                                                                     <asp:Label ID="lblNivel0" runat="server" Text="Nivel"></asp:Label>
                                                                 </div>
                                                                 <div class="col-md-2">
@@ -565,15 +564,23 @@
                                                                             <asp:DropDownList ID="ddlNivel" runat="server" Width="100%">
                                                                                 <asp:ListItem Value="Z">--NINGÚN REGISTRO--</asp:ListItem>
                                                                             </asp:DropDownList>
-                                                                            <%--<asp:ListBox ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%"></asp:ListBox>--%>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
                                                                 </div>
+
+                                                                <div class="col-md-1">
+                                                                    <asp:LinkButton ID="linkBuscarDatos" CssClass="btn btn-info" runat="server" Width="100%" OnClick="linkBuscarDatos_Click" ValidationGroup="BuscarAlu">Buscar</asp:LinkButton>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-6"></div>
+                                                                <div class="col-md-2">
+                                                                    <asp:RequiredFieldValidator ID="req1" runat="server" ControlToValidate="ddlCicloAlum" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="BuscarAlu" InitialValue="0" TabIndex="3"></asp:RequiredFieldValidator>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                </div>
                                                                 <div class="col-md-1">
                                                                     <asp:RequiredFieldValidator ID="req2" runat="server" ControlToValidate="ddlNivel" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="BuscarAlu" InitialValue="Z"></asp:RequiredFieldValidator>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <asp:LinkButton ID="linkBuscarDatos" CssClass="btn btn-info" runat="server" Width="100%" OnClick="linkBuscarDatos_Click" ValidationGroup="BuscarAlu">Buscar</asp:LinkButton>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -1236,6 +1243,11 @@
         function openPopoverDetalle(ctlr) {
             //alert(ctlr);
             $(ctlr).tooltip();
+        };
+
+
+        function FiltEventos() {
+            $('#<%= ddlEvento.ClientID %>').select2();
         };
     </script>
 </asp:Content>

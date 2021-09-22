@@ -717,6 +717,7 @@
     <Content Include="Scripts\jquery\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jsGeneral.js" />
+    <Content Include="Scripts\jsCodigoQR.js" />
     <Content Include="Scripts\jsQR.js" />
     <Content Include="Scripts\JSreportes.js" />
     <Content Include="Scripts\JSreportes2.js" />

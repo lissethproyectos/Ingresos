@@ -465,15 +465,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlCicloAlum;
 
         /// <summary>
-        /// Control req1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator req1;
-
-        /// <summary>
         /// Control lblNivel0.
         /// </summary>
         /// <remarks>
@@ -501,15 +492,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlNivel;
 
         /// <summary>
-        /// Control req2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator req2;
-
-        /// <summary>
         /// Control linkBuscarDatos.
         /// </summary>
         /// <remarks>
@@ -517,6 +499,24 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton linkBuscarDatos;
+
+        /// <summary>
+        /// Control req1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator req1;
+
+        /// <summary>
+        /// Control req2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator req2;
 
         /// <summary>
         /// Control lblDependencia_D.

@@ -731,7 +731,7 @@
 
 
     </script>
-    <script src="../Scripts/jsQR.js"></script>
+    <script src="../Scripts/jsCodigoQR.js"></script>
     <script src="../Scripts/QRModel.js"></script>
     <script src="../Scripts/popper.js"></script>
 </asp:Content>

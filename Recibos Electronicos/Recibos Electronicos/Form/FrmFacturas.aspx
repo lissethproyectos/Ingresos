@@ -276,11 +276,14 @@
             background-color: #ffffff;
         }
 
-        .accordion { width: 400px;  }  
-/*.accordionHeader { border: 1px solid #2F4F4F; color: white; background-color: #2E4d7B; font-family: Arial, Sans-Serif; font-size: 12px; font-weight: bold; padding: 5px; margin-top: 5px; cursor: pointer; }  
+        .accordion {
+            width: 400px;
+        }
+        /*.accordionHeader { border: 1px solid #2F4F4F; color: white; background-color: #2E4d7B; font-family: Arial, Sans-Serif; font-size: 12px; font-weight: bold; padding: 5px; margin-top: 5px; cursor: pointer; }  
 .accordionHeaderSelected { border: 1px solid #2F4F4F; color: white; background-color: #5078B3; font-family: Arial, Sans-Serif; font-size: 12px; font-weight: bold; padding: 5px; margin-top: 5px; cursor: pointer; }  
 .accordionContent { background-color: #D3DEEF; border: 1px dashed #2F4F4F; border-top: none; padding: 5px; padding-top: 10px; }
-*/    </style>
+*/
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
@@ -394,7 +397,7 @@
                             <div class="col-md-1">
                                 <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                     <ContentTemplate>
-                                        <asp:LinkButton ID="LinkButton1" runat="server" class="btn btn-primary" OnClick="linkBttnBuscar_Click" Width="100%"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" class="btn btn-primary" OnClick="linkBttnBuscar_Click" Width="100%">Ver Recibos</asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -402,7 +405,7 @@
                             <div class="col-md-1">
                                 <asp:UpdatePanel ID="updPnlAgregar" runat="server">
                                     <ContentTemplate>
-                                        <asp:LinkButton ID="linkBttnAgregarReg" runat="server" OnClick="linkBttnAgregarReg_Click" CssClass="btn btn-grey" ValidationGroup="New" Visible="False"><i class="fa fa-plus-circle"></i> Agregar</asp:LinkButton>
+                                        <asp:LinkButton ID="linkBttnAgregarReg" runat="server" OnClick="linkBttnAgregarReg_Click" CssClass="btn btn-grey" ValidationGroup="New" Visible="False">Agregar</asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
@@ -629,10 +632,10 @@
                                                                 </asp:TemplateField>
                                                             </Columns>
                                                             <FooterStyle CssClass="enc" />
-                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                    <SelectedRowStyle CssClass="sel" />
-                                                    <HeaderStyle CssClass="enc" />
-                                                    <AlternatingRowStyle CssClass="alt" />
+                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                            <SelectedRowStyle CssClass="sel" />
+                                                            <HeaderStyle CssClass="enc" />
+                                                            <AlternatingRowStyle CssClass="alt" />
                                                         </asp:GridView>
                                                     </div>
                                                 </div>
@@ -972,328 +975,291 @@
                                             <asp:UpdatePanel ID="UpdatePanel147" runat="server">
                                                 <ContentTemplate>
                                                     <div class="container-fluid">
-
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <ajaxToolkit:Accordion ID="Accordion1" runat="server" FadeTransitions="True" FramesPerSecond="50" HeaderCssClass="accordionCabecera" HeaderSelectedCssClass="cssHeaderSelected" Height="700px" RequireOpenedPane="False" SelectedIndex="-1" TransitionDuration="200" Width="100%" CssClass="accordion">
-                                                                    <Panes>
-                                                                        <ajaxToolkit:AccordionPane runat="server">
-                                                                            <Header>
+                                                        <ajaxToolkit:Accordion ID="Accordion1" runat="server" FadeTransitions="True" FramesPerSecond="50" HeaderCssClass="accordionCabecera" HeaderSelectedCssClass="cssHeaderSelected" Height="700px" RequireOpenedPane="False" SelectedIndex="-1" TransitionDuration="200" Width="100%" CssClass="accordion">
+                                                            <Panes>
+                                                                <ajaxToolkit:AccordionPane runat="server">
+                                                                    <Header>
                                                                          Datos del Voucher
                                                                             </Header>
-                                                                            <Content>
-                                                                                <div class="container-fluid">
-                                                                                    <div class="row">
-                                                                                        <div class="col-md-1">Folio</div>
-                                                                                        <div class="col-md-2">
-                                                                                            <asp:TextBox ID="txtFolio" runat="server" Width="100px"></asp:TextBox>
+                                                                    <Content>
+                                                                        <div class="container-fluid">
+                                                                            <div class="row">
+                                                                                <div class="col-md-1">Folio</div>
+                                                                                <div class="col-md-1">
+                                                                                    <asp:TextBox ID="txtFolio" runat="server" Width="100%"></asp:TextBox>
+                                                                                </div>
+                                                                                <div class="col-md-1">
+                                                                                    <asp:RequiredFieldValidator ID="valFolio" runat="server" ControlToValidate="txtFolio" ErrorMessage="*Folio(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator></div>
+                                                                                <div class="col-md-1">Fecha Pago</div>
+                                                                                <div class="col-md-2">
+                                                                                    <asp:TextBox ID="txtFecha" runat="server" Width="100%"></asp:TextBox>
+                                                                                </div>
+                                                                                <div class="col-md-1">
+                                                                                    <ajaxToolkit:CalendarExtender ID="txtFecha_CalendarExtender" runat="server" PopupButtonID="imgFecha" TargetControlID="txtFecha" />
+                                                                                    <asp:ImageButton ID="imgFecha" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                                                                </div>
+                                                                                <div class="col-md-1">
+                                                                                    <asp:RequiredFieldValidator ID="valFecha" runat="server" ControlToValidate="txtFecha" ErrorMessage="*Fecha(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                </div>
+                                                                                <div class="col-md-1">Importe</div>
+                                                                                <div class="col-md-1">
+                                                                                    <asp:TextBox ID="txtImporte" runat="server" Width="100%"></asp:TextBox>
+                                                                                </div>
+                                                                                <div class="col-md-1">
+                                                                                    <asp:RequiredFieldValidator ID="valImporte" runat="server" ControlToValidate="txtImporte" ErrorMessage="*Importe(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                </div>
+                                                                                <div class="col-md-1">
+                                                                                    <asp:UpdatePanel ID="UpdatePanel15" runat="server">
+                                                                                        <ContentTemplate>
+                                                                                            <asp:CheckBox ID="chkIvaDes" runat="server" AutoPostBack="True" Text="¿Con IVA desglozado?" OnCheckedChanged="chkIvaDes_CheckedChanged" />
+                                                                                        </ContentTemplate>
+                                                                                    </asp:UpdatePanel>
+                                                                                </div>
+                                                                            </div>
+                                                                            <asp:UpdatePanel ID="UpdatePanel16" runat="server">
+                                                                                <ContentTemplate>
+                                                                                    <div class="row" runat="server" id="rowIvaDesglozado" visible="false">
+                                                                                        <div class="col-md-1">IVA</div>
+                                                                                        <div class="col-md-1">
+                                                                                            <asp:TextBox ID="txtIvaDes" runat="server" Width="100%"></asp:TextBox>
                                                                                         </div>
                                                                                         <div class="col-md-1">
-                                                                                            <asp:RequiredFieldValidator ID="valFolio" runat="server" ControlToValidate="txtFolio" ErrorMessage="*Folio(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                            <asp:RequiredFieldValidator ID="reqIvaDes" runat="server" ControlToValidate="txtIvaDes" ErrorMessage="*Iva (Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                         </div>
-                                                                                        <div class="col-md-1">Fecha de Pago</div>
-                                                                                        <div class="col-md-3">
-                                                                                            <asp:TextBox ID="txtFecha" runat="server" Width="100px"></asp:TextBox>
-                                                                                            <ajaxToolkit:CalendarExtender ID="txtFecha_CalendarExtender" runat="server" PopupButtonID="imgFecha" TargetControlID="txtFecha" />
-                                                                                            <asp:ImageButton ID="imgFecha" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                                                                            <asp:RequiredFieldValidator ID="valFecha" runat="server" ControlToValidate="txtFecha" ErrorMessage="*Fecha(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
-
-                                                                                        </div>
-                                                                                        <div class="col-md-1">Importe</div>
-                                                                                        <div class="col-md-2">
-                                                                                            <asp:TextBox ID="txtImporte" runat="server"></asp:TextBox>
+                                                                                        <div class="col-md-1">Total</div>
+                                                                                        <div class="col-md-1">
+                                                                                            <asp:TextBox ID="txtTotalDes" runat="server" Width="100%"></asp:TextBox>
                                                                                         </div>
                                                                                         <div class="col-md-1">
-                                                                                            <asp:RequiredFieldValidator ID="valImporte" runat="server" ControlToValidate="txtImporte" ErrorMessage="*Importe(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                            <asp:RequiredFieldValidator ID="reqTotDes" runat="server" ControlToValidate="txtTotalDes" ErrorMessage="*Total (Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <%--<div class="row">
-                                                                                            <div class="col-md-10">
-                                                                                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                                                                                    <ContentTemplate>
-                                                                                                        <div class="input-group mb-3">
-                                                                                                            <div class="input-group-prepend">
-                                                                                                                <span class="input-group-text">PDF</span>
-                                                                                                            </div>
-                                                                                                            <div class="custom-file" style="width: 70%">
-                                                                                                                <asp:FileUpload ID="fileVoucher" runat="server" class="form-control" Height="40px" Width="100%" />
-
-                                                                                                            </div>
-                                                                                                            <div class="input-group-append">
-                                                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="fileVoucher" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
-                                                                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="FileFactura" Text="* Requerido" ValidationGroup="DatosFiscales"></asp:RequiredFieldValidator>
-                                                                                                                <asp:Button ID="btnVoucher" runat="server" CssClass="btn btn-blue-grey" OnClick="btnVoucher_Click" Text="ADJUNTAR" ValidationGroup="DatosFiscales" />
-                                                                                                                <asp:HyperLink ID="lblArchivoVoucher" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
-                                                                                                                
-                                                                                                                                <asp:LinkButton ID="linkBttnEliminarVoucher" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarVoucher_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
-                                                                                                                        
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </ContentTemplate>
-                                                                                                    <Triggers>
-                                                                                                        <asp:PostBackTrigger ControlID="btnVoucher" />
-                                                                                                    </Triggers>
-                                                                                                </asp:UpdatePanel>
-                                                                                            </div>
-                                                                                        </div>--%>
-                                                                                </div>
-                                                                                <div class="row">
-                                                                                    <div class="col">
-                                                                                        <div class="alert-warning">
-                                                                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                                                                                <ContentTemplate>
-                                                                                                    <div class="container-fluid">
-                                                                                                        <div class="note note-warning" style="font-size: 14px">
-                                                                                                            <div class="row">
-                                                                                                                <div class="col">
-                                                                                                                    Anexar Voucher
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <div class="row">
-                                                                                                                <div class="col">
-                                                                                                                    <div class="col font-weight-bold">
-                                                                                                                        *Solo formatos PNG, JPG y PDF
-                                                                                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="fileVoucher" ErrorMessage="Archivo incorrecto, debe ser un PNG, JPG ó PDF" ValidationExpression="(.*?)\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator>
-                                                                                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="fileVoucher" Text="* Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <div class="row">
-                                                                                                                <div class="col-md-8">
-                                                                                                                    <asp:FileUpload ID="fileVoucher" runat="server" Height="30px" />
-                                                                                                                </div>
-                                                                                                                <div class="col-md-4">
-                                                                                                                    <asp:Button ID="btnVoucher" runat="server" CssClass="btn btn-blue-grey" OnClick="btnVoucher_Click" Text="ADJUNTAR" ValidationGroup="guardar" />
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                            <div class="row">
-                                                                                                                <div class="col-md-6">
-                                                                                                                    <asp:HyperLink ID="lblArchivoVoucher" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
-                                                                                                                </div>
-
-                                                                                                                <div class="col-md-6">
-                                                                                                                    <asp:UpdatePanel ID="UpdatePanel49" runat="server">
-                                                                                                                        <ContentTemplate>
-                                                                                                                            <asp:LinkButton ID="linkBttnEliminarVoucher" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarVoucher_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
-                                                                                                                        </ContentTemplate>
-                                                                                                                    </asp:UpdatePanel>
-                                                                                                                </div>
-                                                                                                            </div>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </ContentTemplate>
-                                                                                                <Triggers>
-                                                                                                    <asp:PostBackTrigger ControlID="btnVoucher" />
-                                                                                                </Triggers>
-                                                                                            </asp:UpdatePanel>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </Content>
-                                                                        </ajaxToolkit:AccordionPane>
-                                                                        <ajaxToolkit:AccordionPane runat="server" ID="AccordionPane1" CssClass="note-info">
-                                                                            <Header>
-                                                                        Datos del Oficio <i class="fa fa-file-text" aria-hidden="true"></i> 
-                                                                    </Header>
-                                                                            <Content>
-                                                                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                                                                                    <ContentTemplate>
-                                                                                        <div class="container-fluid">
-                                                                                            <div class="row">
-                                                                                                <div class="col-md-2">
-                                                                                                    Núm. de Oficio
-                                                                                                </div>
-                                                                                                <div class="col-md-3">
-                                                                                                    <asp:TextBox ID="txtNumOficio" runat="server"></asp:TextBox>
-                                                                                                </div>
-                                                                                                <div class="col-md-1">
-                                                                                                    <asp:RequiredFieldValidator ID="valNumOficio" runat="server" ControlToValidate="txtNumOficio" ErrorMessage="*Número de Oficio (Pestania 2-&gt;Datos del Oficio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
-                                                                                                </div>
-                                                                                                <div class="col-md-2">
-                                                                                                    Fecha Oficio
-                                                                                                </div>
-                                                                                                <div class="col-md-4">
-                                                                                                    <asp:TextBox ID="txtFechaOficio" runat="server"></asp:TextBox>
-                                                                                                    <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="ImageButton2" TargetControlID="txtFechaOficio" />
-                                                                                                    <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                                                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtFechaOficio" ErrorMessage="*Fecha Oficio(Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="container-fluid">
-                                                                                            <div class="note note-warning" style="font-size: 14px">
-                                                                                                <div class="row">
-                                                                                                    <div class="col">
-                                                                                                        Anexar Oficio
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="row">
-                                                                                                    <div class="col">
-                                                                                                        <div class="col font-weight-bold">
-                                                                                                            *Solo formatos PNG, JPG y PDF
-                                                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="fileOficio" ErrorMessage="Archivo incorrecto, debe ser un PNG, JPG ó PDF" ValidationExpression="(.*?)\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="row">
-                                                                                                    <div class="col-md-8">
-                                                                                                        <asp:FileUpload ID="fileOficio" runat="server" Height="30px" />
-                                                                                                    </div>
-                                                                                                    <div class="col-md-4">
-                                                                                                        <asp:Button ID="btnOficio" runat="server" CssClass="btn btn-blue-grey" Font-Size="Smaller" OnClick="btnOficio_Click" Text="ADJUNTAR" ValidationGroup="guardar" />
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div class="row">
-                                                                                                    <div class="col-md-4">
-                                                                                                        <asp:HyperLink ID="lblArchivoOficio" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
-                                                                                                    </div>
-                                                                                                    <div class="col-md-4">
-                                                                                                        <asp:LinkButton ID="linkBttnEliminarOficio" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarOficio_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </ContentTemplate>
-                                                                                    <Triggers>
-                                                                                        <asp:PostBackTrigger ControlID="btnOficio" />
-                                                                                    </Triggers>
-                                                                                </asp:UpdatePanel>
-                                                                            </Content>
-                                                                        </ajaxToolkit:AccordionPane>
-                                                                        <ajaxToolkit:AccordionPane ID="AccordionPane2" runat="server">
-                                                                            <Header>Importe/Convenio <i class="fa fa-money" aria-hidden="true"></i>
-                                                                    </Header>
-                                                                            <Content>
-                                                                                <asp:UpdatePanel ID="updPnlConvenio" runat="server">
-                                                                                    <ContentTemplate>
-                                                                                        <div class="container-fluid">
-                                                                                            <div class="row">
-                                                                                                <div class="col-md-1">
-                                                                                                    Importe
-                                                                                                </div>
-                                                                                                <div class="col-md-2">
-                                                                                                    <asp:TextBox ID="txtImporteConvenio" runat="server" Width="100px"></asp:TextBox>
-
-
-                                                                                                    <asp:RequiredFieldValidator ID="valImpConvenio" runat="server" ControlToValidate="txtImporteConvenio" ErrorMessage="*Importe (Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
-                                                                                                </div>
-                                                                                                <div class="col-md-2">
-                                                                                                    IVA
-                                                                                                </div>
-                                                                                                <div class="col-md-2">
-                                                                                                    <asp:TextBox ID="txtIVA" runat="server" AutoPostBack="True" OnTextChanged="txtIVA_TextChanged" Width="100px"></asp:TextBox>
-                                                                                                </div>
-                                                                                                <div class="col-md-1">
-                                                                                                    <asp:RequiredFieldValidator ID="valIva" runat="server" ControlToValidate="txtIVA" ErrorMessage="*Iva(Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
-                                                                                                </div>
-                                                                                                <div class="col-md-1">
-                                                                                                    Total
-                                                                                                </div>
-                                                                                                <div class="col-md-2">
-                                                                                                    <asp:TextBox ID="txtTotal" runat="server" Width="100px"></asp:TextBox>
-                                                                                                </div>
-                                                                                                <div class="col-md-1">
-                                                                                                    <asp:RequiredFieldValidator ID="valTotal" runat="server" ControlToValidate="txtTotal" ErrorMessage="*Total(Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="row">
-                                                                                                <div class="col-md-2">
-                                                                                                    Observaciones
-                                                                                                </div>
-                                                                                                <div class="col-md-10">
-                                                                                                    <asp:TextBox ID="txtObservacionesConvenio" runat="server" Height="100px" PlaceHolder="Especificar concepto de la factura, el importe total, en caso de que aplique desglosar IVA." TextMode="MultiLine" Width="90%"></asp:TextBox>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="row">
-                                                                                                <div class="col">
+                                                                                </ContentTemplate>
+                                                                            </asp:UpdatePanel>
+                                                                            <div class="row">
+                                                                                <div class="col">
+                                                                                    <div class="alert-warning">
+                                                                                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                                                            <ContentTemplate>
+                                                                                                <div class="container-fluid">
                                                                                                     <div class="note note-warning" style="font-size: 14px">
                                                                                                         <div class="row">
                                                                                                             <div class="col">
-                                                                                                                Anexar Convenio
+                                                                                                                Anexar Voucher
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="row">
-                                                                                                            <div class="col font-weight-bold">
-                                                                                                                *Solo formatos PNG, JPG y PDF
-                                                                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="fileConvenio" ErrorMessage="Archivo incorrecto, debe ser un PNG, JPG ó PDF" ValidationExpression="(.*?)\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator>
+                                                                                                            <div class="col">
+                                                                                                                <div class="col font-weight-bold">
+                                                                                                                    *Solo formatos PNG, JPG y PDF
+                                                                                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="fileVoucher" ErrorMessage="Archivo incorrecto, debe ser un PNG, JPG ó PDF" ValidationExpression="(.*?)\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator>
+                                                                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="fileVoucher" Text="* Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
+                                                                                                                </div>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                         <div class="row">
-                                                                                                            <div class="col-md-10">
-                                                                                                                <asp:FileUpload ID="fileConvenio" runat="server" Height="30px" />
+                                                                                                            <div class="col-md-8">
+                                                                                                                <asp:FileUpload ID="fileVoucher" runat="server" Height="30px" />
                                                                                                             </div>
-                                                                                                            <div class="col-md-2">
-                                                                                                                <asp:Button ID="btnConvenio" runat="server" CssClass="btn btn-blue-grey" Font-Size="Smaller" OnClick="btnConvenio_Click" Text="ADJUNTAR" ValidationGroup="guardar" />
+                                                                                                            <div class="col-md-4">
+                                                                                                                <asp:Button ID="btnVoucher" runat="server" CssClass="btn btn-blue-grey" OnClick="btnVoucher_Click" Text="ADJUNTAR" ValidationGroup="guardar" />
                                                                                                             </div>
                                                                                                         </div>
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-md-6">
+                                                                                                                <asp:HyperLink ID="lblArchivoVoucher" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
+                                                                                                            </div>
 
-                                                                                                        <div class="row">
-                                                                                                            <div class="col-md-10">
-                                                                                                                <asp:HyperLink ID="lblArchivoConvenio" runat="server" Target="_blank">[lblArchivoConvenio]</asp:HyperLink>
-                                                                                                            </div>
-                                                                                                            <div class="col-md-2">
-                                                                                                                <asp:LinkButton ID="linkBttnEliminarConvenio" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarConvenio_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
-                                                                                                                </td>
+                                                                                                            <div class="col-md-6">
+                                                                                                                <asp:UpdatePanel ID="UpdatePanel49" runat="server">
+                                                                                                                    <ContentTemplate>
+                                                                                                                        <asp:LinkButton ID="linkBttnEliminarVoucher" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarVoucher_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
+                                                                                                                    </ContentTemplate>
+                                                                                                                </asp:UpdatePanel>
                                                                                                             </div>
                                                                                                         </div>
                                                                                                     </div>
                                                                                                 </div>
+                                                                                            </ContentTemplate>
+                                                                                            <Triggers>
+                                                                                                <asp:PostBackTrigger ControlID="btnVoucher" />
+                                                                                            </Triggers>
+                                                                                        </asp:UpdatePanel>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </Content>
+                                                                </ajaxToolkit:AccordionPane>
+                                                                <ajaxToolkit:AccordionPane runat="server" ID="AccordionPane1" CssClass="note-info">
+                                                                    <Header>
+                                                                        Datos del Oficio <i class="fa fa-file-text" aria-hidden="true"></i> 
+                                                                    </Header>
+                                                                    <Content>
+                                                                        <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                                                                            <ContentTemplate>
+                                                                                <div class="container-fluid">
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-2">
+                                                                                            Núm. de Oficio
+                                                                                        </div>
+                                                                                        <div class="col-md-3">
+                                                                                            <asp:TextBox ID="txtNumOficio" runat="server"></asp:TextBox>
+                                                                                        </div>
+                                                                                        <div class="col-md-1">
+                                                                                            <asp:RequiredFieldValidator ID="valNumOficio" runat="server" ControlToValidate="txtNumOficio" ErrorMessage="*Número de Oficio (Pestania 2-&gt;Datos del Oficio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                        </div>
+                                                                                        <div class="col-md-2">
+                                                                                            Fecha Oficio
+                                                                                        </div>
+                                                                                        <div class="col-md-4">
+                                                                                            <asp:TextBox ID="txtFechaOficio" runat="server"></asp:TextBox>
+                                                                                            <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="ImageButton2" TargetControlID="txtFechaOficio" />
+                                                                                            <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtFechaOficio" ErrorMessage="*Fecha Oficio(Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="container-fluid">
+                                                                                    <div class="note note-warning" style="font-size: 14px">
+                                                                                        <div class="row">
+                                                                                            <div class="col">
+                                                                                                Anexar Oficio
                                                                                             </div>
                                                                                         </div>
-                                                                                    </ContentTemplate>
-                                                                                    <Triggers>
-                                                                                        <asp:PostBackTrigger ControlID="btnConvenio" />
-                                                                                    </Triggers>
-                                                                                </asp:UpdatePanel>
-                                                                            </Content>
-                                                                        </ajaxToolkit:AccordionPane>
+                                                                                        <div class="row">
+                                                                                            <div class="col">
+                                                                                                <div class="col font-weight-bold">
+                                                                                                    *Solo formatos PNG, JPG y PDF
+                                                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="fileOficio" ErrorMessage="Archivo incorrecto, debe ser un PNG, JPG ó PDF" ValidationExpression="(.*?)\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-8">
+                                                                                                <asp:FileUpload ID="fileOficio" runat="server" Height="30px" />
+                                                                                            </div>
+                                                                                            <div class="col-md-4">
+                                                                                                <asp:Button ID="btnOficio" runat="server" CssClass="btn btn-blue-grey" Font-Size="Smaller" OnClick="btnOficio_Click" Text="ADJUNTAR" ValidationGroup="guardar" />
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-4">
+                                                                                                <asp:HyperLink ID="lblArchivoOficio" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
+                                                                                            </div>
+                                                                                            <div class="col-md-4">
+                                                                                                <asp:LinkButton ID="linkBttnEliminarOficio" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarOficio_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </ContentTemplate>
+                                                                            <Triggers>
+                                                                                <asp:PostBackTrigger ControlID="btnOficio" />
+                                                                            </Triggers>
+                                                                        </asp:UpdatePanel>
+                                                                    </Content>
+                                                                </ajaxToolkit:AccordionPane>
+                                                                <ajaxToolkit:AccordionPane ID="AccordionPane2" runat="server">
+                                                                    <Header>Importe/Convenio <i class="fa fa-money" aria-hidden="true"></i>
+                                                                    </Header>
+                                                                    <Content>
+                                                                        <asp:UpdatePanel ID="updPnlConvenio" runat="server">
+                                                                            <ContentTemplate>
+                                                                                <div class="container-fluid">
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-1">
+                                                                                            Importe
+                                                                                        </div>
+                                                                                        <div class="col-md-2">
+                                                                                            <asp:TextBox ID="txtImporteConvenio" runat="server" Width="100px"></asp:TextBox>
 
-                                                                    </Panes>
-                                                                </ajaxToolkit:Accordion>
-                                                            </div>
-                                                        </div>
+
+                                                                                            <asp:RequiredFieldValidator ID="valImpConvenio" runat="server" ControlToValidate="txtImporteConvenio" ErrorMessage="*Importe (Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                        </div>
+                                                                                        <div class="col-md-2">
+                                                                                            IVA
+                                                                                        </div>
+                                                                                        <div class="col-md-2">
+                                                                                            <asp:TextBox ID="txtIVA" runat="server" AutoPostBack="True" OnTextChanged="txtIVA_TextChanged" Width="100px"></asp:TextBox>
+                                                                                        </div>
+                                                                                        <div class="col-md-1">
+                                                                                            <asp:RequiredFieldValidator ID="valIva" runat="server" ControlToValidate="txtIVA" ErrorMessage="*Iva(Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                        </div>
+                                                                                        <div class="col-md-1">
+                                                                                            Total
+                                                                                        </div>
+                                                                                        <div class="col-md-2">
+                                                                                            <asp:TextBox ID="txtTotal" runat="server" Width="100px"></asp:TextBox>
+                                                                                        </div>
+                                                                                        <div class="col-md-1">
+                                                                                            <asp:RequiredFieldValidator ID="valTotal" runat="server" ControlToValidate="txtTotal" ErrorMessage="*Total(Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col-md-2">
+                                                                                            Observaciones
+                                                                                        </div>
+                                                                                        <div class="col-md-10">
+                                                                                            <asp:TextBox ID="txtObservacionesConvenio" runat="server" Height="100px" PlaceHolder="Especificar concepto de la factura, el importe total, en caso de que aplique desglosar IVA." TextMode="MultiLine" Width="90%"></asp:TextBox>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="row">
+                                                                                        <div class="col">
+                                                                                            <div class="note note-warning" style="font-size: 14px">
+                                                                                                <div class="row">
+                                                                                                    <div class="col">
+                                                                                                        Anexar Convenio
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="row">
+                                                                                                    <div class="col font-weight-bold">
+                                                                                                        *Solo formatos PNG, JPG y PDF
+                                                                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator4" runat="server" ControlToValidate="fileConvenio" ErrorMessage="Archivo incorrecto, debe ser un PNG, JPG ó PDF" ValidationExpression="(.*?)\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-10">
+                                                                                                        <asp:FileUpload ID="fileConvenio" runat="server" Height="30px" />
+                                                                                                    </div>
+                                                                                                    <div class="col-md-2">
+                                                                                                        <asp:Button ID="btnConvenio" runat="server" CssClass="btn btn-blue-grey" Font-Size="Smaller" OnClick="btnConvenio_Click" Text="ADJUNTAR" ValidationGroup="guardar" />
+                                                                                                    </div>
+                                                                                                </div>
+
+                                                                                                <div class="row">
+                                                                                                    <div class="col-md-10">
+                                                                                                        <asp:HyperLink ID="lblArchivoConvenio" runat="server" Target="_blank">[lblArchivoConvenio]</asp:HyperLink>
+                                                                                                    </div>
+                                                                                                    <div class="col-md-2">
+                                                                                                        <asp:LinkButton ID="linkBttnEliminarConvenio" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarConvenio_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
+                                                                                                        </td>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </ContentTemplate>
+                                                                            <Triggers>
+                                                                                <asp:PostBackTrigger ControlID="btnConvenio" />
+                                                                            </Triggers>
+                                                                        </asp:UpdatePanel>
+                                                                    </Content>
+                                                                </ajaxToolkit:AccordionPane>
+
+                                                            </Panes>
+                                                        </ajaxToolkit:Accordion>
                                                     </div>
                                                     <br />
                                                     <div class="container-fluid">
-                                                        <%--<div class="row">
-                                                            <div class="col-md-1">
-                                                                Nivel
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%">
-                                                                </asp:DropDownList>
-                                                            </div>
-                                                        </div>--%>
                                                         <div class="row">
                                                             <div class="col">
                                                                 <asp:CustomValidator ID="valConceptos" runat="server" ErrorMessage="*Se debe asignar al menor un concepto" OnServerValidate="ConceptosAsignados" ValidationGroup="DatosFiscales">*Conceptos Requeridos</asp:CustomValidator>
                                                             </div>
                                                         </div>
                                                         <div class="row">
-                                                            <%--<div class="col-md-6">
-                                                                <div class=" alert alert-warning text-center">
-                                                                    <strong>CONCEPTOS ASIGNADOS</strong>
-                                                                </div>
-                                                            </div>--%>
-                                                            <%--<div class="col-md-6">
-                                                                <div class=" alert alert-warning text-center">
-                                                                    <strong>CONCEPTOS DISPONIBLES
-                                                                    </strong>
-                                                                </div>
-                                                            </div>--%>
-                                                        </div>
-
-                                                        <div class="row">
                                                             <div class="col-md-6">
-
-                                                                <%--<div id="example_filter" class="dataTables_filter">--%>
-                                                                <%-- <div id="ctl00_MainContent_tabFacturas_TabPanel3_grvConceptosDisp" class="dataTables_filter"><label>Buscar:<input type="search" class="" placeholder="" aria-controls="ContentPlaceHolder1_TablaFinanciadores"></label></div>
-                                                                    <label>Buscar<input type="search" class="" placeholder="" aria-controls="example"></label></div>--%>
-                                                                <%--<div id="ctl00_MainContent_tabFacturas_TabPanel3_grvConceptosDisp_filter" class="dataTables_filter">
-                                                                    <label>
-                                                                        Buscar:
-    <input type="search" class="" placeholder="" aria-controls="ctl00_MainContent_tabFacturas_TabPanel3_grvConceptosDisp"></label>
-                                                                </div>--%>
                                                                 <asp:GridView ID="grvConceptosDisp" runat="server" AutoGenerateColumns="False" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptosDisp_PageIndexChanging" OnSelectedIndexChanged="grvConceptosDisp_SelectedIndexChanged" Width="100%" OnRowDataBound="grvConceptosDisp_RowDataBound" CssClass="mGrid">
                                                                     <Columns>
                                                                         <asp:BoundField DataField="ClaveConcepto" HeaderText="CVE">

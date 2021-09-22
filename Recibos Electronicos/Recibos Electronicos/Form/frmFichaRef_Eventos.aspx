@@ -64,14 +64,16 @@
                     <ContentTemplate>
                         <asp:GridView ID="grdEventos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen eventos para esta dependencia." Width="100%" OnPageIndexChanging="grdEventos_PageIndexChanging">
                             <Columns>
-                                <asp:BoundField DataField="Eventos" HeaderText="CVE." />
-                                <asp:BoundField DataField="Dependencia" HeaderText="Dep.">
+                                <asp:BoundField DataField="Eventos" HeaderText="Cve" >
+                                    <ItemStyle Width="7%" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Dependencia" HeaderText="Depcia">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Descripcion" HeaderText="Descripcion">
                                     <HeaderStyle HorizontalAlign="Left" />
-                                    <ItemStyle HorizontalAlign="Left" />
+                                    <ItemStyle  Width="70%" HorizontalAlign="Left" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Fecha_inicial" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha Inicial">
                                     <HeaderStyle HorizontalAlign="Left" />
