@@ -3,7 +3,9 @@
 <%@ Register TagName="uCCorreo" TagPrefix="usr" Src="EnviarCorreo.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <style>
+    <script src="Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <style type="text/css">
         .nav-tabs .nav-link {
             border: 1px solid #f8f9fa;
             border-top-left-radius: .25rem;
@@ -75,6 +77,10 @@
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="EtiquetaCuatro" FooterText="BANORTE" HeaderText="BANORTE">
                                                         <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="EtiquetaSiete" HeaderText="AZTECA">
+                                                        <HeaderStyle HorizontalAlign="Center" Font-Bold="True" ForeColor="#333333" />
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="EtiquetaSeis" FooterText="VISA/MASTERCARD" HeaderText="VISA">
@@ -233,13 +239,13 @@
                             <%--<div id="precarga1" class="align-content-lg-center hidden"><input type="image" class="center" Height="50px" src="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" />Cargando recibo...</div>--%>
                             <div class="col-md-4">
                                 <div class="input-group mb-3">
-                                    <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia, folio ó nombre" Width="80%" Visible="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia, folio ó nombre" Width="70%" Visible="true"></asp:TextBox>
                                     <div class="input-group-append">
                                         <span class="input-group-text_buscar" id="basic-addon2">
                                             <asp:UpdatePanel ID="updPnlBuscar" runat="server">
                                                 <ContentTemplate>
                                                     <button runat="server" id="bttnBuscar" onserverclick="bttnBuscar_Click" class="btn-buscar btn-primary" validationgroup="Buscar" style="width: 100%">
-                                                        <i class="fa fa-search" aria-hidden="true"></i>
+                                                        Ver Recibos
                                                     </button>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
@@ -276,16 +282,11 @@
                                 </div>
                             </div>
                         </div>
-                        <%--<div class="row">
-                            <div class="col text-center">
-                                <asp:UpdateProgress ID="UpdateProgressFactura" runat="server" AssociatedUpdatePanelID="UpdatePanelGrid">
-                                    <ProgressTemplate>
-                                        <asp:Image ID="imgPrecargaFact" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                                            ToolTip="Espere un momento, por favor.." Width="50px" Height="50px" />
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                            </div>
-                        </div>--%>
+
+                        <div class="row alert alert-danger" runat="server" id="divErrorTot" visible="false">
+                            <div class="col">La consulta excede los 2000 registros, favor de realizar filtros para un correcto funcionamiento.</div>
+                        </div>
+
                         <div class="row">
                             <div class="col text-center">
                                 <asp:UpdateProgress ID="UpdateProgressFactura" runat="server" AssociatedUpdatePanelID="updPnlGridFacturas">
@@ -301,13 +302,14 @@
                                 <div style="overflow-x: auto;">
                                     <asp:UpdatePanel ID="updPnlGridFacturas" runat="server">
                                         <ContentTemplate>
-                                            <asp:GridView ID="grdDatosFactura" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" DataKeyNames="ID_FACT" EmptyDataText="El banco no reporto pagos, para el rango de fecha especificado..." OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" PageSize="20" ShowHeaderWhenEmpty="True" Width="100%">
+                                            <asp:GridView ID="grdDatosFactura" runat="server" AutoGenerateColumns="False" CssClass="mGrid" DataKeyNames="ID_FACT" EmptyDataText="El banco no reporto pagos, para el rango de fecha especificado..." OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" PageSize="20" ShowHeaderWhenEmpty="True" Width="100%">
                                                 <Columns>
                                                     <asp:BoundField DataField="ID_FACT" HeaderText="ID" SortExpression="ID"></asp:BoundField>
                                                     <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
-                                                        <HeaderStyle HorizontalAlign="Left" />
-                                                        <ItemStyle HorizontalAlign="Left" />
+                                                    <HeaderStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Left" />
                                                     </asp:BoundField>
+                                                    <asp:BoundField DataField="FACT_BANCO" HeaderText="Banco" />
                                                     <asp:BoundField DataField="FACT_REFERENCIA" HeaderText="Referencia" SortExpression="REFERENCIA">
                                                         <HeaderStyle HorizontalAlign="Left" />
                                                         <ItemStyle HorizontalAlign="Left" />
@@ -324,7 +326,7 @@
                                                         <HeaderStyle HorizontalAlign="Left" />
                                                         <ItemStyle HorizontalAlign="Left" />
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Dep." SortExpression="DEPENDENCIA"></asp:BoundField>
+                                                    <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Dep" SortExpression="DEPENDENCIA"></asp:BoundField>
                                                     <asp:BoundField DataField="FACT_MATRICULA" HeaderText="Cve" />
                                                     <asp:TemplateField HeaderText="Enviar">
                                                         <ItemTemplate>
@@ -727,5 +729,15 @@
     </asp:Panel>
     <script type="text/javascript" src="Scripts/jsQR2.js"></script>
     <script type="text/javascript" src="Scripts/QRModel.js"></script>
+    <script type="text/javascript">
+        function Recibos() {
+
+            $('#<%= grdDatosFactura.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdDatosFactura.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true
+            });
+
+        }
+    </script>
 </asp:Content>
 

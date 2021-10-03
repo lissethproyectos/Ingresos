@@ -35,6 +35,8 @@ namespace Recibos_Electronicos
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
                 inicializar();
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridRecibos", "Recibos();", true);
         }
 
         protected void inicializar()
@@ -192,6 +194,7 @@ namespace Recibos_Electronicos
 
         private void CargarGrid()
         {
+            divErrorTot.Visible = false;
             try
             {
                 DataTable dt = new DataTable();
@@ -199,40 +202,22 @@ namespace Recibos_Electronicos
                 grdDatosFactura.DataSource = GetList();
                 grdDatosFactura.DataBind();
 
+
+
+
+
                 if (grdDatosFactura.Rows.Count > 0)
                 {
-                    //if (SesionUsu.Usu_TipoUsu == 3)//Muestra la columna Editar
-                    //{
-                    //    Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
-                    //    Usur.Usu_IdModulo = 15314;
-                    //    CNUsuario.PermisoUsuario(ref Usur, ref Verificador);
-                    //    grdDatosFactura.Columns[9].Visible = false;
-                    //    if (SesionUsu.Usu_Central == "S")
-                    //    {
-                    //        Int32[] Celdas = { 0, 9, 10, 11 };
-                    //        CNComun.HideColumns(grdDatosFactura, Celdas);
-                    //    }
-                    //    else
-                    //    {
-                    //        Int32[] Celdas = { 0, 7, 9, 10, 11 };
-                    //        CNComun.HideColumns(grdDatosFactura, Celdas);
-                    //    }
-
-                    //}
-                    //else
-                    //{
-                    //Int32[] Celdas = { 0, 10, 11 };
-                    //CNComun.HideColumns(grdDatosFactura, Celdas);
-                    //}
+                   
 
                     if (SesionUsu.Usu_TipoUsu == 4 || SesionUsu.Usu_TipoUsu == 7)//Muestra la columna Editar
                     {
-                        Int32[] Celdas = { 0, 10, 11 };
+                        Int32[] Celdas = { 0, 11, 12 };
                         CNComun.HideColumns(grdDatosFactura, Celdas);
                     }
                     else
                     {
-                        Int32[] Celdas = { 0, 10, 11, 12 };
+                        Int32[] Celdas = { 0, 11, 12, 13 };
                         CNComun.HideColumns(grdDatosFactura, Celdas);
                     }
 
@@ -254,7 +239,12 @@ namespace Recibos_Electronicos
                 Usur.Usu_NoControl = SesionUsu.Usu_NoControl;
                 Usur.Usu_TipoUsu = SesionUsu.Usu_TipoUsu;
                 CNFactura.FacturaConsultaGrid(Usur, ref ObjFactura, ddlDependencia.SelectedValue.ToString(), txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtReferencia.Text, ref List);
-
+                if (List.Count >= 2000)
+                {
+                    List = null;
+                    divErrorTot.Visible = true;
+                }
+                
                 return List;
             }
             catch (Exception ex)
@@ -291,7 +281,7 @@ namespace Recibos_Electronicos
             try
             {
                 grdDatosFactura.SelectedIndex = row.RowIndex;
-                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[7].Text;
+                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[8].Text;
                 PnlCorreo.Recibo = grdDatosFactura.SelectedRow.Cells[0].Text;
                 PnlCorreo.Muestra();
             }
@@ -315,7 +305,7 @@ namespace Recibos_Electronicos
             pnlReciboOficial.Visible = true;
             btnRegresar.Visible = true;
             grdDatosFactura.Visible = false;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ObtenerQR(" + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text) + "," + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[11].Text) + ");", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "ObtenerQR(" + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text) + "," + Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[12].Text) + ");", true);
         }
 
         protected void grdMonitor_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -602,7 +592,7 @@ namespace Recibos_Electronicos
                 ObjFactura.FACT_OBSERVACIONES = txtDescConcepto.Text.ToUpper();
                 ObjFactura.FACT_RECEPTOR_FORMA_PAGO = ddlForma_Pago.SelectedValue;
                 if (SesionUsu.Usu_TipoUsu == 4 || SesionUsu.Usu_TipoUsu == 7)
-                    Usuario = Convert.ToString(grdDatosFactura.SelectedRow.Cells[7].Text);
+                    Usuario = Convert.ToString(grdDatosFactura.SelectedRow.Cells[8].Text);
                 else
                     Usuario = SesionUsu.Usu_Nombre;
 
@@ -641,7 +631,7 @@ namespace Recibos_Electronicos
             try
             {
                 grdDatosFactura.SelectedIndex = row.RowIndex;
-                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[7].Text;
+                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[8].Text;
                 PnlCorreo.Recibo = grdDatosFactura.SelectedRow.Cells[0].Text;
                 PnlCorreo.Muestra();
             }

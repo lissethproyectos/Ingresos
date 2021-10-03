@@ -373,6 +373,12 @@ namespace Recibos_Electronicos.Form
                     CargarGridServicios();
                     modal.Hide();
                 }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+                }
+
             }
         
             catch (Exception ex)

@@ -523,15 +523,13 @@ namespace CapaDatos
 
                 OracleDataReader dr = null;
 
-                string[] ParametrosIn ={ "P_NIVEL" };
-                Object[] Valores ={
-                                    ObjVigencias.Nivel
+                
 
-                };
-
-                if (ObjVigencias.Tipo == "SYSWEB")
+                if (ObjVigencias.Tipo == "SYSWEB" || ObjVigencias.Tipo == "SYSWEB_ADMON")
                 {
-                    cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Vigencias_SYSWEB", ref dr);
+                    string[] ParametrosIn = { "p_tipo" };
+                    Object[] Valores = { ObjVigencias.Tipo };
+                    cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Vigencias_SYSWEB", ref dr, ParametrosIn, Valores);
                     while (dr.Read())
                     {
                         ObjVigencias = new ConceptoPago();
@@ -543,6 +541,8 @@ namespace CapaDatos
                 }
                 else if (ObjVigencias.Tipo == "SIAE_ACT")
                 {
+                    string[] ParametrosIn = { "P_NIVEL" };
+                    Object[] Valores ={ ObjVigencias.Nivel   };
                     cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Vigencias", ref dr, ParametrosIn, Valores);
                     while (dr.Read())
                     {
@@ -558,6 +558,8 @@ namespace CapaDatos
                 }
                 else
                 {
+                    string[] ParametrosIn = { "P_NIVEL" };
+                    Object[] Valores = { ObjVigencias.Nivel };
                     cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Vigencias_Ciclo", ref dr, ParametrosIn, Valores);
                     while (dr.Read())
                     {
@@ -695,10 +697,10 @@ namespace CapaDatos
             {
 
 
-                string[] Parametros = { "P_CICLO", "P_DIAS_VIGENCIA" };
+                string[] Parametros = { "P_CICLO", "P_DIAS_VIGENCIA", "P_TIPO" };
                 string[] ParametrosOut = { "p_BANDERA" };
 
-                object[] Valores = { ObjVigencias.CicloEscolar, ObjVigencias.DiasVigencia };
+                object[] Valores = { ObjVigencias.CicloEscolar, ObjVigencias.DiasVigencia, ObjVigencias.Tipo };
 
 
                 OracleCmd = CDDatos.GenerarOracleCommand("UPD_VIGENCIAS_SYSWEB", ref Verificador, Parametros, Valores, ParametrosOut);

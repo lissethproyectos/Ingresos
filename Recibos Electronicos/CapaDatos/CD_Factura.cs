@@ -84,6 +84,7 @@ namespace CapaDatos
                     ObjComun.EtiquetaCinco = Convert.ToString(dr.GetValue(4));
                     ObjComun.EtiquetaSeis = Convert.ToString(dr.GetValue(5));
                     ObjComun.EtiquetaSiete = Convert.ToString(dr.GetValue(6));
+                    ObjComun.EtiquetaSiete = Convert.ToString(dr.GetValue(7));
                     List.Add(ObjComun);
 
                 }
@@ -226,6 +227,7 @@ namespace CapaDatos
                 String[] Valores = { ObjUsuario.Usu_TipoUsu.ToString(), ObjUsuario.Usu_Nombre, Dependencia, FechaInicial, FechaFinal, ObjUsuario.Usu_NoControl, Referencia };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Facturas", ref dr, Parametros, Valores);
+                //int Reg = dr.FieldCount;
                 while (dr.Read())
                 {
                     ObjFactura = new Factura();
@@ -241,7 +243,8 @@ namespace CapaDatos
                     ObjFactura.VISIBLE1= Convert.ToInt32(dr.GetValue(9))==0?false:true;
                     ObjFactura.VISIBLE2 = Convert.ToInt32(dr.GetValue(9)) == 0 ? true : false;
                     ObjFactura.RUTA_ADJUNTO= Convert.ToInt32(dr.GetValue(9)) == 0 ? "" : "~/Imagenes/fact_xml.png";
-                    ObjFactura.FACT_RECEPTOR_CORREO= Convert.ToString(dr.GetValue(10));
+                    ObjFactura.FACT_RECEPTOR_CORREO = Convert.ToString(dr.GetValue(10));
+                    ObjFactura.FACT_BANCO = Convert.ToString(dr.GetValue(11));
                     List.Add(ObjFactura);
 
                 }

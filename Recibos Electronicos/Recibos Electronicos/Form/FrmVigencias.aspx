@@ -33,6 +33,7 @@
                             <asp:ListItem Value="SIAE_ACT">VIGENCIA DEL CICLO ACTUAL (SIAE)</asp:ListItem>
                             <asp:ListItem Value="SIAE_ANT">VIGENCIA DEL CICLO ANTERIOR (SIAE)</asp:ListItem>
                             <asp:ListItem Value="SYSWEB">VIGENCIA EN SYSWEB</asp:ListItem>
+                            <asp:ListItem Value="SYSWEB_ADMON">VIGENCIA EN SYSWEB (SUPER ADMON)</asp:ListItem>
                         </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>

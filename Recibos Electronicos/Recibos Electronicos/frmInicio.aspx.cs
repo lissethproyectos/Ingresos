@@ -111,9 +111,9 @@ namespace Recibos_Electronicos
                 GetListBancos(ref ListUsuario);
                 if (ListUsuario.Count >= 1)
                 {
-                    grdStatus_Carga_Bancos.DataSource = dt;
-                    grdStatus_Carga_Bancos.DataSource = ListUsuario;
-                    grdStatus_Carga_Bancos.DataBind();
+                    //grdStatus_Carga_Bancos.DataSource = dt;
+                    //grdStatus_Carga_Bancos.DataSource = ListUsuario;
+                    //grdStatus_Carga_Bancos.DataBind();
                 }
             }
             catch (Exception ex)

@@ -48,7 +48,7 @@ namespace Recibos_Electronicos.Form
                 grdVigencias.DataBind();
                 if (grdVigencias.Rows.Count > 0)
                 { 
-                    if (DDLSubtipo.SelectedValue == "SYSWEB")
+                    if (DDLSubtipo.SelectedValue == "SYSWEB" || DDLSubtipo.SelectedValue == "SYSWEB_ADMON")
                         CNComun.HideColumns(grdVigencias, Celdas2);
                     else
                         CNComun.HideColumns(grdVigencias, Celdas);
@@ -166,7 +166,7 @@ namespace Recibos_Electronicos.Form
                 int fila = e.RowIndex;
 
 
-                if (DDLTipo.SelectedValue == "SYSWEB")
+                if (DDLTipo.SelectedValue == "SYSWEB" || DDLTipo.SelectedValue == "SYSWEB_ADMON")
                 {
                     TextBox txtCicloEscolar = (TextBox)(row.Cells[6].FindControl("txtCicloEscolar"));
                     string CicloEscolar = txtCicloEscolar.Text; // row.Cells[3].Text;
@@ -175,6 +175,7 @@ namespace Recibos_Electronicos.Form
                     grdVigencias.EditIndex = -1;
                     ObjVigencias.DiasVigencia = Convert.ToInt32(DiasVigencia);
                     ObjVigencias.CicloEscolar = Convert.ToInt32(CicloEscolar);
+                    ObjVigencias.Tipo = DDLTipo.SelectedValue;
                     CNConcepto.ActualizarVigenciasSYSWEB(ObjVigencias, ref Verificador);
                     if (Verificador == "0")
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(1, 'Los datos han sido modificados correctamente.');", true); //lblMsj.Text = ex.Message;

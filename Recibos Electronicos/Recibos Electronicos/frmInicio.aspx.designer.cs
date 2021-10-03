@@ -69,21 +69,12 @@ namespace Recibos_Electronicos
         protected global::System.Web.UI.UpdateProgress updPnlCC;
 
         /// <summary>
-        /// Control UpdatePanel34.
+        /// Control lblNivel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel34;
-
-        /// <summary>
-        /// Control grdStatus_Carga_Bancos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdStatus_Carga_Bancos;
+        protected global::System.Web.UI.WebControls.Label lblNivel;
     }
 }

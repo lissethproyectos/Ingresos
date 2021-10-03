@@ -56,8 +56,7 @@ namespace CapaDatos
                 object[] Valores = { ObjMensaje.IdMensaje };
                 string[] ParametrosOut ={
                                           "p_centro_contable",
-                                          "p_observaciones",
-                                          "p_observaciones2",
+                                          "p_observaciones",                                          
                                           "p_fecha_inicial",
                                           "p_fecha_final",
                                           "p_status",

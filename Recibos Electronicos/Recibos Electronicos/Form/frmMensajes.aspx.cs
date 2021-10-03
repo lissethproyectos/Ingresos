@@ -77,6 +77,8 @@ namespace Recibos_Electronicos.Form
                 CargarCombos();
                 CargarGrid();
             }
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "Grid", "Mensajes();", true);
         }
 
         protected void grvAlumnos_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -200,8 +202,13 @@ namespace Recibos_Electronicos.Form
 
         protected void DDLTipoUsu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            lblDependencia.Visible = (DDLTipoUsu.SelectedValue == "3") ? true : false;
             ddlDependencia.Visible = (DDLTipoUsu.SelectedValue == "3")?true:false;            
+        }
+
+        protected void bttnNuevo_Click(object sender, EventArgs e)
+        {
+            SesionUsu.Editar = 0;
+            MultiView1.ActiveViewIndex = 1;
         }
     }
 }

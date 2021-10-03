@@ -825,6 +825,42 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Button btnCancelar;
 
         /// <summary>
+        /// Control lblUsuSolicitado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUsuSolicitado;
+
+        /// <summary>
+        /// Control lblFechaSolicitado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFechaSolicitado;
+
+        /// <summary>
+        /// Control lblUsuAutorizado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUsuAutorizado;
+
+        /// <summary>
+        /// Control lblFechaAutorizado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFechaAutorizado;
+
+        /// <summary>
         /// Control UpdatePanel5.
         /// </summary>
         /// <remarks>

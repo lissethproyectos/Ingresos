@@ -281,6 +281,9 @@
                                                         <div class="col-md-1">SubGrupo</div>
                                                         <div class="col-md-3">
                                                             <asp:DropDownList ID="DDLRubro" runat="server">
+                                                                <asp:ListItem>ANÁLISIS DE SUELO</asp:ListItem>
+                                                                <asp:ListItem>ANÁLISIS DE AGUA</asp:ListItem>
+                                                                <asp:ListItem>ANÁLISIS DE COMPOSTA</asp:ListItem>
                                                                 <asp:ListItem>CONSULTORIO</asp:ListItem>
                                                                 <asp:ListItem>CIRUGIAS</asp:ListItem>
                                                                 <asp:ListItem>LABORATORIO</asp:ListItem>

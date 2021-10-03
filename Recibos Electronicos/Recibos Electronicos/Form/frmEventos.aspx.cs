@@ -206,10 +206,10 @@ namespace Recibos_Electronicos.Form
                     ddlDirigido.SelectedValue = Objeventos.Tipo;
                     rbnExclusivo.SelectedValue = Objeventos.Autorizacion;
                     rbnExclusivo_SelectedIndexChanged(null, null);
-                    //lblUsuSolicitado.Text = Objeventos.Usuario_Solicita;
-                    //lblFechaSolicitado.Text = Objeventos.Fecha_Solicitud;
-                    //lblUsuAutorizado.Text = Objeventos.Usuario_Autoriza;
-                    //lblFechaAutorizado.Text = Objeventos.Fecha_Autorizacion;
+                    lblUsuSolicitado.Text = Objeventos.Usuario_Solicita;
+                    lblFechaSolicitado.Text = Objeventos.Fecha_Solicitud;
+                    lblUsuAutorizado.Text = Objeventos.Usuario_Autoriza;
+                    lblFechaAutorizado.Text = Objeventos.Fecha_Autorizacion;
                     txtEspecificacion.Text = Objeventos.Observaciones;
 
 
@@ -1384,6 +1384,19 @@ namespace Recibos_Electronicos.Form
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupOficios", "$('#modalOficios').modal('show')", true);
 
             }
+        }
+
+        protected void linkBttnReporte_Click(object sender, EventArgs e)
+        {
+           
+                LinkButton cbi = (LinkButton)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grdEventos.SelectedIndex = row.RowIndex;
+                string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP061&Evento=" + grdEventos.SelectedRow.Cells[2].Text + "&enExcel=N";
+                string _open = "window.open('" + ruta + "', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+            
         }
     }
 }

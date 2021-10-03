@@ -87,7 +87,7 @@ namespace Recibos_Electronicos.Form
         {
             //var usuAdmin = Array.FindAll(UsuariosSuper, s => s.Equals(SesionUsu.Usu_Nombre));
             MsjError = string.Empty;
-            Int32[] Celdas = { 0, 8};
+            Int32[] Celdas = { 0 };
 
             try
             {

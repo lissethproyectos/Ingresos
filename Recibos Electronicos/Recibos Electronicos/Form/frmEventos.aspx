@@ -146,7 +146,7 @@
                                                                 <asp:LinkButton ID="linkBttnEditEnabled" runat="server" Visible='<%# Bind("EsVisible2") %>'><i class="fa fa-pencil  fa-2x disabled" aria-hidden="true"></i></asp:LinkButton>
                                                                 <asp:LinkButton ID="linkBttnEdit" runat="server" Visible='<%# Bind("EsVisible") %>' OnClick="linkBttnEdit_Click"><i class="fa fa-pencil  fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                                 &nbsp;<asp:LinkButton ID="linkBttnEliminar" runat="server"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
-                                                                &nbsp;<asp:LinkButton ID="linkBttnReporte" runat="server"><i class="fa fa-sticky-note fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                                &nbsp;<asp:LinkButton ID="linkBttnReporte" runat="server" OnClick="linkBttnReporte_Click"><i class="fa fa-sticky-note fa-2x" aria-hidden="true"></i></asp:LinkButton>
 
                                                                 <%--<asp:ImageButton ID="imgBttnEditar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/edit.png" OnClick="imgBttnEditar_Click" Visible='<%# Bind("EsVisible") %>' />--%>
                                                                 <%--                                                        &nbsp;<asp:ImageButton ID="ctrl_eliminar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/del.png" OnClientClick="return confirm('¿En realidad desea Eliminar este registro?');" />--%>
@@ -765,6 +765,40 @@
                                             </asp:UpdatePanel>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card-deck">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Solicitó</h5>
+                                                        <p class="card-text">
+                                                            <asp:Label ID="lblUsuSolicitado" runat="server"></asp:Label>
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <small class="text-muted">
+                                                                <asp:Label ID="lblFechaSolicitado" runat="server"></asp:Label>
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Autorizó</h5>
+                                                        <p class="card-text">
+                                                            <asp:Label ID="lblUsuAutorizado" runat="server"></asp:Label>
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <small class="text-muted">
+                                                                <asp:Label ID="lblFechaAutorizado" runat="server"></asp:Label>
+                                                            </small>
+                                                        </p>
+                                                    </div>
+                                                </div>                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             </asp:View>
                         </asp:MultiView>
