@@ -26,6 +26,8 @@
             font-family: sans-serif;
         }
 
+       
+
         .dropdown-item:focus, .dropdown-item:hover {
             color: #16181b;
             text-decoration: none;
@@ -67,14 +69,7 @@
             z-index: 1 !important;
         }
 
-        .quedate_en_casa {
-            position: absolute;
-            top: 0;
-            right: 0;
-            text-align: right;
-            margin: 0 auto;
-            width: 20px;
-        }
+       
 
         .c_mnu_nav {
             position: relative;
@@ -122,6 +117,69 @@
                 display: none;
             }
         }
+
+
+/*.ajax__tab_xp .ajax__tab_header .ajax__tab_inner {*/
+    /* background-repeat: no-repeat; */
+    /* padding-left: 3px; */
+/*}
+
+.ajax__myTab .ajax__tab_tab {
+    padding: 8px;
+    margin: 0;
+    background-color: #65635d;
+}
+.ajax__myTab .ajax__tab_active .ajax__tab_inner {
+    background-color: #65635d;
+    border-top: 2px solid #333333;
+    border-left: 1px solid #333333;
+    border-right: 1px solid #333333;*/
+    /* background-color: #0098CB; */
+/*}
+.ajax__tab_header {
+    font-family: Arial;
+    font-size: 14px;
+    border: solid 1px #d9d9d9;
+    background-color: #ededed;
+    color: #fff;*/
+    /* padding-left: 5px; */
+    /*padding-bottom: 8px;*/
+    /* height: 10px; */
+/*}
+.ajax__tab_xp .ajax__tab_header .ajax__tab_active .ajax__tab_tab {
+    background-repeat: repeat-x;
+    color: white;
+    background-color: #65635d;
+}
+
+.ajax__tab_header {
+    font-family: Arial;
+    font-size: 14px;
+    border: solid 1px #d9d9d9;
+    background-color: #ededed;
+    color: #fff;*/
+    /* padding-top: 7px; */
+    /* padding-left: 5px; */
+    /* padding-bottom: 8px; */
+/*}
+.ajax__tab_xp .ajax__tab_header .ajax__tab_tab {
+    background-repeat: repeat-x;
+    margin: 0;*/
+    /* padding: 4px; */
+/*}
+
+.ajax__tab_xp .ajax__tab_header .ajax__tab_outer {
+    background-position: right;
+    background-repeat: no-repeat;
+}
+.ajax__tab_default .ajax__tab {*/
+    /* display: block; */
+    /*float: left;
+    height: 28px;
+    margin-top: 1px;
+}*/
+
+
     </style>
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">

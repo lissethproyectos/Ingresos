@@ -110,6 +110,36 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void ConsultarRegistrosRecibos(ref List<Registro> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Inhabiles", ref dr);
+
+                while (dr.Read())
+                {
+                    Registro ObjRegistro = new Registro();
+
+                    ObjRegistro.objeto = Convert.ToString(dr["OBJETO"]);
+                    List.Add(ObjRegistro);
+
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void ConsultarRegistroMatricula(ref Registro ObjRegistro, ref List<Registro> List)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -182,7 +212,7 @@ namespace CapaDatos
 
         public void refresh_vmaterilaizada(Registro ObjRegistro, ref string Verificador)
         {
-            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
             try
             {
@@ -205,6 +235,32 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void refresh_vmaterilaizada_recibos(Registro ObjRegistro, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                String[] Parametros = { "p_vista" };
+                Object[] Valores = { ObjRegistro.name };
+                String[] ParametrosOut = { "p_bandera" };
+
+
+                cmm = CDDatos.GenerarOracleCommand("GRL_REFRESCAR_VMATERIALIZADAS", ref Verificador, Parametros, Valores, ParametrosOut);
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void habilita_vmaterilaizada(Registro ObjRegistro, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");

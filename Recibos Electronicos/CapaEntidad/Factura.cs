@@ -57,6 +57,7 @@ namespace CapaEntidad
         private string _FACT_RECEPTOR_ESTADO;
         private string _FACT_RECEPTOR_METODO_PAGO;
         private string _FACT_RECEPTOR_STATUS;
+        private string _FACT_RECEPTOR_STATUS2;
         private string _FACT_RECEPTOR_STATUS_NOTAS;
         private string _FACT_STATUS_CAJA;
         private string _RUTA_ADJUNTO;
@@ -417,6 +418,11 @@ namespace CapaEntidad
         {
             get { return _FACT_RECEPTOR_STATUS; }
             set { _FACT_RECEPTOR_STATUS = value; }
+        }
+        public string FACT_RECEPTOR_STATUS2
+        {
+            get { return _FACT_RECEPTOR_STATUS2; }
+            set { _FACT_RECEPTOR_STATUS2 = value; }
         }
         public string FACT_RECEPTOR_STATUS_NOTAS
         {

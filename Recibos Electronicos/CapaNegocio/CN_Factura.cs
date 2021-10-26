@@ -232,6 +232,19 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void FacturaActDatosCaja(Factura ObjFactura, string UsuarioNombre, ref string Verificador)
+        {
+            try
+            {
+                CD_Factura DatosFactura = new CD_Factura();
+                DatosFactura.FacturaActDatosCaja(ObjFactura, UsuarioNombre, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void FacturaEditarDatosEfect(Factura ObjFactura, string UsuarioNombre, ref string Verificador)
         {
             try
@@ -245,13 +258,39 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void FacturaEditarDatosEfect2(Factura ObjFactura, string UsuarioNombre, ref string Verificador)
+        {
+            try
+            {
+                CD_Factura DatosFactura = new CD_Factura();
+                DatosFactura.FacturaEditarDatosEfect2(ObjFactura, UsuarioNombre, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void FacturaAgregarDatosCaja(ref Factura ObjFactura, string UsuarioNombre, ref string Verificador)
-        //public void FacturaAgregarDatosCaja(ref Factura ObjFactura, string UsuarioNombre, ref string Verificador)
         {
             try
             {
                 CD_Factura DatosFactura = new CD_Factura();
                 DatosFactura.FacturaAgregarDatosCaja(ref ObjFactura, UsuarioNombre, ref Verificador);
+                //DatosFactura.FacturaAgregarDatosCaja(ref ObjFactura, UsuarioNombre, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void FacturaAgregarDatosCaja2(ref Factura ObjFactura, string UsuarioNombre, ref string Verificador)
+        {
+            try
+            {
+                CD_Factura DatosFactura = new CD_Factura();
+                DatosFactura.FacturaAgregarDatosCaja2(ref ObjFactura, UsuarioNombre, ref Verificador);
                 //DatosFactura.FacturaAgregarDatosCaja(ref ObjFactura, UsuarioNombre, ref Verificador);
 
             }

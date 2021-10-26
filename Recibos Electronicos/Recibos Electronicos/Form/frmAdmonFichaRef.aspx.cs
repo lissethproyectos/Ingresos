@@ -32,9 +32,11 @@ namespace Recibos_Electronicos.Form
                     string s = Request.Params["__EVENTTARGET"];
                     if ((Request.Params["__EVENTTARGET"] == this.txtReferencia.UniqueID) /*+&& (Request.Params["__EVENTARGUMENT"] == "actualizar_label")*/)
                     {
-                        this.imgBttnBuscar.Focus();
+                        this.bttnBuscar.Focus();
                     }
                 }
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridReferencias", "Referencias();", true);
             }
         }
 
@@ -62,10 +64,16 @@ namespace Recibos_Electronicos.Form
 
         private List<Factura> GetList()
         {
+            divErrorTot.Visible = false;
             try
             {
                 List<Factura> List = new List<Factura>();
-                CNFactura.FichaRefConsultaGrid(ObjFichaRef, txtReferencia.Text, ref List);
+                CNFactura.FichaRefConsultaGrid(ObjFichaRef, txtReferencia.Text.ToUpper(), ref List);
+                if (List.Count >= 2000)
+                {
+                    List = null;
+                    divErrorTot.Visible = true;
+                }
                 return List;
             }
             catch (Exception ex)
@@ -76,8 +84,13 @@ namespace Recibos_Electronicos.Form
 
         protected void txtReferencia_TextChanged(object sender, EventArgs e)
         {
-            this.imgBttnBuscar.Focus();
+            //this.imgBttnBuscar.Focus();
 
+        }
+
+        protected void bttnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarGrid();
         }
     }
 }

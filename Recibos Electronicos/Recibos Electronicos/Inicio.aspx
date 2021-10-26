@@ -105,7 +105,7 @@
                                 <div style="overflow-x: auto;">
                                     <asp:UpdatePanel ID="UpdatePanelGridMonitor" runat="server">
                                         <ContentTemplate>
-                                            <asp:GridView ID="grdMonitor" runat="server" AllowPaging="True"
+                                            <asp:GridView ID="grdMonitor" runat="server"
                                                 AutoGenerateColumns="False" OnPageIndexChanging="grdMonitor_PageIndexChanging"
                                                 Width="100%" PageSize="20" CssClass="mGrid" OnRowDeleting="grdMonitor_RowDeleting" CellSpacing="1">
                                                 <Columns>
@@ -306,8 +306,8 @@
                                                 <Columns>
                                                     <asp:BoundField DataField="ID_FACT" HeaderText="ID" SortExpression="ID"></asp:BoundField>
                                                     <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
-                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                    <ItemStyle HorizontalAlign="Left" />
+                                                        <HeaderStyle HorizontalAlign="Left" />
+                                                        <ItemStyle HorizontalAlign="Left" />
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="FACT_BANCO" HeaderText="Banco" />
                                                     <asp:BoundField DataField="FACT_REFERENCIA" HeaderText="Referencia" SortExpression="REFERENCIA">
@@ -737,6 +737,13 @@
                 "stateSave": true
             });
 
+        }
+        function Monitor() {
+            $('#<%= grdMonitor.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdMonitor.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
         }
     </script>
 </asp:Content>

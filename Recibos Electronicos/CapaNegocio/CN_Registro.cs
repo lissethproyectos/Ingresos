@@ -35,6 +35,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void ConsultarRegistrosRecibos(ref List<Registro> List)
+        {
+            try
+            {
+                CD_Registro CDRegistro = new CD_Registro();
+                CDRegistro.ConsultarRegistrosRecibos(ref List);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void ConsultarRegistros( ref List<Registro> List)
         {
             try
@@ -75,6 +89,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void refresh_vmaterilaizada_recibos(Registro ObjRegistro, ref string Verificador)
+        {
+            try
+            {
+                CD_Registro CDRegistro = new CD_Registro();
+                CDRegistro.refresh_vmaterilaizada(ObjRegistro, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void habilita_vmaterilaizada(Registro ObjRegistro, ref string Verificador)
         {
             try

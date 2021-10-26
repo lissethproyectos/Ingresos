@@ -37,6 +37,7 @@ namespace Recibos_Electronicos
                 inicializar();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "GridRecibos", "Recibos();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridMonitor", "Monitor();", true);
         }
 
         protected void inicializar()

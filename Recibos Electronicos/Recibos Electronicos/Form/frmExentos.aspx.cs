@@ -286,7 +286,7 @@ namespace Recibos_Electronicos.Form
                 grvAlumnos.DataSource = GetList();
                 grvAlumnos.DataBind();
                 if (grvAlumnos.Rows.Count > 0)                
-                    HideColumns(grvAlumnos);
+                    CNComun.HideColumns(grvAlumnos,Celdas);
                 
             }
             catch (Exception ex)
@@ -819,7 +819,7 @@ namespace Recibos_Electronicos.Form
                 {
                     MultiView1.ActiveViewIndex = 1;
                     txtMatricula.Text = SesionUsu.Matricula;
-                    imgBttnBuscarMat_Click(null, null);
+                    linkBttnBuscar_Click(null, null);
                     ddlNivel.SelectedValue = SesionUsu.NivelEstudio;
                     ddlNivel_SelectedIndexChanged(null, null);
                     SesionUsu.Exento = 'N';
@@ -850,7 +850,11 @@ namespace Recibos_Electronicos.Form
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopoverDetalle();", true);
 
             if (!IsPostBack)
+            {
+
                 Inicializar();
+            }
+            
 
 
             ScriptManager.RegisterStartupScript(this, GetType(), "Eventos", "FiltEventos();", true);
@@ -873,10 +877,9 @@ namespace Recibos_Electronicos.Form
             }
         }
 
-        protected void imgBttnBuscarMat_Click(object sender, ImageClickEventArgs e)
+        protected void linkBttnBuscar_Click(object sender, ImageClickEventArgs e)
         {
             Registrar.Visible = false;
-            //LimpiaDatosAlumno();
             try
             {
                 CNComun.LlenaCombo("pkg_pagos_2016.Obt_Combo_Nivel_Alumno", ref ddlNivel, "p_matricula", "p_sistema", txtMatricula.Text.ToUpper(), "SIST_ING", "INGRESOS");
@@ -891,7 +894,6 @@ namespace Recibos_Electronicos.Form
             {
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '"+ ex.Message + "');", true); //lblMsj.Text = ex.Message;
             }
-
         }
 
         protected void ddlDependencia_D_SelectedIndexChanged(object sender, EventArgs e)
@@ -1135,7 +1137,7 @@ namespace Recibos_Electronicos.Form
                 {
                     SesionUsu.Editar = 1;
                     txtMatricula.Text = ObjAlumno.Matricula;
-                    imgBttnBuscarMat_Click(null, null);
+                    linkBttnBuscar_Click(null, null);
                     //txtMatricula_TextChanged(null, null);
                     try
                     {
@@ -1973,6 +1975,39 @@ namespace Recibos_Electronicos.Form
             txtFechaNacimiento.Text = string.Empty;
             txtSemestre.Text = string.Empty;
             txtGrupo.Text = string.Empty;
+        }
+
+        protected void ddlNivel_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                BuscaDatosAlumno();
+            }
+            catch (Exception ex)
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void linkBttnBuscar_Click(object sender, EventArgs e)
+        {
+            Registrar.Visible = false;
+            try
+            {
+                CNComun.LlenaCombo("pkg_pagos_2016.Obt_Combo_Nivel_Alumno", ref ddlNivel, "p_matricula", "p_sistema", txtMatricula.Text.ToUpper(), "SIST_ING", "INGRESOS");
+                CNComun.LlenaCombo("pkg_pagos_2016.Obt_Combo_Ciclo_Alum", ref ddlCicloAlum, "p_matricula", txtMatricula.Text.ToUpper(), "INGRESOS");
+                if (ddlNivel.Items.Count == 1)
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Dato no encontrado, si deseas registralo dar click por única vez.');", true); //lblMsj.Text = "Dato no encontrado, si deseas registralo dar click por única vez.";
+                    Registrar.Visible = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
+            }
         }
 
 

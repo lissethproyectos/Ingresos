@@ -30,10 +30,11 @@ namespace Recibos_Electronicos.Form
     {
         #region <Variables>
         string Verificador = string.Empty;
-      
+
         Sesion SesionUsu = new Sesion();
         Registro ObjRegistros = new Registro();
         CN_Registro CNRegistros = new CN_Registro();
+        CN_Comun CNComun = new CN_Comun();
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -42,63 +43,67 @@ namespace Recibos_Electronicos.Form
             {
                 Inicializar();
             }
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridSincronizacion", "Sincronizacion();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridMaterializadas", "Materializadas();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridInhabiles", "Inhabiles();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridInhabilesRecibos", "InhabilesRecibos();", true);            
         }
         #region <Botones y Eventos>
         protected void btnConsultar_Click(object sender, EventArgs e)
         {
             lblMsj.Text = string.Empty;
-            CargarGridMatricula();
+            //CargarGridMatricula();
         }
         protected void linkSincronizar_Click(object sender, EventArgs e)
         {
-          
+
             try
-        {
-            //string pathArchivoBat = (@"C:\Users\Admin\Documents\Visual Studio 2010\Projects\Recibos Electronicos3\Recibos Electronicos\bat\respaldobd.bat");
-            //Process proceso = new Process();
-            //proceso.StartInfo.FileName = pathArchivoBat;
-            //proceso.Start();
-            //proceso.WaitForExit();           
-             
-             Process process = new Process();
-             process.StartInfo.FileName = @"C:\Users\Admin\Documents\run.bat"; 
-             process.StartInfo.UseShellExecute = false;
-             process.Start();
-             process.WaitForExit(); 
+            {
+                //string pathArchivoBat = (@"C:\Users\Admin\Documents\Visual Studio 2010\Projects\Recibos Electronicos3\Recibos Electronicos\bat\respaldobd.bat");
+                //Process proceso = new Process();
+                //proceso.StartInfo.FileName = pathArchivoBat;
+                //proceso.Start();
+                //proceso.WaitForExit();           
 
+                Process process = new Process();
+                process.StartInfo.FileName = @"C:\Users\Admin\Documents\run.bat";
+                process.StartInfo.UseShellExecute = false;
+                process.Start();
+                process.WaitForExit();
+
+
+            }
+            catch
+            {
+
+            }
 
         }
-        catch
-        {
-            
-        }
 
-    }
 
-   
         protected void grvDatos_Grals_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            grvDatos_Grals.PageIndex = 0;
-            grvDatos_Grals.PageIndex = e.NewPageIndex;
-            CargarGridMatricula();
+            //grvDatos_Grals.PageIndex = 0;
+            //grvDatos_Grals.PageIndex = e.NewPageIndex;
+            //CargarGridMatricula();
         }
 
         protected void grvRegistros_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grvRegistros.PageIndex = 0;
             grvRegistros.PageIndex = e.NewPageIndex;
-            
             CargarGrid();
         }
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            mltViewSauce.ActiveViewIndex = 0;
-            
+            //mltViewSauce.ActiveViewIndex = 0;
+
         }
         protected void imgBttnConsulta_Mat_Click(object sender, ImageClickEventArgs e)
         {
             lblMsj.Text = string.Empty;
-            mltViewSauce.SetActiveView(vwConsulaMat);
+            //mltViewSauce.SetActiveView(vwConsulaMat);
         }
 
         #endregion
@@ -106,10 +111,11 @@ namespace Recibos_Electronicos.Form
 
         private void Inicializar()
         {
-            mltViewSauce.SetActiveView(vwSincroniza);
-                CargarGrid();
-                CargarGridVistasMaterializadas();
-                CargarGrid_view_inhabiles();
+            //mltViewSauce.SetActiveView(vwSincroniza);
+            CargarGrid();
+            CargarGridVistasMaterializadas();
+            CargarGrid_view_inhabiles();
+            CargarGrid_view_inhabiles_recibos();
         }
         private List<Registro> GetList1()
         {
@@ -130,7 +136,7 @@ namespace Recibos_Electronicos.Form
             try
             {
                 List<Registro> List = new List<Registro>();
-               
+
                 CNRegistros.ConsultarRegistros(ref List);
                 return List;
             }
@@ -153,14 +159,13 @@ namespace Recibos_Electronicos.Form
                 throw new Exception(ex.Message);
             }
         }
-        private List<Registro> GetListMatricula()
+
+        private List<Registro> GetListRecibos()
         {
             try
             {
                 List<Registro> List = new List<Registro>();
-                ObjRegistros.Matricula = txtMatricula.Text.ToUpper();
-                CNRegistros.ConsultarRegistroMatricula(ref ObjRegistros, ref List);
-                txtNombre.Text = ObjRegistros.Nombre;
+                CNRegistros.ConsultarRegistrosRecibos(ref List);
                 return List;
             }
             catch (Exception ex)
@@ -168,6 +173,21 @@ namespace Recibos_Electronicos.Form
                 throw new Exception(ex.Message);
             }
         }
+        //private List<Registro> GetListMatricula()
+        //{
+        //    try
+        //    {
+        //        List<Registro> List = new List<Registro>();
+        //        ObjRegistros.Matricula = txtMatricula.Text.ToUpper();
+        //        CNRegistros.ConsultarRegistroMatricula(ref ObjRegistros, ref List);
+        //        txtNombre.Text = ObjRegistros.Nombre;
+        //        return List;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
         private void CargarGridVistasMaterializadas()
         {
             try
@@ -218,7 +238,7 @@ namespace Recibos_Electronicos.Form
                 grvInhabiles.DataSource = dt;
                 grvInhabiles.DataSource = GetList2();
                 grvInhabiles.DataBind();
-              
+
             }
             catch (Exception ex)
             {
@@ -226,21 +246,38 @@ namespace Recibos_Electronicos.Form
             }
 
         }
-        private void CargarGridMatricula()
+
+        private void CargarGrid_view_inhabiles_recibos()
         {
             try
             {
                 DataTable dt = new DataTable();
-                grvDatos_Grals.DataSource = dt;
-                grvDatos_Grals.DataSource = GetListMatricula();
-                grvDatos_Grals.DataBind();
+                grvInhabilesRecibos.DataSource = dt;
+                grvInhabilesRecibos.DataSource = GetListRecibos();
+                grvInhabilesRecibos.DataBind();
+
             }
             catch (Exception ex)
             {
                 lblMsj.Text = ex.Message;
             }
+
         }
-       
+        //private void CargarGridMatricula()
+        //{
+        //    try
+        //    {
+        //        DataTable dt = new DataTable();
+        //        grvDatos_Grals.DataSource = dt;
+        //        grvDatos_Grals.DataSource = GetListMatricula();
+        //        grvDatos_Grals.DataBind();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lblMsj.Text = ex.Message;
+        //    }
+        //}
+
         #endregion
 
         protected void grvRegistros_SelectedIndexChanged(object sender, EventArgs e)
@@ -264,16 +301,19 @@ namespace Recibos_Electronicos.Form
         {
             try
             {
-            LinkButton cbi = (LinkButton)(sender);            
-            GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            rgvVMaterializadas.SelectedIndex = row.RowIndex;
-            ObjRegistros.name= rgvVMaterializadas.SelectedRow.Cells[0].Text;
+                LinkButton cbi = (LinkButton)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                rgvVMaterializadas.SelectedIndex = row.RowIndex;
+                ObjRegistros.name = rgvVMaterializadas.SelectedRow.Cells[0].Text;
 
-            CNRegistros.refresh_vmaterilaizada(ObjRegistros, ref Verificador);
+                CNRegistros.refresh_vmaterilaizada(ObjRegistros, ref Verificador);
                 if (Verificador == "0")
-                    lblMsj.Text = "La información se ha sincronizado correctamente";
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'La información se ha sincronizado correctamente');", true); //lblMsj.Text = ex.Message;blMsj.Text = "La información se ha sincronizado correctamente";
                 else
-                    lblMsj.Text = Verificador;
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+                }
             }
             catch (Exception ex)
             {
@@ -302,11 +342,19 @@ namespace Recibos_Electronicos.Form
             }
         }
 
+        protected void grvInhabilesRecibos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ObjRegistros.name = grvInhabilesRecibos.SelectedRow.Cells[0].Text;
+            CNRegistros.refresh_vmaterilaizada_recibos(ObjRegistros, ref Verificador);
+            if (Verificador == "0")
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(1, 'La información se ha sincronizado correctamente');", true); //lblMsj.Text = ex.Message;blMsj.Text = "La información se ha sincronizado correctamente";
+            else
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
 
-
-
-
-      
+        }
     }
 
 }

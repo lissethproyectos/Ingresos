@@ -683,6 +683,7 @@
     <Content Include="Form\frmExencionesAutomaticas.aspx" />
     <Content Include="Form\frmExentos_Copia.aspx" />
     <Content Include="Form\frmFacturacion.aspx" />
+    <Content Include="Form\FrmFacturas3.aspx" />
     <Content Include="Form\FrmSolicitud_Facturas.aspx" />
     <Content Include="Form\FrmFacturas.aspx" />
     <Content Include="Form\FrmFacturasResp.aspx" />
@@ -1268,6 +1269,13 @@
     </Compile>
     <Compile Include="Form\frmFacturacion.aspx.designer.cs">
       <DependentUpon>frmFacturacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\FrmFacturas3.aspx.cs">
+      <DependentUpon>FrmFacturas3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\FrmFacturas3.aspx.designer.cs">
+      <DependentUpon>FrmFacturas3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\FrmSolicitud_Facturas.aspx.cs">
       <DependentUpon>FrmSolicitud_Facturas.aspx</DependentUpon>
@@ -1921,7 +1929,6 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <None Include="Properties\PublishProfiles\ProyLis.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Reportes\ComprobanteFiscal.rpt">

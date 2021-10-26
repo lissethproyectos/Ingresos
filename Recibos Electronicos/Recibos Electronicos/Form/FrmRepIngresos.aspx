@@ -16,23 +16,23 @@
                 </asp:DropDownList>
             </div>
         </div>
+        <asp:UpdatePanel ID="UpdatePanel48" runat="server">
+                    <ContentTemplate>
         <div class="row" id="rowCiclo" runat="server" visible="false">
             <div class="col-md-2">
-                <asp:UpdatePanel ID="UpdatePanel48" runat="server">
-                    <ContentTemplate>
-                        <asp:Label ID="lblCiclo" runat="server" Text="Ciclo Escolar:" Visible="False"></asp:Label>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                
+                        <asp:Label ID="lblCiclo" runat="server" Text="Ciclo Escolar"></asp:Label>
+                   
             </div>
             <div class="col-md-4">
-                <asp:UpdatePanel ID="UpdatePanel47" runat="server">
-                    <ContentTemplate>
-                        <customControl:GroupDropDownList ID="ddlCiclo" runat="server" AutoPostBack="True" Visible="False" Width="100%">
+               
+                        <customControl:GroupDropDownList ID="ddlCiclo" runat="server" AutoPostBack="True" Width="100%">
                         </customControl:GroupDropDownList>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                   
             </div>
         </div>
+     </ContentTemplate>
+                </asp:UpdatePanel>
         <div class="row">
             <div class="col-md-2">
                 <asp:Label ID="lblFecha_Factura_Ini" runat="server" Text="Fecha Inicial"></asp:Label>

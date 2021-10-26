@@ -1,24 +1,26 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmAdmonFichaRef.aspx.cs" Inherits="Recibos_Electronicos.Form.frmAdmonFichaRef" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">  
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
     <style type="text/css">
-        .auto-style3 {
-            width: 119px;
-        }
-
-        .auto-style8 {
-            width: 1853px;
-        }
-
-        .auto-style9 {
-            width: 56px;
+        .auto-style1 {
+            position: relative;
+            width: 100%;
+            -ms-flex: 0 0 8.333333%;
+            flex: 0 0 8.333333%;
+            max-width: 8.333333%;
+            left: 0px;
+            top: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid">
+    <div class="container-fluid">        
         <div class="row">
-            <div class="col alert alert-warning">
+            <div class="col alert alert-info">
                 Busqueda de referencias generadas en la página SYSWEB o SIAE.
             </div>
         </div>
@@ -26,17 +28,17 @@
             <div class="col-md-2">
                 Referencia
             </div>
-            <div class="col-md-9">
+            <div class="col-md-8">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
                         <asp:TextBox ID="txtReferencia" runat="server" Width="100%" AutoPostBack="True" OnTextChanged="txtReferencia_TextChanged"></asp:TextBox>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-                        <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" ValidationGroup="Busca" />
+                        <asp:Button ID="bttnBuscar" runat="server" CssClass="btn btn-primary" Width="100%" OnClick="bttnBuscar_Click" Text="Ver Referencias" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -99,5 +101,22 @@
                 </asp:UpdatePanel>
             </div>
         </div>
+        <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+            <ContentTemplate>
+                <div class="row alert alert-danger" runat="server" id="divErrorTot" visible="false">
+                    <div class="col">La consulta excede los 2000 registros, favor de realizar filtros para un correcto funcionamiento.</div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
+
+    <script type="text/javascript">       
+        function Referencias() {
+            //$('input[type=search]').val('');
+            $('#<%= grdFichasRef.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdFichasRef.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true
+            });
+        };
+    </script>
 </asp:Content>
