@@ -214,6 +214,14 @@ namespace CapaEntidad
             set { _DiasVigencia = value; }
         }
 
+        private int _DiasVigencia_Ev;
+
+        public int DiasVigencia_Ev
+        {
+            get { return _DiasVigencia_Ev; }
+            set { _DiasVigencia_Ev = value; }
+        }
+
         private string _FechaVigencia;
         public string FechaVigencia
         {

@@ -13,7 +13,7 @@ namespace Recibos_Electronicos.Form
     public partial class FrmVigencias : System.Web.UI.Page
     {
         #region <Variables>
-        Int32[] Celdas = { 4, 5, 6, 7 };
+        Int32[] Celdas = { 4, 5, 6, 7, 8 };
         Sesion SesionUsu = new Sesion();
         ConceptoPago ObjVigencias = new ConceptoPago();
         CN_ConceptoPago CNConcepto = new CN_ConceptoPago();
@@ -171,9 +171,12 @@ namespace Recibos_Electronicos.Form
                     TextBox txtCicloEscolar = (TextBox)(row.Cells[6].FindControl("txtCicloEscolar"));
                     string CicloEscolar = txtCicloEscolar.Text; // row.Cells[3].Text;
                     TextBox txtDias_Vigencia = (TextBox)(row.Cells[7].FindControl("txtDias_Vigencia"));
+                    TextBox txtDias_Vigencia_Ev = (TextBox)(row.Cells[8].FindControl("txtDias_Vigencia_Ev"));
                     string DiasVigencia = txtDias_Vigencia.Text; // row.Cells[3].Text;
+                    string DiasVigencia_Ev = txtDias_Vigencia_Ev.Text;
                     grdVigencias.EditIndex = -1;
                     ObjVigencias.DiasVigencia = Convert.ToInt32(DiasVigencia);
+                    ObjVigencias.DiasVigencia_Ev = Convert.ToInt32(DiasVigencia_Ev);
                     ObjVigencias.CicloEscolar = Convert.ToInt32(CicloEscolar);
                     ObjVigencias.Tipo = DDLTipo.SelectedValue;
                     CNConcepto.ActualizarVigenciasSYSWEB(ObjVigencias, ref Verificador);

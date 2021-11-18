@@ -47,7 +47,7 @@
                         <asp:DropDownList ID="DDLSubtipo" runat="server" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="DDLSubtipo_SelectedIndexChanged"></asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-            </div>            
+            </div>
         </div>
     </div>
     <div class="container">
@@ -96,17 +96,27 @@
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:TemplateField>
-                                    <asp:TemplateField HeaderText="DIAS VIGENCIA">
+                                    <asp:TemplateField HeaderText="DIAS VIGENCIA (PÚBLICO GRAL)">
                                         <EditItemTemplate>
-                                            <asp:TextBox ID="txtDias_Vigencia" runat="server" Font-Size="Large" Text='<%# Bind("diasvigencia") %>'></asp:TextBox>
+                                            <asp:TextBox ID="txtDias_Vigencia" runat="server" Font-Size="Large" Text='<%# Bind("DiasVigencia") %>'></asp:TextBox>
                                         </EditItemTemplate>
                                         <ItemTemplate>
-                                            <asp:Label ID="lblDias_Vigencia" runat="server" Font-Bold="True" Font-Size="Large" Text='<%# Bind("diasvigencia") %>'></asp:Label>
+                                            <asp:Label ID="lblDias_Vigencia" runat="server" Font-Bold="True" Font-Size="Large" Text='<%# Bind("DiasVigencia") %>'></asp:Label>
                                         </ItemTemplate>
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:TemplateField>
-                                    <asp:CommandField ShowEditButton="True" CancelText="CANCELAR" DeleteText="ELIMINAR" EditText="EDITAR" UpdateText="ACTUALIZAR" >
+                                    <asp:TemplateField HeaderText="DIAS VIGENCIA (EVENTOS)">
+                                        <EditItemTemplate>
+                                            <asp:TextBox ID="txtDias_Vigencia_Ev" runat="server" Font-Size="Large" Text='<%# Bind("DiasVigencia_Ev") %>'></asp:TextBox>
+                                        </EditItemTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblDias_Vigencia_Ev" runat="server" Font-Bold="True" Font-Size="Large" Text='<%# Bind("DiasVigencia_Ev") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:CommandField ShowEditButton="True" CancelText="CANCELAR" DeleteText="ELIMINAR" EditText="EDITAR" UpdateText="ACTUALIZAR">
+                                        <HeaderStyle HorizontalAlign="Center" />
+                                        <ItemStyle HorizontalAlign="Center" />
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:CommandField>

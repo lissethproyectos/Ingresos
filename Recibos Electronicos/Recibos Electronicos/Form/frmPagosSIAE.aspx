@@ -274,6 +274,14 @@
                             <asp:TextBox ID="txtReferenciaOrig" runat="server" Enabled="False" Width="100%"></asp:TextBox>
                         </div>
                     </div>
+<div class="row">
+                        <div class="col-md-3">
+                            <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia"></asp:Label>
+                        </div>
+                        <div class="col-md-9">
+                            <asp:TextBox ID="txtReferenciaPagada" runat="server" Width="100%"></asp:TextBox>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col text-right">
                             <asp:Button ID="bttnSalir" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalir_Click" Text="SALIR" />
@@ -281,12 +289,12 @@
                             &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos" Visible="False" />
                         </div>
                     </div>
-                    <div class="row">
+                   <%-- <div class="row">
                         <div class="col">
-                            <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Pagada:" Visible="False"></asp:Label>
-                            <asp:TextBox ID="txtReferenciaPagada" runat="server" Visible="False" Width="200px"></asp:TextBox>
+                            <asp:Label ID="lblReferenciaPagada2" runat="server" Text="Referencia Pagada:" Visible="False"></asp:Label>
+                            <asp:TextBox ID="txtReferenciaPagada2" runat="server" Visible="False" Width="200px"></asp:TextBox>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>

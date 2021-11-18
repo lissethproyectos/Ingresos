@@ -91,7 +91,7 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_RECEPTOR_CORREO = Convert.ToString(dr.GetValue(10));
                     ObjCjaFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(11));
                     ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
-                    ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(13)) == "R" ? "R" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "C" : "";
+                    ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(12));  //Convert.ToString(dr.GetValue(13)) == "R" ? "R" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "C" : "";
                     //Convert.ToString(dr.GetValue(13));
                     ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
@@ -99,7 +99,15 @@ namespace CapaDatos
                     ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "S" ? false : true;
                     ObjCjaFactura.VISIBLE2 = Convert.ToString(dr.GetValue(16)) == "S" ? true : false;
                     ObjCjaFactura.HABILITADO = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? false : true;
-                    ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
+                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "RECHAZADO";
+                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "S")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "SOLICITADO";
+                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "F")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "FACTURADO";
+                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "C")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "POR CONFIRMAR";
+                    //(ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
                     string p = Convert.ToString(dr.GetValue(17));
                     ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
                     ObjCjaFactura.FACT_FECHA_SOLICITUD = Convert.ToString(dr.GetValue(18));
@@ -139,6 +147,123 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void FacturaCajaConsultaGrid3(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Comprobante, ref List<CajaFactura> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                String[] Parametros = { "p_usuario", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_referencia", "p_status", "p_confirmados", "p_comprobante_fiscal" };
+                String[] Valores = { ObjUsuario.Usu_Nombre, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, Comprobante };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Facturas_Caja2", ref dr, Parametros, Valores);//int total = dr.FieldCount();
+
+                while (dr.Read())
+                {
+                    ObjCjaFactura = new CajaFactura();
+                    ObjCjaFactura.ID_FACT = Convert.ToString(dr.GetValue(0)); //Este obtiene el Id de la TabYla Factura o Factura_Caja
+                    ObjCjaFactura.FACT_FOLIO = Convert.ToString(dr.GetValue(1));
+                    ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(6));
+                    ObjCjaFactura.FACT_FECHA_FACTURA = Convert.ToString(dr.GetValue(2));
+                    ObjCjaFactura.FACT_TOTAL = Convert.ToString(dr.GetValue(3));
+                    ObjCjaFactura.FACT_NOMBRE = Convert.ToString(dr.GetValue(4));
+                    ObjCjaFactura.FACT_DEPENDENCIA = Convert.ToString(dr.GetValue(5));
+                    ObjCjaFactura.Avance = Convert.ToInt32(dr.GetValue(7));
+                    //ObjCjaFactura.IdCajaFact = Convert.ToInt32(dr.GetValue(9));
+                    ObjCjaFactura.FACT_BANCO = Convert.ToString(dr.GetValue(8));
+                    ObjCjaFactura.FACT_CONFIRMADO = Convert.ToString(dr.GetValue(9));
+                    ObjCjaFactura.FACT_RECEPTOR_CORREO = Convert.ToString(dr.GetValue(10));
+                    ObjCjaFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(11));
+                    ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
+                    ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(12));  //Convert.ToString(dr.GetValue(13)) == "R" ? "R" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "C" : "";
+                    //Convert.ToString(dr.GetValue(13));
+                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                    ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
+                    ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
+                    ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "S" ? false : true;
+                    ObjCjaFactura.VISIBLE2 = Convert.ToString(dr.GetValue(16)) == "S" ? true : false;
+                    ObjCjaFactura.HABILITADO = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? false : true;
+                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "RECHAZADO";
+                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "S")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "SOLICITADO";
+                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "F")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "FACTURADO";
+                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "C")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "POR CONFIRMAR";
+                    //(ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
+                    string p = Convert.ToString(dr.GetValue(17));
+                    ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
+                    ObjCjaFactura.FACT_FECHA_SOLICITUD = Convert.ToString(dr.GetValue(18));
+                    ObjCjaFactura.COLOR = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "#c50b0b" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "#1c6f1a" : "";
+                    //ObjCjaFactura.COLOR = "#ece260";
+                    if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) >= 2 && Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) <= 3)
+                    {
+                        ObjCjaFactura.VISIBLE3 = false;
+                        ObjCjaFactura.VISIBLE4 = true;
+                        ObjCjaFactura.VISIBLE5 = false;
+                    }
+                    else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
+                    {
+                        ObjCjaFactura.VISIBLE3 = false;
+                        ObjCjaFactura.VISIBLE4 = false;
+                        ObjCjaFactura.VISIBLE5 = true;
+                    }
+                    else
+                    {
+                        ObjCjaFactura.VISIBLE3 = true;
+                        ObjCjaFactura.VISIBLE4 = false;
+                        ObjCjaFactura.VISIBLE5 = false;
+                    }
+
+
+                    //ObjCjaFactura.Ruta = Convert.ToString(dr.GetValue(16));
+                    List.Add(ObjCjaFactura);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+        public void FacturaHistSolConsultaGrid(Facturacion objFacturacion, ref List<Facturacion> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                String[] Parametros = { "P_Id_Fact" };
+                String[] Valores = { Convert.ToString(objFacturacion.ID_FACT) };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Hist_Fact_Ref", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    objFacturacion = new Facturacion();
+                    objFacturacion.DESC_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(0)); //Este obtiene el Id de la Tabla Factura o Factura_Caja
+                    objFacturacion.RECEPTOR_FECHA_STATUS = Convert.ToString(dr.GetValue(1));
+                    List.Add(objFacturacion);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void SolicitudesFacturaConsultaGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Comprobante, ref List<CajaFactura> List)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -177,7 +302,14 @@ namespace CapaDatos
                     ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "S" ? false : true;
                     ObjCjaFactura.VISIBLE2 = Convert.ToString(dr.GetValue(16)) == "S" ? true : false;
                     ObjCjaFactura.HABILITADO = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? false : true;
-                    ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
+                     if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R")                   
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "RECHAZADO";                    
+                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "S")                   
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "SOLICITADO";                    
+                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "C")                   
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "FALTA CONFIRMAR";
+                    
+                    //ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
                     string p = Convert.ToString(dr.GetValue(17));
                     ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
                     ObjCjaFactura.FACT_FECHA_SOLICITUD = Convert.ToString(dr.GetValue(18));
@@ -402,6 +534,38 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void FacturaDoctosConsultaGrid(Facturacion ObjFactura, ref List<Facturacion> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                String[] Parametros = { "P_Id_Factura" };
+                String[] Valores = { Convert.ToString(ObjFactura.ID_FACT) };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Doctos_Facturas", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    ObjFactura = new Facturacion();
+                    ObjFactura.TIPO = Convert.ToString(dr.GetValue(0)); //Este obtiene el Id de la Tabla Factura o Factura_Caja
+                    ObjFactura.RUTA_ADJUNTO = Convert.ToString(dr.GetValue(1));
+                    ObjFactura.NUM_OFICIO = Convert.ToString(dr.GetValue(2));
+                    List.Add(ObjFactura);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void FacturaCajaEfectivoConsultaGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, String Dependencia, String FechaInicial, String FechaFinal, string Referencia, string Status, string Confirmados, string Tipo, ref List<CajaFactura> List)
         {
             CD_Datos CDDatos = new CD_Datos();
@@ -448,99 +612,6 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
                     ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
                     ObjCjaFactura.COLOR = "#ece260";
-                    if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) >= 2 && Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) <= 3)
-                    {
-                        ObjCjaFactura.VISIBLE3 = false;
-                        ObjCjaFactura.VISIBLE4 = true;
-                        ObjCjaFactura.VISIBLE5 = false;
-
-                    }
-                    else if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) > 3)
-                    {
-                        ObjCjaFactura.VISIBLE3 = false;
-                        ObjCjaFactura.VISIBLE4 = false;
-                        ObjCjaFactura.VISIBLE5 = true;
-                    }
-                    else
-                    {
-                        ObjCjaFactura.VISIBLE3 = true;
-                        ObjCjaFactura.VISIBLE4 = false;
-                        ObjCjaFactura.VISIBLE5 = false;
-                    }
-
-                    List.Add(ObjCjaFactura);
-                }
-                dr.Close();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-            finally
-            {
-                CDDatos.LimpiarOracleCommand(ref cmm);
-            }
-        }
-        public void FacturaCajaEfectivoConsultaGrid2(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, String Dependencia, String FechaInicial, String FechaFinal, string Referencia, string Status, string Confirmados, string Tipo, ref List<CajaFactura> List)
-        {
-            CD_Datos CDDatos = new CD_Datos();
-            OracleCommand cmm = null;
-            try
-            {
-                OracleDataReader dr = null;
-
-                String[] Parametros = { "p_usuario", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_referencia", "p_status", "p_confirmados", "p_tipo" };
-                String[] Valores = { ObjUsuario.Usu_Nombre, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, Tipo };
-
-                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Solicitar_Fact_Efec", ref dr, Parametros, Valores);
-                while (dr.Read())
-                {
-                    ObjCjaFactura = new CajaFactura();
-                    ObjCjaFactura.ID_FACT = Convert.ToString(dr.GetValue(0)); //Este obtiene el Id de la Tabla Factura o Factura_Caja
-                    ObjCjaFactura.FACT_RECEPTOR_RFC = Convert.ToString(dr.GetValue(1));
-                    ObjCjaFactura.FACT_FOLIO = Convert.ToString(dr.GetValue(19));
-                    ObjCjaFactura.FACT_FECHA_FACTURA = Convert.ToString(dr.GetValue(2));
-                    ObjCjaFactura.FACT_TOTAL = Convert.ToString(dr.GetValue(3));
-                    ObjCjaFactura.FACT_NOMBRE = Convert.ToString(dr.GetValue(4));
-                    ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(4));
-                    ObjCjaFactura.FACT_DEPENDENCIA = Convert.ToString(dr.GetValue(5));
-                    ObjCjaFactura.Avance = Convert.ToInt32(dr.GetValue(7));
-                    ObjCjaFactura.FACT_CONFIRMADO = Convert.ToString(dr.GetValue(9));
-                    ObjCjaFactura.FACT_RECEPTOR_CORREO = Convert.ToString(dr.GetValue(10));
-                    ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
-                    ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(13));
-                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
-                    ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
-                    ObjCjaFactura.FACT_FECHA_CAPTURA = Convert.ToString(dr.GetValue(15));
-                    ObjCjaFactura.FACT_DIAS_EMISION = Convert.ToInt32(dr.GetValue(16));
-                    ObjCjaFactura.FACT_BANCO = Convert.ToString(dr.GetValue(6));
-                    ObjCjaFactura.FACT_FECHA_SOLICITUD = Convert.ToString(dr.GetValue(15));
-                    ObjCjaFactura.FACT_IMPUESTO_TASA = Convert.ToString(dr.GetValue(20));
-                    ObjCjaFactura.FACT_SUBTOTAL = Convert.ToString(dr.GetValue(21));
-                    ObjCjaFactura.VISIBLE1 = true;
-                    //if (Convert.ToString(dr.GetValue(18)).Length > 25)
-                    if (Convert.ToString(dr.GetValue(4)).Length > 25)
-                        ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(4)).Substring(1, 25) + "...";
-                    else
-                        ObjCjaFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(4));
-
-                    ObjCjaFactura.TOOLTIP = Convert.ToString(dr.GetValue(18));
-                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R")
-                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "RECHAZADO";
-                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "S")
-                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "SOLICITADO";
-                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "C")
-                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "FALTA CONFIRMAR";
-                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "F")
-                    {
-                        ObjCjaFactura.VISIBLE1 = false;
-                        ObjCjaFactura.VISIBLE2 = true;
-                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "FACTURADO";
-                    }
-
-                    //ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
-                    ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
-                    ObjCjaFactura.COLOR = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RED" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "YELLOW" : "";
                     if (Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) >= 2 && Convert.ToInt32(ObjCjaFactura.FACT_DIAS_SOLICITUD) <= 3)
                     {
                         ObjCjaFactura.VISIBLE3 = false;
@@ -665,6 +736,30 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        public void FacturacionCajaBorrar(Facturacion ObjFactura, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_ID_FACTURA", "P_TIPO"
+                                      };
+                object[] Valores = { ObjFactura.ID_FACT, ObjFactura.TIPO };
+                String[] ParametrosOut = { "p_Bandera" };
+
+                Cmd = CDDatos.GenerarOracleCommand("DEL_FACTURA_CAJA", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> Archivos, Factura objFactura, string RutaServ, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

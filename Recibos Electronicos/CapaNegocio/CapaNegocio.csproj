@@ -58,6 +58,7 @@
     <Compile Include="CN_DetFactura.cs" />
     <Compile Include="CN_Evento.cs" />
     <Compile Include="CN_Factura.cs" />
+    <Compile Include="CN_Facturacion.cs" />
     <Compile Include="CN_Familiar.cs" />
     <Compile Include="CN_Menus.cs" />
     <Compile Include="CN_Oficio.cs" />

@@ -398,6 +398,7 @@ namespace Recibos_Electronicos.Form
                 ObjFactura.FACT_OBSERVACIONES = txtDescConcepto.Text.ToUpper();
                 ObjFactura.FACT_RECEPTOR_FORMA_PAGO = ddlForma_Pago.SelectedValue;
 
+
                 //ObjFactura.FACT_TIPO = (SesionUsu.Editar!=3)?Convert.ToString(grdDatosFactura.SelectedRow.Cells[19].Text):"T";
                 ObjFactura.FACT_TIPO = ddlTipo.SelectedValue;
                 ObjFactura.OFICIO = txtNumOficio.Text;

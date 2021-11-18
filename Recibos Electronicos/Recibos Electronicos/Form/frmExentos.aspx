@@ -3,9 +3,13 @@
 <%@ Register Assembly="CapaNegocio" Namespace="CapaNegocio" TagPrefix="customControl" %>
 <%@ Register Src="../EnviarCorreo.ascx" TagName="uCCorreo" TagPrefix="usr" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../Scripts/jquery/jquery-3.1.1.min.js"></script>
+  <%--  <script src="../Scripts/jquery/jquery-3.1.1.min.js"></script>
     <script src="../Scripts/select2/js/select2.min.js"></script>
-    <link href="../Scripts/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
+    <link href="../Scripts/select2/css/select2.min.css" type="text/css" rel="stylesheet" />    --%>
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+
     <style type="text/css">
         .overlay {
             position: fixed;
@@ -87,7 +91,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <asp:GridView ID="grvStatus" runat="server" AllowPaging="True" AutoGenerateColumns="False" OnPageIndexChanging="grvStatus_PageIndexChanging" PageSize="5" Width="100%" BorderColor="#D8D8D8" BorderStyle="Solid" BorderWidth="1px">
+                                            <asp:GridView ID="grvStatus" runat="server" AutoGenerateColumns="False" Width="100%" CssClass="mGrid">
                                                 <Columns>
                                                     <asp:BoundField DataField="Dependencia" HeaderText="Revisar">
                                                         <HeaderStyle Font-Bold="True" Font-Size="14px" ForeColor="#333333" />
@@ -170,14 +174,8 @@
                                     <div class="row">
                                         <div class="col">
                                             <div style="overflow-x: auto;">
-                                                <asp:GridView ID="grvAlumnos" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" GridLines="None" OnPageIndexChanging="grvAlumnos_PageIndexChanging" OnRowDeleting="grvAlumnos_RowDeleting" OnSelectedIndexChanged="grvAlumnos_SelectedIndexChanged" PageSize="12" Width="100%" ShowFooter="True">
+                                                <asp:GridView ID="grvAlumnos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" GridLines="None" OnPageIndexChanging="grvAlumnos_PageIndexChanging" OnRowDeleting="grvAlumnos_RowDeleting" OnSelectedIndexChanged="grvAlumnos_SelectedIndexChanged"  Width="100%" ShowFooter="True">
                                                     <Columns>
-                                                        <%--<asp:TemplateField HeaderText="Detalle">
-                                                                        <ItemTemplate>
-                                                                            <asp:Label runat="server"  name="ligaDet" ID="linkDetalle" Text="<i class='fa fa-cog'></i>" CssClass="btn btn-light" data-placement="left" data-toggle="tooltip" ToolTip='<%# Bind("registro.EtiquetaSeis") %>' onmouseover="openPopoverDetalle(this)" />
-                                                                        </ItemTemplate>
-                                                                        <FooterStyle HorizontalAlign="Center" />
-                                                                    </asp:TemplateField>--%>
                                                         <asp:BoundField DataField="IdPersona" HeaderText="id" />
                                                         <asp:BoundField DataField="GenerarPermiso" SortExpression="GenerarPermiso" />
                                                         <asp:BoundField DataField="Dependencia" HeaderText="Depcia" />
@@ -1205,7 +1203,6 @@
         });
 
         function openPopoverDetalle(ctlr) {
-            //alert(ctlr);
             $(ctlr).tooltip();
         };
 
@@ -1214,7 +1211,21 @@
             $('#<%= ddlEvento.ClientID %>').select2();
         };
 
+        function Exentos() {
+            $('#<%= grvAlumnos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvAlumnos.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
+        };
 
+        function Monitor() {
+            $('#<%= grvStatus.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvStatus.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
+        };
 
     </script>
 </asp:Content>

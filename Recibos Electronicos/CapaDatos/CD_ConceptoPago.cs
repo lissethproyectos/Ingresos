@@ -535,6 +535,7 @@ namespace CapaDatos
                         ObjVigencias = new ConceptoPago();
                         ObjVigencias.CicloEscolar = Convert.ToInt32(dr[0]);
                         ObjVigencias.DiasVigencia = Convert.ToInt32(dr[1]);
+                        ObjVigencias.DiasVigencia_Ev = Convert.ToInt32(dr[2]);
                         List.Add(ObjVigencias);
 
                     }
@@ -697,10 +698,10 @@ namespace CapaDatos
             {
 
 
-                string[] Parametros = { "P_CICLO", "P_DIAS_VIGENCIA", "P_TIPO" };
+                string[] Parametros = { "P_CICLO", "P_DIAS_VIGENCIA", "P_TIPO", "P_DIAS_VIGENCIA_EVENTO" };
                 string[] ParametrosOut = { "p_BANDERA" };
 
-                object[] Valores = { ObjVigencias.CicloEscolar, ObjVigencias.DiasVigencia, ObjVigencias.Tipo };
+                object[] Valores = { ObjVigencias.CicloEscolar, ObjVigencias.DiasVigencia, ObjVigencias.Tipo, ObjVigencias.DiasVigencia_Ev };
 
 
                 OracleCmd = CDDatos.GenerarOracleCommand("UPD_VIGENCIAS_SYSWEB", ref Verificador, Parametros, Valores, ParametrosOut);

@@ -73,6 +73,8 @@ namespace CapaNegocio
             }
         }
 
+
+
         public void FacturApiGrid(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Comprobante, ref List<CajaFactura> List)
         {
             try
@@ -109,8 +111,46 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void FacturaCajaConsultaGrid3(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Comprobante, ref List<CajaFactura> List)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.FacturaCajaConsultaGrid3(ObjUsuario, ref ObjCjaFactura, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, Comprobante, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void FacturaHistSolConsultaGrid(Facturacion objFacturacion, ref List<Facturacion> List)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.FacturaHistSolConsultaGrid(objFacturacion, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public void FacturaDoctosConsultaGrid(Factura ObjFactura, ref List<Factura> List)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.FacturaDoctosConsultaGrid(ObjFactura, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void FacturaDoctosConsultaGrid(Facturacion ObjFactura, ref List<Facturacion> List)
         {
             try
             {
@@ -135,19 +175,7 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void FacturaCajaEfectivoConsultaGrid2(Usuario ObjUsuario, ref CajaFactura ObjCjaFactura, string Dependencia, string FechaInicial, string FechaFinal, string Referencia, string Status, string Confirmados, string Tipo, ref List<CajaFactura> List)
-        {
-            try
-            {
-                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
-
-                DatosCajaFactura.FacturaCajaEfectivoConsultaGrid2(ObjUsuario, ref ObjCjaFactura, Dependencia, FechaInicial, FechaFinal, Referencia, Status, Confirmados, Tipo, ref List);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        
         public void FacturaCajaEfectivoBorrar(CajaFactura ObjCjaFactura, ref string Verificador)
         {
             try
@@ -166,6 +194,32 @@ namespace CapaNegocio
             {
                 CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
                 DatosCajaFactura.FacturaCajaBorrar(ObjFactura, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void FacturacionCajaBorrar(Factura ObjFactura, ref string Verificador)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.FacturaCajaBorrar(ObjFactura, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void FacturacionCajaBorrar(Facturacion ObjFactura, ref string Verificador)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                DatosCajaFactura.FacturacionCajaBorrar(ObjFactura, ref Verificador);
             }
             catch (Exception ex)
             {

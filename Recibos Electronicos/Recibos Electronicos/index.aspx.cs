@@ -48,11 +48,6 @@ namespace Recibos_Electronicos
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
                 inicializar();
-            //else
-            //{
-            //    precarga1
-            //}
-            
         }
         #region <Botones y Eventos>
         protected void btnConsultar_Click(object sender, EventArgs e)
@@ -351,7 +346,7 @@ namespace Recibos_Electronicos
         }
         private void CargarGridRetenciones()
         {
-            Int32[] Celdas = new Int32[] { 0,6,9,10 };
+            Int32[] Celdas = new Int32[] { 0,6,9,10,11 };
 
             try
             {
@@ -468,10 +463,7 @@ namespace Recibos_Electronicos
             {
                 List<Factura> List = new List<Factura>();
                 Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
-                string Tipo=string.Empty;
-                //if(ddlTipoRep.SelectedValue=="2")
-                //    Tipo = ddlPeriodoPago.SelectedItem.Text;
-
+                string Tipo=string.Empty;              
                 CNFactura.FacturaConsultaGridRetenciones(Usur, ref ObjFactura, ddlDependencia.SelectedValue, txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtReferencia.Text, Tipo, ref List);
                 return List;
             }
@@ -498,16 +490,10 @@ namespace Recibos_Electronicos
         {
             try
             {
-                //CNFactura.Obt_Mensaje(ref Verificador);
-                //if (Verificador == "0")
-                //{
-                //    lblMensaje.Text = string.Empty;
-                //}
-                //else
-                //{
-                //    lblMensaje.Text = Verificador;
-                //}
-                CargarGrid();
+                if (SesionUsu.Evento == "RETENCIONES")
+                    CargarGridRetenciones();
+                else
+                    CargarGrid();
 
             }
             catch (Exception ex)

@@ -13,5 +13,35 @@ namespace Recibos_Electronicos
         {
 
         }
+
+        protected void bttnAgregarREP_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void linkBttnEliminarREP_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void grdCatCOG_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void linkBttnEditarCOG_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void linkBttnAgregarCOG_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void grdCatalogos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

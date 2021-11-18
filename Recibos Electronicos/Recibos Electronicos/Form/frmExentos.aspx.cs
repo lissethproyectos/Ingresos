@@ -94,7 +94,6 @@ namespace Recibos_Electronicos.Form
                 ddlHijo.Items.Clear();
 
         }
-
         private void BuscaDatosAlumno()
         {
             BuscaMatricula();
@@ -277,7 +276,7 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] { 4, 12, 16, 17, 18, 19, 20, 21 };
+            Int32[] Celdas = new Int32[] {0, 1, 4, 12, 16, 17, 18, 19, 20, 21 };
 
             try
             {
@@ -285,8 +284,8 @@ namespace Recibos_Electronicos.Form
                 grvAlumnos.DataSource = dt;
                 grvAlumnos.DataSource = GetList();
                 grvAlumnos.DataBind();
-                if (grvAlumnos.Rows.Count > 0)                
-                    CNComun.HideColumns(grvAlumnos,Celdas);
+                if (grvAlumnos.Rows.Count > 0)
+                    HideColumns(grvAlumnos);
                 
             }
             catch (Exception ex)
@@ -514,6 +513,7 @@ namespace Recibos_Electronicos.Form
             //grdView.HeaderRow.Cells[18].Visible = false;
             grdView.HeaderRow.Cells[19].Visible = false;
             grdView.HeaderRow.Cells[20].Visible = false;
+            grdView.HeaderRow.Cells[21].Visible = false;
             grdView.HeaderRow.Cells[13].Visible = (SesionUsu.Usu_Central=="S") ? true : false;
             //4, 12, 16, 17, 18, 19, 20
             grdView.FooterRow.Cells[0].Visible = false;
@@ -526,6 +526,7 @@ namespace Recibos_Electronicos.Form
             //grdView.FooterRow.Cells[18].Visible = false;
             grdView.FooterRow.Cells[19].Visible = false;
             grdView.FooterRow.Cells[20].Visible = false;
+            grdView.FooterRow.Cells[21].Visible = false;
             grdView.FooterRow.Cells[13].Visible = (SesionUsu.Usu_Central == "S") ? true : false;
 
 
@@ -544,6 +545,7 @@ namespace Recibos_Electronicos.Form
                 //row.Cells[18].Visible = false;
                 row.Cells[19].Visible = false;
                 row.Cells[20].Visible = false;
+                row.Cells[21].Visible = false;
             }
 
         }
@@ -815,6 +817,7 @@ namespace Recibos_Electronicos.Form
                 Cargarcombos();
                 CargarGridStatus();
                 txtReferencia.Focus();
+
                 if (SesionUsu.Exento.ToString() != null && SesionUsu.Exento == 'S')
                 {
                     MultiView1.ActiveViewIndex = 1;
@@ -849,15 +852,13 @@ namespace Recibos_Electronicos.Form
             SesionUsu = (Sesion)Session["Usuario"];
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopoverDetalle();", true);
 
-            if (!IsPostBack)
-            {
-
+            if (!IsPostBack)          
                 Inicializar();
-            }
             
-
-
             ScriptManager.RegisterStartupScript(this, GetType(), "Eventos", "FiltEventos();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "Exentos();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "grdMonitor", "Monitor();", true);
+
         }
 
         protected void imgBttnNuevo_Click(object sender, ImageClickEventArgs e)

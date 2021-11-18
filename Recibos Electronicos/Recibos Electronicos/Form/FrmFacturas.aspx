@@ -1011,7 +1011,7 @@
                                                                                 <div class="col-md-1">
                                                                                     <asp:UpdatePanel ID="UpdatePanel15" runat="server">
                                                                                         <ContentTemplate>
-                                                                                            <asp:CheckBox ID="chkIvaDes" runat="server" AutoPostBack="True" Text="¿Con IVA desglozado?" OnCheckedChanged="chkIvaDes_CheckedChanged" />
+                                                                                            <asp:CheckBox ID="chkIvaDes" runat="server" AutoPostBack="True" Text="¿Con IVA desglozado?" OnCheckedChanged="chkIvaDes_CheckedChanged"/>
                                                                                         </ContentTemplate>
                                                                                     </asp:UpdatePanel>
                                                                                 </div>

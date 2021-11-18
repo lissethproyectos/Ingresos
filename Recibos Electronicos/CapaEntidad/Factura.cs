@@ -83,8 +83,22 @@ namespace CapaEntidad
         private string _FACT_IMPORTE;
         private string _TOOLTIP;
         private string _FACT_FECHA_SOLICITUD;
+        private double _FACT_IVA;
+        private string _NUMERO_INTERIOR;
+        private string _NUMERO_EXTERIOR;
         //Metodos agregados por Lisseth
 
+
+        public string NUMERO_EXTERIOR
+        {
+            get { return _NUMERO_EXTERIOR; }
+            set { _NUMERO_EXTERIOR = value; }
+        }
+        public string NUMERO_INTERIOR
+        {
+            get { return _NUMERO_INTERIOR; }
+            set { _NUMERO_INTERIOR = value; }
+        }
         public string FACT_NIVEL
         {
             get { return _FACT_NIVEL; }
@@ -243,6 +257,16 @@ namespace CapaEntidad
             get { return _FACT_FOLIOBANCARIO; }
             set { _FACT_FOLIOBANCARIO = value; }
         }
+        //public string FACT_OFICIO
+        //{
+        //    get { return _FACT_OFICIO; }
+        //    set { _FACT_OFICIO = value; }
+        //}
+        //public string FACT_FECHA_OFICIO
+        //{
+        //    get { return _FACT_FECHA_OFICIO; }
+        //    set { _FACT_FECHA_OFICIO = value; }
+        //}
         public string FACT_OBSERVACIONES
         {
             get { return _FACT_OBSERVACIONES; }
@@ -305,7 +329,7 @@ namespace CapaEntidad
             get { return _ID_FACT_EFEC; }
             set { _ID_FACT_EFEC = value; }
         }
-        public String FACT_FOLIO
+        public string FACT_FOLIO
         {
             get { return _FACT_FOLIO.Trim(); }
             set { _FACT_FOLIO = value.Trim(); }
@@ -494,6 +518,12 @@ namespace CapaEntidad
         {
             get { return _FACT_IMPORTE; }
             set { _FACT_IMPORTE = value; }
+        }
+
+        public double FACT_IVA
+        {
+            get { return _FACT_IVA; }
+            set { _FACT_IVA = value; }
         }
         public string FACT_SELLO_DIGITAL
         {
