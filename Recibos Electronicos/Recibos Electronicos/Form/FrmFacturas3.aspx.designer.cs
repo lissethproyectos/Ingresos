@@ -375,6 +375,51 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.View Facturas;
 
         /// <summary>
+        /// Control rowPaso1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowPaso1;
+
+        /// <summary>
+        /// Control rowPaso2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowPaso2;
+
+        /// <summary>
+        /// Control rowPaso3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowPaso3;
+
+        /// <summary>
+        /// Control rowPaso4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowPaso4;
+
+        /// <summary>
+        /// Control rowPaso5.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl rowPaso5;
+
+        /// <summary>
         /// Control ddlDependencia2.
         /// </summary>
         /// <remarks>
@@ -382,6 +427,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDependencia2;
+
+        /// <summary>
+        /// Control UpdatePanel17.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel17;
 
         /// <summary>
         /// Control tabFacturas.
@@ -1023,6 +1077,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.TextBox txtFolioFactPagada;
 
         /// <summary>
+        /// Control reqFolioFactPagada.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqFolioFactPagada;
+
+        /// <summary>
         /// Control ddlReceptor_MetodoPagoFA.
         /// </summary>
         /// <remarks>
@@ -1030,6 +1093,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlReceptor_MetodoPagoFA;
+
+        /// <summary>
+        /// Control reqMetodoPago.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqMetodoPago;
 
         /// <summary>
         /// Control UpdatePanel1.
@@ -1041,24 +1113,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
 
         /// <summary>
-        /// Control RegularExpressionValidator3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
-
-        /// <summary>
-        /// Control RequiredFieldValidator4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
-
-        /// <summary>
         /// Control fileVoucher.
         /// </summary>
         /// <remarks>
@@ -1068,13 +1122,22 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.FileUpload fileVoucher;
 
         /// <summary>
-        /// Control btnVoucher.
+        /// Control linkBttnAdjVoucher.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnVoucher;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnAdjVoucher;
+
+        /// <summary>
+        /// Control RegularExpressionValidator107.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator107;
 
         /// <summary>
         /// Control lblArchivoVoucher.
@@ -1084,6 +1147,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink lblArchivoVoucher;
+
+        /// <summary>
+        /// Control CustomValidator2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator CustomValidator2;
 
         /// <summary>
         /// Control UpdatePanel49.
@@ -1194,13 +1266,22 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.FileUpload fileOficio;
 
         /// <summary>
-        /// Control btnOficio.
+        /// Control linkBttnAdjOficio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnOficio;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnAdjOficio;
+
+        /// <summary>
+        /// Control reqOficio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator reqOficio;
 
         /// <summary>
         /// Control lblArchivoOficio.
@@ -1509,6 +1590,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanelFoto;
 
         /// <summary>
+        /// Control pnlFacturas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlFacturas;
+
+        /// <summary>
         /// Control txtFolio_Fact_Cja.
         /// </summary>
         /// <remarks>
@@ -1572,22 +1662,22 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.FileUpload fileFactura;
 
         /// <summary>
-        /// Control btnAgregaFactura.
+        /// Control linkBttnAgregaFactura.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregaFactura;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnAgregaFactura;
 
         /// <summary>
-        /// Control RegularExpressionValidator2.
+        /// Control RegularExpressionValidator3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator3;
 
         /// <summary>
         /// Control grdArchivos.
@@ -1635,24 +1725,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Button btnCancelarEditar;
 
         /// <summary>
-        /// Control hddnCorreo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddnCorreo;
-
-        /// <summary>
-        /// Control modalCorreo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender modalCorreo;
-
-        /// <summary>
         /// Control updPgrBitacora.
         /// </summary>
         /// <remarks>
@@ -1678,15 +1750,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdBitacora;
-
-        /// <summary>
-        /// Control pnlCorreo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlCorreo;
 
         /// <summary>
         /// Control UpdatePanel35.
@@ -1777,15 +1840,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bttnCorreo;
-
-        /// <summary>
-        /// Control bttnCancelarCorreo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bttnCancelarCorreo;
 
         /// <summary>
         /// Control updPgrFacturas.

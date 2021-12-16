@@ -333,9 +333,8 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
 
-                string[] Parametros = { "p_dependencia",
-                                        "p_Busqueda"};
-                object[] Valores = { ObjCliente.Dependencia, Buscar };
+                string[] Parametros = { "p_dependencia", "p_nivel", "p_Busqueda"};
+                object[] Valores = { ObjCliente.Dependencia, ObjCliente.Nivel, Buscar };
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_Cat_Clientes", ref dr, Parametros, Valores);
                 while (dr.Read())
                 {

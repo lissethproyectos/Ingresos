@@ -67,11 +67,11 @@
                                                         <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="EtiquetaCinco" FooterText="BANCOMER" HeaderText="BANCOMER">
+                                                    <asp:BoundField DataField="EtiquetaCinco" FooterText="BANCOMER" HeaderText="BBVA">
                                                         <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="EtiquetaDos" FooterText="BANAMEX" HeaderText="BANAMEX">
+                                                    <asp:BoundField DataField="EtiquetaDos" FooterText="BANAMEX" HeaderText="CITIBANAMEX">
                                                         <HeaderStyle Font-Bold="True" ForeColor="#333333" HorizontalAlign="Center" />
                                                         <ItemStyle HorizontalAlign="Center" />
                                                     </asp:BoundField>

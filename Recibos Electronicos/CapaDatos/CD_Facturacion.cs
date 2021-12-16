@@ -467,7 +467,8 @@ namespace CapaDatos
                                         "P_FECHA_FACT",
                                         "P_FOLIO_FACT",
                                         "P_EXTENSION",
-                                        "P_RUTA"
+                                        "P_RUTA",
+                                        "P_NOMBRE_ARCHIVO"
                                       };
                         string[] ParametrosOut = { "P_BANDERA" };
 
@@ -479,12 +480,15 @@ namespace CapaDatos
                                         Archivos[i].Fecha_Fact_Cja,
                                         Archivos[i].Folio_Fact_Cja,
                                         Archivos[i].ExtensionArchivo,
-                                        Archivos[i].Ruta
+                                        Archivos[i].Ruta,
+                                        Archivos[i].NombreArchivo
                                        };
                         OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURA_DOCTO", ref Verificador, Parametros, Valores, ParametrosOut);
                         string OrigenArchivo = RutaServ + Archivos[i].NombreArchivo; // + Archivos[i].ExtensionArchivo;
                         string DestinoArchivo;
-                        DestinoArchivo = /*IdFactura + */RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].Folio_Fact_Cja + Archivos[i].ExtensionArchivo;
+                        //DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].Folio_Fact_Cja + Archivos[i].ExtensionArchivo;
+                        DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo + Archivos[i].ExtensionArchivo;
+
                         if (System.IO.File.Exists(OrigenArchivo))
                         {
                             System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);

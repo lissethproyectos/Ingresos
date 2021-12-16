@@ -10,44 +10,54 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col text-center">
-                <asp:UpdateProgress ID="UpdateProgress2" AssociatedUpdatePanelID="UpdatePanel4" runat="server">
-                    <ProgressTemplate>
-                        <asp:Image ID="Image88" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." AlternateText="Espere un momento, por favor.." />
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                    <ContentTemplate>
-                        <asp:Panel ID="pnlBuscar" runat="server" DefaultButton="imgbtnBuscar">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-md-1">
-                                        <asp:Label ID="lblBuscar" runat="server" Text="Buscar"></asp:Label>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <asp:TextBox ID="txtFolioBuscar" runat="server" Placeholder="Recibo/Referencia/Nombre Completo" Width="100%"></asp:TextBox>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <asp:UpdatePanel ID="UpdBuscar" runat="server">
-                                            <ContentTemplate>
-                                                <asp:ImageButton ID="imgbtnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar_Click" />
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
+    <asp:UpdatePanel ID="UpdMult" runat="server">
+        <ContentTemplate>
+            <asp:MultiView ID="MultiView1" runat="server">
+                <asp:View ID="View1" runat="server">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <asp:Label ID="lblBuscar" runat="server" Text="Buscar"></asp:Label>
                             </div>
-                        </asp:Panel>
-
-                        <asp:Panel ID="pnlRecibos" runat="server">
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col text-center">
+                            <div class="col-md-9">
+                                <asp:TextBox ID="txtFolioBuscar" runat="server" Placeholder="Recibo/Referencia/Nombre Completo" Width="100%"></asp:TextBox>
+                            </div>
+                            <div class="col-md-1">
+                                <asp:UpdatePanel ID="UpdBuscar" runat="server">
+                                    <ContentTemplate>
+                                        <asp:ImageButton ID="imgbtnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgbtnBuscar_Click" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="col-md-1">
+                                <asp:UpdateProgress ID="UpdateProgress2" runat="server"
+                                    AssociatedUpdatePanelID="UpdBuscar">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image86" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="50px"
+                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdateProgress ID="updPgrFacturas" runat="server"
+                                    AssociatedUpdatePanelID="updPnlFacturas">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image86" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="50px"
+                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdatePanel ID="updPnlFacturas" runat="server">
+                                    <ContentTemplate>
                                         <asp:GridView ID="grvFacturas" runat="server" AllowPaging="True"
                                             AutoGenerateColumns="False"
                                             OnSelectedIndexChanging="grvFacturas_SelectedIndexChanging"
@@ -137,7 +147,7 @@
                                                 <asp:TemplateField HeaderText="Borrar" ShowHeader="False">
                                                     <ItemTemplate>
                                                         <%--<asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Delete" ImageUrl="~/Imagenes/del.png" OnClientClick="return confirm('¿Eliminar registro?');" Text="Eliminar" />--%>
-                                                        <asp:LinkButton ID="linkBttnBorrar" runat="server" CausesValidation="False" CommandName="Delete"  OnClientClick="return confirm('¿Eliminar registro?');" ><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                        <asp:LinkButton ID="linkBttnBorrar" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Eliminar registro?');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
@@ -147,18 +157,33 @@
                                             <HeaderStyle CssClass="enc" BackColor="#595959" ForeColor="White" Font-Size="10px" BorderColor="White" />
                                             <AlternatingRowStyle CssClass="alt" />
                                         </asp:GridView>
-                                    </div>
-                                </div>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
-                        </asp:Panel>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-        </div>
-        <usr:uccorreo ID="PnlCorreo" runat="server" />
-        <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-            <ContentTemplate>
-                <asp:Panel ID="pnlModificacion_Recibo" runat="server" Visible="False">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdateProgress ID="UpdateProgress22" runat="server" AssociatedUpdatePanelID="UpdatePanel33">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image87" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                                            ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="UpdatePanel33" runat="server">
+                                    <ContentTemplate>
+                                        <iframe id="miniContenedor" frameborder="0" marginheight="0" marginwidth="0" name="miniContenedor"
+                                            style="height: 500px" width="100%"></iframe>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
+                </asp:View>
+                <asp:View ID="View2" runat="server">
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-2">
@@ -384,11 +409,6 @@
                                 <asp:ImageButton ID="imgBttnAgregarConcepto0" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="imgBttnAgregarConcepto0_Click" />
                             </div>
                         </div>
-                        <asp:HiddenField ID="hddnModal" runat="server" />
-                        <ajaxToolkit:ModalPopupExtender ID="modal" runat="server"
-                            PopupControlID="pnlAgregaConceptos"
-                            TargetControlID="hddnModal" BackgroundCssClass="modalBackground_Proy" CancelControlID="btnCancelar_Concp">
-                        </ajaxToolkit:ModalPopupExtender>
                         <div class="row">
                             <div class="col">
                                 <asp:GridView ID="grvFacturas_Detalle" runat="server" AutoGenerateColumns="False"
@@ -504,111 +524,6 @@
                                 </fieldset>
                             </div>
                         </div>
-                        <asp:Panel ID="pnlAgregaConceptos" runat="server" BackColor="White"
-                            CssClass="TituloModalPopupMsg" Width="100%">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col">
-                                        <asp:UpdatePanel ID="UpdatePanel14" runat="server">
-                                            <ContentTemplate>
-                                                <asp:Label ID="lblMsjConc" runat="server" CssClass="MsjError"></asp:Label>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        Nivel de Estudios
-                                    </div>
-                                    <div class="col-md-8">
-                                        <asp:UpdatePanel ID="UpdatePanel6" runat="server">
-                                            <ContentTemplate>
-                                                <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" TabIndex="1" Width="100%">
-                                                </asp:DropDownList>
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlNivel" CssClass="MsjError" ErrorMessage="*Requerido" InitialValue="Z" ValidationGroup="guardar_conceptos"></asp:RequiredFieldValidator>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <asp:UpdateProgress ID="UpdateProgress23" runat="server" AssociatedUpdatePanelID="UpdatePanel6">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="Image89" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        Concepto
-                                    </div>
-                                    <div class="col-md-8">
-                                        <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                                            <ContentTemplate>
-                                                <%--<asp:DropDownList ID="ddlConcepto" runat="server" AutoPostBack="True" 
-                                                                    onselectedindexchanged="ddlConcepto_SelectedIndexChanged">
-                                                                </asp:DropDownList>--%>
-                                                <customControl:GroupDropDownList ID="ddlConcepto" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlConcepto_SelectedIndexChanged" Width="100%">
-                                                </customControl:GroupDropDownList>
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ControlToValidate="ddlConcepto" CssClass="MsjError" ErrorMessage="*Requerido" InitialValue="00000" ValidationGroup="guardar_conceptos"></asp:RequiredFieldValidator>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-
-                                    <div class="col-md-1">
-                                        <asp:UpdateProgress ID="UpdateProgress24" runat="server" AssociatedUpdatePanelID="UpdatePanel7">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="Image90" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <asp:Label ID="lblValor_unitario" runat="server" Text="P. Unitario"></asp:Label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <asp:UpdatePanel ID="UpdatePanel8" runat="server">
-                                            <ContentTemplate>
-                                                <asp:TextBox ID="txtValor_unitario" runat="server"></asp:TextBox>
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ControlToValidate="txtValor_unitario" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar_conceptos"></asp:RequiredFieldValidator>
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator104" runat="server" ControlToValidate="txtValor_unitario" ValidationExpression="^-?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9]{0,2})?$" SetFocusOnError="True" ValidationGroup="Detalle">*Formato (999,999,999.99)</asp:RegularExpressionValidator>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <asp:Label ID="lblCantidad" runat="server" Text="Cantidad"></asp:Label>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                                            <ContentTemplate>
-                                                <asp:TextBox ID="txtCantidad" runat="server" ValidationGroup="conceptos" Width="25%">1</asp:TextBox>
-                                                <br />
-                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ControlToValidate="txtCantidad" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar_conceptos"></asp:RequiredFieldValidator>
-                                                <br />
-                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtCantidad" CssClass="MsjError" ErrorMessage="*Solo Números" ValidationExpression="\d+"></asp:RegularExpressionValidator>
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <asp:UpdatePanel ID="UpdatePanel11" runat="server">
-                                            <ContentTemplate>
-                                                <asp:Button ID="btnGuardar_Concep_Continuar" runat="server" CssClass="btn btn-info" OnClick="btnGuardar_Concep_Continuar_Click" Text="GUARDAR Y CONTINUAR" ValidationGroup="guardar_conceptos" />
-                                                &nbsp;<asp:Button ID="btnGuardar_Concep" runat="server" CssClass="btn btn-primary" OnClick="btnGuardar_Concep_Click" Text="GUARDAR Y SALIR" ValidationGroup="guardar_conceptos" />
-                                                &nbsp;<asp:Button ID="btnCancelar_Concp" runat="server" CssClass="btn btn-blue-grey" Text="CANCELAR" OnClick="btnCancelar_Concp_Click" />
-                                                &nbsp;
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </div>
-                                </div>
-                            </div>
-                        </asp:Panel>
                         <div class="row">
                             <div class="col">
                                 <asp:UpdateProgress ID="UpdateProgress25" runat="server" AssociatedUpdatePanelID="UpdatePanel5">
@@ -630,27 +545,120 @@
                                 </asp:UpdatePanel>
                             </div>
                         </div>
-                </asp:Panel>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <div class="row">
-            <div class="col">
-                <asp:UpdateProgress ID="UpdateProgress22" runat="server" AssociatedUpdatePanelID="UpdatePanel33">
-                    <ProgressTemplate>
-                        <asp:Image ID="Image87" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                            ToolTip="Espere un momento, por favor.." />
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <asp:UpdatePanel ID="UpdatePanel33" runat="server">
-                    <ContentTemplate>
-                        <iframe id="miniContenedor" frameborder="0" marginheight="0" marginwidth="0" name="miniContenedor"
-                            style="height: 500px" width="100%"></iframe>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
+                    </div>
+                </asp:View>
+            </asp:MultiView>
+        </ContentTemplate>
+    </asp:UpdatePanel>
+    <usr:uccorreo ID="PnlCorreo" runat="server" />
+    <div class="modal fade" id="modalConceptos" tabindex="-1" role="dialog" aria-labelledby="modalConceptos" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modConceptos">Conceptos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="UpdatePanel14" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Label ID="lblMsjConc" runat="server" CssClass="MsjError"></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                Nivel de Estudios
+                            </div>
+                            <div class="col-md-8">
+                                <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                                    <ContentTemplate>
+                                        <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" TabIndex="1" Width="100%">
+                                        </asp:DropDownList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlNivel" CssClass="MsjError" ErrorMessage="*Requerido" InitialValue="Z" ValidationGroup="guardar_conceptos"></asp:RequiredFieldValidator>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="col-md-1">
+                                <asp:UpdateProgress ID="UpdateProgress23" runat="server" AssociatedUpdatePanelID="UpdatePanel6">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image89" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                Concepto
+                            </div>
+                            <div class="col-md-8">
+                                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                    <ContentTemplate>
+                                        <%--<asp:DropDownList ID="ddlConcepto" runat="server" AutoPostBack="True" 
+                                                                    onselectedindexchanged="ddlConcepto_SelectedIndexChanged">
+                                                                </asp:DropDownList>--%>
+                                        <customControl:GroupDropDownList ID="ddlConcepto" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlConcepto_SelectedIndexChanged" Width="100%">
+                                        </customControl:GroupDropDownList>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator26" runat="server" ControlToValidate="ddlConcepto" CssClass="MsjError" ErrorMessage="*Requerido" InitialValue="00000" ValidationGroup="guardar_conceptos"></asp:RequiredFieldValidator>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+
+                            <div class="col-md-1">
+                                <asp:UpdateProgress ID="UpdateProgress24" runat="server" AssociatedUpdatePanelID="UpdatePanel7">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image90" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <asp:Label ID="lblValor_unitario" runat="server" Text="P. Unitario"></asp:Label>
+                            </div>
+                            <div class="col-md-3">
+                                <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                                    <ContentTemplate>
+                                        <asp:TextBox ID="txtValor_unitario" runat="server" Width="100%"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ControlToValidate="txtValor_unitario" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar_conceptos"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator104" runat="server" ControlToValidate="txtValor_unitario" ValidationExpression="^-?([0-9]{1,3},([0-9]{3},)*[0-9]{3}|[0-9]+)(.[0-9]{0,2})?$" SetFocusOnError="True" ValidationGroup="Detalle">*Formato (999,999,999.99)</asp:RegularExpressionValidator>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="col-md-3">
+                                <asp:Label ID="lblCantidad" runat="server" Text="Cantidad"></asp:Label>
+                            </div>
+                            <div class="col-md-3">
+                                <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+                                    <ContentTemplate>
+                                        <asp:TextBox ID="txtCantidad" runat="server" ValidationGroup="conceptos" Width="100%">1</asp:TextBox>
+                                        <br />
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ControlToValidate="txtCantidad" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar_conceptos"></asp:RequiredFieldValidator>
+                                        <br />
+                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="txtCantidad" CssClass="MsjError" ErrorMessage="*Solo Números" ValidationExpression="\d+"></asp:RegularExpressionValidator>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-right">
+                                <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Button ID="btnGuardar_Concep_Continuar" runat="server" CssClass="btn btn-info" OnClick="btnGuardar_Concep_Continuar_Click" Text="GUARDAR" ValidationGroup="guardar_conceptos" />
+                                        <%-- &nbsp;<asp:Button ID="btnGuardar_Concep" runat="server" CssClass="btn btn-primary" OnClick="btnGuardar_Concep_Click" Text="GUARDAR Y SALIR" ValidationGroup="guardar_conceptos" />
+                                                            &nbsp;--%>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

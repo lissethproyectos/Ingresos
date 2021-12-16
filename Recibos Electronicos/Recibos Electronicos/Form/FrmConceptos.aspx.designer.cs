@@ -78,6 +78,24 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.ImageButton imgBttnNuevo;
 
         /// <summary>
+        /// Control updPgrConceptos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrConceptos;
+
+        /// <summary>
+        /// Control updPnlConceptos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlConceptos;
+
+        /// <summary>
         /// Control grvConceptos.
         /// </summary>
         /// <remarks>

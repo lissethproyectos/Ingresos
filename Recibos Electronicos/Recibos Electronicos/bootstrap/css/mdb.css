@@ -2232,6 +2232,11 @@ a.waves-effect, a.waves-light {
   .btn-primary:not([disabled]):not(.disabled):active:focus, .btn-primary:not([disabled]):not(.disabled).active:focus,
   .show > .btn-primary.dropdown-toggle:focus {
     box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15); }
+    .btn-primary.dropdown-toggle option {
+        font-weight: normal;
+        background-color: #5b5b5b;
+        text-align:left;
+    }
 
 .primary-ic {
   color: #4285f4 !important; }
@@ -5870,7 +5875,7 @@ ul.stepper {
   padding: 0 1.5rem;
   padding: 1.5rem; }
   ul.stepper li a {
-    padding: 1.5rem;
+    /*padding: 1.5rem;*/
     text-align: center; }
     ul.stepper li a .circle {
       display: inline-block;

@@ -121,33 +121,7 @@ namespace CapaNegocio
             {
                 throw new Exception(ex.Message);
             }
-        }
-        //public void LlenaCombo(string SP, ref DropDownList DDL, string parametro, string valor, string parametro2, string valor2, string parametro3, string valor3, ref List<Comun> Etiquetas, string UsuBD)
-        //{
-        //    try
-        //    {
-        //        List<Comun> Lista = new List<Comun>();
-        //        CD_Comun CDComun = new CD_Comun();
-        //        CDComun.LlenaCombo(SP, ref Lista, parametro, parametro2, parametro3, valor, valor2, valor3, UsuBD);
-        //        DDL.Items.Clear();
-        //        if (Lista.Count > 0)
-        //        {
-        //            Etiquetas = Lista;
-        //            DDL.DataSource = Lista;
-        //            DDL.DataValueField = "IdStr";
-        //            DDL.DataTextField = "Descripcion";
-        //            DDL.DataBind();
-        //        }
-        //        else
-        //        {
-        //            DDL.Items.Add("La opción no contiene datos");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
+        }        
         public void LlenaCombo(string SP, ref DropDownList DDL, string parametro, string parametro2, string parametro3, string valor, string valor2, string valor3, ref List<Comun> Etiquetas, string UsuBD)
         {
             try

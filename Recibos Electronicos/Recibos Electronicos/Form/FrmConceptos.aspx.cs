@@ -230,6 +230,7 @@ namespace Recibos_Electronicos.Form
             try
             {
                 CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
+                ddlNivel.SelectedValue = "L";
                 //ddlNivel.Items.Insert(0, new ListItem("--Todos--", "T"));
                 //ddlNivel.Items.Remove(ddlNivel.Items[1]);
             }

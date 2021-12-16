@@ -221,7 +221,7 @@ namespace Recibos_Electronicos.Form
             //pnlEditar.Visible = false;
         }
 
-        protected void btnAgregaFactura_Click(object sender, EventArgs e)
+        protected void linkBttnAgregaFactura_Click(object sender, EventArgs e)
         {
             try
             {
@@ -229,14 +229,27 @@ namespace Recibos_Electronicos.Form
                 if (fileFactura.HasFile)
                 {
                     int fileSize = fileFactura.PostedFile.ContentLength;
-                    //fullPath = Path.Combine(Server.MapPath("../Facturas/PDF/"), fileFactura.FileName);
-                    //fileFactura.SaveAs(fullPath);
-                    fullPathFactura = Path.Combine(Server.MapPath("../ArchivosFacturasTemp/"), fileFactura.FileName);
+                    if(ddlTipo.SelectedValue=="R")
+                        fullPathFactura = Path.Combine(Server.MapPath("../ArchivosFacturasTemp/"), "R-"+ grdDatosFactura.SelectedRow.Cells[0].Text+"-"+fileFactura.FileName);
+                    else
+                        fullPathFactura = Path.Combine(Server.MapPath("../ArchivosFacturasTemp/"), ddlTipo.SelectedValue + "-" + grdDatosFacturaEfect.SelectedRow.Cells[0].Text + "-" + fileFactura.FileName);
+
                     fileFactura.SaveAs(fullPathFactura);
                     ObjCjaFactura.Fecha_Fact_Cja = txtFecha_Fact_Cja.Text;
                     ObjCjaFactura.Folio_Fact_Cja = txtFolio_Fact_Cja.Text;
-                    ObjCjaFactura.NombreArchivo = fileFactura.FileName;
-                    ObjCjaFactura.Ruta = "../ArchivosFacturasTemp/" + fileFactura.FileName; //fullPath;
+                    //ObjCjaFactura.NombreArchivo = fileFactura.FileName;
+
+                    if (ddlTipo.SelectedValue == "R")
+                    {
+                        ObjCjaFactura.NombreArchivo = "R-" + grdDatosFactura.SelectedRow.Cells[0].Text + "-" + fileFactura.FileName.ToUpper();
+                        ObjCjaFactura.Ruta = "../ArchivosFacturasTemp/" + "R-" + grdDatosFactura.SelectedRow.Cells[0].Text + "-" + fileFactura.FileName;
+                    }
+                    else
+                    {
+                        ObjCjaFactura.NombreArchivo = ddlTipo.SelectedValue + "-" + grdDatosFacturaEfect.SelectedRow.Cells[0].Text + "-" + fileFactura.FileName.ToUpper();
+                        ObjCjaFactura.Ruta = "../ArchivosFacturasTemp/" + ddlTipo.SelectedValue + "-" + grdDatosFacturaEfect.SelectedRow.Cells[0].Text + "-" + fileFactura.FileName;
+                    }
+
                     ObjCjaFactura.ExtensionArchivo = Path.GetExtension(fileFactura.FileName);
                     if (Session["Archivos"] == null)
                     {
@@ -575,8 +588,10 @@ namespace Recibos_Electronicos.Form
                     ObjFacturacion.RECEPTOR_STATUS = "E";
                 else if (grdArchivos.Rows.Count > 0 && grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "F")
                 {
-                    if (txtFolio.Text != string.Empty && txtFecha.Text != string.Empty && txtImporteDeposito.Text != string.Empty)
+                    if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text=="A"  && txtFolio.Text != string.Empty && txtFecha.Text != string.Empty && txtImporteDeposito.Text != string.Empty && lblArchivoVoucher.Text != string.Empty)
                         ObjFacturacion.RECEPTOR_STATUS = "P";
+                    else
+                        ObjFacturacion.RECEPTOR_STATUS = "F";
                 }
                 else
                 {
@@ -863,7 +878,7 @@ namespace Recibos_Electronicos.Form
             Int32[] CeldasPorConfirmar = { 0, 10, 11, 12, 13, 14, 15, 17 };*/
             Int32[] CeldasFacturados = { 0, 7, 8, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26 }; //{ 0, 6, 7, 9, 10, 11, 13, 14, 16, 17, 18, 20, 21, 23, 24, 25, 26 };
             Int32[] CeldasSolicitados = { 0, 7, 8, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 };
-            Int32[] CeldasPorConfirmar = { 0, 6, 7, 12, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 25, 26 };
+            Int32[] CeldasPorConfirmar = { 0, 6, 7, 12, 14, 15, 17, 18, 19, 20, 21, 22, 24, 25, 26 };
 
 
             try
@@ -920,6 +935,11 @@ namespace Recibos_Electronicos.Form
                     LinkButton linkBttnDocto = (LinkButton)(row.Cells[23].FindControl("linkBttnFacturaRef"));
                     linkBttnDocto.Visible = false;
 
+                    LinkButton linkBttnCorreo = (LinkButton)(row.Cells[16].FindControl("linkBttnCorreo"));
+                    linkBttnCorreo.Visible = false;
+
+
+
                     if (row.Cells[19].Text == "R")
                     {
                         row.Cells[11].BackColor = System.Drawing.Color.Red;
@@ -936,6 +956,8 @@ namespace Recibos_Electronicos.Form
                     {
                         //linkEditar.Visible = false;
                         //linkBttnDocto.Visible = true;
+                        linkBttnCorreo.Visible = true;
+                        linkBttnDocto.Visible = true;
                         linkBttnDocto.Visible = true;
                         row.Cells[11].BackColor = System.Drawing.Color.CadetBlue; //Color.FromName("#275090"); //System.Drawing.Color.DarkBlue;
                         row.Cells[11].ForeColor = System.Drawing.Color.White;
@@ -971,7 +993,12 @@ namespace Recibos_Electronicos.Form
 
                     LinkButton linkBttnCancelar = (LinkButton)(row.Cells[21].FindControl("linkBttnCancelar0"));
                     linkBttnCancelar.Visible = false;
-                    
+
+                    LinkButton linkEditar2 = (LinkButton)(row.Cells[29].FindControl("linkBttnEditar2"));
+                    linkEditar2.Visible = false;
+
+
+                    row.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
 
                     if (row.Cells[24].Text == "R")
                     {
@@ -988,6 +1015,10 @@ namespace Recibos_Electronicos.Form
                     else if (row.Cells[24].Text == "F")
                     {
                         linkEditar.Visible = false;
+                        if (row.Cells[27].Text == "A")
+                            linkEditar2.Visible = true;
+                       
+
                         linkBttnDocto.Visible = true;
                         row.Cells[18].BackColor = System.Drawing.Color.CadetBlue; //Color.FromName("#275090"); //System.Drawing.Color.DarkBlue;
                         row.Cells[18].ForeColor = System.Drawing.Color.White;
@@ -996,6 +1027,9 @@ namespace Recibos_Electronicos.Form
                     {
                         linkEditar.Visible = false;
                         linkBttnDocto.Visible = true;
+                        if (row.Cells[27].Text == "A")
+                            linkEditar2.Visible = true;
+
                         row.Cells[18].BackColor = System.Drawing.Color.YellowGreen;
                         row.Cells[18].ForeColor = System.Drawing.Color.White;
                     }
@@ -1003,6 +1037,8 @@ namespace Recibos_Electronicos.Form
                     {
                         linkEditar.Visible = false;
                         linkBttnDocto.Visible = true;
+                        if (row.Cells[27].Text == "A")
+                            linkEditar2.Visible = true;
                         row.Cells[18].BackColor = System.Drawing.Color.DarkGray;
                         row.Cells[18].ForeColor = System.Drawing.Color.White;
                     }
@@ -1017,7 +1053,7 @@ namespace Recibos_Electronicos.Form
 
                     }
 
-                    row.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
+                    //row.Cells[Convert.ToInt32(Columnas.GetValue(i))].Visible = false;
                 }
             }
         }
@@ -1048,8 +1084,8 @@ namespace Recibos_Electronicos.Form
                 grdDatosFacturaEfect.DataBind();
                 if (ddlTipo.SelectedValue == "T")
                 {
-                    Int32[] Celdas = { 0, 4, 5, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26, 27, 28, 29 };
-                    Int32[] CeldasSolicitados = { 0, 4, 5, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26, 27, 28, 29 };
+                    Int32[] Celdas = { 0, 4, 5, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26, 27, 28 };
+                    Int32[] CeldasSolicitados = { 0, 4, 5, 11, 12, 13, 14, 15, 22, 23, 24, 25, 26, 27, 28 };
                     Int32[] CeldasFacturados = { 0, 4, 5, 11, 12, 13, 14, 15, 21, 22, 23, 24, 25, 26, 27, 28 };
                     if (ddlStatus.SelectedValue == "F")
                         StyleColumnasEfec(grdDatosFacturaEfect, CeldasFacturados);
@@ -1061,10 +1097,10 @@ namespace Recibos_Electronicos.Form
                 }
                 else
                 {
-                    Int32[] Celdas = { 0, 6, 7, 8, 9, 10, 14, 15, 22, 23, 24, 25, 26, 27, 28, 29 };
+                    Int32[] Celdas = { 0, 6, 7, 8, 9, 10, 14, 15, 21, 22, 23, 24, 25, 26, 27, 28 };
                     Int32[] CeldasSolicitados = { 0, 6, 7, 8, 9, 10, 14, 15, 20, 22, 23, 24, 25, 26, 27, 28 };
                     Int32[] CeldasFacturados = { 0, 8, 9, 11, 12, 14, 15, 20, 21, 22, 23, 24, 25, 26, 27, 28 };
-                    Int32[] CeldasPagados = { 0, 8, 9, 11, 12, 14, 15, 20, 21, 22, 23, 24, 25, 26, 27, 28 };
+                    Int32[] CeldasPagados = { 0, 8, 9, 11, 12, 14, 15, 21, 22, 23, 24, 25, 26, 27, 28 };
                     Int32[] CeldasPUE = { 0, 8, 9, 11, 12, 20, 21, 22, 23, 24, 25, 26, 27, 28 };
                     if (ddlStatus.SelectedValue == "F")
                         StyleColumnasEfec(grdDatosFacturaEfect, CeldasFacturados);
@@ -1772,7 +1808,155 @@ namespace Recibos_Electronicos.Form
                     break;
             }
         }
+        protected void StatusEditar()
+        {
+            rowFA.Visible = false;
+            pnl1.Enabled = true;
+            rowPnl1.Visible = false;
 
+            pnl2.Enabled = true;
+            rowPnl2.Visible = false;
+            pnlFacturas.Visible = true;
+            grdArchivos.Columns[5].Visible = true;
+            switch (grdDatosFacturaEfect.SelectedRow.Cells[24].Text)
+            {
+                case "C":
+                    hddnBandera.Value = "1";
+                    tabFacturas.Tabs[2].Visible = false;
+                    tabFacturas.Tabs[1].Visible = true;
+                    if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "T")
+                    {
+                        collapse1.Visible = true;
+                        collapse2.Visible = false;
+                        collapse3.Visible = false;
+                        collapse4.Visible = false;
+                    }
+                    else
+                    {
+                        collapse1.Visible = false;
+                        collapse2.Visible = true;
+                        collapse3.Visible = true;
+                        collapse4.Visible = false;
+                    }
+
+                    break;
+                case "S":
+                    hddnBandera.Value = "0";
+                    if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "T" || grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "A")
+                        tabFacturas.Tabs[1].Visible = true;
+                    else
+                        tabFacturas.Tabs[1].Visible = false;
+
+                    tabFacturas.Tabs[2].Visible = true;
+
+                    if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "T")
+                    {
+                        collapse1.Visible = true;
+                        collapse2.Visible = false;
+                        collapse3.Visible = false;
+                        collapse4.Visible = false;
+                    }
+                    else
+                    {
+                        collapse1.Visible = false;
+                        collapse2.Visible = true;
+                        collapse3.Visible = true;
+                        collapse4.Visible = false;
+                    }
+                    break;
+                case "F":
+                    hddnBandera.Value = "0";
+                    if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "A")
+                    {
+                        tabFacturas.Tabs[1].Visible = true;
+                        if (ddlStatus.SelectedValue == "C")
+                        {
+                            grdArchivos.Columns[5].Visible = false;
+                            pnlFacturas.Visible = false;
+                        }
+                        
+                        collapse1.Visible = true;
+                        collapse2.Visible = true;
+                        collapse3.Visible = true;
+                        collapse4.Visible = false;
+                        rowFA.Visible = true;
+                        //ScriptManager.RegisterStartupScript(this, GetType(), "CollapseActualizar1", "VerCollapse1();", true);
+                        //ScriptManager.RegisterStartupScript(this, GetType(), "CollapseActualizar2", "VerCollapse2();", true);
+                        //ScriptManager.RegisterStartupScript(this, GetType(), "CollapseActualizar3", "VerCollapse3();", true);
+                    }
+                    else if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "T")
+                    {
+                        tabFacturas.Tabs[1].Visible = true;
+                        pnl1.Enabled = false;
+                        pnl2.Enabled = false;
+                        rowPnl1.Visible = true;
+                        rowPnl2.Visible = true;
+                        collapse1.Visible = true;
+                        collapse2.Visible = false;
+                        collapse3.Visible = false;
+                        collapse4.Visible = false;
+                    }
+                    else
+                        tabFacturas.Tabs[1].Visible = false;
+
+                    tabFacturas.Tabs[2].Visible = true;
+                    break;
+                case "P":
+                    hddnBandera.Value = "0";
+                    if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "T")
+                    {
+                        tabFacturas.Tabs[1].Visible = true;
+                        tabFacturas.Tabs[2].Visible = true;
+
+
+                        collapse1.Visible = true;
+                        collapse2.Visible = false;
+                        collapse3.Visible = false;
+                        collapse4.Visible = false;
+                        //ScriptManager.RegisterStartupScript(this, GetType(), "CollapseActualizar1", "VerCollapse1();", true);
+                        //ScriptManager.RegisterStartupScript(this, GetType(), "CollapseActualizar2", "OcultarCollapse2();", true);
+                        //ScriptManager.RegisterStartupScript(this, GetType(), "CollapseActualizar3", "OcultarCollapse3();", true);
+
+                    }
+                    else if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "A")
+                    {
+                        tabFacturas.Tabs[1].Visible = true;
+                        collapse1.Visible = true;
+                        collapse2.Visible = true;
+                        collapse3.Visible = true;
+                        collapse4.Visible = true;
+                        rowFA.Visible = true;
+                    }
+                    else
+                        tabFacturas.Tabs[1].Visible = false;
+                    break;
+                case "E":
+                    hddnBandera.Value = "0";
+                    if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "T")
+                    {
+                        tabFacturas.Tabs[1].Visible = true;
+                        tabFacturas.Tabs[2].Visible = true;
+
+                        collapse1.Visible = true;
+                        collapse2.Visible = false;
+                        collapse3.Visible = false;
+                        collapse4.Visible = false;
+
+                    }
+                    else if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "A")
+                    {
+                        tabFacturas.Tabs[1].Visible = true;
+                        collapse1.Visible = true;
+                        collapse2.Visible = true;
+                        collapse3.Visible = true;
+                        collapse4.Visible = true;
+                        rowFA.Visible = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
         protected void ddlStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<CajaFactura> lst = new List<CajaFactura>();
@@ -1818,7 +2002,8 @@ namespace Recibos_Electronicos.Form
                     else
                         lblEtFormaBusqueda.Text = "Fecha de Solicitud";
 
-                    lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> para emitir facturas anticipadas con método de pago PUE(pago en una sola exhibición) y forma de pago ( transferencia electrónica, tarjeta de crédito, tarjeta de débito etc.),la fecha límite de pago es el último día del mes en la que se haya emitido la factura, si el pago es realizado en el siguiente mes la factura se cancelara y se emitirá una nueva factura con las siglas PPD (pago en parcialidades o diferido) y forma de pago (por definir).";
+                    //lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> para emitir facturas anticipadas con método de pago PUE(pago en una sola exhibición) y forma de pago ( transferencia electrónica, tarjeta de crédito, tarjeta de débito etc.),la fecha límite de pago es el último día del mes en la que se haya emitido la factura, si el pago es realizado en el siguiente mes la factura se cancelara y se emitirá una nueva factura con las siglas PPD (pago en parcialidades o diferido) y forma de pago (por definir).";
+                    lblNota.Text = "<strong>" + ddlTipo.SelectedItem.Text + ":</strong> las facturas emitidas con el método de pago PUE(pago en una sola exhibición), la fecha límite de pago es el último día del mes en que se emitió.";
                     grdDatosFactura.Visible = false;
                     grdDatosFacturaEfect.Visible = true;
 
@@ -1926,7 +2111,7 @@ namespace Recibos_Electronicos.Form
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdDatosFactura.SelectedIndex = row.RowIndex;
             txtCorreo.Text = grdDatosFactura.SelectedRow.Cells[15].Text;
-            modalCorreo.Show();
+            //modalCorreo.Show();
         }
 
         protected void bttnCorreo_Click(object sender, EventArgs e)
@@ -1936,7 +2121,7 @@ namespace Recibos_Electronicos.Form
             string contenido = string.Empty;
             lblMensajeCorreo.Text = string.Empty;
             ObjCjaFactura.ID_FACT = Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
-            modalCorreo.Show();
+            //modalCorreo.Show();
             try
             {
                 List<CajaFactura> ListArch = new List<CajaFactura>();
@@ -1952,7 +2137,7 @@ namespace Recibos_Electronicos.Form
                 {
                     if (mmsg != null)
                     {
-                        modalCorreo.Hide();
+                        //modalCorreo.Hide();
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'La Factura se ha enviado al correo');", true);
                     }
                     else
@@ -1973,7 +2158,7 @@ namespace Recibos_Electronicos.Form
 
         protected void bttnCancelarCorreo_Click(object sender, EventArgs e)
         {
-            modalCorreo.Hide();
+            //modalCorreo.Hide();
         }
 
         protected void chkRechazado_CheckedChanged(object sender, EventArgs e)
@@ -2057,10 +2242,11 @@ namespace Recibos_Electronicos.Form
             txtTotalConvenio.Text = Convert.ToString(Convert.ToDouble(txtImporteConvenio.Text) + Convert.ToDouble(txtIVAConvenio.Text));
         }
 
-        protected void btnVoucher_Click(object sender, EventArgs e)
+        protected void linkBttnAdjVoucher_Click(object sender, EventArgs e)
         {
             try
             {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Collapse1", "Collapse1();", true);
 
                 if (fileVoucher.HasFile)
                 {
@@ -2126,6 +2312,7 @@ namespace Recibos_Electronicos.Form
 
         protected void linkBttnEliminarVoucher_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 System.IO.File.Delete(lblArchivoVoucher.ToolTip);
@@ -2133,6 +2320,7 @@ namespace Recibos_Electronicos.Form
                 lblArchivoVoucher.Text = string.Empty;
                 lblArchivoVoucher.ToolTip = string.Empty;
                 linkBttnEliminarVoucher.Visible = false;
+                ScriptManager.RegisterStartupScript(this, GetType(), "Collapse1", "Collapse1();", true);
             }
             catch (Exception ex)
             {
@@ -2208,7 +2396,7 @@ namespace Recibos_Electronicos.Form
 
 
 
-        protected void btnOficio_Click(object sender, EventArgs e)
+        protected void linkBttnAdjOficio_Click(object sender, EventArgs e)
         {
             try
             {
@@ -2216,17 +2404,7 @@ namespace Recibos_Electronicos.Form
                 if (fileOficio.HasFile)
                 {
                     int fileSize = fileOficio.PostedFile.ContentLength;
-                    fullPath = Path.Combine(Server.MapPath("../DoctosFacturasTemp/"), fileOficio.FileName);
-                    //if (fileSize > 52000)
-                    //{
-                    //    System.Drawing.Image ImageDraw = System.Drawing.Image.FromFile(fullPath);
-                    //    ImageDraw = this.Redimensionar(ImageDraw, 30, 30);
-                    //    fullPath = "../Facturas/IMAGES/" + fileOficio.FileName;
-                    //    ImageDraw.Save(fullPath);
-                    //    ImageDraw.Dispose();
-                    //}
-                    //else
-                    //    fileOficio.SaveAs(fullPath);
+                    fullPath = Path.Combine(Server.MapPath("../DoctosFacturasTemp/"), fileOficio.FileName);                   
 
                     fileOficio.SaveAs(fullPath);
                     lblArchivoOficio.NavigateUrl = "../DoctosFacturasTemp/" + fileOficio.FileName;
@@ -2235,7 +2413,7 @@ namespace Recibos_Electronicos.Form
                     linkBttnEliminarOficio.Visible = true;
 
                     collapse1.Attributes["class"] = "collapse multi-collapse show";
-                    //ScriptManager.RegisterStartupScript(this, GetType(), "Collapse1", "Collapse1();", true);
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Collapse2", "Collapse2();", true);
                 }
 
             }
@@ -2351,6 +2529,15 @@ namespace Recibos_Electronicos.Form
 
         }
 
+        protected void VoucherAdjunto(object source, ServerValidateEventArgs args)
+        {
+            if (lblArchivoVoucher.Text == string.Empty)
+                args.IsValid = false;
+            else
+                args.IsValid = true;
+
+        }
+
         protected void bttnDoctos_Click(object sender, EventArgs e)
         {
 
@@ -2463,7 +2650,8 @@ namespace Recibos_Electronicos.Form
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdDatosFactura.SelectedIndex = row.RowIndex;
             txtCorreo.Text = grdDatosFactura.SelectedRow.Cells[15].Text;
-            modalCorreo.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCorreo", "$('#modalEMail').modal('show')", true);
+            //modalCorreo.Show();
         }
 
         protected void linkBttnRecibo_Click(object sender, EventArgs e)
@@ -2545,8 +2733,12 @@ namespace Recibos_Electronicos.Form
             LimipiarCampos();
             rowSolicitarFactura.Visible = false;
             tabFacturas.Tabs[1].Visible = false;
-
-            Status();
+            rowPaso1.Visible = false;
+            rowPaso2.Visible = false;
+            rowPaso3.Visible = false;
+            rowPaso4.Visible = false;
+            rowPaso5.Visible = false;
+            StatusEditar();
 
             try
             {
@@ -2630,6 +2822,13 @@ namespace Recibos_Electronicos.Form
                         chkRechazado.Visible = true;
                         btnGuardarEditar.ValidationGroup = "DatosFiscalesCaja";
                     }
+                    else if (grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "F")                    
+                        rowPaso3.Visible = true;                    
+                    else if (grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "P")                    
+                        rowPaso4.Visible = true;
+                    else if (grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "E")
+                        rowPaso5.Visible = true;
+
                     else
                         chkRechazado.Visible = false;
 

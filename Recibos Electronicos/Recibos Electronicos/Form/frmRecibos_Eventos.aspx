@@ -254,9 +254,13 @@
                 </asp:UpdatePanel>
             </div>
             <div class="col-md-7 text-right">
-                <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />
-                <asp:ImageButton ID="imgBttnReporteLote" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf2.png" OnClick="imgBttnReporteLote_Click" />
-                &nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
+                <asp:UpdatePanel ID="UpdatePanel6" runat="server">
+                    <ContentTemplate>
+                        <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />
+                        <asp:ImageButton ID="imgBttnReporteLote" runat="server" ImageUrl="http://sysweb.unach.mx/resources/imagenes/pdf2.png" OnClick="imgBttnReporteLote_Click" />
+                        &nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
 

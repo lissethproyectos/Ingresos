@@ -301,6 +301,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+
     <div class="container-fluid">
         <div class="row">
             <div class="col text-center">
@@ -494,7 +495,7 @@
                                                                 <asp:Label ID="lblSol" runat="server" Text='<%# Bind("FACT_DESC_STATUS_SOLICITUD") %>' Font-Bold="True" Font-Size="8"></asp:Label>
                                                             </ItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Center" />
-                                                            <ItemStyle HorizontalAlign="Center"/>
+                                                            <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField>
                                                             <ItemTemplate>
@@ -517,7 +518,7 @@
                                                             <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
                                                         <asp:BoundField DataField="FACT_RECEPTOR_CORREO" />
-                                                        <asp:TemplateField HeaderText="ENVIAR XML/PDF">
+                                                        <asp:TemplateField>
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnCorreo" runat="server" OnClick="linkBttnCorreo_Click"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                             </ItemTemplate>
@@ -722,6 +723,245 @@
                 </asp:View>
                 <asp:View ID="Facturas" runat="server">
                     <div class="container-fluid">
+                        <!-- Horizontal Steppers -->
+                        <div class="row" id="rowPaso1" runat="server" visible="false">
+                            <div class="col">
+                                <!-- Stepers Wrapper -->
+                                <ul class="stepper stepper-horizontal">
+
+                                    <!-- First Step -->
+                                    <li class="active">
+                                        <a href="#!">
+                                            <span class="circle">1</span>
+                                            <span class="label">Registrar y confirmar solicitud</span>
+                                        </a>
+                                    </li>
+
+                                    <!-- Second Step -->
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">2</span>
+                                            <span class="label">Adjuntar Factura</span>
+                                        </a>
+                                    </li>
+
+                                    <!-- Third Step -->
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">3</span>
+                                            <span class="label">Adjuntar Comprobante de Pago</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">4</span>
+                                            <span class="label">REP</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">5</span>
+                                            <span class="label">Documentación completa</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.Stepers Wrapper -->
+
+                            </div>
+                        </div>
+                        <div class="row" id="rowPaso2" runat="server" visible="false">
+                            <div class="col">
+                                <!-- Stepers Wrapper -->
+                                <ul class="stepper stepper-horizontal">
+
+                                    <!-- First Step -->
+                                    <li class="completed">
+                                        <a href="#!">
+                                            <span class="circle">1</span>
+                                            <span class="label">Registrar y confirmar solicitud</span>
+                                        </a>
+                                    </li>
+
+                                    <!-- Second Step -->
+                                    <li class="active">
+                                        <a href="#!">
+                                            <span class="circle">2</span>
+                                            <span class="label">Adjuntar Factura</span>
+                                        </a>
+                                    </li>
+
+                                    <!-- Third Step -->
+                                    <li class="active">
+                                        <a href="#!">
+                                            <span class="circle">3</span>
+                                            <span class="label">Adjuntar Comprobante de Pago</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">4</span>
+                                            <span class="label">REP</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">5</span>
+                                            <span class="label">Documentación completa</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.Stepers Wrapper -->
+
+                            </div>
+                        </div>
+                        <div class="row" id="rowPaso3" runat="server" visible="false">
+                            <div class="col">
+                                <!-- Stepers Wrapper -->
+                                <ul class="stepper stepper-horizontal">
+
+                                    <!-- First Step -->
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">1</span>
+                                            <span class="label">Registrar y confirmar solicitud</span>
+                                        </a>
+                                    </li>
+
+                                    <!-- Second Step -->
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">2</span>
+                                            <span class="label">Adjuntar Factura</span>
+                                        </a>
+                                    </li>
+
+                                    <!-- Third Step -->
+                                    <li class="active">
+                                        <a href="#!">
+                                            <span class="circle">3</span>
+                                            <span class="label">Adjuntar Comprobante de Pago</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">4</span>
+                                            <span class="label">REP</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">5</span>
+                                            <span class="label">Documentación completa</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.Stepers Wrapper -->
+
+                            </div>
+                        </div>
+                        <div class="row" id="rowPaso4" runat="server" visible="false">
+                            <div class="col">
+                                <!-- Stepers Wrapper -->
+                                <ul class="stepper stepper-horizontal">
+                                    <!-- First Step -->
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">1</span>
+                                            <span class="label">Registrar y confirmar solicitud</span>
+                                        </a>
+                                    </li>
+                                    <!-- Second Step -->
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">2</span>
+                                            <span class="label">Adjuntar Factura</span>
+                                        </a>
+                                    </li>
+                                    <!-- Third Step -->
+                                    <li class="">
+                                        <a href="#!">
+                                            <span class="circle">3</span>
+                                            <span class="label">Adjuntar Comprobante de Pago</span>
+                                        </a>
+                                    </li>
+                                    <li class="active">
+                                        <a href="#!">
+                                            <span class="circle">4</span>
+                                            <span class="label">Adjuntar Recibo de Pago (REP)</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">5</span>
+                                            <span class="label">Documentación completa</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.Stepers Wrapper -->
+
+                            </div>
+                        </div>
+                        <div class="row" id="rowPaso5" runat="server" visible="false">
+                            <div class="col">
+                                <!-- Stepers Wrapper -->
+                                <ul class="stepper stepper-horizontal">
+
+                                    <!-- First Step -->
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">1</span>
+                                            <span class="label">Registrar y confirmar solicitud</span>
+                                        </a>
+                                    </li>
+
+                                    <!-- Second Step -->
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">2</span>
+                                            <span class="label">Adjuntar Factura</span>
+                                        </a>
+                                    </li>
+
+                                    <!-- Third Step -->
+                                    <li class="">
+                                        <a href="#!">
+                                            <span class="circle">3</span>
+                                            <span class="label">Adjuntar Comprobante de Pago</span>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#!">
+                                            <span class="circle">4</span>
+                                            <span class="label">Adjuntar Recibo de Pago (REP)</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="active">
+                                        <a href="#!">
+                                            <span class="circle">5</span>
+                                            <span class="label">Documentación completa</span>
+                                        </a>
+                                    </li>
+
+                                </ul>
+                                <!-- /.Stepers Wrapper -->
+
+                            </div>
+                        </div>
+                        <!-- /.Horizontal Steppers -->
+
+                    </div>
+                    <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-2">
                                 Dependencia
@@ -733,7 +973,9 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="0" Width="100%" Height="614px" CssClass="ajax__tab_xp" ScrollBars="Vertical">
+                                <asp:UpdatePanel ID="UpdatePanel17" runat="server">
+                                    <ContentTemplate>
+<ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="0" Width="100%" Height="614px" CssClass="ajax__tab_xp" ScrollBars="Vertical">
                                     <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                         <HeaderTemplate><i class="fa fa fa-file fa-2x" aria-hidden="true"></i>&nbsp;Información de Factura</HeaderTemplate>
                                         <ContentTemplate>
@@ -823,7 +1065,7 @@
                                                                 <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
                                                                 <asp:ListItem Value="PUE">[PUE] Pago en una sola exhibicion</asp:ListItem>
                                                                 <asp:ListItem Value="PPD">[PPD] Pago en parcialidades o diferido</asp:ListItem>
-                                                            </asp:DropDownList><asp:RequiredFieldValidator ID="valMetodoPago" runat="server" ControlToValidate="ddlReceptor_MetodoPago" ErrorMessage="*Método de Pago" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                            </asp:DropDownList><asp:RequiredFieldValidator ID="valMetodoPago" runat="server" ControlToValidate="ddlReceptor_MetodoPago" ErrorMessage="*Método de Pago (Pestania 1)" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                         </div>
                                                         <div class="col-md-2">Forma de Pago </div>
                                                         <div class="col-md-4">
@@ -908,34 +1150,34 @@
                                                             <asp:RequiredFieldValidator ID="reqDescConcepto" runat="server" ControlToValidate="txtDescConcepto" ErrorMessage="*Detallar el concepto que se requiera en la factura" ForeColor="Red" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
                                                         </div>
                                                     </div>
-                                                <br />
-                                                <div class="row font-weight-bold" id="rowSolicitarFactura" runat="server">
-                                                    <div class="col-md-2">Solicitar Factura </div>
-                                                    <div class="col-md-10">
-                                                        <asp:CheckBox ID="chkSolicitar" runat="server" Text="Si" ValidationGroup="DatosFiscales" />
+                                                    <br />
+                                                    <div class="row font-weight-bold" id="rowSolicitarFactura" runat="server">
+                                                        <div class="col-md-2">Solicitar Factura </div>
+                                                        <div class="col-md-10">
+                                                            <asp:CheckBox ID="chkSolicitar" runat="server" Text="Si" ValidationGroup="DatosFiscales" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <br />
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:CheckBox ID="chkRechazado" runat="server" AutoPostBack="True" Font-Bold="True" Font-Size="14px" OnCheckedChanged="chkRechazado_CheckedChanged" Text="Rechazado" Visible="False" />
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
+                                                    <br />
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+                                                                <ContentTemplate>
+                                                                    <asp:CheckBox ID="chkRechazado" runat="server" AutoPostBack="True" Font-Bold="True" Font-Size="14px" OnCheckedChanged="chkRechazado_CheckedChanged" Text="Rechazado" Visible="False" />
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row" id="rowObservaciones" runat="server">
-                                                    <div class="col-md-2 font-weight-bold">Motivo del Rechazo </div>
-                                                    <div class="col-md-10">
-                                                        <asp:TextBox ID="txtObservaciones" runat="server" Height="67px" TabIndex="17" TextMode="MultiLine" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="reqObservaciones" runat="server" ControlToValidate="txtObservaciones" ErrorMessage="*Motivo del Rechazo" ForeColor="Red" ValidationGroup="DatosFiscalesCaja" Text="*Requerido"></asp:RequiredFieldValidator>
+                                                    <div class="row" id="rowObservaciones" runat="server">
+                                                        <div class="col-md-2 font-weight-bold">Motivo del Rechazo </div>
+                                                        <div class="col-md-10">
+                                                            <asp:TextBox ID="txtObservaciones" runat="server" Height="67px" TabIndex="17" TextMode="MultiLine" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="reqObservaciones" runat="server" ControlToValidate="txtObservaciones" ErrorMessage="*Motivo del Rechazo" ForeColor="Red" ValidationGroup="DatosFiscalesCaja" Text="*Requerido"></asp:RequiredFieldValidator>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <asp:CheckBox ID="chkConfirmaSolicitud" runat="server" CssClass="alert alert-warning" Text="*Si los datos ya han sido corregidos, puede CONFIRMAR LA SOLICITUD" ValidationGroup="DatosFiscales" Visible="False" /><asp:CustomValidator ID="valCheck" runat="server" ClientValidationFunction="ValidateCheckBox" ErrorMessage="*Confirmar Solicitud" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:CustomValidator>
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <asp:CheckBox ID="chkConfirmaSolicitud" runat="server" CssClass="alert alert-warning" Text="*Si los datos ya han sido corregidos, puede CONFIRMAR LA SOLICITUD" ValidationGroup="DatosFiscales" Visible="False" /><asp:CustomValidator ID="valCheck" runat="server" ClientValidationFunction="ValidateCheckBox" ErrorMessage="*Confirmar Solicitud" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:CustomValidator>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 </div>
                                             </asp:Panel>
                                         </ContentTemplate>
@@ -1025,6 +1267,7 @@
                                                                                         <div class="col-md-2">Folio de Factura Pagada</div>
                                                                                         <div class="col-md-3">
                                                                                             <asp:TextBox ID="txtFolioFactPagada" runat="server"></asp:TextBox>
+                                                                                            <asp:RequiredFieldValidator ID="reqFolioFactPagada" runat="server" ControlToValidate="txtFolioFactPagada" ErrorMessage="*Folio de Factura Pagada (Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                         </div>
                                                                                         <div class="col-md-2">Método de Pago</div>
                                                                                         <div class="col-md-3">
@@ -1033,54 +1276,56 @@
                                                                                                 <asp:ListItem Value="PUE">[PUE] Pago en una sola exhibicion</asp:ListItem>
                                                                                                 <asp:ListItem Value="PPD">[PPD] Pago en parcialidades o diferido</asp:ListItem>
                                                                                             </asp:DropDownList>
+                                                                                            <asp:RequiredFieldValidator ID="reqMetodoPago" runat="server" ControlToValidate="ddlReceptor_MetodoPagoFA" ErrorMessage="*Método de Pago (Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales" InitialValue="0">*Requerido</asp:RequiredFieldValidator>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="row">
                                                                                         <div class="col">
-                                                                                            <div class="alert-warning">
-                                                                                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                                                                                    <ContentTemplate>
-                                                                                                        <div class="container-fluid">
-                                                                                                            <div class="note note-warning" style="font-size: 14px">
-                                                                                                                <div class="row">
-                                                                                                                    <div class="col">Anexar Comprobante de Pago (agregar documento legible y a color) </div>
-                                                                                                                </div>
-                                                                                                                <div class="row">
-                                                                                                                    <div class="col">
-                                                                                                                        <div class="col font-weight-bold">
-                                                                                                                            *Solo formatos PNG, JPG y PDF
-                                                                                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="fileVoucher" ErrorMessage="Archivo incorrecto, debe ser un PNG, JPG ó PDF" ValidationExpression="(.*?)\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator><asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="fileVoucher" Text="* Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
-                                                                                                                        </div>
+                                                                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                                                                <ContentTemplate>
+                                                                                                    <div class="container-fluid">
+                                                                                                        <div class="row alert alert-warning">
+                                                                                                            <div class="col" style="font-size: 15px">Anexar Comprobante de Pago <strong>(agregar documento legible y a color)</strong></div>
+                                                                                                        </div>
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-md-8 mb-3">
+                                                                                                                <div class="input-group mb-3">
+
+                                                                                                                    <div class="custom-file input-group-text" style="background-color: #ffffff">
+                                                                                                                        <asp:FileUpload ID="fileVoucher" runat="server" Height="40px" Width="100%" />
                                                                                                                     </div>
-                                                                                                                </div>
-                                                                                                                <div class="row">
-                                                                                                                    <div class="col-md-8">
-                                                                                                                        <asp:FileUpload ID="fileVoucher" runat="server" Height="30px" />
+                                                                                                                    <div class="input-group-prepend">
+                                                                                                                        <asp:LinkButton ID="linkBttnAdjVoucher" runat="server" ValidationGroup="guardar" OnClick="linkBttnAdjVoucher_Click" CssClass="input-group-text"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
+                                                                                                                        <%--<asp:Button ID="btnVoucher" runat="server" CssClass="btn btn-blue-grey" OnClick="btnVoucher_Click" Text="ADJUNTAR" ValidationGroup="guardar" />--%>
                                                                                                                     </div>
-                                                                                                                    <div class="col-md-4">
-                                                                                                                        <asp:Button ID="btnVoucher" runat="server" CssClass="btn btn-blue-grey" OnClick="btnVoucher_Click" Text="ADJUNTAR" ValidationGroup="guardar" />
-                                                                                                                    </div>
-                                                                                                                </div>
-                                                                                                                <div class="row">
-                                                                                                                    <div class="col-md-6">
-                                                                                                                        <asp:HyperLink ID="lblArchivoVoucher" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
-                                                                                                                    </div>
-                                                                                                                    <div class="col-md-6">
-                                                                                                                        <asp:UpdatePanel ID="UpdatePanel49" runat="server">
-                                                                                                                            <ContentTemplate>
-                                                                                                                                <asp:LinkButton ID="linkBttnEliminarVoucher" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarVoucher_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
-                                                                                                                            </ContentTemplate>
-                                                                                                                        </asp:UpdatePanel>
-                                                                                                                    </div>
+
                                                                                                                 </div>
                                                                                                             </div>
+                                                                                                            <div class="col-md-4">
+                                                                                                                <asp:RegularExpressionValidator ID="RegularExpressionValidator107" runat="server" ControlToValidate="fileVoucher" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
+                                                                                                            </div>
                                                                                                         </div>
-                                                                                                    </ContentTemplate>
-                                                                                                    <Triggers>
-                                                                                                        <asp:PostBackTrigger ControlID="btnVoucher" />
-                                                                                                    </Triggers>
-                                                                                                </asp:UpdatePanel>
-                                                                                            </div>
+                                                                                                        <div class="row">
+                                                                                                            <div class="col-md-4">
+                                                                                                                <asp:HyperLink ID="lblArchivoVoucher" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
+                                                                                                                <asp:CustomValidator ID="CustomValidator2" runat="server" ErrorMessage="*El comprobante es requerido (Datos del Voucher - Pestania 2)" OnServerValidate="VoucherAdjunto" ValidationGroup="DatosFiscales">*Comprobante Requerido</asp:CustomValidator>
+                                                                                                                <%--<asp:RequiredFieldValidator ID="reqVoucher" runat="server" ErrorMessage="*Comprobante requerido" ControlToValidate="lblArchivoVoucher" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>--%>
+                                                                                                            </div>
+                                                                                                            <div class="col-md-8">
+                                                                                                                <asp:UpdatePanel ID="UpdatePanel49" runat="server">
+                                                                                                                    <ContentTemplate>
+                                                                                                                        <asp:LinkButton ID="linkBttnEliminarVoucher" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarVoucher_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                                                                                    </ContentTemplate>
+                                                                                                                </asp:UpdatePanel>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <%--</div>--%>
+                                                                                                    </div>
+                                                                                                </ContentTemplate>
+                                                                                                <Triggers>
+                                                                                                    <asp:PostBackTrigger ControlID="linkBttnAdjVoucher" />
+                                                                                                </Triggers>
+                                                                                            </asp:UpdatePanel>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1116,39 +1361,54 @@
                                                                                             </div>
                                                                                         </div>
                                                                                         <div class="container-fluid">
-                                                                                            <div class="note note-warning" style="font-size: 14px">
-                                                                                                <div class="row">
-                                                                                                    <div class="col">Anexar Oficio </div>
-                                                                                                </div>
-                                                                                                <div class="row">
-                                                                                                    <div class="col">
-                                                                                                        <div class="col font-weight-bold">
-                                                                                                            *Solo formatos PNG, JPG y PDF
+                                                                                            <div class="row alert alert-warning">
+                                                                                                <div class="col" style="font-size: 15px">Anexar Oficio</strong></div>
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <div class="col">
+                                                                                                    <div class="col font-weight-bold">
+                                                                                                        *Solo formatos PNG, JPG y PDF
                                                                                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="fileOficio" ErrorMessage="Archivo incorrecto, debe ser un PNG, JPG ó PDF" ValidationExpression="(.*?)\.(png|PNG|jpg|JPG|jpeg|JPEG|gif|GIF|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator>
-                                                                                                        </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div class="row">
+                                                                                            </div>
+                                                                                            <%--<div class="row">
                                                                                                     <div class="col-md-8">
                                                                                                         <asp:FileUpload ID="fileOficio" runat="server" Height="30px" />
                                                                                                     </div>
                                                                                                     <div class="col-md-4">
                                                                                                         <asp:Button ID="btnOficio" runat="server" TabIndex="26" CssClass="btn btn-blue-grey" Font-Size="Smaller" OnClick="btnOficio_Click" Text="ADJUNTAR" ValidationGroup="guardar" />
                                                                                                     </div>
+                                                                                                </div>--%>
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-8 mb-3">
+                                                                                                    <div class="input-group mb-3">
+                                                                                                        <div class="custom-file input-group-text" style="background-color: #ffffff">
+                                                                                                            <asp:FileUpload ID="fileOficio" runat="server" Height="30px" />
+                                                                                                        </div>
+                                                                                                        <div class="input-group-prepend">
+                                                                                                            <asp:LinkButton ID="linkBttnAdjOficio" runat="server" OnClick="linkBttnAdjOficio_Click" CssClass="input-group-text"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
+                                                                                                            <%--<asp:Button ID="btnVoucher" runat="server" CssClass="btn btn-blue-grey" OnClick="btnVoucher_Click" Text="ADJUNTAR" ValidationGroup="guardar" />--%>
+                                                                                                        </div>
+
+                                                                                                    </div>
                                                                                                 </div>
-                                                                                                <div class="row">
-                                                                                                    <div class="col-md-4">
-                                                                                                        <asp:HyperLink ID="lblArchivoOficio" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
-                                                                                                    </div>
-                                                                                                    <div class="col-md-4">
-                                                                                                        <asp:LinkButton ID="linkBttnEliminarOficio" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarOficio_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
-                                                                                                    </div>
+                                                                                                <div class="col-md-4">
+                                                                                                    <asp:RegularExpressionValidator ID="reqOficio" runat="server" ControlToValidate="fileOficio" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF)$"></asp:RegularExpressionValidator>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row">
+                                                                                                <div class="col-md-4">
+                                                                                                    <asp:HyperLink ID="lblArchivoOficio" runat="server" Target="_blank">[lblArchivoVoucher]</asp:HyperLink>
+                                                                                                </div>
+                                                                                                <div class="col-md-4">
+                                                                                                    <asp:LinkButton ID="linkBttnEliminarOficio" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarOficio_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');">ELIMINAR</asp:LinkButton>
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
                                                                                     </ContentTemplate>
                                                                                     <Triggers>
-                                                                                        <asp:PostBackTrigger ControlID="btnOficio" />
+                                                                                        <asp:PostBackTrigger ControlID="linkBttnAdjOficio" />
                                                                                     </Triggers>
                                                                                 </asp:UpdatePanel>
                                                                             </div>
@@ -1307,7 +1567,7 @@
                                                         <div class="container-fluid">
                                                             <div class="row">
                                                                 <div class="col">
-                                                                    <asp:CustomValidator ID="valConceptos" runat="server" ErrorMessage="*Se debe asignar al menor un concepto" OnServerValidate="ConceptosAsignados" ValidationGroup="DatosFiscales">*Conceptos Requeridos</asp:CustomValidator>
+                                                                    <asp:CustomValidator ID="valConceptos" runat="server" ErrorMessage="*Se debe asignar al menor un concepto (Datos del Voucher - Pestania 2)" OnServerValidate="ConceptosAsignados" ValidationGroup="DatosFiscales">*Conceptos Requeridos</asp:CustomValidator>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
@@ -1334,7 +1594,7 @@
                                                                 <div class="col-md-6">
                                                                     <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnRowDeleting="grvConceptos_RowDeleting" Width="100%">
                                                                         <Columns>
-                                                                            <asp:BoundField DataField="ClaveConcepto" HeaderText="Cve.">
+                                                                            <asp:BoundField DataField="ClaveConcepto" HeaderText="Cve">
                                                                                 <HeaderStyle HorizontalAlign="Left" />
                                                                                 <ItemStyle HorizontalAlign="Left" />
                                                                             </asp:BoundField>
@@ -1364,39 +1624,42 @@
                                             <asp:UpdatePanel ID="UpdatePanelFoto" runat="server">
                                                 <ContentTemplate>
                                                     <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-md-2">Folio de la Factura </div>
-                                                            <div class="col-md-2">
-                                                                <asp:TextBox ID="txtFolio_Fact_Cja" runat="server" Width="100%"></asp:TextBox>
-                                                            </div>
-                                                            <div class="col-md-1">
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtFolio_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="adjuntarFactura"></asp:RequiredFieldValidator>
-                                                            </div>
-                                                            <div class="col-md-2">Fecha de la Factura </div>
-                                                            <div class="col-md-3">
-                                                                <asp:TextBox ID="txtFecha_Fact_Cja" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox><ajaxToolkit:CalendarExtender ID="txtFecha_Fact_Cja_CalendarExtender" runat="server" PopupButtonID="imgFecha_Fact_Cja" TargetControlID="txtFecha_Fact_Cja" />
-                                                                <asp:ImageButton ID="imgFecha_Fact_Cja" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />&#160;<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtFecha_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="adjuntarFactura"></asp:RequiredFieldValidator>
-                                                            </div>
-                                                        </div>
-                                                        <div class="note note-warning">
-                                                            <div class="row font-weight-bold">
-                                                                <div class="col">*Solo formatos PDF Y XML </div>
+                                                        <asp:Panel ID="pnlFacturas" runat="server">
+                                                            <div class="row">
+                                                                <div class="col-md-2">Folio de la Factura </div>
+                                                                <div class="col-md-2">
+                                                                    <asp:TextBox ID="txtFolio_Fact_Cja" runat="server" Width="100%"></asp:TextBox>
+                                                                </div>
+                                                                <div class="col-md-1">
+                                                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtFolio_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="adjuntarFactura"></asp:RequiredFieldValidator>
+                                                                </div>
+                                                                <div class="col-md-2">Fecha de la Factura </div>
+                                                                <div class="col-md-3">
+                                                                    <asp:TextBox ID="txtFecha_Fact_Cja" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox><ajaxToolkit:CalendarExtender ID="txtFecha_Fact_Cja_CalendarExtender" runat="server" PopupButtonID="imgFecha_Fact_Cja" TargetControlID="txtFecha_Fact_Cja" />
+                                                                    <asp:ImageButton ID="imgFecha_Fact_Cja" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />&#160;<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtFecha_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="adjuntarFactura"></asp:RequiredFieldValidator>
+                                                                </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-8">
-                                                                    <asp:FileUpload ID="fileFactura" runat="server" />
+                                                                <div class="col-md-8 mb-3">
+                                                                    <div class="input-group mb-3">
+                                                                        <div class="custom-file input-group-text" style="background-color: #ffffff">
+                                                                            <asp:FileUpload ID="fileFactura" runat="server" Height="40px" Width="100%" />
+                                                                        </div>
+                                                                        <div class="input-group-prepend">
+                                                                            <asp:LinkButton ID="linkBttnAgregaFactura" runat="server" ValidationGroup="adjuntarFactura" OnClick="linkBttnAgregaFactura_Click" CssClass="input-group-text"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
+                                                                        </div>
+
+                                                                    </div>
                                                                 </div>
-                                                                <div class="col-md-2">
-                                                                    <asp:Button ID="btnAgregaFactura" runat="server" CssClass="btn btn-blue-grey" OnClick="btnAgregaFactura_Click" Text="ADJUNTAR" ValidationGroup="adjuntarFactura" />
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="fileFactura" ErrorMessage="Archivo incorrecto, debe ser un PDF o XML" ValidationExpression="(.*?)\.(xml|XML|pdf|PDF)$" ValidationGroup="guardar"></asp:RegularExpressionValidator>
+                                                                <div class="col-md-4">
+                                                                    <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="fileFactura" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF|xml|XML)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </asp:Panel>
                                                         <div class="row">
-                                                            <div class="col">
-                                                                <asp:GridView ID="grdArchivos" runat="server" AutoGenerateColumns="False" CssClass="mGrid table table-striped" OnRowDeleting="grdArchivos_RowDeleting" Width="100%">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-8">
+                                                                <asp:GridView ID="grdArchivos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnRowDeleting="grdArchivos_RowDeleting" Width="100%">
                                                                     <Columns>
                                                                         <asp:BoundField DataField="Fecha_Fact_Cja" HeaderText="Fecha" />
                                                                         <asp:BoundField DataField="Folio_Fact_Cja" HeaderText="Folio" />
@@ -1409,18 +1672,27 @@
                                                                         <asp:BoundField DataField="ExtensionArchivo" Visible="False" />
                                                                         <asp:CommandField ShowDeleteButton="True" />
                                                                     </Columns>
+                                                                    <FooterStyle CssClass="enc" />
+                                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                                    <SelectedRowStyle CssClass="sel" />
+                                                                    <HeaderStyle CssClass="enc" />
+                                                                    <AlternatingRowStyle CssClass="alt" />
                                                                 </asp:GridView>
                                                             </div>
+                                                            <div class="col-md-2"></div>
                                                         </div>
                                                     </div>
                                                 </ContentTemplate>
                                                 <Triggers>
-                                                    <asp:PostBackTrigger ControlID="btnAgregaFactura" />
+                                                    <asp:PostBackTrigger ControlID="linkBttnAgregaFactura" />
                                                 </Triggers>
                                             </asp:UpdatePanel>
                                         </ContentTemplate>
                                     </ajaxToolkit:TabPanel>
                                 </ajaxToolkit:TabContainer>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                                
                             </div>
                         </div>
                         <div class="row">
@@ -1439,9 +1711,9 @@
             </asp:MultiView>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:HiddenField ID="hddnCorreo" runat="server" />
+   <%-- <asp:HiddenField ID="hddnCorreo" runat="server" />
     <ajaxToolkit:ModalPopupExtender ID="modalCorreo" runat="server" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlCorreo" TargetControlID="hddnCorreo">
-    </ajaxToolkit:ModalPopupExtender>
+    </ajaxToolkit:ModalPopupExtender>--%>
     <div class="modal fade" id="modalBitacora" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -1489,7 +1761,7 @@
             </div>
         </div>
     </div>
-    <asp:Panel ID="pnlCorreo" runat="server" CssClass="TituloModalPopupMsg" Width="65%">
+    <%-- <asp:Panel ID="pnlCorreo" runat="server" CssClass="TituloModalPopupMsg" Width="65%">
         <div class="card text-white bg-dark mb-3">
             <div class="card-header">
                 Enviar Recibo Oficial
@@ -1544,16 +1816,74 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-
-
-
-
-    </asp:Panel>
+        </div>--%>
+    <%--</asp:Panel>--%>
     <%--    <asp:HiddenField ID="hddnDoctos" runat="server" />
     <ajaxToolkit:ModalPopupExtender ID="modalDoctos" runat="server" TargetControlID="hddnDoctos" PopupControlID="pnlDoctos" BackgroundCssClass="modalBackground_Proy">
     </ajaxToolkit:ModalPopupExtender>--%>
+
+    <div class="modal fade" id="modalEMail" tabindex="-1" role="dialog" aria-labelledby="modalEMail" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modEMail">Enviar facturas</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdatePanel ID="UpdatePanel35" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Label ID="lblMensajeCorreo" runat="server" Font-Bold="True" Font-Size="16px"></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <asp:UpdatePanel ID="UpdatePanel36" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Label ID="lblCorreo" runat="server" Text="Correo:"></asp:Label>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                            <div class="col-md-10">
+                                <asp:UpdatePanel ID="UpdatePanel34" runat="server">
+                                    <ContentTemplate>
+                                        <asp:TextBox ID="txtCorreo" runat="server" Width="90%"></asp:TextBox>
+                                        <br />
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtCorreo" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="correo"></asp:RequiredFieldValidator>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="UpdateProgress12" runat="server" AssociatedUpdatePanelID="UpdatePanel37">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image88" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdatePanel ID="UpdatePanel37" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Button ID="bttnCorreo" runat="server" CssClass="btn btn-info" Height="40px" OnClick="bttnCorreo_Click" Text="Enviar" ValidationGroup="correo" />
+                                        <%--&nbsp;<asp:Button ID="bttnCancelarCorreo" runat="server" CssClass="btn btn-blue-grey" Height="40px" OnClick="bttnCancelarCorreo_Click" Text="Salir" />--%>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="modalFacturas" tabindex="-1" role="dialog" aria-labelledby="modalFact" aria-hidden="true">
         <div class="modal-dialog" role="document">

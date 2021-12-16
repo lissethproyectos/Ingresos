@@ -63,7 +63,7 @@ namespace Recibos_Electronicos.Form
         {
             if (SesionUsu.Editar == 1)
             {
-                modal.Show();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConceptos", "$('#modalConceptos').modal('show')", true);
             }
             ddlConcepto.Items.Clear();
             CNComun.LlenaComboG("pkg_pagos.Obt_Combo_Conceptos_SE", ref ddlConcepto, "p_nivel", ddlNivel.SelectedValue, ref ListConceptos, "INGRESOS");
@@ -81,13 +81,14 @@ namespace Recibos_Electronicos.Form
         }
         protected void imgBttnAgregarConcepto0_Click(object sender, ImageClickEventArgs e)
         {
-            modal.Show();
+            //modal.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConceptos", "$('#modalConceptos').modal('show')", true);
         }
         protected void ddlConcepto_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (SesionUsu.Editar == 1)
-            {
-                modal.Show();
+            {                
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConceptos", "$('#modalConceptos').modal('show')", true);
             }
 
             if (ddlConcepto.Items.Count > 1)
@@ -100,7 +101,7 @@ namespace Recibos_Electronicos.Form
             //ModalPopupExtender1.Show();
             GuardarDatos_FacturaDet();
             LimpiarCampos();
-            modal.Hide();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConceptos", "$('#modalConceptos').modal('hide')", true);
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
@@ -132,6 +133,7 @@ namespace Recibos_Electronicos.Form
         #region <Funciones y Sub>
         private void Inicializar()
         {
+            MultiView1.ActiveViewIndex = 0;
             CargarCombos();
             var Usu = SesionUsu.Usu_Nombre;
             var usuAdmin = Array.FindAll(UsuariosSuper, s => s.Equals(Usu));
@@ -387,9 +389,10 @@ namespace Recibos_Electronicos.Form
                         if (Verificador == "0")
                         {
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'Los datos se guardaron correctamente.');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
-                            pnlModificacion_Recibo.Visible = false;
-                            pnlRecibos.Visible = true;
-                            pnlBuscar.Visible = true;
+                            //pnlModificacion_Recibo.Visible = false;
+                            //pnlRecibos.Visible = true;
+                            //pnlBuscar.Visible = true;
+                            MultiView1.ActiveViewIndex = 0;
                             SesionUsu.Editar = 0;
                             CargarGrid();
                         }
@@ -460,16 +463,13 @@ namespace Recibos_Electronicos.Form
         }
         #endregion
 
-        protected void btnCancelar_Concp_Click(object sender, EventArgs e)
-        {
-            LimpiarCampos();
-            modal.Hide();
-        }
+       
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            pnlModificacion_Recibo.Visible = false;
-            pnlRecibos.Visible = true;
-            pnlBuscar.Visible = true;
+            //pnlModificacion_Recibo.Visible = false;
+            //pnlRecibos.Visible = true;
+            //pnlBuscar.Visible = true;
+            MultiView1.ActiveViewIndex = 0;
             SesionUsu.Editar = 0;
         }
         protected void grvFacturas_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -493,9 +493,10 @@ namespace Recibos_Electronicos.Form
             CNFacturas.FacturaConsultaDatos(ref ObjFactura, ref Verificador);
             if (Verificador == "0")
             {
-                pnlBuscar.Visible = false;
-                pnlRecibos.Visible = false;
-                pnlModificacion_Recibo.Visible = true;
+                //pnlBuscar.Visible = false;
+                //pnlRecibos.Visible = false;
+                //pnlModificacion_Recibo.Visible = true;
+                MultiView1.ActiveViewIndex = 1;
                 txtFolio.Text = ObjFactura.FACT_FOLIO;
                 //txtFecha_Cfd1.Text = ObjFactura.FACT_FECHA_CFD;
                 txtFecha_Cfd1.Text = ObjFactura.FACT_FECHA_FACTURA;
@@ -598,11 +599,11 @@ namespace Recibos_Electronicos.Form
 
         protected void btnGuardar_Concep_Continuar_Click(object sender, EventArgs e)
         {
-            modal.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConceptos", "$('#modalConceptos').modal('show')", true);
             GuardarDatos_FacturaDet();
             txtValor_unitario.Text = string.Empty;
             txtCantidad.Text = string.Empty;
-            modal.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConceptos", "$('#modalConceptos').modal('show')", true);
             //LimpiarCampos();
         }
 

@@ -168,6 +168,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblTotPagos;
 
         /// <summary>
+        /// Control UpdatePanel6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel6;
+
+        /// <summary>
         /// Control imgBttnReporte.
         /// </summary>
         /// <remarks>

@@ -48,38 +48,54 @@
                                         </div>
                                     </div>
                                     <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="updPgrConceptos" AssociatedUpdatePanelID="updPnlConceptos" runat="server">
+                    <ProgressTemplate>
+                        <asp:Image ID="Image1" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                            ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+
+        </div>
+                                    <div class="row">
                                         <div class="col">
-                                            <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False"
-                                                OnSelectedIndexChanging="grvConceptos_SelectedIndexChanging" CssClass="mGrid" Width="100%" ShowHeaderWhenEmpty="True">
-                                                <Columns>
-                                                    <asp:BoundField DataField="Id" HeaderText="Id" />
-                                                    <asp:BoundField DataField="DescNivel" HeaderText="Nivel" />
-                                                    <asp:BoundField DataField="ClaveConcepto" HeaderText="Clave" />
-                                                    <asp:BoundField DataField="Descripcion" HeaderText="Concepto" />
-                                                    <asp:BoundField DataField="ImporteConcepto" HeaderText="Importe" />
-                                                    <asp:BoundField DataField="StatusStr" HeaderText="Status" />
-                                                    <asp:BoundField DataField="CobroXMateriaStr" HeaderText="Cobro por Materia" />
-                                                    <asp:BoundField DataField="Nivel" HeaderText="Nivel" />
-                                                    <asp:BoundField DataField="Status" HeaderText="Status" />
-                                                    <asp:CommandField ShowSelectButton="True" SelectText="Editar" ButtonType="Image" SelectImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" HeaderText="Editar">
-                                                        <HeaderStyle HorizontalAlign="Center" />
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:CommandField>
-                                                    <asp:TemplateField HeaderText="Clonar">
-                                                        <ItemTemplate>
-                                                            <asp:ImageButton ID="imgBttnCopiar" runat="server" ImageUrl="~/Imagenes/copiar_y_pegar.png" OnClick="imgBttnCopiar_Click" />
-                                                        </ItemTemplate>
-                                                        <HeaderStyle HorizontalAlign="Center" />
-                                                        <ItemStyle HorizontalAlign="Center" />
-                                                    </asp:TemplateField>
-                                                </Columns>
-                                                <FooterStyle CssClass="enc" />
-                                                <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                <SelectedRowStyle CssClass="sel" />
-                                                <HeaderStyle CssClass="enc" />
-                                                <AlternatingRowStyle CssClass="alt" />
-                                            </asp:GridView>
+                                            <asp:UpdatePanel ID="updPnlConceptos" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False"
+                                                        OnSelectedIndexChanging="grvConceptos_SelectedIndexChanging" CssClass="mGrid" Width="100%" ShowHeaderWhenEmpty="True">
+                                                        <Columns>
+                                                            <asp:BoundField DataField="Id" HeaderText="Id" />
+                                                            <asp:BoundField DataField="DescNivel" HeaderText="Nivel" />
+                                                            <asp:BoundField DataField="ClaveConcepto" HeaderText="Clave" />
+                                                            <asp:BoundField DataField="Descripcion" HeaderText="Concepto" />
+                                                            <asp:BoundField DataField="ImporteConcepto" HeaderText="Importe" />
+                                                            <asp:BoundField DataField="StatusStr" HeaderText="Status" />
+                                                            <asp:BoundField DataField="CobroXMateriaStr" HeaderText="Cobro por Materia" />
+                                                            <asp:BoundField DataField="Nivel" HeaderText="Nivel" />
+                                                            <asp:BoundField DataField="Status" HeaderText="Status" />
+                                                            <asp:CommandField ShowSelectButton="True" SelectText="Editar" ButtonType="Image" SelectImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" HeaderText="Editar">
+                                                                <HeaderStyle HorizontalAlign="Center" />
+                                                                <ItemStyle HorizontalAlign="Center" />
+                                                            </asp:CommandField>
+                                                            <asp:TemplateField HeaderText="Clonar">
+                                                                <ItemTemplate>
+                                                                    <asp:ImageButton ID="imgBttnCopiar" runat="server" ImageUrl="~/Imagenes/copiar_y_pegar.png" OnClick="imgBttnCopiar_Click" />
+                                                                </ItemTemplate>
+                                                                <HeaderStyle HorizontalAlign="Center" />
+                                                                <ItemStyle HorizontalAlign="Center" />
+                                                            </asp:TemplateField>
+                                                        </Columns>
+                                                        <FooterStyle CssClass="enc" />
+                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                        <SelectedRowStyle CssClass="sel" />
+                                                        <HeaderStyle CssClass="enc" />
+                                                        <AlternatingRowStyle CssClass="alt" />
+                                                    </asp:GridView>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
                                         </div>
+
                                     </div>
                                     <div class="row">
                                         <div class="col text-right">
@@ -293,7 +309,7 @@
             //$('input[type=search]').val('');
             $('#<%= grvConceptos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvConceptos.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
-                "stateSave": false
+                "stateSave": true
             });
         };
     </script>
