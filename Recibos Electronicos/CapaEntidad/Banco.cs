@@ -55,6 +55,7 @@ namespace CapaEntidad
         private static UInt16 bcm_longitud = 141;
         private static UInt16 bcmm1_longitud = 185;
         private static UInt16 bcmm2_longitud = 186;
+        private static UInt16 bcmm3_longitud = 615;
         private static UInt16 hsbc_longitud = 125;
 
         /*Variables para archivos de caja*/
@@ -410,6 +411,32 @@ namespace CapaEntidad
                     cajero = "";
                     pago_importe = float.Parse(dato.Substring(151, 19) + "." + dato.Substring(171, 2));
                     pago_fecha = dato.Substring(173, 10);
+                    notas = "";
+                    pago_tipo = "MULTIPAGOS";
+                    //pago_fecha = dato.Substring(172, 10);
+
+                    if (String.IsNullOrEmpty(referencia + dependencia + ficha + folio + pago_fecha))
+                        return 0;
+
+                    return 1;
+                }
+
+                return 2;
+            }
+            else if (bcmm3_longitud == dato.Length)
+            {
+                nombre = "BC";
+                referencia = dato.Substring(120, 26).Trim() + nombre;
+
+                if (referencia.Length == 28)
+                {
+                    dependencia = Int32.Parse(referencia.Substring(0, 5));
+                    ficha = referencia.Substring(5, 8).TrimStart('0');
+                    folio = dato.Substring(170, 20).Trim();
+                    sucursal = "";
+                    cajero = "";
+                    pago_importe = float.Parse(dato.Substring(244, 19));
+                    pago_fecha = dato.Substring(302, 10);
                     notas = "";
                     pago_tipo = "MULTIPAGOS";
                     //pago_fecha = dato.Substring(172, 10);

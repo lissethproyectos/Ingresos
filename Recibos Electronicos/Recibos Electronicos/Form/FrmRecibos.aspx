@@ -33,7 +33,7 @@
                                 <asp:UpdateProgress ID="UpdateProgress2" runat="server"
                                     AssociatedUpdatePanelID="UpdBuscar">
                                     <ProgressTemplate>
-                                        <asp:Image ID="Image86" runat="server"
+                                        <asp:Image ID="imgBuscarFact" runat="server"
                                             AlternateText="Espere un momento, por favor.." Height="50px"
                                             ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
                                             ToolTip="Espere un momento, por favor.." />

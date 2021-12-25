@@ -1010,6 +1010,8 @@ namespace Recibos_Electronicos.Form
                     {
                         row.Cells[18].BackColor = System.Drawing.Color.Green;
                         row.Cells[18].ForeColor = System.Drawing.Color.White;
+                        linkEditar.Visible = false;
+                        linkEditar2.Visible = true;
                         //linkBttnCancelar.Visible = true;
                     }
                     else if (row.Cells[24].Text == "F")

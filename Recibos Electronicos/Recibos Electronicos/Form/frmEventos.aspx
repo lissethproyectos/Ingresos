@@ -493,7 +493,7 @@
                                                                             <ItemTemplate>
                                                                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                                                                     <ContentTemplate>
-                                                                                        <asp:GridView ID="grdEventoConceptos" runat="server" AutoGenerateColumns="False" CssClass="sem table table-striped table-bordered table-hover" ShowHeaderWhenEmpty="True" Width="100%" EmptyDataText="No existen conceptos asignados." OnRowDeleting="grdEventoConceptos_RowDeleting" OnRowDataBound="grdEventoConceptos_RowDataBound" OnRowUpdating="grdEventoConceptos_RowUpdating" OnRowEditing="grdEventoConceptos_RowEditing" OnRowCancelingEdit="grdEventoConceptos_RowCancelingEdit">
+                                                                                        <asp:GridView ID="grdEventoConceptos" runat="server" AutoGenerateColumns="False" CssClass="sem table table-striped table-bordered table-hover" ShowHeaderWhenEmpty="True" Width="100%" EmptyDataText="No existen conceptos asignados." OnRowDeleting="grdEventoConceptos_RowDeleting" OnRowDataBound="grdEventoConceptos_RowDataBound" OnRowUpdating="grdEventoConceptos_RowUpdating" OnRowEditing="grdEventoConceptos_RowEditing" OnRowCancelingEdit="grdEventoConceptos_RowCancelingEdit" OnSelectedIndexChanged="grdEventoConceptos_SelectedIndexChanged">
                                                                                             <Columns>
                                                                                                 <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" />
                                                                                                 <asp:BoundField DataField="Id_Tipo_Participante" HeaderText="IDP" ReadOnly="True" />
@@ -548,6 +548,7 @@
                                                                                                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit"><i class="fa fa-pencil  fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                                                                     </ItemTemplate>
                                                                                                 </asp:TemplateField>
+                                                                                                <asp:BoundField DataField="ID_CONCEPTO" />
                                                                                             </Columns>
                                                                                             <EmptyDataRowStyle ForeColor="Red" />
                                                                                             <FooterStyle CssClass="enc" />

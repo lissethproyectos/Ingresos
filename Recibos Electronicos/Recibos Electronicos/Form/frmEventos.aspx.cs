@@ -1398,5 +1398,10 @@ namespace Recibos_Electronicos.Form
 
             
         }
+
+        protected void grdEventoConceptos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

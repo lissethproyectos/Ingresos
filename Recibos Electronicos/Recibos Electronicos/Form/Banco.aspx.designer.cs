@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Recibos_Electronicos {
-    
-    
-    public partial class Banco {
-        
+namespace Recibos_Electronicos
+{
+
+
+    public partial class Banco
+    {
+
         /// <summary>
         /// Control Label1.
         /// </summary>
@@ -20,7 +22,7 @@ namespace Recibos_Electronicos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
-        
+
         /// <summary>
         /// Control FileUpload1.
         /// </summary>
@@ -29,7 +31,7 @@ namespace Recibos_Electronicos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
-        
+
         /// <summary>
         /// Control Button1.
         /// </summary>
@@ -38,7 +40,7 @@ namespace Recibos_Electronicos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-        
+
         /// <summary>
         /// Control UpdateProgress2.
         /// </summary>
@@ -47,7 +49,25 @@ namespace Recibos_Electronicos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress UpdateProgress2;
-        
+
+        /// <summary>
+        /// Control ddlEjercicio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlEjercicio;
+
+        /// <summary>
+        /// Control DropDownList2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+
         /// <summary>
         /// Control UpdatePanel1.
         /// </summary>
@@ -56,7 +76,7 @@ namespace Recibos_Electronicos {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-        
+
         /// <summary>
         /// Control GVBitacora.
         /// </summary>
