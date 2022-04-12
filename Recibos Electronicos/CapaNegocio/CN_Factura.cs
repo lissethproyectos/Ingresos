@@ -24,7 +24,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-
+        public void Obt_Grid_PagosSIAE(ref List<Factura> List)
+        {
+            try
+            {
+                CD_Factura CDFactura = new CD_Factura();
+                CDFactura.Obt_Grid_PagosSIAE(ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void Editar_VigenciaRecibo(Factura objFactura, string UsuarioNombre, ref string Verificador)
         {
             try

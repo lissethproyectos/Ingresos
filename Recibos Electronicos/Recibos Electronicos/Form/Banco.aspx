@@ -110,6 +110,8 @@
                 'scrollbars=no,menubar=no,height=600,width=800,resizable=yes,toolbar=no,location=no,status=no');
         }
     </script>
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
@@ -145,23 +147,51 @@
         </div>
         <div class="row">
             <div class="col-md-2">Ejercicio</div>
-            <div class="col-md-4">
-                <asp:DropDownList ID="ddlEjercicio" runat="server" Width="100%">
-                    <asp:ListItem>2021</asp:ListItem>
-                    <asp:ListItem>2020</asp:ListItem>
-                    <asp:ListItem>2019</asp:ListItem>
-                    <asp:ListItem>2018</asp:ListItem>
-                </asp:DropDownList>
+            <div class="col-md-2">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <asp:DropDownList ID="ddlEjercicio" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlEjercicio_SelectedIndexChanged">
+                            <asp:ListItem>2022</asp:ListItem>
+                            <asp:ListItem>2021</asp:ListItem>
+                            <asp:ListItem>2020</asp:ListItem>
+                            <asp:ListItem>2019</asp:ListItem>
+                            <asp:ListItem>2018</asp:ListItem>
+                        </asp:DropDownList>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>            
+            <div class="col-md-2">
+                <asp:UpdateProgress ID="updEjercicio" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
+                    <ProgressTemplate>
+                        <asp:Image ID="imgEjercicio" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
             </div>
             <div class="col-md-2">Mes</div>
-            <div class="col-md-4"><asp:DropDownList ID="DropDownList2" runat="server"></asp:DropDownList></div>
+            <div class="col-md-2">
+                <asp:DropDownList ID="ddlMes" runat="server" Width="100%" onChange="Mes()">
+                    <asp:ListItem Value="00">TODOS</asp:ListItem>
+                    <asp:ListItem Value="01">ENERO</asp:ListItem>
+                    <asp:ListItem Value="02">FEBRERO</asp:ListItem>
+                    <asp:ListItem Value="03">MARZO</asp:ListItem>
+                    <asp:ListItem Value="04">ABRIL</asp:ListItem>
+                    <asp:ListItem Value="05">MAYO</asp:ListItem>
+                    <asp:ListItem Value="06">JUNIO</asp:ListItem>
+                    <asp:ListItem Value="07">JULIO</asp:ListItem>
+                    <asp:ListItem Value="08">AGOSTO</asp:ListItem>
+                    <asp:ListItem Value="09">SEPTIEMBRE</asp:ListItem>
+                    <asp:ListItem Value="10">OCTUBRE</asp:ListItem>
+                    <asp:ListItem Value="11">NOVIEMBRE</asp:ListItem>
+                    <asp:ListItem Value="12">DICIEMBRE</asp:ListItem>
+                </asp:DropDownList>
             </div>
+        </div>
 
         <div class="row">
-            <div class="col text-center">
+            <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="GVBitacora" runat="server" EmptyDataText="No hay registros" AutoGenerateColumns="False" CssClass="mGrid" Width="90%" OnSelectedIndexChanged="GVBitacora_SelectedIndexChanged">
+                        <asp:GridView ID="GVBitacora" runat="server" EmptyDataText="No hay registros" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" OnSelectedIndexChanged="GVBitacora_SelectedIndexChanged">
                             <Columns>
                                 <asp:BoundField DataField="Id" HeaderText="ID" />
                                 <asp:BoundField DataField="Banco_nombre" HeaderText="Banco" />
@@ -169,13 +199,15 @@
                                 <asp:TemplateField>
                                     <HeaderTemplate>
                                         <asp:Label ID="Label4" runat="server" Text="Fecha de pago"></asp:Label>
-                                        <asp:DropDownList ID="ddlFechaPago" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlFechaPago_SelectedIndexChanged" AppendDataBoundItems="True">
-                                        </asp:DropDownList>
+                                        <%-- <asp:DropDownList ID="ddlFechaPago" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlFechaPago_SelectedIndexChanged" AppendDataBoundItems="True">
+                                        </asp:DropDownList>--%>
                                     </HeaderTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="Fecha_registro" HeaderText="Fecha de carga" />
                                 <asp:BoundField DataField="Total_registros" HeaderText="Total" />
                                 <asp:CommandField SelectText="Descargar Archivo" ShowSelectButton="True" />
+                                <asp:BoundField DataField="Ejercicio" />
+                                <asp:BoundField DataField="Mes" />
                             </Columns>
                             <FooterStyle CssClass="enc" />
                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -189,4 +221,48 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">    
+        <%--$(document).ready(function () {
+            $('#<%= GVBitacora.ClientID %>').DataTable({
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                }
+            });
+        });--%>
+        function Bitacora() {
+            $('#<%= GVBitacora.ClientID %>').prepend($("<thead></thead>").append($('#<%= GVBitacora.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
+        };
+
+        function Mes() {
+            var table = $('#<%= GVBitacora.ClientID %>').DataTable();   
+            var selectedValue = $('#<%= ddlMes.ClientID %>').val();            
+            if (selectedValue != "00") {
+                table.columns(8).search(selectedValue).draw();
+            }
+            else {
+                table.columns(8).search("").draw();
+            }
+        }
+    </script>
 </asp:Content>

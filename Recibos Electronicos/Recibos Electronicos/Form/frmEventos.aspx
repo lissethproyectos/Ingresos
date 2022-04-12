@@ -14,10 +14,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-2">
-                Dependencia
+            <div class="col-md-1">
+                Depcia
             </div>
-            <div class="col-md-10">
+            <div class="col-md-9">
                 <asp:UpdatePanel ID="updPnlDepcia" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="DDLDependencia" runat="server" Width="100%" CssClass="select2" AutoPostBack="True">
@@ -25,6 +25,13 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <asp:RequiredFieldValidator ID="reqDepcia" runat="server" ControlToValidate="DDLDependencia" ErrorMessage="*Dependencia" ValidationGroup="guardar" InitialValue="00000">*Requerido</asp:RequiredFieldValidator>
+            </div>
+            <div class="col-md-2">
+                <asp:UpdatePanel ID="updPnlCrearPart" runat="server">
+                    <ContentTemplate>
+                        <asp:Button ID="bttnCrearPart" runat="server" CssClass="btn btn-grey" OnClick="bttnCrearPart_Click" Text="Catálogo Participantes" Width="100%" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
         <div class="row">
@@ -44,10 +51,10 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         Año
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-1">
                                         <asp:DropDownList ID="ddlEjercicio" runat="server" Width="100%"></asp:DropDownList>
                                     </div>
                                     <div class="col-md-1">
@@ -64,7 +71,7 @@
                                     <div class="col-md-2">
                                         Tipo de Evento
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <asp:UpdatePanel ID="updPnlDirigido" runat="server">
                                             <ContentTemplate>
                                                 <asp:DropDownList ID="ddlDirigido0" runat="server" Width="100%">
@@ -76,13 +83,14 @@
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </div>
-                                    <div class="col-md-1">
+                                    <div class="col-md-2">
                                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                             <ContentTemplate>
-                                                <asp:LinkButton ID="linkBttnBuscar" runat="server" Width="100%" CssClass="btn btn-info" OnClick="linkBttnBuscar_Click"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
+                                                <asp:LinkButton ID="linkBttnBuscar" runat="server" Width="100%" CssClass="btn btn-info" OnClick="linkBttnBuscar_Click"><i class="fa fa-search" aria-hidden="true"></i> Ver Eventos</asp:LinkButton>
                                             </ContentTemplate>
                                         </asp:UpdatePanel>
                                     </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col text-center">
@@ -94,11 +102,12 @@
                                         </asp:UpdateProgress>
                                     </div>
                                 </div>
+
                                 <div class="row">
                                     <div class="col">
                                         <asp:UpdatePanel ID="updPnlEventos" runat="server">
                                             <ContentTemplate>
-                                                <asp:GridView ID="grdEventos" runat="server" AutoGenerateColumns="False" CssClass="sem table table-striped table-bordered table-hover" Width="100%" OnSelectedIndexChanged="grdEventos_SelectedIndexChanged" EmptyDataText="No hay eventos registrados." OnRowEditing="grdEventos_RowEditing" OnRowCancelingEdit="grdEventos_RowCancelingEdit" OnRowUpdating="grdEventos_RowUpdating" ShowHeaderWhenEmpty="True">
+                                                <asp:GridView ID="grdEventos" runat="server" AutoGenerateColumns="False" CssClass="sem table table-striped table-bordered table-hover" Width="100%" OnSelectedIndexChanged="grdEventos_SelectedIndexChanged" EmptyDataText="No hay eventos registrados." OnRowEditing="grdEventos_RowEditing" OnRowCancelingEdit="grdEventos_RowCancelingEdit" OnRowUpdating="grdEventos_RowUpdating" ShowHeaderWhenEmpty="True" OnRowDeleting="grdEventos_RowDeleting">
                                                     <Columns>
                                                         <asp:BoundField DataField="dependencia" HeaderText="DEPCIA" ReadOnly="True" />
                                                         <asp:BoundField DataField="nivel" HeaderText="NIVEL" ReadOnly="True" />
@@ -145,7 +154,7 @@
                                                                 <%--                                                        &nbsp;<asp:Image ID="Image2" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/edit2.png" Visible='<%# Bind("EsVisible2") %>' />--%>
                                                                 <asp:LinkButton ID="linkBttnEditEnabled" runat="server" Visible='<%# Bind("EsVisible2") %>'><i class="fa fa-pencil  fa-2x disabled" aria-hidden="true"></i></asp:LinkButton>
                                                                 <asp:LinkButton ID="linkBttnEdit" runat="server" Visible='<%# Bind("EsVisible") %>' OnClick="linkBttnEdit_Click"><i class="fa fa-pencil  fa-2x" aria-hidden="true"></i></asp:LinkButton>
-                                                                &nbsp;<asp:LinkButton ID="linkBttnEliminar" runat="server"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                                &nbsp;<asp:LinkButton ID="linkBttnEliminar" runat="server" OnClientClick="return confirm('¿Eliminar registro?');" CommandName="Delete"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                                 &nbsp;<asp:LinkButton ID="linkBttnReporte" runat="server" OnClick="linkBttnReporte_Click"><i class="fa fa-sticky-note fa-2x" aria-hidden="true"></i></asp:LinkButton>
 
                                                                 <%--<asp:ImageButton ID="imgBttnEditar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/edit.png" OnClick="imgBttnEditar_Click" Visible='<%# Bind("EsVisible") %>' />--%>
@@ -157,6 +166,7 @@
                                                         <asp:BoundField DataField="NUEVA_VERSION" ReadOnly="True">
                                                             <ItemStyle Width="1px" />
                                                         </asp:BoundField>
+                                                        <asp:BoundField DataField="Eventos" />
                                                     </Columns>
                                                     <FooterStyle CssClass="enc" />
                                                     <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -170,7 +180,7 @@
                                 </div>
                             </asp:View>
                             <asp:View ID="View2" runat="server">
-                                <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" CssClass="tabs-blue-grey" Font-Names="Calibri" Height="100%">
+                                <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" Width="100%" Font-Names="Calibri" Height="100%">
                                     <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                         <HeaderTemplate>
                                             Datos Generales
@@ -205,6 +215,7 @@
                                                         </asp:DropDownList>
                                                     </div>
                                                 </div>
+                                                <br />
                                                 <div class="row">
                                                     <div class="col-md-1">
                                                         Nombre del Evento
@@ -251,12 +262,42 @@
                                                         <ajaxToolkit:CalendarExtender ID="CalendarExtenderFin" runat="server" BehaviorID="_content_CalendarExtenderFin" PopupButtonID="imgCalendarioFin" TargetControlID="txtFecha_Evento_Fin" />
                                                     </div>
                                                 </div>
+                                                <hr />
+                                                <div class="row">
+                                                    <div class="col-md-1">
+                                                        Nivel
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <asp:UpdatePanel ID="updPnlNivel" runat="server">
+                                                            <ContentTemplate>
+                                                                <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%">
+                                                                </asp:DropDownList>
+                                                            </ContentTemplate>
+                                                        </asp:UpdatePanel>
+                                                        <br />
+                                                        <asp:RequiredFieldValidator ID="reqNivel" runat="server" ControlToValidate="ddlNivel" ErrorMessage="RequiredFieldValidator" InitialValue="Z" ValidationGroup="AgregaPart">* Requerido</asp:RequiredFieldValidator>
+                                                    </div>
+                                                    <div class="col-md-1">
+                                                        Ciclo
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+                                                            <ContentTemplate>
+                                                                <asp:DropDownList ID="ddlCiclo" runat="server"></asp:DropDownList>
+                                                            </ContentTemplate>
+                                                        </asp:UpdatePanel>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <asp:LinkButton ID="linkBttnAgregarCiclo" CssClass="btn btn-blue-grey" runat="server"><i class="fa fa-plus-circle" aria-hidden="true"></i>
+ Agregar</asp:LinkButton>
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-1">
                                                         Status
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <asp:DropDownList ID="ddlStatus" runat="server">
+                                                        <asp:DropDownList ID="ddlStatus" runat="server" Width="100%">
                                                             <asp:ListItem Selected="True" Value="S">Solicitado</asp:ListItem>
                                                             <asp:ListItem Value="A">Autorizado</asp:ListItem>
                                                             <asp:ListItem Value="B">Baja</asp:ListItem>
@@ -326,9 +367,6 @@
                                                     <div class="col-md-1">
                                                         <asp:Button ID="bttnNuevoParticipante" runat="server" CssClass="btn btn-blue-grey" Text="Crear" OnClick="bttnNuevoParticipante_Click" Width="100%" />
                                                     </div>
-                                                    <div class="col-md-1">
-                                                        <asp:Button ID="bttnCrearPart" runat="server" CssClass="btn btn-grey" OnClick="bttnCrearPart_Click" Text="Catálogo" Width="100%" />
-                                                    </div>
                                                     <div class="col-md-2">
                                                         ¿Es ponente?
                                                     </div>
@@ -359,19 +397,7 @@
                                                             </ContentTemplate>
                                                         </asp:UpdatePanel>
                                                     </div>
-                                                    <div class="col-md-1">
-                                                        Nivel
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <asp:UpdatePanel ID="updPnlNivel" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%">
-                                                                </asp:DropDownList>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                        <br />
-                                                        <asp:RequiredFieldValidator ID="reqNivel" runat="server" ControlToValidate="ddlNivel" ErrorMessage="RequiredFieldValidator" InitialValue="Z" ValidationGroup="AgregaPart">* Requerido</asp:RequiredFieldValidator>
-                                                    </div>
+
                                                     <div class="col-md-1">
                                                         Status Part
                                                     </div>
@@ -533,6 +559,7 @@
                                                                                                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("DescCarrera") %>'></asp:Label>
                                                                                                     </ItemTemplate>
                                                                                                 </asp:TemplateField>
+                                                                                                <asp:BoundField DataField="ID_CONCEPTO" HeaderText="ID CONC" />
                                                                                                 <asp:TemplateField ShowHeader="False">
                                                                                                     <ItemTemplate>
                                                                                                         <%--                                                                                                        <asp:LinkButton ID="linkBttnEliminarConc" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar"></asp:LinkButton>--%>
@@ -548,7 +575,6 @@
                                                                                                         <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit"><i class="fa fa-pencil  fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                                                                     </ItemTemplate>
                                                                                                 </asp:TemplateField>
-                                                                                                <asp:BoundField DataField="ID_CONCEPTO" />
                                                                                             </Columns>
                                                                                             <EmptyDataRowStyle ForeColor="Red" />
                                                                                             <FooterStyle CssClass="enc" />
@@ -757,6 +783,11 @@
                                         </asp:UpdateProgress>
                                     </div>
                                     <div class="row">
+                                        <div class="col text-left">
+                                            <asp:ValidationSummary ID="ValidationSummary1" runat="server" ValidationGroup="guardar" HeaderText="Estos campos son requeridos:" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="col text-right">
                                             <asp:UpdatePanel ID="updPnlGuardarEv" runat="server">
                                                 <ContentTemplate>
@@ -795,11 +826,86 @@
                                                             </small>
                                                         </p>
                                                     </div>
-                                                </div>                                                
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
 
+                                </div>
+                            </asp:View>
+                            <asp:View ID="View3" runat="server">
+                                <div class="row">
+                                    <div class="col-md-1">Participantes</div>
+                                    <div class="col-md-4">
+                                        <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                                            <ContentTemplate>
+                                                <asp:DropDownList ID="ddlCatTipPart" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlCatTipPart_SelectedIndexChanged">
+                                                    <asp:ListItem Value="S">Alumno/Cliente UNACH</asp:ListItem>
+                                                    <asp:ListItem Value="SX">Alumno Externo</asp:ListItem>
+                                                    <asp:ListItem Value="E">Empleado UNACH</asp:ListItem>
+                                                    <asp:ListItem Value="X">Público General</asp:ListItem>
+                                                </asp:DropDownList>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                    <%--<div class="col-md-3">
+                                            <asp:UpdatePanel ID="updPnlBuscaPart" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:Button ID="bttnBuscarPart" CssClass="btn btn-info" runat="server" Text="Buscar" OnClick="bttnBuscarPart_Click" Width="100%" />
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>--%>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <asp:UpdateProgress ID="updPgrBuscaPart" runat="server" AssociatedUpdatePanelID="UpdatePanel8">
+                                            <ProgressTemplate>
+                                                <asp:Image ID="imgBuscaPart" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                                                    ToolTip="Espere un momento, por favor.." Width="50px" Height="50px" />
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <asp:UpdatePanel ID="updPnlCatPart" runat="server">
+                                            <ContentTemplate>
+                                                <asp:GridView ID="grvCatParticipantes" runat="server" CssClass="sem table table-striped table-bordered table-hover" AutoGenerateColumns="False" Width="100%" OnRowCancelingEdit="grvCatParticipantes_RowCancelingEdit" OnRowEditing="grvCatParticipantes_RowEditing" OnRowUpdating="grvCatParticipantes_RowUpdating">
+                                                    <Columns>
+                                                        <asp:BoundField DataField="Id_Tipo_Participante" HeaderText="ID" ReadOnly="True" />
+                                                        <asp:TemplateField HeaderText="TIPO PARTICIPANTE">
+                                                            <EditItemTemplate>
+                                                                <asp:TextBox ID="txtDesc_Tipo_Participante" runat="server" Text='<%# Bind("Desc_Tipo_Participante") %>'></asp:TextBox>
+                                                            </EditItemTemplate>
+                                                            <ItemTemplate>
+                                                                <asp:Label ID="lblDesc_Tipo_Participante" runat="server" Text='<%# Bind("Desc_Tipo_Participante") %>'></asp:Label>
+                                                            </ItemTemplate>
+                                                        </asp:TemplateField>
+                                                        <asp:BoundField DataField="Es_Ponente" HeaderText="¿ES PONENTE?" ReadOnly="True" />
+                                                        <asp:CommandField EditText="Editar" ShowEditButton="True" ItemStyle-ForeColor="#990033">
+                                                            <ItemStyle ForeColor="#990033" />
+                                                        </asp:CommandField>
+                                                        <asp:TemplateField ShowHeader="False">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="linkBttnBorrarPart" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar este registro?.');" Text="Eliminar"></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                            <ItemStyle HorizontalAlign="Center" />
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                    <FooterStyle CssClass="enc" />
+                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                    <SelectedRowStyle CssClass="sel" />
+                                                    <HeaderStyle CssClass="enc" BackColor="#595959" ForeColor="White" Font-Size="10px" BorderColor="White" />
+                                                    <AlternatingRowStyle CssClass="alt" />
+                                                </asp:GridView>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-right">
+                                        <asp:Button ID="bttnSalirPart" runat="server" Text="Salir" CssClass="btn btn-blue-grey" OnClick="bttnSalirPart_Click" />
+                                    </div>
                                 </div>
                             </asp:View>
                         </asp:MultiView>
@@ -968,94 +1074,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="modalCatPart" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Catálogo de Participantes</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid">
 
-                        <div class="row">
-                            <div class="col-md-9">
-                                <asp:UpdatePanel ID="UpdatePanel8" runat="server">
-                                    <ContentTemplate>
-                                        <asp:DropDownList ID="ddlCatTipPart" runat="server" Width="100%">
-                                            <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
-                                            <asp:ListItem Value="S">Alumno/Cliente UNACH</asp:ListItem>
-                                            <asp:ListItem Value="SX">Alumno Externo</asp:ListItem>
-                                            <asp:ListItem Value="E">Empleado UNACH</asp:ListItem>
-                                            <asp:ListItem Value="X">Público General</asp:ListItem>
-                                        </asp:DropDownList>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                            <div class="col-md-3">
-                                <asp:UpdatePanel ID="updPnlBuscaPart" runat="server">
-                                    <ContentTemplate>
-                                        <asp:Button ID="bttnBuscarPart" CssClass="btn btn-info" runat="server" Text="Buscar" OnClick="bttnBuscarPart_Click" Width="100%" />
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-center">
-                                <asp:UpdateProgress ID="updPgrBuscaPart" runat="server" AssociatedUpdatePanelID="updPnlBuscaPart">
-                                    <ProgressTemplate>
-                                        <asp:Image ID="imgBuscaPart" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                                            ToolTip="Espere un momento, por favor.." Width="50px" Height="50px" />
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col" style="overflow-x: scroll; overflow-y: hidden;">
-                                <asp:UpdatePanel ID="updPnlCatPart" runat="server">
-                                    <ContentTemplate>
-                                        <asp:GridView ID="grvCatParticipantes" runat="server" CssClass="sem table table-striped table-bordered table-hover" AutoGenerateColumns="False" Width="100%" OnRowCancelingEdit="grvCatParticipantes_RowCancelingEdit" OnRowEditing="grvCatParticipantes_RowEditing" OnRowUpdating="grvCatParticipantes_RowUpdating">
-                                            <Columns>
-                                                <asp:BoundField DataField="Id_Tipo_Participante" HeaderText="ID" ReadOnly="True" />
-                                                <asp:TemplateField HeaderText="TIPO PARTICIPANTE">
-                                                    <EditItemTemplate>
-                                                        <asp:TextBox ID="txtDesc_Tipo_Participante" runat="server" Text='<%# Bind("Desc_Tipo_Participante") %>'></asp:TextBox>
-                                                    </EditItemTemplate>
-                                                    <ItemTemplate>
-                                                        <asp:Label ID="lblDesc_Tipo_Participante" runat="server" Text='<%# Bind("Desc_Tipo_Participante") %>'></asp:Label>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:BoundField DataField="Es_Ponente" HeaderText="¿ES PONENTE?" ReadOnly="True" />
-                                                <asp:CommandField EditText="Editar" ShowEditButton="True" ItemStyle-ForeColor="#990033">
-                                                    <ItemStyle ForeColor="#990033" />
-                                                </asp:CommandField>
-                                                <asp:TemplateField ShowHeader="False">
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="linkBttnBorrarPart" runat="server" CausesValidation="False" CommandName="Delete" OnClientClick="return confirm('¿Desea eliminar este registro?.');" Text="Eliminar"></asp:LinkButton>
-                                                    </ItemTemplate>
-                                                    <ItemStyle HorizontalAlign="Center" />
-                                                </asp:TemplateField>
-                                            </Columns>
-                                            <FooterStyle CssClass="enc" />
-                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                            <SelectedRowStyle CssClass="sel" />
-                                            <HeaderStyle CssClass="enc" BackColor="#595959" ForeColor="White" Font-Size="10px" BorderColor="White" />
-                                            <AlternatingRowStyle CssClass="alt" />
-                                        </asp:GridView>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                </div>
-
-            </div>
-        </div>
-    </div>
     <div class="modal fade" id="modalOficios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -1102,7 +1121,38 @@
         </div>
     </div>
 
-
+    <div class="modal fade" id="modalCiclos" tabindex="-1" role="dialog" aria-labelledby="modalCiclos" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modCiclos">Ciclos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <asp:GridView ID="grdCiclos" runat="server" AutoGenerateColumns="False">
+        <Columns>
+            <asp:BoundField DataField="IdStr" HeaderText="CVE" />
+            <asp:BoundField DataField="Descripcion" HeaderText="DESCRIPCIÓN" />
+            <asp:TemplateField ShowHeader="False">
+                <ItemTemplate>
+                    <asp:LinkButton ID="linkBttnAgregarCiclo" CssClass="btn btn-primary" runat="server" CausesValidation="False" CommandName="Select" Text="Agregar"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
+        </Columns>
+    </asp:GridView>
     <script type="text/javascript">
         function Eventos() {
 

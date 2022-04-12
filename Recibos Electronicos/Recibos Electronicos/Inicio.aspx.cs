@@ -240,7 +240,7 @@ namespace Recibos_Electronicos
                 Usur.Usu_NoControl = SesionUsu.Usu_NoControl;
                 Usur.Usu_TipoUsu = SesionUsu.Usu_TipoUsu;
                 CNFactura.FacturaConsultaGrid(Usur, ref ObjFactura, ddlDependencia.SelectedValue.ToString(), txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtReferencia.Text, ref List);
-                if (List.Count >= 2000)
+                if (List.Count >= 4000)
                 {
                     List = null;
                     divErrorTot.Visible = true;

@@ -78,13 +78,14 @@ namespace Recibos_Electronicos.Form
 
         private void CargarGrid()
         {
-
+            Int32[] Celdas = new Int32[] { 4 };
             try
             {
                 DataTable dt = new DataTable();
                 grvProductos.DataSource = dt;
                 grvProductos.DataSource = GetList();
                 grvProductos.DataBind();
+                //CNComun.HideColumns(grvProductos,Celdas);
                 DropDownList DDLTipo = (DropDownList)grvProductos.HeaderRow.FindControl("ddlTipo");
                 this.BindTipo(DDLTipo);
             }
@@ -95,13 +96,14 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGridServicios()
         {
-
+            Int32[] Celdas = new Int32[] { 10 };
             try
             {
                 DataTable dt = new DataTable();
                 grvServicios.DataSource = dt;
                 grvServicios.DataSource = GetListServicios();
                 grvServicios.DataBind();
+                CNComun.HideColumns(grvServicios, Celdas);
             }
             catch (Exception ex)
             {
@@ -170,6 +172,9 @@ namespace Recibos_Electronicos.Form
                 CargarGridServicios();
                 TabContainer1.ActiveTabIndex = 0;
             }
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridProductos", "Productos();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridServicios", "Servicios();", true);
+
         }
 
         protected void bttnAgregar2_Click(object sender, EventArgs e)
@@ -182,7 +187,8 @@ namespace Recibos_Electronicos.Form
             txtDescripcion2.Text = string.Empty;
             txtImporte.Text = string.Empty;
             multiview.ActiveViewIndex = 1;
-            modal.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopup", "$('#modalProd').modal('show')", true);
+            //modal.Show();
         }
 
 
@@ -192,7 +198,8 @@ namespace Recibos_Electronicos.Form
             btnGuardar_Salir2.Text = "GUARDAR Y SALIR";
             btnGuardar2.Visible = true;
             multiview.ActiveViewIndex = 0;
-            modal.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopup", "$('#modalProd').modal('show')", true);
+            //modal.Show();
         }
 
         protected void btnPagar_Click(object sender, EventArgs e)
@@ -202,7 +209,8 @@ namespace Recibos_Electronicos.Form
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            modal.Show();
+            //modal.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopup", "$('#modal').modal('show')", true);
             Bien objBien = new Bien();
             objBien.Tipo = DDLTipo.SelectedValue;
             objBien.Descripcion = txtDescripcion.Text.ToUpper();
@@ -228,7 +236,7 @@ namespace Recibos_Electronicos.Form
 
         protected void btnCancelar_C_Click(object sender, EventArgs e)
         {
-            modal.Hide();
+            //modal.Hide();
         }
 
         protected void imgBttnCancelar_Click(object sender, ImageClickEventArgs e)
@@ -257,14 +265,13 @@ namespace Recibos_Electronicos.Form
 
         protected void grvProductos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-            grvProductos.EditIndex =
-                -1;
+            grvProductos.EditIndex = -1;
             CargarGrid();
         }
 
         protected void btnGuardar_Salir_Click(object sender, EventArgs e)
         {
-            modal.Show();
+            //modal.Show();
             Bien objBien = new Bien();
             objBien.Descripcion = txtDescripcion.Text.ToUpper();
             objBien.Tipo = DDLTipo.SelectedValue;
@@ -275,7 +282,7 @@ namespace Recibos_Electronicos.Form
                 {
                     LimpiarCampos();
                     CargarGrid();
-                    modal.Hide();
+                    //modal.Hide();
                 }
                 else
                     lblMsj.Text = Verificador;
@@ -371,7 +378,7 @@ namespace Recibos_Electronicos.Form
                 if (Verificador == "0")
                 {
                     CargarGridServicios();
-                    modal.Hide();
+                    //modal.Hide();
                 }
                 else
                 {
@@ -392,7 +399,7 @@ namespace Recibos_Electronicos.Form
         protected void btnCancelar_C2_Click(object sender, EventArgs e)
         {
             CargarGridServicios();
-            modal.Hide();
+            //modal.Hide();
         }
 
         protected void imgBttnEliminar_Click(object sender, ImageClickEventArgs e)
@@ -412,6 +419,8 @@ namespace Recibos_Electronicos.Form
 
 
         }
+
+        
 
         protected void grvServicios_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -442,7 +451,8 @@ namespace Recibos_Electronicos.Form
                     txtImporte.Text = Convert.ToString(objBien.Costo);
                     btnGuardar_Salir2.Text = "MODIFICAR";
                     btnGuardar2.Visible = false;
-                    modal.Show();
+                    //modal.Show();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopup", "$('#modalProd').modal('show')", true);
                     multiview.ActiveViewIndex = 1;
                 }
                 else
@@ -496,6 +506,63 @@ namespace Recibos_Electronicos.Form
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
             }
+        }
+
+        protected void linkBttnEliminarConc_Click(object sender, EventArgs e)
+        {
+            LinkButton imgBttn = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)imgBttn.NamingContainer;
+            grvServicios.SelectedIndex = row.RowIndex;
+            objBien.Id_Inventario = grvServicios.SelectedRow.Cells[0].Text;
+            CNBien.EliminarServicio(objBien, ref Verificador);
+            if (Verificador == "0")
+                CargarGridServicios();
+            else
+            {
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void linkBttnEditarConc_Click(object sender, EventArgs e)
+        {
+            LinkButton imgBttn = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)imgBttn.NamingContainer;
+            grvServicios.SelectedIndex = row.RowIndex;
+            objBien.Id_Inventario = grvServicios.SelectedRow.Cells[0].Text;
+            SesionUsu.Editar = 1;
+            try
+            {
+                CNBien.ConsultarServicio(ref objBien, ref Verificador);
+                if (Verificador == "0")
+                {
+                    DDLDependencia.SelectedValue = objBien.Dependencia;
+                    DDLGrupo.SelectedValue = objBien.Grupo;
+                    DDLRubro.SelectedValue = objBien.TipoGrupo;
+                    txtClave.Text = objBien.Clave;
+                    //DDLConcepto.SelectedIndex
+                    DDLConcepto.SelectedValue = Convert.ToString(objBien.Id_Concepto); //.Concepto;
+                    txtDescripcion2.Text = objBien.Descripcion;
+                    txtImporte.Text = Convert.ToString(objBien.Costo);
+                    btnGuardar_Salir2.Text = "MODIFICAR";
+                    btnGuardar2.Visible = false;
+                    //modal.Show();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopup", "$('#modalProd').modal('show')", true);
+                    multiview.ActiveViewIndex = 1;
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
+
         }
     }
 }

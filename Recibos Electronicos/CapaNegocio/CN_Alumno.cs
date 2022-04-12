@@ -21,6 +21,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void AjustaDependencia(ref string Dependencia, string Nivel, ref string Verificador)
+        {
+            try
+            {
+                CD_Alumno CDAlumno = new CD_Alumno();
+                CDAlumno.AjustaDependencia(ref Dependencia, Nivel, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void ConsultarAlumnosUNACH(Alumno objAlumno, string Buscar, ref List<Alumno> List)
         {
             try

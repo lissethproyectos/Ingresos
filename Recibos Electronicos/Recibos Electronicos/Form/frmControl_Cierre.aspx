@@ -44,6 +44,7 @@
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="ddlEjercicio" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlEjercicio_SelectedIndexChanged">
+                            <asp:ListItem>2022</asp:ListItem>
                             <asp:ListItem>2021</asp:ListItem>
                             <asp:ListItem>2020</asp:ListItem>
                             <asp:ListItem>2019</asp:ListItem>

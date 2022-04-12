@@ -184,7 +184,7 @@ namespace Recibos_Electronicos
                         }
                     }
                     else
-                        Verificador = "No fue posible realizar la autenticación, correo o contraseña no validos.";
+                        Verificador = "No fue posible realizar la autenticación, correo o contraseña no validos, si no recuerdas tu contraseña la puedas cambiar en https://correo.unach.mx/solicitud/?p=inicio&i=recuperar";
 
 
                 }

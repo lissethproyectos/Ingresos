@@ -62,6 +62,7 @@
     <Compile Include="CN_Familiar.cs" />
     <Compile Include="CN_Menus.cs" />
     <Compile Include="CN_Oficio.cs" />
+    <Compile Include="CN_PagosPosgrado.cs" />
     <Compile Include="CN_Participante.cs" />
     <Compile Include="CN_Registro.cs" />
     <Compile Include="CN_Retencion.cs" />

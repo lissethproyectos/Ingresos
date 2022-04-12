@@ -487,7 +487,8 @@ namespace CapaDatos
                         string OrigenArchivo = RutaServ + Archivos[i].NombreArchivo; // + Archivos[i].ExtensionArchivo;
                         string DestinoArchivo;
                         //DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].Folio_Fact_Cja + Archivos[i].ExtensionArchivo;
-                        DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo + Archivos[i].ExtensionArchivo;
+                        //DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo + Archivos[i].ExtensionArchivo;
+                        DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo;
 
                         if (System.IO.File.Exists(OrigenArchivo))
                         {

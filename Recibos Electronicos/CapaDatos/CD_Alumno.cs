@@ -1106,8 +1106,8 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "p_depedencia", "p_nivel" };
-                object[] Valores = { Dependencia, Nivel };
+                String[] Parametros = { "p_depedencia", "p_nivel", "p_evento" };
+                object[] Valores = { Dependencia, Nivel, "NINGUNO" };
                 String[] ParametrosOut = { "p_dependencia_ajustada", "p_bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("GNR_DEPENDENCIA_AJUSTADA_2016", ref Verificador, Parametros, Valores, ParametrosOut);
                 Dependencia = Cmd.Parameters["p_dependencia_ajustada"].Value.ToString();

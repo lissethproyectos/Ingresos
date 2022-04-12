@@ -931,6 +931,28 @@ namespace CapaDatos
             }
         }
 
+        public void EventoEliminar(ConceptoCuotaLibre objDetConcepto, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+                String[] Parametros = { "P_EVENTO" };
+                object[] Valores = { objDetConcepto.Evento };
+                String[] ParametrosOut = { "p_Bandera" };
+
+                Cmd = CDDatos.GenerarOracleCommand("DEL_EVENTO_COMPLETO", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void Insertar_oficio(Evento objeventos, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");

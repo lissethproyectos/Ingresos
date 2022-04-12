@@ -99,7 +99,7 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-        public void ObtenerBitacora( ref List<BancoBitacora> lbb, ref string fecha_i, ref string fecha_f, string Fecha_Pago )
+        public void ObtenerBitacora( ref List<BancoBitacora> lbb, ref string fecha_i, ref string fecha_f, string Ejercicio, string Mes/*, string Fecha_Pago*/)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
@@ -107,20 +107,22 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
 
-                String[] Parametros = { "p_fecha_i", "p_fecha_f", "p_fecha_pago" };
-                String[] Valores = { fecha_i, fecha_f, Fecha_Pago };
+                String[] Parametros = { "p_fecha_i", "p_fecha_f", "p_fecha_pago", "p_Ejercicio", "p_Mes" };
+                String[] Valores = { fecha_i, fecha_f, null, Ejercicio, Mes };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_BitacoraControl", ref dr, Parametros, Valores);
                 while (dr.Read())
                 {
                     BancoBitacora bb = new BancoBitacora();
 
-                    bb.Id = Convert.ToString(dr.GetValue(0));
-                    bb.Banco_nombre = Convert.ToString(dr.GetValue(3));
-                    bb.Archivo_nombre = Convert.ToString(dr.GetValue(2));
+                    bb.Id = Convert.ToString(dr.GetValue(0));                                      
                     bb.Fecha_pago = Convert.ToString(dr.GetValue(1));
-                    bb.Fecha_registro = Convert.ToString(dr.GetValue(5));
+                    bb.Archivo_nombre = Convert.ToString(dr.GetValue(2));
+                    bb.Banco_nombre = Convert.ToString(dr.GetValue(3));
                     bb.Total_registros = Convert.ToUInt16(dr.GetValue(4));
+                    bb.Fecha_registro = Convert.ToString(dr.GetValue(5));
+                    bb.Ejercicio = Convert.ToString(dr.GetValue(6));
+                    bb.Mes = Convert.ToString(dr.GetValue(7));
 
                     lbb.Add(bb);
 

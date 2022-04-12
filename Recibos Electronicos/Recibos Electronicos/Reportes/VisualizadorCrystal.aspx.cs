@@ -55,7 +55,9 @@ namespace Recibos_Electronicos.Reportes
             string Observaciones = Convert.ToString(Request.QueryString["Observaciones"]);
             string ImgQR = Convert.ToString(Request.QueryString["imagenQR"]);
             double Total = Convert.ToInt32(Request.QueryString["Total"]);
-            
+            string IdCarrera = Convert.ToString(Request.QueryString["IdCarrera"]);
+            string Matricula = Convert.ToString(Request.QueryString["Matricula"]);
+
 
             switch (Tipo)
             {                               
@@ -581,6 +583,16 @@ namespace Recibos_Electronicos.Reportes
                     Reporte = "Reportes\\Ficha_Referenciada_Productos.rpt";
                     rptPDF_Ingresos(Reporte, v40, "Ficha Referenciada");
                     break;
+                case "REPSCE_001":
+                    object[] vSCE1 = { Referencia };
+                    Reporte = "Reportes\\RepComprobanteFiscal_Posgrado.rpt";
+                    rptPDF_FE(Reporte, vSCE1, "Ficha Referenciada");
+                    break;
+                case "REPSCE_002":
+                    object[] vSCE2 = { dependencia, Matricula, IdCarrera };
+                    Reporte = "Reportes\\rpt_PagosPosgrado.rpt";
+                    rptPDF_SIAE(Reporte, vSCE2, "Pagos de "+ Matricula);
+                    break;
                 case "REP099":
                     //bool Existe = System.IO.File.Exists("https://sysweb.unach.mx/SIVALE2/Qr/RECIBO2019100000B1005759.png");
                     //string fichero = "https://sysweb.unach.mx/SIVALE2/Qr/RECIBO2019100000B1005759.png";
@@ -694,6 +706,39 @@ namespace Recibos_Electronicos.Reportes
 
         }
 
+        private void rptPDF_SIAE(String Reporte, object[] Parametros, string NombreReporte)
+        {
+            try
+            {
+
+                ConnectionInfo connectionInfo = new ConnectionInfo();
+                p = new System.Web.UI.Page();
+                report.Load(p.Server.MapPath("~") + "\\" + Reporte);
+
+                for (int i = 0; i <= Parametros.Length - 1; i++)
+                    report.SetParameterValue(i, Parametros[i]);
+
+
+                connectionInfo.ServerName = "dsia";
+                connectionInfo.UserID = "secadmin";
+                connectionInfo.Password = "secadmin34";
+                SetDBLogonForReport(connectionInfo, report);
+
+                report.ExportToHttpResponse(ExportFormatType.PortableDocFormat, Response, false, NombreReporte);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CR_ComprobanteFiscal.ReportSource = report;
+                report.Close();
+                report.Dispose();
+                CR_ComprobanteFiscal.Dispose();
+            }
+        }
 
         private void rptPDF_FE(String Reporte, object[] Parametros, string NombreReporte)
         {

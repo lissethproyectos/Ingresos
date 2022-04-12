@@ -13,7 +13,8 @@ namespace CapaEntidad
         public string Archivo_nombre { get; set; }
         public string Fecha_pago { get; set; }
         public string Fecha_registro { get; set; }
-
+        public string Ejercicio { get; set; }
+        public string Mes { get; set; }
         public byte[] Archivo_contenido { get; set; }
         public int Total_registros { get; set; }
     }
@@ -432,7 +433,7 @@ namespace CapaEntidad
                 {
                     dependencia = Int32.Parse(referencia.Substring(0, 5));
                     ficha = referencia.Substring(5, 8).TrimStart('0');
-                    folio = dato.Substring(170, 20).Trim();
+                    folio = dato.Substring(167, 20).Trim();
                     sucursal = "";
                     cajero = "";
                     pago_importe = float.Parse(dato.Substring(244, 19));

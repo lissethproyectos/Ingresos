@@ -28,14 +28,17 @@ namespace Recibos_Electronicos.Form
         {
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)            
-                Inicializar();            
+                Inicializar();
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridAlumnos", "Alumnos();", true);
         }
         
         #region <Botones y Eventos>        
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
-            pnlDatos_Alumno.Visible = false;
-            pnlPrincipal.Visible = true;
+            MultiView1.ActiveViewIndex = 1;
+            //pnlDatos_Alumno.Visible = false;
+            //pnlPrincipal.Visible = true;
             Nuevo();
         }
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -46,20 +49,20 @@ namespace Recibos_Electronicos.Form
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
         {
 
-            pnlPrincipal.Visible = false;
+            //pnlPrincipal.Visible = false;
             btnRegresar.Visible = true;
             ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerReporteAlumnos('" + ddlDependencia.SelectedValue + "','" + ddlNivel.SelectedValue + "');", true);
 
         }
         protected void imgBttnExportar_Click(object sender, ImageClickEventArgs e)
         {
-            pnlPrincipal.Visible = false;
+            //pnlPrincipal.Visible = false;
             btnRegresar.Visible = true;
             ScriptManager.RegisterStartupScript(this, this.GetType(), UniqueID, "VerReporteAlumnosExcel('" + ddlDependencia.SelectedValue + "','" + ddlNivel.SelectedValue + "');", true);
         }
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
-            pnlPrincipal.Visible = true;
+            //pnlPrincipal.Visible = true;
             btnRegresar.Visible = false;
             
         }
@@ -142,14 +145,16 @@ namespace Recibos_Electronicos.Form
             if (SesionUsu.Exento == 'S')
             {
                 SesionUsu.Editar = 0;
-                pnlDatos_Alumno.Visible = true;
-                pnlPrincipal.Visible = false;
+                MultiView1.ActiveViewIndex = 1;
+                //pnlDatos_Alumno.Visible = true;
+                //pnlPrincipal.Visible = false;
                 ddlDependencia_D.SelectedValue = SesionUsu.Dependencia;
                 ddlDependencia_D_SelectedIndexChanged(null,null);
                 ddlNivel_D.SelectedValue = SesionUsu.NivelEstudio;
                 txtMatricula.Text = SesionUsu.Matricula;
             }
             txtBusqueda.Focus();
+            MultiView1.ActiveViewIndex = 0;
         }
         private void CargarCombos()
         {
@@ -219,8 +224,9 @@ namespace Recibos_Electronicos.Form
                     }
                     else
                     {
-                        pnlDatos_Alumno.Visible = false;
-                        pnlPrincipal.Visible = true;
+                        MultiView1.ActiveViewIndex = 0;
+                        //pnlDatos_Alumno.Visible = false;
+                        //pnlPrincipal.Visible = true;
                         Nuevo();
                         CargarGrid();
                     }
@@ -381,7 +387,8 @@ namespace Recibos_Electronicos.Form
             try
             {
                 grvAlumnos.SelectedIndex = row.RowIndex;
-                modalCorreo.Show();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCorreo", "$('#modalCorreo').modal('show')", true);
+                //modalCorreo.Show();
             }
             catch (Exception ex)
             {
@@ -432,8 +439,9 @@ namespace Recibos_Electronicos.Form
         protected void bttnAgregar_Click(object sender, EventArgs e)
         {
             //lblMsj.Text = string.Empty;
-            pnlDatos_Alumno.Visible = true;
-            pnlPrincipal.Visible = false;
+            MultiView1.ActiveViewIndex = 1;
+            //pnlDatos_Alumno.Visible = true;
+            //pnlPrincipal.Visible = false;
             SesionUsu.Editar = 0;
             txtMatricula.Enabled = true;
             Nuevo();
@@ -461,8 +469,9 @@ namespace Recibos_Electronicos.Form
                 CNAlumno.ConsultarAlumnoSel(ref ObjAlumno, ref Verificador);
                 if (Verificador == "0")
                 {
-                    pnlDatos_Alumno.Visible = true;
-                    pnlPrincipal.Visible = false;
+                    MultiView1.ActiveViewIndex = 1;
+                    //pnlDatos_Alumno.Visible = true;
+                    //pnlPrincipal.Visible = false;
                     SesionUsu.Editar = 1;
 
                     ddlNivel_D.SelectedValue = ObjAlumno.Nivel; //ddlNivel.SelectedValue;
@@ -510,8 +519,9 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnNuevo_Click(object sender, ImageClickEventArgs e)
         {
-            pnlDatos_Alumno.Visible = true;
-            pnlPrincipal.Visible = false;
+            MultiView1.ActiveViewIndex = 1;
+            //pnlDatos_Alumno.Visible = true;
+            //pnlPrincipal.Visible = false;
             SesionUsu.Editar = 0;
             txtMatricula.Enabled = true;
             Nuevo();

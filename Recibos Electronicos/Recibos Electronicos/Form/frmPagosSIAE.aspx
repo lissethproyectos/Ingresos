@@ -9,6 +9,18 @@
                 Busqueda de referencias generadas en el SIAE.
             </div>
         </div>
+         <div class="row">
+            <div class="col-md-2">
+                Escuela
+            </div>
+             <div class="col-md-10">
+                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                     <ContentTemplate>
+                         <asp:DropDownList ID="DDLEscuela" runat="server" CssClass="form-control" Width="100%"></asp:DropDownList>
+                     </ContentTemplate>
+                 </asp:UpdatePanel>
+                 </div>
+             </div>
         <div class="row">
             <div class="col-md-2">
                 Nivel
@@ -16,7 +28,7 @@
             <div class="col-md-3">
                 <asp:UpdatePanel ID="updPnlNivel" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlNivel" runat="server"  Width="100%" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged">
                             <asp:ListItem Value="T">TODOS</asp:ListItem>
                             <asp:ListItem Value="L">Licenciatura</asp:ListItem>
                             <asp:ListItem Value="E">Especialidad</asp:ListItem>
@@ -40,7 +52,7 @@
             <div class="col-md-3">
                 <asp:UpdatePanel ID="updPnlCiclo" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlCicloEscolar" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddlCicloEscolar" runat="server"  Width="100%" CssClass="form-control">
                         </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -268,7 +280,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-3">
-                            <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia"></asp:Label>
+                            <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia SIAE"></asp:Label>
                         </div>
                         <div class="col-md-9">
                             <asp:TextBox ID="txtReferenciaOrig" runat="server" Enabled="False" Width="100%"></asp:TextBox>
@@ -276,7 +288,7 @@
                     </div>
 <div class="row">
                         <div class="col-md-3">
-                            <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia"></asp:Label>
+                            <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Pagada"></asp:Label>
                         </div>
                         <div class="col-md-9">
                             <asp:TextBox ID="txtReferenciaPagada" runat="server" Width="100%"></asp:TextBox>

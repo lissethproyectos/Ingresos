@@ -229,6 +229,19 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void EventoEliminar(ConceptoCuotaLibre objDetConcepto, ref string Verificador)
+        {
+            try
+            {
+
+                CD_Evento CDeventos = new CD_Evento();
+                CDeventos.EventoEliminar(objDetConcepto, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void EventoEliminarDetalleParticipante(List<TipoParticipante> lstParticipante, ref string Verificador)
         {
             try
@@ -282,6 +295,7 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
 
         public void EventoEliminarDetallePart(ConceptoCuotaLibre objDetConcepto, ref string Verificador)
         {

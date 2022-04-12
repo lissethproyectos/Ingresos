@@ -684,6 +684,7 @@
     <Content Include="Form\frmExentos_Copia.aspx" />
     <Content Include="Form\frmFacturacion.aspx" />
     <Content Include="Form\FrmFacturas3.aspx" />
+    <Content Include="Form\frmPagosPosgrado.aspx" />
     <Content Include="Form\FrmSolicitud_Facturas.aspx" />
     <Content Include="Form\FrmFacturas.aspx" />
     <Content Include="Form\FrmFacturasResp.aspx" />
@@ -1277,6 +1278,13 @@
     <Compile Include="Form\FrmFacturas3.aspx.designer.cs">
       <DependentUpon>FrmFacturas3.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmPagosPosgrado.aspx.cs">
+      <DependentUpon>frmPagosPosgrado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\frmPagosPosgrado.aspx.designer.cs">
+      <DependentUpon>frmPagosPosgrado.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\FrmSolicitud_Facturas.aspx.cs">
       <DependentUpon>FrmSolicitud_Facturas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1805,6 +1813,12 @@
       <DependentUpon>RepComprobanteFiscal.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\RepComprobanteFiscal_Posgrado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepComprobanteFiscal_Posgrado.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\RepComprobanteFiscal_Ref.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1827,6 +1841,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptHistoricoRecibos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\rpt_PagosPosgrado.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rpt_PagosPosgrado.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\VisualizadorCrystal.aspx.cs">
@@ -2015,6 +2035,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>REP068.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RepComprobanteFiscal_Posgrado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepComprobanteFiscal_Posgrado.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RepComprobanteFiscal_Ref.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepComprobanteFiscal_Ref.cs</LastGenOutput>
@@ -2034,6 +2058,10 @@
     <EmbeddedResource Include="Reportes\rptHistoricoRecibos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptHistoricoRecibos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rpt_PagosPosgrado.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rpt_PagosPosgrado.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

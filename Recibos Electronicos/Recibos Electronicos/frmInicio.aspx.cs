@@ -39,7 +39,7 @@ namespace Recibos_Electronicos
                 CargarGridStatus();
                 CargarGridMonitor(ref grdMonitor);
                 CargarGridBancos();
-
+                CargarGridPagosSIAE();
             }
         }
 
@@ -138,6 +138,20 @@ namespace Recibos_Electronicos
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
             }
         }
+        private void CargarGridPagosSIAE()
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                grdPagosSIAE.DataSource = dt;
+                grdPagosSIAE.DataSource = GetListPagosSIAE();
+                grdPagosSIAE.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
 
         private List<Alumno> GetListStatus()
         {
@@ -145,6 +159,19 @@ namespace Recibos_Electronicos
             {
                 List<Alumno> List = new List<Alumno>();
                 CNAlumno.ConsultarStatusDescuento(ref ObjAlumno, SesionUsu.Usu_Nombre, ref List);
+                return List;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        private List<Factura> GetListPagosSIAE()
+        {
+            try
+            {
+                List<Factura> List = new List<Factura>();
+                CNFactura.Obt_Grid_PagosSIAE(ref List);
                 return List;
             }
             catch (Exception ex)
@@ -172,5 +199,9 @@ namespace Recibos_Electronicos
             CargarGridMonitor(ref grdMonitor);
         }
 
+        protected void linkBttnVerRecibos_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Inicio.aspx", false);
+        }
     }
 }

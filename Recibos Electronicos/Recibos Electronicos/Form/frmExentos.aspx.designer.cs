@@ -24,24 +24,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.UpdatePanel updPnlMultiview;
 
         /// <summary>
-        /// Control selected_tab.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField selected_tab;
-
-        /// <summary>
-        /// Control updPrMultiview.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress updPrMultiview;
-
-        /// <summary>
         /// Control MultiView1.
         /// </summary>
         /// <remarks>
@@ -58,6 +40,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View View1;
+
+        /// <summary>
+        /// Control updPnlStatusSol.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlStatusSol;
 
         /// <summary>
         /// Control grvStatus.
@@ -78,6 +69,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblDependencia;
 
         /// <summary>
+        /// Control updPnlDepcia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlDepcia;
+
+        /// <summary>
         /// Control ddlDependencia.
         /// </summary>
         /// <remarks>
@@ -94,6 +94,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNivel1;
+
+        /// <summary>
+        /// Control updPnlNivel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlNivel;
 
         /// <summary>
         /// Control ddlNivel1.
@@ -114,6 +123,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblCiclo;
 
         /// <summary>
+        /// Control updPnlCiclo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlCiclo;
+
+        /// <summary>
         /// Control ddlCiclo.
         /// </summary>
         /// <remarks>
@@ -130,6 +148,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblSubTipo1;
+
+        /// <summary>
+        /// Control updPnlSubtipo1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlSubtipo1;
 
         /// <summary>
         /// Control ddlSubTipo1.
@@ -150,6 +177,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblStatus_Ini;
 
         /// <summary>
+        /// Control updPnlStatusIni.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlStatusIni;
+
+        /// <summary>
         /// Control ddlStatus_Ini.
         /// </summary>
         /// <remarks>
@@ -168,31 +204,58 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.TextBox txtReferencia;
 
         /// <summary>
-        /// Control UpdatePanel11.
+        /// Control updPnlBuscarExenciones.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel11;
+        protected global::System.Web.UI.UpdatePanel updPnlBuscarExenciones;
 
         /// <summary>
-        /// Control imgBttnBuscar.
+        /// Control linkBttnBuscarEx.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnBuscar;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnBuscarEx;
 
         /// <summary>
-        /// Control imgBttnNuevo0.
+        /// Control linkBttnNewEx.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnNuevo0;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnNewEx;
+
+        /// <summary>
+        /// Control updPrgBuscarExenciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPrgBuscarExenciones;
+
+        /// <summary>
+        /// Control updPgrAlumnos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrAlumnos;
+
+        /// <summary>
+        /// Control updPnlAlumnos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlAlumnos;
 
         /// <summary>
         /// Control grvAlumnos.
@@ -202,6 +265,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvAlumnos;
+
+        /// <summary>
+        /// Control updPnlReportes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlReportes;
 
         /// <summary>
         /// Control imgBttnReporte.
@@ -303,6 +375,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.TextBox txtObservaciones_C;
 
         /// <summary>
+        /// Control updPnlGuardarStus.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlGuardarStus;
+
+        /// <summary>
         /// Control btnGuardar_C.
         /// </summary>
         /// <remarks>
@@ -382,15 +463,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View View2;
-
-        /// <summary>
-        /// Control updPnlTabs.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updPnlTabs;
 
         /// <summary>
         /// Control TabContainer1.
@@ -643,6 +715,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNombre;
+
+        /// <summary>
+        /// Control updPnlNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlNombre;
 
         /// <summary>
         /// Control txtNombre.
@@ -1138,6 +1219,24 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvOficios;
+
+        /// <summary>
+        /// Control updPgrGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrGuardar;
+
+        /// <summary>
+        /// Control updPnlGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlGuardar;
 
         /// <summary>
         /// Control btnGuardar.

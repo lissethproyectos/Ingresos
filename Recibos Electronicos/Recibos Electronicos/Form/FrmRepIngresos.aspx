@@ -74,37 +74,13 @@
             <div class="col-md-1">
                 <asp:UpdatePanel ID="UpdatePanel49" runat="server">
                     <ContentTemplate>
-                        <%--<asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" />--%>
                         <asp:LinkButton ID="linBttnBuscar" CssClass="btn btn-primary" runat="server" OnClick="linBttnBuscar_Click"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-          <%--  <div class="col-md-2">
-                <asp:Label ID="lblOrdenar" runat="server" Text="Ordenar por"></asp:Label>
-            </div>
-            <div class="col-md-4">
-                <asp:UpdatePanel ID="UpdatePanel46" runat="server">
-                    <ContentTemplate>
-                        <asp:DropDownList ID="ddlOrden" runat="server" OnSelectedIndexChanged="ddlOrden_SelectedIndexChanged">
-                            <asp:ListItem Value="1">Clave</asp:ListItem>
-                            <asp:ListItem Value="2">Descripción</asp:ListItem>
-                        </asp:DropDownList>
-
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>--%>
+          
       
-            <%--<div class="col-md-1">
-                <asp:Label ID="lblBuscar" runat="server" Text="Buscar" Width="100%"></asp:Label>
-            </div>
-            <div class="col-md-4">
-                <asp:UpdatePanel ID="UpdatePanel50" runat="server">
-                    <ContentTemplate>
-                        <asp:TextBox ID="txtBuscar" runat="server" Width="100%" PlaceHolder="Por Clave ó Descripción"></asp:TextBox>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>--%>
-            
+                        
         </div>
         <div class="row">
             <div class="col text-center">
@@ -123,7 +99,9 @@
                 <asp:UpdatePanel ID="UpdatePanel42" runat="server">
                     <ContentTemplate>
 <%--                        <div id="divGrid" runat="server" style="border-style: none none solid none; overflow: auto; height: 230px; border-bottom-color: #D9D9D9; border-bottom-width: 1px;">--%>
-                            <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" CssClass="sem table table-striped table-bordered table-hover" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptos_PageIndexChanging" Width="100%" DataKeyNames="ClaveConcepto">
+                            <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" 
+                                CssClass="sem table table-striped table-bordered table-hover" 
+                                EmptyDataText="No se encontro ningún registro"  Width="100%" DataKeyNames="ClaveConcepto">
                                 <Columns>
                                     <asp:BoundField DataField="ClaveConcepto" HeaderText="Cve">
                                         <HeaderStyle HorizontalAlign="Left" />
@@ -135,10 +113,10 @@
                                     </asp:BoundField>
                                     <asp:TemplateField>
                                         <HeaderTemplate>
-                                            <asp:CheckBox ID="chkTodosConc" runat="server" OnCheckedChanged="chkTodosConc_CheckedChanged" AutoPostBack="True" />
+                                            <asp:CheckBox ID="chkTodosConc" runat="server" OnCheckedChanged="chkTodosConc_CheckedChanged" AutoPostBack="true" />
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="chkConcepto" runat="server" Checked='<%# Bind("Habilita") %>' />
+                                            <asp:CheckBox ID="chkConcepto" runat="server" Checked='<%# Bind("Habilita") %>'/>
                                         </ItemTemplate>
                                         <HeaderStyle HorizontalAlign="Center" />
                                         <ItemStyle HorizontalAlign="Center" />
@@ -171,7 +149,8 @@
         function Conceptos() {
             $('#<%= grvConceptos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvConceptos.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
-                "stateSave": true
+                "stateSave": true,
+                "lengthMenu": [10, 20, 50, 100, 200, 500]
             });
         }
     </script>

@@ -62,6 +62,7 @@
     <Compile Include="Menus.cs" />
     <Compile Include="MultiPago.cs" />
     <Compile Include="Oficio.cs" />
+    <Compile Include="PagosPosgrado.cs" />
     <Compile Include="Participante.cs" />
     <Compile Include="ParticipanteAutorizado.cs" />
     <Compile Include="Persona.cs" />

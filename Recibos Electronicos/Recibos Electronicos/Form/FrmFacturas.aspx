@@ -857,9 +857,15 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-2">
+                                                        Código
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <asp:DropDownList ID="ddlCodigoFiscal" runat="server" Width="100%"></asp:DropDownList>
+                                                    </div>
+                                                    <div class="col-md-2">
                                                         Uso de CFDI
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <asp:DropDownList ID="ddlCFDI" runat="server" TabIndex="11" Width="100%">
                                                             <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
                                                             <asp:ListItem Value="G01">ADQUISICION DE MERCANCIAS</asp:ListItem>
@@ -886,6 +892,8 @@
                                                         </asp:DropDownList>
                                                         <asp:RequiredFieldValidator ID="valCFDI" runat="server" ControlToValidate="ddlCFDI" ErrorMessage="*Uso de CFDI" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
                                                     </div>
+                                                </div>
+                                                <div class="row">
                                                     <div class="col-md-1">
                                                         Teléfono
                                                     </div>
@@ -979,8 +987,8 @@
                                                             <Panes>
                                                                 <ajaxToolkit:AccordionPane runat="server">
                                                                     <Header>
-                                                                         Datos del Voucher
-                                                                            </Header>
+                                                                        Datos del Voucher
+                                                                    </Header>
                                                                     <Content>
                                                                         <div class="container-fluid">
                                                                             <div class="row">
@@ -989,7 +997,8 @@
                                                                                     <asp:TextBox ID="txtFolio" runat="server" Width="100%"></asp:TextBox>
                                                                                 </div>
                                                                                 <div class="col-md-1">
-                                                                                    <asp:RequiredFieldValidator ID="valFolio" runat="server" ControlToValidate="txtFolio" ErrorMessage="*Folio(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator></div>
+                                                                                    <asp:RequiredFieldValidator ID="valFolio" runat="server" ControlToValidate="txtFolio" ErrorMessage="*Folio(Datos del Voucher - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                </div>
                                                                                 <div class="col-md-1">Fecha Pago</div>
                                                                                 <div class="col-md-2">
                                                                                     <asp:TextBox ID="txtFecha" runat="server" Width="100%"></asp:TextBox>
@@ -1011,7 +1020,7 @@
                                                                                 <div class="col-md-1">
                                                                                     <asp:UpdatePanel ID="UpdatePanel15" runat="server">
                                                                                         <ContentTemplate>
-                                                                                            <asp:CheckBox ID="chkIvaDes" runat="server" AutoPostBack="True" Text="¿Con IVA desglozado?" OnCheckedChanged="chkIvaDes_CheckedChanged"/>
+                                                                                            <asp:CheckBox ID="chkIvaDes" runat="server" AutoPostBack="True" Text="¿Con IVA desglozado?" OnCheckedChanged="chkIvaDes_CheckedChanged" />
                                                                                         </ContentTemplate>
                                                                                     </asp:UpdatePanel>
                                                                                 </div>
@@ -1093,7 +1102,7 @@
                                                                 </ajaxToolkit:AccordionPane>
                                                                 <ajaxToolkit:AccordionPane runat="server" ID="AccordionPane1" CssClass="note-info">
                                                                     <Header>
-                                                                        Datos del Oficio <i class="fa fa-file-text" aria-hidden="true"></i> 
+                                                                        Datos del Oficio <i class="fa fa-file-text" aria-hidden="true"></i>
                                                                     </Header>
                                                                     <Content>
                                                                         <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -1161,7 +1170,8 @@
                                                                     </Content>
                                                                 </ajaxToolkit:AccordionPane>
                                                                 <ajaxToolkit:AccordionPane ID="AccordionPane2" runat="server">
-                                                                    <Header>Importe/Convenio <i class="fa fa-money" aria-hidden="true"></i>
+                                                                    <Header>
+                                                                        Importe/Convenio <i class="fa fa-money" aria-hidden="true"></i>
                                                                     </Header>
                                                                     <Content>
                                                                         <asp:UpdatePanel ID="updPnlConvenio" runat="server">

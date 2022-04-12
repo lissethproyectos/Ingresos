@@ -286,7 +286,9 @@ namespace Recibos_Electronicos.Form
                 grvAlumnos.DataBind();
                 if (grvAlumnos.Rows.Count > 0)
                     HideColumns(grvAlumnos);
-                
+
+             
+
             }
             catch (Exception ex)
             {
@@ -514,7 +516,7 @@ namespace Recibos_Electronicos.Form
             grdView.HeaderRow.Cells[19].Visible = false;
             grdView.HeaderRow.Cells[20].Visible = false;
             grdView.HeaderRow.Cells[21].Visible = false;
-            grdView.HeaderRow.Cells[13].Visible = (SesionUsu.Usu_Central=="S") ? true : false;
+            //grdView.HeaderRow.Cells[13].Visible = (SesionUsu.Usu_Central=="S") ? true : false;
             //4, 12, 16, 17, 18, 19, 20
             grdView.FooterRow.Cells[0].Visible = false;
             grdView.FooterRow.Cells[1].Visible = false;
@@ -527,19 +529,30 @@ namespace Recibos_Electronicos.Form
             grdView.FooterRow.Cells[19].Visible = false;
             grdView.FooterRow.Cells[20].Visible = false;
             grdView.FooterRow.Cells[21].Visible = false;
-            grdView.FooterRow.Cells[13].Visible = (SesionUsu.Usu_Central == "S") ? true : false;
+            //grdView.FooterRow.Cells[13].Visible = (SesionUsu.Usu_Central == "S") ? true : false;
 
 
             foreach (GridViewRow row in grdView.Rows)
             {
                 row.Cells[0].Visible = false;
                 CheckBox cb = (CheckBox)row.FindControl("ckbGenerar");
+                LinkButton linkBttnEditar=(LinkButton)row.FindControl("linkBttnEditar");
+                linkBttnEditar.Visible = false;
                 cb.Enabled = Convert.ToBoolean(row.Cells[1].Text);
                 row.Cells[1].Visible = false;
                 row.Cells[3].Visible = false;
                 row.Cells[10].Visible = false;
                 row.Cells[12].Visible = false;
-                row.Cells[13].Visible = (SesionUsu.Usu_Central == "S") ? true : false; //(usuAdmin.Length != 0) ? true : false;
+
+                if (SesionUsu.Usu_Central == "S")                
+                    linkBttnEditar.Visible = true;
+                else
+                {
+                    if (row.Cells[8].Text.ToUpper() == "SOLICITADO")
+                        linkBttnEditar.Visible = true;
+                }
+
+                //row.Cells[13].Visible = (SesionUsu.Usu_Central == "S") ? true : false; //(usuAdmin.Length != 0) ? true : false;
                 row.Cells[16].Visible = false;
                 row.Cells[17].Visible = false;
                 //row.Cells[18].Visible = false;
@@ -713,6 +726,7 @@ namespace Recibos_Electronicos.Form
             txtPaterno.Text = string.Empty;
             txtMaterno.Text = string.Empty;
             txtMatricula.Text = string.Empty;
+            ddlCicloAlum.Items.Clear();
             txtSemestre.Text = string.Empty;
             txtGrupo.Text = string.Empty;
             txtFechaNacimiento.Text = string.Empty;
@@ -854,10 +868,14 @@ namespace Recibos_Electronicos.Form
 
             if (!IsPostBack)          
                 Inicializar();
-            
+
             ScriptManager.RegisterStartupScript(this, GetType(), "Eventos", "FiltEventos();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "Exentos();", true);
-            ScriptManager.RegisterStartupScript(this, GetType(), "grdMonitor", "Monitor();", true);
+            if (SesionUsu.Usu_Central == "S")
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "ExentosA();", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "grdMonitor", "Monitor();", true);
+            }
 
         }
 
@@ -1052,7 +1070,7 @@ namespace Recibos_Electronicos.Form
 
         protected void txtReferencia_TextChanged(object sender, EventArgs e)
         {
-            imgBttnBuscar.Focus();
+            //imgBttnBuscar.Focus();
         }
 
         protected void imgBttnCancelar_Click(object sender, ImageClickEventArgs e)
@@ -1120,200 +1138,201 @@ namespace Recibos_Electronicos.Form
 
         protected void grvAlumnos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //lblMsj.Text = string.Empty;
+
+            TabContainer1.ActiveTabIndex = 0;
+            MultiView1.ActiveViewIndex = 1;
+
             lblMsjGuardar.Text = string.Empty;
             Celdas = new Int32[] { 3 };
-            //usuAdmin = Array.FindAll(UsuariosSuper, s => s.Equals(SesionUsu.Usu_Nombre));
             ListFamiliar.Clear();
             string StatusMatricula;
             lblErrorBuscEmp.Text = string.Empty;
             lblErrorBuscEmp.Visible = false;
-            try
-            {
-                ObjAlumno.IdPersona = Convert.ToInt32(grvAlumnos.SelectedRow.Cells[0].Text);  //Convert.ToInt32(grvAlumnos.Rows[v].Cells[0].Text);
-                SesionUsu.Id_Persona = ObjAlumno.IdPersona;
-                ObjAlumno.CicloAlu= Convert.ToString(grvAlumnos.SelectedRow.Cells[21].Text);
-                CNAlumno.ConsultarAlumnoDescuento(ref ObjAlumno, ref Verificador);
-                if (Verificador == "0")
-                {
-                    SesionUsu.Editar = 1;
-                    txtMatricula.Text = ObjAlumno.Matricula;
-                    linkBttnBuscar_Click(null, null);
-                    //txtMatricula_TextChanged(null, null);
-                    try
-                    {
-                        ddlCicloAlum.SelectedValue = ObjAlumno.CicloAlu;
-                    }
-                    catch
-                    {
-                        ddlCicloAlum.SelectedIndex = 0;
-                    }
-                    ddlNivel.SelectedValue = ObjAlumno.Nivel;
-                    ddlEvento.SelectedValue = ObjAlumno.Evento;
-                    BuscaDatosAlumno();
-                    //ddlNivel_SelectedIndexChanged(null, null);
-                    ddlCarrera.SelectedValue = ObjAlumno.Carrera;
-                    if (ddlCarrera.SelectedValue == "000000")
-                    {
-                        ddlCarrera_SelectedIndexChanged(null, null);
-                        txtCarrera.Text = ObjAlumno.DescCarrera;
-                    }
-                    ddlCiclo_D.SelectedValue = ObjAlumno.CicloEscolar;
-                    txtSemestre.Text = ObjAlumno.Semestre;
-                    txtGrupo.Text = ObjAlumno.Grupo;
+            //try
+            //{
+            //    ObjAlumno.IdPersona = Convert.ToInt32(grvAlumnos.SelectedRow.Cells[0].Text);  //Convert.ToInt32(grvAlumnos.Rows[v].Cells[0].Text);
+            //    SesionUsu.Id_Persona = ObjAlumno.IdPersona;
+            //    ObjAlumno.CicloAlu= Convert.ToString(grvAlumnos.SelectedRow.Cells[21].Text);
+            //    CNAlumno.ConsultarAlumnoDescuento(ref ObjAlumno, ref Verificador);
+            //    if (Verificador == "0")
+            //    {
+            //        SesionUsu.Editar = 1;
+            //        txtMatricula.Text = ObjAlumno.Matricula;
+            //        linkBttnBuscar_Click(null, null);
+            //        try
+            //        {
+            //            ddlCicloAlum.SelectedValue = ObjAlumno.CicloAlu;
+            //        }
+            //        catch
+            //        {
+            //            ddlCicloAlum.SelectedIndex = 0;
+            //        }
+            //        ddlNivel.SelectedValue = ObjAlumno.Nivel;
+            //        ddlEvento.SelectedValue = ObjAlumno.Evento;
+            //        BuscaDatosAlumno();
+            //        ////ddlNivel_SelectedIndexChanged(null, null);
+            //        //ddlCarrera.SelectedValue = ObjAlumno.Carrera;
+            //        //if (ddlCarrera.SelectedValue == "000000")
+            //        //{
+            //        //    ddlCarrera_SelectedIndexChanged(null, null);
+            //        //    txtCarrera.Text = ObjAlumno.DescCarrera;
+            //        //}
+            //        ddlCiclo_D.SelectedValue = ObjAlumno.CicloEscolar;
+            //        txtSemestre.Text = ObjAlumno.Semestre;
+            //        txtGrupo.Text = ObjAlumno.Grupo;
 
-                    txtPorcentaje.Text = ObjAlumno.PorcentajeDescuento;
-                    txtFechaInicial.Text = ObjAlumno.FechaInicial;
-                    txtFechaFinal.Text = ObjAlumno.FechaFinal;
-                    txtOficio.Text = ObjAlumno.OficioSolicito;
-                    txtFechaO.Text = ObjAlumno.OficioFecha;
-                    txtAutorizado.Text = ObjAlumno.OficioFirma;
-                    txtSolicitado.Text = ObjAlumno.OficioQuienSolicita;
-                    txtObservaciones.Text = ObjAlumno.Observaciones;
-                    lblUsuSolicitado.Text = ObjAlumno.SolicitoNombre;
-                    lblFechaSolicitado.Text = ObjAlumno.SolicitoFecha;
-                    lblUsuAutorizado.Text = ObjAlumno.AutorizoNombre;
-                    lblFechaAutorizado.Text = ObjAlumno.AutorizoFecha;
-                    lblUsuGenerar.Text = ObjAlumno.GeneroNombre;
-                    lblFechaGenerar.Text = ObjAlumno.GeneroFecha;
-                    SesionUsu.Id_Oficio = ObjAlumno.oficio.IdOficio;
-                    StatusMatricula = ObjAlumno.StatusMatricula;
-                    if (Convert.ToString(ObjAlumno.IdEmpleado) != "0")
-                    {
-                        CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Empleado", ref ddlEmpleado, "p_id_empleado", "p_id_familiar",  Convert.ToString(ObjAlumno.IdEmpleado), Convert.ToString(ObjAlumno.IdFamiliar), ref ListFamiliar);
-                        BuscaEmpleado();
-                        BuscaHijo("N");
-                    }
-                    else
-                    {
-                        ddlEmpleado.Items.Clear();
-                        ddlEmpleado.Items.Insert(0, new ListItem("AGREGAR-->", "0"));
-                        grvEmpleados.DataSource = null;
-                        grvEmpleados.DataBind();
-                        ddlHijo.Items.Clear();
-                        ddlParentesco.Items.Clear();
-                    }
-                    TabContainer1.ActiveTabIndex = 0;
-                    MultiView1.ActiveViewIndex = 1;
-                    if (StatusMatricula == "A")
-                    {
-                        txtNombre.Enabled = false;
-                        txtPaterno.Enabled = false;
-                        txtMaterno.Enabled = false;
-                        txtSemestre.Enabled = true;
-                        txtGrupo.Enabled = true;
-                        txtMatricula.Enabled = (SesionUsu.Usu_Central=="S") ? true : false;  //(usuAdmin.Length != 0) ? true : false;
-                        //ddlNivel.Enabled = false;
-                        ddlStatus.Visible = false;
-                        lblEstatusA.Text = "Autorizado";
-                        //ddlCiclo_D.Enabled = false;
-                        ddlCiclo_D.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;
-                        ddlEvento.Enabled = false;
-                        ddlSubTipo.Enabled = false;
-                        ddlTipo.Enabled = false;
-                        //grvConceptosCat.Enabled = false;
-                        grvConceptosCat.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;
-                        txtPorcentaje.Enabled = false;
-                        txtFechaInicial.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;//(usuAdmin.Length != 0) ? true : false;
-                        txtFechaFinal.Enabled = (SesionUsu.Usu_Central == "S") ? true : false; //(usuAdmin.Length != 0) ? true : false;
-                        txtOficio.Enabled = true;
-                        txtFechaO.Enabled = true;
-                        txtAutorizado.Enabled = true;
-                        txtSolicitado.Enabled = true;
-                        txtObservaciones.Enabled = true;
-                    }
-                    else if (StatusMatricula == "C")
-                    {
-                        ddlStatus.Visible = false;
-                        lblEstatusA.Text = "Cancelado";
-                    }
-                    else
-                    {
-                        //ddlStatus.SelectedValue = ObjAlumno.StatusMatricula;
-                        txtNombre.Enabled = true;
-                        txtPaterno.Enabled = true;
-                        txtMaterno.Enabled = true;
-                        txtSemestre.Enabled = true;
-                        txtGrupo.Enabled = true;
-                        txtMatricula.Enabled = true;
-                        ddlNivel.Enabled = true;
-                        ddlStatus.Visible = true;
-                        lblEstatusA.Text = string.Empty;
-                        ddlCiclo_D.Enabled = true;
-                        ddlEvento.Enabled = true;
-                        ddlSubTipo.Enabled = true;
-                        ddlTipo.Enabled = true;
-                        grvConceptosCat.Enabled = true;
-                        txtPorcentaje.Enabled = true;
-                        txtFechaInicial.Enabled = true;
-                        txtFechaFinal.Enabled = true;
-                        txtOficio.Enabled = true;
-                        txtFechaO.Enabled = true;
-                        txtAutorizado.Enabled = true;
-                        txtSolicitado.Enabled = true;
-                        txtObservaciones.Enabled = true;
-                    }
-
-
-                    //--LIMPIA GRIDS--//
-                    Session["Oficios"] = null;
-                    Session["Conceptos"] = null;
-                    grvOficios.DataSource = null;
-                    grvOficios.DataBind();
-                    grvConceptosCat.DataSource = null;
-                    grvConceptosCat.DataBind();
-                    grvConceptos.DataSource = null;
-                    grvConceptos.DataBind();                    
-                    //--FIN LIMPIA GRIDS--//
+            //        txtPorcentaje.Text = ObjAlumno.PorcentajeDescuento;
+            //        txtFechaInicial.Text = ObjAlumno.FechaInicial;
+            //        txtFechaFinal.Text = ObjAlumno.FechaFinal;
+            //        txtOficio.Text = ObjAlumno.OficioSolicito;
+            //        txtFechaO.Text = ObjAlumno.OficioFecha;
+            //        txtAutorizado.Text = ObjAlumno.OficioFirma;
+            //        txtSolicitado.Text = ObjAlumno.OficioQuienSolicita;
+            //        txtObservaciones.Text = ObjAlumno.Observaciones;
+            //        lblUsuSolicitado.Text = ObjAlumno.SolicitoNombre;
+            //        lblFechaSolicitado.Text = ObjAlumno.SolicitoFecha;
+            //        lblUsuAutorizado.Text = ObjAlumno.AutorizoNombre;
+            //        lblFechaAutorizado.Text = ObjAlumno.AutorizoFecha;
+            //        lblUsuGenerar.Text = ObjAlumno.GeneroNombre;
+            //        lblFechaGenerar.Text = ObjAlumno.GeneroFecha;
+            //        SesionUsu.Id_Oficio = ObjAlumno.oficio.IdOficio;
+            //        StatusMatricula = ObjAlumno.StatusMatricula;
+            //        if (Convert.ToString(ObjAlumno.IdEmpleado) != "0")
+            //        {
+            //            CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Empleado", ref ddlEmpleado, "p_id_empleado", "p_id_familiar", Convert.ToString(ObjAlumno.IdEmpleado), Convert.ToString(ObjAlumno.IdFamiliar), ref ListFamiliar);
+            //            BuscaEmpleado();
+            //            BuscaHijo("N");
+            //        }
+            //        else
+            //        {
+            //            ddlEmpleado.Items.Clear();
+            //            ddlEmpleado.Items.Insert(0, new ListItem("AGREGAR-->", "0"));
+            //            grvEmpleados.DataSource = null;
+            //            grvEmpleados.DataBind();
+            //            ddlHijo.Items.Clear();
+            //            ddlParentesco.Items.Clear();
+            //        }
+            //        //TabContainer1.ActiveTabIndex = 0;
+            //        //MultiView1.ActiveViewIndex = 1;
+            //        if (StatusMatricula == "A")
+            //        {
+            //            txtNombre.Enabled = false;
+            //            txtPaterno.Enabled = false;
+            //            txtMaterno.Enabled = false;
+            //            txtSemestre.Enabled = true;
+            //            txtGrupo.Enabled = true;
+            //            txtMatricula.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;  //(usuAdmin.Length != 0) ? true : false;
+            //            //ddlNivel.Enabled = false;
+            //            ddlStatus.Visible = false;
+            //            lblEstatusA.Text = "Autorizado";
+            //            //ddlCiclo_D.Enabled = false;
+            //            ddlCiclo_D.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;
+            //            ddlEvento.Enabled = false;
+            //            ddlSubTipo.Enabled = false;
+            //            ddlTipo.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;
+            //            //grvConceptosCat.Enabled = false;
+            //            grvConceptosCat.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;
+            //            txtPorcentaje.Enabled = false;
+            //            txtFechaInicial.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;//(usuAdmin.Length != 0) ? true : false;
+            //            txtFechaFinal.Enabled = (SesionUsu.Usu_Central == "S") ? true : false; //(usuAdmin.Length != 0) ? true : false;
+            //            txtOficio.Enabled = true;
+            //            txtFechaO.Enabled = true;
+            //            txtAutorizado.Enabled = true;
+            //            txtSolicitado.Enabled = true;
+            //            txtObservaciones.Enabled = true;
+            //        }
+            //        else if (StatusMatricula == "C")
+            //        {
+            //            ddlStatus.Visible = false;
+            //            lblEstatusA.Text = "Cancelado";
+            //        }
+            //        else
+            //        {
+            //            //ddlStatus.SelectedValue = ObjAlumno.StatusMatricula;
+            //            txtNombre.Enabled = true;
+            //            txtPaterno.Enabled = true;
+            //            txtMaterno.Enabled = true;
+            //            txtSemestre.Enabled = true;
+            //            txtGrupo.Enabled = true;
+            //            txtMatricula.Enabled = true;
+            //            ddlNivel.Enabled = true;
+            //            ddlStatus.Visible = true;
+            //            lblEstatusA.Text = string.Empty;
+            //            ddlCiclo_D.Enabled = true;
+            //            ddlEvento.Enabled = true;
+            //            ddlSubTipo.Enabled = true;
+            //            ddlTipo.Enabled = true;
+            //            grvConceptosCat.Enabled = true;
+            //            txtPorcentaje.Enabled = true;
+            //            txtFechaInicial.Enabled = true;
+            //            txtFechaFinal.Enabled = true;
+            //            txtOficio.Enabled = true;
+            //            txtFechaO.Enabled = true;
+            //            txtAutorizado.Enabled = true;
+            //            txtSolicitado.Enabled = true;
+            //            txtObservaciones.Enabled = true;
+            //        }
 
 
-                    ddlSubTipo.SelectedValue = ObjAlumno.SubTipoDescuento;
-                    ddlSubTipo_SelectedIndexChanged(null, null);
-                    ddlTipo.SelectedValue = ObjAlumno.TipoDescuento;
-                    ddlTipo_SelectedIndexChanged(null, null);
-                    if(StatusMatricula == "A")
-                        grvConceptosCat.Enabled = (SesionUsu.Usu_Central == "S") ? true : false; //false;
-
-                    CNComun.LlenaCombo("pkg_pagos.Obt_Status_Descuentos", ref ddlStatus, "p_usuario", "p_tipo_descuento", "p_todos", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue, "N", "INGRESOS");
-                    if(ObjAlumno.StatusMatricula!="A")
-                        ddlStatus.SelectedValue = ObjAlumno.StatusMatricula;
-
-                    if (SesionUsu.Id_Oficio == 0)
-                        ObtIdOficio();
-
-                    //----CARGA GRID DE OFICIOS Y DE LOS CONCEPTOS AGREGADOS
-                    ObjOficio.IdDescuento = Convert.ToInt32(grvAlumnos.SelectedRow.Cells[0].Text);
-                    List<Oficio> ListOficio = new List<Oficio>();
-                    CNOficio.OficioConsultaGrid(ref ObjOficio, ref ListOficio);
-                    if (ListOficio.Count > 0)
-                    {
-                        Session["Oficios"] = ListOficio;
-                        CargarGridOficios(ListOficio);
-                        Copiar_a_OficiosTemp(ListOficio);
-                    }
-
-                    List<DetConcepto> ListDetConcepto = new List<DetConcepto>();
-                    CNDetDesc.ConsultarDetDescuento(ObjConcepto, SesionUsu.Id_Persona, ref ListDetConcepto);
-                    if (ListDetConcepto.Count > 0)
-                    {
-                        Session["Conceptos"] = ListDetConcepto;
-                        CargarGridConceptos(ListDetConcepto);
-                        if (StatusMatricula == "A")
-                            grvConceptos.Enabled = (SesionUsu.Usu_Central == "S") ? true : false; //false;
-                    }
+            //        //--LIMPIA GRIDS--//
+            //        Session["Oficios"] = null;
+            //        Session["Conceptos"] = null;
+            //        grvOficios.DataSource = null;
+            //        grvOficios.DataBind();
+            //        grvConceptosCat.DataSource = null;
+            //        grvConceptosCat.DataBind();
+            //        grvConceptos.DataSource = null;
+            //        grvConceptos.DataBind();
+            //        //--FIN LIMPIA GRIDS--//
 
 
-                }
-                else
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = Verificador;
-            }
-            catch (Exception ex)
-            {
-                string Mensaje = ex.Message.Replace("\r", "");
-                Mensaje = Mensaje.Replace("\n", "");
-                Mensaje = Mensaje.Replace("'", "");
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Mensaje.Substring(0,45) + "');", true); //lblMsj.Text = ex.Message;
-            }
+            //        ddlSubTipo.SelectedValue = ObjAlumno.SubTipoDescuento;
+            //        ddlSubTipo_SelectedIndexChanged(null, null);
+            //        ddlTipo.SelectedValue = ObjAlumno.TipoDescuento;
+            //        ddlTipo_SelectedIndexChanged(null, null);
+            //        if (StatusMatricula == "A")
+            //            grvConceptosCat.Enabled = (SesionUsu.Usu_Central == "S") ? true : false; //false;
+
+            //        CNComun.LlenaCombo("pkg_pagos.Obt_Status_Descuentos", ref ddlStatus, "p_usuario", "p_tipo_descuento", "p_todos", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue, "N", "INGRESOS");
+            //        if (ObjAlumno.StatusMatricula != "A")
+            //            ddlStatus.SelectedValue = ObjAlumno.StatusMatricula;
+
+            //        if (SesionUsu.Id_Oficio == 0)
+            //            ObtIdOficio();
+
+            //        //----CARGA GRID DE OFICIOS Y DE LOS CONCEPTOS AGREGADOS
+            //        ObjOficio.IdDescuento = Convert.ToInt32(grvAlumnos.SelectedRow.Cells[0].Text);
+            //        List<Oficio> ListOficio = new List<Oficio>();
+            //        CNOficio.OficioConsultaGrid(ref ObjOficio, ref ListOficio);
+            //        if (ListOficio.Count > 0)
+            //        {
+            //            Session["Oficios"] = ListOficio;
+            //            CargarGridOficios(ListOficio);
+            //            Copiar_a_OficiosTemp(ListOficio);
+            //        }
+
+            //        List<DetConcepto> ListDetConcepto = new List<DetConcepto>();
+            //        CNDetDesc.ConsultarDetDescuento(ObjConcepto, SesionUsu.Id_Persona, ref ListDetConcepto);
+            //        if (ListDetConcepto.Count > 0)
+            //        {
+            //            Session["Conceptos"] = ListDetConcepto;
+            //            CargarGridConceptos(ListDetConcepto);
+            //            if (StatusMatricula == "A")
+            //                grvConceptos.Enabled = (SesionUsu.Usu_Central == "S") ? true : false; //false;
+            //        }
+
+
+            //    }
+            //    else
+            //        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = Verificador;
+            //}
+            //catch (Exception ex)
+            //{
+            //    string Mensaje = ex.Message.Replace("\r", "");
+            //    Mensaje = Mensaje.Replace("\n", "");
+            //    Mensaje = Mensaje.Replace("'", "");
+            //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Mensaje.Substring(0,45) + "');", true); //lblMsj.Text = ex.Message;
+            //}
 
 
         }
@@ -2004,6 +2023,239 @@ namespace Recibos_Electronicos.Form
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Dato no encontrado, si deseas registralo dar click por única vez.');", true); //lblMsj.Text = "Dato no encontrado, si deseas registralo dar click por única vez.";
                     Registrar.Visible = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void linkBttnEditar_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                LinkButton cbi = (LinkButton)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grvAlumnos.SelectedIndex = row.RowIndex;
+                TabContainer1.ActiveTabIndex = 0;
+                MultiView1.ActiveViewIndex = 1;
+
+                lblMsjGuardar.Text = string.Empty;
+                Celdas = new Int32[] { 3 };
+                ListFamiliar.Clear();
+                string StatusMatricula;
+                lblErrorBuscEmp.Text = string.Empty;
+                lblErrorBuscEmp.Visible = false;
+                try
+                {
+                    ObjAlumno.IdPersona = Convert.ToInt32(grvAlumnos.SelectedRow.Cells[0].Text);  //Convert.ToInt32(grvAlumnos.Rows[v].Cells[0].Text);
+                    SesionUsu.Id_Persona = ObjAlumno.IdPersona;
+                    ObjAlumno.CicloAlu = Convert.ToString(grvAlumnos.SelectedRow.Cells[21].Text);
+                    CNAlumno.ConsultarAlumnoDescuento(ref ObjAlumno, ref Verificador);
+                    if (Verificador == "0")
+                    {
+                        SesionUsu.Editar = 1;
+                        txtMatricula.Text = ObjAlumno.Matricula;
+                        linkBttnBuscar_Click(null, null);
+                        try
+                        {
+                            ddlCicloAlum.SelectedValue = ObjAlumno.CicloAlu;
+                        }
+                        catch
+                        {
+                            ddlCicloAlum.SelectedIndex = 0;
+                        }
+                        ddlNivel.SelectedValue = ObjAlumno.Nivel;
+                        ddlEvento.SelectedValue = ObjAlumno.Evento;
+                        BuscaDatosAlumno();
+                        ////ddlNivel_SelectedIndexChanged(null, null);
+                        //ddlCarrera.SelectedValue = ObjAlumno.Carrera;
+                        //if (ddlCarrera.SelectedValue == "000000")
+                        //{
+                        //    ddlCarrera_SelectedIndexChanged(null, null);
+                        //    txtCarrera.Text = ObjAlumno.DescCarrera;
+                        //}
+                        ddlCiclo_D.SelectedValue = ObjAlumno.CicloEscolar;
+                        txtSemestre.Text = ObjAlumno.Semestre;
+                        txtGrupo.Text = ObjAlumno.Grupo;
+
+                        txtPorcentaje.Text = ObjAlumno.PorcentajeDescuento;
+                        txtFechaInicial.Text = ObjAlumno.FechaInicial;
+                        txtFechaFinal.Text = ObjAlumno.FechaFinal;
+                        txtOficio.Text = ObjAlumno.OficioSolicito;
+                        txtFechaO.Text = ObjAlumno.OficioFecha;
+                        txtAutorizado.Text = ObjAlumno.OficioFirma;
+                        txtSolicitado.Text = ObjAlumno.OficioQuienSolicita;
+                        txtObservaciones.Text = ObjAlumno.Observaciones;
+                        lblUsuSolicitado.Text = ObjAlumno.SolicitoNombre;
+                        lblFechaSolicitado.Text = ObjAlumno.SolicitoFecha;
+                        lblUsuAutorizado.Text = ObjAlumno.AutorizoNombre;
+                        lblFechaAutorizado.Text = ObjAlumno.AutorizoFecha;
+                        lblUsuGenerar.Text = ObjAlumno.GeneroNombre;
+                        lblFechaGenerar.Text = ObjAlumno.GeneroFecha;
+                        SesionUsu.Id_Oficio = ObjAlumno.oficio.IdOficio;
+                        StatusMatricula = ObjAlumno.StatusMatricula;
+                        if (Convert.ToString(ObjAlumno.IdEmpleado) != "0")
+                        {
+                            CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Empleado", ref ddlEmpleado, "p_id_empleado", "p_id_familiar", Convert.ToString(ObjAlumno.IdEmpleado), Convert.ToString(ObjAlumno.IdFamiliar), ref ListFamiliar);
+                            BuscaEmpleado();
+                            BuscaHijo("N");
+                        }
+                        else
+                        {
+                            ddlEmpleado.Items.Clear();
+                            ddlEmpleado.Items.Insert(0, new ListItem("AGREGAR-->", "0"));
+                            grvEmpleados.DataSource = null;
+                            grvEmpleados.DataBind();
+                            ddlHijo.Items.Clear();
+                            ddlParentesco.Items.Clear();
+                        }
+                        //TabContainer1.ActiveTabIndex = 0;
+                        //MultiView1.ActiveViewIndex = 1;
+                        if (StatusMatricula == "A")
+                        {
+                            txtNombre.Enabled = false;
+                            txtPaterno.Enabled = false;
+                            txtMaterno.Enabled = false;
+                            txtSemestre.Enabled = true;
+                            txtGrupo.Enabled = true;
+                            txtMatricula.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;  //(usuAdmin.Length != 0) ? true : false;
+                            //ddlNivel.Enabled = false;
+                            ddlStatus.Visible = false;
+                            lblEstatusA.Text = "Autorizado";
+                            //ddlCiclo_D.Enabled = false;
+                            ddlCiclo_D.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;
+                            ddlEvento.Enabled = false;
+                            ddlSubTipo.Enabled = false;
+                            ddlTipo.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;
+                            //grvConceptosCat.Enabled = false;
+                            grvConceptosCat.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;
+                            txtPorcentaje.Enabled = false;
+                            txtFechaInicial.Enabled = (SesionUsu.Usu_Central == "S") ? true : false;//(usuAdmin.Length != 0) ? true : false;
+                            txtFechaFinal.Enabled = (SesionUsu.Usu_Central == "S") ? true : false; //(usuAdmin.Length != 0) ? true : false;
+                            txtOficio.Enabled = true;
+                            txtFechaO.Enabled = true;
+                            txtAutorizado.Enabled = true;
+                            txtSolicitado.Enabled = true;
+                            txtObservaciones.Enabled = true;
+                        }
+                        else if (StatusMatricula == "C")
+                        {
+                            ddlStatus.Visible = false;
+                            lblEstatusA.Text = "Cancelado";
+                        }
+                        else
+                        {
+                            //ddlStatus.SelectedValue = ObjAlumno.StatusMatricula;
+                            txtNombre.Enabled = true;
+                            txtPaterno.Enabled = true;
+                            txtMaterno.Enabled = true;
+                            txtSemestre.Enabled = true;
+                            txtGrupo.Enabled = true;
+                            txtMatricula.Enabled = true;
+                            ddlNivel.Enabled = true;
+                            ddlStatus.Visible = true;
+                            lblEstatusA.Text = string.Empty;
+                            ddlCiclo_D.Enabled = true;
+                            ddlEvento.Enabled = true;
+                            ddlSubTipo.Enabled = true;
+                            ddlTipo.Enabled = true;
+                            grvConceptosCat.Enabled = true;
+                            txtPorcentaje.Enabled = true;
+                            txtFechaInicial.Enabled = true;
+                            txtFechaFinal.Enabled = true;
+                            txtOficio.Enabled = true;
+                            txtFechaO.Enabled = true;
+                            txtAutorizado.Enabled = true;
+                            txtSolicitado.Enabled = true;
+                            txtObservaciones.Enabled = true;
+                        }
+
+
+                        //--LIMPIA GRIDS--//
+                        Session["Oficios"] = null;
+                        Session["Conceptos"] = null;
+                        grvOficios.DataSource = null;
+                        grvOficios.DataBind();
+                        grvConceptosCat.DataSource = null;
+                        grvConceptosCat.DataBind();
+                        grvConceptos.DataSource = null;
+                        grvConceptos.DataBind();
+                        //--FIN LIMPIA GRIDS--//
+
+
+                        ddlSubTipo.SelectedValue = ObjAlumno.SubTipoDescuento;
+                        ddlSubTipo_SelectedIndexChanged(null, null);
+                        ddlTipo.SelectedValue = ObjAlumno.TipoDescuento;
+                        ddlTipo_SelectedIndexChanged(null, null);
+                        if (StatusMatricula == "A")
+                            grvConceptosCat.Enabled = (SesionUsu.Usu_Central == "S") ? true : false; //false;
+
+                        CNComun.LlenaCombo("pkg_pagos.Obt_Status_Descuentos", ref ddlStatus, "p_usuario", "p_tipo_descuento", "p_todos", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue, "N", "INGRESOS");
+                        if (ObjAlumno.StatusMatricula != "A")
+                            ddlStatus.SelectedValue = ObjAlumno.StatusMatricula;
+
+                        if (SesionUsu.Id_Oficio == 0)
+                            ObtIdOficio();
+
+                        //----CARGA GRID DE OFICIOS Y DE LOS CONCEPTOS AGREGADOS
+                        ObjOficio.IdDescuento = Convert.ToInt32(grvAlumnos.SelectedRow.Cells[0].Text);
+                        List<Oficio> ListOficio = new List<Oficio>();
+                        CNOficio.OficioConsultaGrid(ref ObjOficio, ref ListOficio);
+                        if (ListOficio.Count > 0)
+                        {
+                            Session["Oficios"] = ListOficio;
+                            CargarGridOficios(ListOficio);
+                            Copiar_a_OficiosTemp(ListOficio);
+                        }
+
+                        List<DetConcepto> ListDetConcepto = new List<DetConcepto>();
+                        CNDetDesc.ConsultarDetDescuento(ObjConcepto, SesionUsu.Id_Persona, ref ListDetConcepto);
+                        if (ListDetConcepto.Count > 0)
+                        {
+                            Session["Conceptos"] = ListDetConcepto;
+                            CargarGridConceptos(ListDetConcepto);
+                            if (StatusMatricula == "A")
+                                grvConceptos.Enabled = (SesionUsu.Usu_Central == "S") ? true : false; //false;
+                        }
+
+
+                    }
+                    else
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = Verificador;
+                }
+                catch (Exception ex)
+                {
+                    string Mensaje = ex.Message.Replace("\r", "");
+                    Mensaje = Mensaje.Replace("\n", "");
+                    Mensaje = Mensaje.Replace("'", "");
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Mensaje.Substring(0, 45) + "');", true); //lblMsj.Text = ex.Message;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+            }
+        }
+
+        protected void linkBttnBuscarEx_Click(object sender, EventArgs e)
+        {
+            CargarGrid();
+        }
+
+        protected void linkBttnNewEx_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TabContainer1.ActiveTabIndex = 0;
+                MultiView1.ActiveViewIndex = 1;
+                SesionUsu.Editar = 0;
+                Nuevo();
+                ObtIdOficio();
+                txtMatricula.Focus();
             }
             catch (Exception ex)
             {

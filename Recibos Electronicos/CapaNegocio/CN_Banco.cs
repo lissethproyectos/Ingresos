@@ -10,11 +10,10 @@ namespace CapaNegocio
 {
     public class CN_Banco
     {
-        public void ObtenerBitacora( ref List<BancoBitacora> lbb, string fecha_i, string fecha_f, string Fecha_Pago )
+        public void ObtenerBitacora( ref List<BancoBitacora> lbb, string fecha_i, string fecha_f, string Ejercicio, string Mes/*, string Fecha_Pago*/ )
         {
             CD_Banco cd_banco = new CD_Banco();
-
-            cd_banco.ObtenerBitacora(ref lbb, ref fecha_i, ref fecha_f, Fecha_Pago);
+            cd_banco.ObtenerBitacora(ref lbb, ref fecha_i, ref fecha_f, Ejercicio, Mes/*, Fecha_Pago*/);
         }
         public IDictionary<string, string> CargarArchivo(HttpPostedFile archivo)
         {

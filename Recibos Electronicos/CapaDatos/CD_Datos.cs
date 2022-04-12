@@ -32,6 +32,8 @@ namespace CapaDatos
             string StrConexion = string.Empty;
             if(userBD=="INGRESOS")
                   StrConexion = "Data Source=dsia;User ID=ingresos; Password=unach09; Unicode=True";
+            else if (userBD == "SIAE")
+                StrConexion = "Data Source=dsia;User ID=secadmin; Password=secadmin34; Unicode=True";
             else
                   StrConexion = "Data Source=dsia;User ID=felectronica; Password=unach09; Unicode=True";
 

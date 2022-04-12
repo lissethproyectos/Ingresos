@@ -530,7 +530,7 @@ namespace Recibos_Electronicos.Form
             if (!IsPostBack)
             {
                 ViewState["Filter"] = "T";
-
+http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
                 Session["Inventario"] = null;
                 hddnIdFichaRef.Value = "0";
                 //lblTotal.Text = string.Empty;
@@ -999,13 +999,13 @@ namespace Recibos_Electronicos.Form
             txtBuscarInv.Text = string.Empty;
             try
             {
-                if (DDLTipoVenta.SelectedValue == "ACT")
-                {
-                    rowNumInv.Visible = true;
-                    txtBuscarInv.Focus();
-                }
-                else
-                    rowNumInv.Visible = false;
+                //if (DDLTipoVenta.SelectedValue == "ACT")
+                //{
+                //    rowNumInv.Visible = true;
+                //    txtBuscarInv.Focus();
+                //}
+                //else
+                //    rowNumInv.Visible = false;
 
                 if (grvInventarioAgregado.Rows.Count >= 1)
                 {

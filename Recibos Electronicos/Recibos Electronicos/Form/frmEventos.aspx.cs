@@ -58,7 +58,8 @@ namespace Recibos_Electronicos.Form
             CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Ejercicios_Eventos", ref ddlEjercicio, "INGRESOS");
             CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref DDLDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
             CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
-            ddlEjercicio.SelectedIndex = 0;
+            string anio = DateTime.Now.ToString("yyyy");
+            ddlEjercicio.SelectedValue = anio;
             DDLDependencia.SelectedIndex = 0;
             CargarGriEventos();
 
@@ -75,7 +76,7 @@ namespace Recibos_Electronicos.Form
 
         private void CargarGriEventos()
         {
-            Int32[] Celdas1 = new Int32[] { 10 };
+            Int32[] Celdas1 = new Int32[] { 10, 11 };
             grdEventos.DataSource = null;
             grdEventos.DataBind();
             try
@@ -428,6 +429,7 @@ namespace Recibos_Electronicos.Form
 
         private void CargarGridConcPart(int IdPart)
         {
+            Int32[] Celdas = new Int32[] {0, 1 };
             try
             {
                 DataTable dt = new DataTable();
@@ -440,7 +442,7 @@ namespace Recibos_Electronicos.Form
                 grd.DataSource = dt;
                 grd.DataSource = GetListDetConceptos(IdPart);
                 grd.DataBind();
-
+                CNComun.HideColumns(grd, Celdas);
 
                 //foreach (GridViewRow row in grd.Rows)
                 //{
@@ -623,6 +625,8 @@ namespace Recibos_Electronicos.Form
 
         protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_AlumnosUnachCiclo", ref ddlCiclo, "p_tipo", "p_nivel", "TODOS", ddlNivel.SelectedValue, "INGRESOS");
+            ddlCiclo.SelectedIndex = 0;
         }
 
         protected void linkBttnAgregarConcep_Click(object sender, EventArgs e)
@@ -839,6 +843,7 @@ namespace Recibos_Electronicos.Form
 
                             if (MsjError == string.Empty)
                             {
+                                ddlDirigido0.SelectedValue = ddlDirigido.SelectedValue;
                                 CargarGriEventos();
                                 MultiView1.ActiveViewIndex = 0;
                                 DDLDependencia.Enabled = true;
@@ -1363,7 +1368,9 @@ namespace Recibos_Electronicos.Form
 
         protected void bttnCrearPart_Click(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupNewPart", "$('#modalCatPart').modal('show')", true);
+            MultiView1.ActiveViewIndex = 2;
+            ddlCatTipPart_SelectedIndexChanged(null, null);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupNewPart", "$('#modalCatPart').modal('show')", true);
         }
 
         protected void btnOficios_Click(object sender, EventArgs e)
@@ -1402,6 +1409,46 @@ namespace Recibos_Electronicos.Form
         protected void grdEventoConceptos_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        protected void grdEventos_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            Verificador = string.Empty;
+            int fila = e.RowIndex;
+            try
+            {
+                ConceptoCuotaLibre objEventoDetPart = new ConceptoCuotaLibre();
+                objEventoDetPart.Evento = Convert.ToString(grdEventos.Rows[fila].Cells[11].Text);
+                CNeventos.EventoEliminar(objEventoDetPart, ref Verificador);
+                if (Verificador == "0")
+                {
+                    CargarGriEventos();
+                    //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(1, 'El evento fue eliminado correctamente.');", true); //lblMsj.Text = ex.Message;
+
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void bttnSalirPart_Click(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
+        }
+
+        protected void ddlCatTipPart_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            grvCatParticipantes.EditIndex = -1;
+            CargarGriCatPart();
         }
     }
 }

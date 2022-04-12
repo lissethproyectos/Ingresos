@@ -703,6 +703,9 @@ namespace Recibos_Electronicos.Form
                 CNComun.LlenaCombo("PKG_CONTRATOS.Obt_Combo_Estados", ref ddlReceptor_Estado, "p_pais", "1");
                 ddlReceptor_Estado.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
                 ddlEstado_Fiscal_SelectedIndexChanged(null, null);
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_CodFiscal", ref ddlCodigoFiscal);
+
+                
             }
             catch (Exception ex)
             {

@@ -51,6 +51,15 @@ namespace Recibos_Electronicos
         protected global::System.Web.UI.UpdateProgress UpdateProgress2;
 
         /// <summary>
+        /// Control UpdatePanel2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+
+        /// <summary>
         /// Control ddlEjercicio.
         /// </summary>
         /// <remarks>
@@ -60,13 +69,22 @@ namespace Recibos_Electronicos
         protected global::System.Web.UI.WebControls.DropDownList ddlEjercicio;
 
         /// <summary>
-        /// Control DropDownList2.
+        /// Control updEjercicio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList2;
+        protected global::System.Web.UI.UpdateProgress updEjercicio;
+
+        /// <summary>
+        /// Control ddlMes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlMes;
 
         /// <summary>
         /// Control UpdatePanel1.

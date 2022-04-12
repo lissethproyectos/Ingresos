@@ -16,6 +16,7 @@ namespace Recibos_Electronicos.Form
         string Verificador = string.Empty;
         CN_Comun CNComun = new CN_Comun();
         CN_Factura CNFactura = new CN_Factura();
+        CN_Alumno CNAlumno = new CN_Alumno();
         CN_SIAE CNSIAE = new CN_SIAE();
         Sesion SesionUsu = new Sesion();
         Factura objFactura = new Factura();
@@ -45,6 +46,7 @@ namespace Recibos_Electronicos.Form
             {
                 //CNComun.LlenaCombo("pkg_pagos_2016.Obt_Ciclos_Escolares", ref ddlCiclo, "INGRESOS");
                 //ddlCiclo.SelectedValue = System.DateTime.Now.ToString("yyyy");
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref DDLEscuela, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Bancos", ref ddlBanco);
                 //CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
 
@@ -101,14 +103,23 @@ namespace Recibos_Electronicos.Form
 
         private List<Factura> GetList()
         {
+            string Escuela;
+            Verificador = string.Empty;
             try
             {
                 List<Factura> List = new List<Factura>();
                 objFactura.CICLO_ESCOLAR = ddlCicloEscolar.SelectedValue;
                 objFactura.FACT_NIVEL = ddlNivel.SelectedValue;
                 objFactura.FACT_REFERENCIA = txtReferencia.Text;
-                //CNSIAE.SIAEConsultaGrid(objFactura, ref List);
-                CNSIAE.RefSIAEConsultaGrid(objFactura, ref List);                
+                Escuela = DDLEscuela.SelectedValue;
+
+                CNAlumno.AjustaDependencia(ref Escuela, objFactura.FACT_NIVEL, ref Verificador);
+                if (Verificador == "0")
+                {
+                    objFactura.FACT_DEPENDENCIA = Escuela;
+                    CNSIAE.RefSIAEConsultaGrid(objFactura, ref List);
+                }
+
                 return List;
             }
             catch (Exception ex)

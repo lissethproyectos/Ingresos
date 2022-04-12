@@ -61,6 +61,7 @@
     <Compile Include="CD_Mensaje.cs" />
     <Compile Include="CD_Menus.cs" />
     <Compile Include="CD_Oficio.cs" />
+    <Compile Include="CD_PagosPosgrado.cs" />
     <Compile Include="CD_Participante.cs" />
     <Compile Include="CD_Registro.cs" />
     <Compile Include="CD_Retencion.cs" />

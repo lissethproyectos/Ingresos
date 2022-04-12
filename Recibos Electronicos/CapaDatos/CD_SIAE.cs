@@ -57,8 +57,8 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
 
-                String[] Parametros = { "P_Nivel", "P_Ciclo_Escolar", "p_referencia" };
-                String[] Valores = { ObjFactura.FACT_NIVEL, ObjFactura.CICLO_ESCOLAR.ToString(), ObjFactura.FACT_REFERENCIA };
+                String[] Parametros = { "P_Nivel", "P_Ciclo_Escolar", "P_Escuela", "p_referencia" };
+                String[] Valores = { ObjFactura.FACT_NIVEL, ObjFactura.CICLO_ESCOLAR.ToString(), ObjFactura.FACT_DEPENDENCIA, ObjFactura.FACT_REFERENCIA };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Ref_SIAE", ref dr, Parametros, Valores);
                 while (dr.Read())

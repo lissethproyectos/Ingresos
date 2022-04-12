@@ -35,17 +35,14 @@ namespace Recibos_Electronicos
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //ObtenerBitacoraControl();
 
             if (!IsPostBack)
             {
-                ViewState["Filter"] = "9";
+                //ViewState["Filter"] = "9";
                 ObtenerBitacoraControl();
-
-                //DropDownList DDLFechaPago = (DropDownList)GVBitacora.HeaderRow.FindControl("ddlFechaPago");
-                //this.BindBancoList(DDLFechaPago);
             }
-            //CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Fecha_Pago", ref ddlFechaPago);
+            ScriptManager.RegisterStartupScript(this, GetType(), "gridBitacora", "Bitacora();", true);
+            
         }
 
         protected void Enviar_Click(object sender, EventArgs e)
@@ -83,13 +80,15 @@ namespace Recibos_Electronicos
             List<BancoBitacora> lbb = new List<BancoBitacora>();
             CN_Banco cn_banco = new CN_Banco();
 
-            cn_banco.ObtenerBitacora(ref lbb, fecha_i, fecha_f, ViewState["Filter"].ToString());
+            cn_banco.ObtenerBitacora(ref lbb, fecha_i, fecha_f, ddlEjercicio.SelectedValue, ddlMes.SelectedValue);
+            //cn_banco.ObtenerBitacora(ref lbb, fecha_i, fecha_f, ddlEjercicio.SelectedValue, ddlMes.SelectedValue, ViewState["Filter"].ToString());
+
 
             GVBitacora.DataSource = lbb;
             GVBitacora.DataBind();
 
-            DropDownList DDLFechaPago = (DropDownList)GVBitacora.HeaderRow.FindControl("ddlFechaPago");
-            this.BindBancoList(DDLFechaPago);
+            //DropDownList DDLFechaPago = (DropDownList)GVBitacora.HeaderRow.FindControl("ddlFechaPago");
+            //this.BindBancoList(DDLFechaPago);
 
         }
 
@@ -127,6 +126,10 @@ namespace Recibos_Electronicos
 
         }
 
-        
+        protected void ddlEjercicio_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ObtenerBitacoraControl();
+            ScriptManager.RegisterStartupScript(this, GetType(), "gridBitacora", "Bitacora();", true);
+        }
     }
 }

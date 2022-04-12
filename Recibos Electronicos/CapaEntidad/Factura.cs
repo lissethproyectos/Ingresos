@@ -27,6 +27,7 @@ namespace CapaEntidad
         private string _CICLO_ESCOLAR;
         private string _PAGADO;
         private string _FACT_RECEPTOR_FORMA_PAGO;
+        private string _FACT_RECEPTOR_CODIGO;
         private int _ID_CODIGO_QR;
         private string _FACT_NIVEL;
         //Variable agregados por Lisseth
@@ -77,7 +78,7 @@ namespace CapaEntidad
         private string _FACT_TIPO_SERVICIO;
         private int _FACT_DIAS_SOLICITUD;
         private string _FACT_DESC_STATUS_SOLICITUD;
-        private string  _STATUS_REF_ANTICIPADA;
+        private string _STATUS_REF_ANTICIPADA;
         private string _FACT_SEMESTRE;
         private string _FACT_CONCEPTOS;
         private string _FACT_IMPORTE;
@@ -86,9 +87,15 @@ namespace CapaEntidad
         private double _FACT_IVA;
         private string _NUMERO_INTERIOR;
         private string _NUMERO_EXTERIOR;
+        private string _ADJUNTO_CONSTANCIA;
         //Metodos agregados por Lisseth
 
 
+        public string FACT_RECEPTOR_CODIGO
+        {
+            get { return _FACT_RECEPTOR_CODIGO; }
+            set { _FACT_RECEPTOR_CODIGO = value; }
+        }
         public string NUMERO_EXTERIOR
         {
             get { return _NUMERO_EXTERIOR; }
@@ -420,6 +427,13 @@ namespace CapaEntidad
         {
             get { return _FACT_RECEPTOR_FORMA_PAGO; }
             set { _FACT_RECEPTOR_FORMA_PAGO = value; }
+        }
+
+
+        public string ADJUNTO_CONSTANCIA
+        {
+            get { return _ADJUNTO_CONSTANCIA; }
+            set { _ADJUNTO_CONSTANCIA = value; }
         }
 
 

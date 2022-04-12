@@ -826,7 +826,8 @@ namespace CapaDatos
                         OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURA_CAJA_GRAL", ref Verificador, Parametros, Valores, ParametrosOut);
                         string OrigenArchivo = RutaServ + Archivos[i].NombreArchivo; // + Archivos[i].ExtensionArchivo;
                         string DestinoArchivo;
-                        DestinoArchivo = /*IdFactura + */RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].Folio_Fact_Cja + Archivos[i].ExtensionArchivo;
+                        //DestinoArchivo = /*IdFactura + */RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].Folio_Fact_Cja + Archivos[i].ExtensionArchivo;
+                        DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo;
                         if (System.IO.File.Exists(OrigenArchivo))
                         {
                             System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);

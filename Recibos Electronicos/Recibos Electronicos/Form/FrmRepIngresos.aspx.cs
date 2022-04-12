@@ -25,26 +25,50 @@ namespace Recibos_Electronicos.Form
         #endregion
         protected string Conceptos_Seleccionados()
         {
-            string Conceptos = string.Empty;
-            string ConceptosSeleccionados;
+            //string Conceptos = string.Empty;
+            //string ConceptosSeleccionados;
             int UltimoReg;
+            var ConceptosSeleccionados=string.Empty;
+            IEnumerable<string> Conceptos;
 
-            var checkedCvesConceptos = from GridViewRow msgRow in grvConceptos.Rows
-                                       where ((CheckBox)msgRow.FindControl("chkConcepto")).Checked
-                                       select (String)(grvConceptos.DataKeys[msgRow.RowIndex].Value.ToString());
 
-            foreach (var CveConcepto in checkedCvesConceptos)
+            foreach (GridViewRow gvrow in grvConceptos.Rows)
             {
-                Conceptos = Conceptos + CveConcepto + ",";
+                var checkbox = gvrow.FindControl("chkConcepto") as CheckBox;
+                if (checkbox.Checked)
+                {
+                    ConceptosSeleccionados = grvConceptos.DataKeys[gvrow.RowIndex].Value.ToString()+","+ ConceptosSeleccionados;
+                }
             }
 
-            UltimoReg = Conceptos.Length;
+            //Conceptos = from GridViewRow msgRow in grvConceptos.Rows
+            //                               where ((CheckBox)msgRow.FindControl("chkConcepto")).Checked
+            //                               select
+            //                               (String)(grvConceptos.DataKeys[msgRow.RowIndex].Value.ToString());
+            //    ConceptosSeleccionados = Conceptos + ConceptosSeleccionados;
+            
+            //foreach (var CveConcepto in checkedCvesConceptos)
+            //{
+            //    Conceptos = Conceptos + CveConcepto + ",";
+            //}
+
+            UltimoReg = ConceptosSeleccionados.Length;
             if (UltimoReg > 0)
-                ConceptosSeleccionados = Conceptos.Substring(0, UltimoReg - 1);
+                ConceptosSeleccionados = ConceptosSeleccionados.Substring(0, UltimoReg - 1);
             else
                 ConceptosSeleccionados = string.Empty;
 
             return ConceptosSeleccionados;
+
+
+
+            //UltimoReg = Conceptos.Length;
+            //if (UltimoReg > 0)
+            //    ConceptosSeleccionados = Conceptos.Substring(0, UltimoReg - 1);
+            //else
+            //    ConceptosSeleccionados = string.Empty;
+
+            //return ConceptosSeleccionados;
         }
         protected void Seleccionar_Todos()
         {
@@ -55,6 +79,7 @@ namespace Recibos_Electronicos.Form
 
         protected void Inicializar()
         {
+            SesionUsu.Editar = 0;
             txtFecha_Factura_Ini.Text = "01/01/" + System.DateTime.Now.Year.ToString();
             txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
             if(UrlReporte == "REP045" || UrlReporte == "REP046")
@@ -102,6 +127,7 @@ namespace Recibos_Electronicos.Form
         }
         private List<ConceptoPago> GetListConceptos(bool Habilitado)
         {
+            Session["Conceptos"] = null;
             try
             {
                 List<ConceptoPago> List = new List<ConceptoPago>();
@@ -109,7 +135,13 @@ namespace Recibos_Electronicos.Form
                 ObjConceptos.Status = 'A';
                 //CNConceptos.ConceptoConsultaGrid(ref ObjConceptos, ddlOrden.SelectedValue, Habilitado, txtBuscar.Text.ToUpper(), ref List);
                 CNConceptos.ConceptoConsultaGrid(ref ObjConceptos, "1", Habilitado, string.Empty, ref List);
-                return List;
+                Session["Conceptos"] = List;
+
+                //if (Session["Conceptos"] == null)
+                //{
+                //    ListDetConcepto = new List<DetConcepto>();
+                //    ListDetConcepto.Add(ObjConceptoDet);
+                    return List;
             }
             catch (Exception ex)
 
@@ -269,16 +301,15 @@ namespace Recibos_Electronicos.Form
         protected void chkTodosConc_CheckedChanged(object sender, EventArgs e)
         {
             bool ValorActual;
+            SesionUsu.Editar = 1;
             CheckBox chkTodosConc = (CheckBox)sender;
             ValorActual = chkTodosConc.Checked;
             CargarGridCatConceptos(ValorActual);
-
+            
             CheckBox chkTodosConceptos = (CheckBox)grvConceptos.HeaderRow.FindControl("chkTodosConc");
             chkTodosConceptos.Checked = ValorActual;
-            //chkTodosConc.Items.FindByValue(ViewState["Filter"].ToString()).Selected = true;
+            SesionUsu.Editar = 0;
 
-            //((CheckBox)Header.FindControl("chkTodosConc")).Checked = ValorActual;
-            //chkTodosConc.Checked = ValorActual;                       
         }
 
         //protected void imgBttnBuscar_Click(object sender, ImageClickEventArgs e)
@@ -289,6 +320,47 @@ namespace Recibos_Electronicos.Form
         protected void linBttnBuscar_Click(object sender, EventArgs e)
         {
             CargarGridCatConceptos(false);
+        }
+
+        protected void chkConcepto_CheckedChanged(object sender, EventArgs e)
+        {
+            if (SesionUsu.Editar == 0)
+            {
+                CheckBox cbi = (CheckBox)(sender);
+                GridViewRow row = (GridViewRow)cbi.NamingContainer;
+                grvConceptos.SelectedIndex = row.RowIndex;
+                DetConcepto ObjConceptoDet = new DetConcepto();
+
+                ListDetConcepto = (List<ConceptoPago>)Session["Conceptos"];
+
+                if (cbi.Checked == true)
+                {
+                    ObjConceptoDet.ClaveConcepto = grvConceptos.SelectedRow.Cells[0].Text;
+                    ListDetConcepto.Add(ObjConceptoDet);
+                }
+                else
+                {
+                    ListDetConcepto.RemoveAt(row.RowIndex);
+                    Session["Conceptos"] = ListDetConcepto;
+                }
+            }
+        }
+
+        protected void grvConceptos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CheckBox cbi = (CheckBox)(grvConceptos.SelectedRow.Cells[2].FindControl("chkConcepto"));
+            ListDetConcepto = (List<ConceptoPago>)Session["Conceptos"];
+            DetConcepto ObjConceptoDet = new DetConcepto();
+            if (cbi.Checked == true)
+            {
+                ObjConceptoDet.ClaveConcepto = grvConceptos.SelectedRow.Cells[0].Text;
+                ListDetConcepto.Add(ObjConceptoDet);
+            }
+            else
+            {
+                ListDetConcepto.RemoveAt(grvConceptos.SelectedRow.RowIndex);
+                Session["Conceptos"] = ListDetConcepto;
+            }
         }
     }
 }

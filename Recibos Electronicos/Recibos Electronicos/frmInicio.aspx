@@ -9,7 +9,7 @@
     <script src="Scripts/Graficas/kpi.js"></script>
     <script type="text/javascript">
         graficasContext.ObtenerDatosGraficaPagados("00000", "20221", "F", function (resp) {
-            var Total=0;
+            var Total = 0;
             switch (resp.ressult) {
                 case "tgp":
                     self.listDatosPagados = graficasContext.listDatosPagados;
@@ -34,8 +34,8 @@
                     var series = chart.series.push(new am4charts.PieSeries3D());
                     series.dataFields.value = "total";
                     series.dataFields.category = "Descripcion";
-                    document.getElementById("ctl00_MainContent_lblNivel").innerHTML = Total+" PAGOS";
-                    
+                    document.getElementById("ctl00_MainContent_lblNivel").innerHTML = Total + " PAGOS";
+
 
 
                     break;
@@ -54,10 +54,10 @@
             overflow: auto;
         }
 
-         #chartdiv {
-	width	: 100%;
-	height	: 450px;
-    }	
+        #chartdiv {
+            width: 100%;
+            height: 450px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -78,8 +78,8 @@
                 </div>
             </div>--%>
             <div class="col-sm-6">
-                <div class="card">   
-                     <%--<div class="card-footer text-muted">
+                <div class="card">
+                    <%--<div class="card-footer text-muted">
                         <a href="Principal.aspx" class="btn btn-warning btn-rounded">Continuar</a>
                     </div>--%>
                     <div class="scroll_monitor">
@@ -138,15 +138,73 @@
                         </div>
 
                     </div>
-                   
+
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="card">
                     <div class="scroll_monitor">
                         <div class="card-body">
-                            <asp:Label ID="lblNivel" runat="server" Text="" CssClass="font-weight-bold" Font-Size="18px"></asp:Label>
-                            <div id="chartdiv"></div>
+                            <div class="row">
+                                <div class="col">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="grafica-tab" data-toggle="tab" href="#grafica" role="tab" aria-controls="grafica" aria-selected="true">Resumen de Pagos</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="pagos-tab" data-toggle="tab" href="#pagos-siae" role="tab" aria-controls="pagos-siae" aria-selected="false">Pagos Escolares (Licenciatura)</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content" id="myTabContent">
+                                        <div class="tab-pane fade show active" id="grafica" role="tabpanel" aria-labelledby="grafica-tab">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <asp:Label ID="lblNivel" runat="server" Text="" CssClass="font-weight-bold" Font-Size="18px"></asp:Label>
+                                                </div>
+                                                <div class="col-md-6 text-right">
+                                                    <asp:LinkButton ID="linkBttnVerRecibos" runat="server" CssClass="btn btn-warning" OnClick="linkBttnVerRecibos_Click"><i class="fa fa-file"></i> Ver Recibos</asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div id="chartdiv"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane fade" id="pagos-siae" role="tabpanel" aria-labelledby="pagos-siae">
+                                            <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:GridView ID="grdPagosSIAE" runat="server" CssClass="mGrid" AutoGenerateColumns="False" Width="100%">
+                                                        <Columns>
+                                                            <asp:BoundField DataField="CICLO_ESCOLAR" HeaderText="CICLO" />
+                                                            <asp:BoundField DataField="FACT_CONCEPTOS" HeaderText="CONCEPTO" />
+                                                            <asp:BoundField DataField="FACT_TOTAL" DataFormatString="{0:n}" HeaderText="TOT PAGOS">
+                                                                <HeaderStyle Font-Bold="True"/>
+                                                                <ItemStyle HorizontalAlign="Right" />
+                                                            </asp:BoundField>
+                                                            <asp:BoundField DataField="FACT_IMPORTE" HeaderText="IMPORTE">
+                                                                <HeaderStyle Font-Bold="True"/>
+                                                                <ItemStyle HorizontalAlign="Right" Font-Size="16px"   Font-Bold="True" />
+                                                            </asp:BoundField>
+                                                        </Columns>
+                                                        <FooterStyle CssClass="enc" />
+                                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                        <RowStyle Font-Bold="False" />
+                                                        <SelectedRowStyle CssClass="sel" />
+                                                        <HeaderStyle CssClass="enc" />
+                                                        <AlternatingRowStyle CssClass="alt" />
+                                                    </asp:GridView>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
+                                        </div>
+
+
+                                    </div>
+                                    <%--<asp:Image ID="Image1" runat="server" ImageUrl='~/Imagenes/recibo3.png' Text="No"  Visible='<%# Bind("VISIBLE2") %>'/>--%>
+                                </div>
+                            </div>
+
                             <%--<asp:UpdatePanel ID="UpdatePanel34" runat="server">
                                 <ContentTemplate>
                                     <asp:GridView ID="grdStatus_Carga_Bancos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" Visible="false">
@@ -174,7 +232,7 @@
                 </div>
             </div>
         </div>
-        
+
 
         <%--<div class="row"><div class="col text-right">
             <a href="Inicio.aspx" class="btn btn-primary btn-rounded" style="font-size:14px;">Comprobante Oficial</a>
