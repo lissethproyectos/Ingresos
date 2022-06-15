@@ -102,6 +102,7 @@ namespace Recibos_Electronicos.Form
                     ddlDependencia2.Enabled = false;
                     ddlDependencia2.SelectedValue = ObjFactura.FACT_DEPENDENCIA;
                     rdoBttnReceptorTipoPersona.SelectedValue = ObjFactura.FACT_RECEPTOR_TIPO_PERS;
+                    rdoBttnReceptorTipoPersona_SelectedIndexChanged(null, null);
                     txtReceptor_Nombre.Text = ObjFactura.FACT_NOMBRE;
                     txtReceptor_Rfc.Text = ObjFactura.FACT_RECEPTOR_RFC;
                     txtReceptor_Domicilio.Text = ObjFactura.FACT_RECEPTOR_DOMICILIO;
@@ -142,6 +143,7 @@ namespace Recibos_Electronicos.Form
                     txtReceptor_Telefono.Text = ObjFactura.FACT_RECEPTOR_TELEFONO;
                     txtReceptor_Correo.Text = ObjFactura.FACT_RECEPTOR_CORREO;
                     ddlCodigoFiscal.SelectedValue = ObjFactura.FACT_RECEPTOR_CODIGO;
+                    ddlCodigoFiscal_SelectedIndexChanged(null, null);
                     ddlCFDI.SelectedValue = ObjFactura.CFDI;
                     txtDescConcepto.Text = ObjFactura.FACT_OBSERVACIONES;
 
@@ -310,12 +312,22 @@ namespace Recibos_Electronicos.Form
             {
                 if (Page.IsValid)
                 {
-                    if (ddlTipo.SelectedValue == "R")
-                        Guardar();
-                    else
-                        GuardarEfect();
+                    //if (linkConstancia.NavigateUrl == string.Empty && rdoBttnReceptorTipoPersona.SelectedValue == "F")
+                    if (linkConstancia.NavigateUrl == string.Empty)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'La constancia fiscal es requerida, favor de adjuntar.');", true);  //lblMsj.Text = ex.Message;
 
-                    linkBttnBuscar_Click(null, null);
+                    }
+                    else
+                    {
+
+                        if (ddlTipo.SelectedValue == "R")
+                            Guardar();
+                        else
+                            GuardarEfect();
+
+                        linkBttnBuscar_Click(null, null);
+                    }
                 }
             }
             catch (Exception ex)
@@ -872,9 +884,6 @@ namespace Recibos_Electronicos.Form
                     CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia2, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
                 }
 
-                //CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Tipo_Servicios_F", ref ddlServicio, "INGRESOS");
-                //CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Niveles_Caja", ref ddlNivel, "INGRESOS");
-                //CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Status_Facturas", ref ddlStatus, "p_usuario", "p_tipo_factura", SesionUsu.Usu_Nombre, ddlTipo.SelectedValue);
                 CNComun.LlenaCombo("pkg_felectronica.Obt_Combo_Avance_Factura", ref ddlAvance);
                 CNComun.LlenaCombo("PKG_CONTRATOS.Obt_Combo_Estados", ref ddlReceptor_Estado, "p_pais", "1");
                 ddlReceptor_Estado.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
@@ -892,9 +901,9 @@ namespace Recibos_Electronicos.Form
             /*Int32[] CeldasFacturados = { 0, 8, 10, 11, 13, 14, 15, 16, 17 };
             Int32[] CeldasSolicitados = { 0, 8, 10, 11, 12, 13, 14, 15, 16, 17 };
             Int32[] CeldasPorConfirmar = { 0, 10, 11, 12, 13, 14, 15, 17 };*/
-            Int32[] CeldasFacturados = { 0, 7, 8, 14, 15, 17, 18, 19, 20, 21, 22, 24, 25, 26 }; //{ 0, 6, 7, 9, 10, 11, 13, 14, 16, 17, 18, 20, 21, 23, 24, 25, 26 };
-            Int32[] CeldasSolicitados = { 0, 7, 8, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 };
-            Int32[] CeldasPorConfirmar = { 0, 6, 7, 12, 14, 15, 17, 18, 19, 20, 21, 22, 24, 25, 26 };
+            Int32[] CeldasFacturados = { 0, 7, 8, 14, 15, 17, 18, 19, 21, 22, 24, 25, 26 }; //{ 0, 6, 7, 9, 10, 11, 13, 14, 16, 17, 18, 20, 21, 23, 24, 25, 26 };
+            Int32[] CeldasSolicitados = { 0, 7, 8, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26 };
+            Int32[] CeldasPorConfirmar = { 0, 6, 7, 12, 14, 15, 17, 18, 19, 21, 22, 24, 25, 26 };
 
 
             try
@@ -993,10 +1002,10 @@ namespace Recibos_Electronicos.Form
                 foreach (GridViewRow row in grdView.Rows)
                 {
 
-                    if (row.Cells[28].Text == "RED")
-                        row.BackColor = Color.FromName("#f38383b0");
-                    else if (row.Cells[28].Text == "YELLOW")
-                        row.BackColor = Color.FromName("#eded75");
+                    //if (row.Cells[28].Text == "RED")
+                    //    row.BackColor = Color.FromName("#f38383b0");
+                    //else if (row.Cells[28].Text == "YELLOW")
+                    //    row.BackColor = Color.FromName("#eded75");
 
                     //LinkButton linkDoctos = (LinkButton)(row.Cells[20].FindControl("linkBttnFactura"));
                     //linkDoctos.Visible = true;
@@ -2522,10 +2531,29 @@ namespace Recibos_Electronicos.Form
 
         protected void rdoBttnReceptorTipoPersona_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (rdoBttnReceptorTipoPersona.SelectedValue == "F")
-                txtReceptor_Rfc.MaxLength = 13;
-            else
-                txtReceptor_Rfc.MaxLength = 12;
+            Verificador = string.Empty;
+            try
+            {
+                if (rdoBttnReceptorTipoPersona.SelectedValue == "F")
+                {
+                    txtReceptor_Rfc.MaxLength = 13;
+                    //reqCodigo.ValidationGroup = "DatosFiscales";
+                }
+                else
+                {
+                    txtReceptor_Rfc.MaxLength = 12;
+                    //reqCodigo.ValidationGroup = string.Empty;
+                }
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_TipoCfdi", ref ddlCFDI, "p_cod_fiscal", "p_tipo_persona", ddlCodigoFiscal.SelectedValue, rdoBttnReceptorTipoPersona.SelectedValue);
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
+            }
+
         }
 
         protected void ValidaLongitudRFC(object sender, ServerValidateEventArgs e)
@@ -2664,6 +2692,9 @@ namespace Recibos_Electronicos.Form
             string ruta = "../Reportes/VisualizadorCrystal.aspx?idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+
+           
         }
         protected void bttnVerRecibo_Click(object sender, EventArgs e)
         {
@@ -2780,6 +2811,7 @@ namespace Recibos_Electronicos.Form
                     ddlDependencia2.SelectedValue = ObjFacturacion.DEPENDENCIA;
                     txtReceptor_Rfc.Text = ObjFacturacion.RECEPTOR_RFC;
                     rdoBttnReceptorTipoPersona.SelectedValue = ObjFacturacion.RECEPTOR_TIPO_PERS;
+                    rdoBttnReceptorTipoPersona_SelectedIndexChanged(null, null);
                     txtReceptor_Nombre.Text = ObjFacturacion.RECEPTOR_NOMBRE;
                     txtReceptor_Domicilio.Text = ObjFacturacion.RECEPTOR_DOMICILIO;
                     txtReceptor_Colonia.Text = ObjFacturacion.RECEPTOR_COLONIA;
@@ -3036,6 +3068,20 @@ namespace Recibos_Electronicos.Form
             {
                 string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
+            }
+        }
+
+        protected void ddlCodigoFiscal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_TipoCfdi", ref ddlCFDI, "p_cod_fiscal", "p_tipo_persona", ddlCodigoFiscal.SelectedValue, rdoBttnReceptorTipoPersona.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
             }
         }
     }

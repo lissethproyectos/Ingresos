@@ -28,8 +28,6 @@
             font-family: sans-serif;
         }
 
-       
-
         .dropdown-item:focus, .dropdown-item:hover {
             color: #16181b;
             text-decoration: none;
@@ -70,8 +68,6 @@
         .modalBackground_Proy {
             z-index: 1 !important;
         }
-
-       
 
         .c_mnu_nav {
             position: relative;
@@ -120,68 +116,9 @@
             }
         }
 
-
-/*.ajax__tab_xp .ajax__tab_header .ajax__tab_inner {*/
-    /* background-repeat: no-repeat; */
-    /* padding-left: 3px; */
-/*}
-
-.ajax__myTab .ajax__tab_tab {
-    padding: 8px;
-    margin: 0;
-    background-color: #65635d;
-}
-.ajax__myTab .ajax__tab_active .ajax__tab_inner {
-    background-color: #65635d;
-    border-top: 2px solid #333333;
-    border-left: 1px solid #333333;
-    border-right: 1px solid #333333;*/
-    /* background-color: #0098CB; */
-/*}
-.ajax__tab_header {
-    font-family: Arial;
-    font-size: 14px;
-    border: solid 1px #d9d9d9;
-    background-color: #ededed;
-    color: #fff;*/
-    /* padding-left: 5px; */
-    /*padding-bottom: 8px;*/
-    /* height: 10px; */
-/*}
-.ajax__tab_xp .ajax__tab_header .ajax__tab_active .ajax__tab_tab {
-    background-repeat: repeat-x;
-    color: white;
-    background-color: #65635d;
-}
-
-.ajax__tab_header {
-    font-family: Arial;
-    font-size: 14px;
-    border: solid 1px #d9d9d9;
-    background-color: #ededed;
-    color: #fff;*/
-    /* padding-top: 7px; */
-    /* padding-left: 5px; */
-    /* padding-bottom: 8px; */
-/*}
-.ajax__tab_xp .ajax__tab_header .ajax__tab_tab {
-    background-repeat: repeat-x;
-    margin: 0;*/
-    /* padding: 4px; */
-/*}
-
-.ajax__tab_xp .ajax__tab_header .ajax__tab_outer {
-    background-position: right;
-    background-repeat: no-repeat;
-}
-.ajax__tab_default .ajax__tab {*/
-    /* display: block; */
-    /*float: left;
-    height: 28px;
-    margin-top: 1px;
-}*/
-
-
+        .classHide {
+            display: none
+        }
     </style>
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
@@ -233,10 +170,10 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
                                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                            <ContentTemplate>
-                        <asp:LinkButton ID="linkBttnInicio" runat="server" CssClass="btn btn-link white-text" OnClick="linkBttnInicio_Click"><i class="fa fa-home  fa-2x" aria-hidden="true"></i></asp:LinkButton>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
+                                    <ContentTemplate>
+                                        <asp:LinkButton ID="linkBttnInicio" runat="server" CssClass="btn btn-link white-text" OnClick="linkBttnInicio_Click"><i class="fa fa-home  fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="False">
                                     <ContentTemplate>
                                         <asp:Menu ID="MenuTop" runat="server"
@@ -259,7 +196,7 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                            
+
                         </nav>
 
                     </div>
@@ -296,7 +233,7 @@
         </div>
         <div class="row">
             <div class="col piePagina page-footer font-small pt-4" style="background-color: #585858; color: #fff">
-                
+
                 <div class="container-fluid text-center text-md-left">
 
                     <!-- Grid row -->
@@ -330,18 +267,18 @@
                 <!-- Footer Text -->
 
                 <!-- Copyright -->
-               
+
             </div>
         </div>
         <div class="row">
-             <div class="col footer-copyright text-center py-3 font-weight-bold alert alert-secondary">
-                    Universidad Autónoma de Chiapas
-                </div>
+            <div class="col footer-copyright text-center py-3 font-weight-bold alert alert-secondary">
+                Universidad Autónoma de Chiapas
+            </div>
         </div>
     </form>
 </body>
 </html>
-<script language="javascript" type="text/javascript">
+<%--<script language="javascript" type="text/javascript">
 
     $(document).ready(function () {
         jQuery(document).ready(function () {
@@ -371,4 +308,4 @@
     $("#imgUNACH").click(function () {
         window.location.href = 'https://www.unach.mx/';
     });
-</script>
+</script>--%>

@@ -37,7 +37,7 @@ namespace Recibos_Electronicos.Form
                 SesionUsu.Reporte = string.Empty;
 
             if (SesionUsu.Reporte == "LNG")
-                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR_Lenguas", ref ddlDependencias);
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR_Lenguas", ref ddlDependenciasFiltro);
             else
             {
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependenciasFiltro, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);

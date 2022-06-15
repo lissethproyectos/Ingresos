@@ -32,6 +32,7 @@ namespace CapaDatos
                     objPagos.Fecha_Pago = Convert.ToString(dr[4]);
                     objPagos.Semestre = Convert.ToInt32(dr[6]);
                     objPagos.IdPago = Convert.ToInt32(dr[8]);
+                    objPagos.Ciclo_Actual = Convert.ToString(dr[9]);
                     List.Add(objPagos);
                 }
 
@@ -53,8 +54,10 @@ namespace CapaDatos
 
             try
             {
-                String[] Parametros = { "P_ID_REF", "P_SEMESTRE", "P_NO_PAGO", "P_ID_PAGO" };
-                object[] Valores = { ObjPagoPosgrado.IdRef, ObjPagoPosgrado.Semestre, ObjPagoPosgrado.No_Pago, ObjPagoPosgrado.IdPago };
+                String[] Parametros = { "P_ID_REF", "P_SEMESTRE", "P_NO_PAGO", "P_ID_PAGO", "P_CICLO_ACTUAL" };
+                object[] Valores = { ObjPagoPosgrado.IdRef, ObjPagoPosgrado.Semestre, ObjPagoPosgrado.No_Pago, ObjPagoPosgrado.IdPago,
+                ObjPagoPosgrado.Ciclo_Actual
+                };
                 String[] ParametrosOut = { "P_BANDERA" };
 
                 Cmd = CDDatos.GenerarOracleCommand("UPD_PAGO_POSGRADO", ref Verificador, Parametros, Valores, ParametrosOut);

@@ -150,24 +150,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.GridView grvReferenciasSIAE;
 
         /// <summary>
-        /// Control hddnAlert.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddnAlert;
-
-        /// <summary>
-        /// Control modalAlert.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender modalAlert;
-
-        /// <summary>
         /// Control pnl_Alert.
         /// </summary>
         /// <remarks>
@@ -211,15 +193,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNueva;
-
-        /// <summary>
-        /// Control pnlDatosBanco.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlDatosBanco;
 
         /// <summary>
         /// Control UpdatePanel1.
@@ -418,15 +391,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtReferenciaPagada;
-
-        /// <summary>
-        /// Control bttnSalir.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bttnSalir;
 
         /// <summary>
         /// Control bttnConfirmaPago.

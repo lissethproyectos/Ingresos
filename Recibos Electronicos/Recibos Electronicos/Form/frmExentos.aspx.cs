@@ -278,6 +278,7 @@ namespace Recibos_Electronicos.Form
         {
             Int32[] Celdas = new Int32[] {0, 1, 4, 12, 16, 17, 18, 19, 20, 21 };
 
+
             try
             {
                 DataTable dt = new DataTable();
@@ -510,6 +511,7 @@ namespace Recibos_Electronicos.Form
             grdView.HeaderRow.Cells[3].Visible = false;
             grdView.HeaderRow.Cells[10].Visible = false;
             grdView.HeaderRow.Cells[12].Visible = false;
+            grdView.HeaderRow.Cells[14].Visible = (SesionUsu.Usu_Central == "S") ? true : false;
             grdView.HeaderRow.Cells[16].Visible = false;
             grdView.HeaderRow.Cells[17].Visible = false;
             //grdView.HeaderRow.Cells[18].Visible = false;
@@ -523,6 +525,7 @@ namespace Recibos_Electronicos.Form
             grdView.FooterRow.Cells[3].Visible = false;
             grdView.FooterRow.Cells[10].Visible = false;
             grdView.FooterRow.Cells[12].Visible = false;
+            grdView.FooterRow.Cells[14].Visible = (SesionUsu.Usu_Central == "S") ? true : false;
             grdView.FooterRow.Cells[16].Visible = false;
             grdView.FooterRow.Cells[17].Visible = false;
             //grdView.FooterRow.Cells[18].Visible = false;
@@ -550,6 +553,8 @@ namespace Recibos_Electronicos.Form
                 {
                     if (row.Cells[8].Text.ToUpper() == "SOLICITADO")
                         linkBttnEditar.Visible = true;
+
+                    row.Cells[14].Visible = false;
                 }
 
                 //row.Cells[13].Visible = (SesionUsu.Usu_Central == "S") ? true : false; //(usuAdmin.Length != 0) ? true : false;

@@ -9,18 +9,18 @@
                 Busqueda de referencias generadas en el SIAE.
             </div>
         </div>
-         <div class="row">
+        <div class="row">
             <div class="col-md-2">
                 Escuela
             </div>
-             <div class="col-md-10">
-                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                     <ContentTemplate>
-                         <asp:DropDownList ID="DDLEscuela" runat="server" CssClass="form-control" Width="100%"></asp:DropDownList>
-                     </ContentTemplate>
-                 </asp:UpdatePanel>
-                 </div>
-             </div>
+            <div class="col-md-10">
+                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                    <ContentTemplate>
+                        <asp:DropDownList ID="DDLEscuela" runat="server" CssClass="form-control" Width="100%"></asp:DropDownList>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-2">
                 Nivel
@@ -28,7 +28,7 @@
             <div class="col-md-3">
                 <asp:UpdatePanel ID="updPnlNivel" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlNivel" runat="server"  Width="100%" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlNivel" runat="server" Width="100%" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged">
                             <asp:ListItem Value="T">TODOS</asp:ListItem>
                             <asp:ListItem Value="L">Licenciatura</asp:ListItem>
                             <asp:ListItem Value="E">Especialidad</asp:ListItem>
@@ -52,7 +52,7 @@
             <div class="col-md-3">
                 <asp:UpdatePanel ID="updPnlCiclo" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlCicloEscolar" runat="server"  Width="100%" CssClass="form-control">
+                        <asp:DropDownList ID="ddlCicloEscolar" runat="server" Width="100%" CssClass="form-control">
                         </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
@@ -150,9 +150,9 @@
             </div>
         </div>
     </div>
-    <asp:HiddenField ID="hddnAlert" runat="server" />
+    <%-- <asp:HiddenField ID="hddnAlert" runat="server" />
     <ajaxToolkit:ModalPopupExtender ID="modalAlert" runat="server" PopupControlID="pnlDatosBanco" TargetControlID="hddnAlert" BackgroundCssClass="modalBackground_Proy">
-    </ajaxToolkit:ModalPopupExtender>
+    </ajaxToolkit:ModalPopupExtender>--%>
 
     <asp:Panel ID="pnl_Alert" runat="server" CssClass="TituloModalPopupMsg" Width="40%">
         <asp:Panel ID="pnlMsj" runat="server" Visible="False">
@@ -164,7 +164,7 @@
                             AVISO
                         </div>
                         <center>
-                                                                                            </center>
+                        </center>
                     </td>
                 </tr>
                 <tr>
@@ -201,130 +201,142 @@
         </asp:Panel>
     </asp:Panel>
 
-    <asp:Panel ID="pnlDatosBanco" runat="server" CssClass="TituloModalPopupMsg">
-
-        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-            <ContentTemplate>
-                <div class="container">
-                    <div class="row alert alert-warning">
-                        <div class="col font-weight-bold">
-                            <h7>Información de la Referencia</h7>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">Escuela</div>
-                        <div class="col-md-3">
-                            <asp:TextBox ID="txtEscuela" runat="server" Width="100%"></asp:TextBox>
-                        </div>
-                        <div class="col-md-2">
-                            Carrera
-                        </div>
-                        <div class="col-md-4">
-                            <asp:TextBox ID="txtIdCarrera" runat="server" Width="100%"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">Ciclo</div>
-                        <div class="col-md-2">
-                            <asp:TextBox ID="txtCiclo" runat="server" Width="100%"></asp:TextBox>
-                        </div>
-                        <div class="col-md-1">
-                            Semestre
-                        </div>
-                        <div class="col-md-2">
-                            <asp:TextBox ID="txtSemestre" runat="server" Width="100%"></asp:TextBox>
-                        </div>
-                        <div class="col-md-2">
-                            Matricula
-                        </div>
-                        <div class="col-md-2">
-                            <asp:TextBox ID="txtMatricula" runat="server" Width="100%"></asp:TextBox>
-                        </div>
-                    </div>
-                    <hr>                    
-                    <div class="row">
-                        <div class="col-md-3">
-                            <asp:Label ID="lblBanco" runat="server" Text="Banco"></asp:Label>
-                        </div>
-                        <div class="col-md-3">
-                            <asp:DropDownList ID="ddlBanco" runat="server">
-                            </asp:DropDownList>
-                        </div>
-                        <div class="col-md-3">
-                            <asp:Label ID="lblFolioBanco" runat="server" Text="Folio Empresa"></asp:Label>
-                        </div>
-                        <div class="col-md-2">
-                            <asp:TextBox ID="txtFolioBanco" runat="server" Width="100%"></asp:TextBox>
-                        </div>
-                        <div class="col-md-1">
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtFolioBanco" ErrorMessage="*Folio de Banco" ValidationGroup="Multipagos">*Requerido</asp:RequiredFieldValidator>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <asp:Label ID="lblFechaPago" runat="server" Text="Fecha de Pago"></asp:Label>
-                        </div>
-                        <div class="col-md-3">
-                            <asp:TextBox ID="txtFechaPago" runat="server" Width="80%"></asp:TextBox>
-                            <ajaxToolkit:CalendarExtender ID="CalendarExtender" runat="server" TargetControlID="txtFechaPago" PopupButtonID="imgCalendario" />
-                            <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtFechaPago" ErrorMessage="*Fecha de Pago" ValidationGroup="Multipagos">*Requerido</asp:RequiredFieldValidator>
-                        </div>
-                        
-                        <div class="col-md-3">
-                            <asp:Label ID="lblPagoAplicado" runat="server" Text="Pago Aplicado"></asp:Label>
-                        </div>
-                        <div class="col-md-2">
-                            <asp:CheckBox ID="chkPagoAplicado" runat="server" Text="Si" />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia SIAE"></asp:Label>
-                        </div>
-                        <div class="col-md-9">
-                            <asp:TextBox ID="txtReferenciaOrig" runat="server" Enabled="False" Width="100%"></asp:TextBox>
-                        </div>
-                    </div>
-<div class="row">
-                        <div class="col-md-3">
-                            <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Pagada"></asp:Label>
-                        </div>
-                        <div class="col-md-9">
-                            <asp:TextBox ID="txtReferenciaPagada" runat="server" Width="100%"></asp:TextBox>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col text-right">
-                            <asp:Button ID="bttnSalir" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalir_Click" Text="SALIR" />
-                            &nbsp;<asp:Button ID="bttnConfirmaPago" runat="server" CssClass="btn btn-info" OnClick="bttnConfirmaPago_Click" Text="GUARDAR" ValidationGroup="Guardar" />
-                            &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos" Visible="False" />
-                        </div>
-                    </div>
-                   <%-- <div class="row">
-                        <div class="col">
-                            <asp:Label ID="lblReferenciaPagada2" runat="server" Text="Referencia Pagada:" Visible="False"></asp:Label>
-                            <asp:TextBox ID="txtReferenciaPagada2" runat="server" Visible="False" Width="200px"></asp:TextBox>
-                        </div>
-                    </div>--%>
+    <div class="modal fade" id="modalPagos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modConceptos">Información de la Referencia</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </ContentTemplate>
-        </asp:UpdatePanel>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <asp:UpdateProgress ID="updPrReferencias0" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-                        <ProgressTemplate>
-                            <asp:Image ID="imgMultiview0" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                        </ProgressTemplate>
-                    </asp:UpdateProgress>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                            <ContentTemplate>
+                                <div class="container">                                    
+                                    <div class="row">
+                                        <div class="col-md-2">Escuela</div>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtEscuela" runat="server" Width="100%"></asp:TextBox>
+                                        </div>
+                                        <div class="col-md-2">
+                                            Carrera
+                                        </div>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtIdCarrera" runat="server" Width="100%"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">Ciclo</div>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtCiclo" runat="server" Width="100%"></asp:TextBox>
+                                        </div>
+                                        <div class="col-md-2">
+                                            Semestre
+                                        </div>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtSemestre" runat="server" Width="100%"></asp:TextBox>
+                                        </div>                                       
+                                    </div>
+                                    <div class="row">
+                                         <div class="col-md-2">
+                                            Matricula
+                                        </div>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtMatricula" runat="server" Width="100%"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <asp:Label ID="lblBanco" runat="server" Text="Banco"></asp:Label>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <asp:DropDownList ID="ddlBanco" runat="server" Width="100%">
+                                            </asp:DropDownList>
+                                        </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <asp:Label ID="lblFolioBanco" runat="server" Text="Folio"></asp:Label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <asp:TextBox ID="txtFolioBanco" runat="server" Width="100%"></asp:TextBox>
+                                        </div>
+                                        <div class="col-md-6">
+                                            (Folio Empresa)
+                                        </div>
+                                        <div class="col-md-1">
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtFolioBanco" ErrorMessage="*Folio de Banco" ValidationGroup="Multipagos">*Requerido</asp:RequiredFieldValidator>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <asp:Label ID="lblFechaPago" runat="server" Text="Fecha Pago"></asp:Label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <asp:TextBox ID="txtFechaPago" runat="server" Width="80%"></asp:TextBox>
+                                            <ajaxToolkit:CalendarExtender ID="CalendarExtender" runat="server" TargetControlID="txtFechaPago" PopupButtonID="imgCalendario" />
+                                            <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtFechaPago" ErrorMessage="*Fecha de Pago" ValidationGroup="Multipagos">*Requerido</asp:RequiredFieldValidator>
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <asp:Label ID="lblPagoAplicado" runat="server" Text="Pago Aplicado"></asp:Label>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <asp:CheckBox ID="chkPagoAplicado" runat="server" Text="Si" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font-weight-bold">
+                                            <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia SIAE"></asp:Label>
+                                        </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <asp:TextBox ID="txtReferenciaOrig" runat="server" Enabled="False" Width="100%"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col font-weight-bold">
+                                            <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Pagada"></asp:Label>
+                                        </div>
+                                        </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <asp:TextBox ID="txtReferenciaPagada" runat="server" Width="100%"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-right">
+                                            &nbsp;<asp:Button ID="bttnConfirmaPago" runat="server" CssClass="btn btn-info" OnClick="bttnConfirmaPago_Click" Text="GUARDAR" ValidationGroup="Guardar" />
+                                            &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos" Visible="False" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <asp:UpdateProgress ID="updPrReferencias0" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+                                        <ProgressTemplate>
+                                            <asp:Image ID="imgMultiview0" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
 
-    </asp:Panel>
 
 
 

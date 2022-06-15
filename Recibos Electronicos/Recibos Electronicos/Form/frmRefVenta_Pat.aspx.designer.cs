@@ -168,24 +168,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
 
         /// <summary>
-        /// Control UpdatePanel15.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel15;
-
-        /// <summary>
-        /// Control DDLPagado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DDLPagado;
-
-        /// <summary>
         /// Control txtFecha_Factura_Ini.
         /// </summary>
         /// <remarks>
@@ -238,6 +220,24 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgCalendarioFin;
+
+        /// <summary>
+        /// Control txtBuscaRef.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscaRef;
+
+        /// <summary>
+        /// Control linkBttnBuscarRef.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnBuscarRef;
 
         /// <summary>
         /// Control hddnModal.
@@ -978,22 +978,40 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblRefGenerada;
 
         /// <summary>
-        /// Control imgBttnPagoEfec.
+        /// Control updPnlBttnGenPDF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnPagoEfec;
+        protected global::System.Web.UI.UpdatePanel updPnlBttnGenPDF;
 
         /// <summary>
-        /// Control imgBttnPagoTDC.
+        /// Control linkBttnGenPDF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnPagoTDC;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnGenPDF;
+
+        /// <summary>
+        /// Control updPnlBttnPagoLinea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlBttnPagoLinea;
+
+        /// <summary>
+        /// Control linkBttnPagoLinea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnPagoLinea;
 
         /// <summary>
         /// Control UpdatePanel13.
@@ -1005,13 +1023,58 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanel13;
 
         /// <summary>
-        /// Control btnPagar.
+        /// Control linkBttnGenLink.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnPagar;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnGenLink;
+
+        /// <summary>
+        /// Control updPnlPago.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlPago;
+
+        /// <summary>
+        /// Control linkPago.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink linkPago;
+
+        /// <summary>
+        /// Control updPgrPago.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrPago;
+
+        /// <summary>
+        /// Control updgrBttnGenPDF.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updgrBttnGenPDF;
+
+        /// <summary>
+        /// Control updPgrBttnPagoLinea.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrBttnPagoLinea;
 
         /// <summary>
         /// Control imgBttnBuscarCatCliente.

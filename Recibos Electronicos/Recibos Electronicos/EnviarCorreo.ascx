@@ -7,9 +7,9 @@
 </ajaxToolkit:ModalPopupExtender>
 
 <asp:Panel ID="pnlCorreo" runat="server">
-    <div class="card text-white bg-dark mb-3">
+    <div class="card">
         <div class="card-header">
-            Enviar Recibo Oficial
+            <strong>Enviar Recibo Oficial</strong>
         </div>
         <div class="card-body">
             <div class="container">
@@ -26,7 +26,7 @@
                     <div class="col-md-3">
                         <asp:UpdatePanel ID="UpdatePanel36" runat="server">
                             <ContentTemplate>
-                                <asp:Label ID="lblCorreo" runat="server" Text="Correo:"></asp:Label>
+                                <asp:Label ID="lblCorreo" runat="server" Text="Correo"></asp:Label>
                             </ContentTemplate>
                         </asp:UpdatePanel>
                     </div>
@@ -71,7 +71,7 @@
                     <div class="col text-center">
                         <asp:UpdatePanel ID="UpdatePanel37" runat="server">
                             <ContentTemplate>
-                                <asp:Button ID="bttnCorreo" runat="server" CssClass="btn btn-info" Height="40px" OnClick="bttnCorreo_Click" Text="Enviar" ValidationGroup="correo" />
+                                <asp:Button ID="bttnCorreo" runat="server" CssClass="btn btn-primary" Height="40px" OnClick="bttnCorreo_Click" Text="Enviar" ValidationGroup="correo" />
                                 &nbsp;<asp:Button ID="bttnCancelarCorreo" runat="server" CssClass="btn btn-blue-grey" Height="40px" OnClick="bttnCancelarCorreo_Click" Text="Salir" />
                             </ContentTemplate>
                         </asp:UpdatePanel>

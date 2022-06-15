@@ -14,6 +14,13 @@ namespace CapaEntidad
             set { _Concepto = value; }
         }
 
+        private string _Ciclo_Actual;
+        public string Ciclo_Actual
+        {
+            get { return _Ciclo_Actual; }
+            set { _Ciclo_Actual = value; }
+        }
+
         private string _Escuela;
         public string Escuela
         {

@@ -175,13 +175,16 @@ namespace Recibos_Electronicos.Form
                 txtReferenciaOrig.Text = objFactura.FACT_REFERENCIA;
                 chkPagoAplicado.Checked = (objFactura.FACT_CONFIRMADO=="S")?true:false;
             }
-            modalAlert.Show();
+            //modalAlert.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
+
+            
         }
 
-        protected void CancelAlert_Click(object sender, EventArgs e)
-        {
-            modalAlert.Hide();
-        }
+        //protected void CancelAlert_Click(object sender, EventArgs e)
+        //{
+        //    modalAlert.Hide();
+        //}
 
         protected void btnNueva_Click(object sender, EventArgs e)
         {
@@ -193,7 +196,8 @@ namespace Recibos_Electronicos.Form
                 CNSIAE.ConfirmarPagoSIAE(objFactura, SesionUsu.Usu_Nombre, ref Verificador);
                 if (Verificador == "0")
                 {
-                    modalAlert.Hide();
+                    //modalAlert.Hide();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
                     CargarGrid();
                 }
                 else
@@ -217,7 +221,8 @@ namespace Recibos_Electronicos.Form
                 CNSIAE.ActualizarStatusSIAE(objFactura, SesionUsu.Usu_Nombre, ref Verificador);
                 if (Verificador == "0")
                 {
-                    modalAlert.Hide();
+                    //modalAlert.Hide();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
                     CargarGrid();
                 }
                 else
@@ -251,7 +256,8 @@ namespace Recibos_Electronicos.Form
                 Verificador=ConfirmarPagoSIAE();
                 if (Verificador == "0")
                 {
-                    modalAlert.Hide();
+                    //modalAlert.Hide();
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
                     CargarGrid();
                 }
                 else
@@ -287,15 +293,21 @@ namespace Recibos_Electronicos.Form
             return Verificador;
         }
 
-    protected void bttnSalir_Click(object sender, EventArgs e)
+        //protected void bttnSalir_Click(object sender, EventArgs e)
+        //    {
+        //        modalAlert.Hide();
+        //    }
+
+        protected void CancelAlert_Click(object sender, EventArgs e)
         {
-            modalAlert.Hide();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
         }
 
         protected void bttnGenerarRecibo_Click(object sender, EventArgs e)
         {
             Verificador = string.Empty;
-            modalAlert.Show();
+            //modalAlert.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
 
             chkPagoAplicado.Checked = true;
             Verificador=ConfirmarPagoSIAE();
@@ -313,7 +325,8 @@ namespace Recibos_Electronicos.Form
                         {
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'EL RECIBO SE GENERO CORRECTAMENTE.');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
                             txtReferencia.Text = Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[5].Text);
-                            modalAlert.Hide();
+                            //modalAlert.Hide();
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
                             CargarGrid();
                         }
                         else

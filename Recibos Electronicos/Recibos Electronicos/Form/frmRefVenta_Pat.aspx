@@ -6,7 +6,7 @@
     <script src="https://sysweb.unach.mx/INGRESOS/Scripts/select2/js/select2.min.js"></script>
     <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
     <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
-   
+
 
     <script type="text/javascript">
         function PagBancomer() {
@@ -29,6 +29,52 @@
             document.getElementById('<%= Master.Page.Controls[0].FindControl("form1").ClientID %>').submit();
         }
     </script>
+
+    <style type="text/css">
+        .btn-app {
+            color: white;
+            box-shadow: none;
+            border-radius: 3px;
+            position: relative;
+            padding: 10px 15px;
+            margin: 0;
+            min-width: 40px;
+            /*            max-width: 60px;
+*/ text-align: center;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            font-size: 10px;
+            transition: all .2s;
+            background-color: steelblue !important;
+        }
+
+            .btn-app > .fa, .btn-app > .glyphicon, .btn-app > .ion {
+                font-size: 20px;
+                display: block;
+            }
+
+            .btn-app:hover {
+                border-color: #aaa;
+                transform: scale(1.1);
+            }
+
+        .pdf {
+            background-color: #5e5e5e !important;
+            /*background-color: #dc2f2f !important;*/
+        }
+
+        .excel {
+            background-color: #3ca23c !important;
+        }
+
+        .csv {
+            background-color: #a48829 !important;
+        }
+
+        .imprimir {
+            background-color: #8766b1 !important;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
@@ -95,7 +141,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-2">
+                                     <%--   <div class="col-md-2">
                                             Status
                                         </div>
                                         <div class="col-md-2">
@@ -108,14 +154,16 @@
                                                     </asp:DropDownList>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
-                                        </div>
+                                        </div>--%>
                                         <div class="col-md-2">
                                             Fecha Inicial
                                         </div>
                                         <div class="col-md-2">
-                                            <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
+                                           
+                                            <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>                                                    
                                             <ajaxToolkit:CalendarExtender ID="CalendarExtenderIni" runat="server" PopupButtonID="imgCalendarioIni" TargetControlID="txtFecha_Factura_Ini" />
                                             <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                                                  
                                         </div>
                                         <div class="col-md-2">
                                             Fecha Final
@@ -125,6 +173,12 @@
                                             <ajaxToolkit:CalendarExtender ID="CalendarExtenderFin" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFecha_Factura_Fin" />
                                             <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                         </div>
+                                        <div class="col-md-2">
+                                            <asp:TextBox ID="txtBuscaRef" runat="server" PlaceHolder="Referencia/Folio" Width="100%"></asp:TextBox>
+                                            </div>
+                                        <div class="col-md-2">
+                                            <asp:LinkButton ID="linkBttnBuscarRef" runat="server" CssClass="btn btn-primary" OnClick="linkBttnBuscarRef_Click" Width="100%">Ver Referencias</asp:LinkButton>
+                                            </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
@@ -149,7 +203,7 @@
                                         <div class="col">
                                             <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:GridView ID="grdDatosFactura" runat="server" AutoGenerateColumns="False" CssClass="mGrid mGrid10px" DataKeyNames="ID_FACT" EmptyDataText="No existen registros." OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" Width="100%" ShowHeaderWhenEmpty="True" ShowFooter="True" PageSize="11">
+                                                    <asp:GridView ID="grdDatosFactura" runat="server" AutoGenerateColumns="False" CssClass="mGrid mGrid10px" DataKeyNames="ID_FACT" EmptyDataText="No existen registros." OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" Width="100%" ShowHeaderWhenEmpty="True" ShowFooter="True" PageSize="11">
                                                         <Columns>
                                                             <asp:BoundField DataField="ID_FACT" HeaderText="ID" SortExpression="ID" />
                                                             <asp:BoundField DataField="FACT_DEPENDENCIA" HeaderText="Depcia" SortExpression="DEPENDENCIA" />
@@ -184,8 +238,9 @@
                                                                     <asp:Button ID="bttnGenerarRef" runat="server" CssClass="btn btn-blue-grey" Font-Size="XX-Small" OnClick="bttnGenerarRef_Click" Text="NUEVA REFERENCIA" ValidationGroup="GenRef" Width="144px" />
                                                                 </HeaderTemplate>
                                                                 <ItemTemplate>
-                                                                    <asp:LinkButton ID="bttnReimprimir" runat="server" CssClass="btn btn-mdb-color" Font-Size="X-Small" Visible='<%# Bind("VISIBLE1") %>' Width="85px" OnClick="bttnReimprimir_Click"><i class="fa fa-usd" aria-hidden="true"></i>
-                                                                    &#160;Pagar</asp:LinkButton>&nbsp;<asp:LinkButton ID="bttnEliminar" runat="server" CssClass="btn btn-mdb-color" Font-Size="X-Small" OnClick="bttnEliminar_Click" Visible='<%# Bind("VISIBLE1") %>' Width="85px" OnClientClick="return confirm('¿Eliminar registro?');"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</asp:LinkButton><%--<asp:Button ID="bttnReimprimir" runat="server" CssClass="btn btn-mdb-color" Font-Size="X-Small" Text="Pagar" Visible='<%# Bind("VISIBLE1") %>' Width="57px" OnClick="bttnReimprimir_Click" />&nbsp;<asp:Button ID="bttnEliminar" runat="server" CssClass="btn btn-mdb-color" Font-Size="X-Small" OnClick="bttnEliminar_Click" Text="Eliminar" Visible='<%# Bind("VISIBLE1") %>' Width="57px" OnClientClick="return confirm('¿Eliminar registro?');" />--%>
+                                                                    <asp:LinkButton ID="bttnReimprimir" runat="server" CssClass="btn btn-mdb-color" Font-Size="X-Small" Visible='<%# Bind("VISIBLE1") %>' Width="85px" CommandName="Select"><i class="fa fa-usd" aria-hidden="true"></i>
+                                                                    &#160;Pagar</asp:LinkButton>&nbsp;
+                                                                    <asp:LinkButton ID="bttnEliminar" runat="server" CssClass="btn btn-mdb-color" Font-Size="X-Small" OnClick="bttnEliminar_Click" Visible='<%# Bind("VISIBLE1") %>' Width="85px" OnClientClick="return confirm('¿Eliminar registro?');"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</asp:LinkButton><%--<asp:Button ID="bttnReimprimir" runat="server" CssClass="btn btn-mdb-color" Font-Size="X-Small" Text="Pagar" Visible='<%# Bind("VISIBLE1") %>' Width="57px" OnClick="bttnReimprimir_Click" />&nbsp;<asp:Button ID="bttnEliminar" runat="server" CssClass="btn btn-mdb-color" Font-Size="X-Small" OnClick="bttnEliminar_Click" Text="Eliminar" Visible='<%# Bind("VISIBLE1") %>' Width="57px" OnClientClick="return confirm('¿Eliminar registro?');" />--%>
                                                                     <asp:LinkButton ID="bttnVerRecibo" runat="server" CssClass="btn btn-mdb-color" Font-Size="X-Small" Visible='<%# Bind("VISIBLE2") %>' Width="190px" OnClick="bttnVerRecibo_Click"><i class="fa fa-file"></i> Ver Recibo</asp:LinkButton>
                                                                 </ItemTemplate>
                                                                 <HeaderStyle HorizontalAlign="Left" />
@@ -681,12 +736,8 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-
                         <div class="row">
-                            <div class="col-md-3">
-                                REFERENCIA
-                            </div>
-                            <div class="col-md-9">
+                            <div class="col">
                                 <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                                     <ContentTemplate>
                                         <asp:Label ID="lblRefGenerada" runat="server" Font-Bold="True"></asp:Label>
@@ -695,33 +746,74 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 text-center">
-                                <asp:ImageButton ID="imgBttnPagoEfec" runat="server" ImageUrl="~/Imagenes/formaPago_Efectivo.png" OnClick="imgBttnPagoEfec_Click" />
+                            <div class="col-md-4 text-center">
+                                <asp:UpdatePanel ID="updPnlBttnGenPDF" runat="server">
+                                    <ContentTemplate>
+                                        <asp:LinkButton ID="linkBttnGenPDF" runat="server" CssClass="btn btn-info  buttons-pdf buttons-html5 btn-app export csv" OnClick="linkBttnGenPDF_Click"><i class="fa fa-file fa-2x" aria-hidden="true"></i>Generar Referencia</asp:LinkButton>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>                            
+                            <div class="col-md-4 text-center">
+                                <asp:UpdatePanel ID="updPnlBttnPagoLinea" runat="server">
+                                    <ContentTemplate>
+                                        <asp:LinkButton ID="linkBttnPagoLinea" runat="server" CssClass="btn btn-info  buttons-pdf buttons-html5 btn-app export pdf" OnClick="linkBttnPagoLinea_Click"><i class="fa fa-id-card fa-2x" aria-hidden="true"></i>Pago en Línea</asp:LinkButton>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
                             </div>
-                            <div class="col-md-6 text-center">
-                                <asp:ImageButton ID="imgBttnPagoTDC" runat="server" ImageUrl="~/Imagenes/formaPago_TDC.png" OnClick="imgBttnPagoTDC_Click" />
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 text-center font-weight-bold">
-                                PAGO EN EFECTIVO
-                            </div>
-                            <div class="col-md-6 text-center font-weight-bold">
-                                CRÉDITO Ó DÉBITO/CLABE INTERBANCARIA
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col text-center">
+                            <div class="col-md-4 text-center">
                                 <asp:UpdatePanel ID="UpdatePanel13" runat="server">
                                     <ContentTemplate>
-                                        <asp:Button ID="btnPagar" runat="server" CssClass="btn btn-info" Height="45px" OnClick="btnPagar_Click" Text="PAGAR" Visible="False" />
-                                        <%--&nbsp;<asp:Button ID="btnCancelar_C" runat="server" CssClass="btn btn-blue-grey" Height="45px" OnClick="btnCancelar_C_Click" Text="SALIR" />--%>
+                                        <asp:LinkButton ID="linkBttnGenLink" runat="server" class="btn btn-secondary buttons-pdf buttons-html5 btn-app export excel" OnClick="linkBttnGenLink_Click"><i class="fa fa-bars fa-2x"></i>Link pago en Línea</asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="updPnlPago" runat="server">
+                                    <ContentTemplate>
+                                        <asp:HyperLink ID="linkPago" runat="server"></asp:HyperLink>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updPgrPago" runat="server" AssociatedUpdatePanelID="UpdatePanel13">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgPrecargaLinkPago" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updgrBttnGenPDF" runat="server" AssociatedUpdatePanelID="updPnlBttnGenPDF">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgGenPDF" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updPgrBttnPagoLinea" runat="server" AssociatedUpdatePanelID="updPnlBttnPagoLinea">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgPagoLinea" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <%--<div class="row">
+                            <div class="col text-center">
+                                <asp:UpdatePanel ID="UpdatePanel13" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Button ID="btnPagar" runat="server" CssClass="btn btn-info" Height="45px" Text="PAGAR" Visible="False" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>--%>
                     </div>
                 </div>
             </div>

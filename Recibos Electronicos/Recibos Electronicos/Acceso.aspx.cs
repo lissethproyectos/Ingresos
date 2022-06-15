@@ -37,17 +37,16 @@ namespace Recibos_Electronicos
         {
             try
             {
-                if (Request.QueryString["origen"] != null)
+                if (Request.QueryString["tipo"] != null)
                 {
-                    if (Convert.ToString(Request.QueryString["origen"]) == "evento")
-                    {
-                        ScriptManager.RegisterStartupScript(this, GetType(), "OrigenEvento", "OrigenEvento();", true);
-
-                        //DDLTipoUsuario.SelectedValue = "4";
-                        //txtCve.Visible = true;
-                        //txtCve.Text = Convert.ToString(Request.QueryString["evento"]);
-                    }
+                    if (Convert.ToString(Request.QueryString["tipo"]) == "evento")                    
+                        ScriptManager.RegisterStartupScript(this, GetType(), "TipoUsuario", "TipoAcceso('REFERENCIA');", true);
+                    else if (Convert.ToString(Request.QueryString["tipo"]) == "solicitud")
+                        ScriptManager.RegisterStartupScript(this, GetType(), "TipoUsuario", "TipoAcceso('FACTURA');", true);
                 }
+                else
+                    ScriptManager.RegisterStartupScript(this, GetType(), "TipoUsuario", "LimpiarCampos();", true);
+
                 //if (Request.QueryString["Token"] != null)
                 //{
                 //    string TokenUsu = Convert.ToString(Request.QueryString["Token"]);
@@ -74,22 +73,7 @@ namespace Recibos_Electronicos
                 lblMensaje.Text = ex.Message;
 
             }
-            //Sesion = (Sesion)Session["Usuario"];
-
-            //Origen = Convert.ToString(Request.QueryString["RGN"]);
-            //if (!IsPostBack)
-            //{
-            //    if (Origen != null)
-            //    {
-            //        if (Origen == "ASP")
-            //        {
-            //            DDLTipoUsuario.SelectedValue = "1";
-            //            DDLTipoUsuario_SelectedIndexChanged(null, null);
-            //            pnlMsj.Visible = true;
-            //            lblMensaje.Text = "Para obtener el recibo oficial ingresar al siguiente día hábil de haber realizado el pago, si se realizo el día sábado estará disponible hasta el día martes.";
-            //        }
-            //    }
-            //}
+           
         }
 
         protected void btnIngresar_Click(object sender, EventArgs e)
@@ -198,7 +182,6 @@ namespace Recibos_Electronicos
                     }
 
                 }
-
                 else
                     CN_Usuario.ValidarUsuario(ref Sesion, ref Verificador);
 

@@ -74,7 +74,20 @@
                     <ContentTemplate>
                         <asp:GridView ID="grdPagos" runat="server" AutoGenerateColumns="False" CssClass="mGrid table  table-striped" Width="100%" OnRowEditing="grdPagos_RowEditing" OnRowUpdating="grdPagos_RowUpdating" OnRowCancelingEdit="grdPagos_RowCancelingEdit" OnSelectedIndexChanged="grdPagos_SelectedIndexChanged" EmptyDataText="No hay pagos registrados.">
                             <Columns>
-                                <asp:BoundField DataField="IdRef" ReadOnly="True" />
+                                <asp:BoundField DataField="IdRef" ReadOnly="True" >
+                                    <ControlStyle CssClass="classHide" />
+                                    <FooterStyle CssClass="classHide" />
+                                    <HeaderStyle CssClass="classHide" />
+                                    <ItemStyle CssClass="classHide" />
+                                </asp:BoundField>
+                                <asp:TemplateField HeaderText="Ciclo">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtCiclo" runat="server" Text='<%# Bind("ciclo_actual") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblCiclo" runat="server" Text='<%# Bind("ciclo_actual") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:TemplateField HeaderText="Semestre">
                                     <EditItemTemplate>
                                         <asp:TextBox ID="txtSemestre" runat="server" Text='<%# Bind("semestre") %>'></asp:TextBox>
@@ -108,7 +121,12 @@
                                 <asp:CommandField ShowEditButton="True">
                                     <HeaderStyle HorizontalAlign="Center" />
                                 </asp:CommandField>
-                                <asp:BoundField DataField="IdPago" ReadOnly="True" />
+                                <asp:BoundField DataField="IdPago" ReadOnly="True">
+                                      <ControlStyle CssClass="classHide" />
+                                    <FooterStyle CssClass="classHide" />
+                                    <HeaderStyle CssClass="classHide" />
+                                    <ItemStyle CssClass="classHide" />
+                                    </asp:BoundField>
                             </Columns>
                         </asp:GridView>
                     </ContentTemplate>
@@ -118,12 +136,30 @@
     </div>
     <script type="text/javascript">
         function Pagos() {
-            /*$('#Eventos').DataTable();*/
             $('#<%= grdPagos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdPagos.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
                 "stateSave": true,
                 "ordering": false,
                 "order": [[1, "desc"]]
+            });
+        };
+
+        function PagosUsuNormal() {
+            $('#<%= grdPagos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdPagos.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false,
+                "order": [[1, "desc"]],
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
             });
         };
     </script>

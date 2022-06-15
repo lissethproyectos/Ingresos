@@ -3,6 +3,7 @@ using CapaNegocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -27,8 +28,9 @@ namespace Recibos_Electronicos
         CN_Alumno CNAlumno = new CN_Alumno();
         CN_Evento CNEvento = new CN_Evento();
         CN_CajaFactura CNCjaFactura = new CN_CajaFactura();
+        CN_Facturacion CNFacturacion = new CN_Facturacion();
         string Verificador = "";
-
+        public String fullPath;
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -91,7 +93,8 @@ namespace Recibos_Electronicos
                             grdStatus_Carga_Bancos.DataSource = dt;
                             grdStatus_Carga_Bancos.DataSource = ListAlumno;
                             grdStatus_Carga_Bancos.DataBind();
-                            modalBancos.Show();
+                            ScriptManager.RegisterStartupScript(this, this.GetType(), "gridBancosAlumnos", "$('#modalBancosAlumnos').modal('show')", true);
+
                         }
                     }
                     else
@@ -137,7 +140,8 @@ namespace Recibos_Electronicos
                     if (Observaciones.Length > 1)
                     {
                         lblMsg_Observaciones.Text = Observaciones;
-                        ModalPopupExtender.Show();
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "gridMensajes", "$('#modalMsgs').modal('show')", true);
+
                     }
                 }
                 else
@@ -258,9 +262,8 @@ namespace Recibos_Electronicos
         {
             try
             {
-
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
-
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_CodFiscal", ref ddlCodigoFiscal);
             }
             catch (Exception ex)
             {
@@ -342,12 +345,7 @@ namespace Recibos_Electronicos
             }
         }
 
-        protected void btnSalir_Click(object sender, EventArgs e)
-        {
-            modalBancos.Hide();
-
-
-        }
+       
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
@@ -396,13 +394,14 @@ namespace Recibos_Electronicos
             }
         }
 
-        private List<Factura> GetListDoctos()
+        private List<Facturacion> GetListDoctos()
         {
             try
             {
-                List<Factura> List = new List<Factura>();
-                ObjFactura.ID_FACT = Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
-                CNCjaFactura.FacturaDoctosConsultaGrid(ObjFactura, ref List);
+                List<Facturacion> List = new List<Facturacion>();
+                Facturacion objFacturacion = new Facturacion();
+                objFacturacion.ID_FACT = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
+                CNFacturacion.FacturaDoctosConsultaGrid(objFacturacion, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -419,7 +418,8 @@ namespace Recibos_Electronicos
             {
                 grdDatosFactura.SelectedIndex = row.RowIndex;
                 CargarGridDoctos();
-                modalFactura.Show();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "gridDoctos", "$('#modalDoctos').modal('show')", true);
+
             }
 
 
@@ -439,7 +439,7 @@ namespace Recibos_Electronicos
             {
                 grdDatosFactura.SelectedIndex = row.RowIndex;
                 CargarGridDoctos();
-                modalFactura.Show();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "gridDoctos", "$('#modalDoctos').modal('show')", true);
             }
 
 
@@ -466,6 +466,7 @@ namespace Recibos_Electronicos
                 if (Verificador == "0")
                 {
                     rdoBttnReceptorTipoPersona.SelectedValue = ObjFactura.FACT_RECEPTOR_TIPO_PERS;
+                    rdoBttnReceptorTipoPersona_SelectedIndexChanged(null, null);
                     txtReceptor_Nombre.Text = ObjFactura.FACT_NOMBRE;
                     txtReceptor_Rfc.Text = ObjFactura.FACT_RECEPTOR_RFC;
                     txtReceptor_Domicilio.Text = ObjFactura.FACT_RECEPTOR_DOMICILIO;
@@ -509,12 +510,25 @@ namespace Recibos_Electronicos
                     ddlForma_Pago.SelectedValue = ObjFactura.FACT_RECEPTOR_FORMA_PAGO;
                     txtReceptor_Telefono.Text = ObjFactura.FACT_RECEPTOR_TELEFONO;
                     txtReceptor_Correo.Text = ObjFactura.FACT_RECEPTOR_CORREO;
+
+                    ddlCodigoFiscal.SelectedValue = ObjFactura.FACT_RECEPTOR_CODIGO;
+                    ddlCodigoFiscal_SelectedIndexChanged(null, null);
+
                     ddlCFDI.SelectedValue = ObjFactura.CFDI;
                     txtDescConcepto.Text = ObjFactura.FACT_OBSERVACIONES;
                     lblConceptosFac.Text = ObjFactura.FACT_CONCEPTOS;
                     lblImporte.Text = ObjFactura.FACT_IMPORTE;
+                    txtReceptor_NumExt.Text = ObjFactura.NUMERO_EXTERIOR;
+                    txtReceptor_NumInt.Text = ObjFactura.NUMERO_INTERIOR;
+                    if (ObjFactura.ADJUNTO_CONSTANCIA != string.Empty)
+                    {
+                        linkConstancia.NavigateUrl = "ArchivosFacturas/" + ObjFactura.ADJUNTO_CONSTANCIA;
+                        linkConstancia.Text = ObjFactura.ADJUNTO_CONSTANCIA;
+                        linkConstancia.ToolTip = ObjFactura.ADJUNTO_CONSTANCIA;
+                        linkBttnEliminarConstancia.Visible = true;
+                    }
 
-
+                    //multView.ActiveViewIndex = 1;
 
                 }
 
@@ -552,7 +566,12 @@ namespace Recibos_Electronicos
         protected void btnGuardarEditar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
-                Guardar();
+            {
+                if (linkConstancia.NavigateUrl == string.Empty && rdoBttnReceptorTipoPersona.SelectedValue == "F")                
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'La constancia fiscal es requerida, favor de adjuntar.');", true);  //lblMsj.Text = ex.Message;                
+                else                
+                    Guardar();
+            }
         }
 
         protected void btnCancelarEditar_Click(object sender, EventArgs e)
@@ -563,9 +582,15 @@ namespace Recibos_Electronicos
         protected void rdoBttnReceptorTipoPersona_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (rdoBttnReceptorTipoPersona.SelectedValue == "F")
+            {
                 txtReceptor_Rfc.MaxLength = 13;
+                reqCodigo.ValidationGroup = "DatosFiscales";
+            }
             else
+            {
                 txtReceptor_Rfc.MaxLength = 12;
+                reqCodigo.ValidationGroup = string.Empty;
+            }
         }
 
         protected void Guardar()
@@ -589,6 +614,8 @@ namespace Recibos_Electronicos
                 ObjFactura.FACT_RECEPTOR_STATUS_NOTAS = string.Empty;
                 ObjFactura.FACT_CONFIRMADO = "N"; // "S"; //string.Empty; ;
                 ObjFactura.CFDI = ddlCFDI.SelectedValue;
+                ObjFactura.FACT_RECEPTOR_CODIGO = ddlCodigoFiscal.SelectedValue;
+
                 ObjFactura.FACT_TIPO_SERVICIO = "0"; // ddlServicio.SelectedValue;
                 ObjFactura.FACT_OBSERVACIONES = txtDescConcepto.Text.ToUpper();
                 ObjFactura.FACT_RECEPTOR_FORMA_PAGO = ddlForma_Pago.SelectedValue;
@@ -597,6 +624,9 @@ namespace Recibos_Electronicos
                 else
                     Usuario = SesionUsu.Usu_Nombre;
 
+                ObjFactura.NUMERO_EXTERIOR = (txtReceptor_NumExt.Text == null || txtReceptor_NumExt.Text == string.Empty) ? "0" : txtReceptor_NumExt.Text;
+                ObjFactura.NUMERO_INTERIOR = (txtReceptor_NumInt.Text == null || txtReceptor_NumInt.Text == string.Empty) ? "0" : txtReceptor_NumInt.Text;
+                ObjFactura.ADJUNTO_CONSTANCIA = linkConstancia.Text;
 
 
                 ObjFactura.ID_FACT = Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
@@ -642,9 +672,64 @@ namespace Recibos_Electronicos
             }
         }
 
-        protected void linkBttnCerrarModal_Click(object sender, EventArgs e)
+      
+        protected void linkBttnConstancia_Click(object sender, EventArgs e)
         {
-            modalFactura.Hide();
+            try
+            {
+
+                if (fileConstancia.HasFile)
+                {
+                    int fileSize = fileConstancia.PostedFile.ContentLength;
+                    fullPath = Path.Combine(Server.MapPath("ArchivosFacturas/"), "CONSTANCIA-" + grdDatosFactura.SelectedRow.Cells[0].Text + "-" + fileConstancia.FileName);
+
+                    fileConstancia.SaveAs(fullPath);
+                    linkConstancia.NavigateUrl = "ArchivosFacturas/CONSTANCIA-" + grdDatosFactura.SelectedRow.Cells[0].Text + "-" + fileConstancia.FileName;
+                    linkConstancia.Text = "CONSTANCIA-" + grdDatosFactura.SelectedRow.Cells[0].Text + "-" + fileConstancia.FileName;
+                    linkConstancia.ToolTip = fullPath;
+                    linkBttnEliminarConstancia.Visible = true;
+
+                    //collapse1.Attributes["class"] = "collapse multi-collapse show";
+                    //ScriptManager.RegisterStartupScript(this, GetType(), "Collapse2", "Collapse2();", true);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
+            }
+        }
+        protected void linkBttnEliminarConstancia_Click(object sender, EventArgs e)
+        {
+            //linkBttnEliminarConstancia
+            try
+            {
+                System.IO.File.Delete(linkConstancia.ToolTip);
+                linkConstancia.NavigateUrl = string.Empty;
+                linkConstancia.Text = string.Empty;
+                linkConstancia.ToolTip = string.Empty;
+                linkBttnEliminarConstancia.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                string MsjError = (ex.Message.Length > 40) ? ex.Message.Substring(0, 40) : ex.Message;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
+            }
+        }
+
+        protected void ddlCodigoFiscal_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_TipoCfdi", ref ddlCFDI, "p_cod_fiscal", "p_tipo_persona", ddlCodigoFiscal.SelectedValue, rdoBttnReceptorTipoPersona.SelectedValue);
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
+            }
         }
     }
 }

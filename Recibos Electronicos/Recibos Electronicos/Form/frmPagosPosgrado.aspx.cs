@@ -25,8 +25,10 @@ namespace Recibos_Electronicos.Form
             if (!IsPostBack)
                 Inicializar();
 
-
-            ScriptManager.RegisterStartupScript(this, GetType(), "GridPagos", "Pagos();", true);
+            if (SesionUsu.Usu_Central_Tipo == "SA" || SesionUsu.Usu_Central_Tipo=="A")
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridPagos", "Pagos();", true);
+            else
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridPagos", "PagosUsuNormal();", true);
 
         }
         private void Inicializar()
@@ -58,14 +60,21 @@ namespace Recibos_Electronicos.Form
 
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] { 2, 10, 11, 12 };
-            Int32[] CeldasAdmin = new Int32[] { 2 };
+            Int32[] Celdas = new Int32[] { 0,9,10 };
+            Int32[] CeldasAdmin = new Int32[] { 0, 10 };
             try
             {
                 DataTable dt = new DataTable();
                 grdPagos.DataSource = dt;
                 grdPagos.DataSource = GetList();
-                grdPagos.DataBind();               
+                grdPagos.DataBind();
+                if (grdPagos.Rows.Count > 0)
+                {
+                    if (SesionUsu.Usu_Central_Tipo== "SA" || SesionUsu.Usu_Central_Tipo == "A")
+                        CNComun.HideColumns(grdPagos, CeldasAdmin);
+                    else
+                        CNComun.HideColumns(grdPagos, Celdas);
+                }
             }
             catch (Exception ex)
             {
@@ -119,15 +128,17 @@ namespace Recibos_Electronicos.Form
             {
                 PagosPosgrado objPago = new PagosPosgrado();
                 objPago.IdRef = Convert.ToInt32(row.Cells[0].Text);
-                TextBox txtSemestre = (TextBox)(row.Cells[1].FindControl("txtSemestre"));
+                TextBox txtSemestre = (TextBox)(row.Cells[2].FindControl("txtSemestre"));
                 objPago.Semestre = Convert.ToInt32(txtSemestre.Text);
-                TextBox txtNoPago = (TextBox)(row.Cells[3].FindControl("txtNoPago"));
+                TextBox txtNoPago = (TextBox)(row.Cells[4].FindControl("txtNoPago"));
                 objPago.No_Pago = Convert.ToInt32(txtNoPago.Text);
+                TextBox txtCiclo = (TextBox)(row.Cells[4].FindControl("txtCiclo"));
+                objPago.Ciclo_Actual = Convert.ToString(txtCiclo.Text);
                 //TextBox txtFechaIni_Evento = (TextBox)(row.Cells[5].FindControl("txtFechaIniG"));
                 //objEvento.Fecha_inicial = txtFechaIni_Evento.Text; // row.Cells[3].Text;
                 //TextBox txtFechaFin_Evento = (TextBox)(row.Cells[6].FindControl("txtFechaFinG"));
                 //objEvento.Fecha_final = txtFechaFin_Evento.Text;
-                objPago.IdPago= Convert.ToInt32(row.Cells[9].Text);
+                objPago.IdPago= Convert.ToInt32(row.Cells[10].Text);
                 CNPagos.EditarPagosPosgrado(objPago, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -159,7 +170,7 @@ namespace Recibos_Electronicos.Form
         {
 
             //string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP060&Dependencia=" + DDLEscuelas.SelectedValue + "&Matricula=" + txtMatricula.Text + "&IdCarrera=" + DDLCarreras.SelectedValue + "&enExcel=N";
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REPSCE_001&Referencia=" + grdPagos.SelectedRow.Cells[5].Text + "&enExcel=N";
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REPSCE_001&Referencia=" + grdPagos.SelectedRow.Cells[6].Text + "&enExcel=N";
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 

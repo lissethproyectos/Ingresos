@@ -118,6 +118,9 @@ namespace Recibos_Electronicos.Form
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
                 Inicializar();
+
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridAlumnos", "CatAlumnos();", true);
         }
 
         protected void imgBttnBuscar_Click(object sender, ImageClickEventArgs e)

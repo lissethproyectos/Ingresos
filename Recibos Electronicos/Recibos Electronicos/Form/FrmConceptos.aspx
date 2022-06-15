@@ -4,6 +4,19 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
     <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .auto-style1 {
+            position: relative;
+            width: 100%;
+            -ms-flex: 0 0 16.666667%;
+            flex: 0 0 16.666667%;
+            max-width: 16.666667%;
+            left: -31px;
+            top: 85px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
@@ -32,7 +45,7 @@
                                             <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" TabIndex="1" Width="100%">
                                             </asp:DropDownList>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="auto-style1">
                                             Exclusivos para eventos
                                         </div>
                                         <div class="col-1 text-left">

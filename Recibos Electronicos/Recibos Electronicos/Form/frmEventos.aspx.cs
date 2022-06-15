@@ -1450,5 +1450,19 @@ namespace Recibos_Electronicos.Form
             grvCatParticipantes.EditIndex = -1;
             CargarGriCatPart();
         }
+
+        protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
+        {
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP070&dependencia=" + DDLDependencia.SelectedValue + "&enExcel=N";
+            string _open = "window.open('" + ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
+
+        protected void imgBttnExportar_Click(object sender, ImageClickEventArgs e)
+        {
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP070&dependencia=" + DDLDependencia.SelectedValue+ "&enExcel=S";
+            string _open = "window.open('" + ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
     }
 }

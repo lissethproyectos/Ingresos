@@ -1,5 +1,4 @@
-﻿
-<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Acceso.aspx.cs" Inherits="Recibos_Electronicos.Acceso" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Acceso.aspx.cs" Inherits="Recibos_Electronicos.Acceso" %>
 
 <%@ Register Assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
     Namespace="System.Web.UI" TagPrefix="asp" %>
@@ -24,6 +23,137 @@
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
     <title>SYSWEB-COIN</title>
+    <script language="javascript" type="text/javascript">
+
+        function TipoAcceso(Tipo) {
+            $("#divPassword").hide();
+            $("#txtPassword").hide();
+            $("#listCve").hide();
+            $("#listUser").hide();
+            $("#txtCve").hide();
+            $("#listReferencia").hide();
+            $("#txtCve").show();
+            $("#divMsjGral").show();
+            $("#divMsjUsuDep").hide();
+
+            if (Tipo === "REFERENCIA") {
+                $("#listReferencia").show();
+                $("#listCve").hide();
+                $("#txtCve").attr("placeholder", "Referencia de 26 dígitos");
+                $('.txtCve').css('cursor', 'pointer');
+                $("#txtCve").focus();
+                $("#DDLTipoUsuario").val("4");
+            }
+            else if (Tipo === "FACTURA") {
+                $("#listReferencia").show();
+                $("#listCve").hide();
+                $("#txtCve").attr("placeholder", "Referencia de 26 dígitos");
+                $('.txtCve').css('cursor', 'pointer');
+                $("#txtCve").focus();
+                $('#DDLTipoUsuario option')[5].selected = true;
+
+            }
+
+        };
+
+        function LimpiarCampos() {
+            $("#divPassword").hide();
+            $("#txtPassword").hide();
+            $("#listCve").hide();
+            $("#listUser").hide();
+            $("#txtCve").hide();
+            $("#listReferencia").hide();
+            $("#divMsjGral").show();
+            $("#divMsjUsuDep").hide();
+        }
+
+        $(document).ready(function () {
+
+
+            $("#DDLTipoUsuario").change(function () {
+                $("#divPassword").hide();
+                $("#txtPassword").hide();
+                $("#listCve").hide();
+                $("#listUser").hide();
+                $("#txtCve").hide();
+                $("#listReferencia").hide();
+                $("#txtCve").show();
+                $("#divMsjGral").show();
+                $("#divMsjUsuDep").hide();
+
+                if ($("#DDLTipoUsuario").val() == "1" || $("#DDLTipoUsuario").val() == "2" || $("#DDLTipoUsuario").val() == "4" || $("#DDLTipoUsuario").val() == "6" || $("#DDLTipoUsuario").val() == "7") {
+                    $("#divPassword").hide();
+                    $("#txtPassword").hide();
+                    $("#txtCve").focus();
+
+                    if ($("#DDLTipoUsuario").val() == "1") {
+                        $("#txtCve").attr("placeholder", "Número de Ficha ó Matricula");
+                        $("#listUser").show();
+
+
+                    }
+                    else if ($("#DDLTipoUsuario").val() == "2") {
+                        $("#txtCve").attr("placeholder", "RFC");
+                        $("#listUser").show();
+                    }
+                    else if ($("#DDLTipoUsuario").val() == "4") {
+                        $("#listReferencia").show();
+                        $("#listCve").hide();
+                        $("#txtCve").attr("placeholder", "Referencia de 26 dígitos");
+                        $('.txtCve').css('cursor', 'pointer');
+                    }
+                    else if ($("#DDLTipoUsuario").val() == "7") {
+                        $("#listReferencia").show();
+                        $("#listCve").hide();
+                        $("#txtCve").attr("placeholder", "Referencia de 26 dígitos");
+                        $('.txtCve').css('cursor', 'pointer');
+                    }
+                    else {
+                        $("#listReferencia").hide();
+                        $("#listUser").show();
+
+                        $("#txtCve").attr("placeholder", "Clave SYSWEB");
+                    }
+                }
+                else if ($("#DDLTipoUsuario").val() == "5") {
+                    $("#divPassword").hide();
+                    $("#txtPassword").hide();
+                    $("#listCve").hide();
+                    $("#txtCve").hide();
+                    $("#listReferencia").hide();
+                }
+                else {
+                    $("#divPassword").show();
+                    $("#txtPassword").show();
+                    $("#listReferencia").hide();
+                    $("#listCve").show();
+                    $("#txtCve").show();
+                    $("#txtCve").attr("placeholder", "Correo UNACH");
+                    $("#txtCve").focus();
+                    $("#divMsjGral").hide();
+                    $("#divMsjUsuDep").show();
+
+
+                }
+            });
+            $("#imgFacebook").click(function () {
+                $(location).attr('href', 'https://www.facebook.com/sysweb.dsia/posts/1382513418590378');
+            });
+            $("#modalTelefonos").click(function () {
+                $("#exampleModal").modal("show");
+            });
+            $("#bttnModalActualizar").click(function () {
+                window.location = "https://sysweb.unach.mx/actualiza_correo/frmactualiza_datos.aspx?sistema=14";
+            });
+
+
+
+
+
+        });
+
+
+    </script>
 
 </head>
 <body>
@@ -38,119 +168,104 @@
                     <img id="imgSYSWEB" src="https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
                 </div>
                 <div class="col-md-4 text-center">
-                        <div class="text-light font-weight-bold">
-                            <h4 class="media-heading">Control de Ingresos</h4>
-                            <h5>COIN</h5>
-                        </div>
+                    <div class="text-light font-weight-bold">
+                        <h4 class="media-heading">Control de Ingresos</h4>
+                        <h5>COIN</h5>
                     </div>
+                </div>
                 <div class="col-md-4">
                     <img src="https://sysweb.unach.mx/resources/imagenes/unach.jpg" class="img-fluid d-none d-sm-none d-md-block" alt="Responsive image" style="cursor: pointer" />
                 </div>
             </div>
         </div>
         <div class="bg-light">
-            <article class="card-body mx-auto" style="max-width: 450px;">	
-	                <div class="card">
-                        <div class="card-header">				            
-				                <div class="d-flex justify-content-end social_icon">
-                                    <%--<h5>Iniciar Sesión</h5>--%>
-					                <span>
-                                        <button id="imgFacebook" type="button" class="btn btn-primary btn-lg">
-                                            <i class="fab fa-facebook-square"></i> 
-                                        </button>
-					                &nbsp;
+            <article class="card-body mx-auto" style="max-width: 450px;">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-end social_icon">
+                            <%--<h5>Iniciar Sesión</h5>--%>
+                            <span>
+                                <button id="imgFacebook" type="button" class="btn btn-primary btn-lg">
+                                    <i class="fab fa-facebook-square"></i>
+                                </button>
+                                &nbsp;
                                         <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModal">
-                                            <i class="fas fa-phone-square"></i> 
+                                            <i class="fas fa-phone-square"></i>
                                         </button>
-					                </span>
-				                </div>
-			                </div>
-			            <div class="card-body">
-                            <h5>Iniciar Sesión</h5>
-                            <div class="form-group input-group">
-                                <div class="input-group-prepend">
-		                <span class="input-group-text"> <i class="fa fa-cog"></i> </span>
-		            </div>
-                              <%-- <select class="form-control" id="DDLTipoUsuario" runat="server">
-  <option class="special" value="5">Seleccionar</option>
-  <option value="1">Alumno ó Aspirante</option>
-                                     <option value="3">Usuario Dependencia</option>
-
-  <option value="4" style="background: #5cb85c; color: #fff;">Comprobantes oficiales de EVENTOS</option>
-</select>--%>
-
-                          
-                                        <asp:DropDownList ID="DDLTipoUsuario" runat="server" class="form-control">
-                                            <asp:ListItem Value="5">Seleccionar</asp:ListItem>
-                                            <asp:ListItem Value="1">Alumno ó Aspirante</asp:ListItem>   
-                                            <asp:ListItem Value="3">Usuario Dependencia</asp:ListItem>                    
-                                            <asp:ListItem Value="4">Referencia Bancaria</asp:ListItem>                                            
-                                            <asp:ListItem Value="6">Cliente UNACH</asp:ListItem>
-                                            <asp:ListItem Value="4">Facturas</asp:ListItem>
-                                        </asp:DropDownList>
-	                        </div> <!-- form-group end.// -->
-                            <div class="form-group input-group">
-                                <div id="listUser" class="input-group-prepend">
-		                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-		                         </div>
-		                        <div id="listCve" class="input-group-prepend">
-		                            <span class="input-group-text"> <i class="fa fa-at"></i> </span>
-		                         </div>
-                                 <div id="listReferencia" class="input-group-prepend">
-		                            <span class="input-group-text"> <i class="fa fa-barcode"></i> </span>
-		                         </div>
-                                <%--<input name="" class="form-control" placeholder="Full name" type="text">--%>
-                                <asp:TextBox ID="txtCve" runat="server" CssClass="form-control" TabIndex="1"></asp:TextBox>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5>Iniciar Sesión</h5>
+                        <div class="form-group input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-cog"></i></span>
                             </div>
-                            <div class="form-group input-group">
-    	                        <div id="divPassword" class="input-group-prepend">
-		                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-		                        </div>
-                                        <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Contraseña" TextMode="Password" TabIndex="2"></asp:TextBox>                    
-                    
-                            </div> <!-- form-group// -->
-                            <div class="form-group text-center">
-                                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+                            <asp:DropDownList ID="DDLTipoUsuario" runat="server" class="form-control">
+                                <asp:ListItem Value="5">Seleccionar</asp:ListItem>
+                                <asp:ListItem Value="1">Alumno ó Aspirante</asp:ListItem>
+                                <asp:ListItem Value="3">Usuario Dependencia</asp:ListItem>
+                                <asp:ListItem Value="4">Referencia Bancaria</asp:ListItem>
+                                <asp:ListItem Value="6">Cliente UNACH</asp:ListItem>
+                                <asp:ListItem Value="4">Facturas</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="form-group input-group">
+                            <div id="listUser" class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <div id="listCve" class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-at"></i></span>
+                            </div>
+                            <div id="listReferencia" class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-barcode"></i></span>
+                            </div>
+                            <asp:TextBox ID="txtCve" runat="server" CssClass="form-control" TabIndex="1"></asp:TextBox>
+                        </div>
+                        <div class="form-group input-group">
+                            <div id="divPassword" class="input-group-prepend">
+                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                            </div>
+                            <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Contraseña" TextMode="Password" TabIndex="2"></asp:TextBox>
+
+                        </div>
+                        <div class="form-group text-center">
+                            <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                 <ContentTemplate>
                                     <asp:Panel ID="pnlMsj" runat="server" Visible="False">
-                                        <div class="alert alert-danger"> 
-                                         <asp:Label ID="lblMensaje" runat="server" Font-Bold="True"></asp:Label>
+                                        <div class="alert alert-danger">
+                                            <asp:Label ID="lblMensaje" runat="server" Font-Bold="True"></asp:Label>
                                         </div>
                                     </asp:Panel>
                                 </ContentTemplate>
-                                </asp:UpdatePanel>
-                                <br />
+                            </asp:UpdatePanel>
+                            <br />
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                 <ContentTemplate>
-                                    <asp:Button ID="btnIngresar" runat="server" OnClick="btnIngresar_Click" Text="Iniciar Sesión" TabIndex="5" CssClass="btn"  style="background-color:#d2af47; color:#fff"/>                                                
+                                    <asp:Button ID="btnIngresar" runat="server" OnClick="btnIngresar_Click" Text="Iniciar Sesión" TabIndex="5" CssClass="btn" Style="background-color: #d2af47; color: #fff"/>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                             <asp:UpdateProgress ID="updPrMultiview" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
-                                <progresstemplate>
+                                <ProgressTemplate>
                                     <asp:Image ID="imgMultiview" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                </progresstemplate>
-                            </asp:UpdateProgress>                                                
-
-                      
-                            </div> <!-- form-group// -->      
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
 
 
-<%--                            <div id="divMsjGral" class="alert alert-info hide" role="alert" >
-                               El acceso a esta página es para imprimir y consultar el comprobante oficial de alguno de los servicios que proporciona la universidad.             
-</div>--%>
-                            <p class="note note-warning">
-                                El acceso a esta página es para obtener el comprobante oficial de alguno de los servicios que proporciona la universidad.             
-                                </p>
-<div id="divMsjUsuDep" class="alert alert-warning" role="alert">
-                  <strong>El acceso al sistema es con la cta. y la contraseña del correo unach,</strong> si no actualizaste tu información dar click en el siguiente enlace.<br /><a href="https://ldapauthmaster.unach.mx/pssform_resetaccount.php" target="_blank">¿Olvidó  la contraseña del correo institucional?</a>
-    
-              </div>                         
-                        </div>     
-                         <%-- <div class="card-footer">
-            <img src="Imagenes/quedateencasaunach.png" />
-        </div>--%>
+                        </div>
+                       
+                        <p class="note note-warning">
+                            El acceso a esta página es para obtener el comprobante oficial de alguno de los servicios que proporciona la universidad.             
+                        </p>
+                        <div id="divMsjUsuDep" class="alert alert-warning" role="alert">
+                            <strong>El acceso al sistema es con la cta. y la contraseña del correo unach,</strong> si no actualizaste tu información dar click en el siguiente enlace.<br />
+                            <a href="https://ldapauthmaster.unach.mx/pssform_resetaccount.php" target="_blank">¿Olvidó  la contraseña del correo institucional?</a>
+
+                        </div>
                     </div>
-                </article>
+                  
+                </div>
+            </article>
         </div>
         <!-- card.// -->
 
@@ -160,18 +275,18 @@
                     <div class="row">
                         <hr class="clearfix w-100 d-md-none pb-3">
                         <div class="col-md-6 mb-md-0 mb-3">
-                        <h6 class="text-uppercase mb-4 font-weight-bold">Contacto</h6>
-                        <p>
-                        <i class="fas fa-home mr-3"></i>2da. Poniente Sur No. 108, Edificio Maciel, 3er. Piso Tuxtla Gutiérrez, Chiapas.</p>
-                        <p><i class="fas fa-envelope mr-3"></i>depfin@unach.mx, sysweb@unach.mx</p>
-                        <p><i class="fas fa-phone mr-3"></i>(961) 61 7 80 00, extensiones: 5108 Y 5501</p>
-                    </div>
-              <div class="col-md-6 mb-md-0 mb-3">
-                  <div class="text-xl-center">
-                      
-                      </div>
+                            <h6 class="text-uppercase mb-4 font-weight-bold">Contacto</h6>
+                            <p>
+                                <i class="fas fa-home mr-3"></i>2da. Poniente Sur No. 108, Edificio Maciel, 3er. Piso Tuxtla Gutiérrez, Chiapas.
+                            </p>
+                            <p><i class="fas fa-envelope mr-3"></i>depfin@unach.mx, sysweb@unach.mx</p>
+                            <p><i class="fas fa-phone mr-3"></i>(961) 61 7 80 00, extensiones: 5108 Y 5501</p>
+                        </div>
+                        <div class="col-md-6 mb-md-0 mb-3">
+                            <div class="text-xl-center">
+                            </div>
 
-</div>
+                        </div>
                     </div>
                 </div>
                 <div class="footer-copyright text-center py-3">Universidad Autónoma de Chiapas</div>
@@ -201,116 +316,10 @@
                 </div>
             </div>
         </div>
-        moradonegro&lt;3	
     </form>
 </body>
 </html>
 
 
 
-<script language="javascript" type="text/javascript">
-    
 
-
-    $(document).ready(function () {
-        $("#divPassword").hide();
-        $("#txtPassword").hide();
-        $("#listCve").hide();
-        $("#listUser").hide();
-        $("#txtCve").hide();
-        $("#listReferencia").hide();
-        $("#divMsjGral").show();
-        $("#divMsjUsuDep").hide();
-
-
-        //if (window.location.protocol != 'https:') {
-        //    location.href = location.href.replace("http://", "https://");
-        //}
-
-        $("#DDLTipoUsuario").change(function () {
-            //Todo: write your javascript code here.
-            //$("#listCve").show();
-            //alert($("#DDLTipoUsuario").val());
-            $("#divPassword").hide();
-            $("#txtPassword").hide();
-            $("#listCve").hide();
-            $("#listUser").hide();
-            $("#txtCve").hide();
-            $("#listReferencia").hide();
-
-            $("#txtCve").show();
-            $("#divMsjGral").show();
-            $("#divMsjUsuDep").hide();
-
-            if ($("#DDLTipoUsuario").val() == "1" || $("#DDLTipoUsuario").val() == "2" || $("#DDLTipoUsuario").val() == "4" || $("#DDLTipoUsuario").val() == "6" || $("#DDLTipoUsuario").val() == "7") {
-                $("#divPassword").hide();
-                $("#txtPassword").hide();
-                $("#txtCve").focus();
-
-                if ($("#DDLTipoUsuario").val() == "1") {
-                    $("#txtCve").attr("placeholder", "Número de Ficha ó Matricula");
-                    $("#listUser").show();
-
-
-                }
-                else if ($("#DDLTipoUsuario").val() == "2") {
-                    $("#txtCve").attr("placeholder", "RFC");
-                    $("#listUser").show();
-                }
-                else if ($("#DDLTipoUsuario").val() == "4") {
-                    $("#listReferencia").show();
-                    $("#listCve").hide();
-                    $("#txtCve").attr("placeholder", "Referencia");
-                    $('.txtCve').css('cursor', 'pointer');
-                }
-                else if ($("#DDLTipoUsuario").val() == "7") {
-                    $("#listReferencia").show();
-                    $("#listCve").hide();
-                    $("#txtCve").attr("placeholder", "Referencia");
-                    $('.txtCve').css('cursor', 'pointer');
-                }
-                else {
-                    $("#listReferencia").hide();
-                    $("#listUser").show();
-
-                    $("#txtCve").attr("placeholder", "Clave SYSWEB");
-                }
-            }
-            else if ($("#DDLTipoUsuario").val() == "5") {
-                $("#divPassword").hide();
-                $("#txtPassword").hide();
-                $("#listCve").hide();
-                $("#txtCve").hide();
-                $("#listReferencia").hide();
-            }
-            else {
-                $("#divPassword").show();
-                $("#txtPassword").show();
-                $("#listReferencia").hide();
-                $("#listCve").show();
-                $("#txtCve").show();
-                $("#txtCve").attr("placeholder", "Correo UNACH");
-                $("#txtCve").focus();
-                $("#divMsjGral").hide();
-                $("#divMsjUsuDep").show();
-
-
-            }
-        });
-        $("#imgFacebook").click(function () {
-            $(location).attr('href', 'https://www.facebook.com/sysweb.dsia/posts/1382513418590378');
-        });
-        $("#modalTelefonos").click(function () {
-            $("#exampleModal").modal("show");
-        });
-        $("#bttnModalActualizar").click(function () {
-            window.location = "https://sysweb.unach.mx/actualiza_correo/frmactualiza_datos.aspx?sistema=14";
-        });
-
-
-
-
-    });
-
-
-</script>

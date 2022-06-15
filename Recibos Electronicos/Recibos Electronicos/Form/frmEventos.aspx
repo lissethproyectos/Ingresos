@@ -178,6 +178,12 @@
                                         </asp:UpdatePanel>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col text-right">
+                                        <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" Visible="False" />
+&nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
+                                    </div>
+                                </div>
                             </asp:View>
                             <asp:View ID="View2" runat="server">
                                 <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" Width="100%" Font-Names="Calibri" Height="100%">
@@ -1134,7 +1140,6 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col">
-                                
                             </div>
                         </div>
                     </div>

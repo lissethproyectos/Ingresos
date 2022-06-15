@@ -25,6 +25,7 @@ namespace Recibos_Electronicos.Form
 
 
         string Verificador = string.Empty;
+        string MesActual = "0";
         string WXI = string.Empty;
         List<Bien> lstBien = new List<Bien>();
         private static List<Comun> lstBienGrupo = new List<Comun>();
@@ -274,6 +275,10 @@ namespace Recibos_Electronicos.Form
                             foreach (GridViewRow row in grvInventarioAgregado.Rows)
                             {
                                 row.Cells[Convert.ToInt32(Celdas1.GetValue(i))].Visible = false;
+                                if (SesionUsu.Usu_TipoUsu == 3 && SesionUsu.Usu_Central_Tipo=="SA")
+                                    row.Cells[8].Visible = true;
+                                else
+                                    row.Cells[8].Visible = false;
                             }
                         }
                         Total = lstBien.Sum(x => Convert.ToDouble(x.Costo));
@@ -322,6 +327,7 @@ namespace Recibos_Electronicos.Form
 
                                     }
 
+                           
                         }
 
 
@@ -369,6 +375,8 @@ namespace Recibos_Electronicos.Form
                         btnPagar.CssClass = "btn5";
                         btnPagar.ToolTip = string.Empty;
                     }
+
+
 
                 }
 
@@ -433,7 +441,7 @@ namespace Recibos_Electronicos.Form
                 //objFactura.FACT_DEPENDENCIA = DDLDependencia.SelectedValue;
                 //objFactura.FACT_STATUS = DDLStatus.SelectedValue;                    
                 //CNFactura.FacturaProductosConsultaGrid(DDLDependencia.SelectedValue, DDLPagado.SelectedValue, txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtBuscaRef.Text, SesionUsu.Usu_TipoUsu, SesionUsu.Usu_Nombre, ref List);
-                CNFactura.FacturaProductosConsultaGrid(DDLDependencia.SelectedValue, DDLPagado.SelectedValue, txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, "", SesionUsu.Usu_TipoUsu, SesionUsu.Usu_Nombre, ref List);
+                CNFactura.FacturaProductosConsultaGrid(DDLDependencia.SelectedValue, "T", txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtBuscaRef.Text, SesionUsu.Usu_TipoUsu, SesionUsu.Usu_Nombre, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -524,19 +532,21 @@ namespace Recibos_Electronicos.Form
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopoverPDF();", true);
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "PopExcel", "openPopoverEXCEL();", true);
 
             if (!IsPostBack)
             {
                 ViewState["Filter"] = "T";
-http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
                 Session["Inventario"] = null;
                 hddnIdFichaRef.Value = "0";
-                //lblTotal.Text = string.Empty;
                 hddnTotal.Value = "0";
                 Cargarcombos();
-                txtFecha_Factura_Ini.Text = "01/01/" + System.DateTime.Now.Year.ToString();
+                MesActual = System.DateTime.Now.Month.ToString();
+                int Mes = Convert.ToInt32(MesActual);
+                if (Mes > 3)
+                    Mes = Mes - 3;
+
+
+                txtFecha_Factura_Ini.Text = "01/" + Mes.ToString().PadLeft(2, '0') + "/" + System.DateTime.Now.Year.ToString();
                 txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
                 CargarGridInicio();
                 MultiView1.ActiveViewIndex = 1;
@@ -926,7 +936,7 @@ http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
                             }
                         }
                         lblRefGenerada.Text = hddnReferencia.Value;
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
+                        //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
                         //modalPagar.Show();
                     }
                     else
@@ -1137,6 +1147,14 @@ http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
 
         protected void grdDatosFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SesionUsu.Editar = 0;
+
+
+            lblRefGenerada.Text = grdDatosFactura.SelectedRow.Cells[3].Text;
+            linkPago.Text = string.Empty;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
+
+
         }
 
         protected void btnVerFactRecibo_Click(object sender, EventArgs e)
@@ -1217,7 +1235,7 @@ http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
         {
             lblLeyDependencia.Text = DDLDependencia.SelectedItem.Text;
             CargarGridInicio();
-            
+
         }
 
 
@@ -1245,16 +1263,7 @@ http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
 
 
             lblRefGenerada.Text = grdDatosFactura.SelectedRow.Cells[3].Text;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
-            //modalPagar.Show();
-            //Button cbi = (Button)(sender);
-            //GridViewRow row = (GridViewRow)cbi.NamingContainer;
-            //grdDatosFactura.SelectedIndex = row.RowIndex;
-            //string Observaciones = "";
-            //string Conceptos = "L0606-RECUPERACION POR PRODUCCION 0AGRICOLAS Y GANADEROS";
-            //string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP000-1&idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
-            //string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
 
         }
 
@@ -1298,10 +1307,6 @@ http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
             CargarGridInicio();
         }
 
-        protected void btnPagar_Click(object sender, EventArgs e)
-        {
-
-        }
 
         protected void imgBttnPagoTDC_Click(object sender, ImageClickEventArgs e)
         {
@@ -1335,6 +1340,15 @@ http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
             }
 
 
+        }
+        protected void linkBttnPagoLinea_Click(object sender, EventArgs e)
+        {
+
+            int IdRef = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
+            string Total = string.Format("{0:0.00}", grdDatosFactura.SelectedRow.Cells[5].Text);
+            string nombre = grdDatosFactura.SelectedRow.Cells[6].Text;
+            string _open = "window.open('" + "https://sysweb.unach.mx/FichaReferenciada/Form/PagoenLinea.aspx?order_m=" + grdDatosFactura.SelectedRow.Cells[0].Text + "&reference_m=" + grdDatosFactura.SelectedRow.Cells[3].Text + "&amount_m=" + Total + "&customername_m=" + grdDatosFactura.SelectedRow.Cells[6].Text + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
         }
 
         protected void bttnEliminar_Click(object sender, EventArgs e)
@@ -1518,6 +1532,26 @@ http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
             txtCorreo.Text = string.Empty;
         }
 
+        protected void linkBttnGenPDF_Click(object sender, EventArgs e)
+        {
+            string ruta;
+            if (SesionUsu.Editar == 1)
+            {
+                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP000-1&idFact=" + hddnIdFichaRef.Value;
+                DDLTipoVenta.Enabled = true;
+                CargarGridInicio();
+                MultiView1.ActiveViewIndex = 1;
+
+            }
+            else
+            {
+                ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP000-1&idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
+                string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+            }
+        }
+
+
 
         protected void ddlTipoCli_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1643,10 +1677,35 @@ http://localhost:5144/Form/frmRefVenta_Pat.aspx.cs
         }
         protected void DDLCatClientes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(DDLCatClientes.SelectedValue=="0")
-                lblClienteNombre.Text =string.Empty;
+            if (DDLCatClientes.SelectedValue == "0")
+                lblClienteNombre.Text = string.Empty;
             else
                 lblClienteNombre.Text = DDLCatClientes.SelectedItem.Text;
+        }
+
+        protected void linkBttnGenLink_Click(object sender, EventArgs e)
+        {
+            //LinkButton cbi = (LinkButton)(sender);
+            //GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            //grdDatosFactura.SelectedIndex = row.RowIndex;
+
+            string cadena = string.Empty;
+            int id_referencia = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
+            string referencia = grdDatosFactura.SelectedRow.Cells[3].Text;
+            try
+            {
+                cadena = CN_Token.GenerarToken(id_referencia, referencia);
+                linkPago.Text = "https://sysweb.unach.mx/FichaReferenciada/Form/PagoExclusivoSYSWEB.aspx?sw_acc=" + cadena;
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        protected void linkBttnBuscarRef_Click(object sender, EventArgs e)
+        {
+            CargarGridInicio();
         }
     }
 }

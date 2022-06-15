@@ -572,6 +572,11 @@ namespace Recibos_Electronicos.Reportes
                     Reporte = "Reportes\\REP068.rpt";
                         rptPDF_FE(Reporte, v101, "Facturados");
                     break;
+                case "REP070":
+                    object[] v102 = { dependencia };
+                    Reporte = "Reportes\\REP070_Excel.rpt";
+                    rptExcel_Ingresos(Reporte, v102, "Configuracion Evento");
+                    break;
 
                 case "REP000":
                     object[] v39 = { TipoPersona, Referencia, Total, FechaIn, Conceptos, Observaciones };

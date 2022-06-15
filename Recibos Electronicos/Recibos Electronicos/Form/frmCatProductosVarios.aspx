@@ -26,6 +26,7 @@
                                                 ToolTip="Espere un momento, por favor.." />
                                         </ProgressTemplate>
                                     </asp:UpdateProgress>
+                                    </asp:UpdateProgress>
                                 </div>
                             </div>
                             <div class="row">

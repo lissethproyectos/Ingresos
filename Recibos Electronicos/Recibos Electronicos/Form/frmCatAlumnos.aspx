@@ -2,6 +2,8 @@
 
 <%@ Register Assembly="CapaNegocio" Namespace="CapaNegocio" TagPrefix="customControl" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <%--    <asp:UpdatePanel ID="UpdatePanel4" runat="server">
@@ -125,7 +127,7 @@
                 <div style="overflow-x: auto;">
                     <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                         <ContentTemplate>
-                            <asp:GridView ID="grvAlumnosUNACH" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro." OnPageIndexChanging="grvAlumnosUNACH_PageIndexChanging" PageSize="20" Width="100%" Font-Size="Small">
+                            <asp:GridView ID="grvAlumnosUNACH" runat="server" AutoGenerateColumns="False" CssClass="mGrid" OnPageIndexChanging="grvAlumnosUNACH_PageIndexChanging" PageSize="20" Width="100%" Font-Size="Small">
                                 <Columns>
                                     <asp:BoundField DataField="TipoPersonaStr" HeaderText="Origen" />
                                     <asp:BoundField DataField="Nivel" HeaderText="Nivel">
@@ -189,4 +191,13 @@
     </div>
     <%--        </ContentTemplate>
     </asp:UpdatePanel>--%>
+    <script type="text/javascript">
+     function CatAlumnos() {
+            $('#<%= grvAlumnosUNACH.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvAlumnosUNACH.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
+        };
+    </script>
 </asp:Content>
