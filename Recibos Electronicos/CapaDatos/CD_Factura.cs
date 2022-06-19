@@ -888,6 +888,30 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void FacturaActStatus(Factura ObjFactura, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+
+
+                String[] Parametros = { "p_id_factura", "p_status" };
+                Object[] Valores = { ObjFactura.ID_FACT, ObjFactura.FACT_STATUS };
+                String[] ParametrosOut = { "p_bandera" };
+                cmm = CDDatos.GenerarOracleCommand("UPD_STATUS_CAJA", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
 
         public void FacturaEliminar(Factura ObjFactura, ref string Verificador)
         {

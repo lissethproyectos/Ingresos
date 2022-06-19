@@ -191,6 +191,20 @@ namespace CapaNegocio
             }
         }
 
+        public void FacturaActStatus(Factura ObjFactura, ref string Verificador)
+        {
+            try
+            {
+                CD_Factura DatosFactura = new CD_Factura();
+                DatosFactura.FacturaActStatus(ObjFactura, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void FacturaEliminar(Factura ObjFactura, ref string Verificador)
         {
             try

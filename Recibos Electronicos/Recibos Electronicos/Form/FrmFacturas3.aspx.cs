@@ -30,6 +30,7 @@ namespace Recibos_Electronicos.Form
         public String fullPath;
         public String fullPath_Xml;
         public String fullPathFactura;
+        string MesActual = "0";
         public Boolean strFactura;
         public Boolean strFactura_Xml;
         Int32[] Celdas = { 0, 11, 13, 14, 15, 16 };
@@ -77,14 +78,13 @@ namespace Recibos_Electronicos.Form
         }
         protected void grdDatosFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bttnVerRecibo.Visible = false;
+            linkBttnVerRecibo.Visible = false;
             ObjCjaFactura.ItsOk = false;
             txtFecha_Fact_Cja.Text = string.Empty;
             txtFolio_Fact_Cja.Text = string.Empty;
-            chkConfirmaSolicitud.Checked = false;
-            //ddlDependencia.Enabled = false;
+            //chkConfirmaSolicitud.Checked = false;
             LimipiarCampos();
-            rowSolicitarFactura.Visible = false;
+            //rowSolicitarFactura.Visible = false;
             tabFacturas.Tabs[1].Visible = false;
 
             Status();
@@ -95,7 +95,7 @@ namespace Recibos_Electronicos.Form
 
                 ObjFactura.ID_FACT = Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
                 CNFactura.FacturaConsultaDatosFiscales(ref ObjFactura, ref Verificador);
-                bttnVerRecibo.Visible = true;
+                linkBttnVerRecibo.Visible = true;
 
                 if (Verificador == "0")
                 {
@@ -157,36 +157,54 @@ namespace Recibos_Electronicos.Form
                     }
 
 
-                    btnGuardarEditar.ValidationGroup = "DatosFiscales";
-
+                    linkBttnGuardarEditar.ValidationGroup = "DatosFiscales";
+                    linkBttnEnviarSol.Visible = true;
+                    //linkBttnGuardarEditar.Visible = false;
+                    //rowInhabilFactura.Visible = false;
                     if (grdDatosFactura.SelectedRow.Cells[19].Text == "R")
                     {
-                        chkConfirmaSolicitud.Visible = true;
+                        //chkConfirmaSolicitud.Visible = true;
                         chkRechazado.Checked = true;
                         rowObservaciones.Visible = true;
+                        //rowConfSol.Visible = true;
                         txtObservaciones.Text = ObjFactura.FACT_RECEPTOR_STATUS_NOTAS;
                         txtObservaciones.Enabled = false;
+                        linkBttnGuardarEditar.Visible = false;
+                        linkBttnCancelarSol.Visible = true;
+                        //linkBttnEnviarSol.Visible = true;
                     }
-                    else if (grdDatosFactura.SelectedRow.Cells[19].Text == "S" && ddlStatus.SelectedValue=="S")
+                    else if (grdDatosFactura.SelectedRow.Cells[19].Text == "S" && ddlStatus.SelectedValue == "S")
                     {
-                        btnGuardarEditar.ValidationGroup = "DatosFiscalesCaja"; // string.Empty;
+                        linkBttnGuardarEditar.ValidationGroup = "DatosFiscalesCaja"; // string.Empty;
                         chkRechazado.Visible = true;
                         txtObservaciones.Enabled = true;
+                        linkBttnEnviarSol.Visible = false;
+                        linkBttnCancelarSol.Visible = false;
+                        linkBttnGuardarEditar.Visible = true;
                     }
                     else if (grdDatosFactura.SelectedRow.Cells[19].Text == "S" && ddlStatus.SelectedValue == "C")
                     {
-                        rowSolicitarFactura.Visible = true;
-                        chkSolicitar.Checked = true;
+                        linkBttnGuardarEditar.Visible = false;
+                        linkBttnCancelarSol.Visible = true;
+                        //rowSolicitarFactura.Visible = true;
+                        //chkSolicitar.Checked = true;
                     }
-                    else if (grdDatosFactura.SelectedRow.Cells[19].Text == "F" && ddlStatus.SelectedValue=="C")
+                    else if (grdDatosFactura.SelectedRow.Cells[19].Text == "F" && ddlStatus.SelectedValue == "C")
                     {
                         pnl1.Enabled = false;
                         rowPnl1.Visible = true;
+                        linkBttnGuardarEditar.Visible = false;
+                        linkBttnEnviarSol.Visible = false;
+                        linkBttnCancelarSol.Visible = false;
+                        //rowInhabilFactura.Visible = true;
                     }
                     else
                     {
-                        rowSolicitarFactura.Visible = (ddlStatus.SelectedValue == "C") ? true : false;
-                        
+                        //rowSolicitarFactura.Visible = (ddlStatus.SelectedValue == "C") ? true : false;
+                        linkBttnGuardarEditar.Visible = true;
+                        linkBttnCancelarSol.Visible = false;
+
+
                     }
 
                     lblConceptosFac.Text = ObjFactura.FACT_CONCEPTOS;
@@ -243,8 +261,8 @@ namespace Recibos_Electronicos.Form
                 if (fileFactura.HasFile)
                 {
                     int fileSize = fileFactura.PostedFile.ContentLength;
-                    if(ddlTipo.SelectedValue=="R")
-                        fullPathFactura = Path.Combine(Server.MapPath("../ArchivosFacturasTemp/"), "R-"+ grdDatosFactura.SelectedRow.Cells[0].Text+"-"+fileFactura.FileName);
+                    if (ddlTipo.SelectedValue == "R")
+                        fullPathFactura = Path.Combine(Server.MapPath("../ArchivosFacturasTemp/"), "R-" + grdDatosFactura.SelectedRow.Cells[0].Text + "-" + fileFactura.FileName);
                     else
                         fullPathFactura = Path.Combine(Server.MapPath("../ArchivosFacturasTemp/"), ddlTipo.SelectedValue + "-" + grdDatosFacturaEfect.SelectedRow.Cells[0].Text + "-" + fileFactura.FileName);
 
@@ -322,11 +340,18 @@ namespace Recibos_Electronicos.Form
                     {
 
                         if (ddlTipo.SelectedValue == "R")
-                            Guardar();
+                            Verificador=Guardar(false);
                         else
-                            GuardarEfect();
+                            Verificador=GuardarEfect(false);
 
-                        linkBttnBuscar_Click(null, null);
+
+
+                        if (Verificador == "0")
+                            linkBttnBuscar_Click(null, null);                        
+                        else
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+
+                        //linkBttnBuscar_Click(null, null);
                     }
                 }
             }
@@ -340,96 +365,8 @@ namespace Recibos_Electronicos.Form
         #endregion
 
         #region <Funciones>
-        //protected void Guardar()
-        //{
-        //    bool ExisteConcepto800 = VerificaConceptos();
-        //    if (ExisteConcepto800 == false || chkRechazado.Checked == true)
-        //    {
-        //        ObjFactura.FACT_TIPO = ddlTipo.SelectedValue;
-        //        ObjFactura.FACT_DEPENDENCIA = ddlDependencia2.SelectedValue;
-        //        ObjFactura.FACT_RECEPTOR_RFC = txtReceptor_Rfc.Text;
-        //        ObjFactura.FACT_RECEPTOR_TIPO_PERS = rdoBttnReceptorTipoPersona.SelectedValue;
-        //        ObjFactura.FACT_NOMBRE = txtReceptor_Nombre.Text;
-        //        ObjFactura.FACT_RECEPTOR_DOMICILIO = txtReceptor_Domicilio.Text;
-        //        ObjFactura.FACT_RECEPTOR_COLONIA = txtReceptor_Colonia.Text;                
-        //        ObjFactura.FACT_RECEPTOR_ESTADO = ddlReceptor_Estado.SelectedValue;
-        //        ObjFactura.FACT_RECEPTOR_MUNICIPIO = ddlReceptor_Municipio.SelectedValue;
-        //        ObjFactura.FACT_RECEPTOR_CP = txtReceptor_CP.Text;
-        //        ObjFactura.FACT_RECEPTOR_METODO_PAGO = ddlReceptor_MetodoPago.SelectedValue;
-        //        ObjFactura.FACT_RECEPTOR_FORMA_PAGO = ddlForma_Pago.SelectedValue;
-        //        ObjFactura.CFDI = ddlCFDI.SelectedValue;
-        //        ObjFactura.FACT_RECEPTOR_TELEFONO = txtReceptor_Telefono.Text;
-        //        ObjFactura.FACT_RECEPTOR_CORREO = txtReceptor_Correo.Text;                
-        //        ObjFactura.FACT_RECEPTOR_STATUS = "C";
-        //        ObjFactura.FACT_RECEPTOR_STATUS_NOTAS = (chkRechazado.Checked == true) ? txtObservaciones.Text : string.Empty;
 
-        //        if (chkRechazado.Checked == true)
-        //            ObjFactura.FACT_CONFIRMADO = (chkRechazado.Checked == true) ? (chkConfirmaSolicitud.Checked == true) ? "S" : string.Empty : string.Empty;
-        //        else
-        //            ObjFactura.FACT_CONFIRMADO = chkSolicitar.Checked == true ? "S" : "N";
-
-
-        //        ObjFactura.FACT_OBSERVACIONES = txtDescConcepto.Text.ToUpper();
-
-
-        //            ObjFactura.ID_FACT = Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
-        //            CNFactura.FacturaActDatosCaja(ObjFactura, SesionUsu.Usu_Nombre, ref Verificador);
-
-
-        //        if (Verificador == "0")
-        //        {
-        //            CNCjaFactura.FacturaCajaBorrar(ObjFactura, ref Verificador);
-        //            if (Verificador == "0")
-        //            {
-        //                if (grdArchivos.Rows.Count > 0)
-        //                {
-        //                    //fullPath = Path.Combine(Server.MapPath("../Facturas/PDF/"));
-        //                    //ListArch = (List<CajaFactura>)Session["Archivos"];
-        //                    //CNCjaFactura.FacturaCajaAgregar(SesionUsu.Usu_Nombre, ref ListArch, ObjFactura, fullPath, ref Verificador);
-
-
-        //                    fullPath = Path.Combine(Server.MapPath("../ArchivosFacturasTemp/"));
-        //                    ListArch = (List<CajaFactura>)Session["Archivos"];
-        //                    CNCjaFactura.FacturaCajaAgregar(SesionUsu.Usu_Nombre, ref ListArch, Convert.ToInt32(ObjFactura.ID_FACT), fullPath, ddlTipo.SelectedValue, ref Verificador);
-
-        //                }
-
-
-        //                if (Verificador == "0")
-        //                {
-        //                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'Los datos han sido modificados correctamente');", true);
-        //                    mltViewFacturas.ActiveViewIndex = 0;
-        //                    Status();
-        //                    ddlDependencia.SelectedIndex = 0;
-        //                    ddlDependencia_SelectedIndexChanged(null, null);
-        //                    SesionUsu.Editar = 0;
-        //                }
-        //                else
-        //                {
-        //                    string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-        //                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
-        //                }
-        //            }
-        //            else
-        //            {
-        //                string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-        //                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-        //            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        //Accordion1.RequireOpenedPane
-        //        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Se debe adjuntar el Convenio para los conceptos 800.');", true);  //lblMsj.Text = ex.Message;
-        //    }
-
-        //}
-        protected void Guardar()
+        protected string Guardar(bool SolicitarFactura)
         {
             bool ExisteConcepto800 = VerificaConceptos();
             if (ExisteConcepto800 == false || chkRechazado.Checked == true)
@@ -447,7 +384,7 @@ namespace Recibos_Electronicos.Form
                 ObjFactura.FACT_RECEPTOR_METODO_PAGO = ddlReceptor_MetodoPago.SelectedValue;
                 ObjFactura.FACT_RECEPTOR_FORMA_PAGO = ddlForma_Pago.SelectedValue;
                 ObjFactura.CFDI = ddlCFDI.SelectedValue;
-                ObjFactura.FACT_RECEPTOR_CODIGO=ddlCodigoFiscal.SelectedValue;
+                ObjFactura.FACT_RECEPTOR_CODIGO = ddlCodigoFiscal.SelectedValue;
                 ObjFactura.FACT_RECEPTOR_TELEFONO = txtReceptor_Telefono.Text;
                 ObjFactura.FACT_RECEPTOR_CORREO = txtReceptor_Correo.Text;
                 ObjFactura.FACT_RECEPTOR_STATUS = "C";
@@ -455,20 +392,27 @@ namespace Recibos_Electronicos.Form
 
                 if (chkRechazado.Checked == true)
                 {
-                    if (ddlStatus.SelectedValue == "C" && chkConfirmaSolicitud.Checked==true)
+                    //if (ddlStatus.SelectedValue == "C" && chkConfirmaSolicitud.Checked==true)
+                    if (ddlStatus.SelectedValue == "C" && SolicitarFactura == true)
                         ObjFactura.FACT_RECEPTOR_STATUS = "S";
 
-                    ObjFactura.FACT_CONFIRMADO = (chkRechazado.Checked == true) ? (chkConfirmaSolicitud.Checked == true) ? "S" : string.Empty : string.Empty;
+                    //ObjFactura.FACT_CONFIRMADO = (chkRechazado.Checked == true) ? (chkConfirmaSolicitud.Checked == true) ? "S" : string.Empty : string.Empty;
+                    ObjFactura.FACT_CONFIRMADO = (SolicitarFactura == true) ? "S" : string.Empty;
+                    grdArchivos.DataSource = null;
+                    grdArchivos.DataBind();
+
                 }
                 else
-                    ObjFactura.FACT_CONFIRMADO = chkSolicitar.Checked == true ? "S" : "N";
+                    ObjFactura.FACT_CONFIRMADO = SolicitarFactura == true ? "S" : "N";
 
-
-                if (ddlStatus.SelectedValue == "C" && chkSolicitar.Checked == true)
+             
+                if (ddlStatus.SelectedValue == "C" && SolicitarFactura == true)
                     ObjFactura.FACT_RECEPTOR_STATUS = "S";
-                else if(grdArchivos.Rows.Count>=1 && ddlStatus.SelectedValue=="S" )
+                else if (grdArchivos.Rows.Count >= 1 && ddlStatus.SelectedValue == "S")
                     ObjFactura.FACT_RECEPTOR_STATUS = "F";
                 else if (ddlStatus.SelectedValue == "S" && chkRechazado.Checked == true)
+                    ObjFactura.FACT_RECEPTOR_STATUS = "R";
+                else if (ddlStatus.SelectedValue == "C" && chkRechazado.Checked == true)
                     ObjFactura.FACT_RECEPTOR_STATUS = "R";
 
 
@@ -476,12 +420,7 @@ namespace Recibos_Electronicos.Form
                 ObjFactura.FACT_OBSERVACIONES = txtDescConcepto.Text.ToUpper();
 
 
-                //ObjFactura.FACT_TIPO = (SesionUsu.Editar!=3)?Convert.ToString(grdDatosFactura.SelectedRow.Cells[19].Text):"T";
-
-                //ObjFactura.OFICIO = txtNumOficio.Text;
-                //ObjFactura.FECHA_OFICIO = txtFechaOficio.Text;
-                //Usur.Usu_Nombre = SesionUsu.Usu_Nombre;
-                ObjFactura.NUMERO_EXTERIOR = (txtReceptor_NumExt.Text==null || txtReceptor_NumExt.Text == string.Empty) ?"0": txtReceptor_NumExt.Text;
+                ObjFactura.NUMERO_EXTERIOR = (txtReceptor_NumExt.Text == null || txtReceptor_NumExt.Text == string.Empty) ? "0" : txtReceptor_NumExt.Text;
                 ObjFactura.NUMERO_INTERIOR = (txtReceptor_NumInt.Text == null || txtReceptor_NumInt.Text == string.Empty) ? "0" : txtReceptor_NumInt.Text;
                 ObjFactura.ADJUNTO_CONSTANCIA = linkConstancia.Text;
                 if (SesionUsu.Editar == 1)
@@ -511,7 +450,7 @@ namespace Recibos_Electronicos.Form
 
                         if (Verificador == "0")
                         {
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'Los datos han sido modificados correctamente');", true);
+                            //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'Los datos han sido modificados correctamente');", true);
                             mltViewFacturas.ActiveViewIndex = 0;
                             Status();
                             ddlDependencia.SelectedIndex = 0;
@@ -521,31 +460,36 @@ namespace Recibos_Electronicos.Form
                         else
                         {
                             string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
+                            Verificador = MsjError;
+                            //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
                         }
                     }
                     else
                     {
                         string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
+                        Verificador = MsjError;
+                        //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
                     }
                 }
                 else
                 {
                     string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
+                    Verificador = MsjError;
+                    //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
                 }
             }
             else
             {
-                //Accordion1.RequireOpenedPane
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Se debe adjuntar el Convenio para los conceptos 800.');", true);  //lblMsj.Text = ex.Message;
+                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Se debe adjuntar el Convenio para los conceptos 800.');", true);  //lblMsj.Text = ex.Message;
+                Verificador = "Se debe adjuntar el Convenio para los conceptos 800.";
             }
 
+            return Verificador;
         }
 
-        protected void GuardarEfect()
+        protected string GuardarEfect(bool SolicitarFactura)
         {
+            Verificador = string.Empty;
             bool ExisteConcepto800 = VerificaConceptos();
             if (ExisteConcepto800 == false || chkRechazado.Checked == true)
             {
@@ -574,12 +518,17 @@ namespace Recibos_Electronicos.Form
                 if (chkRechazado.Checked == true)
                 {
                     //if(ddlStatus.SelectedValue=="C")
-                    ObjFacturacion.CONFIRMADO = (chkRechazado.Checked == true) ? (chkConfirmaSolicitud.Checked == true) ? "S" : string.Empty : string.Empty;
+                    //ObjFacturacion.CONFIRMADO = (chkRechazado.Checked == true) ? (chkConfirmaSolicitud.Checked == true) ? "S" : string.Empty : string.Empty;
                     //else
+
+                    ObjFacturacion.CONFIRMADO = (chkRechazado.Checked == true) ? (SolicitarFactura == true) ? "S" : string.Empty : string.Empty;
+
 
                 }
                 else
-                    ObjFacturacion.CONFIRMADO = chkSolicitar.Checked == true ? "S" : "N";
+                    ObjFacturacion.CONFIRMADO = SolicitarFactura == true ? "S" : "N";
+
+                //ObjFacturacion.CONFIRMADO = chkSolicitar.Checked == true ? "S" : "N";
 
 
                 ObjFacturacion.OBSERVACIONES = txtDescConcepto.Text.ToUpper();
@@ -615,7 +564,7 @@ namespace Recibos_Electronicos.Form
                     ObjFacturacion.RECEPTOR_STATUS = "E";
                 else if (grdArchivos.Rows.Count > 0 && grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "F")
                 {
-                    if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text=="A"  && txtFolio.Text != string.Empty && txtFecha.Text != string.Empty && txtImporteDeposito.Text != string.Empty && lblArchivoVoucher.Text != string.Empty)
+                    if (grdDatosFacturaEfect.SelectedRow.Cells[27].Text == "A" && txtFolio.Text != string.Empty && txtFecha.Text != string.Empty && txtImporteDeposito.Text != string.Empty && lblArchivoVoucher.Text != string.Empty)
                         ObjFacturacion.RECEPTOR_STATUS = "P";
                     else
                         ObjFacturacion.RECEPTOR_STATUS = "F";
@@ -624,7 +573,9 @@ namespace Recibos_Electronicos.Form
                 {
                     if (chkRechazado.Checked == true && grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "C")
                     {
-                        if (chkConfirmaSolicitud.Checked == true)
+                        //if (chkConfirmaSolicitud.Checked == true)
+                        if (SolicitarFactura == true)
+
                             ObjFacturacion.RECEPTOR_STATUS = "S";
                     }
                     else if (chkRechazado.Checked == true && grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "S")
@@ -633,9 +584,9 @@ namespace Recibos_Electronicos.Form
                         ObjFacturacion.RECEPTOR_STATUS = "P";
                     else
                     {
-                        if (chkConfirmaSolicitud.Checked == true)
-                            ObjFacturacion.RECEPTOR_STATUS = "S";
-                        if (chkSolicitar.Checked == true)
+                        //if (chkConfirmaSolicitud.Checked == true)
+                        //    ObjFacturacion.RECEPTOR_STATUS = "S";
+                        if (SolicitarFactura == true) // (chkSolicitar.Checked == true)
                             ObjFacturacion.RECEPTOR_STATUS = "S";
                     }
                 }
@@ -744,7 +695,7 @@ namespace Recibos_Electronicos.Form
                 else
                 {
                     CNComun.VerificaTextoMensajeError(ref Verificador);
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
+                    //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
                 }
 
 
@@ -763,7 +714,7 @@ namespace Recibos_Electronicos.Form
 
                         if (Verificador == "0")
                         {
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'Los datos han sido modificados correctamente');", true);
+                            //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'Los datos han sido modificados correctamente');", true);
                             mltViewFacturas.ActiveViewIndex = 0;
                             Status();
                             ddlDependencia.SelectedIndex = 0;
@@ -773,34 +724,49 @@ namespace Recibos_Electronicos.Form
                         else
                         {
                             string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
+                            Verificador = MsjError;
+                            //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);
                         }
                     }
                     else
                     {
                         string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
+                        Verificador = MsjError;
+                        //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
                     }
                 }
                 else
                 {
                     string MsjError = (Verificador.Length > 40) ? Verificador.Substring(0, 40) : Verificador;
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
+                    Verificador = MsjError;
+                    //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true); //lblMensaje.Text = Verificador;
                 }
             }
             else
             {
                 //Accordion1.RequireOpenedPane
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Se debe adjuntar el Convenio para los conceptos 800.');", true);  //lblMsj.Text = ex.Message;
+                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Se debe adjuntar el Convenio para los conceptos 800.');", true);  //lblMsj.Text = ex.Message;
+                Verificador = "Se debe adjuntar el Convenio para los conceptos 800.";
             }
-
+            return Verificador;
         }
 
         protected void inicializar()
         {
             tabFacturas.ActiveTabIndex = 0;
             mltViewFacturas.ActiveViewIndex = 0;
-            txtFecha_Factura_Ini.Text = "01/01" + System.DateTime.Now.ToString("/yyyy"); //DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
+            MesActual = System.DateTime.Now.Month.ToString();
+            int Mes = Convert.ToInt32(MesActual);
+            if (Mes > 3)
+                Mes = Mes - 3;
+
+
+            txtFecha_Factura_Ini.Text = "01/" + Mes.ToString().PadLeft(2, '0') + "/" + System.DateTime.Now.Year.ToString();
+
+
+            //txtFecha_Factura_Ini.Text = "01/01" + System.DateTime.Now.ToString("/yyyy"); //DateTime.Now.AddDays(-1).ToString("dd/MM/yyyy");
+
+
             txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
             CargarCombos();
             ddlTipo_SelectedIndexChanged(null, null);
@@ -884,8 +850,14 @@ namespace Recibos_Electronicos.Form
                     CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia2, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
                 }
 
-                CNComun.LlenaCombo("pkg_felectronica.Obt_Combo_Avance_Factura", ref ddlAvance);
-                CNComun.LlenaCombo("PKG_CONTRATOS.Obt_Combo_Estados", ref ddlReceptor_Estado, "p_pais", "1");
+                CNComun.LlenaCombo("PKG_CONTRATOS.Obt_Combo_Paises", ref ddlReceptor_Pais);
+                ddlReceptor_Pais.SelectedValue = "1";
+
+
+
+
+
+                CNComun.LlenaCombo("PKG_CONTRATOS.Obt_Combo_Estados", ref ddlReceptor_Estado, "p_pais", ddlReceptor_Pais.SelectedValue);
                 ddlReceptor_Estado.Items.Insert(0, new ListItem("-- Seleccione --", "0"));
                 ddlEstado_Fiscal_SelectedIndexChanged(null, null);
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_CodFiscal", ref ddlCodigoFiscal);
@@ -913,7 +885,7 @@ namespace Recibos_Electronicos.Form
                 grdDatosFactura.DataSource = GetList();
                 grdDatosFactura.DataBind();
 
-                
+
                 switch (ddlStatus.SelectedValue)
                 {
                     case "F":
@@ -1044,7 +1016,7 @@ namespace Recibos_Electronicos.Form
                         linkEditar.Visible = false;
                         if (row.Cells[27].Text == "A")
                             linkEditar2.Visible = true;
-                       
+
 
                         linkBttnDocto.Visible = true;
                         row.Cells[18].BackColor = System.Drawing.Color.CadetBlue; //Color.FromName("#275090"); //System.Drawing.Color.DarkBlue;
@@ -1293,7 +1265,7 @@ namespace Recibos_Electronicos.Form
             try
             {
                 List<Facturacion> List = new List<Facturacion>();
-                if(ddlTipo.SelectedValue=="R")
+                if (ddlTipo.SelectedValue == "R")
                     ObjFacturacion.ID_FACT = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
                 else
                     ObjFacturacion.ID_FACT = Convert.ToInt32(grdDatosFacturaEfect.SelectedRow.Cells[0].Text);
@@ -1399,10 +1371,10 @@ namespace Recibos_Electronicos.Form
                 txtReceptor_Telefono.Text = string.Empty;
                 txtReceptor_Correo.Text = string.Empty;
                 txtDescConcepto.Text = string.Empty;
-                chkSolicitar.Checked = false;
+                //chkSolicitar.Checked = false;
                 txtObservaciones.Text = string.Empty;
                 chkRechazado.Checked = false;
-
+                chkConfirmaSolicitud.Checked = false;
 
                 //Datos del Voucher
                 txtFolio.Text = string.Empty;
@@ -1433,8 +1405,8 @@ namespace Recibos_Electronicos.Form
 
 
 
-                chkConfirmaSolicitud.Visible = false;
-                chkConfirmaSolicitud.Checked = false;
+                //chkConfirmaSolicitud.Visible = false;
+                //chkConfirmaSolicitud.Checked = false;
                 lblArchivoVoucher.NavigateUrl = string.Empty;
                 lblArchivoVoucher.Text = string.Empty;
                 linkBttnEliminarVoucher.Visible = false;
@@ -1457,6 +1429,7 @@ namespace Recibos_Electronicos.Form
                 ddlDependencia.Visible = true;
                 chkRechazado.Visible = false;
                 rowObservaciones.Visible = false;
+                //rowConfSol.Visible = false;
                 txtFecha_Fact_Cja.Enabled = true;
                 txtFolio_Fact_Cja.Enabled = true;
                 ddlCFDI.SelectedIndex = 0;
@@ -1471,7 +1444,7 @@ namespace Recibos_Electronicos.Form
                 grvConceptos.DataSource = null;
                 grvConceptos.DataBind();
                 tabFacturas.ActiveTabIndex = 0;
-                chkSolicitar.Checked = false;
+                //chkSolicitar.Checked = false;
             }
             catch (Exception ex)
             {
@@ -1708,8 +1681,9 @@ namespace Recibos_Electronicos.Form
             rowPnl1.Visible = false;
 
             pnl2.Enabled = true;
-            
+
             rowPnl2.Visible = false;
+            rowPnl3.Visible = false;
             switch (ddlStatus.SelectedValue)
             {
                 case "C":
@@ -1783,8 +1757,10 @@ namespace Recibos_Electronicos.Form
                         collapse4.Visible = false;
                     }
                     else
+                    {
+                        rowPnl3.Visible = true;
                         tabFacturas.Tabs[1].Visible = false;
-
+                    }
                     tabFacturas.Tabs[2].Visible = true;
                     break;
                 case "P":
@@ -1909,7 +1885,7 @@ namespace Recibos_Electronicos.Form
                             grdArchivos.Columns[5].Visible = false;
                             pnlFacturas.Visible = false;
                         }
-                        
+
                         collapse1.Visible = true;
                         collapse2.Visible = true;
                         collapse3.Visible = true;
@@ -2202,18 +2178,13 @@ namespace Recibos_Electronicos.Form
         {
             if (chkRechazado.Checked == true)
             {
-                if (chkConfirmaSolicitud.Visible == false)
-                {
-                    rowObservaciones.Visible = true;
-                }
-                else
-                {
-                    rowObservaciones.Visible = true;
-                }
+                rowObservaciones.Visible = true;
+                //rowConfSol.Visible = true;
             }
             else
             {
                 rowObservaciones.Visible = false;
+                //rowConfSol.Visible = false;
             }
         }
 
@@ -2224,7 +2195,7 @@ namespace Recibos_Electronicos.Form
             LimipiarCampos();
             tabFacturas.Tabs[1].Visible = true;
             tabFacturas.Tabs[2].Visible = false;
-            chkConfirmaSolicitud.Visible = true;
+            //chkConfirmaSolicitud.Visible = true;
         }
 
         protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)
@@ -2349,7 +2320,7 @@ namespace Recibos_Electronicos.Form
 
         protected void linkBttnEliminarVoucher_Click(object sender, EventArgs e)
         {
-            
+
             try
             {
                 System.IO.File.Delete(lblArchivoVoucher.ToolTip);
@@ -2441,7 +2412,7 @@ namespace Recibos_Electronicos.Form
                 if (fileOficio.HasFile)
                 {
                     int fileSize = fileOficio.PostedFile.ContentLength;
-                    fullPath = Path.Combine(Server.MapPath("../DoctosFacturasTemp/"), fileOficio.FileName);                   
+                    fullPath = Path.Combine(Server.MapPath("../DoctosFacturasTemp/"), fileOficio.FileName);
 
                     fileOficio.SaveAs(fullPath);
                     lblArchivoOficio.NavigateUrl = "../DoctosFacturasTemp/" + fileOficio.FileName;
@@ -2621,7 +2592,8 @@ namespace Recibos_Electronicos.Form
         {
             chkRechazado.Visible = false;
             rowObservaciones.Visible = false;
-            bttnVerRecibo.Visible = false;
+            //rowConfSol.Visible = false;
+            linkBttnVerRecibo.Visible = false;
             ddlDependencia2.SelectedValue = ddlDependencia.SelectedValue;
             ddlDependencia2.Enabled = true;
             //lblDependencia.Text = ddlDependencia.SelectedItem.Text;
@@ -2687,15 +2659,7 @@ namespace Recibos_Electronicos.Form
             }
         }
 
-        protected void linkBttnVerRecibo_Click(object sender, EventArgs e)
-        {
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
-            string _open = "window.open('" + ruta + "', '_newtab');";
-            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
-
-           
-        }
         protected void bttnVerRecibo_Click(object sender, EventArgs e)
         {
             string ruta = "../Reportes/VisualizadorCrystal.aspx?idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
@@ -2737,13 +2701,14 @@ namespace Recibos_Electronicos.Form
         {
             chkRechazado.Visible = false;
             rowObservaciones.Visible = false;
-            bttnVerRecibo.Visible = false;
+            //rowConfSol.Visible = false;
+            linkBttnVerRecibo.Visible = false;
             ddlDependencia2.SelectedValue = ddlDependencia.SelectedValue;
             ddlDependencia2.Enabled = true;
             LimipiarCampos();
             SesionUsu.Editar = 3;
             Status();
-            rowSolicitarFactura.Visible = true;
+            //rowSolicitarFactura.Visible = true;
             grdArchivos.DataSource = null;
             grdArchivos.DataBind();
             Session["Archivos"] = null;
@@ -2783,14 +2748,14 @@ namespace Recibos_Electronicos.Form
 
         protected void grdDatosFacturaEfect_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bttnVerRecibo.Visible = false;
+            linkBttnVerRecibo.Visible = false;
             ObjCjaFactura.ItsOk = false;
             txtFecha_Fact_Cja.Text = string.Empty;
             txtFolio_Fact_Cja.Text = string.Empty;
-            chkConfirmaSolicitud.Checked = false;
+            //chkConfirmaSolicitud.Checked = false;
             //ddlDependencia.Enabled = false;
             LimipiarCampos();
-            rowSolicitarFactura.Visible = false;
+            //rowSolicitarFactura.Visible = false;
             tabFacturas.Tabs[1].Visible = false;
             rowPaso1.Visible = false;
             rowPaso2.Visible = false;
@@ -2862,29 +2827,31 @@ namespace Recibos_Electronicos.Form
                     txtReceptor_Correo.Text = ObjFacturacion.RECEPTOR_CORREO;
                     txtDescConcepto.Text = ObjFacturacion.OBSERVACIONES;
                     txtObservaciones.Text = ObjFacturacion.RECEPTOR_STATUS_NOTAS;
-                    chkSolicitar.Checked = ObjFacturacion.CONFIRMADO == "S" ? true : false;
-                    rowSolicitarFactura.Visible = true;
+                    //chkSolicitar.Checked = ObjFacturacion.CONFIRMADO == "S" ? true : false;
+                    //rowSolicitarFactura.Visible = true;
                     rowObservaciones.Visible = false;
+                    //rowConfSol.Visible = false;
                     txtObservaciones.Enabled = true;
-                    btnGuardarEditar.ValidationGroup = "DatosFiscales";
+                    linkBttnGuardarEditar.ValidationGroup = "DatosFiscales";
                     if (ddlStatus.SelectedValue == "C" && grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "S")
                         chkRechazado.Visible = false;
                     else if (ddlStatus.SelectedValue == "C" && grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "R")
                     {
-                        chkConfirmaSolicitud.Visible = true;
-                        rowSolicitarFactura.Visible = false;
+                        //chkConfirmaSolicitud.Visible = true;
+                        //rowSolicitarFactura.Visible = false;
                         rowObservaciones.Visible = true;
+                        //rowConfSol.Visible = true;
                         txtObservaciones.Enabled = false;
                     }
                     else if (ddlStatus.SelectedValue == "S" && grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "S")
                     {
-                        btnGuardarEditar.ValidationGroup = string.Empty;
+                        linkBttnGuardarEditar.ValidationGroup = string.Empty;
                         chkRechazado.Visible = true;
-                        btnGuardarEditar.ValidationGroup = "DatosFiscalesCaja";
+                        linkBttnGuardarEditar.ValidationGroup = "DatosFiscalesCaja";
                     }
-                    else if (grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "F")                    
-                        rowPaso3.Visible = true;                    
-                    else if (grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "P")                    
+                    else if (grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "F")
+                        rowPaso3.Visible = true;
+                    else if (grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "P")
                         rowPaso4.Visible = true;
                     else if (grdDatosFacturaEfect.SelectedRow.Cells[24].Text == "E")
                         rowPaso5.Visible = true;
@@ -2895,10 +2862,7 @@ namespace Recibos_Electronicos.Form
                     lblConceptosFac.Text = ObjFacturacion.CONCEPTOS;
 
 
-                    //rowObservaciones.Visible = true;
-                    //txtObservaciones.Enabled = true;
-                    //rowSolicitarFactura.Visible = ddlStatus.SelectedValue == "C" ? true : false;
-                    //rowObservaciones.Visible = false;
+
 
 
                     SesionUsu.Editar = 2;
@@ -2927,7 +2891,7 @@ namespace Recibos_Electronicos.Form
 
 
                     //REP
-                    txtFechaRep.Text= ObjFacturacion.FECHA_REP;
+                    txtFechaRep.Text = ObjFacturacion.FECHA_REP;
                     txtNumREP.Text = ObjFacturacion.FOLIO_REP;
 
                     //Doctos
@@ -2997,7 +2961,7 @@ namespace Recibos_Electronicos.Form
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdDatosFactura.SelectedIndex = row.RowIndex;
             CargarGridDoctosEfect();
-            
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupBitacora", "$('#modalFacturas').modal('show')", true);
         }
         protected void grdDatosFacturaEfect_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -3056,7 +3020,7 @@ namespace Recibos_Electronicos.Form
         protected void linkBttnEliminarConstancia_Click(object sender, EventArgs e)
         {
             //linkBttnEliminarConstancia
-             try
+            try
             {
                 System.IO.File.Delete(linkConstancia.ToolTip);
                 linkConstancia.NavigateUrl = string.Empty;
@@ -3082,6 +3046,149 @@ namespace Recibos_Electronicos.Form
                 Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
+            }
+        }
+
+        protected void linkBttnEnviarSol_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            //chkConfirmaSolicitud.ValidationGroup = "DatosFiscales";
+            try
+            {
+                if (Page.IsValid)
+                {
+                    if (linkConstancia.NavigateUrl == string.Empty)
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'La constancia fiscal es requerida, favor de adjuntar.');", true);  //lblMsj.Text = ex.Message;                    
+                    else if (ddlStatus.SelectedValue == "C" && grdDatosFactura.SelectedRow.Cells[19].Text == "R")
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConfirmacion", "$('#modalConfirmacion').modal('show')", true);
+                    else
+                    {
+
+                        if (ddlTipo.SelectedValue == "R")
+                            Verificador = Guardar(true);
+                        else
+                            Verificador = GuardarEfect(true);
+
+                        if (Verificador == "0")
+                            linkBttnBuscar_Click(null, null);
+                        else
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+            }
+        }
+
+      
+
+
+        protected void linkBttnGuardarEditar_Click(object sender, EventArgs e)
+        {
+            //chkConfirmaSolicitud.ValidationGroup = string.Empty;
+            try
+            {
+                if (Page.IsValid)
+                {
+                    //if (linkConstancia.NavigateUrl == string.Empty && rdoBttnReceptorTipoPersona.SelectedValue == "F")
+                    if (linkConstancia.NavigateUrl == string.Empty)
+                    {
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'La constancia fiscal es requerida, favor de adjuntar.');", true);  //lblMsj.Text = ex.Message;
+
+                    }
+                    else
+                    {
+                        string status=grdDatosFactura.SelectedRow.Cells[19].Text;
+                        if (ddlTipo.SelectedValue == "R")
+                            Verificador=Guardar(false);
+                        else
+                            Verificador=GuardarEfect(false);
+
+                        if (Verificador == "0")
+                        {
+                            if(status!="S")
+                                if(status != "F")
+                                    if(status != "R")
+                                        if(status != "C")
+                                            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConfirmacion", "$('#modalSinConfirmacion').modal('show')", true);
+
+
+                            linkBttnBuscar_Click(null, null);
+                        }
+                        else
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+            }
+        }
+
+        protected void linkBttnVerRecibo_Click(object sender, EventArgs e)
+        {
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?idFact=" + grdDatosFactura.SelectedRow.Cells[0].Text;
+            string _open = "window.open('" + ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+        }
+
+        protected void linkBttnCancelarEditar_Click(object sender, EventArgs e)
+        {
+            SesionUsu.Editar = 0;
+            mltViewFacturas.ActiveViewIndex = 0;
+        }
+
+        protected void linkBttnEnviarSol_modal_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                if (linkConstancia.NavigateUrl == string.Empty)
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'La constancia fiscal es requerida, favor de adjuntar.');", true);  //lblMsj.Text = ex.Message;                    
+                else
+                {
+
+                    if (ddlTipo.SelectedValue == "R")
+                        Verificador = Guardar(true);
+                    else
+                        Verificador = GuardarEfect(true);
+
+                    if (Verificador == "0")
+                        linkBttnBuscar_Click(null, null);
+                }
+            }
+        }
+
+        protected void linkBttnCancelarSol_Click(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                ObjFactura.ID_FACT = Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
+                ObjFactura.FACT_STATUS = "";
+                CNFactura.FacturaActStatus(ObjFactura, ref Verificador);
+                if (Verificador == "0")
+                {
+                    CargarGrid();
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'Solicitud eliminada.');", true);  //lblMsj.Text = ex.Message;                    
+                    mltViewFacturas.ActiveViewIndex = 0;
+                }
+                else
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, " + Verificador + ");", true);  //lblMsj.Text = ex.Message;                    
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
             }
         }
     }

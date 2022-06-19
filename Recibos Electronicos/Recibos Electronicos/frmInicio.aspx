@@ -49,10 +49,10 @@
         });
     </script>
     <style type="text/css">
-        .scroll_monitor {
+       /* .scroll_monitor {
             height: 450px;
             overflow: auto;
-        }
+        }*/
 
         #chartdiv {
             width: 100%;

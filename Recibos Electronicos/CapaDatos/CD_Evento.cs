@@ -1516,8 +1516,8 @@ namespace CapaDatos
             {
 
                 OracleDataReader dr = null;
-                String[] Parametros = { "p_dependencia", "p_usuario", "p_tipo_acceso", "p_tipo_usuario", "p_status", "p_busca" };
-                Object[] Valores = { Objeventos.Dependencia, Usuario, Objeventos.Tipo, TipoUsuario, Status, Buscar };
+                String[] Parametros = { "p_dependencia", "p_usuario", "p_tipo_acceso", "p_tipo_usuario", "p_status",  "p_fecha_inicial", "p_fecha_final", "p_busca" };
+                Object[] Valores = { Objeventos.Dependencia, Usuario, Objeventos.Tipo, TipoUsuario, Status, Objeventos.Fecha_inicial, Objeventos.Fecha_final, Buscar };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_EventosUsu", ref dr, Parametros, Valores);
 

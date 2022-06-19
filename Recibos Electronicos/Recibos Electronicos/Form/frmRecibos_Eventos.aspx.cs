@@ -31,17 +31,31 @@ namespace Recibos_Electronicos.Form
         string MsjError = string.Empty;
         string Reporte = string.Empty;
         double TotalPagos = 0;
+        string MesActual = "0";
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
             SesionUsu = (Sesion)Session["Usuario"];
-            if (!IsPostBack)
-                CargarCombos();
+            if (!IsPostBack)           
+                Inicializar();
+            
 
             ScriptManager.RegisterStartupScript(this, GetType(), "Grid1", "Eventos();", true);
             ScriptManager.RegisterStartupScript(this, GetType(), "Grid2", "Pagos();", true);
         }
         #region <Funciones>
+        protected void Inicializar()
+        {
+            MesActual = System.DateTime.Now.Month.ToString();
+            int Mes = Convert.ToInt32(MesActual);
+            if (Mes > 3)
+                Mes = Mes - 3;
+
+            txtFecha_Factura_Ini.Text = "01/" + Mes.ToString().PadLeft(2, '0') + "/" + System.DateTime.Now.Year.ToString();
+            txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
+            CargarCombos();
+        }
+
         protected void CargarCombos()
         {
             MsjError = string.Empty;
@@ -124,6 +138,8 @@ namespace Recibos_Electronicos.Form
                 List<Evento> ListEvento = new List<Evento>();
                 ObjEvento.Dependencia = ddlDependencia.SelectedValue;
                 ObjEvento.Tipo = ddlDirigido.SelectedValue;
+                ObjEvento.Fecha_inicial = txtFecha_Factura_Ini.Text;
+                ObjEvento.Fecha_final = txtFecha_Factura_Fin.Text;
                 CNEvento.ConsultarEventosTipoUsu(ObjEvento, SesionUsu.Usu_Nombre, Convert.ToString(SesionUsu.Usu_TipoUsu), "A" , "", ref ListEvento);
                 return ListEvento;
             }
@@ -169,6 +185,8 @@ namespace Recibos_Electronicos.Form
         protected void imgBttnBuscar_Click(object sender, ImageClickEventArgs e)
         {
             CargarGridPagos();
+            grdDatosFactura.DataSource = null;
+            grdDatosFactura.DataBind();
         }
 
         protected void grdEventos_PageIndexChanging(object sender, GridViewPageEventArgs e)

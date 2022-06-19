@@ -16,26 +16,26 @@
             //vValor = vValor + 40;
             document.getElementById("getProgressBarFill").style.width = vValor + '%';
             document.getElementById("getProgressBarFill").innerHTML = vValor + '%';
-        }
+        };
 
         function LoadPDF(ruta) {
             //valor = '../Facturas/PDF/' + valor + '.pdf';
             alert("paso");
             window.open(ruta, '_blank');
-        }
+        };
 
         function LoadXML(valor) {
             valor = '../Facturas/XML/' + valor + '.xml';
             window.open(valor, '',
                 'scrollbars=no,menubar=no,height=600,width=800,resizable=yes,toolbar=no,location=no,status=no');
-        }
+        };
 
         function LoadPDF_Nuevo(valor) {
             alert("pasa");
             valor = '../Facturas/PDF/' + valor;
             window.open(valor, '',
                 'scrollbars=no,menubar=no,height=600,width=800,resizable=yes,toolbar=no,location=no,status=no');
-        }
+        };
 
         function LoadXML_Nuevo(valor) {
             //alert(valor);
@@ -70,15 +70,16 @@
                     }
                 }
             }
-        }
+        };
 
         function ValidateCheckBox(sender, args) {
+
             if (document.getElementById('<%=chkConfirmaSolicitud.ClientID %>').checked == true) {
                 args.IsValid = true;
             } else {
                 args.IsValid = false;
             }
-        }
+        };
 
         function ValidateIvaDeposito(sender, args) {
             if (document.getElementById('<%=chkIvaDes.ClientID %>').checked == true) {
@@ -227,7 +228,7 @@
             border-radius: .25rem;
         }
 
-        
+
 
         .tabstyle .ajax__tab_header {
             font-size: 13px;
@@ -261,38 +262,78 @@
             border: 1px solid #999999;
             padding: 8px;
             background-color: #ffffff;
-        }fa fa-cloud-upload
+        }
+
+        .ajax__tab_xp .ajax__tab_body {
+            background-color: #ffffff;
+            border: 1px solid #999999;
+            border-top: 0;
+            font-family: Arial;
+            font-size: 11pt;
+            padding: 8px;
+        }
+
+        fa fa-cloud-upload
 
         .accordion {
             width: 400px;
         }
-        
 
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-}
+        .btn {
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857143;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
 
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
- 
-  /* Position the tooltip text - see examples below! */
-  position: absolute;
-  z-index: 1;
-}
 
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-}
+        .btn-app {
+            color: white;
+            box-shadow: none;
+            border-radius: 3px;
+            position: relative;
+            padding: 10px 15px;
+            margin: 0;
+            min-width: 40px;
+            max-width: 60px;
+            text-align: center;
+            border: 1px solid #ddd;
+            background-color: #f4f4f4;
+            font-size: 10px;
+            transition: all .2s;
+            background-color: steelblue !important;
+        }
+
+            .btn-app > .fa, .btn-app > .glyphicon, .btn-app > .ion {
+                font-size: 20px;
+                display: block;
+            }
+
+            .btn-app:hover {
+                border-color: #aaa;
+                transform: scale(1.1);
+            }
+
+        .pdf {
+            background-color: #5e5e5e !important;
+            /*background-color: #dc2f2f !important;*/
+        }
+
+        .excel {
+            background-color: #3ca23c !important;
+        }
+
+        .csv {
+            background-color: #e86c3a !important;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -975,18 +1016,27 @@
                                                 <ContentTemplate>
                                                     <asp:Panel ID="pnl1" runat="server">
                                                         <div class="container-fluid">
-                                                            <div class="row" runat="server" id="rowPnl1">
+                                                            <div class="row" id="rowPnl1" runat="server">
                                                                 <div class="col alert alert-danger">
                                                                     <h6>NOTA: Contenido únicamente de CONSULTA</h6>
                                                                 </div>
                                                             </div>
+
+                                                            <div class="row" id="rowPnl3" runat="server">
+
+                                                                <div class="col-md-2">Razón Social </div>
+                                                                <div class="col-md-10">
+                                                                    <asp:TextBox ID="txtReceptor_Nombre" runat="server" TabIndex="3" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valRazon_Social" runat="server" ControlToValidate="txtReceptor_Nombre" ErrorMessage="*Razón Social" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                </div>
+                                                            </div>
+
                                                             <div class="row">
                                                                 <div class="col-md-2">RFC </div>
                                                                 <div class="col-md-4">
                                                                     <div class="input-group mb-3">
                                                                         <asp:TextBox ID="txtReceptor_Rfc" runat="server" CssClass="form-control" MaxLength="13"></asp:TextBox><div class="input-group-append">
                                                                             <span class="input-group" id="basic-addon2">
-                                                                                <asp:LinkButton ID="linkBttnRFC" CssClass="btn btn-primary" runat="server"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton></span>
+                                                                                <asp:LinkButton ID="linkBttnRFC" CssClass="btn btn-grey" runat="server"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton></span>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -1006,17 +1056,15 @@
                                                                     <asp:CustomValidator ID="valLongitudRFC0" runat="server" ClientValidationFunction="ValidateTipoPersona" ControlToValidate="rdoBttnReceptorTipoPersona" ErrorMessage="*Para personas Fisicas el RFC debe ser de 13 caracteres, para MORALES de 12 caracteres." ValidationGroup="DatosFiscales">*Longitud de RFC incorrecto</asp:CustomValidator>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">                                                               
-
-                                                                <div class="col-md-2">Razón Social </div>
-                                                                <div class="col-md-10">
-                                                                    <asp:TextBox ID="txtReceptor_Nombre" runat="server" TabIndex="3" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valRazon_Social" runat="server" ControlToValidate="txtReceptor_Nombre" ErrorMessage="*Razón Social" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
-                                                                </div>
-                                                            </div>
                                                             <div class="row">
- <div class="col-md-2">CP </div>
-                                                                <div class="col-md-1">
-                                                                    <asp:TextBox ID="txtReceptor_CP" runat="server" MaxLength="500" TabIndex="10" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valCP_Fiscal" runat="server" ControlToValidate="txtReceptor_CP" ErrorMessage="*Código Postal" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                <div class="col-md-2">Pais</div>
+                                                                <div class="col-md-2">
+                                                                        <asp:UpdatePanel ID="UpdatePanel21" runat="server">
+                                                                            <ContentTemplate>
+                                                                                <asp:DropDownList ID="ddlReceptor_Pais" runat="server" Width="100%"></asp:DropDownList>
+                                                                                <asp:RequiredFieldValidator ID="reqPais" runat="server" ControlToValidate="ddlReceptor_Pais" ErrorMessage="*Pais" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                            </ContentTemplate>
+                                                                        </asp:UpdatePanel>
                                                                 </div>
                                                                 <div class="col-md-1">Estado </div>
                                                                 <div class="col-md-3">
@@ -1027,42 +1075,50 @@
                                                                     </asp:UpdatePanel>
                                                                 </div>
                                                                 <div class="col-md-1">Municipio </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-3">
                                                                     <asp:DropDownList ID="ddlReceptor_Municipio" runat="server" TabIndex="9" Width="100%"></asp:DropDownList><asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="ddlReceptor_Municipio" ErrorMessage="*Municipio" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-2">Calle </div>
+                                                                <div class="col-md-2">CP </div>
+                                                                <div class="col-md-1">
+                                                                    <asp:TextBox ID="txtReceptor_CP" runat="server" MaxLength="500" TabIndex="10" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valCP_Fiscal" runat="server" ControlToValidate="txtReceptor_CP" ErrorMessage="*Código Postal" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                </div>
+                                                                <div class="col-md-1">Calle </div>
                                                                 <div class="col-md-4">
                                                                     <asp:TextBox ID="txtReceptor_Domicilio" runat="server" MaxLength="500" TabIndex="4" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valCalle_Fiscal" runat="server" ControlToValidate="txtReceptor_Domicilio" ErrorMessage="*Calle" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="col-md-1">Colonia </div>
-                                                                <div class="col-md-5">
+                                                                <div class="col-md-3">
                                                                     <asp:TextBox ID="txtReceptor_Colonia" runat="server" TabIndex="5" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valColonia_Fiscal" runat="server" ControlToValidate="txtReceptor_Colonia" ErrorMessage="*Colonia" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">
-                                                                    Número Exterior
-                                                                    </div>
-                                                                <div class="col-md-2">                                                                    
+                                                                    Núm Ext
+                                                                </div>
+                                                                <div class="col-md-2">
                                                                     <asp:TextBox ID="txtReceptor_NumExt" runat="server" TabIndex="6" Width="100%"></asp:TextBox>
                                                                     <asp:RequiredFieldValidator ID="reqNumExt" runat="server" ControlToValidate="txtReceptor_NumExt" ErrorMessage="*Num Exterior" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
-                                                                <div class="col-md-2">Número Interior </div>                                                               
+                                                                <div class="col-md-2">Número Interior </div>
                                                                 <div class="col-md-2">
                                                                     <asp:TextBox ID="txtReceptor_NumInt" runat="server" TabIndex="7" Width="100%"></asp:TextBox>
                                                                 </div>
                                                             </div>
-                                                            
+
                                                             <div class="row">
                                                                 <div class="col-md-2">Metodo de Pago </div>
                                                                 <div class="col-md-4">
-                                                                    <asp:DropDownList ID="ddlReceptor_MetodoPago" runat="server" TabIndex="11" Width="100%">
-                                                                        <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
-                                                                        <asp:ListItem Value="PUE">[PUE] Pago en una sola exhibicion</asp:ListItem>
-                                                                        <asp:ListItem Value="PPD">[PPD] Pago en parcialidades o diferido</asp:ListItem>
-                                                                    </asp:DropDownList>
+                                                                    <asp:UpdatePanel ID="updPnlReceptor_MetodoPago" runat="server">
+                                                                        <ContentTemplate>
+                                                                            <asp:DropDownList ID="ddlReceptor_MetodoPago" runat="server" TabIndex="11" Width="100%">
+                                                                                <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
+                                                                                <asp:ListItem Value="PUE">[PUE] Pago en una sola exhibicion</asp:ListItem>
+                                                                                <asp:ListItem Value="PPD">[PPD] Pago en parcialidades o diferido</asp:ListItem>
+                                                                            </asp:DropDownList>
+                                                                        </ContentTemplate>
+                                                                    </asp:UpdatePanel>
                                                                     <asp:RequiredFieldValidator ID="valMetodoPago" runat="server" ControlToValidate="ddlReceptor_MetodoPago" ErrorMessage="*Método de Pago (Pestania 1)" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="col-md-2">Forma de Pago </div>
@@ -1083,41 +1139,50 @@
                                                             <div class="row">
                                                                 <div class="col-md-2">Régimen Fiscal</div>
                                                                 <div class="col-md-4">
-                                                                    <asp:DropDownList ID="ddlCodigoFiscal" runat="server" Width="100%" OnSelectedIndexChanged="ddlCodigoFiscal_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                                    <asp:UpdatePanel ID="updPnlCodigoFiscal" runat="server">
+                                                                        <ContentTemplate>
+                                                                            <asp:DropDownList ID="ddlCodigoFiscal" runat="server" Width="100%" OnSelectedIndexChanged="ddlCodigoFiscal_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                                        </ContentTemplate>
+                                                                    </asp:UpdatePanel>
                                                                     <asp:RequiredFieldValidator ID="reqCodigo" runat="server" ControlToValidate="ddlCodigoFiscal" ErrorMessage="*Régimen Fiscal" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="col-md-2">Uso de CFDI </div>
                                                                 <div class="col-md-4">
-                                                                    <asp:DropDownList ID="ddlCFDI" runat="server" TabIndex="13" Width="100%">
-                                                                        <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
-                                                                        <asp:ListItem Value="G01">ADQUISICION DE MERCANCIAS</asp:ListItem>
-                                                                        <asp:ListItem Value="G02">DEVOLUCIONES, DESCUENTOS O BONIFICACIONES</asp:ListItem>
-                                                                        <asp:ListItem Value="G03">GASTOS EN GENERAL</asp:ListItem>
-                                                                        <asp:ListItem Value="I01">CONSTRUCCIONES</asp:ListItem>
-                                                                        <asp:ListItem Value="I02">MOBILIARIO Y EQUIPO DE OFICINA POR INVERSIONES</asp:ListItem>
-                                                                        <asp:ListItem Value="I03">EQUIPO DE TRANSPORTE</asp:ListItem>
-                                                                        <asp:ListItem Value="I04">EQUIPO DE COMPUTO Y ACCESORIOS</asp:ListItem>
-                                                                        <asp:ListItem Value="I05">DADOS, TROQUELES, MOLDES, MATRICES Y HERRAMENTAL</asp:ListItem>
-                                                                        <asp:ListItem Value="I06">COMUNICACIONES TELEFONICAS</asp:ListItem>
-                                                                        <asp:ListItem Value="I07">COMUNICACIONES SATELITALES</asp:ListItem>
-                                                                        <asp:ListItem Value="I08">OTRA MAQUINARIA Y EQUIPO</asp:ListItem>
-                                                                        <asp:ListItem Value="D01">HONORARIOS MEDICOS, DENTALES Y GASTOS HOSPITALARIOS</asp:ListItem>
-                                                                        <asp:ListItem Value="D02">GASTOS MEDICOS POR INCAPACIDAD O DISCAPACIDAD</asp:ListItem>
-                                                                        <asp:ListItem Value="D03">GASTOS FUNERALES</asp:ListItem>
-                                                                        <asp:ListItem Value="D04">DONATIVOS</asp:ListItem>
-                                                                        <asp:ListItem Value="D05">INTERESES REALES EFECTIVAMENTE PAGADAS POR CREDITOS HIPOTECARIOS (CASA HABITACION)</asp:ListItem>
-                                                                        <asp:ListItem Value="D06">APORTACIONES VOLUNTARIAS AL SAR</asp:ListItem>
-                                                                        <asp:ListItem Value="D07">PRIMAS POR SEGUROS DE GASTOS MEDICOS</asp:ListItem>
-                                                                        <asp:ListItem Value="D08">GASTOS DE TRANSPORTACION ESCOLAR OBLIGATORIA</asp:ListItem>
-                                                                        <asp:ListItem Value="D09">DEPOSITOS EN C</asp:ListItem>
-                                                                        <asp:ListItem Value="D10">PAGOS POR SERVICIOS EDUCATIVOS (COLEGIATURAS)</asp:ListItem>
-                                                                        <asp:ListItem Value="P01">POR DEFINIR</asp:ListItem>
-                                                                    </asp:DropDownList><asp:RequiredFieldValidator ID="valCFDI" runat="server" ControlToValidate="ddlCFDI" ErrorMessage="*Uso de CFDI" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
+                                                                    <asp:UpdatePanel ID="updPnlCFDI" runat="server">
+                                                                        <ContentTemplate>
+                                                                            <asp:DropDownList ID="ddlCFDI" runat="server" TabIndex="13" Width="100%">
+                                                                                <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
+                                                                                <asp:ListItem Value="G01">ADQUISICION DE MERCANCIAS</asp:ListItem>
+                                                                                <asp:ListItem Value="G02">DEVOLUCIONES, DESCUENTOS O BONIFICACIONES</asp:ListItem>
+                                                                                <asp:ListItem Value="G03">GASTOS EN GENERAL</asp:ListItem>
+                                                                                <asp:ListItem Value="I01">CONSTRUCCIONES</asp:ListItem>
+                                                                                <asp:ListItem Value="I02">MOBILIARIO Y EQUIPO DE OFICINA POR INVERSIONES</asp:ListItem>
+                                                                                <asp:ListItem Value="I03">EQUIPO DE TRANSPORTE</asp:ListItem>
+                                                                                <asp:ListItem Value="I04">EQUIPO DE COMPUTO Y ACCESORIOS</asp:ListItem>
+                                                                                <asp:ListItem Value="I05">DADOS, TROQUELES, MOLDES, MATRICES Y HERRAMENTAL</asp:ListItem>
+                                                                                <asp:ListItem Value="I06">COMUNICACIONES TELEFONICAS</asp:ListItem>
+                                                                                <asp:ListItem Value="I07">COMUNICACIONES SATELITALES</asp:ListItem>
+                                                                                <asp:ListItem Value="I08">OTRA MAQUINARIA Y EQUIPO</asp:ListItem>
+                                                                                <asp:ListItem Value="D01">HONORARIOS MEDICOS, DENTALES Y GASTOS HOSPITALARIOS</asp:ListItem>
+                                                                                <asp:ListItem Value="D02">GASTOS MEDICOS POR INCAPACIDAD O DISCAPACIDAD</asp:ListItem>
+                                                                                <asp:ListItem Value="D03">GASTOS FUNERALES</asp:ListItem>
+                                                                                <asp:ListItem Value="D04">DONATIVOS</asp:ListItem>
+                                                                                <asp:ListItem Value="D05">INTERESES REALES EFECTIVAMENTE PAGADAS POR CREDITOS HIPOTECARIOS (CASA HABITACION)</asp:ListItem>
+                                                                                <asp:ListItem Value="D06">APORTACIONES VOLUNTARIAS AL SAR</asp:ListItem>
+                                                                                <asp:ListItem Value="D07">PRIMAS POR SEGUROS DE GASTOS MEDICOS</asp:ListItem>
+                                                                                <asp:ListItem Value="D08">GASTOS DE TRANSPORTACION ESCOLAR OBLIGATORIA</asp:ListItem>
+                                                                                <asp:ListItem Value="D09">DEPOSITOS EN C</asp:ListItem>
+                                                                                <asp:ListItem Value="D10">PAGOS POR SERVICIOS EDUCATIVOS (COLEGIATURAS)</asp:ListItem>
+                                                                                <asp:ListItem Value="P01">POR DEFINIR</asp:ListItem>
+                                                                            </asp:DropDownList>
+                                                                        </ContentTemplate>
+                                                                    </asp:UpdatePanel>
+                                                                    <asp:RequiredFieldValidator ID="valCFDI" runat="server" ControlToValidate="ddlCFDI" ErrorMessage="*Uso de CFDI" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-2">Teléfono</div>
-                                                                <div class="col-md-2">
+                                                                <div class="col-md-3">
                                                                     <asp:TextBox ID="txtReceptor_Telefono" runat="server" TabIndex="14" Width="100%"></asp:TextBox>
                                                                 </div>
                                                                 <div class="col-md-1">Correo </div>
@@ -1151,13 +1216,13 @@
                                                                                 </div>
                                                                                 <div class="row">
                                                                                     <div class="col-md-2"></div>
-                                                                                    <div class="col-md-6">
-                                                                                        <asp:HyperLink ID="linkConstancia" runat="server" Target="_blank">[lblArchivoConstancia]</asp:HyperLink>
+                                                                                    <div class="col-md-9">
+                                                                                        <asp:HyperLink ID="linkConstancia" runat="server" CssClass="form-control" Target="_blank">[lblArchivoConstancia]</asp:HyperLink>
                                                                                     </div>
-                                                                                    <div class="col-md-4">
+                                                                                    <div class="col-md-1">
                                                                                         <asp:UpdatePanel ID="UpdatePanel19" runat="server">
                                                                                             <ContentTemplate>
-                                                                                                <asp:LinkButton ID="linkBttnEliminarConstancia" runat="server" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarConstancia_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                                                                <asp:LinkButton ID="linkBttnEliminarConstancia" runat="server" CssClass="btn btn-danger" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarConstancia_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash" aria-hidden="true"></i></asp:LinkButton>
                                                                                             </ContentTemplate>
                                                                                         </asp:UpdatePanel>
                                                                                     </div>
@@ -1171,8 +1236,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-2">Inf del Pago </div>
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-1">Inf del Pago </div>
+                                                                <div class="col-md-11">
                                                                     <div class="alert alert-warning" id="rowInfAdicional" runat="server">
                                                                         <div class="row">
                                                                             <div class="col-md-2 font-weight-bold">Total </div>
@@ -1181,8 +1246,8 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="row">
-                                                                            <div class="col-md-2 font-weight-bold">Conceptos </div>
-                                                                            <div class="col-md-10">
+                                                                            <div class="col-md-1 font-weight-bold">Conceptos </div>
+                                                                            <div class="col-md-11">
                                                                                 <asp:Label ID="lblConceptosFac" runat="server"></asp:Label>
                                                                             </div>
                                                                         </div>
@@ -1190,25 +1255,12 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-2">Descripción </div>
-                                                                <div class="col-md-10">
+                                                                <div class="col-md-1">Descripción </div>
+                                                                <div class="col-md-11">
                                                                     <asp:TextBox ID="txtDescConcepto" runat="server" CssClass="form-control" MaxLength="500" TabIndex="16" TextMode="MultiLine" PlaceHolder="Detalle del concepto que se requiera en la factura"></asp:TextBox>
-                                                                </div>
-                                                            </div>
-                                                            <div class="row">
-                                                                <div class="col-md-2"></div>
-                                                                <div class="col-md-10">
                                                                     <asp:RequiredFieldValidator ID="reqDescConcepto" runat="server" ControlToValidate="txtDescConcepto" ErrorMessage="*Detallar el concepto que se requiera en la factura" ForeColor="Red" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
-                                                            <br />
-                                                            <div class="row font-weight-bold" id="rowSolicitarFactura" runat="server">
-                                                                <div class="col-md-2">Solicitar Factura </div>
-                                                                <div class="col-md-10">
-                                                                    <asp:CheckBox ID="chkSolicitar" runat="server" Text="Si" ValidationGroup="DatosFiscales" />
-                                                                </div>
-                                                            </div>
-                                                            <br />
                                                             <div class="row">
                                                                 <div class="col">
                                                                     <asp:UpdatePanel ID="UpdatePanel10" runat="server">
@@ -1219,18 +1271,15 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row" id="rowObservaciones" runat="server">
-                                                                <div class="col-md-2 font-weight-bold">Motivo del Rechazo </div>
+                                                                <div class="col-md-2 font-weight-bold">
+                                                                    Motivo del Rechazo 
+                                                                </div>
                                                                 <div class="col-md-10">
                                                                     <asp:TextBox ID="txtObservaciones" runat="server" Height="67px" TabIndex="17" TextMode="MultiLine" Width="100%"></asp:TextBox>
-                                                                    <asp:RequiredFieldValidator ID="reqObservaciones" runat="server" ControlToValidate="txtObservaciones" ErrorMessage="*Motivo del Rechazo" ForeColor="Red" ValidationGroup="DatosFiscalesCaja" Text="*Requerido"></asp:RequiredFieldValidator>
+                                                                    <asp:RequiredFieldValidator ID="reqObservaciones" runat="server" ControlToValidate="txtObservaciones" ErrorMessage="*Motivo del Rechazo" ForeColor="Red" Text="*Requerido" ValidationGroup="DatosFiscalesCaja"></asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col">
-                                                                    <asp:CheckBox ID="chkConfirmaSolicitud" runat="server" CssClass="alert alert-warning" Text="*Si los datos ya han sido corregidos, puede CONFIRMAR LA SOLICITUD" ValidationGroup="DatosFiscales" Visible="False" />
-                                                                    <asp:CustomValidator ID="valCheck" runat="server" ClientValidationFunction="ValidateCheckBox" ErrorMessage="*Confirmar Solicitud" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:CustomValidator>
-                                                                </div>
-                                                            </div>
+
                                                         </div>
                                                     </asp:Panel>
                                                 </ContentTemplate>
@@ -1660,11 +1709,11 @@
                                                 <ContentTemplate>
                                                     <asp:UpdatePanel ID="UpdatePanelFoto" runat="server">
                                                         <ContentTemplate>
-                                                            <div class="container-fluid">
+                                                            <div class="container">
                                                                 <asp:Panel ID="pnlFacturas" runat="server">
                                                                     <div class="row">
                                                                         <div class="col-md-2">Folio de la Factura</div>
-                                                                        <div class="col-md-2">                                                                            
+                                                                        <div class="col-md-2">
                                                                             <asp:TextBox ID="txtFolio_Fact_Cja" runat="server" Width="100%"></asp:TextBox>
                                                                         </div>
                                                                         <div class="col-md-1">
@@ -1731,14 +1780,21 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-9">
+                            <div class="col-md-6">
                                 <asp:ValidationSummary ID="validationSumGuardar" runat="server" CssClass="mensaje_rojo" HeaderText="Los siguientes campos son requeridos:" ValidationGroup="DatosFiscales" />
                             </div>
-                            <div class="col-md-3 text-right">
-                                <%--<asp:LinkButton ID="linkBttnVerRecibo" runat="server" CssClass="btn btn-warning" OnClick="linkBttnVerRecibo_Click"><i class="fa fa-file"></i> VER RECIBO</asp:LinkButton>--%>
-                                <asp:Button ID="bttnVerRecibo" runat="server" CssClass="btn btn-warning" Text="VER RECIBO" OnClick="bttnVerRecibo_Click"  ValidationGroup="Ninguno" />
-                                &nbsp;<asp:Button ID="btnGuardarEditar" runat="server" CssClass="btn btn-primary" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="GUARDAR" ValidationGroup="DatosFiscales" />
-                                &nbsp;<asp:Button ID="btnCancelarEditar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnCancelarEditar_Click" TabIndex="15" Text="SALIR"  ValidationGroup="Ninguno" />
+                            <div class="col-md-6 text-right">
+
+                                <asp:LinkButton ID="linkBttnVerRecibo" runat="server" CssClass="btn btn-grey" ValidationGroup="Ninguno" OnClick="linkBttnVerRecibo_Click"><i class="fa fa-file"></i> Ver Recibo</asp:LinkButton>
+                                <asp:LinkButton ID="linkBttnCancelarSol" runat="server" CssClass="btn btn-danger" ValidationGroup="DatosFiscales" OnClick="linkBttnCancelarSol_Click"><i class="fa fa-trash" aria-hidden="true"></i> Cancelar Solicitud</asp:LinkButton>
+                                <asp:LinkButton ID="linkBttnGuardarEditar" runat="server" CssClass="btn btn-info" ValidationGroup="DatosFiscales" OnClick="linkBttnGuardarEditar_Click"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</asp:LinkButton>
+                                <asp:LinkButton ID="linkBttnEnviarSol" runat="server" CssClass="btn btn-primary" ValidationGroup="DatosFiscales" OnClick="linkBttnEnviarSol_Click"><i class="fa fa-paper-plane" aria-hidden="true"></i> Guardar y Enviar Solicitud</asp:LinkButton>
+                                <asp:LinkButton ID="linkBttnCancelarEditar" CssClass="btn btn-grey" runat="server" ValidationGroup="Ninguno" OnClick="linkBttnCancelarEditar_Click"><i class="fa fa-window-close" aria-hidden="true"></i> Salir</asp:LinkButton>
+
+                                <%--                                <asp:Button ID="bttnVerRecibo" runat="server" CssClass="btn btn-grey" Text="VER RECIBO" OnClick="bttnVerRecibo_Click" ValidationGroup="Ninguno" />
+                                &nbsp;<asp:Button ID="btnGuardarEditar" runat="server" CssClass="btn btn-grey" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="GUARDAR" ValidationGroup="DatosFiscales" />
+                                &nbsp;<asp:Button ID="Button1" runat="server" CssClass="btn btn-info" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="ENVIAR SOLICITUD" ValidationGroup="DatosFiscales" />
+                                &nbsp;<asp:Button ID="btnCancelarEditar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnCancelarEditar_Click" TabIndex="15" Text="SALIR" ValidationGroup="Ninguno" />--%>
                             </div>
                         </div>
                     </div>
@@ -1758,105 +1814,42 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="scroll_monitor">
-                        <div class="row">
-                            <div class="col">
-                                <asp:UpdateProgress ID="updPgrBitacora" runat="server"
-                                    AssociatedUpdatePanelID="updPnlBitacora">
-                                    <ProgressTemplate>
-                                        <asp:Image ID="imgGridEmp" runat="server"
-                                            AlternateText="Espere un momento, por favor.." Height="50px"
-                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                            ToolTip="Espere un momento, por favor.." />
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                            </div>
+                <div class="modal-body scroll_monitor">
+                    <div class="row">
+                        <div class="col">
+                            <asp:UpdateProgress ID="updPgrBitacora" runat="server"
+                                AssociatedUpdatePanelID="updPnlBitacora">
+                                <ProgressTemplate>
+                                    <asp:Image ID="imgGridEmp" runat="server"
+                                        AlternateText="Espere un momento, por favor.." Height="50px"
+                                        ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                        ToolTip="Espere un momento, por favor.." />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <asp:UpdatePanel ID="updPnlBitacora" runat="server">
-                                    <ContentTemplate>
-                                        <asp:GridView ID="grdBitacora" Width="100%" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontraron datos...">
-                                            <Columns>
-                                                <asp:BoundField DataField="DESC_RECEPTOR_STATUS" HeaderText="Status" />
-                                                <asp:BoundField DataField="RECEPTOR_FECHA_STATUS" HeaderText="Fecha" />
-                                            </Columns>
-                                            <FooterStyle CssClass="enc" />
-                                            <HeaderStyle CssClass="enc" />
-                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                            <SelectedRowStyle CssClass="sel" />
-                                        </asp:GridView>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <asp:UpdatePanel ID="updPnlBitacora" runat="server">
+                                <ContentTemplate>
+                                    <asp:GridView ID="grdBitacora" Width="100%" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontraron datos...">
+                                        <Columns>
+                                            <asp:BoundField DataField="DESC_RECEPTOR_STATUS" HeaderText="Status" />
+                                            <asp:BoundField DataField="RECEPTOR_FECHA_STATUS" HeaderText="Fecha" />
+                                        </Columns>
+                                        <FooterStyle CssClass="enc" />
+                                        <HeaderStyle CssClass="enc" />
+                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                        <SelectedRowStyle CssClass="sel" />
+                                    </asp:GridView>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <%-- <asp:Panel ID="pnlCorreo" runat="server" CssClass="TituloModalPopupMsg" Width="65%">
-        <div class="card text-white bg-dark mb-3">
-            <div class="card-header">
-                Enviar Recibo Oficial
-            </div>
-            <div class="card-body">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col text-center">
-                            <asp:UpdatePanel ID="UpdatePanel35" runat="server">
-                                <ContentTemplate>
-                                    <asp:Label ID="lblMensajeCorreo" runat="server" Font-Bold="True" Font-Size="16px"></asp:Label>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-2">
-                            <asp:UpdatePanel ID="UpdatePanel36" runat="server">
-                                <ContentTemplate>
-                                    <asp:Label ID="lblCorreo" runat="server" Text="Correo:"></asp:Label>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                        <div class="col-md-10">
-                            <asp:UpdatePanel ID="UpdatePanel34" runat="server">
-                                <ContentTemplate>
-                                    <asp:TextBox ID="txtCorreo" runat="server" Width="90%"></asp:TextBox>
-                                    <br />
-                                    <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="txtCorreo" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="correo"></asp:RequiredFieldValidator>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col text-center">
-                            <asp:UpdateProgress ID="UpdateProgress12" runat="server" AssociatedUpdatePanelID="UpdatePanel37">
-                                <ProgressTemplate>
-                                    <asp:Image ID="Image88" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                </ProgressTemplate>
-                            </asp:UpdateProgress>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col text-center">
-                            <asp:UpdatePanel ID="UpdatePanel37" runat="server">
-                                <ContentTemplate>
-                                    <asp:Button ID="bttnCorreo" runat="server" CssClass="btn btn-info" Height="40px" OnClick="bttnCorreo_Click" Text="Enviar" ValidationGroup="correo" />
-                                    &nbsp;<asp:Button ID="bttnCancelarCorreo" runat="server" CssClass="btn btn-blue-grey" Height="40px" OnClick="bttnCancelarCorreo_Click" Text="Salir" />
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>--%>
-    <%--</asp:Panel>--%>
-    <%--    <asp:HiddenField ID="hddnDoctos" runat="server" />
-    <ajaxToolkit:ModalPopupExtender ID="modalDoctos" runat="server" TargetControlID="hddnDoctos" PopupControlID="pnlDoctos" BackgroundCssClass="modalBackground_Proy">
-    </ajaxToolkit:ModalPopupExtender>--%>
-
     <div class="modal fade" id="modalEMail" tabindex="-1" role="dialog" aria-labelledby="modalEMail" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -1919,7 +1912,6 @@
             </div>
         </div>
     </div>
-
     <div class="modal fade" id="modalFacturas" tabindex="-1" role="dialog" aria-labelledby="modalFact" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -1929,80 +1921,102 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="scroll_monitor">
-                        <div class="row">
-                            <div class="col">
-                                <asp:UpdateProgress ID="updPgrFacturas" runat="server"
-                                    AssociatedUpdatePanelID="updPnlFacturas">
-                                    <ProgressTemplate>
-                                        <asp:Image ID="imgGridFacturas" runat="server"
-                                            AlternateText="Espere un momento, por favor.." Height="50px"
-                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
-                                            ToolTip="Espere un momento, por favor.." />
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                            </div>
+                <div class="modal-body scroll_monitor">
+                    <div class="row">
+                        <div class="col">
+                            <asp:UpdateProgress ID="updPgrFacturas" runat="server"
+                                AssociatedUpdatePanelID="updPnlFacturas">
+                                <ProgressTemplate>
+                                    <asp:Image ID="imgGridFacturas" runat="server"
+                                        AlternateText="Espere un momento, por favor.." Height="50px"
+                                        ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                        ToolTip="Espere un momento, por favor.." />
+                                </ProgressTemplate>
+                            </asp:UpdateProgress>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <asp:UpdatePanel ID="updPnlFacturas" runat="server">
-                                    <ContentTemplate>
-                                        <asp:GridView ID="grdDoctosFactura" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" BackColor="#CCCCCC">
-                                            <Columns>
-                                                <asp:BoundField DataField="TIPO" HeaderText="TIPO" />
-                                                <asp:TemplateField HeaderText="ARCHIVO">
-                                                    <ItemTemplate>
-                                                        <asp:HyperLink ID="linkDocto" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "RUTA_ADJUNTO") %>' Target="_blank"><%# DataBinder.Eval(Container.DataItem, "NUM_OFICIO") %></asp:HyperLink>
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                            </Columns>
-                                            <FooterStyle CssClass="enc" />
-                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                            <SelectedRowStyle CssClass="sel" />
-                                            <HeaderStyle CssClass="enc" />
-                                            <AlternatingRowStyle CssClass="alt" />
-                                        </asp:GridView>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <asp:UpdatePanel ID="updPnlFacturas" runat="server">
+                                <ContentTemplate>
+                                    <asp:GridView ID="grdDoctosFactura" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" BackColor="#CCCCCC">
+                                        <Columns>
+                                            <asp:BoundField DataField="TIPO" HeaderText="TIPO" />
+                                            <asp:TemplateField HeaderText="ARCHIVO">
+                                                <ItemTemplate>
+                                                    <asp:HyperLink ID="linkDocto" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "RUTA_ADJUNTO") %>' Target="_blank"><%# DataBinder.Eval(Container.DataItem, "NUM_OFICIO") %></asp:HyperLink>
+                                                </ItemTemplate>
+                                            </asp:TemplateField>
+                                        </Columns>
+                                        <FooterStyle CssClass="enc" />
+                                        <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                        <SelectedRowStyle CssClass="sel" />
+                                        <HeaderStyle CssClass="enc" />
+                                        <AlternatingRowStyle CssClass="alt" />
+                                    </asp:GridView>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="modal" tabindex="-1" role="dialog" id="modalConfirmacion">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar Solicitud</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row" id="rowConfSol" runat="server">
+                            <div class="col font-weight-bold alert alert-danger">
+                                <asp:UpdatePanel ID="UpdatePanel20" runat="server">
+                                    <ContentTemplate>
+                                        <asp:CheckBox ID="chkConfirmaSolicitud" runat="server" Text="*Si los datos ya han sido corregidos, puede CONFIRMAR LA SOLICITUD" ValidationGroup="EnviarSol" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                                <asp:CustomValidator ID="valCheck" runat="server" ClientValidationFunction="ValidateCheckBox" ErrorMessage="*Confirmar Solicitud" ForeColor="Red" ValidationGroup="EnviarSol">*Requerido</asp:CustomValidator>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <asp:LinkButton ID="linkBttnEnviarSol_modal" runat="server" CssClass="btn btn-primary" ValidationGroup="EnviarSol" OnClick="linkBttnEnviarSol_modal_Click"><i class="fa fa-paper-plane" aria-hidden="true"></i> Si</asp:LinkButton>
+                    <button type="button" class="btn btn-blue-grey" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="modalSinConfirmacion">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Aviso</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">
+                        <img src="../Imagenes/clock.PNG" />
+                    </p>
+                    <p>
+                        La solicitud capturada se guardo exitosamente, le recordamos que tiene 72 horas para <strong>ENVIAR LA SOLICITUD </strong>de factura,
+        pasado este tiempo la solicitud sera eliminada del servicio.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-blue-grey" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript"> 
-        function LimpiarCampos() {
-            //alert("pruebas2");
-            //$("#ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Rfc").val('');
-            //$('ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Nombre').val('');
-            //document.getElementById("#ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Rfc").value = "";
-
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Domicilio').val('');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Colonia').val('');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_NumExt').val('');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_NumInt').val('');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_ddlReceptor_Estado').val('0');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_ddlReceptor_Municipio').val('0');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_CP').val('');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_ddlReceptor_MetodoPago').val('0');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_ddlForma_Pago').val('0');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_ddlCFDI').val('0');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Telefono').val('');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Correo').val('');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_txtDescConcepto').val('');
-            //$('#ctl00_MainContent_tabFacturas_TabPanel1_chkSolicitar').prop("checked", false);
-
-
-
-            //document.getElementById('ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Domicilio').value = 'PRUEBAS';
-            //document.getElementById('ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Colonia').value = 'PRUEBAS';
-            //document.getElementById('ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Rfc').value = 'PRUEBAS';
-            //document.getElementById('ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Rfc').value = 'PRUEBAS';
-            //document.getElementById('ctl00_MainContent_tabFacturas_TabPanel1_txtReceptor_Rfc').value = 'PRUEBAS';
-
-        };
 
         function Referencias() {
             $('#<%= grdDatosFactura.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdDatosFactura.ClientID %>').find("tr:first"))).DataTable({

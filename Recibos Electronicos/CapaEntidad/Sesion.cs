@@ -12,7 +12,14 @@ namespace CapaEntidad
         private int _Id_Concepto;
         private string _Correo_UNACH;
         private string _Nombre_Completo;
+        //private bool _Valida;
 
+
+        //public bool Valida
+        //{
+        //    get { return _Valida; }
+        //    set { _Valida = value; }
+        //}
         public string Nombre_Completo
         {
             get { return _Nombre_Completo; }

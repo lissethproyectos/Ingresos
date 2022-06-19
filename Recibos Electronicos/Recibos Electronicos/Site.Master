@@ -28,6 +28,15 @@
             font-family: sans-serif;
         }
 
+        .ajax__tab_xp .ajax__tab_body {
+            background-color: #ffffff;
+            border: 1px solid #999999;
+            border-top: 0;
+            font-family: Arial;
+            font-size: 11pt;
+            padding: 8px;
+        }
+
         .dropdown-item:focus, .dropdown-item:hover {
             color: #16181b;
             text-decoration: none;
@@ -118,6 +127,20 @@
 
         .classHide {
             display: none
+        }
+
+        .scroll_monitor {
+            height: 450px;
+            overflow: auto;
+        }
+
+        .ajax__tab_xp .ajax__tab_body {
+            background-color: #ffffff;
+            border: 1px solid #999999;
+            border-top: 0;
+            font-family: Arial;
+            font-size: 11pt;
+            padding: 8px;
         }
     </style>
 

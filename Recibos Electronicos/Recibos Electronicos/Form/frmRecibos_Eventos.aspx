@@ -11,7 +11,7 @@
             <div class="col-md-1">
                 Dependencia
             </div>
-            <div class="col-md-6">
+            <div class="col-md-11">
                 <asp:UpdatePanel ID="updPnlDep" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlDependencia_SelectedIndexChanged">
@@ -20,8 +20,18 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col font-weight-bold text-warning">
+                Fecha de Pago
+            </div>
+        </div>
+        <hr />
+        <div class="row">
             <div class="col-md-2">
-                Tipo de Evento
+                Tipo Evento
             </div>
             <div class="col-md-2">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
@@ -36,6 +46,31 @@
                 </asp:UpdatePanel>
             </div>
             <div class="col-md-1">
+                Fecha Ini
+            </div>
+            <div class="col-md-3">
+                <asp:UpdatePanel ID="UpdatePanel42" runat="server">
+                    <ContentTemplate>
+                        <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
+                        <ajaxToolkit:CalendarExtender ID="CalendarExtenderIni" runat="server" TargetControlID="txtFecha_Factura_Ini" PopupButtonID="imgCalendarioIni" />
+                        <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+            <div class="col-md-1">
+                Fecha Fin
+            </div>
+            <div class="col-md-2">
+                <asp:UpdatePanel ID="UpdatePanel43" runat="server">
+                    <ContentTemplate>
+                        <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Style="margin-left: 0px" Width="95px"></asp:TextBox>
+                        <ajaxToolkit:CalendarExtender ID="CalendarExtenderFin" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFecha_Factura_Fin" />
+                        <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+
+            </div>
+            <div class="col-md-1">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:LinkButton ID="linkBttnBuscar" runat="server" Width="100%" CssClass="btn btn-info" OnClick="linkBttnBuscar_Click1"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
@@ -43,6 +78,7 @@
                 </asp:UpdatePanel>
             </div>
         </div>
+
         <div class="row">
             <div class="col text-center">
                 <asp:UpdateProgress ID="updprgDep" runat="server" AssociatedUpdatePanelID="UpdatePanel3">
@@ -59,18 +95,7 @@
                 </asp:UpdateProgress>
             </div>
         </div>
-        <%--<div class="row">
-            <div class="col-md-10">
-                <asp:TextBox ID="txtBuscarEvento" runat="server" CssClass="box" PlaceHolder="Cve/Descripción" TabIndex="4" Visible="true" Width="98%"></asp:TextBox>
-            </div>
-            <div class="col-md-2">
-                <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-                    <ContentTemplate>
-                        <asp:ImageButton ID="imgBttnBuscarEvento" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscarEvento_Click" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-        </div>--%>
+
         <div class="row">
             <div class="col text-center">
                 <asp:UpdateProgress ID="updPrgBuscarDatos" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
