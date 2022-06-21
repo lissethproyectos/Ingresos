@@ -14,6 +14,7 @@ namespace CapaEntidad
         private string _TIPO;
         private string _RECEPTOR_RFC;
         private string _RECEPTOR_NOMBRE;
+        private string _RECEPTOR_CODIGO;
         private string _RECEPTOR_DOMICILIO;
         private string _RECEPTOR_COLONIA;
         private string _RECEPTOR_CP;
@@ -28,24 +29,26 @@ namespace CapaEntidad
         private string _RECEPTOR_STATUS;
         private string _DESC_RECEPTOR_STATUS;
         private string _RECEPTOR_FECHA_STATUS;
-        private int _DIAS_SOLICITUD=0;
+        private int _DIAS_SOLICITUD = 0;
         private string _USUARIO;
         private string _COLOR;
         private string _FOLIO_PAGO;
         private string _FECHA_PAGO;
-        private double _IMPORTE_PAGO=0;
-        private double _IVA_PAGO=0;
-        private double _TOTAL_PAGO=0;
+        private double _IMPORTE_PAGO = 0;
+        private double _IVA_PAGO = 0;
+        private double _TOTAL_PAGO = 0;
         private string _NUM_OFICIO;
         private string _FECHA_OFICIO;
-        private double _IMPORTE_CONVENIO=0;
-        private double _IVA_CONVENIO=0;
+        private double _IMPORTE_CONVENIO = 0;
+        private double _IVA_CONVENIO = 0;
         private double _TOTAL_CONVENIO;
         private string _OBSERVACIONES_CONVENIO;
         private string _RUTA_ADJUNTO;
         private string _RUTA_ADJUNTO_OFICIO;
         private string _RUTA_ADJUNTO_CONVENIO;
         private string _RUTA_ADJUNTO_REP;
+        private string _RUTA_ADJUNTO_CONSTANCIA;
+
         private string _CFDI;
         private string _RECEPTOR_TIPO_SERVICIO;
         private string _CONFIRMADO;
@@ -90,7 +93,7 @@ namespace CapaEntidad
             get { return _VISIBLE2; }
             set { _VISIBLE2 = value; }
         }
-       
+
         public string RECHAZADO
         {
             get { return _RECHAZADO; }
@@ -127,6 +130,12 @@ namespace CapaEntidad
         {
             get { return _RECEPTOR_FORMA_PAGO; }
             set { _RECEPTOR_FORMA_PAGO = value; }
+        }
+
+        public string RECEPTOR_CODIGO
+        {
+            get { return _RECEPTOR_CODIGO; }
+            set { _RECEPTOR_CODIGO = value; }
         }
 
         public string CONFIRMADO
@@ -335,6 +344,12 @@ namespace CapaEntidad
         {
             get { return _RUTA_ADJUNTO_REP; }
             set { _RUTA_ADJUNTO_REP = value; }
+        }
+
+        public string RUTA_ADJUNTO_CONSTANCIA
+        {
+            get { return _RUTA_ADJUNTO_CONSTANCIA; }
+            set { _RUTA_ADJUNTO_CONSTANCIA = value; }
         }
         public string CFDI
         {

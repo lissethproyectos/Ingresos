@@ -20,7 +20,7 @@
         </div>
         <div class="row">
             <div class="col-md-2">
-                Matricula
+                Ficha/Matricula
             </div>
             <div class="col-md-2">
                 <asp:TextBox ID="txtMatricula" runat="server" Width="100%"></asp:TextBox>

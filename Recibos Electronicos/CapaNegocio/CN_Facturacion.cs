@@ -105,7 +105,20 @@ namespace CapaNegocio
             try
             {
                 CD_Facturacion CDFacturacion = new CD_Facturacion();
-                CDFacturacion.FacturaDetConsultar(ref ListDetConc, idFactEfec, ref Verificador);
+                CDFacturacion.FacturaDetConsultar(ref ListDetConc, idFactEfec);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void FacturaEfectStatusConsultar(Facturacion objFacturacion, ref List<Facturacion> ListDetConc)
+        {
+            try
+            {
+                CD_Facturacion CDFacturacion = new CD_Facturacion();
+                CDFacturacion.FacturaEfectStatusConsultar(objFacturacion,ref ListDetConc);
             }
             catch (Exception ex)
             {

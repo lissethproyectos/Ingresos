@@ -71,8 +71,7 @@ namespace CapaDatos
                     "P_FECHA_PAGO", "P_IMPORTE_PAGO", "P_IVA_PAGO", "P_TOTAL_PAGO", "P_NUMERO_OFICIO",
                     "P_FECHA_OFICIO", "P_IMPORTE_CONVENIO", "P_IVA_CONVENIO", "P_TOTAL_CONVENIO", "P_NOTAS_CONVENIO", "P_RECEPTOR_STATUS",
                     "P_RECEPTOR_STATUS_NOTAS", "P_TIPO", "P_RUTA_ARCHIVO_CONVENIO", "P_RUTA_ARCHIVO_OFICIO", "P_RUTA_ADJUNTO_VOUCHER",
-                    "P_RECEPTOR_METODO_PAGO_FA",
-                    "p_Bandera" };
+                    "P_RECEPTOR_METODO_PAGO_FA", "P_RECEPTOR_CODIGO", "P_RUTA_CONSTANCIA", "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("SEL_FACTURA_SOLICITUD", ref Verificador, Parametros, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
@@ -107,6 +106,8 @@ namespace CapaDatos
                     ObjFactura.IVA_CONVENIO = Convert.ToDouble(Cmd.Parameters["P_IVA_CONVENIO"].Value);
                     ObjFactura.TOTAL_CONVENIO = Convert.ToDouble(Cmd.Parameters["P_TOTAL_CONVENIO"].Value);
                     ObjFactura.OBSERVACIONES_CONVENIO = Convert.ToString(Cmd.Parameters["P_NOTAS_CONVENIO"].Value);
+                    ObjFactura.RECEPTOR_CODIGO = Convert.ToString(Cmd.Parameters["P_RECEPTOR_CODIGO"].Value);
+                    ObjFactura.RUTA_ADJUNTO_CONSTANCIA = Convert.ToString(Cmd.Parameters["P_RUTA_CONSTANCIA"].Value);
 
 
                     ObjFactura.RECEPTOR_STATUS_NOTAS = Convert.ToString(Cmd.Parameters["p_receptor_status_notas"].Value);
@@ -196,7 +197,8 @@ namespace CapaDatos
                     "P_FECHA_REP","P_FOLIO_REP",
                     "P_RECEPTOR_STATUS","P_RECEPTOR_STATUS_NOTAS","P_TIPO",
                     "P_RUTA_ARCHIVO_CONVENIO","P_RUTA_ARCHIVO_OFICIO","P_RUTA_ADJUNTO_VOUCHER","P_RUTA_ADJUNTO_REP","P_USUARIO",
-                    "P_RECEPTOR_METODO_PAGO_FA", "P_FOLIO_PAGADO"
+                    "P_RECEPTOR_METODO_PAGO_FA", "P_FOLIO_PAGADO",
+                    "P_RECEPTOR_CODIGO", "P_RUTA_CONSTANCIA"
                 };
                 Object[] Valores = {ObjFactura.ID_FACT, ObjFactura.RECEPTOR_RFC, ObjFactura.RECEPTOR_TIPO_PERS, ObjFactura.RECEPTOR_NOMBRE, ObjFactura.RECEPTOR_DOMICILIO,
                     ObjFactura.RECEPTOR_COLONIA, ObjFactura.NUMERO_EXTERIOR, ObjFactura.NUMERO_INTERIOR,ObjFactura.RECEPTOR_ESTADO, ObjFactura.RECEPTOR_MUNICIPIO,
@@ -207,7 +209,8 @@ namespace CapaDatos
                     ObjFactura.FECHA_REP, ObjFactura.FOLIO_REP,
                     ObjFactura.RECEPTOR_STATUS, ObjFactura.RECEPTOR_STATUS_NOTAS, ObjFactura.TIPO, 
                     ObjFactura.RUTA_ADJUNTO_CONVENIO, ObjFactura.RUTA_ADJUNTO_OFICIO, ObjFactura.RUTA_ADJUNTO, ObjFactura.RUTA_ADJUNTO_REP, UsuarioNombre,
-                    ObjFactura.RECEPTOR_METODO_PAGO_FA, ObjFactura.FOLIO_PAGADO
+                    ObjFactura.RECEPTOR_METODO_PAGO_FA, ObjFactura.FOLIO_PAGADO,
+                    ObjFactura.RECEPTOR_CODIGO,  ObjFactura.RUTA_ADJUNTO_CONSTANCIA
                 };
                 String[] ParametrosOut = { "p_bandera" };
                 cmm = CDDatos.GenerarOracleCommand("UPD_FACTURA_SOLICITUD", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -238,7 +241,8 @@ namespace CapaDatos
                     "P_FECHA_OFICIO", "P_IMPORTE_CONVENIO", "P_IVA_CONVENIO", "P_TOTAL_CONVENIO", "P_NOTAS_CONVENIO",
                     "P_FECHA_REP", "P_FOLIO_REP",
                     "P_RECEPTOR_STATUS", "P_RECEPTOR_STATUS_NOTAS", "P_TIPO", "P_RUTA_ARCHIVO_CONVENIO", "P_RUTA_ARCHIVO_OFICIO",
-                    "P_RUTA_ADJUNTO_VOUCHER","P_RUTA_ADJUNTO_REP","P_USUARIO", "P_RECEPTOR_METODO_PAGO_FA", "P_FOLIO_PAGADO"
+                    "P_RUTA_ADJUNTO_VOUCHER","P_RUTA_ADJUNTO_REP","P_USUARIO", "P_RECEPTOR_METODO_PAGO_FA", "P_FOLIO_PAGADO",
+                    "P_RECEPTOR_CODIGO","P_RUTA_CONSTANCIA"
                 };
                 Object[] Valores = {
                     ObjFactura.DEPENDENCIA, ObjFactura.RECEPTOR_RFC,
@@ -253,7 +257,8 @@ namespace CapaDatos
                     ObjFactura.FECHA_REP, ObjFactura.FOLIO_REP,
                     ObjFactura.RECEPTOR_STATUS, ObjFactura.RECEPTOR_STATUS_NOTAS, ObjFactura.TIPO,
                     ObjFactura.RUTA_ADJUNTO_CONVENIO, ObjFactura.RUTA_ADJUNTO_OFICIO, ObjFactura.RUTA_ADJUNTO, ObjFactura.RUTA_ADJUNTO_REP,
-                    UsuarioNombre, ObjFactura.RECEPTOR_METODO_PAGO_FA, ObjFactura.FOLIO_PAGADO
+                    UsuarioNombre, ObjFactura.RECEPTOR_METODO_PAGO_FA, ObjFactura.FOLIO_PAGADO,
+                    ObjFactura.RECEPTOR_CODIGO, ObjFactura.RUTA_ADJUNTO_CONSTANCIA
                 };
                 String[] ParametrosOut = { "P_BANDERA", "P_ID_FACT_EFECT" };
                 cmm = CDDatos.GenerarOracleCommand("INS_FACTURA_SOLICITUD", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -313,7 +318,7 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-        public void FacturaDetConsultar(ref List<DetConcepto> ListDetConc, int idFactEfec, ref string Verificador)
+        public void FacturaDetConsultar(ref List<DetConcepto> ListDetConc, int idFactEfec)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
@@ -344,6 +349,38 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void FacturaEfectStatusConsultar(Facturacion objFacturacion, ref List<Facturacion> ListDetConc)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+
+                OracleDataReader dr = null;
+
+                string[] ParametrosIn = { "P_ID_FACT_EFEC" };
+                Object[] Valores = { objFacturacion.ID_FACT };
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Facturas_Status", ref dr, ParametrosIn, Valores);
+
+                while (dr.Read())
+                {
+                    //DetConcepto ObjConceptoDet = new DetConcepto();
+                    //ObjConceptoDet.ClaveConcepto = Convert.ToString(dr.GetValue(0));
+                    //ObjConceptoDet.Descripcion = Convert.ToString(dr.GetValue(1));
+                    //ListDetConc.Add(ObjConceptoDet);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+
         public void FacturaSolConsultaGrid(Usuario ObjUsuario, ref Facturacion objFacturacion, String Dependencia, String FechaInicial, String FechaFinal, string Referencia, string Status, string Confirmados, string Tipo, ref List<Facturacion> List)
         {
             CD_Datos CDDatos = new CD_Datos();

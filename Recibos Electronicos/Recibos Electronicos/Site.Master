@@ -130,7 +130,7 @@
         }
 
         .scroll_monitor {
-            height: 450px;
+            max-height: 450px;
             overflow: auto;
         }
 
