@@ -169,6 +169,13 @@ namespace CapaEntidad
             set { _Ruta = value; }
         }
 
+        private string _Ciclo;
+        public string Ciclo
+        {
+            get { return _Ciclo; }
+            set { _Ciclo = value; }
+        }
+
         private string _Tipo;
         public string Tipo
         {
@@ -188,6 +195,13 @@ namespace CapaEntidad
             get { return _Telefono_Responsable; }
             set { _Telefono_Responsable = value; }
         }
+
+        //private string _Pagina_Web;
+        //public string Pagina_Web
+        //{
+        //    get { return _Pagina_Web; }
+        //    set { _Pagina_Web = value; }
+        //}
 
         private int _Anio;
         public int Anio

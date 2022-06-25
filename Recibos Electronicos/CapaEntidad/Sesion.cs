@@ -8,7 +8,7 @@ namespace CapaEntidad
     {
         private String _Usu_Nombre;   //(Nombre, Nombre, Contraseña)        
         private string _Usu_Ejercicio;
-        private int _Id_Comprobante;       
+        private int _Id_Comprobante;
         private int _Id_Concepto;
         private string _Correo_UNACH;
         private string _Nombre_Completo;
@@ -58,7 +58,7 @@ namespace CapaEntidad
             get { return _Id_Persona; }
             set { _Id_Persona = value; }
         }
-        
+
         private string _Dependencia;
         public string Dependencia
         {
@@ -127,12 +127,12 @@ namespace CapaEntidad
             get { return _Id_Comprobante; }
             set { _Id_Comprobante = value; }
         }
-       
+
         public string Usu_Ejercicio
         {
             get { return _Usu_Ejercicio.Trim(); }
             set { _Usu_Ejercicio = value.Trim(); }
-        }       
+        }
         public string Usu_Nombre
         {
             get { return _Usu_Nombre.Trim(); }
@@ -151,6 +151,13 @@ namespace CapaEntidad
         {
             get { return _Usu_Central; }
             set { _Usu_Central = value; }
+        }
+
+        private string _Tipo_Usu_Factura="N";//(S,N) Si es un Usuario de Finanzas
+        public string Tipo_Usu_Factura
+        {
+            get { return _Tipo_Usu_Factura; }
+            set { _Tipo_Usu_Factura = value; }
         }
 
         private string _Usu_Central_Tipo;//(S,N) Si es un Usuario de Finanzas

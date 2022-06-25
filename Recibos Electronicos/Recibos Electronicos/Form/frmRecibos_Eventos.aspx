@@ -8,13 +8,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-1">
+            <div class="col-md-2">
                 Dependencia
             </div>
-            <div class="col-md-11">
+            <div class="col-md-10">
                 <asp:UpdatePanel ID="updPnlDep" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlDependencia_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%" onChange="LimpiarGrid();">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="RequiredFieldValidator" InitialValue="0" ValidationGroup="Buscar">*Elegir una Dependencia</asp:RequiredFieldValidator>
                     </ContentTemplate>
@@ -22,21 +22,14 @@
             </div>
 
         </div>
-
-        <div class="row">
-            <div class="col font-weight-bold text-warning">
-                Fecha de Pago
-            </div>
-        </div>
-        <hr />
         <div class="row">
             <div class="col-md-2">
                 Tipo Evento
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlDirigido" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlDirigido_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlDirigido" runat="server" Width="100%" onChange="LimpiarGrid();">
                             <asp:ListItem Value="P">Eventos Especiales</asp:ListItem>
                             <asp:ListItem Value="A">Servicios Extraordinarios</asp:ListItem>
                             <asp:ListItem Value="Z">Eventos Privados</asp:ListItem>
@@ -46,34 +39,15 @@
                 </asp:UpdatePanel>
             </div>
             <div class="col-md-1">
-                Fecha Ini
-            </div>
-            <div class="col-md-3">
-                <asp:UpdatePanel ID="UpdatePanel42" runat="server">
-                    <ContentTemplate>
-                        <asp:TextBox ID="txtFecha_Factura_Ini" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
-                        <ajaxToolkit:CalendarExtender ID="CalendarExtenderIni" runat="server" TargetControlID="txtFecha_Factura_Ini" PopupButtonID="imgCalendarioIni" />
-                        <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-            <div class="col-md-1">
-                Fecha Fin
+                Año
             </div>
             <div class="col-md-2">
-                <asp:UpdatePanel ID="UpdatePanel43" runat="server">
-                    <ContentTemplate>
-                        <asp:TextBox ID="txtFecha_Factura_Fin" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Style="margin-left: 0px" Width="95px"></asp:TextBox>
-                        <ajaxToolkit:CalendarExtender ID="CalendarExtenderFin" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFecha_Factura_Fin" />
-                        <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-
+                <asp:DropDownList ID="ddlEjercicio" runat="server" Width="100%" onChange="LimpiarGrid();"></asp:DropDownList>
             </div>
             <div class="col-md-1">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
-                        <asp:LinkButton ID="linkBttnBuscar" runat="server" Width="100%" CssClass="btn btn-info" OnClick="linkBttnBuscar_Click1"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
+                        <asp:LinkButton ID="linkBttnBuscar" runat="server" Width="100%" CssClass="btn btn-info" OnClick="linkBttnBuscar_Click"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -111,7 +85,7 @@
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grdEventos" runat="server" AutoGenerateColumns="False" CssClass="sem table table-striped table-bordered table-hover" EmptyDataText="No existen eventos para esta dependencia." Width="100%" OnSelectedIndexChanged="grdEventos_SelectedIndexChanged">
+                        <asp:GridView ID="grdEventos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No existen eventos para esta dependencia." Width="100%" OnSelectedIndexChanged="grdEventos_SelectedIndexChanged">
                             <Columns>
                                 <asp:BoundField DataField="ID" HeaderText="ID" />
                                 <asp:BoundField DataField="Eventos" HeaderText="CVE" />
@@ -200,9 +174,10 @@
                             EmptyDataText="No existen pagos para este evento."
                             DataKeyNames="ID_FACT"
                             AutoGenerateColumns="False"
-                            OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" CssClass="sem table table-striped table-bordered table-hover" Width="100%" ShowHeaderWhenEmpty="True">
+                            OnPageIndexChanging="grdDatosFactura_OnPageIndexChanging" CssClass="mGrid" Width="100%" ShowHeaderWhenEmpty="True">
                             <Columns>
                                 <asp:BoundField DataField="ID_FACT" HeaderText="ID" SortExpression="ID"></asp:BoundField>
+                                <asp:BoundField DataField="FACT_BANCO" HeaderText="Banco" />
                                 <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
                                     <HeaderStyle HorizontalAlign="Left" />
                                     <ItemStyle HorizontalAlign="Left" />
@@ -269,12 +244,12 @@
             <div class="col-md-3">
             </div>
             <div class="col-md-1">
-                <asp:Label ID="lblLeyTotPagos" runat="server" Font-Bold="True" Font-Size="14px" ForeColor="Black" Text="T O T A L"></asp:Label>
+                <asp:Label ID="lblLeyTotPagos" runat="server" Font-Bold="True" Font-Size="15px" ForeColor="Black" Text="T O T A L"></asp:Label>
             </div>
             <div class="col-md-1 text-right">
                 <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                     <ContentTemplate>
-                        <asp:Label ID="lblTotPagos" runat="server" Font-Bold="True" Font-Size="14px" ForeColor="Black" Text="0"></asp:Label>
+                        <asp:Label ID="lblTotPagos" runat="server" Font-Bold="True" Font-Size="15px" ForeColor="Black" Text="0"></asp:Label>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -305,12 +280,20 @@
                 "ordering": false
             });
 
-        }
+        };
         function Pagos() {
             $('#<%= grdDatosFactura.ClientID %>').prepend($("<thead></thead>").append($('#<%= grdDatosFactura.ClientID %>').find("tr:first"))).DataTable({
                 "stateSave": true
             });
 
+        };
+        function LimpiarGrid() {
+            var table1 = $('#<%= grdEventos.ClientID %>').DataTable();
+            var table2 = $('#<%= grdDatosFactura.ClientID %>').DataTable();
+            table1.clear()
+            table1.draw();
+            table2.clear()
+            table2.draw();
         }
     </script>
 </asp:Content>

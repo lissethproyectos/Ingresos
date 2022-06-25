@@ -45,6 +45,30 @@
         }
 
         function ValidateTipoPersona(sender, args) {
+            var tipoPers = document.getElementById('<%=ddlTipoPers.ClientID %>');
+
+            if (tipoPers.value == "F") {
+                if (document.getElementById('<%=txtReceptor_Rfc.ClientID %>').value.length == "13") {
+                    args.IsValid = true;
+                }
+                else {
+
+                    args.IsValid = false;
+                }
+            }
+            else {
+                if (document.getElementById('<%=txtReceptor_Rfc.ClientID %>').value.length == "12") {
+                    args.IsValid = true;
+                }
+                else {
+                    args.IsValid = false;
+                }
+            }
+
+        };
+
+
+<%--        function ValidateTipoPersona(sender, args) {
             var RBL = document.getElementById('<%=rdoBttnReceptorTipoPersona.ClientID %>');
             var radiobuttonlist = RBL.getElementsByTagName("input");
             var counter = 0;
@@ -70,7 +94,7 @@
                     }
                 }
             }
-        };
+        };--%>
 
         function ValidateCheckBox(sender, args) {
 
@@ -374,7 +398,7 @@
                                 Dependencia
                             </div>
                             <div class="col-md-10">
-                                <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
+                                <asp:DropDownList ID="ddlDependencia" runat="server" CssClass="form-control">
                                 </asp:DropDownList>
                             </div>
 
@@ -386,7 +410,7 @@
                             <div class="col-md-2">
                                 <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="ddlTipo" runat="server" Width="100%" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" AutoPostBack="True">
+                                        <asp:DropDownList ID="ddlTipo" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" AutoPostBack="True">
                                             <asp:ListItem Value="R">Referenciado</asp:ListItem>
                                             <asp:ListItem Value="T">Efectivo/Transferencia</asp:ListItem>
                                             <asp:ListItem Value="A">Facturas Anticipadas</asp:ListItem>
@@ -398,7 +422,7 @@
                                 Filtro
                             </div>
                             <div class="col-md-3" runat="server" id="rowFiltro2">
-                                <asp:DropDownList ID="ddlFiltro" runat="server" Width="100%">
+                                <asp:DropDownList ID="ddlFiltro" runat="server" CssClass="form-control">
                                     <asp:ListItem Value="S">Recibos con solicitud de factura</asp:ListItem>
                                     <asp:ListItem Value="T">Todos los recibos</asp:ListItem>
                                 </asp:DropDownList>
@@ -658,7 +682,8 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField>
                                                             <ItemTemplate>
-                                                                <asp:LinkButton ID="linkBttnEditar0" runat="server" CausesValidation="false" CommandName="Select" Visible='false' ToolTip="Actualizar datos fiscales"><i aria-hidden="true" class="fa fa-pencil fa-2x"></i></asp:LinkButton><asp:LinkButton ID="linkBttnFactura" runat="server" CausesValidation="false" OnClick="linkBttnFactura_Click" ToolTip="Archivos adjuntos"><i aria-hidden="true" class="fa fa-cloud-download fa-2x"></i></asp:LinkButton>
+                                                                <asp:LinkButton ID="linkBttnEditar0" runat="server" CausesValidation="false" CommandName="Select" Visible='false' ToolTip="Actualizar datos fiscales"><i aria-hidden="true" class="fa fa-pencil fa-2x"></i></asp:LinkButton>
+                                                                <asp:LinkButton ID="linkBttnFactura" runat="server" CausesValidation="false" OnClick="linkBttnFactura_Click" ToolTip="Archivos adjuntos"><i aria-hidden="true" class="fa fa-cloud-download fa-2x"></i></asp:LinkButton>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
                                                         <asp:TemplateField>
@@ -999,7 +1024,6 @@
                             </div>
                         </div>
                         <!-- /.Horizontal Steppers -->
-
                     </div>
                     <div class="container-fluid">
                         <div class="row">
@@ -1017,54 +1041,62 @@
                                     <ContentTemplate>
                                         <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="0" Width="100%" Height="614px" CssClass="ajax__tab_xp" ScrollBars="Vertical">
                                             <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
-                                                <HeaderTemplate><i class="fa fa fa-file fa-2x" aria-hidden="true"></i>&nbsp;Información de Factura</HeaderTemplate>
+                                                <HeaderTemplate><i class="fa fa fa-file fa-2x font-weight-bold" aria-hidden="true"></i>&nbsp;Información de Factura</HeaderTemplate>
                                                 <ContentTemplate>
                                                     <asp:Panel ID="pnl1" runat="server">
                                                         <div class="container-fluid">
+                                                            <h6 class="card-title font-weight-bold">Datos del Receptor</h6>
+                                                            <hr />
                                                             <div class="row" id="rowPnl1" runat="server">
                                                                 <div class="col alert alert-danger">
                                                                     <h6>NOTA: Contenido únicamente de CONSULTA</h6>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-2">RFC </div>
-                                                                <div class="col-md-4">
+                                                                <div class="col-md-1">RFC </div>
+                                                                <div class="col-md-2">
                                                                     <div class="input-group mb-3">
-                                                                        <asp:TextBox ID="txtReceptor_Rfc" runat="server" CssClass="form-control" MaxLength="13"></asp:TextBox><div class="input-group-append">
-                                                                            <span class="input-group" id="basic-addon2">
-                                                                                <asp:LinkButton ID="linkBttnRFC" CssClass="btn btn-grey" runat="server"><i class="fa fa-search" aria-hidden="true"></i> Buscar</asp:LinkButton></span>
-                                                                        </div>
+                                                                        <asp:TextBox ID="txtReceptor_Rfc" runat="server" CssClass="form-control" MaxLength="13"></asp:TextBox>
+                                                                        <span class="input-group-text grey text-white" id="basic-addon2">
+                                                                            <asp:LinkButton ID="linkBttnRFC" runat="server" OnClick="linkBttnRFC_Click"><i class="fa fa-search" aria-hidden="true"></i></asp:LinkButton>
+                                                                        </span>
                                                                     </div>
+
+
                                                                 </div>
-                                                                <div class="col-md-2">Persona </div>
-                                                                <div class="col-md-3">
+                                                                <div class="col-md-1">Persona </div>
+                                                                <div class="col-md-2">
                                                                     <asp:UpdatePanel ID="UpdatePanel51" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:RadioButtonList ID="rdoBttnReceptorTipoPersona" runat="server" OnSelectedIndexChanged="rdoBttnReceptorTipoPersona_SelectedIndexChanged" RepeatDirection="Horizontal" TabIndex="3" AppendDataBoundItems="True" AutoPostBack="True">
+                                                                            <%--<asp:RadioButtonList ID="rdoBttnReceptorTipoPersona" runat="server" OnSelectedIndexChanged="rdoBttnReceptorTipoPersona_SelectedIndexChanged" RepeatDirection="Horizontal" TabIndex="3" AppendDataBoundItems="True" AutoPostBack="True">
                                                                                 <asp:ListItem Value="F">Fisica&#160;&#160;</asp:ListItem>
                                                                                 <asp:ListItem Value="M">Moral</asp:ListItem>
-                                                                            </asp:RadioButtonList>
+                                                                            </asp:RadioButtonList>--%>
+                                                                            <asp:DropDownList ID="ddlTipoPers" runat="server" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="ddlTipoPers_SelectedIndexChanged">
+                                                                                <asp:ListItem Value="0">--SELECCIONAR--</asp:ListItem>
+                                                                                <asp:ListItem Value="F">FISICA</asp:ListItem>
+                                                                                <asp:ListItem Value="M">MORAL</asp:ListItem>
+                                                                            </asp:DropDownList>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
-                                                                    <asp:RequiredFieldValidator ID="valTipoPers" runat="server" ControlToValidate="rdoBttnReceptorTipoPersona" ErrorMessage="*Tipo Persona" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                    <asp:RequiredFieldValidator ID="valTipoPers" runat="server" ControlToValidate="ddlTipoPers" ErrorMessage="*Tipo Persona" ValidationGroup="DatosFiscales" InitialValue="0">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="col-md-1">
-                                                                    <asp:CustomValidator ID="valLongitudRFC0" runat="server" ClientValidationFunction="ValidateTipoPersona" ControlToValidate="rdoBttnReceptorTipoPersona" ErrorMessage="*Para personas Fisicas el RFC debe ser de 13 caracteres, para MORALES de 12 caracteres." ValidationGroup="DatosFiscales">*Longitud de RFC incorrecto</asp:CustomValidator>
+                                                                    <asp:CustomValidator ID="valLongitudRFC0" runat="server" ClientValidationFunction="ValidateTipoPersona" ControlToValidate="ddlTipoPers" ErrorMessage="*Para personas Fisicas el RFC debe ser de 13 caracteres, para MORALES de 12 caracteres." ValidationGroup="DatosFiscales">*Longitud de RFC incorrecto</asp:CustomValidator>
                                                                 </div>
-                                                            </div>
-                                                            <div class="row">
+                                                                <div class="col-md-1">Razón Social </div>
+                                                                <div class="col-md-4">
+                                                                    <asp:TextBox ID="txtReceptor_Nombre" runat="server" TabIndex="3" CssClass="form-control"></asp:TextBox><asp:RequiredFieldValidator ID="valRazon_Social" runat="server" ControlToValidate="txtReceptor_Nombre" ErrorMessage="*Razón Social" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                </div>
 
-                                                                <div class="col-md-2">Razón Social </div>
-                                                                <div class="col-md-10">
-                                                                    <asp:TextBox ID="txtReceptor_Nombre" runat="server" TabIndex="3" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valRazon_Social" runat="server" ControlToValidate="txtReceptor_Nombre" ErrorMessage="*Razón Social" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
-                                                                </div>
                                                             </div>
+
                                                             <div class="row">
-                                                                <div class="col-md-2">Pais</div>
-                                                                <div class="col-md-2">
+                                                                <div class="col-md-1">Pais</div>
+                                                                <div class="col-md-3">
                                                                     <asp:UpdatePanel ID="UpdatePanel21" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:DropDownList ID="ddlReceptor_Pais" runat="server" Width="100%"></asp:DropDownList>
+                                                                            <asp:DropDownList ID="ddlReceptor_Pais" runat="server" CssClass="form-control" Enabled="false"></asp:DropDownList>
                                                                             <asp:RequiredFieldValidator ID="reqPais" runat="server" ControlToValidate="ddlReceptor_Pais" ErrorMessage="*Pais" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
@@ -1073,49 +1105,61 @@
                                                                 <div class="col-md-3">
                                                                     <asp:UpdatePanel ID="UpdatePanel12" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:DropDownList ID="ddlReceptor_Estado" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlEstado_Fiscal_SelectedIndexChanged" TabIndex="8" Width="100%"></asp:DropDownList><asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="ddlReceptor_Estado" ErrorMessage="*Estado" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                            <asp:DropDownList ID="ddlReceptor_Estado" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlEstado_Fiscal_SelectedIndexChanged" TabIndex="8" CssClass="form-control"></asp:DropDownList><asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="ddlReceptor_Estado" ErrorMessage="*Estado" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
                                                                 </div>
                                                                 <div class="col-md-1">Municipio </div>
                                                                 <div class="col-md-3">
-                                                                    <asp:DropDownList ID="ddlReceptor_Municipio" runat="server" TabIndex="9" Width="100%"></asp:DropDownList><asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="ddlReceptor_Municipio" ErrorMessage="*Municipio" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                    <asp:DropDownList ID="ddlReceptor_Municipio" runat="server" TabIndex="9" CssClass="form-control"></asp:DropDownList><asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="ddlReceptor_Municipio" ErrorMessage="*Municipio" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-2">CP </div>
+                                                                <div class="col-md-1">CP </div>
                                                                 <div class="col-md-1">
-                                                                    <asp:TextBox ID="txtReceptor_CP" runat="server" MaxLength="500" TabIndex="10" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valCP_Fiscal" runat="server" ControlToValidate="txtReceptor_CP" ErrorMessage="*Código Postal" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                    <asp:TextBox ID="txtReceptor_CP" runat="server" MaxLength="500" TabIndex="10" CssClass="form-control"></asp:TextBox><asp:RequiredFieldValidator ID="valCP_Fiscal" runat="server" ControlToValidate="txtReceptor_CP" ErrorMessage="*Código Postal" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="col-md-1">Calle </div>
                                                                 <div class="col-md-4">
-                                                                    <asp:TextBox ID="txtReceptor_Domicilio" runat="server" MaxLength="500" TabIndex="4" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valCalle_Fiscal" runat="server" ControlToValidate="txtReceptor_Domicilio" ErrorMessage="*Calle" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                    <asp:TextBox ID="txtReceptor_Domicilio" runat="server" MaxLength="500" TabIndex="4" CssClass="form-control"></asp:TextBox><asp:RequiredFieldValidator ID="valCalle_Fiscal" runat="server" ControlToValidate="txtReceptor_Domicilio" ErrorMessage="*Calle" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="col-md-1">Colonia </div>
-                                                                <div class="col-md-3">
-                                                                    <asp:TextBox ID="txtReceptor_Colonia" runat="server" TabIndex="5" Width="100%"></asp:TextBox><asp:RequiredFieldValidator ID="valColonia_Fiscal" runat="server" ControlToValidate="txtReceptor_Colonia" ErrorMessage="*Colonia" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                <div class="col-md-4">
+                                                                    <asp:TextBox ID="txtReceptor_Colonia" runat="server" TabIndex="5" CssClass="form-control"></asp:TextBox><asp:RequiredFieldValidator ID="valColonia_Fiscal" runat="server" ControlToValidate="txtReceptor_Colonia" ErrorMessage="*Colonia" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-2">
+                                                                <div class="col-md-1">
                                                                     Núm Ext
                                                                 </div>
-                                                                <div class="col-md-2">
-                                                                    <asp:TextBox ID="txtReceptor_NumExt" runat="server" TabIndex="6" Width="100%"></asp:TextBox>
+                                                                <div class="col-md-1">
+                                                                    <asp:TextBox ID="txtReceptor_NumExt" runat="server" TabIndex="6" CssClass="form-control"></asp:TextBox>
                                                                     <asp:RequiredFieldValidator ID="reqNumExt" runat="server" ControlToValidate="txtReceptor_NumExt" ErrorMessage="*Num Exterior" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
-                                                                <div class="col-md-2">Número Interior </div>
-                                                                <div class="col-md-2">
-                                                                    <asp:TextBox ID="txtReceptor_NumInt" runat="server" TabIndex="7" Width="100%"></asp:TextBox>
+                                                                <div class="col-md-1">Núm Int</div>
+                                                                <div class="col-md-1">
+                                                                    <asp:TextBox ID="txtReceptor_NumInt" runat="server" TabIndex="7" CssClass="form-control"></asp:TextBox>
+                                                                </div>
+
+                                                                <div class="col-md-1">Teléfono</div>
+                                                                <div class="col-md-3">
+                                                                    <asp:TextBox ID="txtReceptor_Telefono" runat="server" TabIndex="14" CssClass="form-control"></asp:TextBox>
+                                                                </div>
+                                                                <div class="col-md-1">Correo </div>
+                                                                <div class="col-md-3">
+                                                                    <asp:TextBox ID="txtReceptor_Correo" runat="server" TabIndex="15" CssClass="form-control"></asp:TextBox>
                                                                 </div>
                                                             </div>
 
+
+                                                            <h6 class="card-title font-weight-bold">Datos de la Factura</h6>
+                                                            <hr />
                                                             <div class="row">
                                                                 <div class="col-md-2">Metodo de Pago </div>
                                                                 <div class="col-md-4">
                                                                     <asp:UpdatePanel ID="updPnlReceptor_MetodoPago" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:DropDownList ID="ddlReceptor_MetodoPago" runat="server" TabIndex="11" Width="100%">
+                                                                            <asp:DropDownList ID="ddlReceptor_MetodoPago" runat="server" TabIndex="11" CssClass="form-control">
                                                                                 <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
                                                                                 <asp:ListItem Value="PUE">[PUE] Pago en una sola exhibicion</asp:ListItem>
                                                                                 <asp:ListItem Value="PPD">[PPD] Pago en parcialidades o diferido</asp:ListItem>
@@ -1126,7 +1170,7 @@
                                                                 </div>
                                                                 <div class="col-md-2">Forma de Pago </div>
                                                                 <div class="col-md-4">
-                                                                    <asp:DropDownList ID="ddlForma_Pago" runat="server" TabIndex="12" Width="100%">
+                                                                    <asp:DropDownList ID="ddlForma_Pago" runat="server" TabIndex="12" CssClass="form-control">
                                                                         <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
                                                                         <asp:ListItem Value="01">[01] Efectivo</asp:ListItem>
                                                                         <asp:ListItem Value="02">[02] Cheque Nominativo</asp:ListItem>
@@ -1144,7 +1188,7 @@
                                                                 <div class="col-md-4">
                                                                     <asp:UpdatePanel ID="updPnlCodigoFiscal" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:DropDownList ID="ddlCodigoFiscal" runat="server" Width="100%" OnSelectedIndexChanged="ddlCodigoFiscal_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                                                            <asp:DropDownList ID="ddlCodigoFiscal" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlCodigoFiscal_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
                                                                     <asp:RequiredFieldValidator ID="reqCodigo" runat="server" ControlToValidate="ddlCodigoFiscal" ErrorMessage="*Régimen Fiscal" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
@@ -1153,7 +1197,7 @@
                                                                 <div class="col-md-4">
                                                                     <asp:UpdatePanel ID="updPnlCFDI" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:DropDownList ID="ddlCFDI" runat="server" TabIndex="13" Width="100%">
+                                                                            <asp:DropDownList ID="ddlCFDI" runat="server" TabIndex="13" CssClass="form-control">
                                                                                 <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
                                                                                 <asp:ListItem Value="G01">ADQUISICION DE MERCANCIAS</asp:ListItem>
                                                                                 <asp:ListItem Value="G02">DEVOLUCIONES, DESCUENTOS O BONIFICACIONES</asp:ListItem>
@@ -1183,16 +1227,7 @@
                                                                     <asp:RequiredFieldValidator ID="valCFDI" runat="server" ControlToValidate="ddlCFDI" ErrorMessage="*Uso de CFDI" ForeColor="Red" InitialValue="0" ValidationGroup="DatosFiscales" Text="*Requerido"></asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-md-2">Teléfono</div>
-                                                                <div class="col-md-3">
-                                                                    <asp:TextBox ID="txtReceptor_Telefono" runat="server" TabIndex="14" Width="100%"></asp:TextBox>
-                                                                </div>
-                                                                <div class="col-md-1">Correo </div>
-                                                                <div class="col-md-3">
-                                                                    <asp:TextBox ID="txtReceptor_Correo" runat="server" TabIndex="15" Width="100%"></asp:TextBox>
-                                                                </div>
-                                                            </div>
+
                                                             <br />
                                                             <div class="row">
                                                                 <div class="col">
@@ -1220,7 +1255,7 @@
                                                                                 <div class="row">
                                                                                     <div class="col-md-2"></div>
                                                                                     <div class="col-md-9">
-                                                                                        <asp:HyperLink ID="linkConstancia" runat="server" CssClass="form-control" Target="_blank">[lblArchivoConstancia]</asp:HyperLink>
+                                                                                        <asp:HyperLink ID="linkConstancia" runat="server" CssClass="form-control alert-secondary" Target="_blank">[lblArchivoConstancia]</asp:HyperLink>
                                                                                     </div>
                                                                                     <div class="col-md-1">
                                                                                         <asp:UpdatePanel ID="UpdatePanel19" runat="server">
@@ -1282,6 +1317,7 @@
                                                                     <asp:RequiredFieldValidator ID="reqObservaciones" runat="server" ControlToValidate="txtObservaciones" ErrorMessage="*Motivo del Rechazo" ForeColor="Red" Text="*Requerido" ValidationGroup="DatosFiscalesCaja"></asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
+
 
                                                         </div>
                                                     </asp:Panel>
@@ -2036,6 +2072,7 @@
                             <div class="col-md-10">
                                 <asp:DropDownList ID="ddlStatusFactEfect" runat="server" Width="100%">
                                     <asp:ListItem Value="C">Solicitudes</asp:ListItem>
+                                    <asp:ListItem Value="S">Solicitudes Confirmadas</asp:ListItem>
                                     <asp:ListItem Value="F">Facturados</asp:ListItem>
                                     <asp:ListItem Value="P">Pagados</asp:ListItem>
                                     <asp:ListItem Value="E">REP</asp:ListItem>
@@ -2045,7 +2082,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <asp:LinkButton ID="bttnRegresarStatus"  class="btn btn-primary"  runat="server">Regresar status</asp:LinkButton>
+                    <asp:LinkButton ID="bttnRegresarStatus" class="btn btn-primary" runat="server">Regresar status</asp:LinkButton>
                     <button type="button" class="btn btn-blue-grey" data-dismiss="modal">Cerrar</button>
                 </div>
             </div>

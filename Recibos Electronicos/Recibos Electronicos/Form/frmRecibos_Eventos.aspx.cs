@@ -46,13 +46,13 @@ namespace Recibos_Electronicos.Form
         #region <Funciones>
         protected void Inicializar()
         {
-            MesActual = System.DateTime.Now.Month.ToString();
-            int Mes = Convert.ToInt32(MesActual);
-            if (Mes > 3)
-                Mes = Mes - 3;
+            //MesActual = System.DateTime.Now.Month.ToString();
+            //int Mes = Convert.ToInt32(MesActual);
+            //if (Mes > 3)
+            //    Mes = Mes - 3;
 
-            txtFecha_Factura_Ini.Text = "01/" + Mes.ToString().PadLeft(2, '0') + "/" + System.DateTime.Now.Year.ToString();
-            txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
+            //txtFecha_Factura_Ini.Text = "01/" + Mes.ToString().PadLeft(2, '0') + "/" + System.DateTime.Now.Year.ToString();
+            //txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
             CargarCombos();
         }
 
@@ -62,6 +62,9 @@ namespace Recibos_Electronicos.Form
             try
             {
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
+                CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Ejercicios_Eventos", ref ddlEjercicio, "INGRESOS");
+                string anio = DateTime.Now.ToString("yyyy");
+                ddlEjercicio.SelectedValue = anio;
                 CargarGridEventos();
             }
             catch (Exception ex)
@@ -75,6 +78,8 @@ namespace Recibos_Electronicos.Form
         {
             //Int32[] Celdas = { 6 };
             MsjError = string.Empty;
+            grdDatosFactura.DataSource = null;
+            grdDatosFactura.DataBind();
             try
             {
                 DataTable dt = new DataTable();
@@ -85,7 +90,6 @@ namespace Recibos_Electronicos.Form
                 if (grdEventos.Rows.Count >= 1)
                 {
                     this.grdEventos.SelectedIndex = 0;
-                    //grdEventos.SelectedRow.Cells[1].Text;
                     grdEventos_SelectedIndexChanged(null, null);
                 }
             }
@@ -138,8 +142,9 @@ namespace Recibos_Electronicos.Form
                 List<Evento> ListEvento = new List<Evento>();
                 ObjEvento.Dependencia = ddlDependencia.SelectedValue;
                 ObjEvento.Tipo = ddlDirigido.SelectedValue;
-                ObjEvento.Fecha_inicial = txtFecha_Factura_Ini.Text;
-                ObjEvento.Fecha_final = txtFecha_Factura_Fin.Text;
+                ObjEvento.Anio = Convert.ToInt32(ddlEjercicio.SelectedValue);
+                //ObjEvento.Fecha_inicial = txtFecha_Factura_Ini.Text;
+                //ObjEvento.Fecha_final = txtFecha_Factura_Fin.Text;
                 CNEvento.ConsultarEventosTipoUsu(ObjEvento, SesionUsu.Usu_Nombre, Convert.ToString(SesionUsu.Usu_TipoUsu), "A" , "", ref ListEvento);
                 return ListEvento;
             }
@@ -218,8 +223,7 @@ namespace Recibos_Electronicos.Form
         }
 
         protected void grdEventos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
+        {            
             CargarGridPagos();
         }
 
@@ -230,7 +234,7 @@ namespace Recibos_Electronicos.Form
             try
             {
                 grdDatosFactura.SelectedIndex = row.RowIndex;
-                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[7].Text;
+                PnlCorreo.Matricula = grdDatosFactura.SelectedRow.Cells[8].Text;
                 PnlCorreo.Recibo = grdDatosFactura.SelectedRow.Cells[0].Text;
                 PnlCorreo.Muestra();
             }
@@ -309,7 +313,7 @@ namespace Recibos_Electronicos.Form
 
         protected void linkBttnBuscar_Click(object sender, EventArgs e)
         {
-            CargarGridPagos();
+            CargarGridEventos();
         }
 
         protected void linkBttnBuscar_Click1(object sender, EventArgs e)

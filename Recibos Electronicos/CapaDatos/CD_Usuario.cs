@@ -41,6 +41,34 @@ namespace CapaDatos
             }
         
         }
+        public void ValidarUsuarioFactura(ref Usuario usuario, ref string Verificador)
+        {
+            CD_Datos _CD_Datos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                string[] ParametrosIn = { "P_USUARIO" };
+
+                string[] Valores = { usuario.Usu_Nombre };
+
+
+                string[] ParametrosOut = { "P_TIPO_USUARIO", "P_BANDERA" };
+
+                cmm = _CD_Datos.GenerarOracleCommand("USUARIO_CENTRAL_FACTURACION", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+                usuario.Tipo_Usu_Factura = Convert.ToString(cmm.Parameters["P_TIPO_USUARIO"].Value);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message + "Se ha perdido la conexión, por favor intente más tarde");
+            }
+            finally
+            {
+                _CD_Datos.LimpiarOracleCommand(ref cmm);
+            }
+
+        }
+
         public void ValidarCliente(ref Sesion Usuario, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

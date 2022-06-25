@@ -249,6 +249,14 @@
                                                         <asp:TextBox ID="txtTelResp" runat="server" Width="100%"></asp:TextBox>
                                                     </div>
                                                     <div class="col-md-1">
+                                                        Página Web
+                                                    </div>
+                                                    <div class="col-md-5">
+                                                        <asp:TextBox ID="txtUrlEvento" runat="server" Width="100%"></asp:TextBox>
+                                                    </div>
+                                                    </div>
+                                                <div class="row">
+                                                    <div class="col-md-1">
                                                         Fecha Inicio
                                                     </div>
                                                     <div class="col-md-2">
@@ -287,11 +295,8 @@
                                                         Ciclo
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlCiclo" runat="server"></asp:DropDownList>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
+                                                        <asp:DropDownList ID="ddlCiclo" runat="server"></asp:DropDownList>
+<%--                                                        <asp:TextBox ID="txtCiclo" runat="server"></asp:TextBox>--%>
                                                     </div>
                                                     <div class="col-md-2">
                                                         <asp:LinkButton ID="linkBttnAgregarCiclo" CssClass="btn btn-blue-grey" runat="server"><i class="fa fa-plus-circle" aria-hidden="true"></i>

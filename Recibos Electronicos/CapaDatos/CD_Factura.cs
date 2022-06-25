@@ -313,6 +313,8 @@ namespace CapaDatos
                     ObjFactura.FACT_DEPENDENCIA = Convert.ToString(dr.GetValue(6));
                     ObjFactura.FACT_MATRICULA = Convert.ToString(dr.GetValue(7));
                     ObjFactura.FACT_RECEPTOR_CORREO = Convert.ToString(dr.GetValue(8));
+                    ObjFactura.FACT_BANCO = Convert.ToString(dr.GetValue(9));
+
                     List.Add(ObjFactura);
 
                 }
@@ -644,20 +646,24 @@ namespace CapaDatos
 
                 String[] Parametros = { "P_RFC" };
                 Object[] Valores = { ObjFactura.FACT_RECEPTOR_RFC };
-                String[] ParametrosOut = { "p_nombre", "p_carrera", "p_matricula", "p_observaciones", "p_referencia", "p_fecha", "p_importe", "p_folio_recibo", "p_banco", "p_folio_bancario", "p_Bandera" };
-                Cmd = CDDatos.GenerarOracleCommand("SEL_FACTURA", ref Verificador, Parametros, Valores, ParametrosOut);
+                String[] ParametrosOut = { "P_RAZON_SOCIAL", "P_PAIS", "P_CP", 
+                    "P_DOMICILIO", "P_COLONIA", "P_NUM_EXT","P_NUM_INT","P_TELEFONO","P_CORREO","P_RUTA_CONSTANCIA","P_TIPO_PERSONA","P_BANDERA" };
+                Cmd = CDDatos.GenerarOracleCommand("SEL_DATOS_RFC", ref Verificador, Parametros, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
-                    ObjFactura.FACT_NOMBRE = Convert.ToString(Cmd.Parameters["p_nombre"].Value);
-                    ObjFactura.FACT_CARRERA = Convert.ToString(Cmd.Parameters["p_carrera"].Value);
-                    ObjFactura.FACT_MATRICULA = Convert.ToString(Cmd.Parameters["p_matricula"].Value);
-                    ObjFactura.FACT_OBSERVACIONES = Convert.ToString(Cmd.Parameters["p_observaciones"].Value);
-                    ObjFactura.FACT_REFERENCIA = Convert.ToString(Cmd.Parameters["p_referencia"].Value);
-                    ObjFactura.FACT_FECHA_FACTURA = Convert.ToString(Cmd.Parameters["p_fecha"].Value);
-                    ObjFactura.FACT_TOTAL = Convert.ToString(Cmd.Parameters["p_importe"].Value);
-                    ObjFactura.FACT_FOLIO = Convert.ToString(Cmd.Parameters["p_folio_recibo"].Value);
-                    ObjFactura.FACT_BANCO = Convert.ToString(Cmd.Parameters["p_banco"].Value);
-                    ObjFactura.FACT_FOLIOBANCARIO = Convert.ToString(Cmd.Parameters["p_folio_bancario"].Value);
+                    ObjFactura.FACT_CLIENTE = Convert.ToString(Cmd.Parameters["P_RAZON_SOCIAL"].Value);
+                    ObjFactura.FACT_EXPEDIDO_PAIS = Convert.ToString(Cmd.Parameters["P_PAIS"].Value);
+                    ObjFactura.FACT_RECEPTOR_CP = Convert.ToString(Cmd.Parameters["P_CP"].Value);
+                    ObjFactura.FACT_RECEPTOR_DOMICILIO = Convert.ToString(Cmd.Parameters["P_DOMICILIO"].Value);
+                    ObjFactura.FACT_RECEPTOR_COLONIA = Convert.ToString(Cmd.Parameters["P_COLONIA"].Value);
+
+                    ObjFactura.NUMERO_EXTERIOR = Convert.ToString(Cmd.Parameters["P_NUM_EXT"].Value);
+                    ObjFactura.NUMERO_INTERIOR = Convert.ToString(Cmd.Parameters["P_NUM_INT"].Value);
+                    ObjFactura.FACT_RECEPTOR_TELEFONO = Convert.ToString(Cmd.Parameters["P_TELEFONO"].Value);
+                    ObjFactura.FACT_RECEPTOR_CORREO = Convert.ToString(Cmd.Parameters["P_CORREO"].Value);
+                    ObjFactura.FACT_RECEPTOR_TIPO_PERS = Convert.ToString(Cmd.Parameters["P_TIPO_PERSONA"].Value);                    
+
+                    ObjFactura.ADJUNTO_CONSTANCIA = Convert.ToString(Cmd.Parameters["P_RUTA_CONSTANCIA"].Value);
                 }
             }
             catch (Exception ex)

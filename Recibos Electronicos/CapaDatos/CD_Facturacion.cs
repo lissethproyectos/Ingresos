@@ -441,7 +441,7 @@ namespace CapaDatos
                     else if (objFacturacion.RECEPTOR_STATUS == "P")
                         objFacturacion.DESC_RECEPTOR_STATUS = "PAGADO";
                     else if (objFacturacion.RECEPTOR_STATUS == "E")
-                        objFacturacion.DESC_RECEPTOR_STATUS = "REP";
+                        objFacturacion.DESC_RECEPTOR_STATUS = "REP (CONCLUIDO)";
                     else if (objFacturacion.RECEPTOR_STATUS == "F")
                     {
                        

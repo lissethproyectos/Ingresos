@@ -54,8 +54,9 @@ namespace CapaEntidad
         private string _FACT_ANIO_APROBACION;
         private string _FACT_STATUS;
         private string _FACT_STATUS_NOTAS;
-        private string _FACT_RECEPTOR_MUNICIPIO;
+        private string _FACT_RECEPTOR_PAIS;
         private string _FACT_RECEPTOR_ESTADO;
+        private string _FACT_RECEPTOR_MUNICIPIO;
         private string _FACT_RECEPTOR_METODO_PAGO;
         private string _FACT_RECEPTOR_STATUS;
         private string _FACT_RECEPTOR_STATUS2;
@@ -486,6 +487,12 @@ namespace CapaEntidad
         {
             get { return _FACT_EXPEDIDO_PAIS; }
             set { _FACT_EXPEDIDO_PAIS = value; }
+        }
+
+        public string FACT_RECEPTOR_PAIS
+        {
+            get { return _FACT_RECEPTOR_PAIS; }
+            set { _FACT_RECEPTOR_PAIS = value; }
         }
         public string FACT_FECHA_CFD
         {

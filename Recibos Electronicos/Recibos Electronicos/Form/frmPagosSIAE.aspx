@@ -1,19 +1,16 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="frmPagosSIAE.aspx.cs" Inherits="Recibos_Electronicos.Form.frmPagosSIAE" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">
+    <div class="container">        
         <div class="row">
-            <div class="col alert alert-warning">
-                Busqueda de referencias generadas en el SIAE.
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 Escuela
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="DDLEscuela" runat="server" CssClass="form-control" Width="100%"></asp:DropDownList>
@@ -22,10 +19,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 Nivel
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <asp:UpdatePanel ID="updPnlNivel" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="ddlNivel" runat="server" Width="100%" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged">
@@ -46,10 +43,10 @@
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
-            <div class="col-md-2">
-                Ciclo Escolar
+            <div class="col-md-1">
+                Ciclo
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2">
                 <asp:UpdatePanel ID="updPnlCiclo" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="ddlCicloEscolar" runat="server" Width="100%" CssClass="form-control">
@@ -63,14 +60,9 @@
                         <asp:Image ID="imgCiclo" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
                     </ProgressTemplate>
                 </asp:UpdateProgress>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                Ficha/Nombre/Referencia
-            </div>
-            <div class="col-md-9">
-                <asp:TextBox ID="txtReferencia" runat="server" CssClass="box" PlaceHolder="Referencia/Nombre" Visible="true" Width="100%"></asp:TextBox>
+            </div>       
+            <div class="col-md-3">
+                <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia/Nombre" Visible="true" Width="100%"></asp:TextBox>
             </div>
             <div class="col-md-1">
                 <asp:UpdatePanel ID="UpdatePanel229" runat="server">
@@ -103,7 +95,7 @@
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel228" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grvReferenciasSIAE" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontró el recibo." OnPageIndexChanging="grvReferenciasSIAE_PageIndexChanging" Width="100%">
+                        <asp:GridView ID="grvReferenciasSIAE" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontró el recibo." OnPageIndexChanging="grvReferenciasSIAE_PageIndexChanging" Width="100%">
                             <Columns>
                                 <asp:BoundField DataField="ID_FACT" HeaderText="Id" />
                                 <asp:BoundField DataField="CICLO_ESCOLAR" HeaderText="Ciclo Escolar" />
@@ -345,6 +337,20 @@
             if (window.event.keyCode == 13) {
                 document.getElementById(objBtnID).focus();
             }
+        };
+
+
+        
+        function PagosSIAE() {
+
+            $('#<%= grvReferenciasSIAE.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvReferenciasSIAE.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false
+            });
+
         }
+
+
     </script>
 </asp:Content>

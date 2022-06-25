@@ -19,6 +19,7 @@ namespace CapaEntidad
         private string _Password;
         private string _CUsuario;
         private string _Correo_UNACH;
+        private string _Tipo_Usu_Factura;
         //private String _Usu_Dependencias;//(Son las dependencias que va a poder visualizar el usuario logeado)
 
 
@@ -87,6 +88,12 @@ namespace CapaEntidad
         {
             get { return _Usu_TipoPermiso; }
             set { _Usu_TipoPermiso = value; }
+        }
+
+        public string Tipo_Usu_Factura
+        {
+            get { return _Tipo_Usu_Factura; }
+            set { _Tipo_Usu_Factura = value; }
         }
 
         public string Password

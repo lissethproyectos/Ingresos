@@ -501,13 +501,13 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanel51;
 
         /// <summary>
-        /// Control rdoBttnReceptorTipoPersona.
+        /// Control ddlTipoPers.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButtonList rdoBttnReceptorTipoPersona;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoPers;
 
         /// <summary>
         /// Control valTipoPers.
@@ -699,6 +699,24 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.TextBox txtReceptor_NumInt;
 
         /// <summary>
+        /// Control txtReceptor_Telefono.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReceptor_Telefono;
+
+        /// <summary>
+        /// Control txtReceptor_Correo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReceptor_Correo;
+
+        /// <summary>
         /// Control updPnlReceptor_MetodoPago.
         /// </summary>
         /// <remarks>
@@ -796,24 +814,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator valCFDI;
-
-        /// <summary>
-        /// Control txtReceptor_Telefono.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReceptor_Telefono;
-
-        /// <summary>
-        /// Control txtReceptor_Correo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReceptor_Correo;
 
         /// <summary>
         /// Control UpdatePanel18.

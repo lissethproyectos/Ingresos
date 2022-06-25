@@ -212,8 +212,9 @@ namespace Recibos_Electronicos.Form
                     lblUsuAutorizado.Text = Objeventos.Usuario_Autoriza;
                     lblFechaAutorizado.Text = Objeventos.Fecha_Autorizacion;
                     txtEspecificacion.Text = Objeventos.Observaciones;
-
-
+                    txtTelResp.Text=Objeventos.Telefono_Responsable;
+                    txtUrlEvento.Text = Objeventos.Ruta;
+                    ddlCiclo.SelectedValue = Objeventos.Ciclo;
                     /*Obtienes la configuracioo del evento*/
                     CargarGridDetPart();
 
@@ -324,6 +325,7 @@ namespace Recibos_Electronicos.Form
             txtDescripcion.Text = string.Empty;
             txtEmail_res.Text = string.Empty;
             txtTelResp.Text = string.Empty;
+            txtUrlEvento.Text = string.Empty;
             txtFecha_Evento_Ini.Text = string.Empty;
             txtFecha_Evento_Fin.Text = string.Empty;
             ddlStatus.SelectedIndex = 0;
@@ -734,6 +736,7 @@ namespace Recibos_Electronicos.Form
                     objEvento.Observaciones = txtEspecificacion.Text.ToUpper();
                     objEvento.Nueva_Version = "S";
                     objEvento.Telefono_Responsable = txtTelResp.Text;
+                    objEvento.Ruta = txtUrlEvento.Text;
                     objEvento.Usuario_Solicita = SesionUsu.Usuario;
                     objEvento.Id = SesionUsu.IdEvento;
                     objEvento.Concepto = null;

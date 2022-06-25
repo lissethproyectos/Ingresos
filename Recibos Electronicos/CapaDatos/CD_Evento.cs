@@ -400,9 +400,9 @@ namespace CapaDatos
             try
             {
                 String[] Parametros = { "p_id_evento","p_descripcion", "p_escuela", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_status", "p_nivel", "p_autorizacion", "p_tipo_acceso", 
-                    "p_usuario_solicita", "p_usuario_autoriza", "p_observaciones", "p_tel_res" };
+                    "p_usuario_solicita", "p_usuario_autoriza", "p_observaciones", "p_tel_res", "p_url_evento" };
                 object[] Valores = { objeventos.Id, objeventos.Descripcion, objeventos.Dependencia, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, "", objeventos.Status, objeventos.Nivel, objeventos.Autorizacion, objeventos.Tipo_Acceso,
-                    objeventos.Usuario_Solicita, objeventos.Usuario_Autoriza, objeventos.Observaciones, objeventos.Telefono_Responsable };
+                    objeventos.Usuario_Solicita, objeventos.Usuario_Autoriza, objeventos.Observaciones, objeventos.Telefono_Responsable, objeventos.Ruta };
                 String[] ParametrosOut = { "p_evento", "p_Bandera" };
 
                 Cmd = CDDatos.GenerarOracleCommand("INS_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -1124,9 +1124,9 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "p_evento", "p_id_evento", "p_escuela", "p_descripcion", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_status", "p_nivel", "p_autorizacion",  "p_tipo", "p_usuario", "p_observaciones" };
+                String[] Parametros = { "p_evento", "p_id_evento", "p_escuela", "p_descripcion", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_tel_res", "p_url_evento", "p_status", "p_nivel", "p_autorizacion",  "p_tipo", "p_usuario", "p_observaciones" };
 
-                object[] Valores = { objeventos.Eventos, objeventos.Id, objeventos.Dependencia, objeventos.Descripcion, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, objeventos.Email_Corres, objeventos.Status, objeventos.Nivel, objeventos.Autorizacion, objeventos.Tipo_Acceso, objeventos.Usuario_Modifica, objeventos.Observaciones };
+                object[] Valores = { objeventos.Eventos, objeventos.Id, objeventos.Dependencia, objeventos.Descripcion, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, objeventos.Email_Corres, objeventos.Ruta, objeventos.Telefono_Responsable, objeventos.Status, objeventos.Nivel, objeventos.Autorizacion, objeventos.Tipo_Acceso, objeventos.Usuario_Modifica, objeventos.Observaciones };
 
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_DATOS_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -1214,7 +1214,7 @@ namespace CapaDatos
             {
                 string[] ParametrosIn = { "p_evento" };
                 object[] Valores = { Objeventos.Eventos };
-                string[] ParametrosOut = { "p_descripcion", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_concepto", "p_status", "p_nivel", "p_ini_matricula", "p_autorizacion", "p_tipo", "p_usuario_solicita", "p_fecha_solicitud", "p_usuario_autoriza", "p_fecha_autorizacion", "p_observaciones", "p_id", "p_bandera" };
+                string[] ParametrosOut = { "p_descripcion", "p_dependencia", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_concepto", "p_status", "p_nivel", "p_ini_matricula", "p_autorizacion", "p_tipo", "p_usuario_solicita", "p_fecha_solicitud", "p_usuario_autoriza", "p_fecha_autorizacion", "p_observaciones", "p_id", "p_tel_res", "p_url_evento", "p_ciclo", "p_bandera" };
 
                 Cmd = CDDatos.GenerarOracleCommand("SEL_DATOS_EVENTO", ref Verificador, ParametrosIn, Valores, ParametrosOut);
                 if (Verificador == "0")
@@ -1239,7 +1239,9 @@ namespace CapaDatos
                     Objeventos.Fecha_Autorizacion = Convert.ToString(Cmd.Parameters["p_fecha_autorizacion"].Value);
                     Objeventos.Observaciones = Convert.ToString(Cmd.Parameters["p_observaciones"].Value);
                     Objeventos.Id = Convert.ToInt32(Cmd.Parameters["p_id"].Value);
-
+                    Objeventos.Telefono_Responsable = Convert.ToString(Cmd.Parameters["p_tel_res"].Value);
+                    Objeventos.Ruta = Convert.ToString(Cmd.Parameters["p_url_evento"].Value);
+                    Objeventos.Ciclo = Convert.ToString(Cmd.Parameters["p_ciclo"].Value);
 
                 }
             }
@@ -1516,8 +1518,8 @@ namespace CapaDatos
             {
 
                 OracleDataReader dr = null;
-                String[] Parametros = { "p_dependencia", "p_usuario", "p_tipo_acceso", "p_tipo_usuario", "p_status",  "p_fecha_inicial", "p_fecha_final", "p_busca" };
-                Object[] Valores = { Objeventos.Dependencia, Usuario, Objeventos.Tipo, TipoUsuario, Status, Objeventos.Fecha_inicial, Objeventos.Fecha_final, Buscar };
+                String[] Parametros = { "p_dependencia", "p_usuario", "p_tipo_acceso", "p_tipo_usuario", "p_status",  "p_ejercicio", "p_busca" };
+                Object[] Valores = { Objeventos.Dependencia, Usuario, Objeventos.Tipo, TipoUsuario, Status, Objeventos.Anio, Buscar };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_EventosUsu", ref dr, Parametros, Valores);
 

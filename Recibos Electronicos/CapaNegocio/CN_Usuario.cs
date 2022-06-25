@@ -21,6 +21,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ValidarUsuarioFactura(ref Usuario usuario, ref string Verificador)
+        {
+            try
+            {
+                CapaDatos.CD_Usuario CD_Usuario = new CapaDatos.CD_Usuario();
+                CD_Usuario.ValidarUsuarioFactura(ref usuario, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void ValidarCliente(ref Sesion Usuario, ref string Verificador)
         {
             try

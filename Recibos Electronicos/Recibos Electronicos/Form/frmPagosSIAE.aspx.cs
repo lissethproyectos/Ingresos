@@ -38,6 +38,10 @@ namespace Recibos_Electronicos.Form
                     }
                 }
             }
+
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridPagosSIAE", "PagosSIAE();", true);
+
         }
         #region <Botones y Eventos>
         private void Cargarcombos()
