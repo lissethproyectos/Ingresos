@@ -22,6 +22,20 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+
+        public void FacturaCancelacion(Facturacion ObjFacturacion, ref string Verificador)
+        {
+            try
+            {
+                CD_Facturacion CDFacturacion = new CD_Facturacion();
+                CDFacturacion.FacturaCancelacion(ObjFacturacion, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void FacturaEfectConsultaDatosFiscales(ref Facturacion ObjFactura, ref string Verificador)
         {
             try

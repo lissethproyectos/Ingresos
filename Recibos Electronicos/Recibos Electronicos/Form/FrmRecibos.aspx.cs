@@ -82,15 +82,18 @@ namespace Recibos_Electronicos.Form
         protected void imgBttnAgregarConcepto0_Click(object sender, ImageClickEventArgs e)
         {
             //modal.Show();
+            ddlNivel.SelectedIndex = 0;
+            ddlNivel_SelectedIndexChanged(null, null);
+
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConceptos", "$('#modalConceptos').modal('show')", true);
+
         }
         protected void ddlConcepto_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SesionUsu.Editar == 1)
-            {                
+            txtCantidad.Text = "1";
+            if (SesionUsu.Editar == 1)            
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupConceptos", "$('#modalConceptos').modal('show')", true);
-            }
-
+            
             if (ddlConcepto.Items.Count > 1)
             {
                 txtValor_unitario.Text = ListConceptos[ddlConcepto.SelectedIndex].EtiquetaTres;
@@ -185,7 +188,8 @@ namespace Recibos_Electronicos.Form
         private void CargarGrid()
         {
             Int32[] Celdas = new Int32[] { 0, 9, 14, 15 };
-            Int32[] CeldasAdmin = new Int32[] { 0 };
+            Int32[] CeldasAdmin = new Int32[] { 0, 9, 15 };
+            Int32[] CeldasSuperAdmin = new Int32[] { 0 };
 
             try
             {
@@ -196,10 +200,12 @@ namespace Recibos_Electronicos.Form
 
                 if (grvFacturas.Rows.Count > 0)
                 {
-                    if (SesionUsu.Usu_Central_Tipo == "A" || SesionUsu.Usu_Central_Tipo == "N")
+                    if (SesionUsu.Usu_Central_Tipo == "N")
                         CNComun.HideColumns(grvFacturas, Celdas);
-                    else
+                    else if (SesionUsu.Usu_Central_Tipo == "A")
                         CNComun.HideColumns(grvFacturas, CeldasAdmin);
+                    else
+                        CNComun.HideColumns(grvFacturas, CeldasSuperAdmin);
                 }
             }
             catch (Exception ex)
@@ -463,7 +469,7 @@ namespace Recibos_Electronicos.Form
         }
         #endregion
 
-       
+
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             //pnlModificacion_Recibo.Visible = false;
@@ -728,5 +734,5 @@ namespace Recibos_Electronicos.Form
             grvFacturas.EditIndex = -1;
             CargarGrid();
         }
-    }    
+    }
 }

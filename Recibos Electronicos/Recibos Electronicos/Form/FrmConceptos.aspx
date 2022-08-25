@@ -4,20 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
     <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <style type="text/css">
-        .auto-style1 {
-            position: relative;
-            width: 100%;
-            -ms-flex: 0 0 16.666667%;
-            flex: 0 0 16.666667%;
-            max-width: 16.666667%;
-            left: -31px;
-            top: 85px;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    </style>
-</asp:Content>
+    </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container-fluid">
         <div class="row">
@@ -45,7 +32,7 @@
                                             <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" TabIndex="1" Width="100%">
                                             </asp:DropDownList>
                                         </div>
-                                        <div class="auto-style1">
+                                        <div class="col-2">
                                             Exclusivos para eventos
                                         </div>
                                         <div class="col-1 text-left">
@@ -54,23 +41,23 @@
                                         <%--<div class="col-1">
                                             <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" />
                                         </div>--%>
-                                        <div class="col-1">
+                                        <%--<div class="col-1">
                                             <asp:ImageButton ID="imgBttnNuevo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="imgBttnNuevo_Click" />
                                         </div>
                                         <div class="col-1">
-                                        </div>
+                                        </div>--%>
                                     </div>
                                     <div class="row">
-            <div class="col text-center">
-                <asp:UpdateProgress ID="updPgrConceptos" AssociatedUpdatePanelID="updPnlConceptos" runat="server">
-                    <ProgressTemplate>
-                        <asp:Image ID="Image1" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                            ToolTip="Espere un momento, por favor.." />
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-            </div>
+                                        <div class="col text-center">
+                                            <asp:UpdateProgress ID="updPgrConceptos" AssociatedUpdatePanelID="updPnlConceptos" runat="server">
+                                                <ProgressTemplate>
+                                                    <asp:Image ID="Image1" runat="server" Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                                                        ToolTip="Espere un momento, por favor.." />
+                                                </ProgressTemplate>
+                                            </asp:UpdateProgress>
+                                        </div>
 
-        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col">
                                             <asp:UpdatePanel ID="updPnlConceptos" runat="server">
@@ -87,10 +74,16 @@
                                                             <asp:BoundField DataField="CobroXMateriaStr" HeaderText="Cobro por Materia" />
                                                             <asp:BoundField DataField="Nivel" HeaderText="Nivel" />
                                                             <asp:BoundField DataField="Status" HeaderText="Status" />
-                                                            <asp:CommandField ShowSelectButton="True" SelectText="Editar" ButtonType="Image" SelectImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" HeaderText="Editar">
+                                                            <asp:TemplateField HeaderText="Editar" ShowHeader="False">
+                                                                <HeaderTemplate>
+                                                                    <asp:LinkButton ID="linkBttnAgregarReg0" runat="server" CssClass="btn btn-info" OnClientClick="LimpiarCampos();" OnClick="linkBttnAgregarReg_Click" ValidationGroup="New">Nuevo</asp:LinkButton>
+                                                                </HeaderTemplate>
+                                                                <ItemTemplate>
+                                                                    <asp:ImageButton ID="ImageButton1" runat="server" CausesValidation="False" CommandName="Select" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" Text="Editar" />
+                                                                </ItemTemplate>
                                                                 <HeaderStyle HorizontalAlign="Center" />
                                                                 <ItemStyle HorizontalAlign="Center" />
-                                                            </asp:CommandField>
+                                                            </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Clonar">
                                                                 <ItemTemplate>
                                                                     <asp:ImageButton ID="imgBttnCopiar" runat="server" ImageUrl="~/Imagenes/copiar_y_pegar.png" OnClick="imgBttnCopiar_Click" />

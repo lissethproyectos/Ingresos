@@ -65,7 +65,8 @@ namespace CapaEntidad
         private string _FECHA_REP;
         private string _FOLIO_REP;
         private string _FOLIO_PAGADO;
-
+        private string _MOTIVO_CANCELACION;
+        private string _OBSERVACIONES_CANCELACION;
         public string FOLIO_PAGADO
         {
             get { return _FOLIO_PAGADO; }
@@ -138,10 +139,24 @@ namespace CapaEntidad
             set { _RECEPTOR_CODIGO = value; }
         }
 
+
         public string CONFIRMADO
         {
             get { return _CONFIRMADO; }
             set { _CONFIRMADO = value; }
+        }
+
+        public string MOTIVO_CANCELACION
+        {
+            get { return _MOTIVO_CANCELACION; }
+            set { _MOTIVO_CANCELACION = value; }
+        }
+
+
+        public string OBSERVACIONES_CANCELACION
+        {
+            get { return _OBSERVACIONES_CANCELACION; }
+            set { _OBSERVACIONES_CANCELACION = value; }
         }
         public string OBSERVACIONES
         {

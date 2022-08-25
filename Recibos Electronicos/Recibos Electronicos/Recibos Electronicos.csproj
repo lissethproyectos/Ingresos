@@ -685,6 +685,7 @@
     <Content Include="Form\frmFacturacion.aspx" />
     <Content Include="Form\FrmFacturas3.aspx" />
     <Content Include="Form\frmPagosPosgrado.aspx" />
+    <Content Include="Form\frmRefVenta_PS.aspx" />
     <Content Include="Form\FrmSolicitud_Facturas.aspx" />
     <Content Include="Form\FrmFacturas.aspx" />
     <Content Include="Form\FrmFacturasResp.aspx" />
@@ -1284,6 +1285,13 @@
     </Compile>
     <Compile Include="Form\frmPagosPosgrado.aspx.designer.cs">
       <DependentUpon>frmPagosPosgrado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmRefVenta_PS.aspx.cs">
+      <DependentUpon>frmRefVenta_PS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\frmRefVenta_PS.aspx.designer.cs">
+      <DependentUpon>frmRefVenta_PS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\FrmSolicitud_Facturas.aspx.cs">
       <DependentUpon>FrmSolicitud_Facturas.aspx</DependentUpon>

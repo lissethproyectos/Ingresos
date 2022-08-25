@@ -1195,14 +1195,14 @@ namespace CapaDatos
                                         "P_RECEPTOR_CP", "P_RECEPTOR_ESTADO", "P_RECEPTOR_MUNICIPIO", "P_RECEPTOR_METODO_PAGO", "P_RECEPTOR_TELEFONO",
                                         "P_RECEPTOR_CORREO", "P_RECEPTOR_TIPO_PERS", "P_RECEPTOR_STATUS", "P_RECEPTOR_STATUS_NOTAS", "P_CONFIRMADO",
                                         "p_usuario", "P_CFDI", "P_RECEPTOR_OBSERVACIONES", "P_RECEPTOR_FORMA_PAGO","P_RECEPTOR_NUMERO_EXTERIOR", 
-                                        "P_RECEPTOR_NUMERO_INTERIOR", "P_RECEPTOR_CODIGO", "P_RUTA_CONSTANCIA"
+                                        "P_RECEPTOR_NUMERO_INTERIOR", "P_RECEPTOR_CODIGO", "P_RUTA_CONSTANCIA", "P_ORIGEN_CONSTANCIA"
                 };
                 Object[] Valores = {ObjFactura.ID_FACT, ObjFactura.FACT_RECEPTOR_RFC, ObjFactura.FACT_NOMBRE, ObjFactura.FACT_RECEPTOR_DOMICILIO,
                                     ObjFactura.FACT_RECEPTOR_COLONIA, ObjFactura.FACT_RECEPTOR_CP, ObjFactura.FACT_RECEPTOR_ESTADO, ObjFactura.FACT_RECEPTOR_MUNICIPIO,
                                     ObjFactura.FACT_RECEPTOR_METODO_PAGO, ObjFactura.FACT_RECEPTOR_TELEFONO, ObjFactura.FACT_RECEPTOR_CORREO, ObjFactura.FACT_RECEPTOR_TIPO_PERS,
                                     ObjFactura.FACT_RECEPTOR_STATUS, ObjFactura.FACT_RECEPTOR_STATUS_NOTAS, ObjFactura.FACT_CONFIRMADO, UsuarioNombre, ObjFactura.CFDI, ObjFactura.FACT_OBSERVACIONES,
                                     ObjFactura.FACT_RECEPTOR_FORMA_PAGO, ObjFactura.NUMERO_EXTERIOR, ObjFactura.NUMERO_INTERIOR, ObjFactura.FACT_RECEPTOR_CODIGO,
-                                    ObjFactura.ADJUNTO_CONSTANCIA
+                                    ObjFactura.ADJUNTO_CONSTANCIA, "INGRESOS"
                 };
                 String[] ParametrosOut = { "p_bandera" };
                 cmm = CDDatos.GenerarOracleCommand("ACT_FACTURA_CAJA", ref Verificador, Parametros, Valores, ParametrosOut);

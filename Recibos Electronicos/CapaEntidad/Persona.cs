@@ -21,7 +21,7 @@ namespace CapaEntidad
             get { return _TipoPersona; }
             set { _TipoPersona = value; }
         }
-        private string _TipoPersonaStr;
+        private string _TipoPersonaStr=string.Empty;
 
         public string TipoPersonaStr
         {
@@ -114,7 +114,7 @@ namespace CapaEntidad
             set { _Correo_Instituicional = value.Trim(); }
         }
 
-        private string _NoControl;
+        private string _NoControl=string.Empty;
 
         public string NoControl
         {

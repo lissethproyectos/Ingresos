@@ -18,6 +18,7 @@ namespace Recibos_Electronicos
         CN_Banco CNBanco = new CN_Banco();
         BancoBitacora ObjBanco = new BancoBitacora();
         List<BancoBitacora> ListArch = new List<BancoBitacora>();
+        string Verificador = string.Empty;
         #endregion
         private void BindBancoList(DropDownList ddlFechaPago)
         {
@@ -48,28 +49,36 @@ namespace Recibos_Electronicos
         protected void Enviar_Click(object sender, EventArgs e)
         {
             IDictionary<string, string> salida = new Dictionary<string, string>();
-
-            if (FileUpload1.HasFile)
+            try
             {
-                HttpPostedFile archivo = FileUpload1.PostedFile;
+                if (FileUpload1.HasFile)
+                {
+                    HttpPostedFile archivo = FileUpload1.PostedFile;
 
-                CN_Banco cnbanco = new CN_Banco();
-                salida = cnbanco.CargarArchivo(archivo);
+                    CN_Banco cnbanco = new CN_Banco();
+                    salida = cnbanco.CargarArchivo(archivo);
 
-                if (salida["exito"] == "1")
-                    Label1.CssClass = "mgg_aviso mgg_aviso_verde";
+                    if (salida["exito"] == "1")
+                        Label1.CssClass = "mgg_aviso mgg_aviso_verde";
 
+                    else
+                        Label1.CssClass = "mgg_aviso mgg_aviso_rojo";
+
+                    Label1.Text = salida["mensaje"];
+                }
                 else
+                {
+                    Label1.Text = "Por favor seleccione un archivo";
                     Label1.CssClass = "mgg_aviso mgg_aviso_rojo";
-
-                Label1.Text = salida["mensaje"];
+                }
+                ObtenerBitacoraControl();
             }
-            else
+            catch(Exception ex)
             {
-                Label1.Text = "Por favor seleccione un archivo";
-                Label1.CssClass = "mgg_aviso mgg_aviso_rojo";
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + ex.Message + "');", true);  //lblMsjFam.Text = Verificador;
             }
-            ObtenerBitacoraControl();
         }
 
         protected void ObtenerBitacoraControl()

@@ -465,8 +465,11 @@ namespace Recibos_Electronicos
 
                 if (Verificador == "0")
                 {
-                    rdoBttnReceptorTipoPersona.SelectedValue = ObjFactura.FACT_RECEPTOR_TIPO_PERS;
-                    rdoBttnReceptorTipoPersona_SelectedIndexChanged(null, null);
+                    //rdoBttnReceptorTipoPersona.SelectedValue = ObjFactura.FACT_RECEPTOR_TIPO_PERS;
+                    //rdoBttnReceptorTipoPersona_SelectedIndexChanged(null, null);
+                    ddlTipoPers.SelectedValue = ObjFactura.FACT_RECEPTOR_TIPO_PERS;
+                    ddlTipoPers_SelectedIndexChanged(null, null);
+
                     txtReceptor_Nombre.Text = ObjFactura.FACT_NOMBRE;
                     txtReceptor_Rfc.Text = ObjFactura.FACT_RECEPTOR_RFC;
                     txtReceptor_Domicilio.Text = ObjFactura.FACT_RECEPTOR_DOMICILIO;
@@ -567,7 +570,7 @@ namespace Recibos_Electronicos
         {
             if (Page.IsValid)
             {
-                if (linkConstancia.NavigateUrl == string.Empty && rdoBttnReceptorTipoPersona.SelectedValue == "F")                
+                if (linkConstancia.NavigateUrl == string.Empty && ddlTipoPers.SelectedValue == "F")                
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'La constancia fiscal es requerida, favor de adjuntar.');", true);  //lblMsj.Text = ex.Message;                
                 else                
                     Guardar();
@@ -579,19 +582,19 @@ namespace Recibos_Electronicos
             multView.ActiveViewIndex = 0;
         }
 
-        protected void rdoBttnReceptorTipoPersona_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (rdoBttnReceptorTipoPersona.SelectedValue == "F")
-            {
-                txtReceptor_Rfc.MaxLength = 13;
-                reqCodigo.ValidationGroup = "DatosFiscales";
-            }
-            else
-            {
-                txtReceptor_Rfc.MaxLength = 12;
-                reqCodigo.ValidationGroup = string.Empty;
-            }
-        }
+        //protected void rdoBttnReceptorTipoPersona_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    if (rdoBttnReceptorTipoPersona.SelectedValue == "F")
+        //    {
+        //        txtReceptor_Rfc.MaxLength = 13;
+        //        reqCodigo.ValidationGroup = "DatosFiscales";
+        //    }
+        //    else
+        //    {
+        //        txtReceptor_Rfc.MaxLength = 12;
+        //        reqCodigo.ValidationGroup = string.Empty;
+        //    }
+        //}
 
         protected void Guardar()
         {
@@ -609,7 +612,7 @@ namespace Recibos_Electronicos
                 ObjFactura.FACT_RECEPTOR_METODO_PAGO = ddlReceptor_MetodoPago.SelectedValue;
                 ObjFactura.FACT_RECEPTOR_TELEFONO = txtReceptor_Telefono.Text;
                 ObjFactura.FACT_RECEPTOR_CORREO = txtReceptor_Correo.Text;
-                ObjFactura.FACT_RECEPTOR_TIPO_PERS = rdoBttnReceptorTipoPersona.SelectedValue;
+                ObjFactura.FACT_RECEPTOR_TIPO_PERS = ddlTipoPers.SelectedValue; //rdoBttnReceptorTipoPersona.SelectedValue;
                 ObjFactura.FACT_RECEPTOR_STATUS = string.Empty; //"R";
                 ObjFactura.FACT_RECEPTOR_STATUS_NOTAS = string.Empty;
                 ObjFactura.FACT_CONFIRMADO = "N"; // "S"; //string.Empty; ;
@@ -722,7 +725,7 @@ namespace Recibos_Electronicos
         {
             try
             {
-                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_TipoCfdi", ref ddlCFDI, "p_cod_fiscal", "p_tipo_persona", ddlCodigoFiscal.SelectedValue, rdoBttnReceptorTipoPersona.SelectedValue);
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_TipoCfdi", ref ddlCFDI, "p_cod_fiscal", "p_tipo_persona", ddlCodigoFiscal.SelectedValue, ddlTipoPers.SelectedValue);// rdoBttnReceptorTipoPersona.SelectedValue);
             }
             catch (Exception ex)
             {
@@ -731,5 +734,27 @@ namespace Recibos_Electronicos
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
             }
         }
+
+        protected void ddlTipoPers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Verificador = string.Empty;
+            try
+            {
+                if (ddlTipoPers.SelectedValue == "F")
+                    txtReceptor_Rfc.MaxLength = 13;
+                else
+                    txtReceptor_Rfc.MaxLength = 12;
+
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_TipoCfdi", ref ddlCFDI, "p_cod_fiscal", "p_tipo_persona", ddlCodigoFiscal.SelectedValue, ddlTipoPers.SelectedValue);
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);
+            }
+        }
+
     }
 }

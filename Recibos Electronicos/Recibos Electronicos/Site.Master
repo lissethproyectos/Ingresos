@@ -142,6 +142,10 @@
             font-size: 11pt;
             padding: 8px;
         }
+                
+        .text-dorado {
+            color: #a08011 !important;
+        }
     </style>
 
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">

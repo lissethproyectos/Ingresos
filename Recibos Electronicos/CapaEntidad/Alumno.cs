@@ -299,21 +299,21 @@ namespace CapaEntidad
             set { _IdFamiliar = value; }
         }
 
-        private string _NombreEmpleado;
+        private string _NombreEmpleado=string.Empty;
         public string NombreEmpleado
         {
             get { return _NombreEmpleado; }
             set { _NombreEmpleado = value; }
         }
 
-        private string _Adscripcion;
+        private string _Adscripcion=string.Empty;
         public string Adscripcion
         {
             get { return _Adscripcion; }
             set { _Adscripcion = value; }
         }
 
-        private string _Parentesco;
+        private string _Parentesco=string.Empty;
         public string Parentesco
         {
             get { return _Parentesco; }

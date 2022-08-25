@@ -142,8 +142,8 @@ namespace Recibos_Electronicos.Form
                     txtSemestre.Text = ObjMatricula.Semestre;
                     txtGrupo.Text = ObjMatricula.Grupo;
                     txtFechaNacimiento.Text = ObjMatricula.FechaNacimiento;
-                    txtFechaNacimiento.Enabled = (ObjMatricula.FechaNacimiento==string.Empty)?true:false;
-                    rdoBttnLstGenero.SelectedValue =Convert.ToString(ObjMatricula.Genero);
+                    txtFechaNacimiento.Enabled = (ObjMatricula.FechaNacimiento == string.Empty) ? true : false;
+                    rdoBttnLstGenero.SelectedValue = Convert.ToString(ObjMatricula.Genero);
                     TabContainer1.Tabs[1].Enabled = true;
                     TabContainer1.Tabs[2].Enabled = true;
                     //TabContainer1.ActiveTabIndex=1;
@@ -159,7 +159,7 @@ namespace Recibos_Electronicos.Form
                     txtFechaNacimiento.Text = string.Empty;
                     rdoBttnLstGenero.ClearSelection();
                     Registrar.Visible = true;
-                    string MsjError="Verifique matrícula(" + txtMatricula.Text + ") y/ó Nivel de Estudios(" + ddlNivel.SelectedItem.Text + ") ó de Click en el botón Registrar Matrícula";
+                    string MsjError = "Verifique matrícula(" + txtMatricula.Text + ") y/ó Nivel de Estudios(" + ddlNivel.SelectedItem.Text + ") ó de Click en el botón Registrar Matrícula";
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
                     //lblMsj.Text = "Verifique matrícula(" + txtMatricula.Text + ") y/ó Nivel de Estudios(" + ddlNivel.SelectedItem.Text + ") ó de Click en el botón Registrar Matrícula";
                 }
@@ -173,7 +173,7 @@ namespace Recibos_Electronicos.Form
         private void EmpleadoMatricula()
         {
             //lblMsj.Text = string.Empty;
-            Verificador = string.Empty;            
+            Verificador = string.Empty;
             try
             {
                 CNAlumno.ConsultarEmpleadoMatricula(ref ObjEmpleadoAlumno, txtMatricula.Text.ToUpper(), ref Verificador);
@@ -276,7 +276,7 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] {0, 1, 4, 12, 16, 17, 18, 19, 20, 21 };
+            Int32[] Celdas = new Int32[] { 0, 1, 4, 12, 16, 17, 18, 19, 20, 21 };
 
 
             try
@@ -288,7 +288,7 @@ namespace Recibos_Electronicos.Form
                 if (grvAlumnos.Rows.Count > 0)
                     HideColumns(grvAlumnos);
 
-             
+
 
             }
             catch (Exception ex)
@@ -325,7 +325,7 @@ namespace Recibos_Electronicos.Form
                 grvHijos.DataBind();
                 if (grvHijos.Rows.Count > 0)
                 {
-                    CNComun.HideColumns(grvHijos,Celdas);
+                    CNComun.HideColumns(grvHijos, Celdas);
                 }
             }
             catch (Exception ex)
@@ -361,7 +361,7 @@ namespace Recibos_Electronicos.Form
             {
                 throw new Exception(ex.Message);
             }
-        }        
+        }
         private List<Alumno> GetList()
         {
             try
@@ -386,12 +386,12 @@ namespace Recibos_Electronicos.Form
                 List<Persona> List = new List<Persona>();
                 ObjEmpleado.Nombre = txtNombreEmp.Text;
                 //ObjEmpleado.APaterno = txtApellidosEmp.Text;
-                if(Busca=="S")
+                if (Busca == "S")
                     ObjEmpleado.IdPersona = 0;
                 else
                     ObjEmpleado.IdPersona = Convert.ToInt32(ddlEmpleado.SelectedValue);
 
-                CNEmpleado.ConsultarEmpleado(ref ObjEmpleado, ref List);                
+                CNEmpleado.ConsultarEmpleado(ref ObjEmpleado, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -405,7 +405,7 @@ namespace Recibos_Electronicos.Form
             {
                 List<Alumno> List = new List<Alumno>();
                 ObjAlumno.IdPersona = Convert.ToInt32(grvEmpleados.SelectedRow.Cells[0].Text);
-                CNEmpleado.ConsultarHijos(ref ObjAlumno, ref List);                
+                CNEmpleado.ConsultarHijos(ref ObjAlumno, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -539,7 +539,7 @@ namespace Recibos_Electronicos.Form
             {
                 row.Cells[0].Visible = false;
                 CheckBox cb = (CheckBox)row.FindControl("ckbGenerar");
-                LinkButton linkBttnEditar=(LinkButton)row.FindControl("linkBttnEditar");
+                LinkButton linkBttnEditar = (LinkButton)row.FindControl("linkBttnEditar");
                 linkBttnEditar.Visible = false;
                 cb.Enabled = Convert.ToBoolean(row.Cells[1].Text);
                 row.Cells[1].Visible = false;
@@ -547,7 +547,7 @@ namespace Recibos_Electronicos.Form
                 row.Cells[10].Visible = false;
                 row.Cells[12].Visible = false;
 
-                if (SesionUsu.Usu_Central == "S")                
+                if (SesionUsu.Usu_Central == "S")
                     linkBttnEditar.Visible = true;
                 else
                 {
@@ -600,39 +600,50 @@ namespace Recibos_Electronicos.Form
                 {
 
                     ObjAlumno.FechaInicial = txtFechaInicial.Text;
-                ObjAlumno.FechaFinal = txtFechaFinal.Text;
-                ObjAlumno.OficioSolicito = txtOficio.Text.ToUpper();
-                ObjAlumno.OficioFecha = txtFechaO.Text;
-                ObjAlumno.OficioFirma = txtAutorizado.Text.ToUpper();
-                ObjAlumno.OficioQuienSolicita = txtSolicitado.Text.ToUpper();
-                ObjAlumno.Observaciones = txtObservaciones.Text;
-                ObjAlumno.IdPersona = SesionUsu.Id_Persona;
-                ObjAlumno.Genero =Convert.ToChar(rdoBttnLstGenero.SelectedValue);
-                ObjAlumno.FechaNacimiento = txtFechaNacimiento.Text;
+                    ObjAlumno.FechaFinal = txtFechaFinal.Text;
+                    ObjAlumno.OficioSolicito = txtOficio.Text.ToUpper();
+                    ObjAlumno.OficioFecha = txtFechaO.Text;
+                    ObjAlumno.OficioFirma = txtAutorizado.Text.ToUpper();
+                    ObjAlumno.OficioQuienSolicita = txtSolicitado.Text.ToUpper();
+                    ObjAlumno.Observaciones = txtObservaciones.Text;
+                    ObjAlumno.IdPersona = SesionUsu.Id_Persona;
+                    ObjAlumno.Genero = Convert.ToChar(rdoBttnLstGenero.SelectedValue);
+                    ObjAlumno.FechaNacimiento = txtFechaNacimiento.Text;
 
-                if (ddlEmpleado.SelectedValue!="0" && (ddlTipo.SelectedItem.Text.Contains("STAUNACH") || ddlTipo.SelectedItem.Text.Contains("SPAUNACH") || ddlTipo.SelectedItem.Text.Contains("Confianza")))
-                {
-                    ObjAlumno.NombreEmpleado = ddlEmpleado.SelectedItem.Text;
-                    ObjAlumno.IdFamiliar =Convert.ToInt32(ddlHijo.SelectedValue);
-                    ObjAlumno.Adscripcion = grvEmpleados.SelectedRow.Cells[2].Text;
-                    ObjAlumno.TipoPersonaStr = grvEmpleados.SelectedRow.Cells[1].Text;
-                    ObjAlumno.NoControl = grvEmpleados.SelectedRow.Cells[4].Text;
-                    ddlParentesco.SelectedValue = ddlHijo.SelectedValue;
-                    ObjAlumno.Parentesco = ddlParentesco.SelectedItem.Text; // ListBeneficiario[ddlHijo.SelectedIndex].EtiquetaDos;
-                    
+                    if (ddlEmpleado.SelectedValue != "0" && (ddlTipo.SelectedItem.Text.Contains("STAUNACH") || ddlTipo.SelectedItem.Text.Contains("SPAUNACH") || ddlTipo.SelectedItem.Text.Contains("Confianza")))
+                    {
+                        
 
-                    ObjAlumno.IdEmpleado = Convert.ToInt32(grvEmpleados.SelectedRow.Cells[0].Text);
-                }
-                else
-                {
-                    ObjAlumno.NombreEmpleado = string.Empty;
-                    ObjAlumno.IdFamiliar = 0;
-                    ObjAlumno.Adscripcion = string.Empty;
-                    ObjAlumno.TipoPersonaStr = string.Empty;
-                    ObjAlumno.NoControl = "0";
-                    ObjAlumno.Parentesco = string.Empty;
-                    ObjAlumno.IdEmpleado = 0;                                        
-                }
+                        if (grvEmpleados.Rows.Count > 1)
+                        {
+                            ObjAlumno.NombreEmpleado = ddlEmpleado.SelectedItem.Text;
+
+
+                            if (ddlHijo.SelectedValue == string.Empty)
+                                ObjAlumno.IdFamiliar = 0;
+                            else
+                                ObjAlumno.IdFamiliar = Convert.ToInt32(ddlHijo.SelectedValue);
+
+                            ObjAlumno.Adscripcion = grvEmpleados.SelectedRow.Cells[2].Text;
+                            ObjAlumno.TipoPersonaStr = grvEmpleados.SelectedRow.Cells[1].Text;
+                            ObjAlumno.NoControl = grvEmpleados.SelectedRow.Cells[4].Text;
+                            ddlParentesco.SelectedValue = ddlHijo.SelectedValue;
+                            ObjAlumno.Parentesco = ddlParentesco.SelectedItem.Text; // ListBeneficiario[ddlHijo.SelectedIndex].EtiquetaDos;
+                            ObjAlumno.IdEmpleado = Convert.ToInt32(grvEmpleados.SelectedRow.Cells[0].Text);
+
+                        }
+
+                    }
+                    else
+                    {
+                        ObjAlumno.NombreEmpleado = string.Empty;
+                        ObjAlumno.IdFamiliar = 0;
+                        ObjAlumno.Adscripcion = string.Empty;
+                        ObjAlumno.TipoPersonaStr = string.Empty;
+                        ObjAlumno.NoControl = "0";
+                        ObjAlumno.Parentesco = string.Empty;
+                        ObjAlumno.IdEmpleado = 0;
+                    }
 
                     //lblMsjGuardar.Text = string.Empty;
                     //lblMsj.Text = string.Empty;
@@ -641,7 +652,7 @@ namespace Recibos_Electronicos.Form
                     VerificadorOficios = string.Empty;
                     if (SesionUsu.Editar == 0)
                     {
-                        if (Session["Oficios"] == null)                        
+                        if (Session["Oficios"] == null)
                             ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'Favor de adjuntar oficio.');", true);
 
                         else
@@ -693,9 +704,9 @@ namespace Recibos_Electronicos.Form
 
                     if (Verificador == "0" && VerificadorOficios == "0" && VerificadorConceptos == "0")
                     {
-                        if(SesionUsu.Editar == 0 && ddlStatus.SelectedValue=="A" && ddlSubTipo.SelectedValue=="EXENTO")
+                        if (SesionUsu.Editar == 0 && ddlStatus.SelectedValue == "A" && ddlSubTipo.SelectedValue == "EXENTO")
                             CNAlumno.GeneraReciboDescuento(ref ObjAlumno, ref Verificador);
-                        else if (SesionUsu.Editar == 1 && ddlStatus.SelectedValue == "A" && ddlSubTipo.SelectedValue == "EXENTO" && (grvAlumnos.SelectedRow.Cells[9].Text==string.Empty || grvAlumnos.SelectedRow.Cells[9].Text == "&nbsp;"))
+                        else if (SesionUsu.Editar == 1 && ddlStatus.SelectedValue == "A" && ddlSubTipo.SelectedValue == "EXENTO" && (grvAlumnos.SelectedRow.Cells[9].Text == string.Empty || grvAlumnos.SelectedRow.Cells[9].Text == "&nbsp;"))
                             CNAlumno.GeneraReciboDescuento(ref ObjAlumno, ref Verificador);
 
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'Los datos se guardaron correctamente.');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
@@ -705,14 +716,14 @@ namespace Recibos_Electronicos.Form
                         MultiView1.ActiveViewIndex = 0;
                     }
                     else
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '"+ "Posible registro duplicado.. Error(" + Verificador + ")" + " " + VerificadorOficios + "');", true);  //lblMsj.Text = "Posible registro duplicado.. Error(" + Verificador + ")" + " " + VerificadorOficios;
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + "Posible registro duplicado.. Error(" + Verificador + ")" + " " + VerificadorOficios + "');", true);  //lblMsj.Text = "Posible registro duplicado.. Error(" + Verificador + ")" + " " + VerificadorOficios;
 
                 }
 
 
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '"+ ex.Message + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + ex.Message + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
                     //lblMsj.Text = ex.Message;
                 }
             }
@@ -768,7 +779,7 @@ namespace Recibos_Electronicos.Form
 
             //grvConceptosCat.DataSource = null;
             //grvConceptosCat.DataBind();
-            
+
             ddlSubTipo.SelectedIndex = 0;
             ddlSubTipo_SelectedIndexChanged(null, null);
             grvConceptosCat.Enabled = true;
@@ -832,7 +843,7 @@ namespace Recibos_Electronicos.Form
             try
             {
                 MultiView1.ActiveViewIndex = 0;
-                SesionUsu.Row = -1;                
+                SesionUsu.Row = -1;
                 Cargarcombos();
                 CargarGridStatus();
                 txtReferencia.Focus();
@@ -871,7 +882,7 @@ namespace Recibos_Electronicos.Form
             SesionUsu = (Sesion)Session["Usuario"];
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopoverDetalle();", true);
 
-            if (!IsPostBack)          
+            if (!IsPostBack)
                 Inicializar();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "Eventos", "FiltEventos();", true);
@@ -916,7 +927,7 @@ namespace Recibos_Electronicos.Form
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '"+ ex.Message + "');", true); //lblMsj.Text = ex.Message;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
             }
         }
 
@@ -927,7 +938,12 @@ namespace Recibos_Electronicos.Form
                 if (ddlDependencia_D.SelectedValue == "61401" || ddlDependencia_D.SelectedValue == "61501" || ddlDependencia_D.SelectedValue == "61301")
                     ddlDependencia_D.Enabled = true;
                 else
-                    ddlDependencia_D.Enabled = false;
+                {
+                    if (SesionUsu.Usu_Central_Tipo == "A" || SesionUsu.Usu_Central_Tipo == "SA")
+                        ddlDependencia_D.Enabled = true;
+                    else
+                        ddlDependencia_D.Enabled = false;
+                }
 
                 CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Carrera_Posgrado", ref ddlCarrera, "p_nivel", "p_dependencia", ddlNivel.SelectedValue, ddlDependencia_D.SelectedValue, "INGRESOS");
                 if (ddlCarrera.Items.Count == 0)
@@ -960,7 +976,7 @@ namespace Recibos_Electronicos.Form
             }
 
         }
-      
+
         protected void Registrar_Click(object sender, EventArgs e)
         {
             SesionUsu.Exento = 'S';
@@ -1099,7 +1115,11 @@ namespace Recibos_Electronicos.Form
 
         protected void ckbGenerar_CheckedChanged(object sender, EventArgs e)
         {
-            MPPAlert.Hide();
+            //MPPAlert.Hide();
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupBitacora", "$('#modalPagos').modal('hide')", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
+
             bool cb = Convert.ToBoolean(DataBinder.Eval(sender, "Checked"));
             CheckBox cbi = (CheckBox)(sender);
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
@@ -1108,11 +1128,9 @@ namespace Recibos_Electronicos.Form
             if (cb)
             {
                 SesionUsu.Id_Persona = Convert.ToInt32(DataBinder.Eval(sender, "ValidationGroup").ToString());
-                MPPAlert.Show();
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
+                //MPPAlert.Show();
             }
-            //else
-            //    lblMsj.Text = string.Empty;
-
         }
 
         protected void imgBttnCorreo_Click(object sender, ImageClickEventArgs e)
@@ -1388,7 +1406,7 @@ namespace Recibos_Electronicos.Form
                         ObjOficio.NombreArchivo = NombreArchivo;
                         ObjOficio.LinkArchivo = "~/OficiosTemp/" + NombreArchivo;
                         ObjOficio.RutaArchivo = fullPath;
-                        ObjOficio.NumOficio =Convert.ToString(SesionUsu.Id_Oficio);
+                        ObjOficio.NumOficio = Convert.ToString(SesionUsu.Id_Oficio);
                         if (Session["Oficios"] == null)
                         {
                             ListOficio = new List<Oficio>();
@@ -1411,7 +1429,7 @@ namespace Recibos_Electronicos.Form
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '"+ ex.Message + "');", true); //lblMsj.Text = ex.Message;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
             }
 
         }
@@ -1440,7 +1458,10 @@ namespace Recibos_Electronicos.Form
 
         protected void CancelAlert_Click(object sender, EventArgs e)
         {
-            MPPAlert.Hide();
+            //MPPAlert.Hide();
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupBitacora", "$('#modalPagos').modal('hide')", true);
+
             foreach (GridViewRow row in grvAlumnos.Rows)
             {
 
@@ -1456,7 +1477,8 @@ namespace Recibos_Electronicos.Form
 
         protected void btnNueva_Click(object sender, EventArgs e)
         {
-            MPPAlert.Hide();
+            //MPPAlert.Hide();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
             try
             {
                 ObjAlumno.IdPersona = Convert.ToInt32(grvAlumnos.SelectedRow.Cells[0].Text);
@@ -1470,7 +1492,7 @@ namespace Recibos_Electronicos.Form
                     CargarGrid();
                 else
                 {
-                    string Msj=Verificador;
+                    string Msj = Verificador;
                     CNComun.VerificaTextoMensajeError(ref Msj);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = Verificador;
                 }
@@ -1478,7 +1500,7 @@ namespace Recibos_Electronicos.Form
             }
             catch (Exception ex)
             {
-                string Msj=ex.Message;
+                string Msj = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Msj);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Msj + "');", true); //lblMsj.Text = ex.Message;
             }
@@ -1503,7 +1525,7 @@ namespace Recibos_Electronicos.Form
                     modalCancelar.Hide();
                 }
                 else
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '"+ Verificador + "');", true); //lblMsj.Text = Verificador;
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = Verificador;
 
             }
             catch (Exception ex)
@@ -1533,15 +1555,15 @@ namespace Recibos_Electronicos.Form
             lblMsjGuardar.Text = string.Empty;
             //lblMsj.Text = string.Empty;
             string TextImporte = string.Empty;
-            bool InsertaDato = true;            
+            bool InsertaDato = true;
             var ExisteConcepto = Array.FindAll(ConceptosPosgrado, s => s.Equals(grvConceptosCat.SelectedRow.Cells[0].Text));
             try
             {
 
                 TextBox myTextBox = (TextBox)(grvConceptosCat.SelectedRow.Cells[2].FindControl("txtImporte"));
                 TextImporte = myTextBox.Text;
-                ObjConcepto.ImporteDetalle =Convert.ToDouble(grvConceptosCat.SelectedRow.Cells[3].Text);
-                if ((ddlNivel.SelectedValue=="L" || ddlNivel.SelectedValue=="N") && (ddlSubTipo.SelectedValue == "EXENTO" || ddlSubTipo.SelectedValue == "DESCUENTO") && ObjConcepto.ImporteDetalle == 0 && (TextImporte == "0" || TextImporte == string.Empty) && grvConceptosCat.SelectedRow.Cells[0].Text != "L0203" && grvConceptosCat.SelectedRow.Cells[0].Text != "L0201")
+                ObjConcepto.ImporteDetalle = Convert.ToDouble(grvConceptosCat.SelectedRow.Cells[3].Text);
+                if ((ddlNivel.SelectedValue == "L" || ddlNivel.SelectedValue == "N") && (ddlSubTipo.SelectedValue == "EXENTO" || ddlSubTipo.SelectedValue == "DESCUENTO") && ObjConcepto.ImporteDetalle == 0 && (TextImporte == "0" || TextImporte == string.Empty) && grvConceptosCat.SelectedRow.Cells[0].Text != "L0203" && grvConceptosCat.SelectedRow.Cells[0].Text != "L0201")
                 {
                     lblMsjGuardar.Text = "Debes definir el importe.";
                     myTextBox.Focus();
@@ -1644,7 +1666,7 @@ namespace Recibos_Electronicos.Form
         {
             lblMsjGuardar.Text = string.Empty;
 
-            if (grvConceptos.Rows.Count >= 1 && grvConceptos.Rows[0].Cells[4].Text!=ddlSubTipo.SelectedValue)
+            if (grvConceptos.Rows.Count >= 1 && grvConceptos.Rows[0].Cells[4].Text != ddlSubTipo.SelectedValue)
             {
                 lblMsjGuardar.Text = "Si desea añadir otro tipo de descuento debe eliminar los conceptos agregados.";
                 ddlSubTipo.SelectedValue = grvConceptos.Rows[0].Cells[4].Text;
@@ -1657,15 +1679,15 @@ namespace Recibos_Electronicos.Form
             }
 
             if (ddlSubTipo.SelectedValue == "DESCUENTO")
-                { lblPorcentaje.Visible = true; txtPorcentaje.Visible = true; txtPorcentaje.Focus(); }
+            { lblPorcentaje.Visible = true; txtPorcentaje.Visible = true; txtPorcentaje.Focus(); }
             else
-                { lblPorcentaje.Visible = false; txtPorcentaje.Visible = false; }            
+            { lblPorcentaje.Visible = false; txtPorcentaje.Visible = false; }
 
         }
 
         protected void TabContainer1_ActiveTabChanged(object sender, EventArgs e)
         {
-            if(TabContainer1.ActiveTabIndex==2)
+            if (TabContainer1.ActiveTabIndex == 2)
             {
                 if (ddlNivel.SelectedValue == "Z" || ddlNivel.Items.Count == 0)
                 {
@@ -1682,7 +1704,7 @@ namespace Recibos_Electronicos.Form
 
         //protected void ddlDependencia_Empleado_SelectedIndexChanged(object sender, EventArgs e)
         //{
-            
+
 
         //    CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Empleados", ref ddlEmpleado, "p_dependencia", "p_tipo_personal", ddlDependencia_Empleado.SelectedValue, rdoBttnTipoPersonal.SelectedValue);
 
@@ -1733,7 +1755,7 @@ namespace Recibos_Electronicos.Form
         protected void bttnAgregarEmp_Click(object sender, EventArgs e)
         {
             ListFamiliar.Clear();
-            if(grvEmpleados.Rows.Count>=1 && ddlHijo.Items.Count>=1)
+            if (grvEmpleados.Rows.Count >= 1 && ddlHijo.Items.Count >= 1)
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Empleado", ref ddlEmpleado, "p_id_empleado", "p_id_familiar", grvEmpleados.SelectedRow.Cells[0].Text, ddlHijo.SelectedValue, ref ListFamiliar);
 
             modalEmpleado.Hide();
@@ -1774,7 +1796,7 @@ namespace Recibos_Electronicos.Form
                 ObjFamiliar.Nombre = txtNombreFamiliar.Text;
                 ObjFamiliar.TipoPersonaStr = ddlParentescoFam.SelectedValue;
                 ObjFamiliar.FechaNacimiento = txtFechaNacimiento.Text;
-                ObjFamiliar.Genero =Convert.ToChar(rdoBttnLstGenero.SelectedValue);
+                ObjFamiliar.Genero = Convert.ToChar(rdoBttnLstGenero.SelectedValue);
                 ObjFamiliar.UsuNombre = SesionUsu.Usu_Nombre;
                 ObjFamiliar.IdPersona = Convert.ToInt32(grvEmpleados.SelectedRow.Cells[0].Text);
                 CNFamiliar.FamiliarInsertar(ObjFamiliar, ref Verificador);
@@ -1787,18 +1809,18 @@ namespace Recibos_Electronicos.Form
                     mltViewFamiliares.ActiveViewIndex = 0;
                 }
                 else
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '"+ Verificador + "');", true);  //lblMsjFam.Text = Verificador;
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '"+ ex.Message + "' );", true); //lblMsjFam.Text = ex.Message;
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + ex.Message + "' );", true); //lblMsjFam.Text = ex.Message;
             }
         }
 
         protected void bttnSalirFam_Click(object sender, EventArgs e)
         {
             modalEmpleado.Show();
-            mltViewFamiliares.ActiveViewIndex = 0;            
+            mltViewFamiliares.ActiveViewIndex = 0;
         }
 
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
@@ -2081,6 +2103,14 @@ namespace Recibos_Electronicos.Form
                         //    ddlCarrera_SelectedIndexChanged(null, null);
                         //    txtCarrera.Text = ObjAlumno.DescCarrera;
                         //}
+                        ddlDependencia_D.SelectedValue = ObjAlumno.Dependencia;
+                        ddlDependencia_D_SelectedIndexChanged(null, null);
+                        ddlCarrera.SelectedValue = ObjAlumno.Carrera;
+                        if (ddlCarrera.SelectedValue == "000000")
+                        {
+                            ddlCarrera_SelectedIndexChanged(null, null);
+                            txtCarrera.Text = ObjAlumno.DescCarrera;
+                        }
                         ddlCiclo_D.SelectedValue = ObjAlumno.CicloEscolar;
                         txtSemestre.Text = ObjAlumno.Semestre;
                         txtGrupo.Text = ObjAlumno.Grupo;

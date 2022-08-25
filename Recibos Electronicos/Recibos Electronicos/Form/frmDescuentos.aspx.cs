@@ -844,6 +844,7 @@ namespace Recibos_Electronicos.Form
                     ddlEvento.SelectedValue = ObjAlumno.Evento;
 
                     ddlNivel_SelectedIndexChanged(null, null);
+                    ddlDependencia_D.SelectedValue = ObjAlumno.Dependencia;
                     ddlCarrera.SelectedValue = ObjAlumno.Carrera;
                     if (ddlCarrera.SelectedValue == "000000")
                     {

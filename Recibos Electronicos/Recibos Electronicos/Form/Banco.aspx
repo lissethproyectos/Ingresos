@@ -129,7 +129,7 @@
                 </div>
             </div>
             <div class="col-md-2">
-                <asp:Button ID="Button1" runat="server" Text="Enviar" OnClick="Enviar_Click" CssClass="mgg_enviar" OnClientClick="mostrar_spinner( )" />
+                <asp:Button ID="Button1" runat="server" Text="Subir" OnClick="Enviar_Click" CssClass="mgg_enviar" OnClientClick="mostrar_spinner( )" />
             </div>
         </div>
         <div class="row">

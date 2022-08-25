@@ -3,7 +3,7 @@
 <%@ Register Assembly="CapaNegocio" Namespace="CapaNegocio" TagPrefix="customControl" %>
 <%@ Register Src="../EnviarCorreo.ascx" TagName="uCCorreo" TagPrefix="usr" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="../Scripts/jquery/jquery-3.1.1.min.js"></script>
+    <%--<script src="../Scripts/jquery/jquery-3.1.1.min.js"></script>--%>
     <script src="../Scripts/select2/js/select2.min.js"></script>
     <link href="../Scripts/select2/css/select2.min.css" type="text/css" rel="stylesheet" />
     <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
@@ -64,17 +64,6 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <%-- <asp:UpdateProgress ID="updPrMultiview" runat="server" AssociatedUpdatePanelID="updPnlMultiview">
-                            <ProgressTemplate>
-                                <div class="overlay">
-                                    <div class="overlayContent">
-                                        <asp:Image ID="img1" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
-                                    </div>
-                                </div>
-                            </ProgressTemplate>
-                        </asp:UpdateProgress>--%>
-    <%-- <asp:UpdatePanel ID="updPnlMultiview" runat="server">
-        <ContentTemplate>--%>
     <div class="container-fluid">
         <div class="row">
             <div class="col">
@@ -138,7 +127,7 @@
                                             </asp:UpdatePanel>
                                         </div>
                                         <div class="col-md-1">
-                                            </div>
+                                        </div>
                                         <div class="col-md-2">
                                             <asp:Label ID="lblCiclo" runat="server" Text="Ciclo Escolar"></asp:Label>
                                         </div>
@@ -186,7 +175,7 @@
                                             <asp:UpdatePanel ID="updPnlBuscarExenciones" runat="server">
                                                 <ContentTemplate>
                                                     <asp:LinkButton ID="linkBttnBuscarEx" runat="server" Width="45%" CssClass="btn btn-primary font-small" OnClick="linkBttnBuscarEx_Click"><i class="fa fa-search" aria-hidden="true"></i> Ver Exenciones</asp:LinkButton>
-                                                    &nbsp;<asp:LinkButton ID="linkBttnNewEx" runat="server" Width="40%" CssClass="btn btn-blue-grey" OnClick="linkBttnNewEx_Click" ValidationGroup="Nuevo" ><i class="fa fa-plus-square" aria-hidden="true"></i> Nuevo</asp:LinkButton>
+                                                    &nbsp;<asp:LinkButton ID="linkBttnNewEx" runat="server" Width="40%" CssClass="btn btn-blue-grey" OnClick="linkBttnNewEx_Click" ValidationGroup="Nuevo"><i class="fa fa-plus-square" aria-hidden="true"></i> Nuevo</asp:LinkButton>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
@@ -335,13 +324,11 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                
                                 <asp:HiddenField ID="hddnCancelar" runat="server" />
                                 <ajaxToolkit:ModalPopupExtender ID="modalCancelar" runat="server" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlObs_Cancelacion" TargetControlID="hddnCancelar" CancelControlID="btnCancelar_C">
                                 </ajaxToolkit:ModalPopupExtender>
                                 <asp:HiddenField ID="hddnGenRecibo" runat="server" />
-                                <ajaxToolkit:ModalPopupExtender ID="MPPAlert" runat="server" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnl_Alert" TargetControlID="hddnGenRecibo">
-                                </ajaxToolkit:ModalPopupExtender>
                                 <asp:Panel ID="pnlObs_Cancelacion" runat="server" CssClass="TituloModalPopupMsg" Width="40%">
                                     <table style="width: 100%; z-index: 200;" class="card text-white bg-dark mb-3">
                                         <tr>
@@ -392,49 +379,8 @@
                                         </tr>
                                     </table>
                                 </asp:Panel>
-                                <asp:Panel ID="pnl_Alert" runat="server" CssClass="TituloModalPopupMsg" Style="width: 40%; position: fixed; z-index: 100; left: 405px; top: 73.5px;">
-                                    <div class="container card text-white bg-dark mb-3">
-                                        <div class="row">
-                                            <div class="col font-weight-bold">
-                                                AVISO
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col text-center">¿Esta seguro que desea generar el recibo en cero?</div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col text-center">
-                                                <img src="https://sysweb.unach.mx/resources/imagenes/informacion.png" />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col text-center">
-                                                <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel227">
-                                                    <ProgressTemplate>
-                                                        <div class="overlay">
-                                                            <div class="overlayContent">
-                                                                <asp:Image ID="Image13" runat="server" Height="19px" ImageUrl="~/Imagenes/loader.gif" Width="220px" />
-                                                            </div>
-                                                        </div>
-                                                    </ProgressTemplate>
-                                                </asp:UpdateProgress>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col text-center">
-                                                <asp:UpdatePanel ID="UpdatePanel227" runat="server">
-                                                    <ContentTemplate>
-                                                        <asp:Button ID="btnNueva" runat="server" CssClass="btn btn-info" OnClick="btnNueva_Click" Text="SI" />
-                                                        &nbsp;<asp:Button ID="CancelAlert" runat="server" CssClass="btn btn-blue-grey" OnClick="CancelAlert_Click" Text="NO" />
-                                                        &nbsp;
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </asp:Panel>
-
                                 <usr:uCCorreo ID="PnlCorreo" runat="server" />
+
                             </asp:View>
                             <asp:View ID="View2" runat="server">
                                 <div class="container-fluid">
@@ -474,7 +420,7 @@
                                                                 <div class="col-md-3">
                                                                     <div class="input-group">
                                                                         <asp:TextBox ID="txtMatricula" runat="server" CssClass="form-control"
-                                                                            TabIndex="2" MaxLength="8" CausesValidation="True"
+                                                                            TabIndex="2" MaxLength="9" CausesValidation="True"
                                                                             ValidationGroup="gpoBusca"></asp:TextBox>
                                                                         <asp:UpdatePanel ID="UpdMatricula" runat="server">
                                                                             <ContentTemplate>
@@ -1209,19 +1155,62 @@
                 </asp:GridView>
             </div>
         </div>
-
-
-
     </div>
-    <%-- </ContentTemplate>
-    </asp:UpdatePanel>--%>
+    <div class="modal fade" id="modalPagos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modConceptos">Información de la Referencia</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col font-weight-bold">
+                                AVISO
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">¿Esta seguro que desea generar el recibo en cero?</div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <img src="https://sysweb.unach.mx/resources/imagenes/informacion.png" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="UpdatePanel227">
+                                    <ProgressTemplate>
+                                        <div class="overlay">
+                                            <div class="overlayContent">
+                                                <asp:Image ID="Image13" runat="server" Height="19px" ImageUrl="~/Imagenes/loader.gif" Width="220px" />
+                                            </div>
+                                        </div>
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdatePanel ID="UpdatePanel227" runat="server">
+                                    <ContentTemplate>
+                                        <asp:Button ID="btnNueva" runat="server" CssClass="btn btn-info" OnClick="btnNueva_Click" Text="SI" />
+                                        &nbsp;<asp:Button ID="CancelAlert" runat="server" CssClass="btn btn-blue-grey" OnClick="CancelAlert_Click" Text="NO" />
+                                        &nbsp;
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
-       <%-- var table;
-        $(document).ready(function () {
-            table = $('#<%= grvAlumnos.ClientID %>').DataTable();
-            table.destroy();
-            $('#<%= grvAlumnos.ClientID%> tbody').empty();
-        });--%>
 
         function FiltEventos() {
             $('#<%= ddlEvento.ClientID %>').select2();

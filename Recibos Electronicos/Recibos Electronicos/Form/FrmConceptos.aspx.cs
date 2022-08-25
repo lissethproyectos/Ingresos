@@ -142,6 +142,13 @@ namespace Recibos_Electronicos.Form
             SesionUsu.Id_Concepto = 0;
             Nuevo();
         }
+        protected void linkBttnAgregarReg_Click(object sender, EventArgs e)
+        {
+            mltViewConceptos.ActiveViewIndex = 1;
+            SesionUsu.Editar = 0;
+            SesionUsu.Id_Concepto = 0;
+            Nuevo();
+        }
         protected void grvConceptos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             grvConceptos.PageIndex = 0;

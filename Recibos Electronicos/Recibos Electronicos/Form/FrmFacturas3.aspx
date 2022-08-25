@@ -68,33 +68,6 @@
         };
 
 
-<%--        function ValidateTipoPersona(sender, args) {
-            var RBL = document.getElementById('<%=rdoBttnReceptorTipoPersona.ClientID %>');
-            var radiobuttonlist = RBL.getElementsByTagName("input");
-            var counter = 0;
-            var atLeast = 1
-            for (var i = 0; i < radiobuttonlist.length; i++) {
-                if (radiobuttonlist[i].checked) {
-                    if (radiobuttonlist[i].value == "F") {
-                        if (document.getElementById('<%=txtReceptor_Rfc.ClientID %>').value.length == "13") {
-                            args.IsValid = true;
-                        }
-                        else {
-
-                            args.IsValid = false;
-                        }
-                    }
-                    else {
-                        if (document.getElementById('<%=txtReceptor_Rfc.ClientID %>').value.length == "12") {
-                            args.IsValid = true;
-                        }
-                        else {
-                            args.IsValid = false;
-                        }
-                    }
-                }
-            }
-        };--%>
 
         function ValidateCheckBox(sender, args) {
 
@@ -358,6 +331,30 @@
         .csv {
             background-color: #e86c3a !important;
         }
+
+        .input-group-text {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            padding: 0.2rem 0.6rem;
+            margin-bottom: 0;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            text-align: center;
+            white-space: nowrap;
+            background-color: #7d858d;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+
+
+        table.dataTable thead th, table.dataTable thead td {
+            padding: 10px 2px 10px 2px;
+            border-bottom: 1px solid #111;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -488,7 +485,7 @@
                                     <div class="col">
                                         <asp:UpdatePanel ID="UpdatePanel13" runat="server">
                                             <ContentTemplate>
-                                                <asp:GridView ID="grdDatosFactura" runat="server" AutoGenerateColumns="False" CellPadding="3" CssClass="sem table table-striped table-bordered table-hover" DataKeyNames="Id_Fact" EmptyDataText="No existen facturas, para el rango de fecha especificado..." OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" PageSize="15" Width="100%" OnRowDeleting="grdDatosFactura_RowDeleting" ShowHeaderWhenEmpty="True">
+                                                <asp:GridView ID="grdDatosFactura" runat="server" AutoGenerateColumns="False" CellPadding="3" CssClass="mGrid table table-striped table-bordered table-hover" DataKeyNames="Id_Fact" EmptyDataText="No existen facturas, para el rango de fecha especificado..." OnSelectedIndexChanged="grdDatosFactura_SelectedIndexChanged" PageSize="15" Width="100%" OnRowDeleting="grdDatosFactura_RowDeleting" ShowHeaderWhenEmpty="True">
                                                     <Columns>
                                                         <asp:BoundField DataField="Id_Fact" HeaderText="Id_Fact" SortExpression="ID"></asp:BoundField>
                                                         <asp:BoundField DataField="FACT_FOLIO" HeaderText="Folio" SortExpression="FOLIO">
@@ -562,10 +559,12 @@
                                                                 <asp:LinkButton ID="linkBttnBitacora" runat="server" OnClick="linkBttnBitacoraRef_Click" ToolTip="Bitacora"><i class="fa fa-clock-o fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                             </ItemTemplate>
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Editar">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnEditar" runat="server" CausesValidation="false" CommandName="Select" ToolTip="Actualizar datos fiscales"><i aria-hidden="true" class="fa fa-pencil fa-2x"></i></asp:LinkButton>
                                                             </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField>
                                                             <HeaderStyle HorizontalAlign="Center" />
@@ -578,7 +577,7 @@
                                                             <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
                                                         <asp:BoundField DataField="FACT_RECEPTOR_CORREO" />
-                                                        <asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Enviar Doctos">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnCorreo" runat="server" OnClick="linkBttnCorreo_Click" ToolTip="Enviar facturas por correo"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                             </ItemTemplate>
@@ -588,7 +587,7 @@
                                                         <asp:BoundField DataField="ID_FICHA_BANCARIA" />
                                                         <asp:BoundField DataField="FACT_STATUS_CAJA" />
                                                         <asp:BoundField DataField="FACT_RECEPTOR_STATUS" />
-                                                        <asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Ver Recibo">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnRecibo" runat="server" OnClick="linkBttnRecibo_Click" ToolTip="Comprobante oficial"><i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></asp:LinkButton>
                                                             </ItemTemplate>
@@ -603,11 +602,12 @@
                                                             <ItemStyle HorizontalAlign="Center" Width="20px" />
                                                         </asp:TemplateField>
                                                         <asp:BoundField DataField="FACT_TIPO" />
-                                                        <asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Ver Doctos">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnFacturaRef" runat="server" CausesValidation="false" OnClick="linkBttnFacturaRef_Click" ToolTip="Archivos adjuntos"><i aria-hidden="true" class="fa fa-cloud-download fa-2x"></i></asp:LinkButton>
                                                             </ItemTemplate>
-                                                            <ItemStyle HorizontalAlign="Center" Width="20px" />
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
                                                         <asp:BoundField DataField="FACT_DIAS_SOLICITUD" />
                                                         <asp:BoundField DataField="FACT_RECEPTOR_STATUS2" />
@@ -619,7 +619,7 @@
                                                     <HeaderStyle CssClass="enc" Font-Size="12px" />
                                                     <AlternatingRowStyle CssClass="alt" />
                                                 </asp:GridView>
-                                                <asp:GridView ID="grdDatosFacturaEfect" runat="server" AutoGenerateColumns="False" CellPadding="3" CssClass="sem table table-striped table-bordered table-hover" DataKeyNames="Id_Fact" EmptyDataText="No existen facturas, para el rango de fecha especificado..." OnSelectedIndexChanged="grdDatosFacturaEfect_SelectedIndexChanged" ShowHeaderWhenEmpty="True" Width="100%" OnRowDeleting="grdDatosFacturaEfect_RowDeleting">
+                                                <asp:GridView ID="grdDatosFacturaEfect" runat="server" AutoGenerateColumns="False" CellPadding="3" CssClass="mGrid table table-striped table-bordered table-hover" DataKeyNames="Id_Fact" EmptyDataText="No existen facturas, para el rango de fecha especificado..." OnSelectedIndexChanged="grdDatosFacturaEfect_SelectedIndexChanged" ShowHeaderWhenEmpty="True" Width="100%" OnRowDeleting="grdDatosFacturaEfect_RowDeleting">
                                                     <Columns>
                                                         <asp:BoundField DataField="ID_FACT" HeaderText="Id_Fact" SortExpression="ID" />
                                                         <asp:BoundField DataField="DEPENDENCIA" HeaderText="Depen" SortExpression="DEPENDENCIA">
@@ -667,7 +667,7 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Status">
                                                             <HeaderTemplate>
-                                                                <asp:LinkButton ID="linkBttnAgregarReg0" runat="server" CssClass="btn btn-grey" OnClientClick="LimpiarCampos();" OnClick="linkBttnAgregarReg_Click" ValidationGroup="New">Nuevo</asp:LinkButton>
+                                                                <asp:LinkButton ID="linkBttnAgregarReg0" runat="server" CssClass="btn btn-dark" OnClientClick="LimpiarCampos();" OnClick="linkBttnAgregarReg_Click" ValidationGroup="New">Nuevo</asp:LinkButton>
                                                             </HeaderTemplate>
                                                             <ItemTemplate>
                                                                 <asp:Label ID="lblSol0" runat="server" Font-Bold="True" Font-Size="8" Text='<%# Bind("DESC_RECEPTOR_STATUS") %>'></asp:Label>
@@ -675,16 +675,19 @@
                                                             <HeaderStyle HorizontalAlign="Center" />
                                                             <ItemStyle ForeColor="#000000" HorizontalAlign="Center" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Bitacora">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnBitacora0" runat="server" OnClick="linkBttnBitacora_Click" ToolTip="Bitacora"><i aria-hidden="true" class="fa fa-clock-o fa-2x"></i></asp:LinkButton>
                                                             </ItemTemplate>
+                                                            <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Doctos">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnEditar0" runat="server" CausesValidation="false" CommandName="Select" Visible='false' ToolTip="Actualizar datos fiscales"><i aria-hidden="true" class="fa fa-pencil fa-2x"></i></asp:LinkButton>
                                                                 <asp:LinkButton ID="linkBttnFactura" runat="server" CausesValidation="false" OnClick="linkBttnFactura_Click" ToolTip="Archivos adjuntos"><i aria-hidden="true" class="fa fa-cloud-download fa-2x"></i></asp:LinkButton>
                                                             </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField>
                                                             <HeaderStyle HorizontalAlign="Center" />
@@ -719,10 +722,12 @@
                                                         </asp:TemplateField>
                                                         <asp:BoundField DataField="TIPO" />
                                                         <asp:BoundField DataField="COLOR" />
-                                                        <asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Editar">
                                                             <ItemTemplate>
                                                                 <asp:LinkButton ID="linkBttnEditar2" runat="server" CausesValidation="false" CommandName="Select" ToolTip="Actualizar datos fiscales"><i aria-hidden="true" class="fa fa-pencil fa-2x"></i></asp:LinkButton>
                                                             </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField>
                                                             <ItemTemplate>
@@ -1039,13 +1044,16 @@
                             <div class="col">
                                 <asp:UpdatePanel ID="UpdatePanel17" runat="server">
                                     <ContentTemplate>
-                                        <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="0" Width="100%" Height="614px" CssClass="ajax__tab_xp" ScrollBars="Vertical">
+                                        <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="3" Width="100%" Height="614px" CssClass="ajax__tab_xp" ScrollBars="Vertical">
                                             <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
-                                                <HeaderTemplate><i class="fa fa fa-file fa-2x font-weight-bold" aria-hidden="true"></i>&nbsp;Información de Factura</HeaderTemplate>
+                                                <HeaderTemplate><i class="fa fa fa-file fa-2x font-weight-bold" aria-hidden="true"></i>&nbsp;Datos Fiscales</HeaderTemplate>
                                                 <ContentTemplate>
                                                     <asp:Panel ID="pnl1" runat="server">
                                                         <div class="container-fluid">
-                                                            <h6 class="card-title font-weight-bold">Datos del Receptor</h6>
+                                                            <h6 class="text-dorado font-weight-bold">
+                                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                                                Datos del Receptor
+                                                            </h6>
                                                             <hr />
                                                             <div class="row" id="rowPnl1" runat="server">
                                                                 <div class="col alert alert-danger">
@@ -1057,8 +1065,8 @@
                                                                 <div class="col-md-2">
                                                                     <div class="input-group mb-3">
                                                                         <asp:TextBox ID="txtReceptor_Rfc" runat="server" CssClass="form-control" MaxLength="13"></asp:TextBox>
-                                                                        <span class="input-group-text grey text-white" id="basic-addon2">
-                                                                            <asp:LinkButton ID="linkBttnRFC" runat="server" OnClick="linkBttnRFC_Click"><i class="fa fa-search" aria-hidden="true"></i></asp:LinkButton>
+                                                                        <span class="input-group-text primary text-white" id="basic-addon2">
+                                                                            <asp:LinkButton ID="linkBttnRFC" runat="server" OnClick="linkBttnRFC_Click"><i class="fa fa-search text-white" aria-hidden="true"></i></asp:LinkButton>
                                                                         </span>
                                                                     </div>
 
@@ -1105,19 +1113,19 @@
                                                                 <div class="col-md-3">
                                                                     <asp:UpdatePanel ID="UpdatePanel12" runat="server">
                                                                         <ContentTemplate>
-                                                                            <asp:DropDownList ID="ddlReceptor_Estado" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlEstado_Fiscal_SelectedIndexChanged" TabIndex="8" CssClass="form-control"></asp:DropDownList><asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="ddlReceptor_Estado" ErrorMessage="*Estado" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                            <asp:DropDownList ID="ddlReceptor_Estado" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlEstado_Fiscal_SelectedIndexChanged" TabIndex="2" CssClass="form-control"></asp:DropDownList><asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="ddlReceptor_Estado" ErrorMessage="*Estado" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
                                                                 </div>
                                                                 <div class="col-md-1">Municipio </div>
                                                                 <div class="col-md-3">
-                                                                    <asp:DropDownList ID="ddlReceptor_Municipio" runat="server" TabIndex="9" CssClass="form-control"></asp:DropDownList><asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="ddlReceptor_Municipio" ErrorMessage="*Municipio" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                    <asp:DropDownList ID="ddlReceptor_Municipio" runat="server" TabIndex="3" CssClass="form-control"></asp:DropDownList><asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="ddlReceptor_Municipio" ErrorMessage="*Municipio" InitialValue="0" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                             </div>
                                                             <div class="row">
                                                                 <div class="col-md-1">CP </div>
                                                                 <div class="col-md-1">
-                                                                    <asp:TextBox ID="txtReceptor_CP" runat="server" MaxLength="500" TabIndex="10" CssClass="form-control"></asp:TextBox><asp:RequiredFieldValidator ID="valCP_Fiscal" runat="server" ControlToValidate="txtReceptor_CP" ErrorMessage="*Código Postal" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                    <asp:TextBox ID="txtReceptor_CP" runat="server" MaxLength="500" TabIndex="3" CssClass="form-control"></asp:TextBox><asp:RequiredFieldValidator ID="valCP_Fiscal" runat="server" ControlToValidate="txtReceptor_CP" ErrorMessage="*Código Postal" ForeColor="Red" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                 </div>
                                                                 <div class="col-md-1">Calle </div>
                                                                 <div class="col-md-4">
@@ -1143,16 +1151,17 @@
 
                                                                 <div class="col-md-1">Teléfono</div>
                                                                 <div class="col-md-3">
-                                                                    <asp:TextBox ID="txtReceptor_Telefono" runat="server" TabIndex="14" CssClass="form-control"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtReceptor_Telefono" runat="server" TabIndex="8" CssClass="form-control"></asp:TextBox>
                                                                 </div>
                                                                 <div class="col-md-1">Correo </div>
                                                                 <div class="col-md-3">
-                                                                    <asp:TextBox ID="txtReceptor_Correo" runat="server" TabIndex="15" CssClass="form-control"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtReceptor_Correo" runat="server" TabIndex="9" CssClass="form-control"></asp:TextBox>
                                                                 </div>
                                                             </div>
-
-
-                                                            <h6 class="card-title font-weight-bold">Datos de la Factura</h6>
+                                                            <h6 class="text-dorado font-weight-bold">
+                                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                                                Datos de la Factura
+                                                            </h6>
                                                             <hr />
                                                             <div class="row">
                                                                 <div class="col-md-2">Metodo de Pago </div>
@@ -1242,7 +1251,7 @@
                                                                                                 <asp:FileUpload ID="fileConstancia" runat="server" Height="40px" Width="100%" />
                                                                                             </div>
                                                                                             <div class="input-group-prepend">
-                                                                                                <asp:LinkButton ID="linkBttnConstancia" runat="server" ValidationGroup="guardar" OnClick="linkBttnConstancia_Click" CssClass="input-group-text"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
+                                                                                                <asp:LinkButton ID="linkBttnConstancia" runat="server" ValidationGroup="guardar" OnClick="linkBttnConstancia_Click" CssClass="input-group-text text-white"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -1339,7 +1348,6 @@
                                                                 <div class="container-fluid">
                                                                     <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="home-profile">
                                                                         <div id="accordion" role="tablist" aria-multiselectable="false">
-
                                                                             <div class="card" id="collapse2" runat="server">
                                                                                 <div class="card-header" role="tab" id="headingTwo">
                                                                                     <div class="mb-0">
@@ -1357,14 +1365,14 @@
                                                                                                     <div class="row">
                                                                                                         <div class="col-md-2">Núm. de Oficio </div>
                                                                                                         <div class="col-md-3">
-                                                                                                            <asp:TextBox ID="txtNumOficio" runat="server" TabIndex="24"></asp:TextBox>
+                                                                                                            <asp:TextBox ID="txtNumOficio" runat="server" TabIndex="24" CssClass="form-control"></asp:TextBox>
                                                                                                         </div>
                                                                                                         <div class="col-md-1">
                                                                                                             <asp:RequiredFieldValidator ID="valNumOficio" runat="server" ControlToValidate="txtNumOficio" ErrorMessage="*Número de Oficio (Pestania 2-&gt;Datos del Oficio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                                         </div>
                                                                                                         <div class="col-md-2">Fecha Oficio </div>
                                                                                                         <div class="col-md-4">
-                                                                                                            <asp:TextBox ID="txtFechaOficio" runat="server" TabIndex="25"></asp:TextBox><ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="ImageButton2" TargetControlID="txtFechaOficio" />
+                                                                                                            <asp:TextBox ID="txtFechaOficio" runat="server" TabIndex="25" CssClass="form-control"></asp:TextBox><ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" PopupButtonID="ImageButton2" TargetControlID="txtFechaOficio" />
                                                                                                             <asp:ImageButton ID="ImageButton2" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" /><asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="txtFechaOficio" ErrorMessage="*Fecha Oficio(Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                                         </div>
                                                                                                     </div>
@@ -1417,7 +1425,7 @@
                                                                                 <div class="card-header" role="tab" id="headingTres">
                                                                                     <div class="mb-0">
                                                                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTres" aria-expanded="false" aria-controls="collapseTres" class="collapsed"><i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                                                                            <h3>2. Importe/Convenio</h3>
+                                                                                            <h3>1. Importe/Convenio</h3>
                                                                                         </a><i class="fa fa-angle-right" aria-hidden="true"></i>
                                                                                     </div>
                                                                                 </div>
@@ -1429,18 +1437,18 @@
                                                                                                     <div class="row">
                                                                                                         <div class="col-md-1">Importe </div>
                                                                                                         <div class="col-md-2">
-                                                                                                            <asp:TextBox ID="txtImporteConvenio" runat="server" TabIndex="27" Width="100px"></asp:TextBox><asp:RequiredFieldValidator ID="valImpConvenio" runat="server" ControlToValidate="txtImporteConvenio" ErrorMessage="*Importe (Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
+                                                                                                            <asp:TextBox ID="txtImporteConvenio" runat="server" TabIndex="27" Width="100px" CssClass="form-control"></asp:TextBox><asp:RequiredFieldValidator ID="valImpConvenio" runat="server" ControlToValidate="txtImporteConvenio" ErrorMessage="*Importe (Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                                         </div>
                                                                                                         <div class="col-md-2">IVA </div>
                                                                                                         <div class="col-md-2">
-                                                                                                            <asp:TextBox ID="txtIVAConvenio" runat="server" AutoPostBack="True" TabIndex="28" OnTextChanged="txtIVA_TextChanged" Width="100px"></asp:TextBox>
+                                                                                                            <asp:TextBox ID="txtIVAConvenio" runat="server" AutoPostBack="True" TabIndex="28" OnTextChanged="txtIVA_TextChanged" Width="100px" CssClass="form-control"></asp:TextBox>
                                                                                                         </div>
                                                                                                         <div class="col-md-1">
                                                                                                             <asp:RequiredFieldValidator ID="valIva" runat="server" ControlToValidate="txtIVAConvenio" ErrorMessage="*Iva(Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                                         </div>
                                                                                                         <div class="col-md-1">Total </div>
                                                                                                         <div class="col-md-2">
-                                                                                                            <asp:TextBox ID="txtTotalConvenio" runat="server" Width="100px" TabIndex="29"></asp:TextBox>
+                                                                                                            <asp:TextBox ID="txtTotalConvenio" runat="server" Width="100px" TabIndex="29" CssClass="form-control"></asp:TextBox>
                                                                                                         </div>
                                                                                                         <div class="col-md-1">
                                                                                                             <asp:RequiredFieldValidator ID="valTotal" runat="server" ControlToValidate="txtTotalConvenio" ErrorMessage="*Total(Pestania 2-&gt;Convenio)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
@@ -1496,7 +1504,7 @@
                                                                                 <div class="card-header" role="tab" id="headingOne">
                                                                                     <div class="mb-0">
                                                                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed"><i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                                                                            <h3>3. Comprobante de Pago</h3>
+                                                                                            <h3>2. Comprobante de Pago</h3>
                                                                                         </a><i class="fa fa-angle-right" aria-hidden="true"></i>
                                                                                     </div>
                                                                                 </div>
@@ -1522,7 +1530,7 @@
                                                                                                 <div class="col-md-1">
                                                                                                     <asp:RequiredFieldValidator ID="valFecha" runat="server" ControlToValidate="txtFecha" ErrorMessage="*Fecha(Datos del Comprobante de Pago - Pestania 2)" ValidationGroup="DatosFiscales">*Requerido</asp:RequiredFieldValidator>
                                                                                                 </div>
-                                                                                                <div class="col-md-1">Importe</div>
+                                                                                                <div class="col-md-1">Subtotal</div>
                                                                                                 <div class="col-md-1">
                                                                                                     <asp:TextBox ID="txtImporteDeposito" runat="server" TabIndex="20" Width="100%"></asp:TextBox>
                                                                                                 </div>
@@ -1588,7 +1596,7 @@
                                                                                                                                 <asp:FileUpload ID="fileVoucher" runat="server" Height="40px" Width="100%" />
                                                                                                                             </div>
                                                                                                                             <div class="input-group-prepend">
-                                                                                                                                <asp:LinkButton ID="linkBttnAdjVoucher" runat="server" ValidationGroup="guardar" OnClick="linkBttnAdjVoucher_Click" CssClass="input-group-text"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
+                                                                                                                                <asp:LinkButton ID="linkBttnAdjVoucher" runat="server" ValidationGroup="guardar" OnClick="linkBttnAdjVoucher_Click" CssClass="input-group-text text-white"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
                                                                                                                             </div>
                                                                                                                         </div>
                                                                                                                     </div>
@@ -1624,7 +1632,7 @@
                                                                                 <div class="card-header" role="tab" id="headingCuatro">
                                                                                     <div class="mb-0">
                                                                                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseCuatro" aria-expanded="false" aria-controls="collapseCuatro" class="collapsed"><i class="fa fa-file-text-o" aria-hidden="true"></i>
-                                                                                            <h3>4. Recibo Electrónico de Pago (REP)</h3>
+                                                                                            <h3>3. Recibo Electrónico de Pago (REP)</h3>
                                                                                         </a><i class="fa fa-angle-right" aria-hidden="true"></i>
                                                                                     </div>
                                                                                 </div>
@@ -1746,7 +1754,7 @@
                                                 </ContentTemplate>
                                             </ajaxToolkit:TabPanel>
                                             <ajaxToolkit:TabPanel ID="TabPanel2" runat="server" HeaderText="Imagen de la Factura">
-                                                <HeaderTemplate><i class="fa fa-upload fa-2x" aria-hidden="true"></i>&nbsp;Archivos</HeaderTemplate>
+                                                <HeaderTemplate><i class="fa fa-upload fa-2x" aria-hidden="true"></i>&nbsp;Factura (xml,pdf)</HeaderTemplate>
                                                 <ContentTemplate>
                                                     <asp:UpdatePanel ID="UpdatePanelFoto" runat="server">
                                                         <ContentTemplate>
@@ -1755,29 +1763,41 @@
                                                                     <div class="row">
                                                                         <div class="col-md-2">Folio de la Factura</div>
                                                                         <div class="col-md-2">
-                                                                            <asp:TextBox ID="txtFolio_Fact_Cja" runat="server" Width="100%"></asp:TextBox>
+                                                                            <asp:TextBox ID="txtFolio_Fact_Cja" runat="server" CssClass="form-control"></asp:TextBox>
                                                                         </div>
                                                                         <div class="col-md-1">
                                                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtFolio_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="adjuntarFactura"></asp:RequiredFieldValidator>
                                                                         </div>
+                                                                    </div>
+                                                                    <div class="row">
                                                                         <div class="col-md-2">Fecha de la Factura </div>
-                                                                        <div class="col-md-3">
-                                                                            <asp:TextBox ID="txtFecha_Fact_Cja" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox><ajaxToolkit:CalendarExtender ID="txtFecha_Fact_Cja_CalendarExtender" runat="server" PopupButtonID="imgFecha_Fact_Cja" TargetControlID="txtFecha_Fact_Cja" />
-                                                                            <asp:ImageButton ID="imgFecha_Fact_Cja" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />&#160;<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtFecha_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="adjuntarFactura"></asp:RequiredFieldValidator>
+                                                                        <div class="col-md-2">
+                                                                            <div class="input-group mb-3">
+                                                                                <asp:TextBox ID="txtFecha_Fact_Cja" runat="server" AutoPostBack="True" CssClass="form-control" onkeyup="javascript:this.value='';"></asp:TextBox><ajaxToolkit:CalendarExtender ID="txtFecha_Fact_Cja_CalendarExtender" runat="server" PopupButtonID="imgFecha_Fact_Cja" TargetControlID="txtFecha_Fact_Cja" />
+                                                                                <span class="input-group-text primary text-white" id="basic-addon2">
+                                                                                    <asp:ImageButton ID="imgFecha_Fact_Cja" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />                                                                                    
+                                                                                </span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtFecha_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="adjuntarFactura"></asp:RequiredFieldValidator>
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
-                                                                        <div class="col-md-8 mb-3">
+                                                                        <div class="col-md-2">Archivo</div>
+                                                                        <div class="col-md-10 mb-3">
                                                                             <div class="input-group mb-3">
                                                                                 <div class="custom-file input-group-text" style="background-color: #ffffff">
                                                                                     <asp:FileUpload ID="fileFactura" runat="server" Height="40px" Width="100%" />
                                                                                 </div>
                                                                                 <div class="input-group-prepend">
-                                                                                    <asp:LinkButton ID="linkBttnAgregaFactura" runat="server" ValidationGroup="adjuntarFactura" OnClick="linkBttnAgregaFactura_Click" CssClass="input-group-text"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
+                                                                                    <asp:LinkButton ID="linkBttnAgregaFactura" runat="server" ValidationGroup="adjuntarFactura" OnClick="linkBttnAgregaFactura_Click" CssClass="input-group-text text-white"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-md-4">
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col">
                                                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="fileFactura" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF|xml|XML)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
                                                                         </div>
                                                                     </div>
@@ -1804,12 +1824,99 @@
                                                                             <AlternatingRowStyle CssClass="alt" />
                                                                         </asp:GridView>
                                                                     </div>
-                                                                    <div class="col-md-2"></div>
+
                                                                 </div>
+                                                                <%--<div class="row">
+                                                                    <div class="col">
+                                                                        <p>
+  <a class="btn btn-danger" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Solicitar Cancelación de Factura
+  </a>
+  
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
+<div id='collapsediv1' class='collapse div1'>
+  <div>
+    AAAAAAAAAA
+  </div>
+  <div>
+    BBBBBBBBBBB
+  </div>
+</div>
+                                                                    </div>
+                                                                </div>--%>
                                                             </div>
                                                         </ContentTemplate>
                                                         <Triggers>
                                                             <asp:PostBackTrigger ControlID="linkBttnAgregaFactura" />
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
+                                                </ContentTemplate>
+                                            </ajaxToolkit:TabPanel>
+                                            <ajaxToolkit:TabPanel ID="TabPanel4" runat="server" HeaderText="TabPanel4">
+                                                <HeaderTemplate>
+                                                    <i class="fa fa-times" aria-hidden="true"></i>Solicitud de Cancelación
+                                                </HeaderTemplate>
+                                                <ContentTemplate>
+                                                    <asp:UpdatePanel ID="UpdatePanel23" runat="server">
+                                                        <ContentTemplate>
+                                                            <br />
+                                                            <div class="container">
+                                                                <%--<div class="row">
+                                                                    <div class="col alert alert-warning">
+                                                                        Con el nuevo esquema de CFDI 4.0, a partir del 1 de enero de 2022, será requerido señalar el motivo por el cual se cancela el comprobante.
+                                                                    </div>
+                                                                </div>--%>
+
+                                                                <div class="row" id="rowSolCancela" runat="server">
+                                                                    <div class="col-md-1 font-weight-bold">
+                                                                        Motivo as as
+                                                                    </div>
+                                                                    <div class="col-md-11 font-weight-bold">
+                                                                        <asp:DropDownList ID="ddlMotivoCancelacion" runat="server" CssClass="form-control">
+                                                                            <asp:ListItem Value="00">--Seleccionar--</asp:ListItem>
+                                                                            <asp:ListItem Value="CNC001">COMPROBANTES EMITIDOS CON ERRORES CON RELACIÓN</asp:ListItem>
+                                                                            <asp:ListItem Value="CNC002">COMPROBANTES EMITIDOS SIN ERRORES CON RELACIÓN</asp:ListItem>
+                                                                            <asp:ListItem Value="CNC003">NO SE LLEVO OPERACIÓN</asp:ListItem>
+                                                                        </asp:DropDownList>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-1">
+                                                                        Acuse
+                                                                    </div>
+                                                                    <div class="col-md-11">
+                                                                        <div class="input-group mb-3">
+                                                                            <div class="custom-file input-group-text" style="background-color: #ffffff">
+                                                                                <asp:FileUpload ID="fileAcuse" runat="server" Height="40px" Width="100%" />
+                                                                            </div>
+                                                                            <div class="input-group-prepend">
+                                                                                <asp:LinkButton ID="linkBttnAcuse" runat="server" ValidationGroup="guardar" OnClick="linkBttnAcuse_Click" CssClass="input-group-text text-white"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-md-1"></div>
+                                                                    <div class="col-md-10">
+                                                                        <asp:HyperLink ID="linkAcuse" runat="server" CssClass="form-control alert-secondary" Target="_blank">[lblArchivoConstancia]</asp:HyperLink>
+                                                                    </div>
+                                                                    <div class="col-md-1">
+                                                                        <asp:UpdatePanel ID="UpdatePanel22" runat="server">
+                                                                            <ContentTemplate>
+                                                                                <asp:LinkButton ID="linkBttnEliminarAcuse" runat="server" CssClass="btn btn-danger" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarConstancia_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash" aria-hidden="true"></i></asp:LinkButton>
+                                                                            </ContentTemplate>
+                                                                        </asp:UpdatePanel>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:PostBackTrigger ControlID="linkBttnAcuse" />
                                                         </Triggers>
                                                     </asp:UpdatePanel>
                                                 </ContentTemplate>
@@ -1842,9 +1949,29 @@
             </asp:MultiView>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <%-- <asp:HiddenField ID="hddnCorreo" runat="server" />
-    <ajaxToolkit:ModalPopupExtender ID="modalCorreo" runat="server" BackgroundCssClass="modalBackground_Proy" PopupControlID="pnlCorreo" TargetControlID="hddnCorreo">
-    </ajaxToolkit:ModalPopupExtender>--%>
+    <%--<div class="row">
+                                                                    <div class="col">
+                                                                        <p>
+  <a class="btn btn-danger" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Solicitar Cancelación de Factura
+  </a>
+  
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+  </div>
+</div>
+<div id='collapsediv1' class='collapse div1'>
+  <div>
+    AAAAAAAAAA
+  </div>
+  <div>
+    BBBBBBBBBBB
+  </div>
+</div>
+                                                                    </div>
+                                                                </div>--%>
     <div class="modal fade" id="modalBitacora" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -2060,7 +2187,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">El registro se regresara al status seleccionado.</h5>
+                    <h5 class="modal-title">Cancelación de Factura</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -2068,26 +2195,42 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col-md-2">Status</div>
-                            <div class="col-md-10">
-                                <asp:DropDownList ID="ddlStatusFactEfect" runat="server" Width="100%">
-                                    <asp:ListItem Value="C">Solicitudes</asp:ListItem>
-                                    <asp:ListItem Value="S">Solicitudes Confirmadas</asp:ListItem>
-                                    <asp:ListItem Value="F">Facturados</asp:ListItem>
-                                    <asp:ListItem Value="P">Pagados</asp:ListItem>
-                                    <asp:ListItem Value="E">REP</asp:ListItem>
+                            <div class="col">Motivo</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:DropDownList ID="ddlMotivoCancelacion2" runat="server" CssClass="form-control">
+                                    <asp:ListItem Value="00">--Seleccionar--</asp:ListItem>
+                                    <asp:ListItem Value="CNC001">COMPROBANTES EMITIDOS CON ERRORES CON RELACIÓN</asp:ListItem>
+                                    <asp:ListItem Value="CNC002">COMPROBANTES EMITIDOS SIN ERRORES CON RELACIÓN</asp:ListItem>
+                                    <asp:ListItem Value="CNC003">NO SE LLEVO OPERACIÓN</asp:ListItem>
                                 </asp:DropDownList>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">Observaciones</div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:TextBox ID="txtObservacionesCancela" runat="server" Height="67px" CssClass="form-control" TextMode="MultiLine"></asp:TextBox>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <asp:LinkButton ID="bttnRegresarStatus" class="btn btn-primary" runat="server">Regresar status</asp:LinkButton>
-                    <button type="button" class="btn btn-blue-grey" data-dismiss="modal">Cerrar</button>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <asp:LinkButton ID="bttnCancelaFact" class="btn btn-primary" runat="server" OnClick="bttnCancelaFact_Click">Solicitar cancelación</asp:LinkButton>
+                                <button type="button" class="btn btn-blue-grey" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <script type="text/javascript"> 
 
         function Referencias() {

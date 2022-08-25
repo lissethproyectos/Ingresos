@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col text-center">
                                 <asp:UpdateProgress ID="updPgrFacturas" runat="server"
                                     AssociatedUpdatePanelID="updPnlFacturas">
                                     <ProgressTemplate>
@@ -409,46 +409,66 @@
                                 <asp:ImageButton ID="imgBttnAgregarConcepto0" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" OnClick="imgBttnAgregarConcepto0_Click" />
                             </div>
                         </div>
+
                         <div class="row">
-                            <div class="col">
-                                <asp:GridView ID="grvFacturas_Detalle" runat="server" AutoGenerateColumns="False"
-                                    Width="100%" OnRowDeleting="grvFacturas_Detalle_RowDeleting" CssClass="mGrid">
-                                    <Columns>
-                                        <asp:BoundField DataField="IdDetFact" HeaderText="ID">
-                                            <ItemStyle Width="10%" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="ClaveConcepto" HeaderText="CLAVE">
-                                            <HeaderStyle HorizontalAlign="Left" />
-                                            <ItemStyle HorizontalAlign="Left" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="cantidad" HeaderText="CANTIDAD">
-                                            <HeaderStyle HorizontalAlign="Center" />
-                                            <ItemStyle HorizontalAlign="Center" Width="15%" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="DescConcepto" HeaderText="CONCEPTO">
-                                            <HeaderStyle HorizontalAlign="Left" />
-                                            <ItemStyle HorizontalAlign="Left" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="ValorUnitario" HeaderText="P. UNITARIO">
-                                            <HeaderStyle HorizontalAlign="Right" />
-                                            <ItemStyle HorizontalAlign="Right" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="importe" HeaderText="IMPORTE">
-                                            <HeaderStyle HorizontalAlign="Right" />
-                                            <ItemStyle HorizontalAlign="Right" />
-                                        </asp:BoundField>
-                                        <asp:CommandField ShowDeleteButton="True">
-                                            <ItemStyle HorizontalAlign="Center" />
-                                        </asp:CommandField>
-                                    </Columns>
-                                    <FooterStyle CssClass="enc" />
-                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                    <SelectedRowStyle CssClass="sel" />
-                                    <HeaderStyle CssClass="enc" />
-                                    <AlternatingRowStyle CssClass="alt" />
-                                </asp:GridView>
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updPgrFacturas_Detalle" runat="server"
+                                    AssociatedUpdatePanelID="updPnlFacturas_Detalle">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgDet" runat="server"
+                                            AlternateText="Espere un momento, por favor.." Height="50px"
+                                            ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif"
+                                            ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="updPnlFacturas_Detalle" runat="server">
+                                    <ContentTemplate>
+                                        <asp:GridView ID="grvFacturas_Detalle" runat="server" AutoGenerateColumns="False"
+                                            Width="100%" OnRowDeleting="grvFacturas_Detalle_RowDeleting" CssClass="mGrid">
+                                            <Columns>
+                                                <asp:BoundField DataField="IdDetFact" HeaderText="ID">
+                                                    <ItemStyle Width="10%" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="ClaveConcepto" HeaderText="CLAVE">
+                                                    <HeaderStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="cantidad" HeaderText="CANTIDAD">
+                                                    <HeaderStyle HorizontalAlign="Center" />
+                                                    <ItemStyle HorizontalAlign="Center" Width="15%" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="DescConcepto" HeaderText="CONCEPTO">
+                                                    <HeaderStyle HorizontalAlign="Left" />
+                                                    <ItemStyle HorizontalAlign="Left" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="ValorUnitario" HeaderText="P. UNITARIO">
+                                                    <HeaderStyle HorizontalAlign="Right" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="importe" HeaderText="IMPORTE">
+                                                    <HeaderStyle HorizontalAlign="Right" />
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                </asp:BoundField>
+                                                <asp:CommandField ShowDeleteButton="True">
+                                                    <ItemStyle HorizontalAlign="Center" />
+                                                </asp:CommandField>
+                                            </Columns>
+                                            <FooterStyle CssClass="enc" />
+                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                            <SelectedRowStyle CssClass="sel" />
+                                            <HeaderStyle CssClass="enc" />
+                                            <AlternatingRowStyle CssClass="alt" />
+                                        </asp:GridView>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col">
                                 <asp:Label ID="lblTotal_Letras" runat="server"></asp:Label>
@@ -525,7 +545,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col">
+                            <div class="col text-center">
                                 <asp:UpdateProgress ID="UpdateProgress25" runat="server" AssociatedUpdatePanelID="UpdatePanel5">
                                     <ProgressTemplate>
                                         <asp:Image ID="Image91" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
@@ -646,12 +666,19 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="UpdPgr11" runat="server" AssociatedUpdatePanelID="UpdatePanel11">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="Image11" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col text-right">
                                 <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                                     <ContentTemplate>
                                         <asp:Button ID="btnGuardar_Concep_Continuar" runat="server" CssClass="btn btn-info" OnClick="btnGuardar_Concep_Continuar_Click" Text="GUARDAR" ValidationGroup="guardar_conceptos" />
-                                        <%-- &nbsp;<asp:Button ID="btnGuardar_Concep" runat="server" CssClass="btn btn-primary" OnClick="btnGuardar_Concep_Click" Text="GUARDAR Y SALIR" ValidationGroup="guardar_conceptos" />
-                                                            &nbsp;--%>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>

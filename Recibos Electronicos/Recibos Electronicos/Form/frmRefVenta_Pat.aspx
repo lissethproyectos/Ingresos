@@ -406,7 +406,7 @@
                                                                         <div class="col-md-3">
                                                                             <div class="input-group">
                                                                                 <asp:TextBox ID="txtClaveSysweb" runat="server" CssClass="form-control"
-                                                                                    TabIndex="2" MaxLength="8" CausesValidation="True"
+                                                                                    TabIndex="2" MaxLength="9" CausesValidation="True"
                                                                                     ValidationGroup="gpoBusca"></asp:TextBox>
                                                                                 <asp:UpdatePanel ID="UpdMatricula" runat="server">
                                                                                     <ContentTemplate>

@@ -346,7 +346,19 @@
             $('#<%= grvReferenciasSIAE.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvReferenciasSIAE.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
                 "stateSave": true,
-                "ordering": false
+                "ordering": false,
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
             });
 
         }
