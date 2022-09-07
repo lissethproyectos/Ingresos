@@ -72,6 +72,12 @@ namespace CapaEntidad
             get { return _Evento; }
             set { _Evento = value; }
         }
+        private string _LigaPago;
+        public string LigaPago
+        {
+            get { return _LigaPago; }
+            set { _LigaPago = value; }
+        }
 
         private int _IdEvento;
         public int IdEvento

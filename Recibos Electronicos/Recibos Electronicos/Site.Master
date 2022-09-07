@@ -134,6 +134,8 @@
             overflow: auto;
         }
 
+         
+
         .ajax__tab_xp .ajax__tab_body {
             background-color: #ffffff;
             border: 1px solid #999999;

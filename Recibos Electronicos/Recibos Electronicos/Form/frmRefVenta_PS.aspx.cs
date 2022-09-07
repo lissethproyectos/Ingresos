@@ -82,7 +82,7 @@ namespace Recibos_Electronicos.Form
         {
             decimal Total = 0;
 
-            grvProductosAgregados.Visible = true;
+            //grvProductosAgregados.Visible = true;
             grvProductosAgregados.DataSource = null;
             grvProductosAgregados.DataBind();
 
@@ -91,13 +91,15 @@ namespace Recibos_Electronicos.Form
                 lstProductosAgregados = (List<Bien>)Session["listaProductosAgregados"];
 
 
-            grvProductosAgregados.Visible = true;
             grvProductosAgregados.DataSource = lstProductosAgregados;
             grvProductosAgregados.DataBind();
 
-            Total = lstProductosAgregados.Sum(x => Convert.ToDecimal(x.Total));
-            Label lblTot = (Label)grvProductosAgregados.FooterRow.FindControl("lblGranTotal");
-            lblTot.Text = Convert.ToString(Total.ToString("C"));
+            if (lstProductosAgregados.Count > 0)
+            {
+                Total = lstProductosAgregados.Sum(x => Convert.ToDecimal(x.Total));
+                //Label lblTot = (Label)grvProductosAgregados.FooterRow.FindControl("lblGranTotal");
+                lblGranTotal.Text = Convert.ToString(Total.ToString("C"));
+            }
 
 
 
@@ -159,7 +161,11 @@ namespace Recibos_Electronicos.Form
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'Ocurrió un problema al cargar los datos: " + ex.Message + "');", true);
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '"+ Verificador + ""');", true);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
+
             }
         }
         private void CargarGridClientes()
@@ -247,8 +253,9 @@ namespace Recibos_Electronicos.Form
                 //Factura objFactura = new Factura();
                 //objFactura.FACT_DEPENDENCIA = DDLDependencia.SelectedValue;
                 //objFactura.FACT_STATUS = DDLStatus.SelectedValue;                    
-                //CNFactura.FacturaProductosConsultaGrid(DDLDependencia.SelectedValue, DDLPagado.SelectedValue, txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtBuscaRef.Text, SesionUsu.Usu_TipoUsu, SesionUsu.Usu_Nombre, ref List);
-                CNFactura.FacturaProductosConsultaGrid(DDLDependencia.SelectedValue, "T", txtFecha_Factura_Ini.Text, txtFecha_Factura_Fin.Text, txtBuscaRef.Text, SesionUsu.Usu_TipoUsu, SesionUsu.Usu_Nombre, ref List);
+                //CNFactura.FacturaProductosConsultaGrid(DDLDependencia.SelectedValue, DDLPagado.SelectedValue, txtFecha_Factura_Ini.Text, Convert.ToDateTime(txtFecha_Factura_Fin.Text).ToString("dd/MM/yyyy"), txtBuscaRef.Text, SesionUsu.Usu_TipoUsu, SesionUsu.Usu_Nombre, ref List);
+                //string fechaIni=Convert.ToDateTime(txtFecha_Factura_Ini.Text).ToString("dd/MM/yyyy");
+                CNFactura.FacturaProductosConsultaGrid(DDLDependencia.SelectedValue, "T", Convert.ToDateTime(txtFecha_Factura_Ini.Text).ToString("dd/MM/yyyy"), Convert.ToDateTime(txtFecha_Factura_Fin.Text).ToString("dd/MM/yyyy"), txtBuscaRef.Text, SesionUsu.Usu_TipoUsu, SesionUsu.Usu_Nombre, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -353,8 +360,15 @@ namespace Recibos_Electronicos.Form
                     Mes = Mes - 3;
 
 
-                txtFecha_Factura_Ini.Text = "01/" + Mes.ToString().PadLeft(2, '0') + "/" + System.DateTime.Now.Year.ToString();
-                txtFecha_Factura_Fin.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
+                string FechaIni = "01/" + Mes.ToString().PadLeft(2, '0') + "/" + System.DateTime.Now.Year.ToString();
+                //string FechaIni = System.DateTime.Now.Year.ToString() + "/" + Mes.ToString().PadLeft(2, '0') + "/01";
+
+                txtFecha_Factura_Ini.Text = FechaIni;
+
+                //txtFecha_Factura_Ini.Text = Convert.ToDateTime(FechaIni).ToString("dd/MM/yyyy");
+
+                string FechaFin = System.DateTime.Now.ToString("dd/MM/yyyy");
+                txtFecha_Factura_Fin.Text = Convert.ToDateTime(FechaFin).ToString("dd/MM/yyyy");
                 CargarGridInicio();
                 MultiView1.ActiveViewIndex = 1;
 
@@ -687,13 +701,27 @@ namespace Recibos_Electronicos.Form
         protected void grdDatosFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
             SesionUsu.Editar = 0;
+            string cadena = string.Empty;
+            int id_referencia = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
+            string referencia = grdDatosFactura.SelectedRow.Cells[3].Text;
+            try
+            {
+                cadena = CN_Token.GenerarToken(id_referencia, referencia);
+                string LinkPago = "https://sysweb.unach.mx/FichaReferenciada/Form/PagoExclusivoSYSWEB.aspx?sw_acc=" + cadena;
+                string _open = "window.open('" + LinkPago + "', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+            }
 
+            //lblRefGenerada.Text = grdDatosFactura.SelectedRow.Cells[3].Text;
+            //linkPago.Text = string.Empty;
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
 
-            lblRefGenerada.Text = grdDatosFactura.SelectedRow.Cells[3].Text;
-            linkPago.Text = string.Empty;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
-
-
+            catch (Exception ex)
+            {
+                string MsjError = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref MsjError);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);
+            }
         }
 
         protected void btnVerFactRecibo_Click(object sender, EventArgs e)
@@ -709,16 +737,14 @@ namespace Recibos_Electronicos.Form
             Session["listaProductosAgregados"] = null;
             grvProductosAgregados.DataSource = null;
             grvProductosAgregados.DataBind();
-
+            CargarGridProductos();
+            linkBttnEnviar.Visible = false;
+            //linkBttnPagar.Visible = true;
+            linkBttnPagar.Text = "<i class='fa fa-credit-card fa-2x'></i> Generar Referencia";
+            linkBttnNuevaRef.Visible = false;
             CNComun.LlenaCombo("pkg_pagos_2016.Obt_Combo_Productos_Serv", ref DDLProductos, "p_dependencia", DDLDependencia.SelectedValue, ref lstProductos, "INGRESOS");
             Session["listaProductos"] = lstProductos;
-            //if (SesionUsu.Usu_TipoUsu == 6)
-            //{
-            //    txtClaveSysweb.Text = SesionUsu.Usu_Nombre;
-            //    imgBttnBuscar_Click(null, null);
-            //}
-            //else
-            //    txtClaveSysweb.Text = string.Empty;
+           
             grvClientes.DataSource = null;
             grvClientes.DataBind();
 
@@ -727,12 +753,8 @@ namespace Recibos_Electronicos.Form
             ddlNivelBusqueda_SelectedIndexChanged(null, null);
 
 
-            Session["Inventario"] = null;
-            grvProductosAgregados.DataSource = null;
-            grvProductosAgregados.DataBind();
-
-            //grvInventario.DataSource = null;
-            //grvInventario.DataBind();
+          
+            
 
             hddnIdFichaRef.Value = "0";
             hddnReferencia.Value = "0";
@@ -790,14 +812,10 @@ namespace Recibos_Electronicos.Form
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grdDatosFactura.SelectedIndex = row.RowIndex;
             CargarGridDetalle();
-            modal.Show();
-        }
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowModalDet", "$('#modalDetalle').modal('show')", true);
 
-        protected void btnCancelar_Detalle_Click(object sender, EventArgs e)
-        {
-            modal.Hide();
+            //modal.Show();
         }
-
         protected void bttnReimprimir_Click(object sender, EventArgs e)
         {
             SesionUsu.Editar = 0;
@@ -874,6 +892,18 @@ namespace Recibos_Electronicos.Form
             string Total = string.Format("{0:0.00}", grdDatosFactura.SelectedRow.Cells[5].Text);
             string nombre = grdDatosFactura.SelectedRow.Cells[6].Text;
             string _open = "window.open('" + "https://sysweb.unach.mx/FichaReferenciada/Form/PagoenLinea.aspx?order_m=" + grdDatosFactura.SelectedRow.Cells[0].Text + "&reference_m=" + grdDatosFactura.SelectedRow.Cells[3].Text + "&amount_m=" + Total + "&customername_m=" + grdDatosFactura.SelectedRow.Cells[6].Text + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
+        protected void linkBttnPagoLinea2_Click(object sender, EventArgs e)
+        {
+            if (Session["DatosReferencia"] != null)
+                ObjFichaReferenciada = (FichaReferenciada)Session["DatosReferencia"];
+
+            int IdRef = Convert.ToInt32(ObjFichaReferenciada.IdFichaBancaria);
+            string Total = string.Format("{0:0.00}", ObjFichaReferenciada.Importetotal);
+            string nombre = ObjFichaReferenciada.Nombre;
+            string referencia = ObjFichaReferenciada.Referencia;
+            string _open = "window.open('" + "https://sysweb.unach.mx/FichaReferenciada/Form/PagoenLinea.aspx?order_m=" + IdRef + "&reference_m=" + referencia + "&amount_m=" + Total + "&customername_m=" + nombre + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
         }
 
@@ -969,6 +999,7 @@ namespace Recibos_Electronicos.Form
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             //DDLTipoVenta.Enabled = true;
+            SesionUsu.LigaPago = string.Empty;
             CargarGridInicio();
             MultiView1.ActiveViewIndex = 1;
         }
@@ -977,7 +1008,7 @@ namespace Recibos_Electronicos.Form
         {
 
 
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP060&dependencia=" + DDLDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&enExcel=S";
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP060&dependencia=" + DDLDependencia.SelectedValue + "&FInicial=" + Convert.ToDateTime(txtFecha_Factura_Ini.Text).ToString("dd/MM/yyyy") + "&FFinal=" + Convert.ToDateTime(txtFecha_Factura_Fin.Text).ToString("dd/MM/yyyy") + "&enExcel=S";
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
@@ -986,7 +1017,7 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP060&dependencia=" + DDLDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&enExcel=N";
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP060&dependencia=" + DDLDependencia.SelectedValue + "&FInicial=" + Convert.ToDateTime(txtFecha_Factura_Ini.Text).ToString("dd/MM/yyyy") + "&FFinal=" + Convert.ToDateTime(txtFecha_Factura_Fin.Text).ToString("dd/MM/yyyy") + "&enExcel=N";
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
@@ -1215,6 +1246,29 @@ namespace Recibos_Electronicos.Form
             }
         }
 
+        protected void linkBttnRedirectPagar_Click(object sender, EventArgs e)
+        {
+
+            string cadena = string.Empty;
+            int id_referencia = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
+            string referencia = grdDatosFactura.SelectedRow.Cells[3].Text;
+            try
+            {
+                cadena = CN_Token.GenerarToken(id_referencia, referencia);
+                string LinkPago = "https://sysweb.unach.mx/FichaReferenciada/Form/PagoExclusivoSYSWEB.aspx?sw_acc=" + cadena;
+                string _open = "window.open('" + LinkPago + "', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                //Response.Redirect(LinkPago);
+                //string _open = "window.open('" + ruta + "', 'miniContenedor', 'toolbar=yes', 'location=no', 'menubar=yes', 'resizable=yes');";
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
         protected void linkBttnBuscarRef_Click(object sender, EventArgs e)
         {
             CargarGridInicio();
@@ -1226,11 +1280,28 @@ namespace Recibos_Electronicos.Form
             {
                 lstProductos = (List<Comun>)Session["listaProductos"];
                 Session["Inventario"] = lstProductos;
-                txtPrecio.Text = lstProductos[DDLProductos.SelectedIndex].EtiquetaDos;
+
                 if (lstProductos[DDLProductos.SelectedIndex].EtiquetaDos == "0")
                     txtPrecio.Enabled = true;
                 else
+                {
+                    txtPrecio.Text = lstProductos[DDLProductos.SelectedIndex].EtiquetaDos;
                     txtPrecio.Enabled = false;
+                }
+
+                if(lstProductos[DDLProductos.SelectedIndex].EtiquetaTres=="ACT")
+                {
+                    txtCantidad_Prod.Text = "1";
+                    txtCantidad_Prod.Enabled = false;
+                    DDLUnidadMedidaProd.SelectedValue = "5";
+                    DDLUnidadMedidaProd.Enabled = false;
+                }
+                else
+                {
+                    txtCantidad_Prod.Enabled = true;
+                    DDLUnidadMedidaProd.Enabled = true;
+                }
+
                 txtCantidad_Prod.Focus();
             }
         }
@@ -1238,18 +1309,43 @@ namespace Recibos_Electronicos.Form
         protected void linkBttnAgregarProd_Click(object sender, EventArgs e)
         {
             Bien objBien = new Bien();
+            rowErrorProd.Visible = false;
             try
             {
                 if (Session["listaProductos"] != null)
                 {
                     lstProductos = (List<Comun>)Session["listaProductos"];
-                    if (txtPrecio.Text != null)
+                    if (DDLProductos.SelectedValue=="0")
+                    {
+                        rowErrorProd.Visible = true;
+                        lblErrorProd.Text = "*Seleccionar producto";
+                        DDLProductos.Focus();
+                    }
+                    else if (txtCantidad_Prod.Text == null || txtCantidad_Prod.Text == string.Empty)
+                    {
+                        rowErrorProd.Visible = true;
+                        lblErrorProd.Text = "*Cantidad requerida";
+                        txtCantidad_Prod.Focus();
+                    }
+                    else if (DDLUnidadMedidaProd.SelectedValue == "0")
+                    {
+                        rowErrorProd.Visible = true;
+                        lblErrorProd.Text = "*Unidad requerida";
+                        DDLUnidadMedidaProd.Focus();
+                    }
+                    else if (txtPrecio.Text == null || txtPrecio.Text == string.Empty)
+                    {
+                        rowErrorProd.Visible = true;
+                        lblErrorProd.Text = "*Precio requerido";
+                        txtPrecio.Focus();
+                    }
+                    else
                     {
                         objBien.Costo = Convert.ToDouble(txtPrecio.Text);
                         objBien.Unidad_Medida = DDLUnidadMedidaProd.SelectedValue;
                         objBien.Cantidad = Convert.ToDouble(txtCantidad_Prod.Text);
                         objBien.Clave = DDLProductos.SelectedValue;
-                        objBien.Descripcion = DDLProductos.SelectedItem.Text;
+                        objBien.Producto = lstProductos[DDLProductos.SelectedIndex].EtiquetaSeis; //DDLProductos.SelectedItem.Text;
                         objBien.Unidad_Medida = DDLUnidadMedidaProd.SelectedValue;
                         objBien.Tipo = lstProductos[DDLProductos.SelectedIndex].EtiquetaTres;
                         objBien.Id_Inventario = lstProductos[DDLProductos.SelectedIndex].EtiquetaCuatro;
@@ -1265,6 +1361,7 @@ namespace Recibos_Electronicos.Form
                         Session["listaProductosAgregados"] = lstProductosAgregados;
                         CargarGridProductos();
                     }
+
                 }
                 else
                 {
@@ -1283,22 +1380,79 @@ namespace Recibos_Electronicos.Form
 
         protected void linkBttnPagar_Click(object sender, EventArgs e)
         {
-            ObjFichaReferenciada.IdFichaBancaria = GetID("FichaRef");         
-            CNBien.InsertarFichaReferenciada(ref ObjFichaReferenciada, ref Verificador);
-            if (Verificador == "0")
+            if (SesionUsu.LigaPago == null || SesionUsu.LigaPago == string.Empty)
             {
-                List<Bien> ListPDet = new List<Bien>();
-                lstProductosAgregados = (List<Bien>)Session["listaProductosAgregados"];
-                CNBien.InsertarDetalleConceptoPago(Convert.ToInt32(ObjFichaReferenciada.IdFichaBancaria), ref Verificador, ref lstProductosAgregados);
-                if (Verificador == "0")
+                if (Session["listaProductosAgregados"] != null)
                 {
-                    Verificador = string.Empty;
-                    CNBien.InsertarDetallePago_Ventas(ObjFichaReferenciada.IdFichaBancaria, ref Verificador, lstProductosAgregados);
-                    if (Verificador == "0")
+                    lstProductosAgregados = (List<Bien>)Session["listaProductosAgregados"];
+
+                    if (lstProductosAgregados.Count >= 1)
                     {
-                        lblRefGenerada.Text = hddnReferencia.Value;
-                        CargarGridInicio();
-                        MultiView1.ActiveViewIndex = 1;
+                        ObjFichaReferenciada.IdFichaBancaria = GetID("FichaRef");
+                        if (ddlNivelBusqueda.SelectedValue == "X")
+                            ObjFichaReferenciada.NoControl = DDLCatClientes.SelectedValue; /*DDLCatClientes.SelectedValue; txtClaveSysweb.Text.ToUpper();*/
+                        else
+                            ObjFichaReferenciada.NoControl = txtClaveSysweb.Text.ToUpper();
+
+                        ObjFichaReferenciada.Nivel = "L";
+                        ObjFichaReferenciada.Dependencia = DDLDependencia.SelectedValue;
+                        ObjFichaReferenciada.Carrera = "000000";
+                        ObjFichaReferenciada.Nombre = lblClienteNombre.Text; //grvClientes.SelectedRow.Cells[1].Text; DDLCatClientes.SelectedItem.Text; lblClienteNombre.Text;
+
+                        ObjFichaReferenciada.Vigencia = 7;
+                        ObjFichaReferenciada.Importetotal = Convert.ToDouble(lstProductosAgregados.Sum(x => Convert.ToDecimal(x.Total))); //Convert.ToDouble(hddnTotal.Value);
+                        ObjFichaReferenciada.CicloEscolar = 20;
+                        ObjFichaReferenciada.Referencia = GetReferencia();
+                        ObjFichaReferenciada.ConceptoRef = txtObservaciones.Text.ToUpper();
+                        ObjFichaReferenciada.Grupo = "U";
+                        ObjFichaReferenciada.Semestre = "0";
+                        ObjFichaReferenciada.Evento = "ADMON"; //(DDLTipoVenta.SelectedValue == "1") ? "201800072" : "";
+                        ObjFichaReferenciada.Referencia = hddnReferencia.Value;
+                        ObjFichaReferenciada.Usuario = "VENTA_PRODUCTOS";
+                        ObjFichaReferenciada.UsuarioRegistra = SesionUsu.Usu_Nombre;
+                        CNBien.InsertarFichaReferenciada(ref ObjFichaReferenciada, ref Verificador);
+                        if (Verificador == "0")
+                        {
+                            Session["DatosReferencia"] = ObjFichaReferenciada;
+                            List<Bien> ListPDet = new List<Bien>();
+                            CNBien.InsertarDetalleConceptoPago(Convert.ToInt32(ObjFichaReferenciada.IdFichaBancaria), ref Verificador, ref lstProductosAgregados);
+                            if (Verificador == "0")
+                            {
+                                Verificador = string.Empty;
+                                CNBien.InsertarDetallePago_Ventas(ObjFichaReferenciada.IdFichaBancaria, ref Verificador, lstProductosAgregados);
+                                if (Verificador == "0")
+                                {
+                                    string cadena = CN_Token.GenerarToken(ObjFichaReferenciada.IdFichaBancaria, ObjFichaReferenciada.Referencia);
+                                    string LinkPago = "https://sysweb.unach.mx/FichaReferenciada/Form/PagoExclusivoSYSWEB.aspx?sw_acc=" + cadena;
+                                    SesionUsu.LigaPago = LinkPago;
+                                    string _open = "window.open('" + LinkPago + "', '_newtab');";
+                                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                                    linkBttnEnviar.Visible = true;
+                                    //CargarGridInicio();
+                                    //MultiView1.ActiveViewIndex = 1;
+                                    //linkBttnPagar.Visible = false;
+                                    linkBttnPagar.Text = "<i class='fa fa-credit-card fa-2x'></i> Ver Referencia";
+                                    linkBttnNuevaRef.Visible = true;
+                                    //linkBttnReferencia.Visible = true;
+                                    //linkBttnPagoLinea.Visible = true;
+                                }
+                                else
+                                {
+                                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
+                                }
+                            }
+                            else
+                            {
+                                CNComun.VerificaTextoMensajeError(ref Verificador);
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
+                            }
+                        }
+                        else
+                        {
+                            Session["DatosReferencia"] = null;
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'Debes agregar al menos un producto o servicio.');", true);  //lblMsjFam.Text = Verificador;
+                        }
                     }
                     else
                     {
@@ -1307,19 +1461,103 @@ namespace Recibos_Electronicos.Form
                     }
                 }
                 else
-                {
-                    CNComun.VerificaTextoMensajeError(ref Verificador);
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
-                }
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'Debe agregar productos o servicios a su carrito.');", true);  //lblMsjFam.Text = Verificador;
             }
             else
             {
-                CNComun.VerificaTextoMensajeError(ref Verificador);
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);  //lblMsjFam.Text = Verificador;
+                string _open = "window.open('" + SesionUsu.LigaPago + "', '_newtab');";
+                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
             }
 
         }
 
+        protected void grvProductosAgregados_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            decimal Total = 0;
+            try
+            {
+                int fila = e.RowIndex;
+                if (Session["listaProductosAgregados"] != null)
+                {
+                    lstProductosAgregados = (List<Bien>)Session["listaProductosAgregados"];
+                    lstProductosAgregados.RemoveAt(fila);
+                    Session["listaProductosAgregados"] = lstProductosAgregados;
+                    grvProductosAgregados.DataSource = lstProductosAgregados;
+                    grvProductosAgregados.DataBind();
+                    if (lstProductosAgregados.Count > 0)
+                    {
+                        Total = lstProductosAgregados.Sum(x => Convert.ToDecimal(x.Total));
+                        //Label lblTot = (Label)grvProductosAgregados.FooterRow.FindControl("lblGranTotal");
+                        lblGranTotal.Text = Convert.ToString(Total.ToString("C"));
+                    }
+                }
+            }
 
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        protected void linkBttnEnviar_Click(object sender, EventArgs e)
+        {
+            string ruta = string.Empty;
+            string archivo = string.Empty;
+            string asunto = string.Empty;
+            string contenido = string.Empty;
+            string OrigenArchivo = string.Empty;
+            lblMensajeCorreo.Text = string.Empty;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCorreo", "$('#modalEnviarCorreo').modal('show')", true);           
+        }
+        protected void bttnEnviarRef_Click(object sender, EventArgs e)
+        {
+           
+            try
+            {
+                System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+                string asunto = "Ficha Referenciada UNACH-SYSWEB";
+                string contenido = "<div class='row'><div class='col text-center'><a href='"+SesionUsu.LigaPago+ "' ><input type='image' style='width:50px' name='imgBttnPagoEfec' src='https://sysweb.unach.mx/resources/imagenes/formaPago_Efectivo.png'>"+
+                    "</br>CLICK PARA PAGAR EN LÍNEA/VENTANILLA</a></div></div><div class='row'><div class='col'><font size='2'>Para cualquier duda o aclaración te puedes comunicar a los siguientes telefonos:" + "<br /><br /><strong>DIRECCIÓN DE SISTEMAS DE INFORMACIÓN ADMINISTRATIVA</strong><br />Teléfono - (961) 617 80 00, Ext.: 5503, 5501, 5508 y 5509<br /><br /></div></div>" +
+                "<div class='row'><div class='col'><strong>DEPARTAMENTO DE FINANZAS</strong><br />Teléfono - (961) 617 80 00, Ext.: 5108</font></div></div>";
+                string MsjError = string.Empty;
+                CNComun.EnvioCorreo(ref mmsg, asunto, contenido, txtEMailCliente.Text, ref MsjError);
+                if (MsjError == string.Empty)
+                {
+                    if (mmsg != null)
+                    {
+                        lblMensajeCorreo.Text = "La referencia se ha enviado correctamente al correo: " + txtEMailCliente.Text;
+                    }
+                    else
+                    {
+                        lblMensajeCorreo.Text = "Error en el envio de los archivos. " + MsjError; // ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
+                    }
+                }
+                else
+                    lblMensajeCorreo.Text = MsjError;
+            }
+            catch (Exception ex)
+            {
+                lblMensajeCorreo.Text = ex.Message;
+            }
+        }
+
+        protected void linkBttnNuevaRef_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session["listaProductosAgregados"] = null;
+                CargarGridProductos();
+                lblGranTotal.Text = "0";
+                DDLProductos.SelectedValue = "0";
+                linkBttnPagar.Text = "<i class='fa fa-credit-card fa-2x'></i> Generar Referencia";
+                SesionUsu.LigaPago = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                string MsjError = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref MsjError);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true); //lblMsj.Text = ex.Message;
+            }
+        }
     }
 }

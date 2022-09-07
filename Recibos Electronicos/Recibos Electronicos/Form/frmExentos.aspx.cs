@@ -612,9 +612,9 @@ namespace Recibos_Electronicos.Form
 
                     if (ddlEmpleado.SelectedValue != "0" && (ddlTipo.SelectedItem.Text.Contains("STAUNACH") || ddlTipo.SelectedItem.Text.Contains("SPAUNACH") || ddlTipo.SelectedItem.Text.Contains("Confianza")))
                     {
-                        
 
-                        if (grvEmpleados.Rows.Count > 1)
+
+                        if (grvEmpleados.Rows.Count >= 1)
                         {
                             ObjAlumno.NombreEmpleado = ddlEmpleado.SelectedItem.Text;
 
@@ -2013,15 +2013,25 @@ namespace Recibos_Electronicos.Form
 
         protected void ddlCicloAlum_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ddlNivel.SelectedIndex = 0;
-            //ddlDependencia_D.Items.Clear();
-            ddlCarrera.SelectedIndex = 0;
-            txtNombre.Text = string.Empty;
-            txtPaterno.Text = string.Empty;
-            txtMaterno.Text = string.Empty;
-            txtFechaNacimiento.Text = string.Empty;
-            txtSemestre.Text = string.Empty;
-            txtGrupo.Text = string.Empty;
+            Verificador = string.Empty;
+            try
+            {
+                ddlNivel.SelectedIndex = 0;
+                //ddlDependencia_D.Items.Clear();
+                ddlCarrera.SelectedIndex = 0;
+                txtNombre.Text = string.Empty;
+                txtPaterno.Text = string.Empty;
+                txtMaterno.Text = string.Empty;
+                txtFechaNacimiento.Text = string.Empty;
+                txtSemestre.Text = string.Empty;
+                txtGrupo.Text = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                Verificador=ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
         }
 
         protected void ddlNivel_SelectedIndexChanged1(object sender, EventArgs e)

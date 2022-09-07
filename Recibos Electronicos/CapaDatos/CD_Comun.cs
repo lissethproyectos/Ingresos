@@ -107,10 +107,33 @@ namespace CapaDatos
                     }
                     else if (dr.FieldCount == 5)
                     {
-
                         Comun.EtiquetaDos = Convert.ToString(dr.GetValue(2));
                         Comun.EtiquetaTres = Convert.ToString(dr.GetValue(3));
                         Comun.EtiquetaCuatro = Convert.ToString(dr.GetValue(4));
+                    }
+                    else if (dr.FieldCount == 6)
+                    {
+                        Comun.EtiquetaDos = Convert.ToString(dr.GetValue(2));
+                        Comun.EtiquetaTres = Convert.ToString(dr.GetValue(3));
+                        Comun.EtiquetaCuatro = Convert.ToString(dr.GetValue(4));
+                        Comun.EtiquetaCinco = Convert.ToString(dr.GetValue(5));
+                    }
+                    else if (dr.FieldCount == 7)
+                    {
+                        Comun.EtiquetaDos = Convert.ToString(dr.GetValue(2));
+                        Comun.EtiquetaTres = Convert.ToString(dr.GetValue(3));
+                        Comun.EtiquetaCuatro = Convert.ToString(dr.GetValue(4));
+                        Comun.EtiquetaCinco = Convert.ToString(dr.GetValue(5));
+                        Comun.EtiquetaSeis = Convert.ToString(dr.GetValue(6));
+                    }
+                    else if (dr.FieldCount == 8)
+                    {
+                        Comun.EtiquetaDos = Convert.ToString(dr.GetValue(2));
+                        Comun.EtiquetaTres = Convert.ToString(dr.GetValue(3));
+                        Comun.EtiquetaCuatro = Convert.ToString(dr.GetValue(4));
+                        Comun.EtiquetaCinco = Convert.ToString(dr.GetValue(5));
+                        Comun.EtiquetaSeis = Convert.ToString(dr.GetValue(6));
+                        Comun.EtiquetaSiete = Convert.ToString(dr.GetValue(7));
                     }
                     list.Add(Comun);
                 }

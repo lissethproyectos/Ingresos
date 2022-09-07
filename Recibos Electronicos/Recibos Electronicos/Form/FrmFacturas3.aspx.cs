@@ -2847,6 +2847,7 @@ namespace Recibos_Electronicos.Form
             ddlDependencia2.Enabled = true;
             tabFacturas.Tabs[1].Visible = true;
             tabFacturas.Tabs[2].Visible = false;
+            tabFacturas.Tabs[3].Visible = false;
             collapse2.Visible = false;
             collapse3.Visible = true;
             collapse4.Visible = false;
@@ -2868,7 +2869,8 @@ namespace Recibos_Electronicos.Form
             rowPaso3.Visible = false;
             rowPaso4.Visible = false;
             rowPaso5.Visible = false;
-
+            rowPnl1.Visible = false;
+            rowPnl2.Visible = false;
         }
 
         protected void chkIvaDes_CheckedChanged(object sender, EventArgs e)

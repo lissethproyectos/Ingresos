@@ -1851,6 +1851,12 @@
       <DependentUpon>RepComprobanteFiscal_QR.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\rptBitacora_Carga.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBitacora_Carga.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\rptEventos_Excel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2084,6 +2090,10 @@
     <EmbeddedResource Include="Reportes\RepComprobanteFiscal_QR.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepComprobanteFiscal_QR.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rptBitacora_Carga.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBitacora_Carga.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptEventos_Excel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

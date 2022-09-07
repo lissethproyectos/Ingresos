@@ -114,7 +114,7 @@ namespace CapaEntidad
             set { _Correo_Instituicional = value.Trim(); }
         }
 
-        private string _NoControl=string.Empty;
+        private string _NoControl="0";
 
         public string NoControl
         {
