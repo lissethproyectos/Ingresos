@@ -128,7 +128,14 @@ namespace Recibos_Electronicos.Form
                 objUsuario.Usu_Nombre = SesionUsu.Usu_Nombre;
                 CNUsuario.EncriptarUsuario(objUsuario, ref WXI, ref Verificador);
                 string Ruta = "https://sysweb.unach.mx/FichaReferenciada/Form/Registro_Participantes.aspx?Evento=" + grdEventos.SelectedRow.Cells[0].Text + "&WXIEvento="+WXI;
-                Response.Redirect(Ruta, false);
+                ////Response.Redirect(Ruta, false);
+                //string ruta2 = "<script>window.open('" + Ruta + "','_blank');</script>";
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "IrEvento", "RedirectEvento('"+Ruta+"');", true);
+
+               
+                
+
             }
             catch (Exception ex)
             {

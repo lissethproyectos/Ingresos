@@ -216,9 +216,21 @@ namespace Recibos_Electronicos.Reportes
                     rptExcel_Ingresos(Reporte, v10, "Eventos y sus Conceptos");
                     break;
                 case "REP027":
-                    Reporte = "Reportes\\rptEventos_Excel.rpt";
                     object[] v11 = { Evento, Usuario, dependencia, dependencia_fin };
-                    rptExcel_Ingresos(Reporte, v11, "Eventos");
+
+                    if (enExcel == "N")
+                    {
+                        Reporte = "Reportes\\rptEventosParticipantes.rpt";
+                        rptPDF_Ingresos(Reporte, v11, "Eventos y Participantes");
+
+                    }
+                    else
+                    {
+                        Reporte = "Reportes\\rptEventos_Excel.rpt";
+                        rptExcel_Ingresos(Reporte, v11, "Eventos");
+
+                    }
+
                     break;
                 case "REP028":
                     Reporte = "Reportes\\RepEventosConcept_Excel.rpt";

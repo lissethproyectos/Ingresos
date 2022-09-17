@@ -2360,8 +2360,19 @@ namespace Recibos_Electronicos.Form
 
         protected void txtIVA_TextChanged(object sender, EventArgs e)
         {
-            ScriptManager.RegisterStartupScript(this, GetType(), "Collapse3", "Collapse3();", true);
-            txtTotalConvenio.Text = Convert.ToString(Convert.ToDouble(txtImporteConvenio.Text) + Convert.ToDouble(txtIVAConvenio.Text));
+            Verificador = string.Empty;
+            try
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Collapse3", "Collapse3();", true);
+                if (txtIVAConvenio.Text != string.Empty)
+                    txtTotalConvenio.Text = Convert.ToString(Convert.ToDouble(txtImporteConvenio.Text) + Convert.ToDouble(txtIVAConvenio.Text));
+            }
+            catch(Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
         }
 
         protected void linkBttnAdjVoucher_Click(object sender, EventArgs e)

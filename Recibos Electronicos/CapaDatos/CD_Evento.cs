@@ -400,9 +400,9 @@ namespace CapaDatos
             try
             {
                 String[] Parametros = { "p_id_evento","p_descripcion", "p_escuela", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_status", "p_nivel", "p_autorizacion", "p_tipo_acceso", 
-                    "p_usuario_solicita", "p_usuario_autoriza", "p_observaciones", "p_tel_res", "p_url_evento" };
+                    "p_usuario_solicita", "p_usuario_autoriza", "p_observaciones", "p_tel_res", "p_url_evento", "p_ciclo" };
                 object[] Valores = { objeventos.Id, objeventos.Descripcion, objeventos.Dependencia, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, "", objeventos.Status, objeventos.Nivel, objeventos.Autorizacion, objeventos.Tipo_Acceso,
-                    objeventos.Usuario_Solicita, objeventos.Usuario_Autoriza, objeventos.Observaciones, objeventos.Telefono_Responsable, objeventos.Ruta };
+                    objeventos.Usuario_Solicita, objeventos.Usuario_Autoriza, objeventos.Observaciones, objeventos.Telefono_Responsable, objeventos.Ruta, objeventos.Ciclo };
                 String[] ParametrosOut = { "p_evento", "p_Bandera" };
 
                 Cmd = CDDatos.GenerarOracleCommand("INS_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);
@@ -1124,9 +1124,9 @@ namespace CapaDatos
             OracleCommand Cmd = null;
             try
             {
-                String[] Parametros = { "p_evento", "p_id_evento", "p_escuela", "p_descripcion", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_tel_res", "p_url_evento", "p_status", "p_nivel", "p_autorizacion",  "p_tipo", "p_usuario", "p_observaciones" };
+                String[] Parametros = { "p_evento", "p_id_evento", "p_escuela", "p_descripcion", "p_fecha_inicial", "p_fecha_final", "p_email_res", "p_email_corres", "p_tel_res", "p_url_evento", "p_status", "p_nivel", "p_autorizacion",  "p_tipo", "p_usuario", "p_observaciones", "p_ciclo" };
 
-                object[] Valores = { objeventos.Eventos, objeventos.Id, objeventos.Dependencia, objeventos.Descripcion, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, objeventos.Email_Corres, objeventos.Ruta, objeventos.Telefono_Responsable, objeventos.Status, objeventos.Nivel, objeventos.Autorizacion, objeventos.Tipo_Acceso, objeventos.Usuario_Modifica, objeventos.Observaciones };
+                object[] Valores = { objeventos.Eventos, objeventos.Id, objeventos.Dependencia, objeventos.Descripcion, objeventos.Fecha_inicial, objeventos.Fecha_final, objeventos.Email_Res, objeventos.Email_Corres, objeventos.Ruta, objeventos.Telefono_Responsable, objeventos.Status, objeventos.Nivel, objeventos.Autorizacion, objeventos.Tipo_Acceso, objeventos.Usuario_Modifica, objeventos.Observaciones, objeventos.Ciclo };
 
                 String[] ParametrosOut = { "p_Bandera" };
                 Cmd = CDDatos.GenerarOracleCommand("UPD_DATOS_EVENTO", ref Verificador, Parametros, Valores, ParametrosOut);

@@ -10,10 +10,10 @@
             <div class="col-md-2">
                 Dependencia
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <asp:UpdatePanel ID="updPnlDep" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
+                        <asp:DropDownList ID="ddlDependencia" runat="server" CssClass="form-control">
                         </asp:DropDownList>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="ddlDependencia" ErrorMessage="RequiredFieldValidator" InitialValue="0" ValidationGroup="Buscar">*Elegir una Dependencia</asp:RequiredFieldValidator>
                     </ContentTemplate>
@@ -22,8 +22,8 @@
             <div class="col-md-2">
                 Tipo de Evento
             </div>
-            <div class="col-md-3">
-                <asp:DropDownList runat="server" ID="ddlDirigido" OnSelectedIndexChanged="ddlDirigido_SelectedIndexChanged" Width="100%">
+            <div class="col-md-2">
+                <asp:DropDownList runat="server" ID="ddlDirigido" OnSelectedIndexChanged="ddlDirigido_SelectedIndexChanged" CssClass="form-control">
                     <asp:ListItem Value="P">Eventos Especiales</asp:ListItem>
                     <asp:ListItem Value="A">Servicios Extraordinarios</asp:ListItem>
                     <asp:ListItem Value="Z">Eventos Privados</asp:ListItem>
@@ -37,6 +37,11 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
+            </div>
+        <div class="row">
+            <div class="col text-right">
+                <asp:HyperLink ID="HyperLink1" runat="server" CssClass="btn btn-info" NavigateUrl="https://sysweb.unach.mx/resources/CGF_DF_10_013_2021.pdf" Target="_blank">Especificaciones</asp:HyperLink>
+                </div>
         </div>
         <div class="row">
             <div class="col text-center">
@@ -111,6 +116,10 @@
                 "stateSave": true,
                 "ordering": false
             });
-        }
+        };
+
+        function RedirectEvento(liga) {
+            window.open(liga, '_blank');
+         }
     </script>
 </asp:Content>

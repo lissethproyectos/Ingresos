@@ -355,7 +355,7 @@
                                             <section class="mx-2 pb-3">
 
 
-                                                <ajaxToolkit:TabContainer ID="tabReg" runat="server" ActiveTabIndex="1" Width="100%" ScrollBar="Vertical">
+                                                <ajaxToolkit:TabContainer ID="tabReg" runat="server" ActiveTabIndex="0" Width="100%" ScrollBar="Vertical">
                                                     <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                         <HeaderTemplate>
                                                             <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i>Datos del Cliente
@@ -387,7 +387,7 @@
                                                                                 <asp:TextBox ID="txtBuscaCliente" runat="server" Width="85%" PlaceHolder="Nombre, paterno, materno ó matricula"></asp:TextBox>
                                                                                 <span class="input-group-addon" style="width: 15%">
                                                                                     <asp:LinkButton ID="linkBttnBuscCli" runat="server" CssClass="btn btn-info" OnClick="linkBttnBuscCli_Click" Width="100%" ValidationGroup="BuscaCli"> <i class="fa fa-search" aria-hidden="true"></i>Buscar
-                                                                                    </asp:LinkButton>
+                                                                                </asp:LinkButton>
                                                                                 </span>
                                                                             </div>
                                                                         </div>
@@ -411,9 +411,8 @@
                                                                                 <asp:UpdatePanel ID="UpdMatricula" runat="server">
                                                                                     <ContentTemplate>
                                                                                         <span class="input-group-addon">
-                                                                                            <asp:LinkButton ID="linkBttnBuscar" runat="server" Width="100%" CssClass="btn btn-info" OnClick="linkBttnBuscar_Click">                                                                   
-                                                                        <i class="fa fa-search" aria-hidden="true"></i> Buscar
-                                                                                            </asp:LinkButton>
+                                                                                            <asp:LinkButton ID="linkBttnBuscar" runat="server" Width="100%" CssClass="btn btn-info" OnClick="linkBttnBuscar_Click"> <i class="fa fa-search" aria-hidden="true"></i>Buscar
+                                                                                        </asp:LinkButton>
                                                                                         </span>
                                                                                     </ContentTemplate>
                                                                                 </asp:UpdatePanel>

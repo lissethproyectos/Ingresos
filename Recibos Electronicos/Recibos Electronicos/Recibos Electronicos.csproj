@@ -1857,6 +1857,12 @@
       <DependentUpon>rptBitacora_Carga.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\rptEventosParticipantes.cs">
+      <DependentUpon>rptEventosParticipantes.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reportes\rptEventos_Excel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2094,6 +2100,10 @@
     <EmbeddedResource Include="Reportes\rptBitacora_Carga.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptBitacora_Carga.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\rptEventosParticipantes.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptEventosParticipantes.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptEventos_Excel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

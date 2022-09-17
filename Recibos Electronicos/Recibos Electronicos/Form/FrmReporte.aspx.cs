@@ -33,59 +33,43 @@ namespace Recibos_Electronicos.Form
             {
                 imgBttnExportar.Visible = true;
                 imgBttnReporte.Visible = true;
-                lblTipo.Visible = false;
-                ddlTipo.Visible = false;
-                lblEventos.Visible = false;
-                ddlEventos.Visible = false;
-                lblFecha_Factura_Ini.Visible = true;
-                pnlFechas.Visible = true;
+                divEventos.Visible = false;
+                divDepcias.Visible = true;
+                divFechas.Visible = true;
             }
             else if (Request.QueryString["reporte"] == "REP030")
             {
                 imgBttnExportar.Visible = true;
                 imgBttnReporte.Visible = true;
-                lblTipo.Visible = false;
-                ddlTipo.Visible = false;
-                lblEventos.Visible = false;
-                ddlEventos.Visible = false;
-                lblFecha_Factura_Ini.Visible = true;
-                pnlFechas.Visible = true;
+                divEventos.Visible = false;
+                divDepcias.Visible = true;
+                divFechas.Visible = true;
             }
             else if (Request.QueryString["reporte"] == "REP029")
             {
                 imgBttnExportar.Visible = true;
                 imgBttnReporte.Visible = true;
-                lblTipo.Visible = false;
-                ddlTipo.Visible = false;
-                lblEventos.Visible = false;
-                ddlEventos.Visible = false;
-                lblFecha_Factura_Ini.Visible = true;
-                pnlFechas.Visible = true;
+                divEventos.Visible = false;
+                divDepcias.Visible = true;
+                divFechas.Visible = true;
             }
 
             else if (Request.QueryString["reporte"] == "REP048")
             {
-                lblTipo.Visible = false;
-                ddlTipo.Visible = false;
-                lblDependenciaIni.Visible = false;
-                ddlDependenciaIni.Visible = false;
-                lblDependenciaFin.Visible = false;
-                ddlDependenciaFin.Visible = false;
-                lblEventos.Visible = false;
-                ddlEventos.Visible = false;
-                lblEjercicio.Visible = false;
-                ddlEjercicio.Visible = false;
-                pnlFechas.Visible = true;
+                divDepcias.Visible = false;
+                divEventos.Visible = false;
+                divFechas.Visible = true;
                 imgBttnExportar.Visible = true;
                 imgBttnReporte.Visible = true;
             }
 
             else
             {
-                lblFecha_Factura_Ini.Visible = false;
-                pnlFechas.Visible = false;
+                divDepcias.Visible = true;
+                divEventos.Visible = true;
+                divFechas.Visible = false;
                 imgBttnExportar.Visible = true;
-                imgBttnReporte.Visible = false;
+                imgBttnReporte.Visible = true;
             }
                 
                 CargarCombos();            
@@ -158,6 +142,21 @@ namespace Recibos_Electronicos.Form
                 string _open = "window.open('" + ruta + "', '_newtab');";
                 ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
             }
+            else
+            {
+                if (ddlTipo.SelectedValue == "1")                {
+
+                    string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP027&Evento=" + ddlEventos.SelectedValue + "&Usuario=" + SesionUsu.Usu_Nombre + "&dependencia=" + ddlDependenciaIni.SelectedValue + "&dependencia_fin=" + ddlDependenciaFin.SelectedValue + "&enExcel=N";
+                    string _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                }
+                else
+                {
+                    string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP028&dependencia=" + ddlDependenciaIni.SelectedValue + "&dependencia_fin=" + ddlDependenciaFin.SelectedValue + "&usuario=" + SesionUsu.Usu_Nombre;
+                    string _open = "window.open('" + ruta + "', '_newtab');";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+                }
+            }
             
 
         }
@@ -199,7 +198,7 @@ namespace Recibos_Electronicos.Form
                 if (ddlTipo.SelectedValue == "1")
                 {
 
-                    string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP027&Evento=" + ddlEventos.SelectedValue + "&Usuario=" + SesionUsu.Usu_Nombre + "&dependencia=" + ddlDependenciaIni.SelectedValue + "&dependencia_fin=" + ddlDependenciaFin.SelectedValue;
+                    string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP027&Evento=" + ddlEventos.SelectedValue + "&Usuario=" + SesionUsu.Usu_Nombre + "&dependencia=" + ddlDependenciaIni.SelectedValue + "&dependencia_fin=" + ddlDependenciaFin.SelectedValue + "&enExcel=S";
                     string _open = "window.open('" + ruta + "', '_newtab');";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
                 }

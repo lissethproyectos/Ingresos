@@ -55,18 +55,30 @@ namespace Recibos_Electronicos.Form
 
         private void CargarCombos()
         {
-            CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Ejercicios_Eventos", ref ddlEjercicio, "INGRESOS");
-            CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref DDLDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
-            CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
-            string anio = DateTime.Now.ToString("yyyy");
-            ddlEjercicio.SelectedValue = anio;
-            DDLDependencia.SelectedIndex = 0;
-            CargarGriEventos();
+            Verificador = string.Empty;
+            try
+            {
+                CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Ejercicios_Eventos", ref ddlEjercicio, "INGRESOS");
+                CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref DDLDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
+                CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
+                CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Ciclos_Eventos", ref ddlCiclo, "INGRESOS");
+                ddlCiclo.SelectedIndex = 0;
+                string anio = DateTime.Now.ToString("yyyy");
+                ddlEjercicio.SelectedValue = anio;
+                DDLDependencia.SelectedIndex = 0;
+                CargarGriEventos();
 
-            //CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
-            //CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Periodo_Pago", ref ddlTipo_Periodo, "INGRESOS");
-            ////DDLTipoParticipante_SelectedIndexChanged(null, null);
-            //ddlTipo_Periodo.SelectedValue = "20";
+                //CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel, "INGRESOS");
+                //CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Periodo_Pago", ref ddlTipo_Periodo, "INGRESOS");
+                ////DDLTipoParticipante_SelectedIndexChanged(null, null);
+                //ddlTipo_Periodo.SelectedValue = "20";
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '"+ Verificador + "');", true);
+            }
         }
 
         protected void linkBttnBuscar_Click(object sender, EventArgs e)
@@ -94,6 +106,7 @@ namespace Recibos_Electronicos.Form
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'Ocurrió un problema al cargar los datos: " + ex.Message + "');", true);
             }
         }
+
         private List<Evento> GetListEventos()
         {
             try
@@ -112,6 +125,7 @@ namespace Recibos_Electronicos.Form
                 throw new Exception(ex.Message);
             }
         }
+       
 
         protected void imgBttnEditar_Click(object sender, ImageClickEventArgs e)
         {
@@ -203,7 +217,7 @@ namespace Recibos_Electronicos.Form
                     txtDescripcion.Text = Objeventos.Descripcion;
                     txtEmail_res.Text = Objeventos.Email_Res;
                     ddlNivel.SelectedValue = Objeventos.Nivel;
-                    ddlNivel_SelectedIndexChanged(null, null);
+                    //ddlNivel_SelectedIndexChanged(null, null);
                     ddlDirigido.SelectedValue = Objeventos.Tipo;
                     rbnExclusivo.SelectedValue = Objeventos.Autorizacion;
                     rbnExclusivo_SelectedIndexChanged(null, null);
@@ -269,15 +283,7 @@ namespace Recibos_Electronicos.Form
 
         }
 
-        protected void bttnNuevoParticipante_Click(object sender, EventArgs e)
-        {
-            //DDLTipoParticipanteNew.SelectedIndex = 0;
-            //txtDesc_Tipo_Participante.Text = string.Empty;
-            //chkPonenteNew.Checked = false;
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupNewPart", "$('#modalPart').modal('show')", true);
-
-        }
-
+       
         protected void chkPonente_CheckedChanged(object sender, EventArgs e)
         {
             string EsPonente = (chkPonente.Checked == true) ? "S" : "N";
@@ -340,8 +346,9 @@ namespace Recibos_Electronicos.Form
             chkConstancia.Checked = false;
             chkPonente_CheckedChanged(null, null);
             ddlNivel.SelectedIndex = 0;
-            ddlNivel_SelectedIndexChanged(null, null);
+            //ddlNivel_SelectedIndexChanged(null, null);
             ddlStatusPart.SelectedIndex = 0;
+
             grdEventoDetalle.DataSource = null;
             grdEventoDetalle.DataBind();
             Session["OficiosEvento"] = null;
@@ -616,19 +623,13 @@ namespace Recibos_Electronicos.Form
             {
                 MsjError = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref MsjError);
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'Ocurrió un problema al cargar los datos: " + MsjError + "');", true);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'Ocurrió un problema al cargcaar los datos: " + MsjError + "');", true);
             }
         }
 
         protected void ddlConceptoFil_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtObservacion.Text = ddlConceptoFil.SelectedItem.Text.Replace(" ", "_");
-        }
-
-        protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_AlumnosUnachCiclo", ref ddlCiclo, "p_tipo", "p_nivel", "TODOS", ddlNivel.SelectedValue, "INGRESOS");
-            ddlCiclo.SelectedIndex = 0;
         }
 
         protected void linkBttnAgregarConcep_Click(object sender, EventArgs e)
@@ -706,183 +707,8 @@ namespace Recibos_Electronicos.Form
             }
         }
 
-        protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-            Evento objEvento = new Evento();
-            ConceptoCuotaLibre objEventoDet = new ConceptoCuotaLibre();
-            List<Oficio> ListOficios = new List<Oficio>();
-            List<Alumno> ListAutorizados = new List<Alumno>();
-            Verificador = string.Empty;
-            MsjError = string.Empty;
-            if (grdOficios.Rows.Count == 0 && ddlStatus.SelectedValue == "A")
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Adjuntar oficio de solicitud.');", true); //lblMsj.Text = ex.Message;
-            }
-            else
-            {
-                try
-                {
-                    //DATOS DE ENCABEZADO
-                    objEvento.Descripcion = txtDescripcion.Text.ToUpper();
-                    objEvento.Dependencia = DDLDependencia.SelectedValue;
-                    objEvento.Fecha_inicial = txtFecha_Evento_Ini.Text;
-                    objEvento.Fecha_final = txtFecha_Evento_Fin.Text;
-                    objEvento.Email_Res = txtEmail_res.Text;
-                    objEvento.Email_Corres = string.Empty;
-                    objEvento.Status = ddlStatus.SelectedValue;
-                    objEvento.Nivel = ddlNivel.SelectedValue;
-                    objEvento.Autorizacion = rbnExclusivo.SelectedValue;
-                    objEvento.Tipo_Acceso = ddlDirigido.SelectedValue; //ddlTipoAcceso.SelectedValue;
-                    objEvento.Observaciones = txtEspecificacion.Text.ToUpper();
-                    objEvento.Nueva_Version = "S";
-                    objEvento.Telefono_Responsable = txtTelResp.Text;
-                    objEvento.Ruta = txtUrlEvento.Text;
-                    objEvento.Usuario_Solicita = SesionUsu.Usuario;
-                    objEvento.Id = SesionUsu.IdEvento;
-                    objEvento.Concepto = null;
-                    //objEvento.
-
-                    if (ddlStatus.SelectedValue == "A")
-                        objEvento.Usuario_Autoriza = SesionUsu.Usuario;
-                    if (SesionUsu.Editar == 0)
-                    {
-                        CNeventos.EventoInsertar(objEvento, ref Verificador);
-                        if (Verificador == "0")
-                        {
-                            //CNeventos.EventoInsertarDetalle();
-                            ListOficios = (List<Oficio>)Session["OficiosEvento"];
-                            if (ListOficios != null && ListOficios.Count > 0)
-                            {
-                                Verificador = string.Empty;
-                                CNeventos.Insertar_Oficios(objEvento.Eventos, ListOficios, ref Verificador);
-                                if (Verificador != "0")
-                                {
-                                    if (Verificador != string.Empty)
-                                        MsjError = MsjError + " ERROR EN EL REGISTRO DE LOS OFICIOS: " + Verificador;
-                                }
-                            }
-
-                            ListAutorizados = (List<Alumno>)Session["AutorizadosEvento"];
-                            if (ListAutorizados != null && ListAutorizados.Count > 0)
-                            {
-                                Verificador = string.Empty;
-                                CNeventos.Insertar_Autorizados(objEvento.Eventos, ddlNivel.SelectedValue, ListAutorizados, ref Verificador);
-
-                                if (Verificador != "0")
-                                {
-                                    if (Verificador != string.Empty)
-                                        MsjError = MsjError + " ERROR EN EL REGISTRO DE LOS OFICIOS: " + Verificador;
-                                }
-                            }
-
-                            if (MsjError == string.Empty)
-                            {
-                                CargarGriEventos();
-                                MultiView1.ActiveViewIndex = 0;
-                                SesionUsu.Editar = -1;
-                            }
-                            else
-                            {
-                                CNComun.VerificaTextoMensajeError(ref MsjError);
-                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
-                            }
-                        }
-                        else
-                        {
-
-                            CNComun.VerificaTextoMensajeError(ref Verificador);
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
-                        }
-                    }
-                    else
-                    {
-                        objEvento.Eventos = SesionUsu.Evento; // grdEventos.SelectedRow.Cells[2].Text;
-                        objEvento.Id = SesionUsu.IdEvento;
-                        objEvento.Usuario_Modifica = SesionUsu.Usu_Nombre;
-                        CNeventos.EventoEditar(objEvento, ref Verificador);
-                        if (Verificador == "0")
-                        {
-
-
-                            ListOficios = (List<Oficio>)Session["OficiosEvento"];
-                            CNeventos.Eliminar_Oficios(objEvento, ref Verificador);
-                            if (Verificador != "0")
-                            {
-                                if (Verificador != string.Empty)
-                                {
-                                    MsjError = MsjError + " ERROR AL ELIMINAR LOS OFICIOS: " + Verificador;
-                                }
-                            }
-                            if (ListOficios != null && ListOficios.Count > 0)
-                            {
-                                Verificador = string.Empty;
-                                CNeventos.Insertar_Oficios(objEvento.Eventos, ListOficios, ref Verificador);
-                                if (Verificador != "0")
-                                {
-                                    if (Verificador != string.Empty)
-                                        MsjError = MsjError + " ERROR EN EL REGISTRO DE LOS OFICIOS: " + Verificador;
-                                }
-
-                            }
-
-                            ListAutorizados = (List<Alumno>)Session["AutorizadosEvento"];
-                            CNeventos.Eliminar_Autorizados(objEvento, ref Verificador);
-                            if (Verificador != "0")
-                            {
-                                if (Verificador != string.Empty)
-                                {
-                                    MsjError = MsjError + " ERROR AL ELIMINAR MATRICULAS/CVES AUTORIZADAS: " + Verificador;
-                                }
-                            }
-                            if (ListAutorizados != null && ListAutorizados.Count > 0)
-                            {
-                                CNeventos.Insertar_Autorizados(objEvento.Eventos, ddlNivel.SelectedValue, ListAutorizados, ref Verificador);
-                                if (Verificador != "0")
-                                {
-                                    if (Verificador != string.Empty)
-                                        MsjError = MsjError + " ERROR EN EL REGISTRO DE LOS OFICIOS: " + Verificador;
-                                }
-                            }
-
-                            if (MsjError == string.Empty)
-                            {
-                                ddlDirigido0.SelectedValue = ddlDirigido.SelectedValue;
-                                CargarGriEventos();
-                                MultiView1.ActiveViewIndex = 0;
-                                DDLDependencia.Enabled = true;
-                                SesionUsu.Editar = -1;
-                            }
-                            else
-                            {
-                                CNComun.VerificaTextoMensajeError(ref MsjError);
-                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
-                            }
-                        }
-                        else
-                        {
-                            CNComun.VerificaTextoMensajeError(ref Verificador);
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    Verificador = ex.Message;
-                    CNComun.VerificaTextoMensajeError(ref Verificador);
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
-                }
-            }
-        }
-
-        protected void btnCancelar_Click(object sender, EventArgs e)
-        {
-            MultiView1.ActiveViewIndex = 0;
-            SesionUsu.Id_Persona = 0;
-            SesionUsu.IdEvento = 0; // String.Empty;
-            DDLDependencia.Enabled = true;
-            linkBttnBuscar_Click(null, null);
-        }
+     
+     
 
         protected void grdEventoConceptos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -1466,6 +1292,195 @@ namespace Recibos_Electronicos.Form
             string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP070&dependencia=" + DDLDependencia.SelectedValue+ "&enExcel=S";
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+        }
+
+        protected void linkBttnNuevoParticipante_Click(object sender, EventArgs e)
+        {
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupNewPart", "$('#modalPart').modal('show')", true);
+        }
+
+        protected void linkBttnGuardar_Click(object sender, EventArgs e)
+        {
+            Evento objEvento = new Evento();
+            ConceptoCuotaLibre objEventoDet = new ConceptoCuotaLibre();
+            List<Oficio> ListOficios = new List<Oficio>();
+            List<Alumno> ListAutorizados = new List<Alumno>();
+            Verificador = string.Empty;
+            MsjError = string.Empty;
+            if (grdOficios.Rows.Count == 0 && ddlStatus.SelectedValue == "A")
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, 'Adjuntar oficio de solicitud.');", true); //lblMsj.Text = ex.Message;
+            }
+            else
+            {
+                try
+                {
+                    //DATOS DE ENCABEZADO
+                    objEvento.Descripcion = txtDescripcion.Text.ToUpper();
+                    objEvento.Dependencia = DDLDependencia.SelectedValue;
+                    objEvento.Fecha_inicial = txtFecha_Evento_Ini.Text;
+                    objEvento.Fecha_final = txtFecha_Evento_Fin.Text;
+                    objEvento.Email_Res = txtEmail_res.Text;
+                    objEvento.Email_Corres = string.Empty;
+                    objEvento.Status = ddlStatus.SelectedValue;
+                    objEvento.Nivel = ddlNivel.SelectedValue;
+                    objEvento.Autorizacion = rbnExclusivo.SelectedValue;
+                    objEvento.Tipo_Acceso = ddlDirigido.SelectedValue; //ddlTipoAcceso.SelectedValue;
+                    objEvento.Observaciones = txtEspecificacion.Text.ToUpper();
+                    objEvento.Nueva_Version = "S";
+                    objEvento.Telefono_Responsable = txtTelResp.Text;
+                    objEvento.Ruta = txtUrlEvento.Text;
+                    objEvento.Usuario_Solicita = SesionUsu.Usuario;
+                    objEvento.Id = SesionUsu.IdEvento;
+                    objEvento.Concepto = null;
+                    objEvento.Ciclo = ddlCiclo.SelectedValue;
+                    //objEvento.
+
+                    if (ddlStatus.SelectedValue == "A")
+                        objEvento.Usuario_Autoriza = SesionUsu.Usuario;
+                    if (SesionUsu.Editar == 0)
+                    {
+                        CNeventos.EventoInsertar(objEvento, ref Verificador);
+                        if (Verificador == "0")
+                        {
+                            //CNeventos.EventoInsertarDetalle();
+                            ListOficios = (List<Oficio>)Session["OficiosEvento"];
+                            if (ListOficios != null && ListOficios.Count > 0)
+                            {
+                                Verificador = string.Empty;
+                                CNeventos.Insertar_Oficios(objEvento.Eventos, ListOficios, ref Verificador);
+                                if (Verificador != "0")
+                                {
+                                    if (Verificador != string.Empty)
+                                        MsjError = MsjError + " ERROR EN EL REGISTRO DE LOS OFICIOS: " + Verificador;
+                                }
+                            }
+
+                            ListAutorizados = (List<Alumno>)Session["AutorizadosEvento"];
+                            if (ListAutorizados != null && ListAutorizados.Count > 0)
+                            {
+                                Verificador = string.Empty;
+                                CNeventos.Insertar_Autorizados(objEvento.Eventos, ddlNivel.SelectedValue, ListAutorizados, ref Verificador);
+
+                                if (Verificador != "0")
+                                {
+                                    if (Verificador != string.Empty)
+                                        MsjError = MsjError + " ERROR EN EL REGISTRO DE LOS OFICIOS: " + Verificador;
+                                }
+                            }
+
+                            if (MsjError == string.Empty)
+                            {
+                                CargarGriEventos();
+                                MultiView1.ActiveViewIndex = 0;
+                                SesionUsu.Editar = -1;
+                            }
+                            else
+                            {
+                                CNComun.VerificaTextoMensajeError(ref MsjError);
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
+                            }
+                        }
+                        else
+                        {
+
+                            CNComun.VerificaTextoMensajeError(ref Verificador);
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+                        }
+                    }
+                    else
+                    {
+                        objEvento.Eventos = SesionUsu.Evento; // grdEventos.SelectedRow.Cells[2].Text;
+                        objEvento.Id = SesionUsu.IdEvento;
+                        objEvento.Usuario_Modifica = SesionUsu.Usu_Nombre;
+                        CNeventos.EventoEditar(objEvento, ref Verificador);
+                        if (Verificador == "0")
+                        {
+
+
+                            ListOficios = (List<Oficio>)Session["OficiosEvento"];
+                            CNeventos.Eliminar_Oficios(objEvento, ref Verificador);
+                            if (Verificador != "0")
+                            {
+                                if (Verificador != string.Empty)
+                                {
+                                    MsjError = MsjError + " ERROR AL ELIMINAR LOS OFICIOS: " + Verificador;
+                                }
+                            }
+                            if (ListOficios != null && ListOficios.Count > 0)
+                            {
+                                Verificador = string.Empty;
+                                CNeventos.Insertar_Oficios(objEvento.Eventos, ListOficios, ref Verificador);
+                                if (Verificador != "0")
+                                {
+                                    if (Verificador != string.Empty)
+                                        MsjError = MsjError + " ERROR EN EL REGISTRO DE LOS OFICIOS: " + Verificador;
+                                }
+
+                            }
+
+                            ListAutorizados = (List<Alumno>)Session["AutorizadosEvento"];
+                            CNeventos.Eliminar_Autorizados(objEvento, ref Verificador);
+                            if (Verificador != "0")
+                            {
+                                if (Verificador != string.Empty)
+                                {
+                                    MsjError = MsjError + " ERROR AL ELIMINAR MATRICULAS/CVES AUTORIZADAS: " + Verificador;
+                                }
+                            }
+                            if (ListAutorizados != null && ListAutorizados.Count > 0)
+                            {
+                                CNeventos.Insertar_Autorizados(objEvento.Eventos, ddlNivel.SelectedValue, ListAutorizados, ref Verificador);
+                                if (Verificador != "0")
+                                {
+                                    if (Verificador != string.Empty)
+                                        MsjError = MsjError + " ERROR EN EL REGISTRO DE LOS OFICIOS: " + Verificador;
+                                }
+                            }
+
+                            if (MsjError == string.Empty)
+                            {
+                                ddlDirigido0.SelectedValue = ddlDirigido.SelectedValue;
+                                CargarGriEventos();
+                                MultiView1.ActiveViewIndex = 0;
+                                DDLDependencia.Enabled = true;
+                                SesionUsu.Editar = -1;
+                            }
+                            else
+                            {
+                                CNComun.VerificaTextoMensajeError(ref MsjError);
+                                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
+                            }
+                        }
+                        else
+                        {
+                            CNComun.VerificaTextoMensajeError(ref Verificador);
+                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Verificador = ex.Message;
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+                }
+            }
+        }
+
+        protected void linkBttnCancelar_Click(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
+            SesionUsu.Id_Persona = 0;
+            SesionUsu.IdEvento = 0; // String.Empty;
+            DDLDependencia.Enabled = true;
+            linkBttnBuscar_Click(null, null);
+        }
+
+        protected void linkBttnAgregarParticipante_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

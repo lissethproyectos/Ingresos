@@ -366,40 +366,13 @@ namespace Recibos_Electronicos.Form
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtenderFin;
 
         /// <summary>
-        /// Control updPnlNivel.
+        /// Control lstCiclo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updPnlNivel;
-
-        /// <summary>
-        /// Control ddlNivel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlNivel;
-
-        /// <summary>
-        /// Control reqNivel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqNivel;
-
-        /// <summary>
-        /// Control ddlCiclo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCiclo;
+        protected global::System.Web.UI.WebControls.ListBox lstCiclo;
 
         /// <summary>
         /// Control linkBttnAgregarCiclo.
@@ -492,13 +465,13 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator25;
 
         /// <summary>
-        /// Control bttnNuevoParticipante.
+        /// Control linkBttnNuevoParticipante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bttnNuevoParticipante;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnNuevoParticipante;
 
         /// <summary>
         /// Control UpdatePanel29.
@@ -528,6 +501,33 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.CheckBox chkConstancia;
 
         /// <summary>
+        /// Control updPnlNivel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlNivel;
+
+        /// <summary>
+        /// Control ddlNivel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlNivel;
+
+        /// <summary>
+        /// Control reqNivel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqNivel;
+
+        /// <summary>
         /// Control updPnlCatTipoParticipantes.
         /// </summary>
         /// <remarks>
@@ -555,13 +555,13 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.RequiredFieldValidator reqTipPart;
 
         /// <summary>
-        /// Control updPnlStatusPart.
+        /// Control updAgregaPart.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updPnlStatusPart;
+        protected global::System.Web.UI.UpdatePanel updAgregaPart;
 
         /// <summary>
         /// Control ddlStatusPart.
@@ -573,22 +573,13 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlStatusPart;
 
         /// <summary>
-        /// Control updAgregaPart.
+        /// Control linkBttnAgregarParticipante.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updAgregaPart;
-
-        /// <summary>
-        /// Control bttnAgregarParticipante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bttnAgregarParticipante;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnAgregarParticipante;
 
         /// <summary>
         /// Control pgrAgregaPart.
@@ -870,22 +861,22 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.UpdatePanel updPnlGuardarEv;
 
         /// <summary>
-        /// Control btnGuardar.
+        /// Control linkBttnCancelar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnCancelar;
 
         /// <summary>
-        /// Control btnCancelar.
+        /// Control linkBttnGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelar;
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnGuardar;
 
         /// <summary>
         /// Control lblUsuSolicitado.
@@ -1176,15 +1167,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.UpdatePanel UpdatePanel30;
 
         /// <summary>
-        /// Control btnAgregarParticipante.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAgregarParticipante;
-
-        /// <summary>
         /// Control Button2.
         /// </summary>
         /// <remarks>
@@ -1192,6 +1174,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button2;
+
+        /// <summary>
+        /// Control btnAgregarParticipante.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarParticipante;
 
         /// <summary>
         /// Control UpdatePanel9.
@@ -1221,12 +1212,30 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
 
         /// <summary>
-        /// Control grdCiclos.
+        /// Control ddlCiclo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdCiclos;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCiclo;
+
+        /// <summary>
+        /// Control LinkButton4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
+
+        /// <summary>
+        /// Control LinkButton3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
     }
 }

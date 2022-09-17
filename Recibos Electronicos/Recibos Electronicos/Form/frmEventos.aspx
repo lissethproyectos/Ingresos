@@ -29,7 +29,7 @@
             <div class="col-md-2">
                 <asp:UpdatePanel ID="updPnlCrearPart" runat="server">
                     <ContentTemplate>
-                        <asp:Button ID="bttnCrearPart" runat="server" CssClass="btn btn-grey" OnClick="bttnCrearPart_Click" Text="Catálogo Participantes" Width="100%" />
+                        <asp:Button ID="bttnCrearPart" runat="server" CssClass="btn btn-grey" OnClick="bttnCrearPart_Click" Text="Catálogo Participantes" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -181,7 +181,7 @@
                                 <div class="row">
                                     <div class="col text-right">
                                         <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" Visible="False" />
-&nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
+                                        &nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
                                     </div>
                                 </div>
                             </asp:View>
@@ -200,22 +200,22 @@
                                                     <div class="col-md-2">
                                                         <asp:Label ID="lblCveDesc" runat="server" Font-Bold="True" Font-Size="Large" ForeColor="#0066CC">---</asp:Label>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-3 text-right">
                                                         ¿El Evento se mostrará en?
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <asp:DropDownList ID="ddlDirigido" runat="server" AutoPostBack="True" Width="100%">
+                                                    <div class="col-md-3">
+                                                        <asp:DropDownList ID="ddlDirigido" runat="server" AutoPostBack="True" CssClass="form-control">
                                                             <asp:ListItem Value="P">Eventos Especiales</asp:ListItem>
                                                             <asp:ListItem Value="A">Servicios Extraordinarios</asp:ListItem>
                                                             <asp:ListItem Value="Z">Eventos Privados</asp:ListItem>
                                                             <asp:ListItem Value="C">Complemento Cursos de Verano</asp:ListItem>
                                                         </asp:DropDownList>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-1">
                                                         Tipo Acceso
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <asp:DropDownList ID="ddlTipoAcceso" runat="server" Width="100%" Enabled="False">
+                                                        <asp:DropDownList ID="ddlTipoAcceso" runat="server" CssClass="form-control" Enabled="False">
                                                             <asp:ListItem Value="P">Público General</asp:ListItem>
                                                             <asp:ListItem Value="A">Administradores</asp:ListItem>
                                                         </asp:DropDownList>
@@ -227,7 +227,7 @@
                                                         Nombre del Evento
                                                     </div>
                                                     <div class="col-md-11">
-                                                        <asp:TextBox ID="txtDescripcion" runat="server" Width="100%"></asp:TextBox>
+                                                        <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control"></asp:TextBox>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -237,27 +237,27 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-1">
-                                                        E-mail Responsable
+                                                        @Responsable
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <asp:TextBox ID="txtEmail_res" runat="server" class="form-control" Width="100%"></asp:TextBox>
+                                                        <asp:TextBox ID="txtEmail_res" runat="server" class="form-control" CssClass="form-control"></asp:TextBox>
                                                     </div>
                                                     <div class="col-md-1">
                                                         Tel Responsable
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <asp:TextBox ID="txtTelResp" runat="server" Width="100%"></asp:TextBox>
+                                                        <asp:TextBox ID="txtTelResp" runat="server" CssClass="form-control"></asp:TextBox>
                                                     </div>
                                                     <div class="col-md-1">
                                                         Página Web
                                                     </div>
                                                     <div class="col-md-5">
-                                                        <asp:TextBox ID="txtUrlEvento" runat="server" Width="100%"></asp:TextBox>
+                                                        <asp:TextBox ID="txtUrlEvento" runat="server" CssClass="form-control"></asp:TextBox>
                                                     </div>
-                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-1">
-                                                        Fecha Inicio
+                                                        Fecha Ini
                                                     </div>
                                                     <div class="col-md-2">
                                                         <asp:TextBox ID="txtFecha_Evento_Ini" runat="server" AutoPostBack="True" onkeyup="javascript:this.value='';" Width="70%"></asp:TextBox>
@@ -279,43 +279,28 @@
                                                 <hr />
                                                 <div class="row">
                                                     <div class="col-md-1">
-                                                        Nivel
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <asp:UpdatePanel ID="updPnlNivel" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" Width="100%">
-                                                                </asp:DropDownList>
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
-                                                        <br />
-                                                        <asp:RequiredFieldValidator ID="reqNivel" runat="server" ControlToValidate="ddlNivel" ErrorMessage="RequiredFieldValidator" InitialValue="Z" ValidationGroup="AgregaPart">* Requerido</asp:RequiredFieldValidator>
-                                                    </div>
-                                                    <div class="col-md-1">
                                                         Ciclo
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <asp:DropDownList ID="ddlCiclo" runat="server"></asp:DropDownList>
-<%--                                                        <asp:TextBox ID="txtCiclo" runat="server"></asp:TextBox>--%>
+                                                    <div class="col-md-4">
+                                                        <div class="input-group mb-3">
+                                                            <asp:ListBox ID="lstCiclo" runat="server" CssClass="form-control"></asp:ListBox>
+                                                            <span id="basic-addon3">
+                                                                <asp:LinkButton ID="linkBttnAgregarCiclo" CssClass="input-group-text btn-grey" runat="server" data-toggle="modal" data-target="#modalCiclos"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Agregar</asp:LinkButton>
+                                                            </span>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-2">
-                                                        <asp:LinkButton ID="linkBttnAgregarCiclo" CssClass="btn btn-blue-grey" runat="server"><i class="fa fa-plus-circle" aria-hidden="true"></i>
- Agregar</asp:LinkButton>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
                                                     <div class="col-md-1">
                                                         Status
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <asp:DropDownList ID="ddlStatus" runat="server" Width="100%">
+                                                        <asp:DropDownList ID="ddlStatus" runat="server" CssClass="form-control">
                                                             <asp:ListItem Selected="True" Value="S">Solicitado</asp:ListItem>
                                                             <asp:ListItem Value="A">Autorizado</asp:ListItem>
                                                             <asp:ListItem Value="B">Baja</asp:ListItem>
                                                         </asp:DropDownList>
                                                     </div>
-                                                    <div class="col-md-3 font-weight-bold">
-                                                        ¿Su evento es exclusivo?
+                                                    <div class="col-md-2 font-weight-bold">
+                                                        ¿Evento exclusivo?
                                                     </div>
                                                     <div class="col-md-1">
                                                         <asp:UpdatePanel ID="updPnlEvExc" runat="server">
@@ -332,10 +317,10 @@
                                                 <br />
                                                 <div class="row">
                                                     <div class="col-md-1">
-                                                        Especificaciones
+                                                        Nota
                                                     </div>
                                                     <div class="col-md-11">
-                                                        <asp:TextBox ID="txtEspecificacion" runat="server" Height="69px" TextMode="MultiLine" Width="100%"></asp:TextBox>
+                                                        <asp:TextBox ID="txtEspecificacion" runat="server" Height="69px" TextMode="MultiLine" CssClass="form-control"></asp:TextBox>
                                                     </div>
                                                 </div>
                                             </div>
@@ -358,27 +343,28 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-1">
                                                         Tipo de Participante
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-3">
                                                         <asp:UpdatePanel ID="updPnlTipoPart0" runat="server">
                                                             <ContentTemplate>
-                                                                <asp:DropDownList ID="DDLTipoParticipante" runat="server" AutoPostBack="True" Width="100%" OnSelectedIndexChanged="DDLTipoParticipante_SelectedIndexChanged">
+                                                                <asp:DropDownList ID="DDLTipoParticipante" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DDLTipoParticipante_SelectedIndexChanged" CssClass="form-control">
                                                                     <asp:ListItem Value="0">--Seleccionar--</asp:ListItem>
                                                                     <asp:ListItem Value="S">Alumno/Cliente UNACH</asp:ListItem>
                                                                     <asp:ListItem Value="SX">Alumno Externo</asp:ListItem>
                                                                     <asp:ListItem Value="E">Empleado UNACH</asp:ListItem>
                                                                     <asp:ListItem Value="X">Público General</asp:ListItem>
                                                                 </asp:DropDownList>
-                                                                <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ControlToValidate="DDLTipoParticipante" ErrorMessage="RequiredFieldValidator" InitialValue="0" ValidationGroup="AgregaPart">* Requerido</asp:RequiredFieldValidator>
                                                             </ContentTemplate>
                                                         </asp:UpdatePanel>
-                                                    </div>
-                                                    <div class="col-md-1">
-                                                        <asp:Button ID="bttnNuevoParticipante" runat="server" CssClass="btn btn-blue-grey" Text="Crear" OnClick="bttnNuevoParticipante_Click" Width="100%" />
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator25" runat="server" ControlToValidate="DDLTipoParticipante" ErrorMessage="RequiredFieldValidator" InitialValue="0" ValidationGroup="AgregaPart">* Requerido</asp:RequiredFieldValidator>
                                                     </div>
                                                     <div class="col-md-2">
+                                                        <asp:LinkButton ID="linkBttnNuevoParticipante" runat="server" CssClass="btn btn-info" OnClick="linkBttnNuevoParticipante_Click" Font-Size="9px"><i class="fa fa-user fa-2x"></i>&nbsp;Crear</asp:LinkButton>
+
+                                                    </div>
+                                                    <div class="col-md-1">
                                                         ¿Es ponente?
                                                     </div>
                                                     <div class="col-md-1">
@@ -388,7 +374,7 @@
                                                             </ContentTemplate>
                                                         </asp:UpdatePanel>
                                                     </div>
-                                                    <div class="col-md-2">
+                                                    <div class="col-md-2 text-right">
                                                         ¿Requieren constancia?
                                                     </div>
                                                     <div class="col-md-1">
@@ -396,39 +382,46 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
+                                                    <div class="col-md-1">
+                                                        Nivel
+                                                    </div>
                                                     <div class="col-md-2">
+                                                        <asp:UpdatePanel ID="updPnlNivel" runat="server">
+                                                            <ContentTemplate>
+                                                                <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" CssClass="form-control">
+                                                                </asp:DropDownList>
+                                                            </ContentTemplate>
+                                                        </asp:UpdatePanel>
+                                                        <br />
+                                                        <asp:RequiredFieldValidator ID="reqNivel" runat="server" ControlToValidate="ddlNivel" ErrorMessage="RequiredFieldValidator" InitialValue="Z" ValidationGroup="AgregaPart">* Requerido</asp:RequiredFieldValidator>
+                                                    </div>
+                                                    <div class="col-md-1">
                                                         Participantes
                                                     </div>
                                                     <div class="col-md-3">
                                                         <asp:UpdatePanel ID="updPnlCatTipoParticipantes" runat="server">
                                                             <ContentTemplate>
-                                                                <asp:DropDownList ID="DDLCatTipoParticipantes" runat="server" Width="100%" class="form-select" AutoPostBack="True">
+                                                                <asp:DropDownList ID="DDLCatTipoParticipantes" runat="server" CssClass="form-control" AutoPostBack="True">
                                                                 </asp:DropDownList>
                                                                 <asp:RequiredFieldValidator ID="reqTipPart" runat="server" ControlToValidate="DDLCatTipoParticipantes" ErrorMessage="Participante" InitialValue="9999999999" ValidationGroup="AgregaPart">* Requerido</asp:RequiredFieldValidator>
                                                             </ContentTemplate>
                                                         </asp:UpdatePanel>
                                                     </div>
-
                                                     <div class="col-md-1">
                                                         Status Part
                                                     </div>
                                                     <div class="col-md-2">
-                                                        <asp:UpdatePanel ID="updPnlStatusPart" runat="server">
+                                                        <asp:UpdatePanel ID="updAgregaPart" runat="server">
                                                             <ContentTemplate>
-                                                                <asp:DropDownList ID="ddlStatusPart" runat="server" Width="100%">
+                                                                <asp:DropDownList ID="ddlStatusPart" runat="server" CssClass="form-control">
                                                                     <asp:ListItem Value="A">Alta</asp:ListItem>
                                                                     <asp:ListItem Value="B">Baja</asp:ListItem>
                                                                 </asp:DropDownList>
                                                             </ContentTemplate>
                                                         </asp:UpdatePanel>
                                                     </div>
-
-                                                    <div class="col-1">
-                                                        <asp:UpdatePanel ID="updAgregaPart" runat="server">
-                                                            <ContentTemplate>
-                                                                <asp:Button ID="bttnAgregarParticipante" runat="server" Text="Agregar" CssClass="btn btn-info" OnClick="bttnAgregarParticipante_Click" ValidationGroup="AgregaPart" />
-                                                            </ContentTemplate>
-                                                        </asp:UpdatePanel>
+                                                    <div class="col-md-1">
+                                                        <asp:LinkButton ID="linkBttnAgregarParticipante" runat="server" Width="100px" OnClick="linkBttnAgregarParticipante_Click" CssClass="btn btn-info" ValidationGroup="AgregaPart" Font-Size="9px"><i class="fa fa-chevron-circle-down fa-2x" aria-hidden="true"></i>&nbsp;Agregar</asp:LinkButton>
                                                     </div>
                                                 </div>
                                                 <div class="col text-center">
@@ -454,7 +447,7 @@
                                                     <div class="col" style="overflow-x: scroll; overflow-y: hidden;">
                                                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                                             <ContentTemplate>
-                                                                <asp:GridView ID="grdEventoDetalle" runat="server" AutoGenerateColumns="False" Width="100%" CssClass="mGrid" OnSelectedIndexChanged="grdEventoDetalle_SelectedIndexChanged" OnRowDeleting="grdEventoDetalle_RowDeleting" OnRowDataBound="grdEventoDetalle_RowDataBound" OnRowUpdating="grdEventoDetalle_RowUpdating" OnRowEditing="grdEventoDetalle_RowEditing" OnRowCancelingEdit="grdEventoDetalle_RowCancelingEdit">
+                                                                <asp:GridView ID="grdEventoDetalle" runat="server" AutoGenerateColumns="False" Width="100%" CssClass="mGrid" OnSelectedIndexChanged="grdEventoDetalle_SelectedIndexChanged" OnRowDeleting="grdEventoDetalle_RowDeleting" OnRowDataBound="grdEventoDetalle_RowDataBound" OnRowUpdating="grdEventoDetalle_RowUpdating" OnRowEditing="grdEventoDetalle_RowEditing" OnRowCancelingEdit="grdEventoDetalle_RowCancelingEdit" EmptyDataText="No hay conceptos registrados." ShowHeaderWhenEmpty="True">
                                                                     <Columns>
                                                                         <asp:BoundField DataField="Id_Tipo_Participante" HeaderText="ID" ReadOnly="True">
                                                                             <ItemStyle VerticalAlign="Top" />
@@ -802,8 +795,9 @@
                                         <div class="col text-right">
                                             <asp:UpdatePanel ID="updPnlGuardarEv" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-primary" OnClick="btnGuardar_Click" TabIndex="20" Text="GUARDAR" ValidationGroup="guardar" />
-                                                    &nbsp;<asp:Button ID="btnCancelar" runat="server" CausesValidation="False" CssClass="btn btn-blue-grey" OnClick="btnCancelar_Click" TabIndex="21" Text="CANCELAR" />
+                                                    <asp:LinkButton ID="linkBttnCancelar" runat="server" CssClass="btn btn-grey" OnClick="linkBttnCancelar_Click"><i class="fa fa-chevron-left fa-2x" aria-hidden="true"></i> Salir</asp:LinkButton>
+                                                    &nbsp;<asp:LinkButton ID="linkBttnGuardar" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGuardar_Click" ValidationGroup="guardar"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i> Guardar</asp:LinkButton>
+                                                    &nbsp;
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
@@ -930,8 +924,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Conceptos</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalLabel">Conceptos
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -1014,7 +1008,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Participantes</h5>
+                    <h5 class="modal-title" id="modalParticipantes">Participantes</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1074,8 +1068,8 @@
                         <div class="col text-right">
                             <asp:UpdatePanel ID="UpdatePanel30" runat="server">
                                 <ContentTemplate>
-                                    <asp:Button ID="btnAgregarParticipante" runat="server" CssClass="btn btn-primary" OnClick="btnAgregarParticipante_Click" Text="Agregar" ValidationGroup="AgregaParticipante" />
-                                    <asp:Button ID="Button2" runat="server" Text="SALIR" class="btn btn-blue-grey" data-dismiss="modal" />
+                                    <asp:Button ID="Button2" runat="server" Text="Salir" class="btn btn-blue-grey" data-dismiss="modal" />
+                                    <asp:Button ID="btnAgregarParticipante" runat="server" CssClass="btn btn-info" OnClick="btnAgregarParticipante_Click" Text="Agregar" ValidationGroup="AgregaParticipante" />
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </div>
@@ -1144,7 +1138,26 @@
                 <div class="modal-body">
                     <div class="container-fluid">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-md-2">
+                                Ciclo
+                            </div>
+                            <div class="col-md-4">
+                                <asp:DropDownList ID="ddlCiclo" runat="server" CssClass="form-control"></asp:DropDownList>
+                                <%--<asp:TextBox ID="txtCicloNuevo" runat="server" CssClass="form-control"></asp:TextBox>--%>
+                            </div>
+                        </div>
+                        <%-- <div class="row">
+                            <div class="col-md-2">
+                                Descripción
+                            </div>
+                            <div class="col-md-10">
+                                <asp:TextBox ID="txtDescCiclo" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                        </div>--%>
+                        <div class="row">
+                            <div class="col text-right">
+                                <asp:LinkButton ID="LinkButton4" runat="server" data-dismiss="modal" aria-label="Close" CssClass="btn btn-blue-grey">Cancelar</asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton3" runat="server" CssClass="btn btn-info">Guardar</asp:LinkButton>
                             </div>
                         </div>
                     </div>
@@ -1152,17 +1165,8 @@
             </div>
         </div>
     </div>
-    <asp:GridView ID="grdCiclos" runat="server" AutoGenerateColumns="False">
-        <Columns>
-            <asp:BoundField DataField="IdStr" HeaderText="CVE" />
-            <asp:BoundField DataField="Descripcion" HeaderText="DESCRIPCIÓN" />
-            <asp:TemplateField ShowHeader="False">
-                <ItemTemplate>
-                    <asp:LinkButton ID="linkBttnAgregarCiclo" CssClass="btn btn-primary" runat="server" CausesValidation="False" CommandName="Select" Text="Agregar"></asp:LinkButton>
-                </ItemTemplate>
-            </asp:TemplateField>
-        </Columns>
-    </asp:GridView>
+
+
     <script type="text/javascript">
         function Eventos() {
 

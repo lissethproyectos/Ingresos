@@ -375,7 +375,7 @@
                                                     </asp:UpdatePanel>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <asp:LinkButton ID="linkBttnAgregarCliente" runat="server" CssClass="form-control btn btn-info text-white"><i class="fa fa-plus-circle"></i> Nuevo</asp:LinkButton>
+                                                    <asp:LinkButton ID="linkBttnAgregarCliente" runat="server" CssClass="form-control btn btn-info text-white"  OnClick="linkBttnNuevoCliente_Click"><i class="fa fa-plus-circle"></i> Nuevo</asp:LinkButton>
                                                 </div>
 
                                                 <div class="col-md-1">
