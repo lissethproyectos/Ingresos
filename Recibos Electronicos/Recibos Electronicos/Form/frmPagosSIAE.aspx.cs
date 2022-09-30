@@ -20,7 +20,7 @@ namespace Recibos_Electronicos.Form
         CN_SIAE CNSIAE = new CN_SIAE();
         Sesion SesionUsu = new Sesion();
         Factura objFactura = new Factura();
-        
+
         #endregion
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -68,7 +68,7 @@ namespace Recibos_Electronicos.Form
         {
             try
             {
-                if(SesionUsu.Usu_Central_Tipo != "SA")
+                if (SesionUsu.Usu_Central_Tipo != "SA")
                     Response.Redirect("index.aspx", false);
 
 
@@ -152,13 +152,13 @@ namespace Recibos_Electronicos.Form
             grvReferenciasSIAE.SelectedIndex = row.RowIndex;
             objFactura.ID_FACT = grvReferenciasSIAE.SelectedRow.Cells[0].Text;
             CNSIAE.SIAEConsultaDatosPago(ref objFactura, ref Verificador);
-            if (grvReferenciasSIAE.SelectedRow.Cells[11].Text == "TITULO" || grvReferenciasSIAE.SelectedRow.Cells[11].Text == "EXTRAORDINARIO")
-                bttnGenerarRecibo.Visible = true;// (grvReferenciasSIAE.SelectedRow.Cells[11].Text == "TITULO") ? true : false;
-            else
-                bttnGenerarRecibo.Visible = false;
+            //if (grvReferenciasSIAE.SelectedRow.Cells[11].Text == "TITULO" || grvReferenciasSIAE.SelectedRow.Cells[11].Text == "EXTRAORDINARIO")
+            //    bttnGenerarRecibo.Visible = true;// (grvReferenciasSIAE.SelectedRow.Cells[11].Text == "TITULO") ? true : false;
+            //else
+            //    bttnGenerarRecibo.Visible = false;
 
 
-            if (Verificador=="0")
+            if (Verificador == "0")
             {
                 txtFolioBanco.Text = objFactura.FACT_FOLIOBANCARIO;
                 txtFechaPago.Text = objFactura.FACT_FECHA_FACTURA;
@@ -177,12 +177,12 @@ namespace Recibos_Electronicos.Form
                 }
 
                 txtReferenciaOrig.Text = objFactura.FACT_REFERENCIA;
-                chkPagoAplicado.Checked = (objFactura.FACT_CONFIRMADO=="S")?true:false;
+                chkPagoAplicado.Checked = (objFactura.FACT_CONFIRMADO == "S") ? true : false;
             }
             //modalAlert.Show();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
 
-            
+
         }
 
         //protected void CancelAlert_Click(object sender, EventArgs e)
@@ -220,8 +220,8 @@ namespace Recibos_Electronicos.Form
 
             try
             {
-                objFactura.FACT_STATUS = (grvReferenciasSIAE.SelectedRow.Cells[9].Text=="I")?"Z":"I";
-                objFactura.ID_FACT=grvReferenciasSIAE.SelectedRow.Cells[0].Text;
+                objFactura.FACT_STATUS = (grvReferenciasSIAE.SelectedRow.Cells[9].Text == "I") ? "Z" : "I";
+                objFactura.ID_FACT = grvReferenciasSIAE.SelectedRow.Cells[0].Text;
                 CNSIAE.ActualizarStatusSIAE(objFactura, SesionUsu.Usu_Nombre, ref Verificador);
                 if (Verificador == "0")
                 {
@@ -257,7 +257,7 @@ namespace Recibos_Electronicos.Form
             Verificador = string.Empty;
             try
             {
-                Verificador=ConfirmarPagoSIAE();
+                Verificador = ConfirmarPagoSIAE();
                 if (Verificador == "0")
                 {
                     //modalAlert.Hide();
@@ -281,7 +281,7 @@ namespace Recibos_Electronicos.Form
         {
             string RefPag = string.Empty;
 
-            objFactura.ID_FACT = grvReferenciasSIAE.SelectedRow.Cells [0].Text;
+            objFactura.ID_FACT = grvReferenciasSIAE.SelectedRow.Cells[0].Text;
             objFactura.FACT_FOLIOBANCARIO = txtFolioBanco.Text;
             objFactura.FACT_FECHA_FACTURA = txtFechaPago.Text;
             objFactura.FACT_BANCO = ddlBanco.SelectedValue;
@@ -292,7 +292,7 @@ namespace Recibos_Electronicos.Form
             objFactura.FACT_CARRERA = txtIdCarrera.Text;
             objFactura.FACT_SEMESTRE = txtSemestre.Text;
             objFactura.FACT_MATRICULA = txtMatricula.Text;
-            RefPag = (txtReferenciaPagada.Text == string.Empty) ? txtReferenciaOrig.Text : txtReferenciaPagada.Text;   
+            RefPag = (txtReferenciaPagada.Text == string.Empty) ? txtReferenciaOrig.Text : txtReferenciaPagada.Text;
             CNSIAE.ActualizarDatosSIAE(objFactura, RefPag, SesionUsu.Usu_Nombre, ref Verificador);
             return Verificador;
         }
@@ -314,33 +314,39 @@ namespace Recibos_Electronicos.Form
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
 
             chkPagoAplicado.Checked = true;
-            Verificador=ConfirmarPagoSIAE();
+            Verificador = ConfirmarPagoSIAE();
             if (Verificador == "0")
             {
 
                 objFactura.ID_FICHA_BANCARIA = Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[12].Text);
                 objFactura.multipago.Order = txtFolioBanco.Text;
+                objFactura.FACT_BANCO = ddlBanco.SelectedValue;
                 try
                 {
-                    if (Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[12].Text) != 0)
-                    {
+
+
+                    if (Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[12].Text) != 0 && Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[13].Text) == "U")
                         CNFactura.Generar_Recibo_OnLine(objFactura, ref Verificador);
-                        if (Verificador == "0")
-                        {
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'EL RECIBO SE GENERO CORRECTAMENTE.');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
-                            txtReferencia.Text = Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[5].Text);
-                            //modalAlert.Hide();
-                            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
-                            CargarGrid();
-                        }
-                        else
-                        {
-                            CNComun.VerificaTextoMensajeError(ref Verificador);
-                            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
-                        }
+                    else
+                        CNFactura.Generar_Recibo_OnLine_SIAE(objFactura, ref Verificador);
+
+                    if (Verificador == "0")
+                    {
+                        txtReferencia.Text = Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[5].Text);
+                        //modalAlert.Hide();
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('hide')", true);
+                        CargarGrid();
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'EL RECIBO SE GENERO CORRECTAMENTE.');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
+
                     }
                     else
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'NO EXISTE REGISTRO EN SYSWEB');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
+                    {
+                        CNComun.VerificaTextoMensajeError(ref Verificador);
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
+                    }
+
+                    //else
+                    //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'NO EXISTE REGISTRO EN SYSWEB');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
                 }
                 catch (Exception ex)
                 {
@@ -358,7 +364,7 @@ namespace Recibos_Electronicos.Form
 
         protected void ddlCicloEscolar_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)

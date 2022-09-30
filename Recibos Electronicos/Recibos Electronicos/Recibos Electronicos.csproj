@@ -661,6 +661,7 @@
     <Content Include="Eventos_Ingenieria.html" />
     <Content Include="facturapi.ico" />
     <Content Include="Form\Exencion_old.aspx" />
+    <Content Include="Form\FrmAdminFacturas.aspx" />
     <Content Include="Form\frmAdmonFichaRef.aspx" />
     <Content Include="Form\frmBanco.aspx" />
     <Content Include="Form\DefaultAlumnos.aspx" />
@@ -685,11 +686,8 @@
     <Content Include="Form\frmFacturacion.aspx" />
     <Content Include="Form\FrmFacturas3.aspx" />
     <Content Include="Form\frmPagosPosgrado.aspx" />
+    <Content Include="Form\frmPagosReferenciados.aspx" />
     <Content Include="Form\frmRefVenta_PS.aspx" />
-    <Content Include="Form\FrmSolicitud_Facturas.aspx" />
-    <Content Include="Form\FrmFacturas.aspx" />
-    <Content Include="Form\FrmFacturasResp.aspx" />
-    <Content Include="Form\FrmFacturas2.aspx" />
     <Content Include="Form\frmGenerarReciboAsp.aspx" />
     <Content Include="Form\frmRecibos_Eventos.aspx" />
     <Content Include="Form\frmRedirectPosgrado.aspx" />
@@ -1118,6 +1116,13 @@
     <Compile Include="EnviarCorreo.ascx.designer.cs">
       <DependentUpon>EnviarCorreo.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Form\FrmAdminFacturas.aspx.cs">
+      <DependentUpon>FrmAdminFacturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\FrmAdminFacturas.aspx.designer.cs">
+      <DependentUpon>FrmAdminFacturas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmAdmonFichaRef.aspx.cs">
       <DependentUpon>frmAdmonFichaRef.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1286,40 +1291,19 @@
     <Compile Include="Form\frmPagosPosgrado.aspx.designer.cs">
       <DependentUpon>frmPagosPosgrado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmPagosReferenciados.aspx.cs">
+      <DependentUpon>frmPagosReferenciados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\frmPagosReferenciados.aspx.designer.cs">
+      <DependentUpon>frmPagosReferenciados.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Form\frmRefVenta_PS.aspx.cs">
       <DependentUpon>frmRefVenta_PS.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Form\frmRefVenta_PS.aspx.designer.cs">
       <DependentUpon>frmRefVenta_PS.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmSolicitud_Facturas.aspx.cs">
-      <DependentUpon>FrmSolicitud_Facturas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Form\FrmSolicitud_Facturas.aspx.designer.cs">
-      <DependentUpon>FrmSolicitud_Facturas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmFacturas.aspx.cs">
-      <DependentUpon>FrmFacturas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Form\FrmFacturas.aspx.designer.cs">
-      <DependentUpon>FrmFacturas.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmFacturasResp.aspx.cs">
-      <DependentUpon>FrmFacturasResp.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Form\FrmFacturasResp.aspx.designer.cs">
-      <DependentUpon>FrmFacturasResp.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Form\FrmFacturas2.aspx.cs">
-      <DependentUpon>FrmFacturas2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Form\FrmFacturas2.aspx.designer.cs">
-      <DependentUpon>FrmFacturas2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\frmGenerarReciboAsp.aspx.cs">
       <DependentUpon>frmGenerarReciboAsp.aspx</DependentUpon>
@@ -1694,12 +1678,6 @@
       <DependentUpon>datos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\Ficha_Referenciada_Productos.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Ficha_Referenciada_Productos.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reportes\Ficha_Referenciada_SIAE.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1857,22 +1835,10 @@
       <DependentUpon>rptBitacora_Carga.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reportes\rptEventosParticipantes.cs">
-      <DependentUpon>rptEventosParticipantes.rpt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Reportes\rptEventos_Excel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>rptEventos_Excel.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reportes\rptHistoricoRecibos.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>rptHistoricoRecibos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\rpt_PagosPosgrado.cs">
@@ -1999,7 +1965,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Ficha_Referenciada_Productos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Ficha_Referenciada_Productos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\Ficha_Referenciada_SIAE.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -2101,17 +2066,12 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptBitacora_Carga.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reportes\rptEventosParticipantes.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptEventosParticipantes.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptEventos_Excel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>rptEventos_Excel.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptHistoricoRecibos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptHistoricoRecibos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rpt_PagosPosgrado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

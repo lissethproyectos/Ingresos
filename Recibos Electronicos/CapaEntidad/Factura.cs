@@ -89,6 +89,7 @@ namespace CapaEntidad
         private string _NUMERO_INTERIOR;
         private string _NUMERO_EXTERIOR;
         private string _ADJUNTO_CONSTANCIA;
+        private string _Status;
         //Metodos agregados por Lisseth
 
 
@@ -372,6 +373,12 @@ namespace CapaEntidad
         {
             get { return _Status_Carga; }
             set { _Status_Carga = value; }
+        }
+
+        public string Status
+        {
+            get { return _Status; }
+            set { _Status = value; }
         }
         public string FACT_TIPO
         {

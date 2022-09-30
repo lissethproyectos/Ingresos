@@ -511,6 +511,20 @@ namespace CapaNegocio
             }
         }
 
+        public void Generar_Recibo_OnLine_SIAE(Factura ObjFactura, ref string Verificador)
+        {
+            try
+            {
+                CD_Factura DatosFactura = new CD_Factura();
+                DatosFactura.Generar_Recibo_OnLine_SIAE(ObjFactura, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public void ConsultarRefAspirantes(Factura ObjFactura, string Busqueda, ref List<Factura> List)
         {

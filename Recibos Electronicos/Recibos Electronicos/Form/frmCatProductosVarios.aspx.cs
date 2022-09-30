@@ -39,7 +39,7 @@ namespace Recibos_Electronicos.Form
             Verificador = string.Empty;
             ListConceptos = (List<Comun>)Session["Conceptos"];
             objServicio.Dependencia = DDLDependencia.SelectedValue;
-            objServicio.Clave = txtClave.Text;
+            objServicio.Clave = ""; // txtClave.Text;
             objServicio.Descripcion = txtDescripcion2.Text;
             objServicio.Total = Convert.ToDouble(txtImporte.Text);
             objServicio.Estatus = "A";
@@ -63,7 +63,7 @@ namespace Recibos_Electronicos.Form
 
             objServicio.Id_Inventario = grvServicios.SelectedRow.Cells[0].Text;
             objServicio.Dependencia = DDLDependencia2.SelectedValue;
-            objServicio.Clave = txtClave.Text;
+            objServicio.Clave = ""; // txtClave.Text;
             objServicio.Descripcion = txtDescripcion2.Text;
             objServicio.Total = Convert.ToDouble(txtImporte.Text);
             objServicio.Concepto = Convert.ToString(ListConceptos[DDLConcepto.SelectedIndex].Etiqueta);  //DDLConcepto.SelectedValue;
@@ -183,7 +183,7 @@ namespace Recibos_Electronicos.Form
             btnGuardar_Salir2.Text = "GUARDAR Y SALIR";
             btnGuardar2.Visible = true;
             DDLDependencia.SelectedValue = DDLDependencia2.SelectedValue;
-            txtClave.Text = string.Empty;
+            //txtClave.Text = string.Empty;
             txtDescripcion2.Text = string.Empty;
             txtImporte.Text = string.Empty;
             multiview.ActiveViewIndex = 1;
@@ -352,7 +352,7 @@ namespace Recibos_Electronicos.Form
                 Verificador = GuardarServicio();
                 if (Verificador == "0")
                 {
-                    txtClave.Text = string.Empty;
+                    //txtClave.Text = string.Empty;
                     txtDescripcion2.Text = string.Empty;
                     txtImporte.Text = string.Empty;
                 }
@@ -444,7 +444,7 @@ namespace Recibos_Electronicos.Form
                     DDLDependencia.SelectedValue = objBien.Dependencia;
                     DDLGrupo.SelectedValue = objBien.Grupo;
                     DDLRubro.SelectedValue = objBien.TipoGrupo;
-                    txtClave.Text = objBien.Clave;
+                    //txtClave.Text = objBien.Clave;
                     //DDLConcepto.SelectedIndex
                     DDLConcepto.SelectedValue =Convert.ToString(objBien.Id_Concepto); //.Concepto;
                     txtDescripcion2.Text = objBien.Descripcion;
@@ -539,7 +539,7 @@ namespace Recibos_Electronicos.Form
                     DDLDependencia.SelectedValue = objBien.Dependencia;
                     DDLGrupo.SelectedValue = objBien.Grupo;
                     DDLRubro.SelectedValue = objBien.TipoGrupo;
-                    txtClave.Text = objBien.Clave;
+                    //txtClave.Text = objBien.Clave;
                     //DDLConcepto.SelectedIndex
                     DDLConcepto.SelectedValue = Convert.ToString(objBien.Id_Concepto); //.Concepto;
                     txtDescripcion2.Text = objBien.Descripcion;

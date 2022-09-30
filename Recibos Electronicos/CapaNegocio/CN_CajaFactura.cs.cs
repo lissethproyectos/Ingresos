@@ -226,24 +226,24 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> List, Factura objFactura, string RutaServ, ref string Verificador)
+        //public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> List, Factura objFactura, string RutaServ, ref string Verificador)
+        //{
+        //    try
+        //    {
+        //        CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+        //        DatosCajaFactura.FacturaCajaAgregar(Usuario, ref List, objFactura, RutaServ, ref Verificador);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> List, int IdFactura, string Tipo, ref string Verificador)
         {
             try
             {
                 CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
-                DatosCajaFactura.FacturaCajaAgregar(Usuario, ref List, objFactura, RutaServ, ref Verificador);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> List, int IdFactura, string RutaServ, string Tipo, ref string Verificador)
-        {
-            try
-            {
-                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
-                DatosCajaFactura.FacturaCajaAgregar(Usuario, ref List, IdFactura, RutaServ, Tipo, ref Verificador);
+                DatosCajaFactura.FacturaCajaAgregar(Usuario, ref List, IdFactura, Tipo, ref Verificador);
             }
             catch (Exception ex)
             {
@@ -257,6 +257,18 @@ namespace CapaNegocio
             {
                 CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
                 DatosCajaFactura.ConsultarPdfXmlFactura(ref ObjCjaFactura, Tipo, ref List);                
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void ConsultarFacturas(ref List<CajaFactura> List)
+        {
+            try
+            {
+                CD_CajaFactura DatosCajaFactura = new CD_CajaFactura();
+                //DatosCajaFactura.ConsultarPdfXmlFactura(ref ObjCjaFactura, Tipo, ref List);
             }
             catch (Exception ex)
             {

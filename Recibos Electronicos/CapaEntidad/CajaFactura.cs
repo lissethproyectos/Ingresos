@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CapaEntidad
 {
-    public class CajaFactura: Factura
+    public class CajaFactura : Factura
     {
         private string _Fecha_Fact_Cja; //Es la fecha en que se genero la factura atraves del sistema de caja
         private string _Ruta;
@@ -19,6 +19,8 @@ namespace CapaEntidad
         private bool _ItsOk;
         private string _NombreArchivo;
         private string _ExtensionArchivo;
+        private string _NombreArchivoPDF;
+        private string _NombreArchivoXML;
 
 
         public bool ItsOk
@@ -45,11 +47,11 @@ namespace CapaEntidad
             set { _ArchivoBlob = value; }
         }
 
-        public string Ruta
-        {
-            get { return _Ruta; }
-            set { _Ruta = value; }
-        }
+        //public string Ruta
+        //{
+        //    get { return _Ruta; }
+        //    set { _Ruta = value; }
+        //}
 
         public string Ruta_Pdf
         {
@@ -94,6 +96,17 @@ namespace CapaEntidad
             get { return _NombreArchivo; }
             set { _NombreArchivo = value; }
         }
+        public string NombreArchivoXML
+        {
+            get { return _NombreArchivoXML; }
+            set { _NombreArchivoXML = value; }
+        }
+
+        public string NombreArchivoPDF
+        {
+            get { return _NombreArchivoPDF; }
+            set { _NombreArchivoPDF = value; }
+        }
 
         public string ExtensionArchivo
         {
@@ -101,6 +114,6 @@ namespace CapaEntidad
             set { _ExtensionArchivo = value; }
         }
 
-      
+
     }
 }

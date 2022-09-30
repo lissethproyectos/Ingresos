@@ -130,6 +130,7 @@
                                 <asp:BoundField DataField="FACT_STATUS" />
                                 <asp:BoundField DataField="FACT_TIPO" HeaderText="Tipo" />
                                 <asp:BoundField DataField="ID_FICHA_BANCARIA" />
+                                <asp:BoundField DataField="FACT_TIPO_SERVICIO" />
                             </Columns>
                             <FooterStyle CssClass="enc" />
                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -304,7 +305,7 @@
                                     <div class="row">
                                         <div class="col text-right">
                                             &nbsp;<asp:Button ID="bttnConfirmaPago" runat="server" CssClass="btn btn-info" OnClick="bttnConfirmaPago_Click" Text="GUARDAR" ValidationGroup="Guardar" />
-                                            &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos" Visible="False" />
+                                            &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos"/>
                                         </div>
                                     </div>
                                 </div>
@@ -312,7 +313,7 @@
                         </asp:UpdatePanel>
                         <div class="container">
                             <div class="row">
-                                <div class="col">
+                                <div class="col text-center">
                                     <asp:UpdateProgress ID="updPrReferencias0" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
                                         <ProgressTemplate>
                                             <asp:Image ID="imgMultiview0" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />

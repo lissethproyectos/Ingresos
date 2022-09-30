@@ -254,11 +254,11 @@
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DDLDependencia" ErrorMessage="RequiredFieldValidator" ValidationGroup="Guardar" InitialValue="00000">* Requerido</asp:RequiredFieldValidator>
                                             </div>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-2">Clave</div>
+                                       <div class="row">
+                                             <%--<div class="col-md-2">Clave</div>
                                             <div class="col-md-4">
                                                 <asp:TextBox ID="txtClave" runat="server" Width="100%"></asp:TextBox>
-                                            </div>
+                                            </div>--%>
                                             <div class="col-md-2">Grupo</div>
                                             <div class="col-md-4">
                                                 <asp:DropDownList ID="DDLGrupo" runat="server" Width="100%">

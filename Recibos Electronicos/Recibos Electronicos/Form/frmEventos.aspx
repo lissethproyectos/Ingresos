@@ -282,12 +282,13 @@
                                                         Ciclo
                                                     </div>
                                                     <div class="col-md-4">
-                                                        <div class="input-group mb-3">
+                                                        <asp:DropDownList ID="ddlCiclo" runat="server" CssClass="form-control"></asp:DropDownList>
+                                                       <%-- <div class="input-group mb-3">
                                                             <asp:ListBox ID="lstCiclo" runat="server" CssClass="form-control"></asp:ListBox>
                                                             <span id="basic-addon3">
                                                                 <asp:LinkButton ID="linkBttnAgregarCiclo" CssClass="input-group-text btn-grey" runat="server" data-toggle="modal" data-target="#modalCiclos"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Agregar</asp:LinkButton>
                                                             </span>
-                                                        </div>
+                                                        </div>--%>
                                                     </div>
                                                     <div class="col-md-1">
                                                         Status
@@ -1142,7 +1143,7 @@
                                 Ciclo
                             </div>
                             <div class="col-md-4">
-                                <asp:DropDownList ID="ddlCiclo" runat="server" CssClass="form-control"></asp:DropDownList>
+                                <%--<asp:DropDownList ID="ddlCiclo" runat="server" CssClass="form-control"></asp:DropDownList>--%>
                                 <%--<asp:TextBox ID="txtCicloNuevo" runat="server" CssClass="form-control"></asp:TextBox>--%>
                             </div>
                         </div>

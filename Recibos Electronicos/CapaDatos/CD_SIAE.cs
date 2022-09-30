@@ -74,9 +74,54 @@ namespace CapaDatos
                     ObjFactura.FACT_RECEPTOR_STATUS = "../Imagenes/" + Convert.ToString(dr.GetValue(8)) + ".PNG";
                     ObjFactura.FACT_STATUS_NOTAS = Convert.ToString(dr.GetValue(9));
                     ObjFactura.CICLO_ESCOLAR = Convert.ToString(dr.GetValue(7));
+                    ObjFactura.FACT_TIPO_SERVICIO = Convert.ToString(dr.GetValue(9));
                     ObjFactura.FACT_STATUS = Convert.ToString(dr.GetValue(10));
                     ObjFactura.FACT_TIPO = Convert.ToString(dr.GetValue(11));
                     ObjFactura.VISIBLE1 = Convert.ToString(dr.GetValue(11))== "TITULO" ?true:false;
+                    ObjFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(12));
+                    List.Add(ObjFactura);
+
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
+        public void ConsultaGridRefSysweb(Factura ObjFactura, ref List<Factura> List)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                String[] Parametros = { "P_Nivel", "P_Ciclo_Escolar", "P_Escuela", "p_referencia" };
+                String[] Valores = { ObjFactura.FACT_NIVEL, ObjFactura.CICLO_ESCOLAR.ToString(), ObjFactura.FACT_DEPENDENCIA, ObjFactura.FACT_REFERENCIA };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Ref_SysWeb", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    ObjFactura = new Factura();
+                    ObjFactura.ID_FACT = Convert.ToString(dr.GetValue(0));
+                    ObjFactura.FACT_DEPENDENCIA = Convert.ToString(dr.GetValue(1));
+                    ObjFactura.FACT_MATRICULA = Convert.ToString(dr.GetValue(2));
+                    ObjFactura.FACT_NOMBRE = Convert.ToString(dr.GetValue(3));
+                    ObjFactura.FACT_REFERENCIA = Convert.ToString(dr.GetValue(4));
+                    ObjFactura.FACT_TOTAL = Convert.ToString(dr.GetValue(5));
+                    ObjFactura.FACT_FECHA_FACTURA = Convert.ToString(dr.GetValue(6));
+                    ObjFactura.FACT_RECEPTOR_STATUS = "../Imagenes/" + Convert.ToString(dr.GetValue(8)) + ".PNG";
+                    ObjFactura.FACT_STATUS_NOTAS = Convert.ToString(dr.GetValue(9));
+                    ObjFactura.CICLO_ESCOLAR = Convert.ToString(dr.GetValue(7));
+                    ObjFactura.FACT_TIPO_SERVICIO = Convert.ToString(dr.GetValue(9));
+                    ObjFactura.FACT_STATUS = Convert.ToString(dr.GetValue(10));
+                    ObjFactura.FACT_TIPO = Convert.ToString(dr.GetValue(11));
+                    //ObjFactura.VISIBLE1 = Convert.ToString(dr.GetValue(11)) == "TITULO" ? true : false;
                     ObjFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(12));
                     List.Add(ObjFactura);
 

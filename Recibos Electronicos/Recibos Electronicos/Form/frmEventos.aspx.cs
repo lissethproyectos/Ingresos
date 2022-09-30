@@ -1480,7 +1480,35 @@ namespace Recibos_Electronicos.Form
 
         protected void linkBttnAgregarParticipante_Click(object sender, EventArgs e)
         {
+            Verificador = string.Empty;
+            try
+            {
+                ConceptoCuotaLibre objDetPart = new ConceptoCuotaLibre();
+                //objDetPart.Evento = Convert.ToString(SesionUsu.IdEvento);
+                objDetPart.IdEvento = Convert.ToInt32(SesionUsu.IdEvento);
 
+                objDetPart.Id_Tipo_Participante = Convert.ToInt32(DDLCatTipoParticipantes.SelectedValue);
+                objDetPart.Tipo_Participante = DDLTipoParticipante.SelectedValue;
+                objDetPart.Desc_Tipo_Participante = txtDescripcion.Text.ToUpper();
+                objDetPart.Es_Ponente = (chkPonente.Checked == true) ? "S" : "N";
+                objDetPart.Requiere_Constancia = (chkConstancia.Checked == true) ? "S" : "N";
+                objDetPart.Status = Convert.ToChar(ddlStatusPart.SelectedValue);
+                CNeventos.EventoInsertarDetPart(ref objDetPart, ref Verificador);
+                if (Verificador == "0")
+                    CargarGridDetPart();
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                string MsjError = ex.Message.Substring(0, 30);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
+            }
         }
     }
 }

@@ -85,15 +85,15 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_NOMBRE = Convert.ToString(dr.GetValue(4));
                     ObjCjaFactura.FACT_DEPENDENCIA = Convert.ToString(dr.GetValue(5));
                     ObjCjaFactura.Avance = Convert.ToInt32(dr.GetValue(7));
-                    //ObjCjaFactura.IdCajaFact = Convert.ToInt32(dr.GetValue(9));
                     ObjCjaFactura.FACT_BANCO = Convert.ToString(dr.GetValue(8));
                     ObjCjaFactura.FACT_CONFIRMADO = Convert.ToString(dr.GetValue(9));
                     ObjCjaFactura.FACT_RECEPTOR_CORREO = Convert.ToString(dr.GetValue(10));
                     ObjCjaFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(11));
                     ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
                     ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(12));  //Convert.ToString(dr.GetValue(13)) == "R" ? "R" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "C" : "";
-                    //Convert.ToString(dr.GetValue(13));
-                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                                                                                             //ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                                                                                             //ObjCjaFactura.Ruta_Pdf = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "S" ? false : true;
@@ -179,7 +179,7 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
                     ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(12));  //Convert.ToString(dr.GetValue(13)) == "R" ? "R" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "C" : "";
                     //Convert.ToString(dr.GetValue(13));
-                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                    //ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "S" ? false : true;
@@ -189,10 +189,12 @@ namespace CapaDatos
                         ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "RECHAZADO";
                     else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "S")
                         ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "SOLICITADO";
-                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "F")
+                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "F")
                         ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "FACTURADO";
-                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "C")
+                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "C")
                         ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "POR CONFIRMAR";
+                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "X")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "SOLICITUD CANCELACIÓN";
                     //(ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
                     string p = Convert.ToString(dr.GetValue(17));
                     ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
@@ -296,19 +298,19 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
                     ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(13)) == "R" ? "R" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "C" : "";
                     //Convert.ToString(dr.GetValue(13));
-                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                    //ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "S" ? false : true;
                     ObjCjaFactura.VISIBLE2 = Convert.ToString(dr.GetValue(16)) == "S" ? true : false;
                     ObjCjaFactura.HABILITADO = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? false : true;
-                     if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R")                   
-                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "RECHAZADO";                    
-                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "S")                   
-                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "SOLICITADO";                    
-                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "C")                   
+                    if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "RECHAZADO";
+                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "S")
+                        ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "SOLICITADO";
+                    else if (ObjCjaFactura.FACT_RECEPTOR_STATUS == "C")
                         ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = "FALTA CONFIRMAR";
-                    
+
                     //ObjCjaFactura.FACT_DESC_STATUS_SOLICITUD = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "RECHAZADO" : Convert.ToString(dr.GetValue(9)) == "TRUE" ? "CONFIRMADO" : "";
                     string p = Convert.ToString(dr.GetValue(17));
                     ObjCjaFactura.FACT_DIAS_SOLICITUD = Convert.ToInt32(dr.GetValue(17));
@@ -381,7 +383,7 @@ namespace CapaDatos
                     ObjCjaFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(11));
                     ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
                     ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(13));
-                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                    //ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "0" ? false : true;
@@ -432,7 +434,7 @@ namespace CapaDatos
                     ObjCjaFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(11));
                     ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
                     ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(13));
-                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                    //ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.VISIBLE1 = Convert.ToString(dr.GetValue(16)) == "S" ? false : true;
@@ -482,7 +484,7 @@ namespace CapaDatos
                     ObjCjaFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(11));
                     ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
                     ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(13));
-                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                    //ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_CLIENTE = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.FACT_STATUS = Convert.ToString(dr.GetValue(16));
@@ -594,7 +596,7 @@ namespace CapaDatos
                     ObjCjaFactura.FACT_RECEPTOR_CORREO = Convert.ToString(dr.GetValue(10));
                     ObjCjaFactura.FACT_STATUS_CAJA = Convert.ToString(dr.GetValue(12));
                     ObjCjaFactura.FACT_RECEPTOR_STATUS = Convert.ToString(dr.GetValue(13));
-                    ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
+                    //ObjCjaFactura.Ruta = (ObjCjaFactura.FACT_RECEPTOR_STATUS == "R") ? "../Imagenes/desactivado.PNG" : "";
                     ObjCjaFactura.FACT_TIPO = Convert.ToString(dr.GetValue(14));
                     ObjCjaFactura.FACT_FECHA_CAPTURA = Convert.ToString(dr.GetValue(15));
                     ObjCjaFactura.FACT_DIAS_EMISION = Convert.ToInt32(dr.GetValue(16));
@@ -724,7 +726,9 @@ namespace CapaDatos
                 object[] Valores = { ObjFactura.ID_FACT, ObjFactura.FACT_TIPO };
                 String[] ParametrosOut = { "p_Bandera" };
 
-                Cmd = CDDatos.GenerarOracleCommand("DEL_FACTURA_CAJA", ref Verificador, Parametros, Valores, ParametrosOut);
+                //Cmd = CDDatos.GenerarOracleCommand("DEL_FACTURA_CAJA", ref Verificador, Parametros, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("DEL_FACTURA_FISCAL", ref Verificador, Parametros, Valores, ParametrosOut);
+
 
             }
             catch (Exception ex)
@@ -759,8 +763,7 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-
-        public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> Archivos, Factura objFactura, string RutaServ, ref string Verificador)
+        public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> Archivos, int IdFactura, string Tipo, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
@@ -769,14 +772,38 @@ namespace CapaDatos
                 CDDatos.StartTrans();
                 for (int i = 0; i < Archivos.Count; i++)
                 {
-                    if (Archivos[i].Ruta != null)
+                    if (Archivos[i].Ruta_Xml != null)
                     {
-                        FileStream FS = new FileStream(RutaServ + Archivos[i].NombreArchivo, FileMode.Open, FileAccess.Read);
-                        Archivos[i].ArchivoBlob = new byte[FS.Length];
-                        string ext = Path.GetExtension(Archivos[i].NombreArchivo);
-                        FS.Read(Archivos[i].ArchivoBlob, 0, System.Convert.ToInt32(FS.Length));
-                        FS.Close();
-                        cmm = CDDatos.GenerarOracleCommand_Imagen("INS_FACTURA_CAJA", objFactura, Usuario, Archivos[i].ArchivoBlob, Archivos[i].Fecha_Fact_Cja, Archivos[i].Folio_Fact_Cja, Archivos[i].ExtensionArchivo, objFactura.FACT_TIPO, Archivos[i].Ruta, ref Verificador);
+                        string[] Parametros = { "P_ID_FACTURA",
+                                        "P_TIPO",
+                                        "P_USUARIO",
+                                        "P_FECHA_FACT",
+                                        "P_FOLIO_FACT",
+                                        "P_RUTA_XML",
+                                        "P_RUTA_PDF",
+                                        "P_NOMBRE_ARCHIVO_XML",
+                                        "P_NOMBRE_ARCHIVO_PDF",
+                                        "P_STATUS"
+                                      };
+                        string[] ParametrosOut = { "P_BANDERA" };
+
+
+                        object[] Valores = {
+                                        IdFactura,
+                                        Tipo,
+                                        Usuario,
+                                        Archivos[i].Fecha_Fact_Cja,
+                                        Archivos[i].Folio_Fact_Cja,
+                                        Archivos[i].Ruta_Xml,
+                                        Archivos[i].Ruta_Pdf,
+                                        Archivos[i].NombreArchivoXML,
+                                        Archivos[i].NombreArchivoPDF,
+                                                                                Archivos[i].Status
+
+                                       };
+
+                        cmm = CDDatos.GenerarOracleCommand("INS_FACTURA_FISCAL", ref Verificador, Parametros, Valores, ParametrosOut);
+
                     }
                 }
             }
@@ -789,62 +816,148 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-        public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> Archivos, int IdFactura, string RutaServ, string Tipo, ref string Verificador)
-        {
-            for (int i = 0; i < Archivos.Count; i++)
-            {
-                CD_Datos CDDatos = new CD_Datos();
-                OracleCommand OracleCmd = null;
 
-                try
-                {
+        //public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> Archivos, Factura objFactura, string RutaServ, ref string Verificador)
+        //{
+        //    CD_Datos CDDatos = new CD_Datos();
+        //    OracleCommand cmm = null;
+        //    try
+        //    {
+        //        CDDatos.StartTrans();
+        //        for (int i = 0; i < Archivos.Count; i++)
+        //        {
+        //            if (Archivos[i].Ruta != null)
+        //            {
+        //                FileStream FS = new FileStream(RutaServ + Archivos[i].NombreArchivo, FileMode.Open, FileAccess.Read);
+        //                Archivos[i].ArchivoBlob = new byte[FS.Length];
+        //                string ext = Path.GetExtension(Archivos[i].NombreArchivo);
+        //                FS.Read(Archivos[i].ArchivoBlob, 0, System.Convert.ToInt32(FS.Length));
+        //                FS.Close();
+        //                cmm = CDDatos.GenerarOracleCommand_Imagen("INS_FACTURA_CAJA", objFactura, Usuario, Archivos[i].ArchivoBlob, Archivos[i].Fecha_Fact_Cja, Archivos[i].Folio_Fact_Cja, Archivos[i].ExtensionArchivo, objFactura.FACT_TIPO, Archivos[i].Ruta, ref Verificador);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        CDDatos.LimpiarOracleCommand(ref cmm);
+        //    }
+        //}
+        //public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> Archivos, int IdFactura, string RutaServ, string Tipo, ref string Verificador)
+        //{
+        //    for (int i = 0; i < Archivos.Count; i++)
+        //    {
+        //        CD_Datos CDDatos = new CD_Datos();
+        //        OracleCommand OracleCmd = null;
 
-                    if (Archivos[i].Ruta != null)
-                    {
-                        string[] Parametros = { "P_ID_FACTURA",
-                                        "P_TIPO",
-                                        "P_USUARIO",
-                                        "P_FECHA_FACT",
-                                        "P_FOLIO_FACT",
-                                        "P_EXTENSION",
-                                        "P_RUTA",
-                                        "P_NOMBRE_ARCHIVO"
-                                      };
-                        string[] ParametrosOut = { "P_BANDERA" };
+        //        try
+        //        {
+
+        //            if (Archivos[i].Ruta != null)
+        //            {
+        //                string[] Parametros = { "P_ID_FACTURA",
+        //                                "P_TIPO",
+        //                                "P_USUARIO",
+        //                                "P_FECHA_FACT",
+        //                                "P_FOLIO_FACT",
+        //                                "P_EXTENSION",
+        //                                "P_RUTA",
+        //                                "P_NOMBRE_ARCHIVO"
+        //                              };
+        //                string[] ParametrosOut = { "P_BANDERA" };
 
 
-                        object[] Valores = {
-                                        IdFactura,
-                                        Tipo,
-                                        Usuario,
-                                        Archivos[i].Fecha_Fact_Cja,
-                                        Archivos[i].Folio_Fact_Cja,
-                                        Archivos[i].ExtensionArchivo,
-                                        Archivos[i].Ruta,
-                                        Archivos[i].NombreArchivo
-                                       };
-                        OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURA_CAJA_GRAL", ref Verificador, Parametros, Valores, ParametrosOut);
-                        string OrigenArchivo = RutaServ + Archivos[i].NombreArchivo; // + Archivos[i].ExtensionArchivo;
-                        string DestinoArchivo;
-                        //DestinoArchivo = /*IdFactura + */RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].Folio_Fact_Cja + Archivos[i].ExtensionArchivo;
-                        DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo;
-                        if (System.IO.File.Exists(OrigenArchivo))
-                        {
-                            System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);
-                            System.IO.File.Delete(OrigenArchivo);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    CDDatos.LimpiarOracleCommand(ref OracleCmd);
-                }
-            }
-        }
+        //                object[] Valores = {
+        //                                IdFactura,
+        //                                Tipo,
+        //                                Usuario,
+        //                                Archivos[i].Fecha_Fact_Cja,
+        //                                Archivos[i].Folio_Fact_Cja,
+        //                                Archivos[i].ExtensionArchivo,
+        //                                Archivos[i].Ruta,
+        //                                Archivos[i].NombreArchivo
+        //                               };
+        //                OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURA_CAJA_GRAL", ref Verificador, Parametros, Valores, ParametrosOut);
+        //                string OrigenArchivo = RutaServ + Archivos[i].NombreArchivo; // + Archivos[i].ExtensionArchivo;
+        //                string DestinoArchivo;
+        //                //DestinoArchivo = /*IdFactura + */RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].Folio_Fact_Cja + Archivos[i].ExtensionArchivo;
+        //                DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo;
+        //                if (System.IO.File.Exists(OrigenArchivo))
+        //                {
+        //                    System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);
+        //                    System.IO.File.Delete(OrigenArchivo);
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception(ex.Message);
+        //        }
+        //        finally
+        //        {
+        //            CDDatos.LimpiarOracleCommand(ref OracleCmd);
+        //        }
+        //    }
+        //}
+        //public void FacturaCajaAgregar(string Usuario, ref List<CajaFactura> Archivos, int IdFactura, string RutaServ, string Tipo, ref string Verificador)
+        //{
+        //    for (int i = 0; i < Archivos.Count; i++)
+        //    {
+        //        CD_Datos CDDatos = new CD_Datos();
+        //        OracleCommand OracleCmd = null;
+
+        //        try
+        //        {
+
+        //            if (Archivos[i].Ruta_Xml != null)
+        //            {
+        //                string[] Parametros = { "P_ID_FACTURA",
+        //                                "P_TIPO",
+        //                                "P_USUARIO",
+        //                                "P_FECHA_FACT",
+        //                                "P_FOLIO_FACT",
+        //                                "P_EXTENSION",
+        //                                "P_RUTA",
+        //                                "P_NOMBRE_ARCHIVO"
+        //                              };
+        //                string[] ParametrosOut = { "P_BANDERA" };
+
+
+        //                object[] Valores = {
+        //                                IdFactura,
+        //                                Tipo,
+        //                                Usuario,
+        //                                Archivos[i].Fecha_Fact_Cja,
+        //                                Archivos[i].Folio_Fact_Cja,
+        //                                Archivos[i].ExtensionArchivo,
+        //                                Archivos[i].Ruta_Xml,
+        //                                Archivos[i].Ruta_Pdf
+        //                               };
+        //                OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURA_CAJA_GRAL", ref Verificador, Parametros, Valores, ParametrosOut);
+        //                string OrigenArchivo = RutaServ + Archivos[i].NombreArchivo; // + Archivos[i].ExtensionArchivo;
+        //                string DestinoArchivo;
+        //                DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo;
+        //                if (System.IO.File.Exists(OrigenArchivo))
+        //                {
+        //                    System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);
+        //                    System.IO.File.Delete(OrigenArchivo);
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception(ex.Message);
+        //        }
+        //        finally
+        //        {
+        //            CDDatos.LimpiarOracleCommand(ref OracleCmd);
+        //        }
+        //    }
+        //}
+
         public void FacturApiAgregar(string Referencia, int IdFactura, string IdFacturaApi, ref string Verificador)
         {
 
@@ -867,107 +980,107 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref OracleCmd);
             }
         }
-        public void ConsultarPdfXmlFactura1(ref CajaFactura ObjCjaFactura, string Tipo, ref List<CajaFactura> List)
-        {
-            try
-            {
-                OracleDataReader dr = null;
-                CD_Datos CDDatos = new CD_Datos();
-                string SP = "";
-                string Ruta = "";
-                string Archivo = string.Empty;
-                string IdFact;
-                string[] Parametros = { "P_Id_Fact", "P_TIPO" };
-                object[] Valores = { ObjCjaFactura.ID_FACT, Tipo };
+        //public void ConsultarPdfXmlFactura1(ref CajaFactura ObjCjaFactura, string Tipo, ref List<CajaFactura> List)
+        //{
+        //    try
+        //    {
+        //        OracleDataReader dr = null;
+        //        CD_Datos CDDatos = new CD_Datos();
+        //        string SP = "";
+        //        string Ruta = "";
+        //        string Archivo = string.Empty;
+        //        string IdFact;
+        //        string[] Parametros = { "P_Id_Fact", "P_TIPO" };
+        //        object[] Valores = { ObjCjaFactura.ID_FACT, Tipo };
 
-                Ruta = AppDomain.CurrentDomain.BaseDirectory + "/Facturas/PDF/";
-                IdFact = ObjCjaFactura.ID_FACT;
-                SP = "pkg_felectronica.Obt_Pdf_Xml_Factura";
-                OracleCommand cmm = CDDatos.GenerarOracleCommandCursor(SP, ref dr, Parametros, Valores);
-                while (dr.Read())
-                {
+        //        Ruta = AppDomain.CurrentDomain.BaseDirectory + "/Facturas/PDF/";
+        //        IdFact = ObjCjaFactura.ID_FACT;
+        //        SP = "pkg_felectronica.Obt_Pdf_Xml_Factura";
+        //        OracleCommand cmm = CDDatos.GenerarOracleCommandCursor(SP, ref dr, Parametros, Valores);
+        //        while (dr.Read())
+        //        {
 
-                    ObjCjaFactura = new CajaFactura();
-                    Archivo = "" + dr.GetValue(3) + dr.GetValue(5);
-                    Archivo = System.IO.Path.Combine(Ruta, Archivo);
+        //            ObjCjaFactura = new CajaFactura();
+        //            Archivo = "" + dr.GetValue(3) + dr.GetValue(5);
+        //            Archivo = System.IO.Path.Combine(Ruta, Archivo);
 
-                    if (System.IO.File.Exists(Archivo))
-                        System.IO.File.Delete(Archivo);
-
-
-                    if (dr[4] != DBNull.Value)
-                    {
-                        ObjCjaFactura.ArchivoBlob = (byte[])dr[4];
-                        FileStream FS = new FileStream(Ruta + dr.GetValue(3) + dr.GetValue(5), FileMode.OpenOrCreate, FileAccess.ReadWrite);
-                        FS.Write(ObjCjaFactura.ArchivoBlob, 0, ObjCjaFactura.ArchivoBlob.Length);
-                        FS.Close();
-                        FS = null;
-                    }
+        //            if (System.IO.File.Exists(Archivo))
+        //                System.IO.File.Delete(Archivo);
 
 
-                    ObjCjaFactura.Ruta = "../Facturas/PDF/" + dr.GetValue(3) + dr.GetValue(5); //Ruta + dr.GetValue(3) + dr.GetValue(5);
-                    ObjCjaFactura.ID_FACT = IdFact;
-                    ObjCjaFactura.Fecha_Fact_Cja = Convert.ToString(dr.GetValue(2));
-                    ObjCjaFactura.Folio_Fact_Cja = Convert.ToString(dr.GetValue(3));
-                    ObjCjaFactura.NombreArchivo = Convert.ToString(dr.GetValue(3)) + Convert.ToString(dr.GetValue(5));
-                    ObjCjaFactura.ExtensionArchivo = Convert.ToString(dr.GetValue(5));
-                    List.Add(ObjCjaFactura);
-                }
-                CDDatos.LimpiarOracleCommand(ref cmm);
+        //            if (dr[4] != DBNull.Value)
+        //            {
+        //                ObjCjaFactura.ArchivoBlob = (byte[])dr[4];
+        //                FileStream FS = new FileStream(Ruta + dr.GetValue(3) + dr.GetValue(5), FileMode.OpenOrCreate, FileAccess.ReadWrite);
+        //                FS.Write(ObjCjaFactura.ArchivoBlob, 0, ObjCjaFactura.ArchivoBlob.Length);
+        //                FS.Close();
+        //                FS = null;
+        //            }
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
-        public void ConsultarPdfXmlFactura3(ref CajaFactura ObjCjaFactura, string Tipo, ref List<CajaFactura> List)
-        {
-            try
-            {
-                OracleDataReader dr = null;
-                CD_Datos CDDatos = new CD_Datos();
-                string SP = "";
-                string Ruta = "";
-                string Archivo = string.Empty;
-                string IdFact;
-                string[] Parametros = { "P_Id_Fact", "P_TIPO" };
-                object[] Valores = { ObjCjaFactura.ID_FACT, Tipo };
 
-                Ruta = AppDomain.CurrentDomain.BaseDirectory + "/ArchivosFacturas/";
-                IdFact = ObjCjaFactura.ID_FACT;
-                SP = "pkg_felectronica.Obt_Pdf_Xml_Factura";
-                OracleCommand cmm = CDDatos.GenerarOracleCommandCursor(SP, ref dr, Parametros, Valores);
-                while (dr.Read())
-                {
+        //            ObjCjaFactura.Ruta = "../Facturas/PDF/" + dr.GetValue(3) + dr.GetValue(5); //Ruta + dr.GetValue(3) + dr.GetValue(5);
+        //            ObjCjaFactura.ID_FACT = IdFact;
+        //            ObjCjaFactura.Fecha_Fact_Cja = Convert.ToString(dr.GetValue(2));
+        //            ObjCjaFactura.Folio_Fact_Cja = Convert.ToString(dr.GetValue(3));
+        //            ObjCjaFactura.NombreArchivo = Convert.ToString(dr.GetValue(3)) + Convert.ToString(dr.GetValue(5));
+        //            ObjCjaFactura.ExtensionArchivo = Convert.ToString(dr.GetValue(5));
+        //            List.Add(ObjCjaFactura);
+        //        }
+        //        CDDatos.LimpiarOracleCommand(ref cmm);
 
-                    ObjCjaFactura = new CajaFactura();
-                    ObjCjaFactura.Ruta = "../ArchivosFacturasTemp/" + dr.GetValue(3) + dr.GetValue(5); //Ruta + dr.GetValue(3) + dr.GetValue(5);
-                    ObjCjaFactura.ID_FACT = IdFact;
-                    ObjCjaFactura.Fecha_Fact_Cja = Convert.ToString(dr.GetValue(2));
-                    ObjCjaFactura.Folio_Fact_Cja = Convert.ToString(dr.GetValue(3));
-                    ObjCjaFactura.NombreArchivo = Convert.ToString(dr.GetValue(3)) + Convert.ToString(dr.GetValue(5));
-                    ObjCjaFactura.ExtensionArchivo = Convert.ToString(dr.GetValue(5));
-                    List.Add(ObjCjaFactura);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
+        //public void ConsultarPdfXmlFactura3(ref CajaFactura ObjCjaFactura, string Tipo, ref List<CajaFactura> List)
+        //{
+        //    try
+        //    {
+        //        OracleDataReader dr = null;
+        //        CD_Datos CDDatos = new CD_Datos();
+        //        string SP = "";
+        //        string Ruta = "";
+        //        string Archivo = string.Empty;
+        //        string IdFact;
+        //        string[] Parametros = { "P_Id_Fact", "P_TIPO" };
+        //        object[] Valores = { ObjCjaFactura.ID_FACT, Tipo };
 
-                    string OrigenArchivo = Ruta + dr.GetValue(3) + dr.GetValue(5);
-                    string DestinoArchivo;
-                    DestinoArchivo = Ruta.Replace("ArchivosFacturas", "ArchivosFacturasTemp") + dr.GetValue(3) + dr.GetValue(5);
-                    if (System.IO.File.Exists(OrigenArchivo))
-                    {
-                        System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);
-                        System.IO.File.Delete(OrigenArchivo);
-                    }
+        //        Ruta = AppDomain.CurrentDomain.BaseDirectory + "/ArchivosFacturas/";
+        //        IdFact = ObjCjaFactura.ID_FACT;
+        //        SP = "pkg_felectronica.Obt_Pdf_Xml_Factura";
+        //        OracleCommand cmm = CDDatos.GenerarOracleCommandCursor(SP, ref dr, Parametros, Valores);
+        //        while (dr.Read())
+        //        {
 
-                }
-                CDDatos.LimpiarOracleCommand(ref cmm);
+        //            ObjCjaFactura = new CajaFactura();
+        //            ObjCjaFactura.Ruta = "../ArchivosFacturasTemp/" + dr.GetValue(3) + dr.GetValue(5); //Ruta + dr.GetValue(3) + dr.GetValue(5);
+        //            ObjCjaFactura.ID_FACT = IdFact;
+        //            ObjCjaFactura.Fecha_Fact_Cja = Convert.ToString(dr.GetValue(2));
+        //            ObjCjaFactura.Folio_Fact_Cja = Convert.ToString(dr.GetValue(3));
+        //            ObjCjaFactura.NombreArchivo = Convert.ToString(dr.GetValue(3)) + Convert.ToString(dr.GetValue(5));
+        //            ObjCjaFactura.ExtensionArchivo = Convert.ToString(dr.GetValue(5));
+        //            List.Add(ObjCjaFactura);
 
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //            string OrigenArchivo = Ruta + dr.GetValue(3) + dr.GetValue(5);
+        //            string DestinoArchivo;
+        //            DestinoArchivo = Ruta.Replace("ArchivosFacturas", "ArchivosFacturasTemp") + dr.GetValue(3) + dr.GetValue(5);
+        //            if (System.IO.File.Exists(OrigenArchivo))
+        //            {
+        //                System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);
+        //                System.IO.File.Delete(OrigenArchivo);
+        //            }
+
+        //        }
+        //        CDDatos.LimpiarOracleCommand(ref cmm);
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
         public void ConsultarPdfXmlFactura(ref CajaFactura ObjCjaFactura, string Tipo, ref List<CajaFactura> List)
         {
             try
@@ -983,7 +1096,7 @@ namespace CapaDatos
 
                 Ruta = AppDomain.CurrentDomain.BaseDirectory + "/ArchivosFacturas/";
                 IdFact = ObjCjaFactura.ID_FACT;
-                SP = "pkg_felectronica_2016.Obt_Combo_Facturas_Cja";
+                SP = "pkg_felectronica_2016.Obt_Grid_Facturas_Fiscal";
                 OracleCommand cmm = CDDatos.GenerarOracleCommandCursor(SP, ref dr, Parametros, Valores);
                 while (dr.Read())
                 {
@@ -991,9 +1104,20 @@ namespace CapaDatos
                     ObjCjaFactura = new CajaFactura();
                     ObjCjaFactura.Fecha_Fact_Cja = Convert.ToString(dr.GetValue(3));
                     ObjCjaFactura.Folio_Fact_Cja = Convert.ToString(dr.GetValue(2));
-                    ObjCjaFactura.Ruta = "../ArchivosFacturas/" + dr.GetValue(0); //Ruta + dr.GetValue(3) + dr.GetValue(5);
+                    ObjCjaFactura.Ruta_Xml = "../ArchivosFacturas/" + dr.GetValue(0) + ".XML"; //Ruta + dr.GetValue(3) + dr.GetValue(5);
+                    ObjCjaFactura.Ruta_Pdf = "../ArchivosFacturas/" + dr.GetValue(1) + ".PDF"; //Ruta + dr.GetValue(3) + dr.GetValue(5);
                     ObjCjaFactura.NombreArchivo = Convert.ToString(dr.GetValue(0));
                     ObjCjaFactura.ExtensionArchivo = Convert.ToString(dr.GetValue(4));
+                    ObjCjaFactura.Status = Convert.ToString(dr.GetValue(5));
+                    ObjCjaFactura.Status_Carga = Convert.ToString(dr.GetValue(6));
+                    if(ObjCjaFactura.Status=="X")
+                        ObjCjaFactura.HABILITADO = true;
+                    else
+                        ObjCjaFactura.HABILITADO = false;
+                    ObjCjaFactura.NombreArchivoPDF = dr.GetValue(0) + ".PDF";
+                    ObjCjaFactura.NombreArchivoXML = dr.GetValue(0) + ".XML";
+
+
                     List.Add(ObjCjaFactura);
                 }
                 CDDatos.LimpiarOracleCommand(ref cmm);
@@ -1004,5 +1128,44 @@ namespace CapaDatos
                 throw new Exception(ex.Message);
             }
         }
+        public void ConsultarFacturas(ref List<CajaFactura> List)
+        {
+            try
+            {
+                OracleDataReader dr = null;
+                CD_Datos CDDatos = new CD_Datos();
+                string SP = "";
+                string Ruta = "";
+                string Archivo = string.Empty;
+                string IdFact;
+                string[] Parametros = { "P_Id_Factura" };
+                object[] Valores = { -1 };
+                CajaFactura ObjCjaFactura;
+                Ruta = AppDomain.CurrentDomain.BaseDirectory + "/ArchivosFacturas/";
+                SP = "pkg_felectronica_2016.Obt_Grid_Doctos_Facturacion";
+                OracleCommand cmm = CDDatos.GenerarOracleCommandCursor(SP, ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+
+                    ObjCjaFactura = new CajaFactura();
+                    ObjCjaFactura.Fecha_Fact_Cja = Convert.ToString(dr.GetValue(3));
+                    ObjCjaFactura.Folio_Fact_Cja = Convert.ToString(dr.GetValue(4));
+                    ObjCjaFactura.Ruta_Xml = "../ArchivosFacturas/" + dr.GetValue(0) + ".XML"; //Ruta + dr.GetValue(3) + dr.GetValue(5);
+                    ObjCjaFactura.Ruta_Pdf = "../ArchivosFacturas/" + dr.GetValue(1) + ".PDF"; //Ruta + dr.GetValue(3) + dr.GetValue(5);                                                 
+                    ObjCjaFactura.NombreArchivoPDF = dr.GetValue(0) + ".PDF";
+                    ObjCjaFactura.NombreArchivoXML = dr.GetValue(0) + ".XML";
+
+
+                    List.Add(ObjCjaFactura);
+                }
+                CDDatos.LimpiarOracleCommand(ref cmm);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

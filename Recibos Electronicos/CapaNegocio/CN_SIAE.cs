@@ -33,6 +33,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void RefSyswebConsultaGrid(Factura ObjFactura, ref List<Factura> List)
+        {
+            try
+            {
+                CD_SIAE CDSIAE = new CD_SIAE();
+                CDSIAE.ConsultaGridRefSysweb(ObjFactura, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
 
         public void ActualizarStatusSIAE(Factura ObjFactura, string Usuario, ref string Verificador)
         {

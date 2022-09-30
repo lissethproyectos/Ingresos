@@ -1123,6 +1123,28 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void Generar_Recibo_OnLine_SIAE(Factura ObjFactura, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand cmm = null;
+            try
+            {
+
+
+                String[] Parametros = { "p_id_ficha_bancaria", "p_mp_order", "p_origen" };
+                Object[] Valores = { ObjFactura.ID_FICHA_BANCARIA, ObjFactura.multipago.Order, ObjFactura.FACT_BANCO };
+                String[] ParametrosOut = { "p_Bandera" };
+                cmm = CDDatos.GenerarOracleCommand("GNR_RECIBO_ONLINE_SIAE", ref Verificador, Parametros, Valores, ParametrosOut);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
 
         public void Generar_Recibo_Apirante(Factura ObjFactura, ref string Verificador)
         {

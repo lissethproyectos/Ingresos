@@ -596,7 +596,7 @@
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="RECHAZADO">
                                                             <ItemTemplate>
-                                                                <asp:Image ID="imgRechazado2" runat="server" ImageUrl='<%# Bind("Ruta") %>' />
+                                                                <asp:Image ID="imgRechazado2" runat="server" ImageUrl='<%# Bind("Ruta_Pdf") %>' />
                                                             </ItemTemplate>
                                                             <HeaderStyle HorizontalAlign="Center" />
                                                             <ItemStyle HorizontalAlign="Center" Width="20px" />
@@ -612,6 +612,13 @@
                                                         <asp:BoundField DataField="FACT_DIAS_SOLICITUD" />
                                                         <asp:BoundField DataField="FACT_RECEPTOR_STATUS2" />
                                                         <asp:BoundField DataField="COLOR" />
+                                                        <asp:TemplateField HeaderText="Solicitar Cancelación">
+                                                            <ItemTemplate>
+                                                                <asp:LinkButton ID="linkBttnCancelarFact1" runat="server" CausesValidation="false" ToolTip="Eliminar registro" OnClick="linkBttnEliminarStatus_Click"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                            </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" Width="5%" />
+                                                        </asp:TemplateField>
                                                     </Columns>
                                                     <FooterStyle CssClass="enc" />
                                                     <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -729,10 +736,12 @@
                                                             <HeaderStyle HorizontalAlign="Center" />
                                                             <ItemStyle HorizontalAlign="Center" />
                                                         </asp:TemplateField>
-                                                        <asp:TemplateField>
+                                                        <asp:TemplateField HeaderText="Solicitar Cancelación">
                                                             <ItemTemplate>
-                                                                <asp:LinkButton ID="linkBttnEliminarStatus" runat="server" CausesValidation="false" ToolTip="Eliminar registro" OnClick="linkBttnEliminarStatus_Click"><i aria-hidden="true" class="fa fa-trash fa-2x"></i></asp:LinkButton>
+                                                                <asp:LinkButton ID="linkBttnEliminarStatus" runat="server" CausesValidation="false" ToolTip="Eliminar registro" OnClick="linkBttnEliminarStatus_Click"><i aria-hidden="true" class="fa fa-times-circle fa-2x"></i></asp:LinkButton>
                                                             </ItemTemplate>
+                                                            <HeaderStyle HorizontalAlign="Center" />
+                                                            <ItemStyle HorizontalAlign="Center" Width="5%" />
                                                         </asp:TemplateField>
                                                     </Columns>
                                                     <FooterStyle CssClass="enc" />
@@ -1044,7 +1053,7 @@
                             <div class="col">
                                 <asp:UpdatePanel ID="UpdatePanel17" runat="server">
                                     <ContentTemplate>
-                                        <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="3" Width="100%" Height="614px" CssClass="ajax__tab_xp" ScrollBars="Vertical">
+                                        <ajaxToolkit:TabContainer ID="tabFacturas" runat="server" ActiveTabIndex="2" Width="100%" Height="614px" CssClass="ajax__tab_xp" ScrollBars="Vertical">
                                             <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                 <HeaderTemplate><i class="fa fa fa-file fa-2x font-weight-bold" aria-hidden="true"></i>&nbsp;Datos Fiscales</HeaderTemplate>
                                                 <ContentTemplate>
@@ -1761,44 +1770,80 @@
                                                             <div class="container">
                                                                 <asp:Panel ID="pnlFacturas" runat="server">
                                                                     <div class="row">
-                                                                        <div class="col-md-2">Folio de la Factura</div>
+                                                                        <div class="col-md-1">Folio</div>
                                                                         <div class="col-md-2">
                                                                             <asp:TextBox ID="txtFolio_Fact_Cja" runat="server" CssClass="form-control"></asp:TextBox>
                                                                         </div>
                                                                         <div class="col-md-1">
-                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtFolio_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="adjuntarFactura"></asp:RequiredFieldValidator>
+                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="txtFolio_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">Fecha de la Factura </div>
+                                                                        <div class="col-md-1">Fecha</div>
                                                                         <div class="col-md-2">
                                                                             <div class="input-group mb-3">
                                                                                 <asp:TextBox ID="txtFecha_Fact_Cja" runat="server" AutoPostBack="True" CssClass="form-control" onkeyup="javascript:this.value='';"></asp:TextBox><ajaxToolkit:CalendarExtender ID="txtFecha_Fact_Cja_CalendarExtender" runat="server" PopupButtonID="imgFecha_Fact_Cja" TargetControlID="txtFecha_Fact_Cja" />
                                                                                 <span class="input-group-text primary text-white" id="basic-addon2">
-                                                                                    <asp:ImageButton ID="imgFecha_Fact_Cja" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />                                                                                    
+                                                                                    <asp:ImageButton ID="imgFecha_Fact_Cja" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                                                                 </span>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-2">
-                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtFecha_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="adjuntarFactura"></asp:RequiredFieldValidator>
+                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="txtFecha_Fact_Cja" ErrorMessage="*Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                                        </div>
+                                                                        <div class="col-md-1">Status</div>
+                                                                        <div class="col-md-2">
+                                                                            <asp:DropDownList ID="ddlStatusFact" runat="server" CssClass="form-control">
+                                                                                <asp:ListItem Value="A">Activo</asp:ListItem>
+                                                                                <asp:ListItem Value="C">Cancelado</asp:ListItem>
+                                                                                <asp:ListItem Value="SC">Solicita Cancelación</asp:ListItem>
+                                                                            </asp:DropDownList>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-2">Archivo</div>
-                                                                        <div class="col-md-10 mb-3">
-                                                                            <div class="input-group mb-3">
-                                                                                <div class="custom-file input-group-text" style="background-color: #ffffff">
-                                                                                    <asp:FileUpload ID="fileFactura" runat="server" Height="40px" Width="100%" />
-                                                                                </div>
-                                                                                <div class="input-group-prepend">
-                                                                                    <asp:LinkButton ID="linkBttnAgregaFactura" runat="server" ValidationGroup="adjuntarFactura" OnClick="linkBttnAgregaFactura_Click" CssClass="input-group-text text-white"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
-                                                                                </div>
-                                                                            </div>
+
+                                                                    <div class="row" id="divFacturas" runat="server">
+                                                                        <div class="col-md-5">
+                                                                            <asp:UpdatePanel ID="UpdatePanel24" runat="server">
+                                                                                <ContentTemplate>
+                                                                                    <div class="input-group mb-3">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <span class="input-group-text text-white">XML</span>
+                                                                                        </div>
+                                                                                        <div class="custom-file" style="width: 70%">
+                                                                                            <asp:FileUpload ID="FileFacturaXML" runat="server" class="form-control" Height="40px" Width="100%" />
+                                                                                        </div>
+                                                                                        <div class="input-group-append">
+                                                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator6" runat="server" ControlToValidate="FileFacturaXML" ErrorMessage="Archivo incorrecto, debe ser un XML" ValidationExpression="(.*?)\.(xml|XML)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
+                                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="*Archivo XML" ControlToValidate="FileFacturaXML" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </ContentTemplate>
+                                                                                <Triggers>
+                                                                                    <asp:PostBackTrigger ControlID="bttnAgregaFactura" />
+                                                                                </Triggers>
+                                                                            </asp:UpdatePanel>
                                                                         </div>
-                                                                    </div>
-                                                                    <div class="row">
-                                                                        <div class="col">
-                                                                            <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="fileFactura" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF|xml|XML)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
+                                                                        <div class="col-md-5">
+                                                                            <asp:UpdatePanel ID="UpdatePanel25" runat="server">
+                                                                                <ContentTemplate>
+                                                                                    <div class="input-group mb-3">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <span class="input-group-text text-white">PDF</span>
+                                                                                        </div>
+                                                                                        <div class="custom-file" style="width: 70%">
+                                                                                            <asp:FileUpload ID="FileFacturaPDF" runat="server" class="form-control" Height="40px" Width="100%" />
+                                                                                        </div>
+                                                                                        <div class="input-group-append">
+                                                                                            <asp:RegularExpressionValidator ID="reqExpFacturaPDF" runat="server" ControlToValidate="FileFacturaPDF" ErrorMessage="Archivo incorrecto, debe ser un PDF" ValidationExpression="(.*?)\.(pdf|PDF)$" ValidationGroup="CFDI"></asp:RegularExpressionValidator>
+                                                                                            <asp:RequiredFieldValidator ID="reqFacturaPDF" runat="server" ControlToValidate="FileFacturaPDF" ErrorMessage="*Archivo PDF" Text="* Requerido" ValidationGroup="CFDI"></asp:RequiredFieldValidator>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </ContentTemplate>
+                                                                                <Triggers>
+                                                                                    <asp:PostBackTrigger ControlID="bttnAgregaFactura" />
+                                                                                </Triggers>
+                                                                            </asp:UpdatePanel>
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            <asp:LinkButton ID="bttnAgregaFactura" runat="server" ValidationGroup="CFDI" OnClick="bttnAgregaFactura_Click" CssClass="btn btn-grey"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Adjuntar</asp:LinkButton>
                                                                         </div>
                                                                     </div>
                                                                 </asp:Panel>
@@ -1808,14 +1853,51 @@
                                                                             <Columns>
                                                                                 <asp:BoundField DataField="Fecha_Fact_Cja" HeaderText="Fecha" />
                                                                                 <asp:BoundField DataField="Folio_Fact_Cja" HeaderText="Folio" />
-                                                                                <asp:BoundField DataField="NombreArchivo" Visible="False" />
-                                                                                <asp:TemplateField HeaderText="Archivo">
+                                                                                <asp:TemplateField>
+                                                                                    <HeaderTemplate>
+                                                                                        <i class="fa fa-file-code-o fa-2x" aria-hidden="true"></i>
+                                                                                    </HeaderTemplate>
                                                                                     <ItemTemplate>
-                                                                                        <asp:HyperLink ID="linkPdf" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "Ruta") %>' Target="_blank"><%# DataBinder.Eval(Container.DataItem, "NombreArchivo") %></asp:HyperLink>
+                                                                                        <asp:HyperLink ID="linkXml" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "Ruta_Xml") %>' Target="_blank" Font-Bold="True">XML</asp:HyperLink>
                                                                                     </ItemTemplate>
+                                                                                    <HeaderStyle HorizontalAlign="Center" Width="5%" />
+                                                                                    <ItemStyle HorizontalAlign="Center" />
                                                                                 </asp:TemplateField>
-                                                                                <asp:BoundField DataField="ExtensionArchivo" Visible="False" />
-                                                                                <asp:CommandField ShowDeleteButton="True" />
+                                                                                <asp:TemplateField>
+                                                                                    <HeaderTemplate>
+                                                                                        <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i>
+                                                                                    </HeaderTemplate>
+                                                                                    <ItemTemplate>
+                                                                                        <asp:HyperLink ID="linkPdf" runat="server" NavigateUrl='<%# DataBinder.Eval(Container.DataItem, "Ruta_Pdf") %>' Target="_blank" Font-Bold="True">PDF</asp:HyperLink>
+                                                                                    </ItemTemplate>
+                                                                                    <HeaderStyle HorizontalAlign="Center" Width="5%" />
+                                                                                    <ItemStyle HorizontalAlign="Center" />
+                                                                                </asp:TemplateField>
+                                                                                <asp:TemplateField ShowHeader="False">
+                                                                                    <HeaderTemplate>
+                                                                                        <i class="fa fa-trash fa-2x" aria-hidden="true"></i>
+                                                                                    </HeaderTemplate>
+                                                                                    <ItemTemplate>
+                                                                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Delete" Text="Eliminar" Font-Bold="True"></asp:LinkButton>
+                                                                                    </ItemTemplate>
+                                                                                    <HeaderStyle HorizontalAlign="Center" Width="5%" />
+                                                                                    <ItemStyle HorizontalAlign="Center" />
+                                                                                </asp:TemplateField>
+                                                                                <asp:TemplateField HeaderText="Status">
+                                                                                    <ItemTemplate>
+                                                                                        <asp:Label ID="lblDescStatus" runat="server" Text='<%# Bind("Status_Carga") %>' Font-Bold="True"></asp:Label>
+                                                                                    </ItemTemplate>
+                                                                                    <HeaderStyle HorizontalAlign="Center" Width="5%" />
+                                                                                    <ItemStyle HorizontalAlign="Center" />
+                                                                                </asp:TemplateField>
+                                                                                <asp:TemplateField HeaderText="Acción">
+                                                                                    <ItemTemplate>
+                                                                                        <asp:LinkButton ID="linkBttnStatusFact" runat="server" CssClass="btn btn-danger" Visible='<%# Bind("HABILITADO") %>' OnClick="linkBttnStatusFact_Click" Text="Aceptar Cancelación"></asp:LinkButton>
+                                                                                    </ItemTemplate>
+                                                                                    <HeaderStyle HorizontalAlign="Center" Width="12%" />
+                                                                                    <ItemStyle HorizontalAlign="Center" />
+                                                                                </asp:TemplateField>
+                                                                                <asp:BoundField DataField="Status" />
                                                                             </Columns>
                                                                             <FooterStyle CssClass="enc" />
                                                                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -1851,73 +1933,6 @@
                                                                 </div>--%>
                                                             </div>
                                                         </ContentTemplate>
-                                                        <Triggers>
-                                                            <asp:PostBackTrigger ControlID="linkBttnAgregaFactura" />
-                                                        </Triggers>
-                                                    </asp:UpdatePanel>
-                                                </ContentTemplate>
-                                            </ajaxToolkit:TabPanel>
-                                            <ajaxToolkit:TabPanel ID="TabPanel4" runat="server" HeaderText="TabPanel4">
-                                                <HeaderTemplate>
-                                                    <i class="fa fa-times" aria-hidden="true"></i>Solicitud de Cancelación
-                                                </HeaderTemplate>
-                                                <ContentTemplate>
-                                                    <asp:UpdatePanel ID="UpdatePanel23" runat="server">
-                                                        <ContentTemplate>
-                                                            <br />
-                                                            <div class="container">
-                                                                <%--<div class="row">
-                                                                    <div class="col alert alert-warning">
-                                                                        Con el nuevo esquema de CFDI 4.0, a partir del 1 de enero de 2022, será requerido señalar el motivo por el cual se cancela el comprobante.
-                                                                    </div>
-                                                                </div>--%>
-
-                                                                <div class="row" id="rowSolCancela" runat="server">
-                                                                    <div class="col-md-1 font-weight-bold">
-                                                                        Motivo as as
-                                                                    </div>
-                                                                    <div class="col-md-11 font-weight-bold">
-                                                                        <asp:DropDownList ID="ddlMotivoCancelacion" runat="server" CssClass="form-control">
-                                                                            <asp:ListItem Value="00">--Seleccionar--</asp:ListItem>
-                                                                            <asp:ListItem Value="CNC001">COMPROBANTES EMITIDOS CON ERRORES CON RELACIÓN</asp:ListItem>
-                                                                            <asp:ListItem Value="CNC002">COMPROBANTES EMITIDOS SIN ERRORES CON RELACIÓN</asp:ListItem>
-                                                                            <asp:ListItem Value="CNC003">NO SE LLEVO OPERACIÓN</asp:ListItem>
-                                                                        </asp:DropDownList>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-1">
-                                                                        Acuse
-                                                                    </div>
-                                                                    <div class="col-md-11">
-                                                                        <div class="input-group mb-3">
-                                                                            <div class="custom-file input-group-text" style="background-color: #ffffff">
-                                                                                <asp:FileUpload ID="fileAcuse" runat="server" Height="40px" Width="100%" />
-                                                                            </div>
-                                                                            <div class="input-group-prepend">
-                                                                                <asp:LinkButton ID="linkBttnAcuse" runat="server" ValidationGroup="guardar" OnClick="linkBttnAcuse_Click" CssClass="input-group-text text-white"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-md-1"></div>
-                                                                    <div class="col-md-10">
-                                                                        <asp:HyperLink ID="linkAcuse" runat="server" CssClass="form-control alert-secondary" Target="_blank">[lblArchivoConstancia]</asp:HyperLink>
-                                                                    </div>
-                                                                    <div class="col-md-1">
-                                                                        <asp:UpdatePanel ID="UpdatePanel22" runat="server">
-                                                                            <ContentTemplate>
-                                                                                <asp:LinkButton ID="linkBttnEliminarAcuse" runat="server" CssClass="btn btn-danger" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarConstancia_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash" aria-hidden="true"></i></asp:LinkButton>
-                                                                            </ContentTemplate>
-                                                                        </asp:UpdatePanel>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </ContentTemplate>
-                                                        <Triggers>
-                                                            <asp:PostBackTrigger ControlID="linkBttnAcuse" />
-                                                        </Triggers>
                                                     </asp:UpdatePanel>
                                                 </ContentTemplate>
                                             </ajaxToolkit:TabPanel>
@@ -1927,11 +1942,16 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col text-right">
+                                <asp:CheckBox ID="chkValida" runat="server" Checked="True" OnCheckedChanged="chkValida_CheckedChanged" Text="Realizar validación" AutoPostBack="True" Font-Bold="True" />
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <asp:ValidationSummary ID="validationSumGuardar" runat="server" CssClass="mensaje_rojo" HeaderText="Los siguientes campos son requeridos:" ValidationGroup="DatosFiscales" />
                             </div>
-                            <div class="col-md-6 text-right">
 
+                            <div class="col-md-6 text-right">
                                 <asp:LinkButton ID="linkBttnVerRecibo" runat="server" CssClass="btn btn-grey" ValidationGroup="Ninguno" OnClick="linkBttnVerRecibo_Click"><i class="fa fa-file"></i> Ver Recibo</asp:LinkButton>
                                 <asp:LinkButton ID="linkBttnCancelarSol" runat="server" CssClass="btn btn-danger" ValidationGroup="DatosFiscales" OnClick="linkBttnCancelarSol_Click"><i class="fa fa-trash" aria-hidden="true"></i> Cancelar Solicitud</asp:LinkButton>
                                 <asp:LinkButton ID="linkBttnGuardarEditar" runat="server" CssClass="btn btn-info" ValidationGroup="DatosFiscales" OnClick="linkBttnGuardarEditar_Click"><i class="fa fa-floppy-o" aria-hidden="true"></i> Guardar</asp:LinkButton>
@@ -1949,29 +1969,10 @@
             </asp:MultiView>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <%--<div class="row">
-                                                                    <div class="col">
-                                                                        <p>
-  <a class="btn btn-danger" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Solicitar Cancelación de Factura
-  </a>
-  
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
-  </div>
-</div>
-<div id='collapsediv1' class='collapse div1'>
-  <div>
-    AAAAAAAAAA
-  </div>
-  <div>
-    BBBBBBBBBBB
-  </div>
-</div>
-                                                                    </div>
-                                                                </div>--%>
+    <%--                                <asp:Button ID="bttnVerRecibo" runat="server" CssClass="btn btn-grey" Text="VER RECIBO" OnClick="bttnVerRecibo_Click" ValidationGroup="Ninguno" />
+                                &nbsp;<asp:Button ID="btnGuardarEditar" runat="server" CssClass="btn btn-grey" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="GUARDAR" ValidationGroup="DatosFiscales" />
+                                &nbsp;<asp:Button ID="Button1" runat="server" CssClass="btn btn-info" OnClick="btnGuardarEditar_Click" TabIndex="14" Text="ENVIAR SOLICITUD" ValidationGroup="DatosFiscales" />
+                                &nbsp;<asp:Button ID="btnCancelarEditar" runat="server" CssClass="btn btn-blue-grey" OnClick="btnCancelarEditar_Click" TabIndex="15" Text="SALIR" ValidationGroup="Ninguno" />--%>
     <div class="modal fade" id="modalBitacora" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -2117,7 +2118,7 @@
                                         </Columns>
                                         <FooterStyle CssClass="enc" />
                                         <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                        <SelectedRowStyle CssClass="sel" />
+                                        <SelectedRowStyle CssClass="alert-info" />
                                         <HeaderStyle CssClass="enc" />
                                         <AlternatingRowStyle CssClass="alt" />
                                     </asp:GridView>
@@ -2221,7 +2222,71 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col text-right">
-                                <asp:LinkButton ID="bttnCancelaFact" class="btn btn-primary" runat="server" OnClick="bttnCancelaFact_Click">Solicitar cancelación</asp:LinkButton>
+                                <asp:LinkButton ID="bttnCancelaFact" class="btn btn-primary" runat="server" OnClick="bttnSolCancelaFact_Click">Solicitar cancelación</asp:LinkButton>
+                                <button type="button" class="btn btn-blue-grey" data-dismiss="modal">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="modalAcuse">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar aceptar cancelación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <asp:UpdatePanel ID="UpdatePanel23" runat="server">
+                            <ContentTemplate>
+                                <div class="row">
+                                    <div class="col">
+                                        Acuse
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="input-group mb-3">
+                                            <div class="custom-file input-group-text" style="background-color: #ffffff">
+                                                <asp:FileUpload ID="fileAcuse" runat="server" Height="40px" Width="100%" />
+                                            </div>
+                                            <div class="input-group-prepend">
+                                                <asp:LinkButton ID="linkBttnAcuse" runat="server" ValidationGroup="guardar" OnClick="linkBttnAcuse_Click" CssClass="input-group-text text-white"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i>Adjuntar</asp:LinkButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <asp:HyperLink ID="linkAcuse" runat="server" CssClass="form-control alert-secondary" Target="_blank">[lblArchivoConstancia]</asp:HyperLink>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <asp:UpdatePanel ID="UpdatePanel22" runat="server">
+                                            <ContentTemplate>
+                                                <asp:LinkButton ID="linkBttnEliminarAcuse" runat="server" CssClass="btn btn-danger" CausesValidation="False" CommandName="Click" OnClick="linkBttnEliminarConstancia_Click" OnClientClick="return confirm('¿Desea eliminar el registro?');"><i class="fa fa-trash" aria-hidden="true"></i></asp:LinkButton>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </div>
+                                </div>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:PostBackTrigger ControlID="linkBttnAcuse" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col text-right">
+                                <asp:LinkButton ID="linkBttnRechazarSol" class="btn btn-danger" runat="server" OnClick="linkBttnRechazarSol_Click">Rechazar</asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton2" class="btn btn-primary" runat="server" OnClick="bttnCancelaFact_Click">Confirmar</asp:LinkButton>
                                 <button type="button" class="btn btn-blue-grey" data-dismiss="modal">Cerrar</button>
                             </div>
                         </div>

@@ -366,22 +366,13 @@ namespace Recibos_Electronicos.Form
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtenderFin;
 
         /// <summary>
-        /// Control lstCiclo.
+        /// Control ddlCiclo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lstCiclo;
-
-        /// <summary>
-        /// Control linkBttnAgregarCiclo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkBttnAgregarCiclo;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCiclo;
 
         /// <summary>
         /// Control ddlStatus.
@@ -1210,15 +1201,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-
-        /// <summary>
-        /// Control ddlCiclo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlCiclo;
 
         /// <summary>
         /// Control LinkButton4.

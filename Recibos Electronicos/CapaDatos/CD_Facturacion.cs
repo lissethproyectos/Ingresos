@@ -195,8 +195,8 @@ namespace CapaDatos
             OracleCommand cmm = null;
             try
             {
-                String[] Parametros = { "P_ID_FACTURA", "P_MOTIVO_CANCELACION", "P_OBS_CANCELACION" };
-                Object[] Valores = { objFactura.ID_FACT, objFactura.RECEPTOR_STATUS_NOTAS, objFactura.OBSERVACIONES };
+                String[] Parametros = { "P_ID_FACTURA", "P_MOTIVO_CANCELACION", "P_OBS_CANCELACION", "P_TIPO" };
+                Object[] Valores = { objFactura.ID_FACT, objFactura.RECEPTOR_STATUS_NOTAS, objFactura.OBSERVACIONES, objFactura.TIPO };
                 String[] ParametrosOut = { "p_bandera" };
                 cmm = CDDatos.GenerarOracleCommand("UPD_FACTURA_CANCELACION", ref Verificador, Parametros, Valores, ParametrosOut);
             }
@@ -542,64 +542,66 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-        public void FacturaDoctoAgregar(string Usuario, ref List<CajaFactura> Archivos, int IdFactura, string RutaServ, string Tipo, ref string Verificador)
-        {
-            for (int i = 0; i < Archivos.Count; i++)
-            {
-                CD_Datos CDDatos = new CD_Datos();
-                OracleCommand OracleCmd = null;
+        //public void FacturaDoctoAgregar(string Usuario, ref List<CajaFactura> Archivos, int IdFactura, string RutaServ, string Tipo, ref string Verificador)
+        //{
+        //    for (int i = 0; i < Archivos.Count; i++)
+        //    {
+        //        CD_Datos CDDatos = new CD_Datos();
+        //        OracleCommand OracleCmd = null;
 
-                try
-                {
+        //        try
+        //        {
 
-                    if (Archivos[i].Ruta != null)
-                    {
-                        string[] Parametros = { "P_ID_FACTURA",
-                                        "P_TIPO",
-                                        "P_USUARIO",
-                                        "P_FECHA_FACT",
-                                        "P_FOLIO_FACT",
-                                        "P_EXTENSION",
-                                        "P_RUTA",
-                                        "P_NOMBRE_ARCHIVO"
-                                      };
-                        string[] ParametrosOut = { "P_BANDERA" };
+        //            if (Archivos[i].Ruta != null)
+        //            {
+        //                string[] Parametros = { "P_ID_FACTURA",
+        //                                "P_TIPO",
+        //                                "P_USUARIO",
+        //                                "P_FECHA_FACT",
+        //                                "P_FOLIO_FACT",
+        //                                "P_EXTENSION",
+        //                                "P_RUTA",
+        //                                "P_NOMBRE_ARCHIVO"
+        //                              };
+        //                string[] ParametrosOut = { "P_BANDERA" };
 
 
-                        object[] Valores = {
-                                        IdFactura,
-                                        Tipo,
-                                        Usuario,
-                                        Archivos[i].Fecha_Fact_Cja,
-                                        Archivos[i].Folio_Fact_Cja,
-                                        Archivos[i].ExtensionArchivo,
-                                        Archivos[i].Ruta,
-                                        Archivos[i].NombreArchivo
-                                       };
-                        OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURA_DOCTO", ref Verificador, Parametros, Valores, ParametrosOut);
-                        string OrigenArchivo = RutaServ + Archivos[i].NombreArchivo; // + Archivos[i].ExtensionArchivo;
-                        string DestinoArchivo;
-                        //DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].Folio_Fact_Cja + Archivos[i].ExtensionArchivo;
-                        //DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo + Archivos[i].ExtensionArchivo;
-                        DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo;
+        //                object[] Valores = {
+        //                                IdFactura,
+        //                                Tipo,
+        //                                Usuario,
+        //                                Archivos[i].Fecha_Fact_Cja,
+        //                                Archivos[i].Folio_Fact_Cja,
+        //                                Archivos[i].ExtensionArchivo,
+        //                                Archivos[i].Ruta,
+        //                                Archivos[i].NombreArchivo
+        //                               };
+        //                OracleCmd = CDDatos.GenerarOracleCommand("INS_FACTURA_DOCTO", ref Verificador, Parametros, Valores, ParametrosOut);
+        //                string OrigenArchivo = RutaServ + Archivos[i].NombreArchivo; // + Archivos[i].ExtensionArchivo;
+        //                string DestinoArchivo;
+        //                //DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].Folio_Fact_Cja + Archivos[i].ExtensionArchivo;
+        //                //DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo + Archivos[i].ExtensionArchivo;
+        //                DestinoArchivo = RutaServ.Replace("ArchivosFacturasTemp", "ArchivosFacturas") + Archivos[i].NombreArchivo;
 
-                        if (System.IO.File.Exists(OrigenArchivo))
-                        {
-                            System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);
-                            System.IO.File.Delete(OrigenArchivo);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    CDDatos.LimpiarOracleCommand(ref OracleCmd);
-                }
-            }
-        }
+        //                if (System.IO.File.Exists(OrigenArchivo))
+        //                {
+        //                    System.IO.File.Copy(OrigenArchivo, DestinoArchivo, true);
+        //                    System.IO.File.Delete(OrigenArchivo);
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception(ex.Message);
+        //        }
+        //        finally
+        //        {
+        //            CDDatos.LimpiarOracleCommand(ref OracleCmd);
+        //        }
+        //    }
+        //}
+
+
         public void FacturaDoctoBorrar(Facturacion ObjFactura, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos();

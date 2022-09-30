@@ -163,18 +163,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void FacturaDoctoAgregar(string Usuario, ref List<CajaFactura> List, int IdFactura, string RutaServ, string Tipo, ref string Verificador)
-        {
-            try
-            {
-                CD_Facturacion CDFacturacion = new CD_Facturacion();
-                CDFacturacion.FacturaDoctoAgregar(Usuario, ref List, IdFactura, RutaServ, Tipo, ref Verificador);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //public void FacturaDoctoAgregar(string Usuario, ref List<CajaFactura> List, int IdFactura, string RutaServ, string Tipo, ref string Verificador)
+        //{
+        //    try
+        //    {
+        //        CD_Facturacion CDFacturacion = new CD_Facturacion();
+        //        CDFacturacion.FacturaDoctoAgregar(Usuario, ref List, IdFactura, RutaServ, Tipo, ref Verificador);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
         public void FacturaDoctoBorrar(Facturacion ObjFactura, ref string Verificador)
         {
             try
