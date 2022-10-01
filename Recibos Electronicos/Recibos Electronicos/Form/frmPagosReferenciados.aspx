@@ -5,33 +5,33 @@
     <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="container">        
-        <div class="row">            
-             <div class="col-md-1">
-                Origen
-            </div>
-             <div class="col-md-2">
-                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
-                     <ContentTemplate>
-                         <asp:DropDownList ID="ddlOrigen" runat="server" CssClass="form-control">
-                             <asp:ListItem Value="SIAE">Escolares</asp:ListItem>
-                             <asp:ListItem Value="SYSWEB">Sysweb</asp:ListItem>
-                         </asp:DropDownList>
-                     </ContentTemplate>
-                 </asp:UpdatePanel>
-            </div>
+    <div class="container">
+        <div class="row">
             <div class="col-md-1">
                 Escuela
             </div>
-            <div class="col-md-8">
+            <div class="col-md-11">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="DDLEscuela" runat="server" CssClass="form-control" Width="100%"></asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-            </div>            
+            </div>
         </div>
         <div class="row">
+            <div class="col-md-1">
+                Origen
+            </div>
+            <div class="col-md-2">
+                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <ContentTemplate>
+                        <asp:DropDownList ID="ddlOrigen" runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlOrigen_SelectedIndexChanged">
+                            <asp:ListItem Value="SIAE">Escolares</asp:ListItem>
+                            <asp:ListItem Value="SYSWEB">Sysweb</asp:ListItem>
+                        </asp:DropDownList>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
             <div class="col-md-1">
                 Nivel
             </div>
@@ -49,37 +49,99 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-            <div class="col-md-1">
-                Ciclo
-            </div>
-            <div class="col-md-2">
+            <div class="col-md-6">
                 <asp:UpdatePanel ID="updPnlCiclo" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlCicloEscolar" runat="server" Width="100%" CssClass="form-control">
-                        </asp:DropDownList>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-            <div class="col-md-1">
-                <asp:UpdateProgress ID="updPrgCiclo" runat="server" AssociatedUpdatePanelID="updPnlCiclo">
-                    <ProgressTemplate>
-                        <asp:Image ID="imgCiclo" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-            </div>       
-            <div class="col-md-3">
-                <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia/Nombre" Visible="true" Width="100%"></asp:TextBox>
-            </div>
-            <div class="col-md-1">
-                <asp:UpdatePanel ID="UpdatePanel229" runat="server">
-                    <ContentTemplate>
-                        <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" />
+                        <div class="row" runat="server" id="divCiclo">
+                            <div class="col-md-1">
+                                Ciclo
+                            </div>
+                            <div class="col-md-5">
+                                <asp:DropDownList ID="ddlCicloEscolar" runat="server" Width="100%" CssClass="form-control">
+                                </asp:DropDownList>
+                            </div>
+                            <div class="col-md-1">
+                                <asp:UpdateProgress ID="updPrgCiclo" runat="server" AssociatedUpdatePanelID="updPnlCiclo">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgCiclo" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
+                            </div>
+                        </div>
+                        <div class="row" runat="server" id="divBusqueda" visible="false">
+                            <div class="col-md-1">
+                                Filtro
+                            </div>
+                            <div class="col-md-11">
+                                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                    <ContentTemplate>
+                                        <asp:DropDownList ID="ddlBusqueda" runat="server" CssClass="form-control" OnSelectedIndexChanged="ddlBusqueda_SelectedIndexChanged" AutoPostBack="True">
+                                            <asp:ListItem Value="1">Fecha de Registro</asp:ListItem>
+                                            <asp:ListItem Value="2">Referencia/Nombre</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
         </div>
+        <asp:UpdatePanel ID="updPnlFechas" runat="server">
+            <ContentTemplate>
+                <div class="row" id="divFechas" runat="server">
+                    <div class="col-md-1">
+                        Inicio
+                    </div>
+                    <div class="col-md-2">
+                        <asp:TextBox ID="txtFechaIni" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Width="95px"></asp:TextBox>
+                        <ajaxToolkit:CalendarExtender ID="CalendarExtenderIni" runat="server" TargetControlID="txtFechaIni" PopupButtonID="imgCalendarioIni" />
+                        <asp:ImageButton ID="imgCalendarioIni" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                    </div>
+                    <div class="col-md-1">
+                        Fin
+                    </div>
+                    <div class="col-md-2">
+                        <asp:TextBox ID="txtFechaFin" runat="server" AutoPostBack="True" CssClass="box" onkeyup="javascript:this.value='';" Style="margin-left: 0px" Width="95px"></asp:TextBox>
+                        <ajaxToolkit:CalendarExtender ID="CalendarExtenderFin" runat="server" PopupButtonID="imgCalendarioFin" TargetControlID="txtFechaFin" />
+                        <asp:ImageButton ID="imgCalendarioFin" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
+                    </div>
+                    <div class="col-md-2">
+                        <asp:LinkButton ID="linkBttnBusca1" runat="server" CssClass="btn btn-primary" OnClick="linkBttnBusca1_Click">Buscar</asp:LinkButton>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        <asp:UpdatePanel ID="updPnlBuscarRef" runat="server">
+            <ContentTemplate>
+                <div class="row" id="rowBuscaRef" runat="server">
+                    <div class="col-md-1">Buscar</div>
+                    <div class="col-md-10">
+                        <asp:TextBox ID="txtReferencia" runat="server" CssClass="form-control" PlaceHolder="Referencia/Nombre"></asp:TextBox>
+                    </div>
+                    <div class="col-md-1">
+                        <asp:UpdatePanel ID="UpdatePanel229" runat="server">
+                            <ContentTemplate>
+                                <asp:LinkButton ID="linkBttnBusca2" runat="server" CssClass="btn btn-primary" OnClick="linkBttnBusca2_Click">Buscar</asp:LinkButton>
+                            </ContentTemplate>
+                        </asp:UpdatePanel>
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+        
         <div class="row">
-                        <div class="col>
+            <div class="col text-center">
+                <asp:UpdateProgress ID="UpdatePgr3" runat="server" AssociatedUpdatePanelID="UpdatePanel3">
+                    <ProgressTemplate>
+                        <asp:Image ID="img10" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col text-center">
                 <asp:UpdateProgress ID="updPrgNivelo" runat="server" AssociatedUpdatePanelID="updPnlNivel">
                     <ProgressTemplate>
                         <asp:Image ID="img3" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
@@ -106,6 +168,7 @@
                 </asp:UpdateProgress>
             </div>
         </div>
+        <hr />
         <div class="row">
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel228" runat="server">
@@ -137,25 +200,28 @@
                                 <asp:BoundField DataField="FACT_TIPO" HeaderText="Tipo" />
                                 <asp:TemplateField HeaderText="Pago Aplicado">
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="imgStatus" runat="server" ImageUrl='<%# Bind("FACT_RECEPTOR_STATUS") %>' OnClick="imgStatus_Click" />                                        
+                                        <asp:ImageButton ID="imgStatus" runat="server" ImageUrl='<%# Bind("FACT_RECEPTOR_STATUS") %>' OnClick="imgStatus_Click" />
                                     </ItemTemplate>
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Editar">
+                                <asp:TemplateField>
                                     <EditItemTemplate>
                                         <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="linkBttnEditar" runat="server" CssClass="btn btn-primary" OnClick="linkBttnEditar_Click">Editar</asp:LinkButton>
+                                        <asp:LinkButton ID="linkBttnEditar" runat="server" CssClass="btn btn-info" OnClick="linkBttnEditar_Click"><i class="fa fa-pencil" aria-hidden="true"></i>Editar</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
-                                <asp:TemplateField HeaderText="Recibo">
-                                    <EditItemTemplate>
-                                        <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                                    </EditItemTemplate>
+                                <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="linkBttnGenRecibo" runat="server" CssClass="btn btn-green" OnClick="linkBttnGenRecibo_Click">Generar</asp:LinkButton>
+                                        <asp:LinkButton ID="linkBttnGenRecibo" runat="server" CssClass="btn btn-green" OnClick="linkBttnGenRecibo_Click"><i class="fa fa-barcode" aria-hidden="true"></i>Referencia</asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblBttnGenRecibo0" runat="server" CssClass="btn btn-grey disabled" Text="Recibo" Visible='<%# Bind("VISIBLE2") %>'></asp:Label>
+                                        <asp:LinkButton ID="linkBttnGenRecibo0" runat="server" CssClass="btn btn-primary disabled" OnClick="linkBttnGenRecibo_Click" Visible='<%# Bind("VISIBLE1") %>'><i class="fa fa-file"></i>Recibo</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="FACT_STATUS_NOTAS" />
@@ -178,7 +244,7 @@
     <ajaxToolkit:ModalPopupExtender ID="modalAlert" runat="server" PopupControlID="pnlDatosBanco" TargetControlID="hddnAlert" BackgroundCssClass="modalBackground_Proy">
     </ajaxToolkit:ModalPopupExtender>--%>
 
-    
+
 
     <div class="modal fade" id="modalPagos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -193,37 +259,39 @@
                     <div class="container-fluid">
                         <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                             <ContentTemplate>
-                                <div class="container">                                    
-                                    <div class="row">
-                                        <div class="col-md-2">Escuela</div>
-                                        <div class="col-md-4">
-                                            <asp:TextBox ID="txtEscuela" runat="server" Width="100%"></asp:TextBox>
+                                <div class="container">
+                                    <div id="pnlDatosGral" runat="server">
+                                        <div class="row">
+                                            <div class="col-md-2">Cve Escuela</div>
+                                            <div class="col-md-4">
+                                                <asp:TextBox ID="txtEscuela" runat="server" Width="100%"></asp:TextBox>
+                                            </div>
+                                            <div class="col-md-2">
+                                                Id Carrera
+                                            </div>
+                                            <div class="col-md-4">
+                                                <asp:TextBox ID="txtIdCarrera" runat="server" Width="100%"></asp:TextBox>
+                                            </div>
                                         </div>
-                                        <div class="col-md-2">
-                                            Carrera
+                                        <div class="row">
+                                            <div class="col-md-2">Ciclo</div>
+                                            <div class="col-md-4">
+                                                <asp:TextBox ID="txtCiclo" runat="server" Width="100%"></asp:TextBox>
+                                            </div>
+                                            <div class="col-md-2">
+                                                Semestre
+                                            </div>
+                                            <div class="col-md-4">
+                                                <asp:TextBox ID="txtSemestre" runat="server" Width="100%"></asp:TextBox>
+                                            </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <asp:TextBox ID="txtIdCarrera" runat="server" Width="100%"></asp:TextBox>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-2">Ciclo</div>
-                                        <div class="col-md-4">
-                                            <asp:TextBox ID="txtCiclo" runat="server" Width="100%"></asp:TextBox>
-                                        </div>
-                                        <div class="col-md-2">
-                                            Semestre
-                                        </div>
-                                        <div class="col-md-4">
-                                            <asp:TextBox ID="txtSemestre" runat="server" Width="100%"></asp:TextBox>
-                                        </div>                                       
-                                    </div>
-                                    <div class="row">
-                                         <div class="col-md-2">
-                                            Matricula
-                                        </div>
-                                        <div class="col-md-4">
-                                            <asp:TextBox ID="txtMatricula" runat="server" Width="100%"></asp:TextBox>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                Matricula
+                                            </div>
+                                            <div class="col-md-4">
+                                                <asp:TextBox ID="txtMatricula" runat="server" Width="100%"></asp:TextBox>
+                                            </div>
                                         </div>
                                     </div>
                                     <hr>
@@ -235,7 +303,7 @@
                                             <asp:DropDownList ID="ddlBanco" runat="server" Width="100%">
                                             </asp:DropDownList>
                                         </div>
-                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-md-2">
                                             <asp:Label ID="lblFolioBanco" runat="server" Text="Folio"></asp:Label>
@@ -270,9 +338,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="col font-weight-bold">
-                                            <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia SIAE"></asp:Label>
+                                            <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia"></asp:Label>
                                         </div>
-                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col">
                                             <asp:TextBox ID="txtReferenciaOrig" runat="server" Enabled="False" Width="100%"></asp:TextBox>
@@ -282,7 +350,7 @@
                                         <div class="col font-weight-bold">
                                             <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Pagada"></asp:Label>
                                         </div>
-                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col">
                                             <asp:TextBox ID="txtReferenciaPagada" runat="server" Width="100%"></asp:TextBox>
@@ -290,8 +358,9 @@
                                     </div>
                                     <div class="row">
                                         <div class="col text-right">
+                                            <button type="button" class="btn btn-grey" data-dismiss="modal">CERRAR</button>
                                             &nbsp;<asp:Button ID="bttnConfirmaPago" runat="server" CssClass="btn btn-info" OnClick="bttnConfirmaPago_Click" Text="GUARDAR" ValidationGroup="Guardar" />
-                                            &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos"/>
+                                            &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos" />
                                         </div>
                                     </div>
                                 </div>
@@ -327,13 +396,28 @@
         };
 
 
-        
+
         function PagosSIAE() {
 
             $('#<%= grvReferenciasSIAE.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvReferenciasSIAE.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
                 "stateSave": true,
-                "ordering": false
+                "ordering": false,
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
             });
 
         }

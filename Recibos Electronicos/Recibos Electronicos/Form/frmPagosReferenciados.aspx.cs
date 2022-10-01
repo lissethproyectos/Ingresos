@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using CapaEntidad;
 using CapaNegocio;
 using System.Data;
+using System.Globalization;
 
 namespace Recibos_Electronicos.Form
 {
@@ -34,7 +35,7 @@ namespace Recibos_Electronicos.Form
                 {
                     if ((Request.Params["__EVENTTARGET"] == this.txtReferencia.UniqueID) /*+&& (Request.Params["__EVENTARGUMENT"] == "actualizar_label")*/)
                     {
-                        this.imgBttnBuscar.Focus();
+                        this.linkBttnBusca1.Focus();
                     }
                 }
             }
@@ -74,6 +75,8 @@ namespace Recibos_Electronicos.Form
 
                 //string s=SesionUsu.Usu_Central_Tipo;
                 Cargarcombos();
+                ddlOrigen.SelectedValue = "SIAE";
+                ddlOrigen_SelectedIndexChanged(null, null);
                 ddlNivel_SelectedIndexChanged(null, null);
                 txtReferencia.Focus();
             }
@@ -86,7 +89,8 @@ namespace Recibos_Electronicos.Form
         private void CargarGrid()
         {
             Verificador = string.Empty;
-            Int32[] Celdas = new Int32[] {12,13,14,15};
+            Int32[] Celdas = new Int32[] { 13, 14, 15, 16 };
+            Int32[] CeldasSysWeb = new Int32[] { 13, 14, 15, 16 };
             try
             {
                 DataTable dt = new DataTable();
@@ -94,7 +98,14 @@ namespace Recibos_Electronicos.Form
                 grvReferenciasSIAE.DataSource = GetList();
                 grvReferenciasSIAE.DataBind();
                 if (grvReferenciasSIAE.Rows.Count > 0)
-                    CNComun.HideColumns(grvReferenciasSIAE, Celdas);
+                    if (ddlOrigen.SelectedValue == "SIAE")
+                        CNComun.HideColumns(grvReferenciasSIAE, Celdas);
+                    else
+                        CNComun.HideColumns(grvReferenciasSIAE, CeldasSysWeb);
+
+
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridPagosSIAE", "PagosSIAE();", true);
+
 
             }
             catch (Exception ex)
@@ -116,15 +127,23 @@ namespace Recibos_Electronicos.Form
                 objFactura.FACT_NIVEL = ddlNivel.SelectedValue;
                 objFactura.FACT_REFERENCIA = txtReferencia.Text;
                 Escuela = DDLEscuela.SelectedValue;
-
+                //DateTime fechaIni = txtFechaIni.Text.ToString("dd/MM/yyyy");
                 CNAlumno.AjustaDependencia(ref Escuela, objFactura.FACT_NIVEL, ref Verificador);
                 if (Verificador == "0")
                 {
                     objFactura.FACT_DEPENDENCIA = Escuela;
-                    if(ddlOrigen.SelectedValue=="SIAE")
+                    if (ddlOrigen.SelectedValue == "SIAE")
                         CNSIAE.RefSIAEConsultaGrid(objFactura, ref List);
                     else
-                        CNSIAE.RefSIAEConsultaGrid(objFactura, ref List);
+                    {
+                        //var dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
+                        //var dateIni = DateTime.ParseExact(txtFechaIni.Text, "dd/MM/yy", dateTimeFormat);
+
+                        //var dateTimeFormat2 = CultureInfo.InvariantCulture.DateTimeFormat;
+                        //var dateFin = DateTime.ParseExact(txtFechaFin.Text, "dd/MM/yyyy", dateTimeFormat);
+
+                        CNSIAE.RefSyswebConsultaGrid(objFactura, txtFechaIni.Text, txtFechaFin.Text, ref List); ;
+                    }
                 }
 
                 return List;
@@ -157,7 +176,7 @@ namespace Recibos_Electronicos.Form
 
             try
             {
-                objFactura.FACT_STATUS = grvReferenciasSIAE.SelectedRow.Cells[13].Text;
+                objFactura.FACT_STATUS = grvReferenciasSIAE.SelectedRow.Cells[14].Text;
                 objFactura.ID_FACT = grvReferenciasSIAE.SelectedRow.Cells[0].Text;
                 CNSIAE.ConfirmarPagoSIAE(objFactura, SesionUsu.Usu_Nombre, ref Verificador);
                 if (Verificador == "0")
@@ -182,7 +201,7 @@ namespace Recibos_Electronicos.Form
 
             try
             {
-                objFactura.FACT_STATUS = (grvReferenciasSIAE.SelectedRow.Cells[12].Text == "I") ? "Z" : "I";
+                objFactura.FACT_STATUS = (grvReferenciasSIAE.SelectedRow.Cells[13].Text == "I") ? "Z" : "I";
                 objFactura.ID_FACT = grvReferenciasSIAE.SelectedRow.Cells[0].Text;
                 CNSIAE.ActualizarStatusSIAE(objFactura, SesionUsu.Usu_Nombre, ref Verificador);
                 if (Verificador == "0")
@@ -280,14 +299,14 @@ namespace Recibos_Electronicos.Form
             if (Verificador == "0")
             {
 
-                objFactura.ID_FICHA_BANCARIA = Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[14].Text);
+                objFactura.ID_FICHA_BANCARIA = Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[15].Text);
                 objFactura.multipago.Order = txtFolioBanco.Text;
                 objFactura.FACT_BANCO = ddlBanco.SelectedValue;
                 try
                 {
 
 
-                    if (Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[14].Text) != 0 && Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[15].Text) == "U")
+                    if (Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[15].Text) != 0 && Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[16].Text) == "SYSWEB")
                         CNFactura.Generar_Recibo_OnLine(objFactura, ref Verificador);
                     else
                         CNFactura.Generar_Recibo_OnLine_SIAE(objFactura, ref Verificador);
@@ -331,7 +350,8 @@ namespace Recibos_Electronicos.Form
 
         protected void ddlNivel_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_AlumnosUnachCiclo", ref ddlCicloEscolar, "p_nivel", "p_tipo", ddlNivel.SelectedValue, "TODOS", "INGRESOS");
+            if(ddlOrigen.SelectedValue=="SIAE")
+                CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_AlumnosUnachCiclo", ref ddlCicloEscolar, "p_nivel", "p_tipo", ddlNivel.SelectedValue, "TODOS", "INGRESOS");
         }
 
         protected void linkBttnGenRecibo_Click(object sender, EventArgs e)
@@ -351,7 +371,29 @@ namespace Recibos_Electronicos.Form
             GridViewRow row = (GridViewRow)cbi.NamingContainer;
             grvReferenciasSIAE.SelectedIndex = row.RowIndex;
             objFactura.ID_FACT = grvReferenciasSIAE.SelectedRow.Cells[0].Text;
-            CNSIAE.SIAEConsultaDatosPago(ref objFactura, ref Verificador);
+            if (ddlOrigen.SelectedValue == "SIAE")
+            {
+                pnlDatosGral.Visible = true;
+                lblReferenciaPagada.Visible = true;
+                txtReferenciaPagada.Visible = true;
+                bttnConfirmaPago.Visible = true;
+                lblPagoAplicado.Visible = true;
+                chkPagoAplicado.Visible = true;
+                bttnGenerarRecibo.Text = "GUARDAR Y GENERAR RECIBO";
+                CNSIAE.SIAEConsultaDatosPago(ref objFactura, ref Verificador);
+            }
+            else
+            {
+                txtReferenciaOrig.Text= grvReferenciasSIAE.SelectedRow.Cells[5].Text;
+                lblReferenciaPagada.Visible = false;
+                txtReferenciaPagada.Visible = false;
+                pnlDatosGral.Visible = false;
+                bttnConfirmaPago.Visible = false;
+                bttnGenerarRecibo.Text = "GENERAR RECIBO";
+                lblPagoAplicado.Visible = false;
+                chkPagoAplicado.Visible = false;
+                CNSIAE.SysWebConsultaDatosPago(ref objFactura, ref Verificador);
+            }
             //if (grvReferenciasSIAE.SelectedRow.Cells[11].Text == "TITULO" || grvReferenciasSIAE.SelectedRow.Cells[11].Text == "EXTRAORDINARIO")
             //    bttnGenerarRecibo.Visible = true;// (grvReferenciasSIAE.SelectedRow.Cells[11].Text == "TITULO") ? true : false;
             //else
@@ -383,6 +425,67 @@ namespace Recibos_Electronicos.Form
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
 
 
+        }
+
+        protected void ddlOrigen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            DateTime hoy = DateTime.Now;
+            string FechaIni = hoy.ToString("dd/MM/yyyy");
+            string FechaFin = hoy.ToString("dd/MM/yyyy");
+            if (ddlOrigen.SelectedValue == "SYSWEB")
+            {
+                divCiclo.Visible = false;
+                divBusqueda.Visible = true;
+                txtFechaIni.Text = FechaIni;
+                txtFechaFin.Text = FechaFin;
+                ddlBusqueda_SelectedIndexChanged(null, null);
+            }
+            else
+            {
+                divFechas.Visible = false;
+                divCiclo.Visible = true;
+                divBusqueda.Visible = false;
+                rowBuscaRef.Visible = true;
+            }
+        }
+
+        protected void linkBttnBusca2_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CargarGrid();
+            }
+            catch(Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
+            }
+        }
+
+        protected void linkBttnBusca1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CargarGrid();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
+            }
+        }
+
+        protected void ddlBusqueda_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlBusqueda.SelectedValue == "2")
+            {
+
+                divFechas.Visible = false;
+                rowBuscaRef.Visible = true;
+            }
+            else
+            {
+                divFechas.Visible = true;
+                rowBuscaRef.Visible = false;
+            }
         }
     }
 }
