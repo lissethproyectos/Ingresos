@@ -1109,8 +1109,8 @@ namespace CapaDatos
             {
 
 
-                String[] Parametros = { "p_id_ficha_bancaria", "p_mp_order" };
-                Object[] Valores = { ObjFactura.ID_FICHA_BANCARIA, ObjFactura.multipago.Order };
+                String[] Parametros = { "p_id_ficha_bancaria", "p_mp_order", "p_origen" };
+                Object[] Valores = { ObjFactura.ID_FICHA_BANCARIA, ObjFactura.multipago.Order, ObjFactura.FACT_BANCO };
                 String[] ParametrosOut = { "p_Bandera" };
                 cmm = CDDatos.GenerarOracleCommand("GNR_RECIBO_ONLINE", ref Verificador, Parametros, Valores, ParametrosOut);
             }

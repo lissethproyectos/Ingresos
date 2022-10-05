@@ -82,23 +82,28 @@ namespace Recibos_Electronicos
             lblMensaje.Text = string.Empty;// Verificador;
             try
             {
-                string Validado = ValidarInfUsuario();
-                if (Validado == "0")
-                    IniciarSesion();
+                if (DDLTipoUsuario.SelectedValue == "4")
+                    Response.Redirect("https://sysweb.unach.mx/FichaReferenciadaEventos/Factura", false);
                 else
                 {
-                    txtCve.Text = string.Empty;
-                    txtPassword.Text = string.Empty;
-                    txtCve.Focus();
-                    pnlMsj.Visible = true;
-                    if (DDLTipoUsuario.SelectedValue == "1")
-                        lblMensaje.Text = "Alumno/aspirante no encontrado, favor de verificar.";
-                    else if (DDLTipoUsuario.SelectedValue == "4")
-                        lblMensaje.Text = "Referencia no encontrada, favor de verificar.";
+                    string Validado = ValidarInfUsuario();
+                    if (Validado == "0")
+                        IniciarSesion();
                     else
                     {
+                        txtCve.Text = string.Empty;
+                        txtPassword.Text = string.Empty;
+                        txtCve.Focus();
                         pnlMsj.Visible = true;
-                        lblMensaje.Text = Validado;
+                        if (DDLTipoUsuario.SelectedValue == "1")
+                            lblMensaje.Text = "Alumno/aspirante no encontrado, favor de verificar.";
+                        else if (DDLTipoUsuario.SelectedValue == "4")
+                            lblMensaje.Text = "Referencia no encontrada, favor de verificar.";
+                        else
+                        {
+                            pnlMsj.Visible = true;
+                            lblMensaje.Text = Validado;
+                        }
                     }
                 }
             }

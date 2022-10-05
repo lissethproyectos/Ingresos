@@ -867,7 +867,30 @@
             } else {
                 args.IsValid = false;
             }
-        }
+        };
+
+        function ValidateTipoPersona(sender, args) {
+            var tipoPers = document.getElementById('<%=ddlTipoPers.ClientID %>');
+
+            if (tipoPers.value == "F") {
+                if (document.getElementById('<%=txtReceptor_Rfc.ClientID %>').value.length == "13") {
+                    args.IsValid = true;
+                }
+                else {
+
+                    args.IsValid = false;
+                }
+            }
+            else {
+                if (document.getElementById('<%=txtReceptor_Rfc.ClientID %>').value.length == "12") {
+                    args.IsValid = true;
+                }
+                else {
+                    args.IsValid = false;
+                }
+            }
+
+        };
     </script>
 </asp:Content>
 

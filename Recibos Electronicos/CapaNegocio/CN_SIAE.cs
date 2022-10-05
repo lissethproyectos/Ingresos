@@ -33,12 +33,12 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void RefSyswebConsultaGrid(Factura ObjFactura, string FechaIni, string FechFin, ref List<Factura> List)
+        public void RefSyswebConsultaGrid(Factura ObjFactura, string FechaIni, string FechFin, string TipoBusqueda, ref List<Factura> List)
         {
             try
             {
                 CD_SIAE CDSIAE = new CD_SIAE();
-                CDSIAE.ConsultaGridRefSysweb(ObjFactura, FechaIni, FechFin, ref List);
+                CDSIAE.ConsultaGridRefSysweb(ObjFactura, FechaIni, FechFin, TipoBusqueda,  ref List);
             }
             catch (Exception ex)
             {
@@ -104,7 +104,7 @@ namespace CapaNegocio
             try
             {
                 CD_SIAE CDSIAE = new CD_SIAE();
-                CDSIAE.SIAEConsultaDatosPago(ref ObjFactura, ref Verificador);
+                CDSIAE.SysWebConsultaDatosPago(ref ObjFactura, ref Verificador);
             }
             catch (Exception ex)
             {

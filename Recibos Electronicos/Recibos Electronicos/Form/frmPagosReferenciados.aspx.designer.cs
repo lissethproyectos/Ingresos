@@ -132,6 +132,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.DropDownList ddlBusqueda;
 
         /// <summary>
+        /// Control updPgrFechas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrFechas;
+
+        /// <summary>
         /// Control updPnlFechas.
         /// </summary>
         /// <remarks>
@@ -258,6 +267,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.LinkButton linkBttnBusca2;
 
         /// <summary>
+        /// Control UpdateProgress4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress4;
+
+        /// <summary>
         /// Control UpdatePgr3.
         /// </summary>
         /// <remarks>
@@ -375,6 +393,24 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.TextBox txtMatricula;
 
         /// <summary>
+        /// Control txtEvento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtEvento;
+
+        /// <summary>
+        /// Control txtNombre.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
+
+        /// <summary>
         /// Control lblBanco.
         /// </summary>
         /// <remarks>
@@ -483,6 +519,15 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.CheckBox chkPagoAplicado;
 
         /// <summary>
+        /// Control bttnGenerarRecibo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button bttnGenerarRecibo;
+
+        /// <summary>
         /// Control lblReferenciaOrig.
         /// </summary>
         /// <remarks>
@@ -526,15 +571,6 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bttnConfirmaPago;
-
-        /// <summary>
-        /// Control bttnGenerarRecibo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bttnGenerarRecibo;
 
         /// <summary>
         /// Control updPrReferencias0.

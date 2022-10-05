@@ -97,10 +97,11 @@
                         $("#listUser").show();
                     }
                     else if ($("#DDLTipoUsuario").val() == "4") {
-                        $("#listReferencia").show();
+                        $("#listReferencia").hide();
                         $("#listCve").hide();
-                        $("#txtCve").attr("placeholder", "Referencia de 26 dígitos");
-                        $('.txtCve').css('cursor', 'pointer');
+                        $("#txtCve").hide();
+                        //$("#txtCve").attr("placeholder", "Referencia de 26 dígitos");
+                        //$('.txtCve').css('cursor', 'pointer');
                     }
                     else if ($("#DDLTipoUsuario").val() == "7") {
                         $("#listReferencia").show();

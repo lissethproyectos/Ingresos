@@ -77,13 +77,18 @@ namespace CapaDatos
                     ObjFactura.FACT_TIPO_SERVICIO = Convert.ToString(dr.GetValue(9));
                     ObjFactura.FACT_STATUS = Convert.ToString(dr.GetValue(10));
                     ObjFactura.FACT_TIPO = Convert.ToString(dr.GetValue(11));
-                    ObjFactura.VISIBLE1 = Convert.ToString(dr.GetValue(11))== "TITULO" ?true:false;
+                    int id = Convert.ToInt32(dr.GetValue(13));
+                    ObjFactura.VISIBLE1 = Convert.ToInt32(dr.GetValue(13)) == 0 ? true : false;
+                    ObjFactura.VISIBLE2 = Convert.ToInt32(dr.GetValue(13)) == 0 ? false : true;
                     ObjFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(12));
+                    ObjFactura.ID_FACT_EFEC = Convert.ToString(dr.GetValue(0));
+                    ObjFactura.ID_RECIBO = Convert.ToInt32(dr.GetValue(13));
                     List.Add(ObjFactura);
 
                 }
                 dr.Close();
             }
+
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
@@ -93,7 +98,7 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-        public void ConsultaGridRefSysweb(Factura ObjFactura,  string FechaIni, string FechFin,  ref List<Factura> List)
+        public void ConsultaGridRefSysweb(Factura ObjFactura,  string FechaIni, string FechFin, string TipoBusqueda,  ref List<Factura> List)
         {
             CD_Datos CDDatos = new CD_Datos();
             OracleCommand cmm = null;
@@ -101,8 +106,8 @@ namespace CapaDatos
             {
                 OracleDataReader dr = null;
 
-                String[] Parametros = { "P_Nivel", "P_Fecha_Inicial", "P_Fecha_Final", "P_Escuela", "p_referencia" };
-                String[] Valores = { ObjFactura.FACT_NIVEL, FechaIni, FechFin, ObjFactura.FACT_DEPENDENCIA, ObjFactura.FACT_REFERENCIA };
+                String[] Parametros = { "P_Nivel", "P_Fecha_Inicial", "P_Fecha_Final", "P_Escuela", "p_referencia", "p_tipo_busqueda" };
+                String[] Valores = { ObjFactura.FACT_NIVEL, FechaIni, FechFin, ObjFactura.FACT_DEPENDENCIA, ObjFactura.FACT_REFERENCIA, TipoBusqueda };
 
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Ref_SysWeb", ref dr, Parametros, Valores);
                 while (dr.Read())
@@ -121,9 +126,10 @@ namespace CapaDatos
                     ObjFactura.FACT_TIPO_SERVICIO = Convert.ToString(dr.GetValue(9));
                     ObjFactura.FACT_STATUS = Convert.ToString(dr.GetValue(10));
                     ObjFactura.FACT_TIPO = Convert.ToString(dr.GetValue(11));
-                    ObjFactura.VISIBLE1 = Convert.ToInt32(dr.GetValue(0)) == 0 ? false : true;
-                    ObjFactura.VISIBLE2 = Convert.ToInt32(dr.GetValue(0)) == 0 ? true : false;
+                    ObjFactura.VISIBLE1 = Convert.ToInt32(dr.GetValue(0)) == 0 ? true : false;
+                    ObjFactura.VISIBLE2 = Convert.ToInt32(dr.GetValue(0)) == 0 ? false : true ;
                     ObjFactura.ID_FICHA_BANCARIA = Convert.ToInt32(dr.GetValue(12));
+                    ObjFactura.ID_RECIBO = Convert.ToInt32(dr.GetValue(13));
                     List.Add(ObjFactura);
 
                 }
@@ -246,7 +252,7 @@ namespace CapaDatos
             {
                 String[] Parametros = { "P_ID" };
                 object[] Valores = { ObjFactura.ID_FACT };
-                String[] ParametrosOut = { "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA", "P_PAGO_CONFIRMADO", "P_CICLO", "P_ESCUELA", "P_CARRERA", "P_SEMESTRE", "P_MATRICULA", "P_BANDERA" };
+                String[] ParametrosOut = { "P_FOLIO", "P_FECHA_PAGO", "P_BANCO", "P_REFERENCIA", "P_PAGO_CONFIRMADO", "P_CICLO", "P_ESCUELA", "P_CARRERA", "P_SEMESTRE", "P_MATRICULA", "P_EVENTO", "P_NOMBRE", "P_BANDERA" };
                 Cmd = CDDatos.GenerarOracleCommand("OBT_DATOS_PAGO_SYSWEB", ref Verificador, Parametros, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
@@ -261,7 +267,8 @@ namespace CapaDatos
                     ObjFactura.FACT_CARRERA = Convert.ToString(Cmd.Parameters["P_CARRERA"].Value);
                     ObjFactura.FACT_SEMESTRE = Convert.ToString(Cmd.Parameters["P_SEMESTRE"].Value);
                     ObjFactura.FACT_MATRICULA = Convert.ToString(Cmd.Parameters["P_MATRICULA"].Value);
-
+                    ObjFactura.FACT_EVENTO = Convert.ToString(Cmd.Parameters["P_EVENTO"].Value);
+                    ObjFactura.FACT_NOMBRE = Convert.ToString(Cmd.Parameters["P_NOMBRE"].Value);
                 }
             }
             catch (Exception ex)

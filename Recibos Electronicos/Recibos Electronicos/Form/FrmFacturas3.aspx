@@ -1521,6 +1521,11 @@
                                                                                     <div class="card-block">
                                                                                         <div class="container-fluid">
                                                                                             <div class="row">
+                                                                                                <div class="col text-right">
+                                                                                                    <asp:LinkButton ID="linkBtnBorrarDatosComprobante" runat="server" CssClass="btn btn-danger">Borrar</asp:LinkButton>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="row">
                                                                                                 <div class="col-md-1">Folio</div>
                                                                                                 <div class="col-md-1">
                                                                                                     <asp:TextBox ID="txtFolio" runat="server" TabIndex="18" Width="100%"></asp:TextBox>

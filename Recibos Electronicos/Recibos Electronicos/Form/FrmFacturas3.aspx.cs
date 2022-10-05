@@ -3041,7 +3041,8 @@ namespace Recibos_Electronicos.Form
             rowPaso5.Visible = false;
             rowPnl1.Visible = false;
             rowPnl2.Visible = false;
-
+            pnl1.Enabled = true;
+            pnl2.Enabled = true;
             chkValida.Checked = true;
             chkValida_CheckedChanged(null, null);
 
@@ -4045,7 +4046,17 @@ namespace Recibos_Electronicos.Form
             }
         }
 
-        protected void chkValida_CheckedChanged(object sender, EventArgs e)
+        protected void linkBtnBorrarDatosComprobante_Click(object sender, EventArgs e)
+        {
+            txtFolio.Text = string.Empty;
+            txtFecha.Text = string.Empty;
+            txtImporteDeposito.Text = string.Empty;
+            txtFolioFactPagada.Text = string.Empty;
+            ddlReceptor_MetodoPagoFA.SelectedIndex = 0;
+
+
+        }
+            protected void chkValida_CheckedChanged(object sender, EventArgs e)
         {
             if(chkValida.Checked==false)
                 linkBttnEnviarSol.ValidationGroup = string.Empty;

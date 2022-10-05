@@ -87,6 +87,20 @@
                 </asp:UpdatePanel>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="updPgrFechas" runat="server" AssociatedUpdatePanelID="updPnlFechas">
+                    <ProgressTemplate>
+                        <div class="overlay">
+                            <div class="overlayContent">
+                                <asp:Image ID="imgFechas" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
+                            </div>
+                        </div>
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+        </div>
         <asp:UpdatePanel ID="updPnlFechas" runat="server">
             <ContentTemplate>
                 <div class="row" id="divFechas" runat="server">
@@ -129,7 +143,17 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
-        
+
+        <div class="row">
+            <div class="col text-center">
+                <asp:UpdateProgress ID="UpdateProgress4" runat="server" AssociatedUpdatePanelID="UpdatePanel4">
+                    <ProgressTemplate>
+                        <asp:Image ID="img11" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
+
+        </div>
         <div class="row">
             <div class="col text-center">
                 <asp:UpdateProgress ID="UpdatePgr3" runat="server" AssociatedUpdatePanelID="UpdatePanel3">
@@ -161,9 +185,18 @@
         </div>
         <div class="row">
             <div class="col text-center">
-                <asp:UpdateProgress ID="updPrReferencias" runat="server" AssociatedUpdatePanelID="UpdatePanel228">
+                <%--     <asp:UpdateProgress ID="updPrReferencias" runat="server" AssociatedUpdatePanelID="UpdatePanel228">
                     <ProgressTemplate>
                         <asp:Image ID="imgMultiview" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>--%>
+                <asp:UpdateProgress ID="updPrReferencias" runat="server" AssociatedUpdatePanelID="UpdatePanel228">
+                    <ProgressTemplate>
+                        <div class="overlay">
+                            <div class="overlayContent">
+                                <asp:Image ID="img1" runat="server" Height="100px" ImageUrl="~/Imagenes/loader2.gif" Width="100px" />
+                            </div>
+                        </div>
                     </ProgressTemplate>
                 </asp:UpdateProgress>
             </div>
@@ -200,7 +233,8 @@
                                 <asp:BoundField DataField="FACT_TIPO" HeaderText="Tipo" />
                                 <asp:TemplateField HeaderText="Pago Aplicado">
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="imgStatus" runat="server" ImageUrl='<%# Bind("FACT_RECEPTOR_STATUS") %>' OnClick="imgStatus_Click" />
+                                        <asp:Image ID="imgStatus" runat="server" ImageUrl='<%# Bind("FACT_RECEPTOR_STATUS") %>' />
+                                        <%--<asp:ImageButton ID="imgStatus" runat="server" ImageUrl='<%# Bind("FACT_RECEPTOR_STATUS") %>' OnClick="imgStatus_Click" />--%>
                                     </ItemTemplate>
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" />
@@ -215,19 +249,20 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:LinkButton ID="linkBttnGenRecibo" runat="server" CssClass="btn btn-green" OnClick="linkBttnGenRecibo_Click"><i class="fa fa-barcode" aria-hidden="true"></i>Referencia</asp:LinkButton>
+                                        <asp:LinkButton ID="linkBttnReferencia" runat="server" CssClass="btn btn-green" OnClick="linkBttnReferencia_Click"><i class="fa fa-barcode" aria-hidden="true"></i>Referencia</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField>
                                     <ItemTemplate>
-                                        <asp:Label ID="lblBttnGenRecibo0" runat="server" CssClass="btn btn-grey disabled" Text="Recibo" Visible='<%# Bind("VISIBLE2") %>'></asp:Label>
-                                        <asp:LinkButton ID="linkBttnGenRecibo0" runat="server" CssClass="btn btn-primary disabled" OnClick="linkBttnGenRecibo_Click" Visible='<%# Bind("VISIBLE1") %>'><i class="fa fa-file"></i>Recibo</asp:LinkButton>
+                                        <asp:Label ID="lblBttnGenRecibo0" runat="server" CssClass="btn btn-grey disabled" Visible='<%# Bind("VISIBLE1") %>'><i class="fa fa-file"></i>Recibo</asp:Label>
+                                        <asp:LinkButton ID="linkBttnGenRecibo0" runat="server" CssClass="btn btn-primary" OnClick="linkBttnGenRecibo_Click" Visible='<%# Bind("VISIBLE2") %>'><i class="fa fa-file"></i>Recibo</asp:LinkButton>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="FACT_STATUS_NOTAS" />
                                 <asp:BoundField DataField="FACT_STATUS" />
-                                <asp:BoundField DataField="ID_FICHA_BANCARIA" />
+                                <asp:BoundField DataField="ID_FICHA_BANCARIA" HeaderText="ID_RECIBO" />
                                 <asp:BoundField DataField="FACT_TIPO_SERVICIO" />
+                                <asp:BoundField DataField="ID_RECIBO" />
                             </Columns>
                             <FooterStyle CssClass="enc" />
                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -264,25 +299,25 @@
                                         <div class="row">
                                             <div class="col-md-2">Cve Escuela</div>
                                             <div class="col-md-4">
-                                                <asp:TextBox ID="txtEscuela" runat="server" Width="100%"></asp:TextBox>
+                                                <asp:TextBox ID="txtEscuela" runat="server" CssClass="form-control"></asp:TextBox>
                                             </div>
                                             <div class="col-md-2">
                                                 Id Carrera
                                             </div>
                                             <div class="col-md-4">
-                                                <asp:TextBox ID="txtIdCarrera" runat="server" Width="100%"></asp:TextBox>
+                                                <asp:TextBox ID="txtIdCarrera" runat="server" CssClass="form-control"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2">Ciclo</div>
                                             <div class="col-md-4">
-                                                <asp:TextBox ID="txtCiclo" runat="server" Width="100%"></asp:TextBox>
+                                                <asp:TextBox ID="txtCiclo" runat="server" CssClass="form-control"></asp:TextBox>
                                             </div>
                                             <div class="col-md-2">
                                                 Semestre
                                             </div>
                                             <div class="col-md-4">
-                                                <asp:TextBox ID="txtSemestre" runat="server" Width="100%"></asp:TextBox>
+                                                <asp:TextBox ID="txtSemestre" runat="server" CssClass="form-control"></asp:TextBox>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -290,7 +325,21 @@
                                                 Matricula
                                             </div>
                                             <div class="col-md-4">
-                                                <asp:TextBox ID="txtMatricula" runat="server" Width="100%"></asp:TextBox>
+                                                <asp:TextBox ID="txtMatricula" runat="server" CssClass="form-control"></asp:TextBox>
+                                            </div>
+                                            <div class="col-md-2">
+                                                Cve Evento
+                                            </div>
+                                            <div class="col-md-4">
+                                                <asp:TextBox ID="txtEvento" runat="server" CssClass="form-control"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                Nombre
+                                            </div>
+                                            <div class="col-md-10">
+                                                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -328,12 +377,16 @@
                                             <asp:ImageButton ID="imgCalendario" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/calendario.gif" />
                                             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="txtFechaPago" ErrorMessage="*Fecha de Pago" ValidationGroup="Multipagos">*Requerido</asp:RequiredFieldValidator>
                                         </div>
-
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-2">
                                             <asp:Label ID="lblPagoAplicado" runat="server" Text="Pago Aplicado"></asp:Label>
                                         </div>
                                         <div class="col-md-2">
                                             <asp:CheckBox ID="chkPagoAplicado" runat="server" Text="Si" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-green" OnClick="bttnGenerarRecibo_Click" Text="GENERAR RECIBO" ValidationGroup="Multipagos" />
                                         </div>
                                     </div>
                                     <div class="row">
@@ -359,8 +412,7 @@
                                     <div class="row">
                                         <div class="col text-right">
                                             <button type="button" class="btn btn-grey" data-dismiss="modal">CERRAR</button>
-                                            &nbsp;<asp:Button ID="bttnConfirmaPago" runat="server" CssClass="btn btn-info" OnClick="bttnConfirmaPago_Click" Text="GUARDAR" ValidationGroup="Guardar" />
-                                            &nbsp;<asp:Button ID="bttnGenerarRecibo" runat="server" CssClass="btn btn-primary" OnClick="bttnGenerarRecibo_Click" Text="GUARDAR Y GENERAR RECIBO" ValidationGroup="Multipagos" />
+                                            &nbsp;<asp:Button ID="bttnConfirmaPago" runat="server" CssClass="btn btn-primary" OnClick="bttnConfirmaPago_Click" Text="GUARDAR" ValidationGroup="Guardar" />
                                         </div>
                                     </div>
                                 </div>

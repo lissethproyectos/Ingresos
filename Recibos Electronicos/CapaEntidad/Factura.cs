@@ -90,8 +90,15 @@ namespace CapaEntidad
         private string _NUMERO_EXTERIOR;
         private string _ADJUNTO_CONSTANCIA;
         private string _Status;
-        //Metodos agregados por Lisseth
+        private string _FACT_EVENTO;
+        private int    _ID_RECIBO;
 
+        //Metodos agregados por Lisseth
+        public string FACT_EVENTO
+        {
+            get { return _FACT_EVENTO; }
+            set { _FACT_EVENTO = value; }
+        }
 
         public string FACT_RECEPTOR_CODIGO
         {
@@ -332,6 +339,11 @@ namespace CapaEntidad
         {
             get { return _ID_FACT; }
             set { _ID_FACT = value; }
+        }
+        public int ID_RECIBO
+        {
+            get { return _ID_RECIBO; }
+            set { _ID_RECIBO = value; }
         }
         public string ID_FACT_EFEC
         {
