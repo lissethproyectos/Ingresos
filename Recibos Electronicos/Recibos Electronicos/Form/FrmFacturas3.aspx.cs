@@ -2396,6 +2396,48 @@ namespace Recibos_Electronicos.Form
             }
 
         }
+        protected void linkBttnEnviarFact_Click(object sender, EventArgs e)
+        {
+            string ruta = string.Empty;
+            string asunto = string.Empty;
+            string contenido = string.Empty;
+            lblMensajeCorreo.Text = string.Empty;
+            ObjCjaFactura.ID_FACT = Convert.ToString(grdDatosFactura.SelectedRow.Cells[0].Text);
+            //modalCorreo.Show();
+            try
+            {
+                List<CajaFactura> ListArch = new List<CajaFactura>();
+                CNCjaFactura.ConsultarPdfXmlFactura(ref ObjCjaFactura, Convert.ToString(grdDatosFactura.SelectedRow.Cells[22].Text), ref ListArch);
+                System.Net.Mail.MailMessage mmsg = new System.Net.Mail.MailMessage();
+                asunto = "Factura UNACH-SYSWEB";
+                contenido = "<img src='https://sysweb.unach.mx/resources/imagenes/sysweb2018230.png'><br /><div align=center><font size='4'><a href=\'" + ruta + "'>Factura Electrónica</a></font></div><br /><br />" + "<font size='2'>Para cualquier duda o aclaración te puedes comunicar a los siguientes telefonos:" + "<br /><br /><strong>DEPARTAMENTO DE CAJA GENERAL </strong><br />Teléfono - (961) 617 80 00, Ext.: 1024</font>" +
+                    "<strong>DIRECCIÓN DE SISTEMAS DE INFORMACIÓN ADMINISTRATIVA</strong><br />Teléfono - (961) 617 80 00, Ext.: 1302, 5519, 5520 y 5087<br /><br />" +
+                    "Este correo electrónico puede contener información confidencial, sólo está dirigida al destinatario del mismo, la información puede ser privilegiada. Está prohibido que cualquier persona distinta al destinatario copie o distribuya este correo. Si usted no es el destinatario, por favor notifíque esto de inmediato";
+                string MsjError = string.Empty;
+                CNComun.EnvioCorreoAdjunto(ref mmsg, ListArch, asunto, contenido, txtCorreo.Text, ref MsjError);
+                if (MsjError == string.Empty)
+                {
+                    if (mmsg != null)
+                    {
+                        //modalCorreo.Hide();
+                        ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCorreo", "$('#modalEMail').modal('hide')", true);
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'La Factura se ha enviado al correo');", true);
+                    }
+                    else
+                        lblMensajeCorreo.Text = "Error en el envio de los archivos."; // ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
+                }
+                else
+                    lblMensajeCorreo.Text = MsjError;
+            }
+            catch (Exception ex)
+            {
+                //Aquí gestionamos los errores al intentar enviar el correo
+                lblMensajeCorreo.Text = ex.Message;
+                //string MsjError = ex.Message;
+                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + MsjError + "');", true);  //lblMsj.Text = ex.Message;
+            }
+
+        }
 
         protected void bttnCancelarCorreo_Click(object sender, EventArgs e)
         {

@@ -45,7 +45,19 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        
+        public void ConsultarAlumnosPSU(Alumno objAlumno, string Buscar, ref List<Alumno> List)
+        {
+            try
+            {
+                CD_Alumno CDAlumno = new CD_Alumno();
+                CDAlumno.ConsultarAlumnosPSU(objAlumno, Buscar, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void ConsultarAspirantesUNACH(Alumno objAlumno, string Buscar, string Origen, ref List<Alumno> List)
         {
             try
@@ -65,6 +77,19 @@ namespace CapaNegocio
             {
                 CD_Alumno CDAlumno = new CD_Alumno();
                 CDAlumno.ConsultarAlumno(ref Alumno, ref Verificador);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public void ConsultarAlumnoPSU(ref Alumno Alumno, ref string Verificador)
+        {
+            try
+            {
+                CD_Alumno CDAlumno = new CD_Alumno();
+                CDAlumno.ConsultarAlumnoPSU(ref Alumno, ref Verificador);
             }
             catch (Exception ex)
             {
@@ -218,12 +243,12 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void ConsultarAlumnoDescuento(ref Alumno ObjAlumno, string Clasificacion, string Referencia, ref List<Alumno> List)
+        public void ConsultarAlumnoDescuento(string TipoAlum, ref Alumno ObjAlumno, string Clasificacion, string Referencia, ref List<Alumno> List)
         {
             try
             {
                 CD_Alumno CDAlumno = new CD_Alumno();
-                CDAlumno.ConsultarAlumnoDescuento(ref ObjAlumno, Clasificacion, Referencia, ref List);
+                CDAlumno.ConsultarAlumnoDescuento(TipoAlum, ref ObjAlumno, Clasificacion, Referencia, ref List);
 
             }
             catch (Exception ex)

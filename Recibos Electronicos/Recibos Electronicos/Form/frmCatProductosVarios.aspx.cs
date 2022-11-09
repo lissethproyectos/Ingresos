@@ -355,6 +355,7 @@ namespace Recibos_Electronicos.Form
                     //txtClave.Text = string.Empty;
                     txtDescripcion2.Text = string.Empty;
                     txtImporte.Text = string.Empty;
+                    CargarGrid();
                 }
             }
             catch (Exception ex)

@@ -116,7 +116,7 @@ namespace Recibos_Electronicos.Form
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
                 CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Niveles", ref DDLNivel, "INGRESOS");
                 CNComun.LlenaComboG("pkg_pagos_2016.Obt_Ciclos_Escolares", ref ddlCiclo, "INGRESOS");
-                DDLNivel.SelectedIndex = 0;
+                DDLNivel.SelectedValue = "L";
                 DDLNivel_SelectedIndexChanged(null, null);
 
             }
@@ -361,6 +361,17 @@ namespace Recibos_Electronicos.Form
                 ListDetConcepto.RemoveAt(grvConceptos.SelectedRow.RowIndex);
                 Session["Conceptos"] = ListDetConcepto;
             }
+        }
+
+        protected void linkBttnVerRecibos_Click(object sender, EventArgs e)
+        {
+            LinkButton cbi = (LinkButton)(sender);
+            GridViewRow row = (GridViewRow)cbi.NamingContainer;
+            grvConceptos.SelectedIndex = row.RowIndex;
+            string concepto = grvConceptos.SelectedRow.Cells[0].Text;
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP071" + "&dependencia=" + ddlDependencia.SelectedValue + "&FInicial=" + txtFecha_Factura_Ini.Text + "&FFinal=" + txtFecha_Factura_Fin.Text + "&IdConcepto=" + concepto;
+            string _open = "window.open('" + ruta + "', '_newtab');";
+            ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
         }
     }
 }

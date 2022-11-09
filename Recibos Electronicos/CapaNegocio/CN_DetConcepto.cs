@@ -22,12 +22,12 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
-        public void ConsultarCatConceptoDescuento(DetConcepto ObjDetConcepto, string TipoDescuento, ref List<DetConcepto> List)
+        public void ConsultarCatConceptoDescuento(string TipoAlumno, DetConcepto ObjDetConcepto, string TipoDescuento, ref List<DetConcepto> List)
         {
             try
             {
                 CD_DetConcepto CDDetConcepto = new CD_DetConcepto();
-                CDDetConcepto.ConsultarCatConceptoDescuento(ObjDetConcepto, TipoDescuento, ref List);
+                CDDetConcepto.ConsultarCatConceptoDescuento(TipoAlumno, ObjDetConcepto, TipoDescuento, ref List);
 
             }
             catch (Exception ex)

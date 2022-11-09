@@ -265,7 +265,7 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
-        public void ConsultarCatConceptoDescuento(DetConcepto ObjDetConcepto, string TipoDescuento, ref List<DetConcepto> List)
+        public void ConsultarCatConceptoDescuento(string TipoAlumno, DetConcepto ObjDetConcepto, string TipoDescuento, ref List<DetConcepto> List)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
             OracleCommand cmm = null;
@@ -274,8 +274,8 @@ namespace CapaDatos
 
                 OracleDataReader dr = null;
 
-                string[] ParametrosIn = { "p_nivel", "p_tipo_desc", "p_escuela", "p_carrera" };
-                Object[] Valores = { ObjDetConcepto.Nivel, TipoDescuento, ObjDetConcepto.Dependencia, ObjDetConcepto.Carrera };
+                string[] ParametrosIn = { "p_tipo_alu", "p_nivel", "p_tipo_desc", "p_escuela", "p_carrera" };
+                Object[] Valores = { TipoAlumno, ObjDetConcepto.Nivel, TipoDescuento, ObjDetConcepto.Dependencia, ObjDetConcepto.Carrera };
                 cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Conceptos_Descuentos", ref dr, ParametrosIn, Valores);//text
                 string Nivel = ObjDetConcepto.Nivel;
                 string[] NivelesPosgrado = { "M", "E", "D" };

@@ -372,6 +372,7 @@ namespace Recibos_Electronicos.Form
                 CargarGridInicio();
                 MultiView1.ActiveViewIndex = 1;
 
+
                 //DDLTipoVenta_SelectedIndexChanged(null, null);
 
 
@@ -701,27 +702,31 @@ namespace Recibos_Electronicos.Form
         protected void grdDatosFactura_SelectedIndexChanged(object sender, EventArgs e)
         {
             SesionUsu.Editar = 0;
-            string cadena = string.Empty;
-            int id_referencia = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
-            string referencia = grdDatosFactura.SelectedRow.Cells[3].Text;
-            try
-            {
-                cadena = CN_Token.GenerarToken(id_referencia, referencia);
-                string LinkPago = "https://sysweb.unach.mx/FichaReferenciada/Form/PagoExclusivoSYSWEB.aspx?sw_acc=" + cadena;
-                string _open = "window.open('" + LinkPago + "', '_newtab');";
-                ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
-            }
 
-            //lblRefGenerada.Text = grdDatosFactura.SelectedRow.Cells[3].Text;
-            //linkPago.Text = string.Empty;
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
 
-            catch (Exception ex)
-            {
-                string MsjError = ex.Message;
-                CNComun.VerificaTextoMensajeError(ref MsjError);
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);
-            }
+            lblRefGenerada.Text = grdDatosFactura.SelectedRow.Cells[3].Text;
+            linkPago.Text = string.Empty;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
+
+            //SesionUsu.Editar = 0;
+            //string cadena = string.Empty;
+            //int id_referencia = Convert.ToInt32(grdDatosFactura.SelectedRow.Cells[0].Text);
+            //string referencia = grdDatosFactura.SelectedRow.Cells[3].Text;
+            //try
+            //{
+            //    cadena = CN_Token.GenerarToken(id_referencia, referencia);
+            //    string LinkPago = "https://sysweb.unach.mx/FichaReferenciada/Form/PagoExclusivoSYSWEB.aspx?sw_acc=" + cadena;
+            //    string _open = "window.open('" + LinkPago + "', '_newtab');";
+            //    ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
+            //}
+
+
+            //catch (Exception ex)
+            //{
+            //    string MsjError = ex.Message;
+            //    CNComun.VerificaTextoMensajeError(ref MsjError);
+            //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + MsjError + "');", true);
+            //}
         }
 
         protected void btnVerFactRecibo_Click(object sender, EventArgs e)
@@ -784,6 +789,9 @@ namespace Recibos_Electronicos.Form
             txtObservaciones.Text = string.Empty;
             ddlNivelE.Items.Clear();
             //DDLConceptos.SelectedValue = "0";
+            SesionUsu.LigaPago = string.Empty;
+            SesionUsu.LigaPago = null;
+
             Iniciar();
             imgBttnBuscar_Click(null, null);
 
@@ -825,6 +833,8 @@ namespace Recibos_Electronicos.Form
 
 
             lblRefGenerada.Text = grdDatosFactura.SelectedRow.Cells[3].Text;
+
+
             //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPago", "$('#modalPago').modal('show')", true);
 
         }
@@ -1280,24 +1290,39 @@ namespace Recibos_Electronicos.Form
             {
                 lstProductos = (List<Comun>)Session["listaProductos"];
                 Session["Inventario"] = lstProductos;
-
-                if (lstProductos[DDLProductos.SelectedIndex].EtiquetaDos == "0")
-                    txtPrecio.Enabled = true;
-                else
-                {
-                    txtPrecio.Text = lstProductos[DDLProductos.SelectedIndex].EtiquetaDos;
-                    txtPrecio.Enabled = false;
-                }
-
+                //                string Tipo = lstProductos[DDLProductos.SelectedIndex].EtiquetaTres;
+                //if (lstProductos[DDLProductos.SelectedIndex].EtiquetaTres == "ACT")
+                //{
+                //    if (lstProductos[DDLProductos.SelectedIndex].EtiquetaDos == "0")
+                //        txtPrecio.Enabled = true;
+                //    else
+                //    {
+                //        txtPrecio.Text = lstProductos[DDLProductos.SelectedIndex].EtiquetaDos;
+                //        txtPrecio.Enabled = false;
+                //    }
+                //}
                 if(lstProductos[DDLProductos.SelectedIndex].EtiquetaTres=="ACT")
                 {
                     txtCantidad_Prod.Text = "1";
                     txtCantidad_Prod.Enabled = false;
                     DDLUnidadMedidaProd.SelectedValue = "5";
                     DDLUnidadMedidaProd.Enabled = false;
+
+                    if (lstProductos[DDLProductos.SelectedIndex].EtiquetaDos == "0")
+                        txtPrecio.Enabled = true;
+                    else
+                    {
+                        txtPrecio.Text = lstProductos[DDLProductos.SelectedIndex].EtiquetaDos;
+                        txtPrecio.Enabled = false;
+                    }
+
                 }
                 else
                 {
+                        txtPrecio.Text = lstProductos[DDLProductos.SelectedIndex].EtiquetaDos;
+                        txtPrecio.Enabled = true;
+                    DDLUnidadMedidaProd.SelectedIndex = 0;
+                    
                     txtCantidad_Prod.Enabled = true;
                     DDLUnidadMedidaProd.Enabled = true;
                 }
@@ -1551,6 +1576,7 @@ namespace Recibos_Electronicos.Form
                 DDLProductos.SelectedValue = "0";
                 linkBttnPagar.Text = "<i class='fa fa-credit-card fa-2x'></i> Generar Referencia";
                 SesionUsu.LigaPago = string.Empty;
+                SesionUsu.LigaPago = null;
             }
             catch (Exception ex)
             {

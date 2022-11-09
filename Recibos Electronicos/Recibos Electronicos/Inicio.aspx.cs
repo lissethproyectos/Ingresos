@@ -168,14 +168,41 @@ namespace Recibos_Electronicos
                 if (grd.Rows.Count > 0)
                     CNComun.HideColumns(grd, Celdas);
 
-
-                grd.SelectedIndex = 0;
-                if (grd.SelectedRow.Cells[2].Text.Contains("1"))
+                for (int i = 0; i < Celdas.Length; i++)
                 {
-                    grd.SelectedRow.BackColor = System.Drawing.ColorTranslator.FromHtml("#ebccd1");
-                    grd.SelectedRow.Font.Bold = true;
+                    grd.HeaderRow.Cells[Convert.ToInt32(Celdas.GetValue(i))].Visible = false;
+                    grd.FooterRow.Cells[Convert.ToInt32(Celdas.GetValue(i))].Visible = false;
+                    foreach (GridViewRow row in grd.Rows)
+                    {
+                        row.Cells[Convert.ToInt32(Celdas.GetValue(i))].Visible = false;
+                        if (row.Cells[2].Text == "1")
+                        {
+                            row.BackColor = System.Drawing.ColorTranslator.FromHtml("#ebccd1");
+                            row.Font.Bold = true;
+                        }
+                        else if (row.Cells[2].Text == "4")
+                        {
+                            row.BackColor = System.Drawing.ColorTranslator.FromHtml("#d1c690");
+                            row.Font.Bold = true;
+                        }
+                    }
                 }
+
+
+                //grd.SelectedIndex = 0;
+                //string pruebas = grd.SelectedRow.Cells[2].Text;
+                //if (grd.SelectedRow.Cells[2].Text.Contains("1"))
+                //{
+                //    grd.SelectedRow.BackColor = System.Drawing.ColorTranslator.FromHtml("#ebccd1");
+                //    grd.SelectedRow.Font.Bold = true;
+                //}
+                //else if (grd.SelectedRow.Cells[2].Text.Contains("4"))
+                //{
+                //    grd.SelectedRow.BackColor = System.Drawing.ColorTranslator.FromHtml("#c9af4f");
+                //    grd.SelectedRow.Font.Bold = true;
+                //}
             }
+
             catch (Exception ex)
             {
                 lblMensaje.Text = ex.Message;
@@ -213,7 +240,7 @@ namespace Recibos_Electronicos
 
                 if (grdDatosFactura.Rows.Count > 0)
                 {
-                   
+
 
                     if (SesionUsu.Usu_TipoUsu == 4 || SesionUsu.Usu_TipoUsu == 7)//Muestra la columna Editar
                     {
@@ -249,7 +276,7 @@ namespace Recibos_Electronicos
                     List = null;
                     divErrorTot.Visible = true;
                 }
-                
+
                 return List;
             }
             catch (Exception ex)
@@ -345,7 +372,7 @@ namespace Recibos_Electronicos
             }
         }
 
-       
+
 
         protected void btnRegresar_Click(object sender, EventArgs e)
         {
@@ -570,9 +597,9 @@ namespace Recibos_Electronicos
         {
             if (Page.IsValid)
             {
-                if (linkConstancia.NavigateUrl == string.Empty && ddlTipoPers.SelectedValue == "F")                
+                if (linkConstancia.NavigateUrl == string.Empty && ddlTipoPers.SelectedValue == "F")
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'La constancia fiscal es requerida, favor de adjuntar.');", true);  //lblMsj.Text = ex.Message;                
-                else                
+                else
                     Guardar();
             }
         }
@@ -675,7 +702,7 @@ namespace Recibos_Electronicos
             }
         }
 
-      
+
         protected void linkBttnConstancia_Click(object sender, EventArgs e)
         {
             try

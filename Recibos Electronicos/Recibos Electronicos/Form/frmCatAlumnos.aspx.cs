@@ -52,7 +52,7 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] { 2, 10, 11, 12 };
+            Int32[] Celdas = new Int32[] { 2, 11, 12, 13 };
             Int32[] CeldasAdmin = new Int32[] { 2 };
             try
             {

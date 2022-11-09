@@ -870,22 +870,49 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblRefGenerada;
 
         /// <summary>
-        /// Control UpdatePanel13.
+        /// Control updPgrBttnGenPDF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel13;
+        protected global::System.Web.UI.UpdateProgress updPgrBttnGenPDF;
 
         /// <summary>
-        /// Control linkBttnRedirectPagar.
+        /// Control updPnlBttnGenPDF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton linkBttnRedirectPagar;
+        protected global::System.Web.UI.UpdatePanel updPnlBttnGenPDF;
+
+        /// <summary>
+        /// Control linkBttnGenPDF.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnGenPDF;
+
+        /// <summary>
+        /// Control LinkButton4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
+
+        /// <summary>
+        /// Control linkBttnGenLink.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnGenLink;
 
         /// <summary>
         /// Control updPnlPago.

@@ -99,6 +99,7 @@ namespace CapaDatos
                     ObjAlumno.LinkEsquema = Ruta;
                     ObjAlumno.Esquema = EsquemaAlu;
                     ObjAlumno.Correo_Instituicional = Convert.ToString(dr.GetValue(12));
+                    ObjAlumno.StatusMatricula = Convert.ToString(dr.GetValue(13));
                     List.Add(ObjAlumno);
                 }
                 dr.Close();
@@ -113,6 +114,56 @@ namespace CapaDatos
             }
 
         }
+        public void ConsultarAlumnosPSU(Alumno ObjAlumno, string Buscar, ref List<Alumno> List)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                string[] Parametros = { "p_tipo",
+                                        "p_nivel",
+                                        "p_busca",
+                                        "p_dependencia",
+                                        "p_ciclo"};
+                object[] Valores = { ObjAlumno.TipoPersonaStr, ObjAlumno.Nivel, Buscar, ObjAlumno.Dependencia, ObjAlumno.CicloEscolar };
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_PAGOS_2016.Obt_Grid_AlumnosPSU", ref dr, Parametros, Valores);
+                string Ruta = "https://sysweb.unach.mx/FichaReferenciada/Form/Registro_Participantes.aspx";
+                while (dr.Read())
+                {
+                    string EsquemaAlu = "ASPIRANTES";
+                    ObjAlumno = new Alumno();
+                    ObjAlumno.Matricula = Convert.ToString(dr.GetValue(1));
+                    ObjAlumno.Nombre = Convert.ToString(dr.GetValue(2));
+                    ObjAlumno.Observaciones = Convert.ToString(dr.GetValue(3));
+                    ObjAlumno.FechaNacimiento = Convert.ToString(dr.GetValue(4));
+                    ObjAlumno.Dependencia = Convert.ToString(dr.GetValue(5));
+                    ObjAlumno.DescCarrera = Convert.ToString(dr.GetValue(6));
+                    ObjAlumno.CicloEscolar = Convert.ToString(dr.GetValue(7));
+                    ObjAlumno.Nivel = Convert.ToString(dr.GetValue(8));
+                    ObjAlumno.Semestre = Convert.ToString(dr.GetValue(9));
+                    ObjAlumno.Correo = Convert.ToString(dr.GetValue(10));
+                    ObjAlumno.Password = Convert.ToString(dr.GetValue(11));                  
+                    ObjAlumno.LinkEsquema = "https://aspirantes.unach.mx/psu#licenciatura";
+                    ObjAlumno.Esquema = EsquemaAlu;
+                    ObjAlumno.Correo_Instituicional = Convert.ToString(dr.GetValue(12));
+                    ObjAlumno.StatusMatricula = Convert.ToString(dr.GetValue(13));
+                    List.Add(ObjAlumno);
+                }
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+
+        }
+
         public void ConsultarAspirantesUNACH(Alumno ObjAlumno, string Buscar, string Origen, ref List<Alumno> List)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -250,6 +301,79 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
+        public void ConsultarAlumnoPSU(ref Alumno ObjAlumno, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos("INGRESOS");
+            OracleCommand Cmd = null;
+            try
+            {
+
+
+                string[] ParametrosIn = { "p_matricula",
+                                        "p_evento",
+                                        "p_tipo_participante",                                        
+                                        "p_nivel",
+                                        "p_ciclo"
+
+                };
+                object[] Valores = {   ObjAlumno.Matricula,
+                                       ObjAlumno.Evento,
+                                       ObjAlumno.TipoPersona,
+                                       ObjAlumno.Nivel,
+                                       ObjAlumno.CicloEscolar
+            };
+                string[] ParametrosOut ={
+                                         "p_nombre",
+                                          "p_appat",
+                                          "p_apmat",
+                                          "p_sexo" ,
+                                          "p_email",
+                                          "p_escuela",
+                                          "p_carrera",
+                                          "p_semestre",
+                                          "p_grupo",                                          
+                                          "p_desc_escuela",
+                                          "p_desc_carrera",
+                                          "p_status",
+                                          "p_fecha_nacimiento",
+                                          "p_Bandera"
+                };
+
+                //Cmd = CDDatos.GenerarOracleCommand("OBT_INTERNOS", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("OBT_ALUMNO_PSU", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+                if (Verificador == "0")
+                {
+                    ObjAlumno = new Alumno();
+
+                    ObjAlumno.Dependencia = Convert.ToString(Cmd.Parameters["p_escuela"].Value);
+                    ObjAlumno.Carrera = Convert.ToString(Cmd.Parameters["p_carrera"].Value);
+                    ObjAlumno.Semestre = Convert.ToString(Cmd.Parameters["p_semestre"].Value);
+                    ObjAlumno.Grupo = Convert.ToString(Cmd.Parameters["p_grupo"].Value);
+                    ObjAlumno.Correo = Convert.ToString(Cmd.Parameters["p_email"].Value);
+                    ObjAlumno.Constancia = Convert.ToString(Cmd.Parameters["p_nombre"].Value);
+                    ObjAlumno.Nombre = Convert.ToString(Cmd.Parameters["p_nombre"].Value);
+                    ObjAlumno.APaterno = Convert.ToString(Cmd.Parameters["p_appat"].Value);
+                    ObjAlumno.AMaterno = Convert.ToString(Cmd.Parameters["p_apmat"].Value);
+                    ObjAlumno.Genero = Convert.ToChar(Cmd.Parameters["p_sexo"].Value);
+                    ObjAlumno.DescEscuela = Convert.ToString(Cmd.Parameters["p_desc_escuela"].Value);
+                    ObjAlumno.DescCarrera = Convert.ToString(Cmd.Parameters["p_desc_carrera"].Value);
+                    ObjAlumno.StatusMatricula = Convert.ToString(Cmd.Parameters["p_status"].Value);
+                    ObjAlumno.FechaNacimiento = Convert.ToString(Cmd.Parameters["p_fecha_nacimiento"].Value);
+
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref Cmd);
+            }
+        }
+
         public void ConsultarDatosAlumno(ref Alumno ObjAlumno, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
@@ -640,7 +764,7 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref Cmd);
             }
         }
-        public void ConsultarAlumnoDescuento(ref Alumno ObjAlumno, string Clasificacion, string Referencia, ref List<Alumno> List)
+        public void ConsultarAlumnoDescuento(string TipoAlum, ref Alumno ObjAlumno, string Clasificacion, string Referencia, ref List<Alumno> List)
         {
             CD_Datos CDDatos = new CD_Datos("INGRESOS");
             OracleCommand cmm = null;
@@ -654,14 +778,17 @@ namespace CapaDatos
                                       "p_status",
                                       "p_referencia",
                                       "p_nivel",
-                                      "p_clasificacion"
+                                      "p_clasificacion",
+                                      "P_TIPO_ALUMNO"
                                       };
-                object[] Valores = { ObjAlumno.Dependencia,
+                object[] Valores = {
+                                    ObjAlumno.Dependencia,
                                     ObjAlumno.CicloEscolar,
                                     ObjAlumno.StatusMatricula,
                                     Referencia,
                                     ObjAlumno.Nivel,
-                                    Clasificacion
+                                    Clasificacion,
+                                    TipoAlum
                                    };
                 cmm = CDDatos.GenerarOracleCommandCursor("pkg_pagos_2016.Obt_Grid_Descuentos", ref dr, Parametros, Valores);
                 while (dr.Read())
@@ -731,10 +858,10 @@ namespace CapaDatos
                                          "p_dependencia", "p_ciclo_escolar", "p_matricula", "p_nivel", "p_nombre", "p_paterno", "p_materno", "P_evento",
                                         "p_carrera", "p_status","p_semestre", "p_grupo", "p_clave_concepto", "p_porcentaje", 
                                         "p_oficio_solicitud", "p_oficio_fecha", "P_oficio_firma", "P_tipo", "p_vigencia_inicial", "p_vigencia_final", "p_captura_fecha",
-                                        "p_captura_usuario", "p_autoriza_fecha","p_autoriza_usuario","p_recibo_fecha", "p_recibo_usuario", "p_notas", "p_oficio_ruta", "p_oficio_id", "P_IDCARRERA","p_clasificacion", "P_ID_EMPLEADO", "P_ID_FAMILIAR", "P_OFICIO_SOLICITA","P_CICLO_ALUM","p_BANDERA"
+                                        "p_captura_usuario", "p_autoriza_fecha","p_autoriza_usuario","p_recibo_fecha", "p_recibo_usuario", "p_notas", "p_oficio_ruta", "p_oficio_id", "P_IDCARRERA","p_clasificacion", "P_ID_EMPLEADO", "P_ID_FAMILIAR", "P_OFICIO_SOLICITA","P_CICLO_ALUM","P_TIPO_ALUMNO","p_BANDERA"
                 };
 
-                Cmd = CDDatos.GenerarOracleCommand("SEL_DESCUENTOS_2016", ref Verificador, ParametrosIn, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("SEL_DESCUENTOS", ref Verificador, ParametrosIn, Valores, ParametrosOut);
                 if (Verificador == "0")
                 {
                     ObjAlumno = new Alumno();
@@ -773,7 +900,8 @@ namespace CapaDatos
                     ObjAlumno.SubTipoDescuento = Convert.ToString(Cmd.Parameters["p_clasificacion"].Value);
                     ObjAlumno.IdEmpleado = Convert.ToInt32(Cmd.Parameters["P_ID_EMPLEADO"].Value);
                     ObjAlumno.IdFamiliar = Convert.ToInt32(Cmd.Parameters["P_ID_FAMILIAR"].Value);
-                    ObjAlumno.OficioQuienSolicita= Convert.ToString(Cmd.Parameters["P_OFICIO_SOLICITA"].Value);
+                    ObjAlumno.OficioQuienSolicita = Convert.ToString(Cmd.Parameters["P_OFICIO_SOLICITA"].Value);
+                    ObjAlumno.TipoAlumno = Convert.ToString(Cmd.Parameters["P_TIPO_ALUMNO"].Value);
                 }
 
 
@@ -896,18 +1024,18 @@ namespace CapaDatos
                                         "P_STATUS", "P_EVENTO", "P_CLAVE_CONCEPTO", "P_PORCENTAJE", "P_OFICIO_SOLICITUD",
                                         "P_OFICIO_FIRMA", "P_OFICIO_FECHA", "P_ID_TIPO_DESCUENTO", "P_NOTAS", "P_USUARIO",
                                         "P_VIGENCIA_INICIAL", "P_VIGENCIA_FINAL", "P_ASOCIADO", "P_ID_FAMILIAR", "P_ADSCRIPCION", "P_PLAZA", "P_TIPO_PERSONAL", "P_PARENTESCO",
-                                        "P_FECHA_NACIMIENTO", "P_GENERO", "P_ID_EMPLEADO", "P_QUIEN_SOLICITA", "P_CICLO_ALUM"
+                                        "P_FECHA_NACIMIENTO", "P_GENERO", "P_ID_EMPLEADO", "P_QUIEN_SOLICITA", "P_CICLO_ALUM", "P_TIPO_ALUMNO"
                                       };
                 object[] Valores = { ObjAlumno.IdPersona, ObjAlumno.Dependencia, ObjAlumno.CicloEscolar,ObjAlumno.Matricula, ObjAlumno.Nombre,ObjAlumno.APaterno,ObjAlumno.AMaterno,
                                      ObjAlumno.DescCarrera,ObjAlumno.Carrera, ObjAlumno.Semestre, ObjAlumno.Grupo, ObjAlumno.Nivel,
                                      ObjAlumno.StatusMatricula, ObjAlumno.Evento,  ObjAlumno.ConceptoDescuento, ObjAlumno.PorcentajeDescuento, ObjAlumno.OficioSolicito,
                                      ObjAlumno.OficioFirma, ObjAlumno.OficioFecha, ObjAlumno.TipoDescuento, ObjAlumno.Observaciones, ObjAlumno.UsuNombre,
                                      ObjAlumno.FechaInicial, ObjAlumno.FechaFinal, ObjAlumno.NombreEmpleado, ObjAlumno.IdFamiliar, ObjAlumno.Adscripcion, ObjAlumno.NoControl, ObjAlumno.TipoPersonaStr, ObjAlumno.Parentesco,
-                                     ObjAlumno.FechaNacimiento, ObjAlumno.Genero, ObjAlumno.IdEmpleado, ObjAlumno.OficioQuienSolicita, ObjAlumno.CicloAlu
+                                     ObjAlumno.FechaNacimiento, ObjAlumno.Genero, ObjAlumno.IdEmpleado, ObjAlumno.OficioQuienSolicita, ObjAlumno.CicloAlu, ObjAlumno.TipoAlumno
                                    };
                 String[] ParametrosOut = { "p_Bandera" };
 
-                Cmd = CDDatos.GenerarOracleCommand("UPD_DESCUENTOS_2016", ref Verificador, Parametros, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("UPD_DESCUENTOS", ref Verificador, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {
@@ -968,7 +1096,7 @@ namespace CapaDatos
                                         "P_OFICIO_SOLICITUD", "P_OFICIO_FIRMA", "P_OFICIO_FECHA", "P_ID_TIPO_DESCUENTO", "P_NOTAS",
                                         "P_USUARIO", "P_VIGENCIA_INICIAL", "P_VIGENCIA_FINAL","P_QUIEN_SOLICITA","P_ASOCIADO", "P_ID_FAMILIAR",
                                         "P_ADSCRIPCION", "P_PLAZA", "P_TIPO_PERSONAL", "P_PARENTESCO", "P_FECHA_NACIMIENTO",
-                                        "P_GENERO", "P_ID_EMPLEADO", "P_CICLO_ALUM"
+                                        "P_GENERO", "P_ID_EMPLEADO", "P_CICLO_ALUM", "P_TIPO_ALUMNO"
                                       };
                 object[] Valores = {    ObjAlumno.Dependencia, ObjAlumno.CicloEscolar, ObjAlumno.Matricula, ObjAlumno.Nombre, ObjAlumno.APaterno,
                                         ObjAlumno.AMaterno, ObjAlumno.DescCarrera, ObjAlumno.Carrera, ObjAlumno.Semestre, ObjAlumno.Grupo,
@@ -976,10 +1104,10 @@ namespace CapaDatos
                                         ObjAlumno.OficioSolicito, ObjAlumno.OficioFirma,ObjAlumno.OficioFecha, ObjAlumno.TipoDescuento, ObjAlumno.Observaciones,
                                         ObjAlumno.UsuNombre, ObjAlumno.FechaInicial, ObjAlumno.FechaFinal, ObjAlumno.OficioQuienSolicita, ObjAlumno.NombreEmpleado, ObjAlumno.IdFamiliar,
                                         ObjAlumno.Adscripcion, Convert.ToInt32(ObjAlumno.NoControl), ObjAlumno.TipoPersonaStr, ObjAlumno.Parentesco, ObjAlumno.FechaNacimiento,
-                                        Convert.ToString(ObjAlumno.Genero), Convert.ToInt32(ObjAlumno.IdEmpleado), ObjAlumno.CicloAlu};
+                                        Convert.ToString(ObjAlumno.Genero), Convert.ToInt32(ObjAlumno.IdEmpleado), ObjAlumno.CicloAlu, ObjAlumno.TipoAlumno};
                 String[] ParametrosOut = { "P_ID_DESCUENTO", "P_BANDERA" };
 
-                Cmd = CDDatos.GenerarOracleCommand("INS_DESCUENTOS_2016", ref Verificador, Parametros, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("INS_DESCUENTOS", ref Verificador, Parametros, Valores, ParametrosOut);
                 ObjAlumno.IdPersona = Convert.ToInt32(Cmd.Parameters["P_ID_DESCUENTO"].Value);
 
             }
@@ -1055,10 +1183,10 @@ namespace CapaDatos
                     ObjAlumno.Dependencia = Dependencia;
                 }
 
-                String[] Parametros = {"p_id", "p_dependencia", "p_matricula", "p_clave_concepto", "p_usuario"};
-                object[] Valores = { ObjAlumno.IdPersona, ObjAlumno.Dependencia, ObjAlumno.Matricula,  ObjAlumno.ConceptoDescuento, ObjAlumno.UsuNombre };
+                String[] Parametros = { "P_TIPO_ALUMNO", "p_id", "p_dependencia", "p_matricula", "p_clave_concepto", "p_usuario"};
+                object[] Valores = { ObjAlumno.TipoAlumno, ObjAlumno.IdPersona, ObjAlumno.Dependencia, ObjAlumno.Matricula,  ObjAlumno.ConceptoDescuento, ObjAlumno.UsuNombre };
                 String[] ParametrosOut = { "p_Bandera" };
-                Cmd = CDDatos.GenerarOracleCommand("GNR_RECIBO_DESCUENTO_2017", ref Verificador, Parametros, Valores, ParametrosOut);
+                Cmd = CDDatos.GenerarOracleCommand("GNR_RECIBO_DESCUENTO", ref Verificador, Parametros, Valores, ParametrosOut);
             }
             catch (Exception ex)
             {

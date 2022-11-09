@@ -3,51 +3,13 @@
 <%@ Register TagName="uCCorreo" TagPrefix="usr" Src="EnviarCorreo.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-    <script src="https://cdn.amcharts.com/lib/4/core.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/charts.js"></script>
-    <script src="https://cdn.amcharts.com/lib/4/themes/animated.js"></script>
-    <script src="Scripts/Graficas/kpi.js"></script>
-    <script type="text/javascript">
-        graficasContext.ObtenerDatosGraficaPagados("00000", "20221", "F", function (resp) {
-            var Total = 0;
-            switch (resp.ressult) {
-                case "tgp":
-                    self.listDatosPagados = graficasContext.listDatosPagados;
-                    am4core.useTheme(am4themes_animated);
-                    // Themes end
-
-                    let chart = am4core.create("chartdiv", am4charts.PieChart3D);
-                    chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
-
-                    chart.legend = new am4charts.Legend();
-
-                    for (var x = 0; x < self.listDatosPagados.length; x++) {
-                        Total = Total + parseFloat(self.listDatosPagados[x].Dato3);
-                        chart.data.push(
-                            {
-                                "Descripcion": self.listDatosPagados[x].Dato1,
-                                "total": self.listDatosPagados[x].Dato3
-                            },
-                        );
-                    }
-
-                    var series = chart.series.push(new am4charts.PieSeries3D());
-                    series.dataFields.value = "total";
-                    series.dataFields.category = "Descripcion";
-                    document.getElementById("ctl00_MainContent_lblNivel").innerHTML = Total + " PAGOS";
-
-
-
-                    break;
-                case "notgp":
-                    alert(resp.MENSAJE_ERROR);
-                    break;
-                default:
-                    break;
-            }
-            $scope.$apply();
-        });
-    </script>
+   <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+    <script src="Scripts/Graficas/ControllerPagos.js"></script>
+    <script src="Scripts/Graficas/ModelPagos.js"></script>
+    <%--<script src="Scripts/Graficas/kpi.js"></script>--%>
+    
     <style type="text/css">
        /* .scroll_monitor {
             height: 450px;
@@ -158,12 +120,20 @@
                                     <div class="tab-content" id="myTabContent">
                                         <div class="tab-pane fade show active" id="grafica" role="tabpanel" aria-labelledby="grafica-tab">
                                             <div class="row">
-                                                <div class="col-md-6">
-                                                    <asp:Label ID="lblNivel" runat="server" Text="" CssClass="font-weight-bold" Font-Size="18px"></asp:Label>
+                                                <div class="col-md-4">
+                                                    <asp:Label ID="lblNivel" runat="server" Text="" CssClass="font-weight-bold" Font-Size="16px"></asp:Label>                                                    
                                                 </div>
-                                                <div class="col-md-6 text-right">
+                                                 <div class="col-md-4">
+                                                    <asp:Label ID="lblNive2" runat="server" Text="" CssClass="font-weight-bold" Font-Size="16px"></asp:Label>
+                                                </div>
+                                                <div class="col-md-4 text-right">
                                                     <asp:LinkButton ID="linkBttnVerRecibos" runat="server" CssClass="btn btn-warning" OnClick="linkBttnVerRecibos_Click"><i class="fa fa-file"></i> Ver Recibos</asp:LinkButton>
                                                 </div>
+                                            </div>
+                                             <div class="row">
+                                                <div class="col text-center">
+                                            <div id="precarga"><input type="image" class="center" src="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" style="width: 50px; height: 50px" /></div>
+                                                    </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col">

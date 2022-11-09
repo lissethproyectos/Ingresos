@@ -70,7 +70,6 @@
         </div>
     </div>
     <div class="container">
-
         <div class="row">
             <div class="col-md-2">Nivel</div>
             <div class="col-md-3">
@@ -111,7 +110,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row text-center">
             <div class="col">
                 <asp:UpdateProgress ID="updGrid" runat="server" AssociatedUpdatePanelID="UpdatePanel3">
@@ -121,7 +120,6 @@
                 </asp:UpdateProgress>
             </div>
         </div>
-
         <div class="row text-center">
             <div class="col-md-11">
                 <div style="overflow-x: auto;">
@@ -162,6 +160,7 @@
                                     </asp:BoundField>
                                     <asp:BoundField DataField="Dependencia" HeaderText="Dependencia" />
                                     <asp:BoundField DataField="DescCarrera" HeaderText="Carrera" />
+                                    <asp:BoundField DataField="StatusMatricula" HeaderText="Status" />
                                     <asp:BoundField DataField="Correo" HeaderText="Correo" />
                                     <asp:BoundField DataField="Password" HeaderText="Password" />
                                     <asp:TemplateField HeaderText="Página">

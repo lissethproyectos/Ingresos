@@ -22,7 +22,7 @@
                                 <asp:UpdatePanel ID="UpdatePanel5" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddlDependencia" runat="server" AutoPostBack="True"
-                                            OnSelectedIndexChanged="ddlDependencia_SelectedIndexChanged" Width="100%">
+                                            OnSelectedIndexChanged="ddlDependencia_SelectedIndexChanged" CssClass="form-control">
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -37,7 +37,7 @@
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddlCarrera0" runat="server" AutoPostBack="true"
                                             ClientIDMode="Predictable" TabIndex="5"
-                                            Width="100%">
+                                             CssClass="form-control">
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -51,7 +51,7 @@
                                 <asp:UpdatePanel ID="UpdatePanel8" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True"
-                                            OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged1" Width="100%">
+                                            OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged1" CssClass="form-control">
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -60,7 +60,7 @@
                                 <asp:Label ID="lblStatus" runat="server" Text="Status"></asp:Label>
                             </div>
                             <div class="col-md-4">
-                                <asp:DropDownList ID="ddlStatus" runat="server" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged">
+                                <asp:DropDownList ID="ddlStatus" runat="server"  CssClass="form-control" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged">
                                     <asp:ListItem Value="T">Todos</asp:ListItem>
                                     <asp:ListItem Value="A">Activo</asp:ListItem>
                                     <asp:ListItem Value="C">Inactivos</asp:ListItem>
@@ -72,7 +72,7 @@
                                 <asp:Label ID="lblNivel0" runat="server" Text="Matricula/Nombre"></asp:Label>
                             </div>
                             <div class="col-md-8">
-                                <asp:TextBox ID="txtBusqueda" runat="server" Width="100%"></asp:TextBox>
+                                <asp:TextBox ID="txtBusqueda" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-2">
                                 <asp:UpdatePanel ID="updPnlBuscar" runat="server">
@@ -182,25 +182,11 @@
                 <asp:View ID="View2" runat="server">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-2">
-                                <asp:Label ID="lblNivel_D" runat="server" Text="Nivel de Estudio"></asp:Label>
-                            </div>
-                            <div class="col-md-10">
-                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                    <ContentTemplate>
-                                        <asp:DropDownList ID="ddlNivel_D" runat="server" TabIndex="2" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_D_SelectedIndexChanged">
-                                        </asp:DropDownList>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="ddlNivel_D" ErrorMessage="*Requerido" InitialValue="Z" ValidationGroup="guardar"></asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-2">Dependencia</div>
                             <div class="col-md-10">
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="ddlDependencia_D" runat="server" AutoPostBack="True" ClientIDMode="Predictable" OnSelectedIndexChanged="ddlDependencia_D_SelectedIndexChanged" TabIndex="3" Width="100%">
+                                        <asp:DropDownList ID="ddlDependencia_D" runat="server" AutoPostBack="True" ClientIDMode="Predictable" OnSelectedIndexChanged="ddlDependencia_D_SelectedIndexChanged" TabIndex="3" CssClass="form-control">
                                         </asp:DropDownList>
                                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="ddlDependencia_D" CssClass="MsjError" ErrorMessage="*Requerido" InitialValue="00000" ValidationGroup="guardar">
                                         </asp:RequiredFieldValidator>
@@ -214,11 +200,11 @@
                             <div class="col-md-10">
                                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="ddlCarrera" runat="server" AutoPostBack="true" ClientIDMode="Predictable" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged" TabIndex="4" Width="100%">
+                                        <asp:DropDownList ID="ddlCarrera" runat="server" AutoPostBack="true" ClientIDMode="Predictable" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged" TabIndex="4" CssClass="form-control">
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
-                            </div>
+                            </div>                            
                         </div>
                         <div class="row">
                             <div class="col-md-2">
@@ -227,7 +213,7 @@
                             <div class="col-md-10">
                                 <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                                     <ContentTemplate>
-                                        <asp:TextBox ID="txtCarrera" runat="server" CssClass="box" Visible="false" Width="100%" TabIndex="5" AutoPostBack="True"></asp:TextBox>
+                                        <asp:TextBox ID="txtCarrera" runat="server" Visible="false"  CssClass="form-control" TabIndex="5" AutoPostBack="True"></asp:TextBox>
                                         <asp:TextBoxWatermarkExtender ID="txtCarrera_TextBoxWatermarkExtender" runat="server" TargetControlID="txtCarrera" WatermarkCssClass="watermarked" WatermarkText="Escriba el nombre de la carrera " />
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -235,47 +221,25 @@
                         </div>
                         <br />
                         <div class="row">
-                            <div class="col-md-2">Matricula</div>
-                            <div class="col-md-10">
-                                <asp:TextBox ID="txtMatricula" runat="server" CssClass="box" TabIndex="6"></asp:TextBox>
+                            <div class="col-md-2">
+                                Nivel de Estudio
                             </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-2">Nombre</div>
-                            <div class="col-md-10">
-                                <asp:TextBox ID="txtNombre" runat="server" Width="100%" CssClass="box" TabIndex="7"></asp:TextBox>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="txtNombre"
-                                    CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar">                                        
-                                </asp:RequiredFieldValidator>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Apellido Paterno</div>
-                            <div class="col-md-10">
-                                <asp:UpdatePanel ID="UpdatePanel9" runat="server">
+                            <div class="col-md-2">
+                                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                     <ContentTemplate>
-                                        <asp:TextBox ID="txtPaterno" runat="server" TabIndex="8" Width="100%"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="txtPaterno" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
+                                        <asp:DropDownList ID="ddlNivel_D" runat="server" TabIndex="2" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_D_SelectedIndexChanged">
+                                        </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="ddlNivel_D" ErrorMessage="*Requerido" InitialValue="Z" ValidationGroup="guardar"></asp:RequiredFieldValidator>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Apellido Materno</div>
-                            <div class="col-md-10">
-                                <asp:UpdatePanel ID="UpdatePanel10" runat="server">
-                                    <ContentTemplate>
-                                        <asp:TextBox ID="txtMaterno" runat="server" TabIndex="9" Width="100%"></asp:TextBox>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-2">Semestre</div>
-                            <div class="col-md-4">
-                                <asp:TextBox ID="txtSemestre" runat="server" Width="100px" CssClass="box" TabIndex="10"></asp:TextBox>
+                            <div class="col-md-1">Matricula</div>
+                            <div class="col-md-2">
+                                <asp:TextBox ID="txtMatricula" runat="server" CssClass="form-control" TabIndex="6"></asp:TextBox>
+                            </div>                           
+                            <div class="col-md-1">Semestre</div>
+                            <div class="col-md-1">
+                                <asp:TextBox ID="txtSemestre" runat="server"  CssClass="form-control" TabIndex="10"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="txtSemestre"
                                     CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar">                                        
                                 </asp:RequiredFieldValidator>
@@ -284,36 +248,61 @@
                                     ValidationGroup="guardar" Display="Dynamic"></asp:RegularExpressionValidator>
                             </div>
                             <div class="col-md-1">Grupo</div>
-                            <div class="col-md-2">
-                                <asp:TextBox ID="txtGrupo" runat="server" CssClass="box" TabIndex="11" Width="100%"></asp:TextBox>
+                            <div class="col-md-1">
+                                <asp:TextBox ID="txtGrupo" runat="server"  CssClass="form-control" TabIndex="11"></asp:TextBox>
                             </div>
                         </div>
-                        <br />
                         <div class="row">
-                            <div class="col-md-2">Genero</div>
-                            <div class="col-md-4">
-                                <asp:RadioButtonList ID="rdoGenero" runat="server" RepeatDirection="Horizontal" TabIndex="12">
-                                    <asp:ListItem Value="F">Femenino</asp:ListItem>
-                                    <asp:ListItem Selected="True" Value="M">Masculino</asp:ListItem>
-                                </asp:RadioButtonList>
-                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="rdoGenero" ErrorMessage="*Requerido" ForeColor="Red" ValidationGroup="guardar"></asp:RequiredFieldValidator></td>       
+                            <div class="col-md-2">Nombre</div>
+                            <div class="col-md-10">
+                                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" TabIndex="7"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="txtNombre"
+                                    CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar">                                        
+                                </asp:RequiredFieldValidator>
                             </div>
-                            <div class="col-md-1">Activo</div>
-                            <div class="col-md-3">
-                                <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">Apellido Paterno</div>
+                            <div class="col-md-4">
+                                <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                     <ContentTemplate>
-                                        <asp:CheckBox ID="chkActivo" runat="server" Checked="true" TabIndex="13" />
+                                        <asp:TextBox ID="txtPaterno" runat="server" TabIndex="8" CssClass="form-control"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="txtPaterno" CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar"></asp:RequiredFieldValidator>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>                       
+                            <div class="col-md-2">Apellido Materno</div>
+                            <div class="col-md-4">
+                                <asp:UpdatePanel ID="UpdatePanel10" runat="server">
+                                    <ContentTemplate>
+                                        <asp:TextBox ID="txtMaterno" runat="server" TabIndex="9" CssClass="form-control"></asp:TextBox>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-2">Genero</div>
                             <div class="col-md-2">
+                                <asp:RadioButtonList ID="rdoGenero" runat="server" RepeatDirection="Horizontal" TabIndex="12">
+                                    <asp:ListItem Value="F">Femenino</asp:ListItem>
+                                    <asp:ListItem Selected="True" Value="M">Masculino</asp:ListItem>
+                                </asp:RadioButtonList>
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="rdoGenero" ErrorMessage="*Requerido" ForeColor="Red" ValidationGroup="guardar"></asp:RequiredFieldValidator></td>       
+                            </div>                                        
+                            <div class="col-md-1">
                                 Correo
                             </div>
-                            <div class="col-md-4">
-                                <asp:TextBox ID="txtCorreo" runat="server" CssClass="box" TabIndex="14" Width="100%"></asp:TextBox>
+                            <div class="col-md-3">
+                                <asp:TextBox ID="txtCorreo" runat="server" CssClass="form-control" TabIndex="14"></asp:TextBox>
                             </div>
+                             <div class="col-md-1">Activo</div>
+                            <div class="col-md-1">
+                                <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                                    <ContentTemplate>
+                                        <asp:CheckBox ID="chkActivo" runat="server" Checked="true" TabIndex="13" />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>          
                         </div>
                         <div class="row">
                             <div class="col text-center">
@@ -329,9 +318,8 @@
                             <div class="col text-right">
                                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                                     <ContentTemplate>
-                                        <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-info" Height="45px" Text="GUARDAR" OnClick="btnGuardar_Click" ValidationGroup="guardar" TabIndex="15" />
-                                        &nbsp;<asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-blue-grey" Height="45px"
-                                            Text="CANCELAR" OnClick="btnCancelar_Click" TabIndex="16" />
+                                        <asp:LinkButton ID="linkBttnSalir" runat="server" CssClass="btn btn-grey" OnClick="linkBttnSalir_Click"><i class="fa fa-arrow-circle-left fa-2x"></i> Cancelar</asp:LinkButton>
+                                        &nbsp;<asp:LinkButton ID="linkBtnnGuardar" runat="server" CssClass="btn btn-primary" OnClick="linkBtnnGuardar_Click" ValidationGroup="guardar"><i class="fa fa-floppy-o fa-2x" aria-hidden="true"></i> Guardar</asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>

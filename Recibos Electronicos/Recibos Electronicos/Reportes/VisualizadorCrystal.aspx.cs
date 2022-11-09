@@ -589,6 +589,11 @@ namespace Recibos_Electronicos.Reportes
                     Reporte = "Reportes\\REP070_Excel.rpt";
                     rptExcel_Ingresos(Reporte, v102, "Configuracion Evento");
                     break;
+                case "REP071":
+                    object[] v103 = { dependencia, FechaIn, FechaFi, Conceptos };
+                    Reporte = "Reportes\\RepComprobanteFiscal-Lote-Conceptos.rpt";
+                    rptPDF_FE(Reporte, v103, "Lote Recibos");
+                    break;
 
                 case "REP000":
                     object[] v39 = { TipoPersona, Referencia, Total, FechaIn, Conceptos, Observaciones };

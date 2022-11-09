@@ -14,6 +14,14 @@ namespace CapaEntidad
             get { return _IdPersona; }
             set { _IdPersona = value; }
         }
+
+        private string _TipoAlumno;
+        public string TipoAlumno
+        {
+            get { return _TipoAlumno; }
+            set { _TipoAlumno = value; }
+        }
+
         private int _TipoPersona;
 
         public int TipoPersona

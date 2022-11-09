@@ -666,6 +666,7 @@
     <Content Include="Form\frmBanco.aspx" />
     <Content Include="Form\DefaultAlumnos.aspx" />
     <Content Include="Form\frmActEmailTel.aspx" />
+    <Content Include="Form\frmCatAlumnosPSU.aspx" />
     <Content Include="Form\frmCatAspirantes.aspx" />
     <Content Include="Form\frmCatProductosVarios.aspx" />
     <Content Include="Form\frmCatReportes.aspx" />
@@ -797,19 +798,6 @@
     <Content Include="Principal2.aspx" />
     <Content Include="Principal.aspx" />
     <Content Include="Inicio.aspx" />
-    <Content Include="Js\Calendario\calendar_date_select.js" />
-    <Content Include="Js\Calendario\format_spanish.js" />
-    <Content Include="Js\Calendario\prototype.js" />
-    <Content Include="Js\Calendario\Validacion.js" />
-    <Content Include="Js\images\calback.jpg" />
-    <Content Include="Js\images\close.gif" />
-    <Content Include="Js\images\drop1.gif" />
-    <Content Include="Js\images\drop2.gif" />
-    <Content Include="Js\images\left1.gif" />
-    <Content Include="Js\images\left2.gif" />
-    <Content Include="Js\images\right1.gif" />
-    <Content Include="Js\images\right2.gif" />
-    <Content Include="Js\jsGeneral.js" />
     <Content Include="prueba.aspx" />
     <Content Include="Reportes\frmReporteGrals.aspx" />
     <Content Include="Reportes\VisualizadorCrystal.aspx" />
@@ -893,7 +881,9 @@
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />
     <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\Graficas\ControllerPagos.js" />
     <Content Include="Scripts\Graficas\kpi.js" />
+    <Content Include="Scripts\Graficas\ModelPagos.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
@@ -1150,6 +1140,13 @@
     </Compile>
     <Compile Include="Form\frmActEmailTel.aspx.designer.cs">
       <DependentUpon>frmActEmailTel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmCatAlumnosPSU.aspx.cs">
+      <DependentUpon>frmCatAlumnosPSU.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\frmCatAlumnosPSU.aspx.designer.cs">
+      <DependentUpon>frmCatAlumnosPSU.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\frmCatAspirantes.aspx.cs">
       <DependentUpon>frmCatAspirantes.aspx</DependentUpon>
@@ -1805,6 +1802,18 @@
       <DependentUpon>REP070.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\RepComprobanteFiscal-Lote-Conceptos.cs">
+      <DependentUpon>RepComprobanteFiscal-Lote-Conceptos.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Reportes\RepComprobanteFiscal-Lote.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepComprobanteFiscal-Lote.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\RepComprobanteFiscal.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1827,6 +1836,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RepComprobanteFiscal_QR.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reportes\RepLoteRecibos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RepLoteRecibos.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reportes\rptBitacora_Carga.cs">
@@ -2046,6 +2061,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>REP070.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RepComprobanteFiscal-Lote-Conceptos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepComprobanteFiscal-Lote-Conceptos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RepComprobanteFiscal-Lote.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepComprobanteFiscal-Lote.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reportes\RepComprobanteFiscal_Posgrado.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepComprobanteFiscal_Posgrado.cs</LastGenOutput>
@@ -2061,6 +2084,10 @@
     <EmbeddedResource Include="Reportes\RepComprobanteFiscal_QR.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RepComprobanteFiscal_QR.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RepLoteRecibos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RepLoteRecibos.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\rptBitacora_Carga.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

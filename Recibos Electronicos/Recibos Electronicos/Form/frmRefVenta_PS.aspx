@@ -107,7 +107,7 @@
             <div class="col">
                 <asp:UpdatePanel ID="updPnlCtaMayor" runat="server">
                     <ContentTemplate>
-                        <asp:Label ID="lblCtaMayor" runat="server" Text="Cta de Mayor:" Visible="False"></asp:Label>
+                        <asp:Label ID="lblCtaMayor" runat="server" Text="Cta de Mayor:" Visible="False"></asp:Label>                        
                     </ContentTemplate>
                 </asp:UpdatePanel>
                 <asp:UpdatePanel ID="updPnlCtaMayor2" runat="server">
@@ -375,7 +375,7 @@
                                                     </asp:UpdatePanel>
                                                 </div>
                                                 <div class="col-md-2">
-                                                    <asp:LinkButton ID="linkBttnAgregarCliente" runat="server" CssClass="form-control btn btn-info text-white"  OnClick="linkBttnNuevoCliente_Click"><i class="fa fa-plus-circle"></i> Nuevo</asp:LinkButton>
+                                                    <asp:LinkButton ID="linkBttnAgregarCliente" runat="server" CssClass="form-control btn btn-info text-white" OnClick="linkBttnNuevoCliente_Click"><i class="fa fa-plus-circle"></i> Nuevo</asp:LinkButton>
                                                 </div>
 
                                                 <div class="col-md-1">
@@ -556,8 +556,7 @@
                                                 <ProgressTemplate>
                                                     <span>
                                                         <img height="26" src="https://sysweb.unach.mx/Ingresos/Imagenes/load.gif" width="222" />
-                                                    </span><span class="loading">
-                                                    </span>
+                                                    </span><span class="loading"></span>
                                                 </ProgressTemplate>
                                             </asp:UpdateProgress>
                                         </div>
@@ -643,6 +642,31 @@
                             </div>
                         </div>
                         <div class="row">
+                                        <div class="col text-center">
+                                            <asp:UpdateProgress ID="updPgrBttnGenPDF" runat="server"
+                                                AssociatedUpdatePanelID="updPnlBttnGenPDF">
+                                                <ProgressTemplate>
+                                                    <span>
+                                                        <img height="26" src="https://sysweb.unach.mx/Ingresos/Imagenes/load.gif" width="222" />
+                                                    </span><span class="loading"></span>
+                                                </ProgressTemplate>
+                                            </asp:UpdateProgress>
+                                        </div>
+                                    </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:UpdatePanel ID="updPnlBttnGenPDF" runat="server">
+                                    <ContentTemplate>
+                                        <asp:LinkButton ID="linkBttnGenPDF" runat="server" CssClass="btn btn-info  buttons-pdf buttons-html5 btn-app export csv" OnClick="linkBttnGenPDF_Click"><i class="fa fa-file fa-2x" aria-hidden="true"></i>Generar Referencia</asp:LinkButton>
+                                 &nbsp;
+                                        <asp:LinkButton ID="LinkButton4" runat="server" CssClass="btn btn-info  buttons-pdf buttons-html5 btn-app export pdf" OnClick="linkBttnPagoLinea_Click"><i class="fa fa-id-card fa-2x" aria-hidden="true"></i>Pago en Línea</asp:LinkButton>
+                                  &nbsp;
+                                        <asp:LinkButton ID="linkBttnGenLink" runat="server" class="btn btn-secondary buttons-pdf buttons-html5 btn-app export excel" OnClick="linkBttnGenLink_Click"><i class="fa fa-bars fa-2x"></i>Link pago en Línea</asp:LinkButton>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <%--                 <div class="row">
                             <div class="col text-right">
                                 <asp:UpdatePanel ID="UpdatePanel13" runat="server">
                                     <ContentTemplate>
@@ -650,7 +674,7 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>
-                            <%-- <div class="col-md-4 text-center">
+                             <div class="col-md-4 text-center">
                                 <asp:UpdatePanel ID="updPnlBttnGenPDF" runat="server">
                                     <ContentTemplate>
                                         <asp:LinkButton ID="linkBttnGenPDF" runat="server" CssClass="btn btn-info  buttons-pdf buttons-html5 btn-app export csv" OnClick="linkBttnGenPDF_Click"><i class="fa fa-file fa-2x" aria-hidden="true"></i>Generar Referencia</asp:LinkButton>
@@ -670,8 +694,8 @@
                                         <asp:LinkButton ID="linkBttnGenLink" runat="server" class="btn btn-secondary buttons-pdf buttons-html5 btn-app export excel" OnClick="linkBttnGenLink_Click"><i class="fa fa-bars fa-2x"></i>Link pago en Línea</asp:LinkButton>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
-                            </div>--%>
-                        </div>
+                            </div>
+                        </div>--%>
                         <div class="row">
                             <div class="col">
                                 <asp:UpdatePanel ID="updPnlPago" runat="server">
@@ -683,7 +707,7 @@
                         </div>
                         <div class="row">
                             <div class="col text-center">
-                                <asp:UpdateProgress ID="updPgrPago" runat="server" AssociatedUpdatePanelID="UpdatePanel13">
+                                <asp:UpdateProgress ID="updPgrPago" runat="server" AssociatedUpdatePanelID="updPnlPago">
                                     <ProgressTemplate>
                                         <asp:Image ID="imgPrecargaLinkPago" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
                                     </ProgressTemplate>

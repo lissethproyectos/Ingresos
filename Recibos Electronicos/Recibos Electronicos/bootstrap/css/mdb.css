@@ -2238,6 +2238,12 @@ a.waves-effect, a.waves-light {
         text-align:left;
     }
 
+.btn-dorado {
+    background-color: #ad8b27 !important;
+    color: #fff;
+}
+
+
 .primary-ic {
   color: #4285f4 !important; }
   .primary-ic:hover, .primary-ic:focus {

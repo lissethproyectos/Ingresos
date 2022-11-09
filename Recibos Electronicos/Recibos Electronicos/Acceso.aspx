@@ -93,8 +93,10 @@
 
                     }
                     else if ($("#DDLTipoUsuario").val() == "2") {
-                        $("#txtCve").attr("placeholder", "RFC");
-                        $("#listUser").show();
+                        $("#listReferencia").show();
+                        $("#listCve").hide();
+                        $("#txtCve").attr("placeholder", "Referencia de 26 dígitos");
+                        $('.txtCve').css('cursor', 'pointer');
                     }
                     else if ($("#DDLTipoUsuario").val() == "4") {
                         $("#listReferencia").hide();
@@ -206,7 +208,7 @@
                                 <asp:ListItem Value="5">Seleccionar</asp:ListItem>
                                 <asp:ListItem Value="1">Alumno ó Aspirante</asp:ListItem>
                                 <asp:ListItem Value="3">Usuario Dependencia</asp:ListItem>
-                                <asp:ListItem Value="4">Referencia Bancaria</asp:ListItem>
+                                <asp:ListItem Value="7">Referencia Bancaria</asp:ListItem>
                                 <asp:ListItem Value="6">Cliente UNACH</asp:ListItem>
                                 <asp:ListItem Value="4">Facturas</asp:ListItem>
                             </asp:DropDownList>

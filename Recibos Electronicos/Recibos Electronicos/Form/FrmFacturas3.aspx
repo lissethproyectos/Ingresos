@@ -430,7 +430,7 @@
                             <div class="col-md-3">
                                 <asp:UpdatePanel ID="UpdatePanel4" runat="server">
                                     <ContentTemplate>
-                                        <asp:DropDownList ID="ddlStatus" runat="server" Width="100%" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True" CssClass="btn btn-primary dropdown-toggle browser-default custom-select custom-select-lg mb-3">
+                                        <asp:DropDownList ID="ddlStatus" runat="server" OnSelectedIndexChanged="ddlStatus_SelectedIndexChanged" AutoPostBack="True" CssClass="form-control btn btn-primary dropdown-toggle browser-default custom-select custom-select-lg mb-3">
                                         </asp:DropDownList>
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
@@ -2074,6 +2074,7 @@
                             <div class="col text-center">
                                 <asp:UpdatePanel ID="UpdatePanel37" runat="server">
                                     <ContentTemplate>
+                                        <asp:LinkButton ID="linkBttnEnviarFact" runat="server" OnClick="linkBttnEnviarFact_Click">Enviar</asp:LinkButton>
                                         <asp:Button ID="bttnCorreo" runat="server" CssClass="btn btn-info" Height="40px" OnClick="bttnCorreo_Click" Text="Enviar" ValidationGroup="correo" />
                                         <%--&nbsp;<asp:Button ID="bttnCancelarCorreo" runat="server" CssClass="btn btn-blue-grey" Height="40px" OnClick="bttnCancelarCorreo_Click" Text="Salir" />--%>
                                     </ContentTemplate>

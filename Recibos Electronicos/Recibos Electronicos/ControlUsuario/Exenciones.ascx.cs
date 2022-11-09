@@ -39,7 +39,7 @@ namespace Recibos_Electronicos.ControlUsuario
                 ObjAlumno.CicloEscolar = "0";
                 ObjAlumno.StatusMatricula = "A";
                 ObjAlumno.Nivel = "L";
-                CNAlumno.ConsultarAlumnoDescuento(ref ObjAlumno, "T", Matricula, ref List);
+                CNAlumno.ConsultarAlumnoDescuento("UNACH", ref ObjAlumno, "T", Matricula, ref List);
                 return List;
             }
             catch (Exception ex)

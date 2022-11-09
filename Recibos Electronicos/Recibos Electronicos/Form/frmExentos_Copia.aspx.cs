@@ -319,7 +319,7 @@ namespace Recibos_Electronicos.Form
                 ObjConcepto.Nivel = ddlNivel.SelectedValue;
                 ObjConcepto.Dependencia = ddlDependencia_D.SelectedValue;
                 ObjConcepto.Carrera = ddlCarrera.SelectedValue;
-                CNDetDesc.ConsultarCatConceptoDescuento(ObjConcepto, ddlSubTipo.SelectedValue, ref List);
+                CNDetDesc.ConsultarCatConceptoDescuento("UANCH", ObjConcepto, ddlSubTipo.SelectedValue, ref List);
                 return List;
             }
             catch (Exception ex)
@@ -336,7 +336,7 @@ namespace Recibos_Electronicos.Form
                 ObjAlumno.CicloEscolar = ddlCiclo.SelectedValue;
                 ObjAlumno.StatusMatricula = ddlStatus_Ini.SelectedValue;
                 ObjAlumno.Nivel = ddlNivel1.SelectedValue;
-                CNAlumno.ConsultarAlumnoDescuento(ref ObjAlumno, ddlSubTipo1.SelectedValue, txtReferencia.Text, ref List);
+                CNAlumno.ConsultarAlumnoDescuento("UNACH", ref ObjAlumno, ddlSubTipo1.SelectedValue, txtReferencia.Text, ref List);
                 return List;
             }
             catch (Exception ex)

@@ -34,18 +34,7 @@ namespace Recibos_Electronicos.Form
         }
         
         #region <Botones y Eventos>        
-        protected void btnCancelar_Click(object sender, EventArgs e)
-        {
-            MultiView1.ActiveViewIndex = 1;
-            //pnlDatos_Alumno.Visible = false;
-            //pnlPrincipal.Visible = true;
-            Nuevo();
-        }
-        protected void btnGuardar_Click(object sender, EventArgs e)
-        {
-            GuardarDatos();
-
-        }
+       
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
         {
 
@@ -525,6 +514,17 @@ namespace Recibos_Electronicos.Form
             SesionUsu.Editar = 0;
             txtMatricula.Enabled = true;
             Nuevo();
+        }
+
+        protected void linkBttnSalir_Click(object sender, EventArgs e)
+        {
+            MultiView1.ActiveViewIndex = 0;
+            Nuevo();
+        }
+
+        protected void linkBtnnGuardar_Click(object sender, EventArgs e)
+        {
+            GuardarDatos();
         }
     }
 }

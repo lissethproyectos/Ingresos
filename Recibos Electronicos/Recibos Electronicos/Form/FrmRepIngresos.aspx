@@ -2,7 +2,7 @@
 
 <%@ Register Assembly="CapaNegocio" Namespace="CapaNegocio" TagPrefix="customControl" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
-     <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
     <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -17,22 +17,22 @@
             </div>
         </div>
         <asp:UpdatePanel ID="UpdatePanel48" runat="server">
-                    <ContentTemplate>
-        <div class="row" id="rowCiclo" runat="server" visible="false">
-            <div class="col-md-2">
-                
+            <ContentTemplate>
+                <div class="row" id="rowCiclo" runat="server" visible="false">
+                    <div class="col-md-2">
+
                         <asp:Label ID="lblCiclo" runat="server" Text="Ciclo Escolar"></asp:Label>
-                   
-            </div>
-            <div class="col-md-4">
-               
+
+                    </div>
+                    <div class="col-md-4">
+
                         <customControl:GroupDropDownList ID="ddlCiclo" runat="server" AutoPostBack="True" Width="100%">
                         </customControl:GroupDropDownList>
-                   
-            </div>
-        </div>
-     </ContentTemplate>
-                </asp:UpdatePanel>
+
+                    </div>
+                </div>
+            </ContentTemplate>
+        </asp:UpdatePanel>
         <div class="row">
             <div class="col-md-2">
                 <asp:Label ID="lblFecha_Factura_Ini" runat="server" Text="Fecha Inicial"></asp:Label>
@@ -59,7 +59,7 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-        
+
             <div class="col-md-1">
                 <asp:Label ID="lblNivel" runat="server" Text="Nivel"></asp:Label>
             </div>
@@ -78,9 +78,9 @@
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
-          
-      
-                        
+
+
+
         </div>
         <div class="row">
             <div class="col text-center">
@@ -92,16 +92,16 @@
             </div>
         </div>
         <div class="row">
-           <%-- <div class="col-md-2">
+            <%-- <div class="col-md-2">
                 <asp:Label ID="lblConceptos" runat="server" Text="Conceptos"></asp:Label>
             </div>--%>
             <div class="col">
                 <asp:UpdatePanel ID="UpdatePanel42" runat="server">
                     <ContentTemplate>
-<%--                        <div id="divGrid" runat="server" style="border-style: none none solid none; overflow: auto; height: 230px; border-bottom-color: #D9D9D9; border-bottom-width: 1px;">--%>
-                            <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" 
-                                CssClass="sem table table-striped table-bordered table-hover" 
-                                EmptyDataText="No se encontro ningún registro"  Width="100%" DataKeyNames="ClaveConcepto">
+                        <div class="scroll_monitor">
+                            <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False"
+                                CssClass="sem table table-striped table-bordered table-hover"
+                                EmptyDataText="No se encontro ningún registro" Width="100%" DataKeyNames="ClaveConcepto">
                                 <Columns>
                                     <asp:BoundField DataField="ClaveConcepto" HeaderText="Cve">
                                         <HeaderStyle HorizontalAlign="Left" />
@@ -116,9 +116,15 @@
                                             <asp:CheckBox ID="chkTodosConc" runat="server" OnCheckedChanged="chkTodosConc_CheckedChanged" AutoPostBack="true" />
                                         </HeaderTemplate>
                                         <ItemTemplate>
-                                            <asp:CheckBox ID="chkConcepto" runat="server" Checked='<%# Bind("Habilita") %>'/>
+                                            <asp:CheckBox ID="chkConcepto" runat="server" Checked='<%# Bind("Habilita") %>' />
                                         </ItemTemplate>
                                         <HeaderStyle HorizontalAlign="Center" />
+                                        <ItemStyle HorizontalAlign="Center" />
+                                    </asp:TemplateField>
+                                    <asp:TemplateField>
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="linkBttnVerRecibos" runat="server" CssClass="btn btn-grey" OnClick="linkBttnVerRecibos_Click">Ver Recibos</asp:LinkButton>
+                                        </ItemTemplate>
                                         <ItemStyle HorizontalAlign="Center" />
                                     </asp:TemplateField>
                                 </Columns>
@@ -127,7 +133,7 @@
                                 <PagerStyle CssClass="enc" HorizontalAlign="Center" />
                                 <SelectedRowStyle CssClass="sel" />
                             </asp:GridView>
-<%--                        </div>--%>
+                        </div>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -138,6 +144,7 @@
                     <ContentTemplate>
                         <asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
                         &nbsp;<asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />
+                        &nbsp;
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -150,7 +157,14 @@
             $('#<%= grvConceptos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvConceptos.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
                 "stateSave": true,
-                "lengthMenu": [10, 20, 50, 100, 200, 500]
+                "lengthMenu": [20, 50, 100, 200, 500],
+                "bPaginate": false,
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    null
+                ]
             });
         }
     </script>
