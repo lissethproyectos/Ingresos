@@ -233,8 +233,7 @@
                                 <asp:BoundField DataField="FACT_TIPO" HeaderText="Tipo" />
                                 <asp:TemplateField HeaderText="Pago Aplicado">
                                     <ItemTemplate>
-                                        <asp:Image ID="imgStatus" runat="server" ImageUrl='<%# Bind("FACT_RECEPTOR_STATUS") %>' />
-                                        <%--<asp:ImageButton ID="imgStatus" runat="server" ImageUrl='<%# Bind("FACT_RECEPTOR_STATUS") %>' OnClick="imgStatus_Click" />--%>
+                                        <asp:ImageButton ID="imgStatus" runat="server" ImageUrl='<%# Bind("FACT_RECEPTOR_STATUS") %>' OnClick="imgStatus_Click" />                                        
                                     </ItemTemplate>
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" />
@@ -471,9 +470,29 @@
                     null
                 ]
             });
+            ;
+        }
+        function PagosSYSWEB() {
+
+            $('#<%= grvReferenciasSIAE.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvReferenciasSIAE.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true,
+                "ordering": false,
+                "columns": [
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
+            });
 
         }
-
 
     </script>
 </asp:Content>

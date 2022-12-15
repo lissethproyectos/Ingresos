@@ -7,6 +7,8 @@
 <%--<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>--%>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
     <script type="text/javascript" src="../Js/jsGeneral.js"> </script>
+    <script src="../Scripts/DataTables/jquery.dataTables.min.js"></script>
+    <link href="../Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -20,7 +22,7 @@
                                 <asp:Label ID="lblBuscar" runat="server" Text="Buscar"></asp:Label>
                             </div>
                             <div class="col-md-9">
-                                <asp:TextBox ID="txtFolioBuscar" runat="server" Placeholder="Recibo/Referencia/Nombre Completo" Width="100%"></asp:TextBox>
+                                <asp:TextBox ID="txtFolioBuscar" runat="server" Placeholder="Recibo/Referencia/Nombre Completo"  CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-1">
                                 <asp:UpdatePanel ID="UpdBuscar" runat="server">
@@ -58,7 +60,7 @@
                             <div class="col text-center">
                                 <asp:UpdatePanel ID="updPnlFacturas" runat="server">
                                     <ContentTemplate>
-                                        <asp:GridView ID="grvFacturas" runat="server" AllowPaging="True"
+                                        <asp:GridView ID="grvFacturas" runat="server"
                                             AutoGenerateColumns="False"
                                             OnSelectedIndexChanging="grvFacturas_SelectedIndexChanging"
                                             OnPageIndexChanging="grvFacturas_PageIndexChanging"
@@ -79,6 +81,7 @@
                                                     <HeaderStyle HorizontalAlign="Left" />
                                                     <ItemStyle HorizontalAlign="Left" />
                                                 </asp:BoundField>
+                                                <asp:BoundField DataField="FACT_IMPORTE" HeaderText="Total" />
                                                 <asp:BoundField DataField="FACT_FOLIO" HeaderText="Recibo" ReadOnly="True">
                                                     <HeaderStyle HorizontalAlign="Left" />
                                                     <ItemStyle HorizontalAlign="Left" />
@@ -690,12 +693,16 @@
         </div>
     </div>
     <script language="javascript" type="text/javascript">   
-    <%--$(function () {        
-        $("#<%=txtFolioBuscar.ClientID %>").keypress(function () {
-            //alert("pasa");
-                $("#<%=imgbtnBuscar.ClientID %>").focus(); //alert("Wow; Its Work!.")
+
+        function Recibos() {
+            $('#<%= grvFacturas.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvFacturas.ClientID %>').find("tr:first"))).DataTable({
+                "destroy": true,
+                "stateSave": true
             });
-        });--%>
+            ;
+        };
+
+
         function button_click(objTextBox, objBtnID) {
             if (window.event.keyCode == 13) {
                 document.getElementById(objBtnID).focus();

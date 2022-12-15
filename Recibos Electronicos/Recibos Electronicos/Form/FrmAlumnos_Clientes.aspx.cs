@@ -68,13 +68,13 @@ namespace Recibos_Electronicos.Form
         {
             if (ddlCarrera.SelectedValue == "000000")
             {
-                lblOtraCarrera.Visible = true;
+                rowOtraCarrera.Visible = true;
                 txtCarrera.Visible = true;
                 txtCarrera.Text = string.Empty;
             }
             else
             {
-                lblOtraCarrera.Visible = false;
+                rowOtraCarrera.Visible = false;
                 txtCarrera.Visible = false;
                 txtCarrera.Text = ddlCarrera.SelectedItem.Text;
             }
@@ -223,7 +223,8 @@ namespace Recibos_Electronicos.Form
 
                 else
                 {
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador.Substring(0, 40) + "');", true);  //lblMsj.Text = ex.Message;
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
                     //lblMsj.Text = Verificador;
                 }
 

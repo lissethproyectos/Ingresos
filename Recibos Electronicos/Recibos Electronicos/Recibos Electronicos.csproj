@@ -1736,6 +1736,12 @@
       <DependentUpon>REP038Excel.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reportes\REP043.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>REP043.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reportes\REP055_Excel.cs">
       <DependentUpon>REP055_Excel.rpt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2016,6 +2022,10 @@
     <EmbeddedResource Include="Reportes\REP038Excel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>REP038Excel.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\REP043.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>REP043.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reportes\REP055_Excel.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

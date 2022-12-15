@@ -182,8 +182,8 @@
                 <asp:View ID="View2" runat="server">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-2">Dependencia</div>
-                            <div class="col-md-10">
+                            <div class="col-md-1">Depcia</div>
+                            <div class="col-md-11">
                                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddlDependencia_D" runat="server" AutoPostBack="True" ClientIDMode="Predictable" OnSelectedIndexChanged="ddlDependencia_D_SelectedIndexChanged" TabIndex="3" CssClass="form-control">
@@ -196,35 +196,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2">Carrera</div>
-                            <div class="col-md-10">
-                                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
-                                    <ContentTemplate>
-                                        <asp:DropDownList ID="ddlCarrera" runat="server" AutoPostBack="true" ClientIDMode="Predictable" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged" TabIndex="4" CssClass="form-control">
-                                        </asp:DropDownList>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>                            
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <asp:Label ID="lblOtraCarrera" runat="server" Text="Especificar" Visible="False"></asp:Label>
+                             <div class="col-md-1">
+                                Nivel
                             </div>
-                            <div class="col-md-10">
-                                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                                    <ContentTemplate>
-                                        <asp:TextBox ID="txtCarrera" runat="server" Visible="false"  CssClass="form-control" TabIndex="5" AutoPostBack="True"></asp:TextBox>
-                                        <asp:TextBoxWatermarkExtender ID="txtCarrera_TextBoxWatermarkExtender" runat="server" TargetControlID="txtCarrera" WatermarkCssClass="watermarked" WatermarkText="Escriba el nombre de la carrera " />
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-2">
-                                Nivel de Estudio
-                            </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3">
                                 <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                                     <ContentTemplate>
                                         <asp:DropDownList ID="ddlNivel_D" runat="server" TabIndex="2" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_D_SelectedIndexChanged">
@@ -233,6 +208,30 @@
                                 </asp:UpdatePanel>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="ddlNivel_D" ErrorMessage="*Requerido" InitialValue="Z" ValidationGroup="guardar"></asp:RequiredFieldValidator>
                             </div>
+                            <div class="col-md-1">Carrera</div>
+                            <div class="col-md-7">
+                                <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                    <ContentTemplate>
+                                        <asp:DropDownList ID="ddlCarrera" runat="server" AutoPostBack="true" ClientIDMode="Predictable" OnSelectedIndexChanged="ddlCarrera_SelectedIndexChanged" TabIndex="4" CssClass="form-control">
+                                        </asp:DropDownList>
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>                            
+                        </div>
+                        <div class="row" id="rowOtraCarrera" runat="server">
+                            <div class="col-md-1">
+                                Especificar
+                            </div>
+                            <div class="col-md-11">
+                                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                                    <ContentTemplate>
+                                        <asp:TextBox ID="txtCarrera" runat="server" CssClass="form-control" TabIndex="5" AutoPostBack="True"></asp:TextBox>
+                                        <asp:TextBoxWatermarkExtender ID="txtCarrera_TextBoxWatermarkExtender" runat="server" TargetControlID="txtCarrera" WatermarkCssClass="watermarked" WatermarkText="Escriba el nombre de la carrera " />
+                                    </ContentTemplate>
+                                </asp:UpdatePanel>
+                            </div>
+                        </div>
+                        <div class="row">                           
                             <div class="col-md-1">Matricula</div>
                             <div class="col-md-2">
                                 <asp:TextBox ID="txtMatricula" runat="server" CssClass="form-control" TabIndex="6"></asp:TextBox>
@@ -253,17 +252,16 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2">Nombre</div>
-                            <div class="col-md-10">
+                            <div class="col-md-1">Nombre</div>
+                            <div class="col-md-3">
                                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" TabIndex="7"></asp:TextBox>
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="txtNombre"
                                     CssClass="MsjError" ErrorMessage="*Requerido" ValidationGroup="guardar">                                        
                                 </asp:RequiredFieldValidator>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">Apellido Paterno</div>
-                            <div class="col-md-4">
+                        
+                            <div class="col-md-1">Paterno</div>
+                            <div class="col-md-3">
                                 <asp:UpdatePanel ID="UpdatePanel9" runat="server">
                                     <ContentTemplate>
                                         <asp:TextBox ID="txtPaterno" runat="server" TabIndex="8" CssClass="form-control"></asp:TextBox>
@@ -271,8 +269,8 @@
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>                       
-                            <div class="col-md-2">Apellido Materno</div>
-                            <div class="col-md-4">
+                            <div class="col-md-1">Materno</div>
+                            <div class="col-md-3">
                                 <asp:UpdatePanel ID="UpdatePanel10" runat="server">
                                     <ContentTemplate>
                                         <asp:TextBox ID="txtMaterno" runat="server" TabIndex="9" CssClass="form-control"></asp:TextBox>
@@ -281,7 +279,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2">Genero</div>
+                            <div class="col-md-1">Genero</div>
                             <div class="col-md-2">
                                 <asp:RadioButtonList ID="rdoGenero" runat="server" RepeatDirection="Horizontal" TabIndex="12">
                                     <asp:ListItem Value="F">Femenino</asp:ListItem>

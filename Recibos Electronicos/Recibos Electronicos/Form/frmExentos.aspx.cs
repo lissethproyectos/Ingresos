@@ -209,6 +209,7 @@ namespace Recibos_Electronicos.Form
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Familiares", ref ddlParentescoFam);
                 CNComun.LlenaCombo("pkg_pagos.Obt_Combo_Niveles", ref ddlNivel1, "INGRESOS");
                 //ddlNivel.Items.Insert(0, new ListItem("NINGUNO", "0"));
+                
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_UR", ref ddlDependencia_D, "p_tipo_usuario", "p_usuario", SesionUsu.Usu_TipoUsu.ToString(), SesionUsu.Usu_Nombre);
                 CNComun.LlenaCombo("pkg_pagos_2016.Obt_Ciclos_Escolares", ref ddlCiclo, "INGRESOS");
@@ -1489,6 +1490,7 @@ namespace Recibos_Electronicos.Form
                 ObjAlumno.Matricula = grvAlumnos.SelectedRow.Cells[4].Text;
                 ObjAlumno.Nivel = grvAlumnos.SelectedRow.Cells[16].Text;
                 ObjAlumno.UsuNombre = SesionUsu.Usu_Nombre;
+                ObjAlumno.TipoAlumno = grvAlumnos.SelectedRow.Cells[22].Text;
                 CNAlumno.GeneraReciboDescuento(ref ObjAlumno, ref Verificador);
                 if (Verificador == "0")
                     CargarGrid();

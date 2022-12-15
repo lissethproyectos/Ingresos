@@ -1114,7 +1114,7 @@ namespace CapaDatos
                         ObjCjaFactura.HABILITADO = true;
                     else
                         ObjCjaFactura.HABILITADO = false;
-                    ObjCjaFactura.NombreArchivoPDF = dr.GetValue(0) + ".PDF";
+                    ObjCjaFactura.NombreArchivoPDF = dr.GetValue(1) + ".PDF";
                     ObjCjaFactura.NombreArchivoXML = dr.GetValue(0) + ".XML";
 
 

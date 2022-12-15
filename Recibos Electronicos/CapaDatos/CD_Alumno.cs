@@ -149,6 +149,7 @@ namespace CapaDatos
                     ObjAlumno.Esquema = EsquemaAlu;
                     ObjAlumno.Correo_Instituicional = Convert.ToString(dr.GetValue(12));
                     ObjAlumno.StatusMatricula = Convert.ToString(dr.GetValue(13));
+                    ObjAlumno.TipoPersonaStr = Convert.ToString(dr.GetValue(0));
                     List.Add(ObjAlumno);
                 }
                 dr.Close();
@@ -730,8 +731,10 @@ namespace CapaDatos
                 String[] ParametrosOut = { "p_Bandera", "p_matricula_generada" };
 
                 Cmd = CDDatos.GenerarOracleCommand("INS_ALUMNO_POSGRADO_2016", ref Verificador, Parametros, Valores, ParametrosOut);
-
-                ObjAlumno.Matricula = Convert.ToString(Cmd.Parameters["p_matricula_generada"].Value);
+                if(Verificador=="0")
+                    ObjAlumno.Matricula = Convert.ToString(Cmd.Parameters["p_matricula_generada"].Value);
+                else
+                    ObjAlumno.Matricula = string.Empty;
             }
             catch (Exception ex)
             {
@@ -829,6 +832,8 @@ namespace CapaDatos
                     ObjAlumno.registro.EtiquetaSiete = Convert.ToString(dr.GetValue(16)); //Para saber si tiene asociado un familiar
                     ObjAlumno.registro.EtiquetaSeis = Convert.ToString(dr.GetValue(17)); //Para saber si tiene asociado un familiar
                     ObjAlumno.CicloAlu= Convert.ToString(dr.GetValue(18));
+                    ObjAlumno.TipoAlumno = Convert.ToString(dr.GetValue(19));
+                    
                     List.Add(ObjAlumno);
 
                 }

@@ -13,7 +13,7 @@
             <div class="col-md-10">
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="DDLEscuelas" runat="server" Width="100%"></asp:DropDownList>
+                        <asp:DropDownList ID="DDLEscuelas" runat="server" CssClass="form-control"></asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>
@@ -23,7 +23,7 @@
                 Ficha/Matricula
             </div>
             <div class="col-md-2">
-                <asp:TextBox ID="txtMatricula" runat="server" Width="100%"></asp:TextBox>
+                <asp:TextBox ID="txtMatricula" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
 
             <div class="col-md-2">
@@ -51,7 +51,7 @@
             <div class="col-md-10">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="DDLCarreras" runat="server" Width="100%" OnSelectedIndexChanged="DDLCarreras_SelectedIndexChanged" AutoPostBack="True">
+                        <asp:DropDownList ID="DDLCarreras" runat="server" CssClass="form-control" OnSelectedIndexChanged="DDLCarreras_SelectedIndexChanged" AutoPostBack="True">
                             <asp:ListItem Value="00000">--TODOS--</asp:ListItem>
                         </asp:DropDownList>
                     </ContentTemplate>

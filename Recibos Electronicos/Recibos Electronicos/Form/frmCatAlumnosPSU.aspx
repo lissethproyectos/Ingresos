@@ -13,7 +13,7 @@
                 </asp:DropDownList>
             </div>
         </div>
-        <div class="row">           
+        <div class="row">
             <div class="col-md-2">Ciclo</div>
             <div class="col-md-2">
                 <asp:DropDownList ID="ddlCicloEscolar" runat="server" CssClass="form-control">
@@ -29,12 +29,19 @@
                 </asp:DropDownList>
             </div>
             <div class="col-md-2">
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                <asp:UpdatePanel ID="updPnlBuscar" runat="server">
                     <ContentTemplate>
                         <asp:LinkButton ID="linkBttnBuscar" runat="server" CssClass="btn btn-info" OnClick="linkBttnBuscar_Click">Buscar</asp:LinkButton>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                </div>
+            </div>
+            <div class="col-md-2 text-center">
+                 <asp:UpdateProgress ID="updPgrBuscar" runat="server" AssociatedUpdatePanelID="updPnlBuscar">
+                    <ProgressTemplate>
+                        <asp:Image ID="imgBuscar" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+            </div>
         </div>
         <div class="row">
             <div class="col text-center">
@@ -49,9 +56,9 @@
             <div class="col">
                 <asp:UpdatePanel ID="updPnlAlumnosUNACH" runat="server">
                     <ContentTemplate>
-                        <asp:GridView ID="grvAlumnosUNACH" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%">
+                        <asp:GridView ID="grvAlumnosUNACH" runat="server" AutoGenerateColumns="False" CssClass="mGrid" Width="100%" EmptyDataText="No se encontro ningún registro.">
                             <Columns>
-                                <asp:BoundField DataField="TipoPersonaStr" HeaderText="Origen" />
+                                <asp:BoundField DataField="TipoPersonaStr" HeaderText="Del Extranjero" />
                                 <asp:BoundField DataField="Nivel" HeaderText="Nivel">
                                     <HeaderStyle HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Center" />

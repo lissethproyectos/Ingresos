@@ -1,203 +1,19 @@
-﻿/**
- * --------------------------------------------------------
- * This demo was created using amCharts V4 preview release.
- * 
- * V4 is the latest installement in amCharts data viz
- * library family, to be released in the first half of
- * 2018.
- *
- * For more information and documentation visit:
- * https://www.amcharts.com/docs/v4/
- * --------------------------------------------------------
- */
-
-//window.onload = function () {
-//    graficasContext.ObtenerDatosGraficaPagados("00000", "20221", "F", function (resp) {
-//        var Total = 0;
-//        var ImporteTotal = 0;
-//        switch (resp.ressult) {
-//            case "tgp":
-//                self.listDatosPagados = graficasContext.listDatosPagados;
-//                am5.ready(function () {
-
-//                    // Create root element
-//                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-//                    var root = am5.Root.new("chartdiv");
-//                    var data1;
-
-//                    // Set themes
-//                    // https://www.amcharts.com/docs/v5/concepts/themes/
-//                    root.setThemes([am5themes_Animated.new(root)]);
-
-
-//                    // Create chart
-//                    // https://www.amcharts.com/docs/v5/charts/xy-chart/
-//                    var chart = root.container.children.push(
-//                        am5xy.XYChart.new(root, {
-//                            panX: true,
-//                            panY: true,
-//                            wheelX: "none",
-//                            wheelY: "none"
-//                        })
-//                    );
-
-
-//                    // Create axes
-//                    // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
-//                    //var yRenderer = am5xy.AxisRendererY.new(root, { minGridDistance: 30 });
-
-//                    //var yAxis = chart.yAxes.push(
-//                    //    am5xy.CategoryAxis.new(root, {
-//                    //        maxDeviation: 0,
-//                    //        categoryField: "category",
-//                    //        renderer: yRenderer
-//                    //    })
-//                    //);
-
-//                    var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
-//                    xRenderer.labels.template.setAll({
-//                        rotation: -90,
-//                        centerY: am5.p50,
-//                        centerX: am5.p100,
-//                        paddingRight: 15
-//                    });
-
-//                    var xAxis = chart.xAxes.push(am5xy.CategoryAxis.new(root, {
-//                        maxDeviation: 0.3,
-//                        categoryField: "category",
-//                        renderer: xRenderer,
-//                        tooltip: am5.Tooltip.new(root, {})
-//                    }));
-
-//                    var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
-//                        maxDeviation: 0.3,
-//                        renderer: am5xy.AxisRendererY.new(root, {})
-//                    }));
-
-
-
-//                    // Create series
-//                    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
-//                    var series = chart.series.push(
-//                        am5xy.ColumnSeries.new(root, {
-//                            name: "Series 1",
-//                            xAxis: xAxis,
-//                            yAxis: yAxis,
-//                            valueYField: "value",
-//                            sequencedInterpolation: true,
-//                            categoryXField: "category",
-//                            tooltip: am5.Tooltip.new(root, {
-//                                //labelText: "[bold]{value2}[/]\n{categoryY}: {valueX}"
-//                                labelText: "[bold]{categoryY}[/]\nNúmero Pagos:{valueX}[/]\nTotal: {value2}"
-//                            })
-//                        })
-//                    );
-
-//                    series.columns.template.setAll({
-//                        draggable: true,
-//                        cursorOverStyle: "pointer",
-//                        tooltipText: "{value}",
-//                        cornerRadiusTL: 5,
-//                        cornerRadiusTR: 5
-//                    });
-//                    series.columns.template.adapters.add("fill", function (fill, target) {
-//                        return chart.get("colors").getIndex(series.columns.indexOf(target));
-//                    });
-
-//                    series.columns.template.adapters.add("stroke", function (stroke, target) {
-//                        return chart.get("colors").getIndex(series.columns.indexOf(target));
-//                    });
-
-
-//                    //var columnTemplate = series.columns.template;
-
-//                    //columnTemplate.setAll({
-//                    //    draggable: true,
-//                    //    cursorOverStyle: "pointer",
-//                    //    tooltipText: "{value}",
-//                    //    cornerRadiusBR: 10,
-//                    //    cornerRadiusTR: 10
-//                    //});
-
-
-
-
-//                    series.bullets.push(function () {
-//                        return am5.Bullet.new(root, {
-//                            locationX: 1,
-//                            locationY: 0.5,
-//                            sprite: am5.Label.new(root, {
-//                                centerY: am5.p50,
-//                                text: "{valueY}",
-//                                populateText: true
-//                            })
-//                        });
-//                    });
-
-
-//                    var data = [];
-                    
-
-//                    for (var x = 0; x < self.listDatosPagados.length; x++) {
-//                        Total = Total + parseFloat(self.listDatosPagados[x].Dato3);
-//                        ImporteTotal = ImporteTotal + parseFloat(self.listDatosPagados[x].Dato2);
-//                        data.push({
-//                            "category": self.listDatosPagados[x].Dato1,
-//                            "value": self.listDatosPagados[x].Dato3,
-//                            "value2": self.listDatosPagados[x].Dato2
-//                        });
-//                    }
-
-                    
-
-
-//                    //self.listDatosPagados.push({
-//                    //    Dato1: resp.resultado[i].dato1, Dato2: resp.resultado[i].dato2, Dato3: resp.resultado[i].dato3
-//                    //});
-
-
-//                    xAxis.data.setAll(data);
-//                    series.data.setAll(data);
-
-
-
-//                    // Make stuff animate on load
-//                    // https://www.amcharts.com/docs/v5/concepts/animations/
-//                    series.appear(1000);
-//                    chart.appear(1000, 100);
-
-//                }); // end am5.ready()
-
-//                document.getElementById("ctl00_MainContent_lblNivel").innerHTML = "PAGOS: " + Total;
-//                document.getElementById("ctl00_MainContent_lblNive2").innerHTML = "TOTAL: " + ImporteTotal.toLocaleString('es-MX');
-
-
-
-//                break;
-//            case "notgp":
-//                alert(resp.MENSAJE_ERROR);
-//                break;
-//            default:
-//                break;
-//        }
-//    });
-//}
-
-
-
-window.onload = function () {
+﻿var root = am5.Root.new("chartdiv");
+var Total = 0;
+var ImporteTotal = 0;
+function Grafica1() {
     $("#precarga").show();
     graficasContext.ObtenerDatosGraficaPagados("00000", "20221", "F", function (resp) {
-        var Total = 0;
-        var ImporteTotal = 0;
+        Total = 0;
+        ImporteTotal = 0;
         switch (resp.ressult) {
             case "tgp":
                 self.listDatosPagados = graficasContext.listDatosPagados;
                 am5.ready(function () {
-
+                    root.container.children.clear();
                     // Create root element
                     // https://www.amcharts.com/docs/v5/getting-started/#Root_element
-                    var root = am5.Root.new("chartdiv");
+                    //var root = am5.Root.new("chartdiv");
                     var data1;
 
                     // Set themes
@@ -355,25 +171,15 @@ window.onload = function () {
                     }
 
                     var data = [];
-
-
                     for (var x = 0; x < self.listDatosPagados.length; x++) {
                         Total = Total + parseFloat(self.listDatosPagados[x].Dato3);
                         ImporteTotal = ImporteTotal + parseFloat(self.listDatosPagados[x].Dato2);
                         data.push({
                             "category": self.listDatosPagados[x].Dato1,
-                            "value": self.listDatosPagados[x].Dato3,
-                            "value2": self.listDatosPagados[x].Dato2
+                            "value": parseFloat(self.listDatosPagados[x].Dato3),
+                            "value2": parseFloat(self.listDatosPagados[x].Dato2)
                         });
                     }
-
-
-
-
-                    //self.listDatosPagados.push({
-                    //    Dato1: resp.resultado[i].dato1, Dato2: resp.resultado[i].dato2, Dato3: resp.resultado[i].dato3
-                    //});
-
 
                     yAxis.data.setAll(data);
                     series.data.setAll(data);
@@ -386,6 +192,132 @@ window.onload = function () {
 
                 }); // end am5.ready()
 
+                document.getElementById("ctl00_MainContent_lblNivel").innerHTML = "PAGOS: " + Total;
+                document.getElementById("ctl00_MainContent_lblNive2").innerHTML = "TOTAL: " + ImporteTotal.toLocaleString('es-MX');
+
+                $("#precarga").hide();
+                break;
+            case "notgp":
+                document.getElementById("ctl00_MainContent_lblNivel").innerHTML = "Error al recuperar los datos, intentar más tarde."
+                $("#precarga").hide();
+                break;
+            default:
+                break;
+        }
+    });
+};
+
+function Grafica2() {
+    $("#precarga").show();
+    graficasContext.ObtenerDatosGraficaporAnio(function (resp) {
+        Total = 0;
+        ImporteTotal = 0;
+
+        switch (resp.ressult) {
+            case "tgp":
+                self.listDatosPagados = graficasContext.listDatosPagados;
+                am5.ready(function () {
+                    root.container.children.clear();
+
+                    // Create root element
+                    // https://www.amcharts.com/docs/v5/getting-started/#Root_element
+                    //var root = am5.Root.new("chartdiv");
+
+
+                    // Set themes
+                    // https://www.amcharts.com/docs/v5/concepts/themes/
+                    root.setThemes([
+                        am5themes_Animated.new(root)
+                    ]);
+
+
+                    // Create chart
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/
+                    var chart2 = root.container.children.push(am5xy.XYChart.new(root, {
+                        panX: true,
+                        panY: true,
+                        wheelX: "panX",
+                        wheelY: "zoomX",
+                        pinchZoomX: true
+                    }));
+
+                    // Add cursor
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/cursor/
+                    var cursor = chart2.set("cursor", am5xy.XYCursor.new(root, {}));
+                    cursor.lineY.set("visible", false);
+
+
+                    // Create axes
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/axes/
+                    var xRenderer = am5xy.AxisRendererX.new(root, { minGridDistance: 30 });
+                    xRenderer.labels.template.setAll({
+                        rotation: -90,
+                        centerY: am5.p50,
+                        centerX: am5.p100,
+                        paddingRight: 15
+                    });
+
+                    var xAxis = chart2.xAxes.push(am5xy.CategoryAxis.new(root, {
+                        maxDeviation: 0.3,
+                        categoryField: "category",
+                        renderer: xRenderer,
+                        tooltip: am5.Tooltip.new(root, {})
+                    }));
+
+                    var yAxis = chart2.yAxes.push(am5xy.ValueAxis.new(root, {
+                        maxDeviation: 0.3,
+                        renderer: am5xy.AxisRendererY.new(root, {})
+                    }));
+
+
+                    // Create series
+                    // https://www.amcharts.com/docs/v5/charts/xy-chart/series/
+                    var series = chart2.series.push(am5xy.ColumnSeries.new(root, {
+                        name: "Series 1",
+                        xAxis: xAxis,
+                        yAxis: yAxis,
+                        valueYField: "value",
+                        sequencedInterpolation: true,
+                        categoryXField: "category",
+                        tooltip: am5.Tooltip.new(root, {
+                            labelText: "[bold]{category}[/]\nTot Pagos:{value}[/]\nTotal: {value2}"
+                        })
+                    }));
+
+                    series.columns.template.setAll({ cornerRadiusTL: 5, cornerRadiusTR: 5 });
+                    series.columns.template.adapters.add("fill", function (fill, target) {
+                        return chart2.get("colors").getIndex(series.columns.indexOf(target));
+                    });
+
+                    series.columns.template.adapters.add("stroke", function (stroke, target) {
+                        return chart2.get("colors").getIndex(series.columns.indexOf(target));
+                    });
+
+
+                    // Set data
+                    var data = [];
+
+
+                    for (var x = 0; x < self.listDatosPagados.length; x++) {
+                        Total = Total + parseFloat(self.listDatosPagados[x].Dato3);
+                        ImporteTotal = ImporteTotal + parseFloat(self.listDatosPagados[x].Dato2);
+                        data.push({
+                            "category": self.listDatosPagados[x].Dato1,
+                            "value": parseFloat(self.listDatosPagados[x].Dato2),
+                            "value2": parseFloat(self.listDatosPagados[x].Dato3)
+                        });
+                    };
+
+                    xAxis.data.setAll(data);
+                    series.data.setAll(data);
+
+
+                    // Make stuff animate on load
+                    // https://www.amcharts.com/docs/v5/concepts/animations/
+                    series.appear(1000);
+                    chart2.appear(1000, 100);
+
+                }); // end am5.ready()
                 document.getElementById("ctl00_MainContent_lblNivel").innerHTML = "PAGOS: " + Total;
                 document.getElementById("ctl00_MainContent_lblNive2").innerHTML = "TOTAL: " + ImporteTotal.toLocaleString('es-MX');
 

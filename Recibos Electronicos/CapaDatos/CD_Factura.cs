@@ -1023,6 +1023,7 @@ namespace CapaDatos
                     ObjFactura.FACT_BANCO = Convert.ToString(dr.GetValue(8));
                     ObjFactura.FACT_CARRERA = Convert.ToString(dr.GetValue(9));
                     ObjFactura.FACT_FECHA_DISPERSION = Convert.ToString(dr.GetValue(10));
+                    ObjFactura.FACT_IMPORTE = Convert.ToString(dr.GetValue(11));
                     List.Add(ObjFactura);
                 }
                 dr.Close();

@@ -53,6 +53,8 @@ namespace Recibos_Electronicos.Form
                     }
                 }
             }
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridRecibos", "Recibos();", true);
         }
         #region <Botones y Eventos>
         protected void ddlCarrera_SelectedIndexChanged(object sender, EventArgs e)
@@ -187,8 +189,8 @@ namespace Recibos_Electronicos.Form
         }
         private void CargarGrid()
         {
-            Int32[] Celdas = new Int32[] { 0, 9, 14, 15 };
-            Int32[] CeldasAdmin = new Int32[] { 0, 9, 15 };
+            Int32[] Celdas = new Int32[] { 0, 10, 15, 16 };
+            Int32[] CeldasAdmin = new Int32[] { 0, 10, 16 };
             Int32[] CeldasSuperAdmin = new Int32[] { 0 };
 
             try

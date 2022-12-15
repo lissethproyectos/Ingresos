@@ -35,11 +35,12 @@ namespace Recibos_Electronicos
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
             {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Grafica1", "Grafica1();", true);
                 busca_informativa();
                 CargarGridStatus();
                 CargarGridMonitor(ref grdMonitor);
                 CargarGridBancos();
-                CargarGridPagosSIAE();
+                //CargarGridPagosSIAE();
             }
         }
 
@@ -138,20 +139,20 @@ namespace Recibos_Electronicos
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
             }
         }
-        private void CargarGridPagosSIAE()
-        {
-            try
-            {
-                DataTable dt = new DataTable();
-                grdPagosSIAE.DataSource = dt;
-                grdPagosSIAE.DataSource = GetListPagosSIAE();
-                grdPagosSIAE.DataBind();
-            }
-            catch (Exception ex)
-            {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
-            }
-        }
+        //private void CargarGridPagosSIAE()
+        //{
+        //    try
+        //    {
+        //        DataTable dt = new DataTable();
+        //        grdPagosSIAE.DataSource = dt;
+        //        grdPagosSIAE.DataSource = GetListPagosSIAE();
+        //        grdPagosSIAE.DataBind();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true); //lblMsj.Text = ex.Message;
+        //    }
+        //}
 
         private List<Alumno> GetListStatus()
         {
@@ -202,6 +203,14 @@ namespace Recibos_Electronicos
         protected void linkBttnVerRecibos_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Inicio.aspx", false);
+        }
+
+        protected void ddlTipoRep_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(ddlTipoRep.SelectedValue=="2")
+                ScriptManager.RegisterStartupScript(this, GetType(), "Grafica2", "Grafica2();", true);
+            else
+                ScriptManager.RegisterStartupScript(this, GetType(), "Grafica1", "Grafica1();", true);
         }
     }
 }

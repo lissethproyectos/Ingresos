@@ -324,6 +324,7 @@
                                                                     </ItemTemplate>
                                                                 </asp:TemplateField>
                                                                 <asp:BoundField DataField="CicloAlu" />
+                                                                <asp:BoundField DataField="TipoAlumno" />
                                                             </Columns>
                                                             <FooterStyle CssClass="enc" />
                                                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -1253,6 +1254,7 @@
                 "destroy": true,
                 "stateSave": true,
                 "columns": [
+                    null,
                     null,
                     null,
                     null,

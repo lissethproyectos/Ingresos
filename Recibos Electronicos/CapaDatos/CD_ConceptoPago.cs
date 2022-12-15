@@ -557,6 +557,21 @@ namespace CapaDatos
                         List.Add(ObjVigencias);
                     }
                 }
+                else if (ObjVigencias.Tipo == "PSU")
+                {                   
+                    cmm = CDDatos.GenerarOracleCommandCursor("PKG_FELECTRONICA_2016.Obt_Grid_Vigencias_PSU", ref dr);
+                    while (dr.Read())
+                    {
+                        ObjVigencias = new ConceptoPago();
+                        ObjVigencias.Descripcion = Convert.ToString(dr[0]);
+                        ObjVigencias.FechaInicial = Convert.ToString(dr[1]);
+                        ObjVigencias.FechaFinal = Convert.ToString(dr[2]);
+                        ObjVigencias.Periodo = Convert.ToChar(dr[3]);
+                        ObjVigencias.Nivel = Convert.ToString(dr[4]);
+                        ObjVigencias.ClaveConcepto = Convert.ToString(dr[5]);
+                        List.Add(ObjVigencias);
+                    }
+                }
                 else
                 {
                     string[] ParametrosIn = { "P_NIVEL" };

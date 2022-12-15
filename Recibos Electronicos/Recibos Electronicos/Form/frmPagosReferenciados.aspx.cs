@@ -41,7 +41,12 @@ namespace Recibos_Electronicos.Form
             }
 
 
-            ScriptManager.RegisterStartupScript(this, GetType(), "GridPagosSIAE", "PagosSIAE();", true);
+            if (ddlOrigen.SelectedValue == "SIAE")
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridPagos", "PagosSIAE();", true);
+
+            else
+                ScriptManager.RegisterStartupScript(this, GetType(), "GridPagos", "PagosSYSWEB();", true);
+            //ScriptManager.RegisterStartupScript(this, GetType(), "GridPagosSIAE", "PagosSIAE();", true);
 
         }
         #region <Botones y Eventos>
@@ -90,7 +95,7 @@ namespace Recibos_Electronicos.Form
         {
             Verificador = string.Empty;
             Int32[] Celdas = new Int32[] { 13, 14, 15, 16, 17 };
-            Int32[] CeldasSysWeb = new Int32[] { 13, 14, 15, 16, 17 };
+            Int32[] CeldasSysWeb = new Int32[] { 0, 8, 9, 13, 14, 15, 16, 17 };
             try
             {
                 DataTable dt = new DataTable();
@@ -99,13 +104,16 @@ namespace Recibos_Electronicos.Form
                 grvReferenciasSIAE.DataBind();
                 if (grvReferenciasSIAE.Rows.Count > 0)
                     if (ddlOrigen.SelectedValue == "SIAE")
+                    {
                         CNComun.HideColumns(grvReferenciasSIAE, Celdas);
+                        //ScriptManager.RegisterStartupScript(this, GetType(), "GridPagos", "PagosSIAE();", true);
+
+                    }
                     else
+                    {
                         CNComun.HideColumns(grvReferenciasSIAE, CeldasSysWeb);
-
-
-                ScriptManager.RegisterStartupScript(this, GetType(), "GridPagosSIAE", "PagosSIAE();", true);
-
+                        //ScriptManager.RegisterStartupScript(this, GetType(), "GridPagos", "PagosSYSWEB();", true);
+                    }
 
             }
             catch (Exception ex)
@@ -163,6 +171,19 @@ namespace Recibos_Electronicos.Form
 
         protected void imgStatus_Click(object sender, ImageClickEventArgs e)
         {
+            Verificador = string.Empty;
+            try
+            {
+                Verificador = ConfirmarPagoSIAE();
+                if (Verificador == "0")
+                {
+                    CargarGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + ex.Message + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
+            }
 
         }
 
@@ -291,56 +312,52 @@ namespace Recibos_Electronicos.Form
         protected void bttnGenerarRecibo_Click(object sender, EventArgs e)
         {
             Verificador = string.Empty;
-            //modalAlert.Show();
             ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
 
             chkPagoAplicado.Checked = true;
-            Verificador = ConfirmarPagoSIAE();
-            if (Verificador == "0")
+
+
+
+            objFactura.ID_FICHA_BANCARIA = Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[15].Text);
+            objFactura.multipago.Order = txtFolioBanco.Text;
+            objFactura.FACT_BANCO = ddlBanco.SelectedValue;
+            try
             {
-
-                objFactura.ID_FICHA_BANCARIA = Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[15].Text);
-                objFactura.multipago.Order = txtFolioBanco.Text;
-                objFactura.FACT_BANCO = ddlBanco.SelectedValue;
-                try
+                if (Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[15].Text) != 0 && Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[16].Text) == "SYSWEB")
+                    CNFactura.Generar_Recibo_OnLine(objFactura, ref Verificador);
+                else
                 {
-
-
-                    if (Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[15].Text) != 0 && Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[16].Text) == "SYSWEB")
-                        CNFactura.Generar_Recibo_OnLine(objFactura, ref Verificador);
-                    else
-                        CNFactura.Generar_Recibo_OnLine_SIAE(objFactura, ref Verificador);
-
                     if (Verificador == "0")
-                    {
-                        txtReferencia.Text = Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[5].Text);
-                        //modalAlert.Hide();
-                        ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPagos", "$('#modalPagos').modal('hide')", true);
-                        CargarGrid();
-                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'EL RECIBO SE GENERO CORRECTAMENTE.');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
-
-                    }
+                        CNFactura.Generar_Recibo_OnLine_SIAE(objFactura, ref Verificador);
                     else
                     {
                         CNComun.VerificaTextoMensajeError(ref Verificador);
                         ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
                     }
 
-                    //else
-                    //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, 'NO EXISTE REGISTRO EN SYSWEB');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
                 }
-                catch (Exception ex)
+
+                if (Verificador == "0")
                 {
-                    Verificador = ex.Message;
+                    txtReferencia.Text = Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[5].Text);
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupPagos", "$('#modalPagos').modal('hide')", true);
+                    CargarGrid();
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 1, 'EL RECIBO SE GENERO CORRECTAMENTE.');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
+
+                }
+                else
+                {
                     CNComun.VerificaTextoMensajeError(ref Verificador);
                     ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
                 }
             }
-            else
+            catch (Exception ex)
             {
+                Verificador = ex.Message;
                 CNComun.VerificaTextoMensajeError(ref Verificador);
                 ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal( 0, '" + Verificador + "');", true);//lblMsj.Text = "Los datos se guardaron correctamente.";
             }
+
         }
 
         protected void ddlCicloEscolar_SelectedIndexChanged(object sender, EventArgs e)
