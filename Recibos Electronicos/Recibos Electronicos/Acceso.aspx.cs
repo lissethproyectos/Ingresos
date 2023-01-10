@@ -157,7 +157,7 @@ namespace Recibos_Electronicos
                 {
                     bool Valido = ValidaCorreoUNACH(ref NombreUsu);
                     //if (txtPassword.Text == "F1N4NZ4S")
-                    if (Valido == true || txtPassword.Text == "F1N4NZ4S")
+                    if (Valido == true || txtPassword.Text == "FINANZ4$")
                     {
                         //Sesion.Correo_UNACH = txtCve.Text;
                         CN_Usuario.UsuarioPermisos(ref Sesion, txtCve.Text, ref Verificador);

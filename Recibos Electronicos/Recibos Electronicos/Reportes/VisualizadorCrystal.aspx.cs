@@ -358,7 +358,7 @@ namespace Recibos_Electronicos.Reportes
                     }
                     break;
                 case "REP043":
-                    object[] v29 = { TipoPersona, Nivel };
+                    object[] v29 = { TipoPersona, Nivel, ciclo };
                     if (enExcel == "N")
                     {
                         Reporte = "Reportes\\REP043.rpt";

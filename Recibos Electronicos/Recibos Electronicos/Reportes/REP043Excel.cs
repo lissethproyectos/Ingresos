@@ -16,14 +16,14 @@ namespace Recibos_Electronicos.Reportes {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class REP043 : ReportClass {
+    public class REP043Excel : ReportClass {
         
-        public REP043() {
+        public REP043Excel() {
         }
         
         public override string ResourceName {
             get {
-                return "REP043.rpt";
+                return "REP043Excel.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace Recibos_Electronicos.Reportes {
         
         public override string FullResourceName {
             get {
-                return "Recibos_Electronicos.Reportes.REP043.rpt";
+                return "Recibos_Electronicos.Reportes.REP043Excel.rpt";
             }
             set {
                 // Do nothing
@@ -66,7 +66,7 @@ namespace Recibos_Electronicos.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection1 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
             get {
                 return this.ReportDefinition.Sections[2];
             }
@@ -74,7 +74,7 @@ namespace Recibos_Electronicos.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupHeaderSection2 {
+        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
             get {
                 return this.ReportDefinition.Sections[3];
             }
@@ -82,41 +82,9 @@ namespace Recibos_Electronicos.Reportes {
         
         [Browsable(false)]
         [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section3 {
-            get {
-                return this.ReportDefinition.Sections[4];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection2 {
-            get {
-                return this.ReportDefinition.Sections[5];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section GroupFooterSection1 {
-            get {
-                return this.ReportDefinition.Sections[6];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.CrystalReports.Engine.Section Section4 {
-            get {
-                return this.ReportDefinition.Sections[7];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
         public CrystalDecisions.CrystalReports.Engine.Section Section5 {
             get {
-                return this.ReportDefinition.Sections[8];
+                return this.ReportDefinition.Sections[4];
             }
         }
         
@@ -146,9 +114,9 @@ namespace Recibos_Electronicos.Reportes {
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedREP043 : Component, ICachedReport {
+    public class CachedREP043Excel : Component, ICachedReport {
         
-        public CachedREP043() {
+        public CachedREP043Excel() {
         }
         
         [Browsable(false)]
@@ -185,7 +153,7 @@ namespace Recibos_Electronicos.Reportes {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            REP043 rpt = new REP043();
+            REP043Excel rpt = new REP043Excel();
             rpt.Site = this.Site;
             return rpt;
         }

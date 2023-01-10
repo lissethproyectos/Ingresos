@@ -145,7 +145,7 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP043&TipoPersona=" + ddlTipo.SelectedValue + "&Nivel=" + ddlNivel.SelectedValue + "&enExcel=N";
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP043&TipoPersona=" + ddlTipo.SelectedValue + "&Nivel=" + ddlNivel.SelectedValue + "&ciclo=" + ddlCicloEscolar.SelectedValue + "&enExcel=N";
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
@@ -153,7 +153,7 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnExportar_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP043Excel&TipoPersona=" + ddlTipo.SelectedValue + "&Nivel=" + ddlNivel.SelectedValue+ "&enExcel=S";
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP043&TipoPersona=" + ddlTipo.SelectedValue + "&Nivel=" + ddlNivel.SelectedValue+ "&ciclo="+ddlCicloEscolar.SelectedValue+"&enExcel=S";
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 

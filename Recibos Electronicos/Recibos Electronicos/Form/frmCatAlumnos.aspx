@@ -10,21 +10,22 @@
         <ContentTemplate>--%>
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
-                Dependencia
+            <div class="col-md-1">
+                Depcia
             </div>
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <asp:DropDownList ID="ddlDependencias" runat="server" CssClass="form-control">
                 </asp:DropDownList>
             </div>
         </div>
     </div>
+    <br />
     <div class="container">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-1">
                 Tipo
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <asp:UpdatePanel ID="UpdatePanel8" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="ddlTipo" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlTipo_SelectedIndexChanged" CssClass="form-control">
@@ -47,6 +48,30 @@
                 </asp:UpdateProgress>
 
             </div>
+            <div class="col-md-1">Nivel</div>
+            <div class="col-md-4">
+                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
+                    <ContentTemplate>
+                        <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" CssClass="form-control">
+                        </asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlNivel" ErrorMessage="RequiredFieldValidator" InitialValue="Z" ValidationGroup="BuscaAlumnos">*</asp:RequiredFieldValidator>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+            <div class="col-md-1">
+                <asp:UpdateProgress ID="updPrgPnl7" runat="server" AssociatedUpdatePanelID="UpdatePanel7">
+                    <ProgressTemplate>
+                        <asp:Image ID="img2" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                    </ProgressTemplate>
+                </asp:UpdateProgress>
+
+
+            </div>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
             <div class="col-md-1">
                 Ciclo              
             </div>
@@ -67,31 +92,8 @@
                 </asp:UpdateProgress>
 
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">Nivel</div>
-            <div class="col-md-3">
-                <asp:UpdatePanel ID="UpdatePanel7" runat="server">
-                    <ContentTemplate>
-                        <asp:DropDownList ID="ddlNivel" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlNivel_SelectedIndexChanged" CssClass="form-control">
-                        </asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlNivel" ErrorMessage="RequiredFieldValidator" InitialValue="Z" ValidationGroup="BuscaAlumnos">*</asp:RequiredFieldValidator>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
-            <div class="col-md-1">
-                <asp:UpdateProgress ID="updPrgPnl7" runat="server" AssociatedUpdatePanelID="UpdatePanel7">
-                    <ProgressTemplate>
-                        <asp:Image ID="img2" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                    </ProgressTemplate>
-                </asp:UpdateProgress>
-
-
-            </div>
             <div class="col-md-1">Buscar</div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <asp:TextBox ID="txtBuscar" runat="server" Width="100%" PlaceHolder="Matricula/Nombre" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="col-md-1">
@@ -191,7 +193,7 @@
     <%--        </ContentTemplate>
     </asp:UpdatePanel>--%>
     <script type="text/javascript">
-     function CatAlumnos() {
+        function CatAlumnos() {
             $('#<%= grvAlumnosUNACH.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvAlumnosUNACH.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
                 "stateSave": true,

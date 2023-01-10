@@ -527,6 +527,7 @@ namespace Recibos_Electronicos.Form
             grdView.HeaderRow.Cells[19].Visible = false;
             grdView.HeaderRow.Cells[20].Visible = false;
             grdView.HeaderRow.Cells[21].Visible = false;
+            grdView.HeaderRow.Cells[22].Visible = false;
             //grdView.HeaderRow.Cells[13].Visible = (SesionUsu.Usu_Central=="S") ? true : false;
             //4, 12, 16, 17, 18, 19, 20
             grdView.FooterRow.Cells[0].Visible = false;
@@ -541,6 +542,7 @@ namespace Recibos_Electronicos.Form
             grdView.FooterRow.Cells[19].Visible = false;
             grdView.FooterRow.Cells[20].Visible = false;
             grdView.FooterRow.Cells[21].Visible = false;
+            grdView.FooterRow.Cells[22].Visible = false;
             //grdView.FooterRow.Cells[13].Visible = (SesionUsu.Usu_Central == "S") ? true : false;
 
 
@@ -573,6 +575,7 @@ namespace Recibos_Electronicos.Form
                 row.Cells[19].Visible = false;
                 row.Cells[20].Visible = false;
                 row.Cells[21].Visible = false;
+                row.Cells[22].Visible = false;
             }
 
         }
@@ -906,12 +909,14 @@ namespace Recibos_Electronicos.Form
                 Inicializar();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "Eventos", "FiltEventos();", true);
-            ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "Exentos();", true);
             if (SesionUsu.Usu_Central == "S")
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "ExentosA();", true);
+                ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "ExentosAdmin();", true);
                 ScriptManager.RegisterStartupScript(this, GetType(), "grdMonitor", "Monitor();", true);
             }
+            else
+                ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "ExentosNormal();", true);
+
 
         }
 
@@ -1725,7 +1730,7 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnBuscarEmp_Click(object sender, ImageClickEventArgs e)
         {
-            modalEmpleado.Show();
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
             CargarGridEmpleados("S");
             if (grvEmpleados.Rows.Count >= 1)
             {
@@ -1742,7 +1747,7 @@ namespace Recibos_Electronicos.Form
 
         protected void grvEmpleados_SelectedIndexChanged(object sender, EventArgs e)
         {
-            modalEmpleado.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
             if (grvEmpleados.Rows.Count > 0)
             {
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Grid_Hijos", ref ddlHijo, "p_id_empleado", grvEmpleados.SelectedRow.Cells[0].Text);
@@ -1755,10 +1760,7 @@ namespace Recibos_Electronicos.Form
             //BuscaHijo();
         }
 
-        protected void bttnSalirEmp_Click(object sender, EventArgs e)
-        {
-            modalEmpleado.Hide();
-        }
+       
 
         protected void bttnAgregarEmp_Click(object sender, EventArgs e)
         {
@@ -1766,21 +1768,24 @@ namespace Recibos_Electronicos.Form
             if (grvEmpleados.Rows.Count >= 1 && ddlHijo.Items.Count >= 1)
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Empleado", ref ddlEmpleado, "p_id_empleado", "p_id_familiar", grvEmpleados.SelectedRow.Cells[0].Text, ddlHijo.SelectedValue, ref ListFamiliar);
 
-            modalEmpleado.Hide();
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('hide')", true);
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modalEmp", "$('#modalEmpleado').modal('hide')", true); //lblMsj.Text = ex.Message;
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupCorreo", "$('#modalEMail').modal('hide')", true);
+            //modalEmpleado.Hide();
         }
 
-        protected void imgBttnEmpleado_Click(object sender, ImageClickEventArgs e)
+        protected void imgBttnEmpleado_Click(object sender, ImageClickEventArgs e)//
         {
             BuscaEmpleado();
             BuscaHijo("N");
             mltViewFamiliares.ActiveViewIndex = 0;
             lblAlumno.Text = "<strong>ALUMNO: </strong>" + txtNombre.Text + " " + txtPaterno.Text + " " + txtMaterno.Text;
-            modalEmpleado.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
         }
 
         protected void grvEmpleados_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            modalEmpleado.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
             grvEmpleados.PageIndex = 0;
             grvEmpleados.PageIndex = e.NewPageIndex;
             CargarGridEmpleados("S");
@@ -1788,7 +1793,7 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnNuevoHijo_Click(object sender, ImageClickEventArgs e)
         {
-            modalEmpleado.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
             txtNombreFamiliar.Text = txtNombre.Text + " " + txtPaterno.Text + " " + txtMaterno.Text;
             mltViewFamiliares.ActiveViewIndex = 1;
             //lblMsjFam.Text = string.Empty;
@@ -1797,7 +1802,7 @@ namespace Recibos_Electronicos.Form
 
         protected void bttnAgregarFam_Click(object sender, EventArgs e)
         {
-            modalEmpleado.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
             Verificador = string.Empty;
             try
             {
@@ -1827,7 +1832,7 @@ namespace Recibos_Electronicos.Form
 
         protected void bttnSalirFam_Click(object sender, EventArgs e)
         {
-            modalEmpleado.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
             mltViewFamiliares.ActiveViewIndex = 0;
         }
 
@@ -1852,7 +1857,7 @@ namespace Recibos_Electronicos.Form
 
         protected void bttnNuevoHijo_Click(object sender, EventArgs e)
         {
-            modalEmpleado.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
             txtNombreFamiliar.Text = txtNombre.Text + " " + txtPaterno.Text + " " + txtMaterno.Text;
             mltViewFamiliares.ActiveViewIndex = 1;
         }
@@ -1870,7 +1875,7 @@ namespace Recibos_Electronicos.Form
 
         protected void bttnNuevoHijo_Click(object sender, ImageClickEventArgs e)
         {
-            modalEmpleado.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
             txtNombreFamiliar.Text = txtNombre.Text + " " + txtPaterno.Text + " " + txtMaterno.Text;
             mltViewFamiliares.ActiveViewIndex = 1;
 
@@ -1920,7 +1925,7 @@ namespace Recibos_Electronicos.Form
             BuscaHijo("N");
             mltViewFamiliares.ActiveViewIndex = 0;
             lblAlumno.Text = "<strong>ALUMNO: </strong>" + txtNombre.Text + " " + txtPaterno.Text + " " + txtMaterno.Text;
-            modalEmpleado.Show();
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "modalEmp", "$('#modalEmpleado').modal('show')", true);
         }
 
         protected void linkBttnBorrarEmpleado_Click(object sender, EventArgs e)

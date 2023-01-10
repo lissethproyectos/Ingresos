@@ -151,6 +151,7 @@
                 <asp:UpdatePanel ID="UpdatePanel2" runat="server">
                     <ContentTemplate>
                         <asp:DropDownList ID="ddlEjercicio" runat="server" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="ddlEjercicio_SelectedIndexChanged">
+                            <asp:ListItem>2023</asp:ListItem>
                             <asp:ListItem>2022</asp:ListItem>
                             <asp:ListItem>2021</asp:ListItem>
                             <asp:ListItem>2020</asp:ListItem>
@@ -159,7 +160,7 @@
                         </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-            </div>            
+            </div>
             <div class="col-md-2">
                 <asp:UpdateProgress ID="updEjercicio" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
                     <ProgressTemplate>
@@ -196,13 +197,7 @@
                                 <asp:BoundField DataField="Id" HeaderText="ID" />
                                 <asp:BoundField DataField="Banco_nombre" HeaderText="Banco" />
                                 <asp:BoundField DataField="Archivo_nombre" HeaderText="Nombre del archivo" />
-                                <asp:TemplateField>
-                                    <HeaderTemplate>
-                                        <asp:Label ID="Label4" runat="server" Text="Fecha de pago"></asp:Label>
-                                        <%-- <asp:DropDownList ID="ddlFechaPago" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlFechaPago_SelectedIndexChanged" AppendDataBoundItems="True">
-                                        </asp:DropDownList>--%>
-                                    </HeaderTemplate>
-                                </asp:TemplateField>
+                                <asp:BoundField DataField="Fecha_pago" HeaderText="Fecha de pago" />
                                 <asp:BoundField DataField="Fecha_registro" HeaderText="Fecha de carga" />
                                 <asp:BoundField DataField="Total_registros" HeaderText="Total" />
                                 <asp:CommandField SelectText="Descargar Archivo" ShowSelectButton="True" />
@@ -255,8 +250,8 @@
         };
 
         function Mes() {
-            var table = $('#<%= GVBitacora.ClientID %>').DataTable();   
-            var selectedValue = $('#<%= ddlMes.ClientID %>').val();            
+            var table = $('#<%= GVBitacora.ClientID %>').DataTable();
+            var selectedValue = $('#<%= ddlMes.ClientID %>').val();
             if (selectedValue != "00") {
                 table.columns(8).search(selectedValue).draw();
             }
