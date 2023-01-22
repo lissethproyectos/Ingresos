@@ -661,8 +661,9 @@ namespace CapaDatos
                     ObjVigencias.Dependencia = Convert.ToString(dr[4]);
                     ObjVigencias.Carrera = Convert.ToString(dr[5]);
                     ObjVigencias.ClaveConcepto = Convert.ToString(dr[3]);
+                    ObjVigencias.Observaciones = Convert.ToString(dr[6]);
+                    ObjVigencias.Id = Convert.ToInt32(dr[7]);
                     List.Add(ObjVigencias);
-
                 }
                 dr.Close();
             }
@@ -691,6 +692,35 @@ namespace CapaDatos
 
 
                 OracleCmd = CDDatos.GenerarOracleCommand("UPD_SCE_VIGENCIAS", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref OracleCmd);
+            }
+
+        }
+        public void ActualizarVigenciasEscuela(ConceptoPago ObjVigencias, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand OracleCmd = null;
+            try
+            {
+
+
+                string[] Parametros = { "P_CONCEPTO", "P_FECHA_INICIO", "P_FECHA_FIN", "P_ID" };
+                string[] ParametrosOut = { "p_BANDERA" };
+
+                object[] Valores = { ObjVigencias.ClaveConcepto, ObjVigencias.FechaInicial, ObjVigencias.FechaFinal, ObjVigencias.Id };
+
+
+                OracleCmd = CDDatos.GenerarOracleCommand("UPD_VIGENCIAS_ESCUELA", ref Verificador, Parametros, Valores, ParametrosOut);
 
             }
             catch (Exception ex)
@@ -779,7 +809,36 @@ namespace CapaDatos
                 object[] Valores = { ObjVigencias.ClaveConcepto, ObjVigencias.FechaInicial, ObjVigencias.FechaFinal, ObjVigencias.Descripcion, ObjVigencias.Dependencia, ObjVigencias.Carrera };
 
 
-                OracleCmd = CDDatos.GenerarOracleCommand("INS_SCE_EXCEPCIONES_VIGENCIAS", ref Verificador, Parametros, Valores, ParametrosOut);
+                OracleCmd = CDDatos.GenerarOracleCommand("INS_VIGENCIAS_ESCUELA", ref Verificador, Parametros, Valores, ParametrosOut);
+
+            }
+            catch (Exception ex)
+            {
+
+
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref OracleCmd);
+            }
+
+        }
+        public void EliminarExcepcionesVigenciasSIAE(ConceptoPago ObjVigencias, ref string Verificador)
+        {
+            CD_Datos CDDatos = new CD_Datos();
+            OracleCommand OracleCmd = null;
+            try
+            {
+
+
+                string[] Parametros = { "P_ID" };
+                string[] ParametrosOut = { "p_BANDERA" };
+
+                object[] Valores = { ObjVigencias.Id };
+
+
+                OracleCmd = CDDatos.GenerarOracleCommand("DEL_VIGENCIAS_ESCUELA", ref Verificador, Parametros, Valores, ParametrosOut);
 
             }
             catch (Exception ex)

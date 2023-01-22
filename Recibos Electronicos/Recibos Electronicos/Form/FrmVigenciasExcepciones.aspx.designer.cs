@@ -7,20 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Recibos_Electronicos.Form {
-    
-    
-    public partial class FrmVigenciasExcepciones {
-        
-        /// <summary>
-        /// Control lblDependencia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDependencia;
-        
+namespace Recibos_Electronicos.Form
+{
+
+
+    public partial class FrmVigenciasExcepciones
+    {
+
         /// <summary>
         /// Control UpdatePanel4.
         /// </summary>
@@ -29,7 +22,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel4;
-        
+
         /// <summary>
         /// Control ddlDependencia.
         /// </summary>
@@ -38,7 +31,16 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDependencia;
-        
+
+        /// <summary>
+        /// Control UpdatePanel2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+
         /// <summary>
         /// Control imgBttnBuscar.
         /// </summary>
@@ -47,7 +49,16 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBttnBuscar;
-        
+
+        /// <summary>
+        /// Control UpdatePanel1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+
         /// <summary>
         /// Control imgBttnNuevo.
         /// </summary>
@@ -56,7 +67,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgBttnNuevo;
-        
+
         /// <summary>
         /// Control UpdatePanel3.
         /// </summary>
@@ -65,7 +76,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel3;
-        
+
         /// <summary>
         /// Control grdVigencias.
         /// </summary>
@@ -74,34 +85,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdVigencias;
-        
-        /// <summary>
-        /// Control hddnVigencias.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hddnVigencias;
-        
-        /// <summary>
-        /// Control modalVigencias.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender modalVigencias;
-        
-        /// <summary>
-        /// Control pnlVigencias.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlVigencias;
-        
+
         /// <summary>
         /// Control lblDependenciaA.
         /// </summary>
@@ -110,7 +94,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblDependenciaA;
-        
+
         /// <summary>
         /// Control UpdatePanel5.
         /// </summary>
@@ -119,7 +103,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel UpdatePanel5;
-        
+
         /// <summary>
         /// Control ddlDependenciaA.
         /// </summary>
@@ -128,7 +112,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDependenciaA;
-        
+
         /// <summary>
         /// Control lblCarrera.
         /// </summary>
@@ -137,7 +121,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCarrera;
-        
+
         /// <summary>
         /// Control updPnlCarrera.
         /// </summary>
@@ -146,7 +130,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel updPnlCarrera;
-        
+
         /// <summary>
         /// Control ddlCarrera.
         /// </summary>
@@ -155,16 +139,16 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCarrera;
-        
+
         /// <summary>
-        /// Control lblFechaInicial.
+        /// Control ddlConcepto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaInicial;
-        
+        protected global::System.Web.UI.WebControls.DropDownList ddlConcepto;
+
         /// <summary>
         /// Control txtFechaInicial.
         /// </summary>
@@ -173,7 +157,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFechaInicial;
-        
+
         /// <summary>
         /// Control CalendarExtenderIni.
         /// </summary>
@@ -182,7 +166,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtenderIni;
-        
+
         /// <summary>
         /// Control imgCalendarioIni.
         /// </summary>
@@ -191,16 +175,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgCalendarioIni;
-        
-        /// <summary>
-        /// Control lblFechaFinal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFechaFinal;
-        
+
         /// <summary>
         /// Control txtFechaFinal.
         /// </summary>
@@ -209,7 +184,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFechaFinal;
-        
+
         /// <summary>
         /// Control CalendarExtenderFin.
         /// </summary>
@@ -218,7 +193,7 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtenderFin;
-        
+
         /// <summary>
         /// Control imgCalendarioFin.
         /// </summary>
@@ -227,16 +202,34 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton imgCalendarioFin;
-        
+
         /// <summary>
-        /// Control bttnSalirEmp.
+        /// Control updPnlErrorGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button bttnSalirEmp;
-        
+        protected global::System.Web.UI.UpdatePanel updPnlErrorGuardar;
+
+        /// <summary>
+        /// Control lblErrorGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorGuardar;
+
+        /// <summary>
+        /// Control updPnlGuardar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlGuardar;
+
         /// <summary>
         /// Control bttnAgregar.
         /// </summary>
@@ -245,5 +238,41 @@ namespace Recibos_Electronicos.Form {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button bttnAgregar;
+
+        /// <summary>
+        /// Control UpdatePanel7.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel7;
+
+        /// <summary>
+        /// Control lblErrorElim.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblErrorElim;
+
+        /// <summary>
+        /// Control UpdatePanel6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel6;
+
+        /// <summary>
+        /// Control linkBttnEliminarReg.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton linkBttnEliminarReg;
     }
 }

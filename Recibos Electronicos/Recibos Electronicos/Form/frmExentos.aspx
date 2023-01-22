@@ -408,7 +408,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" ScrollBars="Both">
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" ScrollBars="Both">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
                                                         <i class="fa fa fa-user fa-2x" aria-hidden="true"></i>&nbsp;Datos del Alumno
@@ -489,7 +489,7 @@
                                                                             <ContentTemplate>
                                                                                 <span class="input-group">
                                                                                     <asp:LinkButton ID="linkBttnBuscar" runat="server" CssClass="btn btn-warning form-control" OnClick="linkBttnBuscar_Click"> <i class="fa fa-search" aria-hidden="true"></i>Buscar
-                                                                                    </asp:LinkButton>
+                                                                                </asp:LinkButton>
                                                                                     <asp:LinkButton ID="Registrar" runat="server" CssClass="btn btn-blue-grey" Visible="false"> Agregar</asp:LinkButton>
                                                                                 </span>
                                                                             </ContentTemplate>
@@ -502,7 +502,7 @@
                                                             </div>
                                                             <div class="row" id="rowTipoAlu" runat="server">
                                                                 <div class="col-md-1">
-                                                                    Ciclo
+                                                                    Generación
                                                                 </div>
                                                                 <div class="col-md-3">
                                                                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -791,6 +791,24 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
+                                                                <div class="col text-center">
+                                                                    <asp:UpdateProgress ID="updPgrConceptos" runat="server" AssociatedUpdatePanelID="updPnlConceptos">
+                                                                        <ProgressTemplate>
+                                                                            <asp:Image ID="imgConc" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                                                        </ProgressTemplate>
+                                                                    </asp:UpdateProgress>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col text-center">
+                                                                    <asp:UpdateProgress ID="updPgrConcAsig" runat="server" AssociatedUpdatePanelID="updPnlConcAsig">
+                                                                        <ProgressTemplate>
+                                                                            <asp:Image ID="imgConcAsig" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                                                        </ProgressTemplate>
+                                                                    </asp:UpdateProgress>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
                                                                 <div class="col-md-6">
                                                                     <div id="divGrid" style="border-style: none none solid none; overflow: auto; height: 230px; border-bottom-color: #D9D9D9; border-bottom-width: 1px;">
                                                                         <asp:UpdatePanel ID="updPnlConceptos" runat="server">
@@ -825,31 +843,35 @@
                                                                 </div>
                                                                 <div class="col-md-6">
                                                                     <div id="divGrid2" style="border-style: none none solid none; overflow: auto; height: 230px; border-bottom-color: #D9D9D9; border-bottom-width: 1px;">
-                                                                        <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptos_PageIndexChanging" OnRowDeleting="grvConceptos_RowDeleting" Width="100%">
-                                                                            <Columns>
-                                                                                <asp:BoundField DataField="ClaveDetalle" HeaderText="Cve.">
-                                                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                                                    <ItemStyle HorizontalAlign="Left" />
-                                                                                </asp:BoundField>
-                                                                                <asp:BoundField DataField="DescripcionDetalle" HeaderText="Descripción">
-                                                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                                                    <ItemStyle HorizontalAlign="Left" Width="70%" />
-                                                                                </asp:BoundField>
-                                                                                <asp:BoundField DataField="ImporteDetalleInicio" HeaderText="Importe Original">
-                                                                                    <ItemStyle HorizontalAlign="Right" />
-                                                                                </asp:BoundField>
-                                                                                <asp:BoundField DataField="ImporteDetalle" HeaderText="Importe">
-                                                                                    <HeaderStyle HorizontalAlign="Right" />
-                                                                                    <ItemStyle HorizontalAlign="Right" />
-                                                                                </asp:BoundField>
-                                                                                <asp:BoundField DataField="TipoRegistro" />
-                                                                                <asp:CommandField ShowDeleteButton="True" />
-                                                                            </Columns>
-                                                                            <FooterStyle CssClass="enc" />
-                                                                            <HeaderStyle CssClass="enc" />
-                                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                            <SelectedRowStyle CssClass="sel" />
-                                                                        </asp:GridView>
+                                                                        <asp:UpdatePanel ID="updPnlConcAsig" runat="server">
+                                                                            <ContentTemplate>
+                                                                                <asp:GridView ID="grvConceptos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnPageIndexChanging="grvConceptos_PageIndexChanging" OnRowDeleting="grvConceptos_RowDeleting" Width="100%">
+                                                                                    <Columns>
+                                                                                        <asp:BoundField DataField="ClaveDetalle" HeaderText="Cve.">
+                                                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                                                            <ItemStyle HorizontalAlign="Left" />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="DescripcionDetalle" HeaderText="Descripción">
+                                                                                            <HeaderStyle HorizontalAlign="Left" />
+                                                                                            <ItemStyle HorizontalAlign="Left" Width="70%" />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="ImporteDetalleInicio" HeaderText="Importe Original">
+                                                                                            <ItemStyle HorizontalAlign="Right" />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="ImporteDetalle" HeaderText="Importe">
+                                                                                            <HeaderStyle HorizontalAlign="Right" />
+                                                                                            <ItemStyle HorizontalAlign="Right" />
+                                                                                        </asp:BoundField>
+                                                                                        <asp:BoundField DataField="TipoRegistro" />
+                                                                                        <asp:CommandField ShowDeleteButton="True" />
+                                                                                    </Columns>
+                                                                                    <FooterStyle CssClass="enc" />
+                                                                                    <HeaderStyle CssClass="enc" />
+                                                                                    <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                                                    <SelectedRowStyle CssClass="sel" />
+                                                                                </asp:GridView>
+                                                                            </ContentTemplate>
+                                                                        </asp:UpdatePanel>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -984,7 +1006,7 @@
 
 
 
-                                    
+
 
 
 
@@ -1135,42 +1157,42 @@
         </div>
     </div>
     <div class="modal" tabindex="-1" role="dialog" id="modalEmpleado">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title">Personal UNACH</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <asp:UpdatePanel ID="UpdatePanel11" runat="server">
-                                                        <ContentTemplate>
-                                                            <div class="container">
-                                                                <div class="row">
-                                                                    <div class="col alert alert-warning">
-                                                                        <asp:Label ID="lblAlumno" runat="server" Text=""></asp:Label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col text-center">
-                                                                        <asp:UpdateProgress ID="updPgrBuscarEmp" runat="server" AssociatedUpdatePanelID="updPnlBuscarEmp">
-                                                                            <ProgressTemplate>
-                                                                                <asp:Image ID="imgBuscarEmp" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                                                            </ProgressTemplate>
-                                                                        </asp:UpdateProgress>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col text-center">
-                                                                        <asp:UpdateProgress ID="updPgrEmpleados" runat="server" AssociatedUpdatePanelID="updPnlEmpleados">
-                                                                            <ProgressTemplate>
-                                                                                <asp:Image ID="imgEmpleados" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                                                            </ProgressTemplate>
-                                                                        </asp:UpdateProgress>
-                                                                    </div>
-                                                                </div>
-                                                                <%--<div class="row">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Personal UNACH</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <asp:UpdatePanel ID="UpdatePanel11" runat="server">
+                        <ContentTemplate>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col alert alert-warning">
+                                        <asp:Label ID="lblAlumno" runat="server" Text=""></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <asp:UpdateProgress ID="updPgrBuscarEmp" runat="server" AssociatedUpdatePanelID="updPnlBuscarEmp">
+                                            <ProgressTemplate>
+                                                <asp:Image ID="imgBuscarEmp" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <asp:UpdateProgress ID="updPgrEmpleados" runat="server" AssociatedUpdatePanelID="updPnlEmpleados">
+                                            <ProgressTemplate>
+                                                <asp:Image ID="imgEmpleados" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                    </div>
+                                </div>
+                                <%--<div class="row">
                                                             <div class="col text-center">
                                                                 <asp:UpdateProgress ID="updPgrAddEmp" runat="server" AssociatedUpdatePanelID="updPnlAddEmp">
                                                                     <ProgressTemplate>
@@ -1179,157 +1201,157 @@
                                                                 </asp:UpdateProgress>
                                                             </div>
                                                         </div>--%>
-                                                                <div class="row">
-                                                                    <div class="col text-center">
-                                                                        <asp:UpdateProgress ID="updPgrHijo" runat="server" AssociatedUpdatePanelID="updPnlHijo">
-                                                                            <ProgressTemplate>
-                                                                                <asp:Image ID="imgHijo" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                                                            </ProgressTemplate>
-                                                                        </asp:UpdateProgress>
-                                                                    </div>
-                                                                </div>
-                                                                <asp:MultiView ID="mltViewFamiliares" runat="server" ActiveViewIndex="0">
-                                                                    <asp:View ID="View4" runat="server">
-                                                                        <div class="row">
-                                                                            <div class="col">
-                                                                                Personal
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col">
-                                                                                <div class="input-group">
-                                                                                    <asp:TextBox ID="txtNombreEmp" runat="server" PlaceHolder="Nombre Paterno Materno" CssClass="form-control"></asp:TextBox>
-                                                                                    <div class="input-group-append">
-                                                                                        <asp:UpdatePanel ID="updPnlBuscarEmp" runat="server">
-                                                                                            <ContentTemplate>
-                                                                                                <asp:ImageButton ID="imgBttnBuscarEmp" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscarEmp_Click" ValidationGroup="EmpleadoBusca" />
-                                                                                            </ContentTemplate>
-                                                                                        </asp:UpdatePanel>
-                                                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="txtNombreEmp" ErrorMessage="*Requerido" ValidationGroup="EmpleadoBusca"></asp:RequiredFieldValidator>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col">
-                                                                                <asp:UpdatePanel ID="updPnlEmpleados" runat="server">
-                                                                                    <ContentTemplate>
-                                                                                        <asp:GridView ID="grvEmpleados" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningun registro." OnPageIndexChanging="grvEmpleados_PageIndexChanging" OnSelectedIndexChanged="grvEmpleados_SelectedIndexChanged" PageSize="6" Width="100%">
-                                                                                            <AlternatingRowStyle CssClass="alt" />
-                                                                                            <Columns>
-                                                                                                <asp:BoundField DataField="IdPersona" />
-                                                                                                <asp:BoundField DataField="TipoPersonaStr" HeaderText="TIPO PERSONAL">
-                                                                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                                                                    <ItemStyle HorizontalAlign="Left" />
-                                                                                                </asp:BoundField>
-                                                                                                <asp:BoundField DataField="Dependencia" HeaderText="DEPCIA">
-                                                                                                    <HeaderStyle HorizontalAlign="Right" />
-                                                                                                    <ItemStyle HorizontalAlign="Right" />
-                                                                                                </asp:BoundField>
-                                                                                                <asp:BoundField DataField="Nombre" HeaderText="NOMBRE COMPLETO">
-                                                                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                                                                    <ItemStyle HorizontalAlign="Left" />
-                                                                                                </asp:BoundField>
-                                                                                                <asp:BoundField DataField="NoControl" HeaderText="PLAZA">
-                                                                                                    <HeaderStyle HorizontalAlign="Left" />
-                                                                                                    <ItemStyle HorizontalAlign="Left" />
-                                                                                                </asp:BoundField>
-                                                                                                <asp:CommandField SelectText="BUSCAR BENEFICIARIOS" ShowSelectButton="True" />
-                                                                                            </Columns>
-                                                                                            <FooterStyle CssClass="enc" />
-                                                                                            <HeaderStyle CssClass="enc" />
-                                                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                                                            <SelectedRowStyle CssClass="sel" />
-                                                                                        </asp:GridView>
-                                                                                    </ContentTemplate>
-                                                                                </asp:UpdatePanel>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col">
-                                                                                <asp:Label ID="lblHijo" runat="server" Text="Beneficiario(s)"></asp:Label>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col">
-                                                                                <div class="input-group">
-                                                                                    <asp:UpdatePanel ID="updPnlHijo" runat="server">
-                                                                                        <ContentTemplate>
-                                                                                            <asp:DropDownList ID="ddlHijo" runat="server" CssClass="form-control">
-                                                                                            </asp:DropDownList>
-                                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="ddlHijo" ErrorMessage="*Requerido" InitialValue="9999999" ValidationGroup="Empleado"></asp:RequiredFieldValidator>
-                                                                                        </ContentTemplate>
-                                                                                    </asp:UpdatePanel>
-                                                                                    <div class="input-group-prepend">
-                                                                                        <asp:ImageButton ID="bttnNuevoHijo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" Height="45px" OnClick="bttnNuevoHijo_Click" ValidationGroup="Nuevo Beneficiario" />
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col">
-                                                                                <asp:DropDownList ID="ddlParentesco" runat="server" Visible="False" Width="100%">
-                                                                                </asp:DropDownList>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="row">
-                                                                            <div class="col text-right">
-                                                                                <asp:UpdatePanel ID="UpdatePanel12" runat="server">
-                                                                                    <ContentTemplate>
-                                                                                        <button type="button" class="btn btn-blue-grey" data-dismiss="modal">CERRAR</button>
-                                                                                        <asp:Button ID="bttnAgregarEmp" runat="server" CssClass="btn btn-primary" OnClick="bttnAgregarEmp_Click" Text="AGREGAR" ValidationGroup="Empleado" />
-
-
-                                                                                    </ContentTemplate>
-                                                                                </asp:UpdatePanel>
-                                                                            </div>
-                                                                        </div>
-
-                                                                    </asp:View>
-                                                                    <asp:View ID="View5" runat="server">
-                                                                        <div class="container">
-                                                                            <div class="row">
-                                                                                <div class="col">
-                                                                                    <h4>
-                                                                                        <asp:Label ID="lblEtParentesco" runat="server" Text="Familiares"></asp:Label></h4>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-2">
-                                                                                    <asp:Label ID="lblNombreFamiliar" runat="server" Text="Nombre"></asp:Label>
-                                                                                </div>
-                                                                                <div class="col-md-10">
-                                                                                    <asp:TextBox ID="txtNombreFamiliar" runat="server" PlaceHolder="Nombre Ap. Paterno Ap. Materno" Width="90%"></asp:TextBox>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col-md-2">
-                                                                                    <asp:Label ID="lblParentesco" runat="server" Text="Parentesco"></asp:Label>
-                                                                                </div>
-                                                                                <div class="col-md-10">
-                                                                                    <asp:DropDownList ID="ddlParentescoFam" runat="server" Width="90%">
-                                                                                    </asp:DropDownList>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="row">
-                                                                                <div class="col text-right">
-                                                                                    <asp:Button ID="bttnSalirFam" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalirFam_Click" Text="REGRESAR" />
-                                                                                    &nbsp;<asp:Button ID="bttnAgregarFam" runat="server" CssClass="btn btn-info" OnClick="bttnAgregarFam_Click" Text="GUARDAR" />
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </asp:View>
-                                                                </asp:MultiView>
-                                                            </div>
-                                                        </ContentTemplate>
-                                                    </asp:UpdatePanel>
-
-                                                </div>
-                                                <div class="modal-footer">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <asp:UpdateProgress ID="updPgrHijo" runat="server" AssociatedUpdatePanelID="updPnlHijo">
+                                            <ProgressTemplate>
+                                                <asp:Image ID="imgHijo" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                            </ProgressTemplate>
+                                        </asp:UpdateProgress>
+                                    </div>
+                                </div>
+                                <asp:MultiView ID="mltViewFamiliares" runat="server" ActiveViewIndex="0">
+                                    <asp:View ID="View4" runat="server">
+                                        <div class="row">
+                                            <div class="col">
+                                                Personal
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="input-group">
+                                                    <asp:TextBox ID="txtNombreEmp" runat="server" PlaceHolder="Nombre Paterno Materno" CssClass="form-control"></asp:TextBox>
+                                                    <div class="input-group-append">
+                                                        <asp:UpdatePanel ID="updPnlBuscarEmp" runat="server">
+                                                            <ContentTemplate>
+                                                                <asp:ImageButton ID="imgBttnBuscarEmp" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscarEmp_Click" ValidationGroup="EmpleadoBusca" />
+                                                            </ContentTemplate>
+                                                        </asp:UpdatePanel>
+                                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="txtNombreEmp" ErrorMessage="*Requerido" ValidationGroup="EmpleadoBusca"></asp:RequiredFieldValidator>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <asp:UpdatePanel ID="updPnlEmpleados" runat="server">
+                                                    <ContentTemplate>
+                                                        <asp:GridView ID="grvEmpleados" runat="server" AllowPaging="True" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningun registro." OnPageIndexChanging="grvEmpleados_PageIndexChanging" OnSelectedIndexChanged="grvEmpleados_SelectedIndexChanged" PageSize="6" Width="100%">
+                                                            <AlternatingRowStyle CssClass="alt" />
+                                                            <Columns>
+                                                                <asp:BoundField DataField="IdPersona" />
+                                                                <asp:BoundField DataField="TipoPersonaStr" HeaderText="TIPO PERSONAL">
+                                                                    <HeaderStyle HorizontalAlign="Left" />
+                                                                    <ItemStyle HorizontalAlign="Left" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="Dependencia" HeaderText="DEPCIA">
+                                                                    <HeaderStyle HorizontalAlign="Right" />
+                                                                    <ItemStyle HorizontalAlign="Right" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="Nombre" HeaderText="NOMBRE COMPLETO">
+                                                                    <HeaderStyle HorizontalAlign="Left" />
+                                                                    <ItemStyle HorizontalAlign="Left" />
+                                                                </asp:BoundField>
+                                                                <asp:BoundField DataField="NoControl" HeaderText="PLAZA">
+                                                                    <HeaderStyle HorizontalAlign="Left" />
+                                                                    <ItemStyle HorizontalAlign="Left" />
+                                                                </asp:BoundField>
+                                                                <asp:CommandField SelectText="BUSCAR BENEFICIARIOS" ShowSelectButton="True" />
+                                                            </Columns>
+                                                            <FooterStyle CssClass="enc" />
+                                                            <HeaderStyle CssClass="enc" />
+                                                            <PagerStyle CssClass="enc" HorizontalAlign="Center" />
+                                                            <SelectedRowStyle CssClass="sel" />
+                                                        </asp:GridView>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <asp:Label ID="lblHijo" runat="server" Text="Beneficiario(s)"></asp:Label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="input-group">
+                                                    <asp:UpdatePanel ID="updPnlHijo" runat="server">
+                                                        <ContentTemplate>
+                                                            <asp:DropDownList ID="ddlHijo" runat="server" CssClass="form-control">
+                                                            </asp:DropDownList>
+                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="ddlHijo" ErrorMessage="*Requerido" InitialValue="9999999" ValidationGroup="Empleado"></asp:RequiredFieldValidator>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                    <div class="input-group-prepend">
+                                                        <asp:ImageButton ID="bttnNuevoHijo" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/nuevo.png" Height="45px" OnClick="bttnNuevoHijo_Click" ValidationGroup="Nuevo Beneficiario" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col">
+                                                <asp:DropDownList ID="ddlParentesco" runat="server" Visible="False" Width="100%">
+                                                </asp:DropDownList>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col text-right">
+                                                <asp:UpdatePanel ID="UpdatePanel12" runat="server">
+                                                    <ContentTemplate>
+                                                        <button type="button" class="btn btn-blue-grey" data-dismiss="modal">CERRAR</button>
+                                                        <asp:Button ID="bttnAgregarEmp" runat="server" CssClass="btn btn-primary" OnClick="bttnAgregarEmp_Click" Text="AGREGAR" ValidationGroup="Empleado" />
+
+
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </div>
+                                        </div>
+
+                                    </asp:View>
+                                    <asp:View ID="View5" runat="server">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <h4>
+                                                        <asp:Label ID="lblEtParentesco" runat="server" Text="Familiares"></asp:Label></h4>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblNombreFamiliar" runat="server" Text="Nombre"></asp:Label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <asp:TextBox ID="txtNombreFamiliar" runat="server" PlaceHolder="Nombre Ap. Paterno Ap. Materno" Width="90%"></asp:TextBox>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <asp:Label ID="lblParentesco" runat="server" Text="Parentesco"></asp:Label>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <asp:DropDownList ID="ddlParentescoFam" runat="server" Width="90%">
+                                                    </asp:DropDownList>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col text-right">
+                                                    <asp:Button ID="bttnSalirFam" runat="server" CssClass="btn btn-blue-grey" OnClick="bttnSalirFam_Click" Text="REGRESAR" />
+                                                    &nbsp;<asp:Button ID="bttnAgregarFam" runat="server" CssClass="btn btn-info" OnClick="bttnAgregarFam_Click" Text="GUARDAR" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </asp:View>
+                                </asp:MultiView>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
 
         function FiltEventos() {

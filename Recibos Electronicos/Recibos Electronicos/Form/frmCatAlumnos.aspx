@@ -114,7 +114,7 @@
     </div>
     <div class="container-fluid">
         <div class="row text-center">
-            <div class="col">
+            <div class="col text-center">
                 <asp:UpdateProgress ID="updGrid" runat="server" AssociatedUpdatePanelID="UpdatePanel3">
                     <ProgressTemplate>
                         <asp:Image ID="imgGrid" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />

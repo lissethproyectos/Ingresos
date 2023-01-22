@@ -294,7 +294,7 @@ namespace Recibos_Electronicos.Form
             objFactura.FACT_CARRERA = txtIdCarrera.Text;
             objFactura.FACT_SEMESTRE = txtSemestre.Text;
             objFactura.FACT_MATRICULA = txtMatricula.Text;
-            RefPag = (txtReferenciaPagada.Text == string.Empty) ? txtReferenciaOrig.Text : txtReferenciaPagada.Text;
+            RefPag = txtReferenciaPagada.Text.ToUpper();//(txtReferenciaPagada.Text == string.Empty) ? txtReferenciaOrig.Text : txtReferenciaPagada.Text;
             CNSIAE.ActualizarDatosSIAE(objFactura, RefPag, SesionUsu.Usu_Nombre, ref Verificador);
             return Verificador;
         }

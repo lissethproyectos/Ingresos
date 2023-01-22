@@ -1095,6 +1095,24 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblMsjGuardar;
 
         /// <summary>
+        /// Control updPgrConceptos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrConceptos;
+
+        /// <summary>
+        /// Control updPgrConcAsig.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress updPgrConcAsig;
+
+        /// <summary>
         /// Control updPnlConceptos.
         /// </summary>
         /// <remarks>
@@ -1111,6 +1129,15 @@ namespace Recibos_Electronicos.Form
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grvConceptosCat;
+
+        /// <summary>
+        /// Control updPnlConcAsig.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel updPnlConcAsig;
 
         /// <summary>
         /// Control grvConceptos.

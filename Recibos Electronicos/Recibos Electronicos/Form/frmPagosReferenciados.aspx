@@ -390,7 +390,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col font-weight-bold">
-                                            <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia"></asp:Label>
+                                            <asp:Label ID="lblReferenciaOrig" runat="server" Text="Referencia Pagada"></asp:Label>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -400,7 +400,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col font-weight-bold">
-                                            <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Pagada"></asp:Label>
+                                            <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Generada"></asp:Label>
                                         </div>
                                     </div>
                                     <div class="row">

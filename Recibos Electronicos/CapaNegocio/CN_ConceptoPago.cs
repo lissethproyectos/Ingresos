@@ -191,6 +191,19 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ActualizarVigenciasEscuela(ConceptoPago ObjVigencias, ref string Verificador)
+        {
+            try
+            {
+                CD_ConceptoPago CDConceptoPago = new CD_ConceptoPago();
+                CDConceptoPago.ActualizarVigenciasEscuela(ObjVigencias, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void ActualizarVigenciasSYSWEB(ConceptoPago ObjVigencias, ref string Verificador)
         {
             try
@@ -224,6 +237,19 @@ namespace CapaNegocio
             {
                 CD_ConceptoPago CDConceptoPago = new CD_ConceptoPago();
                 CDConceptoPago.InsertarExcepcionesVigenciasSIAE(ObjVigencias, ref Verificador);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public void EliminarExcepcionesVigenciasSIAE(ConceptoPago ObjVigencias, ref string Verificador)
+        {
+            try
+            {
+                CD_ConceptoPago CDConceptoPago = new CD_ConceptoPago();
+                CDConceptoPago.EliminarExcepcionesVigenciasSIAE(ObjVigencias, ref Verificador);
 
             }
             catch (Exception ex)

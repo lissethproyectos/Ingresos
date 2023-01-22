@@ -25,6 +25,8 @@ namespace Recibos_Electronicos.Form
             SesionUsu = (Sesion)Session["Usuario"];
             if (!IsPostBack)
                 Inicializar();
+
+            ScriptManager.RegisterStartupScript(this, GetType(), "GridVigencias", "Vigencias();", true);
         }
 
         #region <Botones y Eventos>
@@ -137,6 +139,7 @@ namespace Recibos_Electronicos.Form
 
         protected void grdVigencias_SelectedIndexChanged(object sender, EventArgs e)
         {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#modalEliminar').modal('show');", true);
 
         }
 
@@ -158,27 +161,33 @@ namespace Recibos_Electronicos.Form
         {
             GridViewRow row = grdVigencias.Rows[e.RowIndex];
             int fila = e.RowIndex;
-            string FechaIni = Convert.ToString(((TextBox)(row.Cells[1].Controls[0])).Text);
-            string FechaFin = Convert.ToString(((TextBox)(row.Cells[2].Controls[0])).Text);
-            DateTime FechaValidaIni;
+DateTime FechaValidaIni;
             DateTime FechaValidaFin;
+
+            string FechaIni = Convert.ToString(((TextBox)(row.Cells[2].Controls[1])).Text);
+            FechaValidaIni = Convert.ToDateTime(FechaIni);
+            string FechaFin = Convert.ToString(((TextBox)(row.Cells[3].Controls[1])).Text);
+            
             if (DateTime.TryParse(FechaIni, out FechaValidaIni) && DateTime.TryParse(FechaFin, out FechaValidaFin))
             {
-                DateTime FechaInicial = Convert.ToDateTime(FechaIni);
+                DateTime FechaInicial = FechaValidaIni;
                 DateTime FechaFinal = Convert.ToDateTime(FechaFin);
                 if (FechaFinal >= FechaInicial)
                 {
-                    ObjVigencias.Nivel = row.Cells[4].Text;
-                    ObjVigencias.ClaveConcepto = row.Cells[5].Text;
-                    ObjVigencias.Periodo = Convert.ToChar(row.Cells[3].Text);
-                    ObjVigencias.FechaInicial = FechaIni; // Convert.ToString(((TextBox)(row.Cells[1].Controls[0])).Text);
+                    ObjVigencias.ClaveConcepto = Convert.ToString(((DropDownList)(row.Cells[5].Controls[1])).SelectedValue);
+                    ObjVigencias.FechaInicial = FechaInicial.Day+"/"+FechaInicial.Month + "/" +FechaInicial.Year;
+                    //ObjVigencias.FechaInicial = FechaIni.ToString("dd-MM-yyyy");  // Convert.ToString(((TextBox)(row.Cells[1].Controls[0])).Text);
                     ObjVigencias.FechaFinal = FechaFin; //Convert.ToString(((TextBox)(row.Cells[2].Controls[0])).Text);
+                    ObjVigencias.Id = Convert.ToInt32(((TextBox)(row.Cells[8].Controls[0])).Text);
                     grdVigencias.EditIndex = -1;
-                    //CNConcepto.ActualizarVigenciasSIAE(ObjVigencias, ref Verificador);
-                    //if (Verificador == "0")
-                    //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(1, 'Los datos han sido modificados correctamente.');", true); //lblMsj.Text = ex.Message;
-                    //else
-                    //    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador.Substring(0, 20) + "');", true); //lblMsj.Text = ex.Message;
+                    CNConcepto.ActualizarVigenciasEscuela(ObjVigencias, ref Verificador);
+                    if (Verificador == "0")
+                    {
+                        CargarGrid();
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(1, 'Los datos han sido modificados correctamente.');", true); //lblMsj.Text = ex.Message;
+                    }
+                    else
+                        ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador.Substring(0, 20) + "');", true); //lblMsj.Text = ex.Message;
 
                     //CargarGrid();
                 }
@@ -200,12 +209,13 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnNuevo_Click(object sender, ImageClickEventArgs e)
         {
-            modalVigencias.Show();
+            //modalVigencias.Show();
+            ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modalEmp", "$('#modalVigencias').modal('show')", true);
         }
 
         protected void ddlDependenciaA_SelectedIndexChanged(object sender, EventArgs e)
         {
-            modalVigencias.Show();
+            //modalVigencias.Show();
             CNComun.LlenaCombo("PKG_PAGOS_2016.Obt_Combo_Carreras_SIAE", ref ddlCarrera, "p_escuela", ddlDependenciaA.SelectedValue, "INGRESOS");
 
         }
@@ -214,33 +224,84 @@ namespace Recibos_Electronicos.Form
         {
             try
             {
-                Verificador = string.Empty;
+                lblErrorGuardar.Text = string.Empty;
                 ObjVigencias.Dependencia = ddlDependenciaA.SelectedValue;
                 ObjVigencias.Carrera = ddlCarrera.SelectedValue;
                 ObjVigencias.FechaInicial = txtFechaInicial.Text;
                 ObjVigencias.FechaFinal = txtFechaFinal.Text;
+                ObjVigencias.ClaveConcepto = ddlConcepto.SelectedValue;
+                ObjVigencias.Descripcion = ddlConcepto.SelectedItem.Text;
                 CNConcepto.InsertarExcepcionesVigenciasSIAE(ObjVigencias, ref Verificador);
                 if (Verificador == "0")
                 {
-                    modalVigencias.Hide();
+                    //modalVigencias.Hide();
                     CargarGrid();
+                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modalEmp", "$('#modalVigencias').modal('hide')", true);
+
                 }
                 else
                 {
                     CNComun.VerificaTextoMensajeError(ref Verificador);
-                    ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+                    lblErrorGuardar.Text = Verificador;
                 }
 
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message.Substring(0, 20) + "');", true); //lblMsj.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                lblErrorGuardar.Text = Verificador;
             }
         }
 
-        protected void bttnSalirEmp_Click(object sender, EventArgs e)
+        protected void linkBttnEliminarReg_Click(object sender, EventArgs e)
         {
-            modalVigencias.Hide();
+            Verificador = string.Empty;
+            lblErrorElim.Text = string.Empty;
+            try
+            {
+                //int fila = e.RowIndex;
+                //int pagina = grdVigencias.PageSize * grdVigencias.PageIndex;
+                //fila = pagina + fila;
+                ObjVigencias.Id = Convert.ToInt32(grdVigencias.SelectedRow.Cells[8].Text);                
+                CNConcepto.EliminarExcepcionesVigenciasSIAE(ObjVigencias, ref Verificador);
+                if (Verificador == "0")
+                {
+                    CargarGrid();
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#modalEliminar').modal('hide');", true);
+                }
+                else
+                {
+                    CNComun.VerificaTextoMensajeError(ref Verificador);
+                    lblErrorElim.Text = Verificador;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                lblErrorElim.Text = Verificador;
+                //ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true); //lblMsj.Text = ex.Message;
+            }
+
         }
+
+        protected void grdVigencias_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            int fila = e.RowIndex;
+            int pagina = grdVigencias.PageSize * grdVigencias.PageIndex;
+            fila = pagina + fila;
+
+            GridViewRow row = grdVigencias.Rows[e.RowIndex];
+            
+            SesionUsu.Row = e.RowIndex;
+            //ObjVigencias.Dependencia = Convert.ToString(grdVigencias.Rows[fila].Cells[0].Text);
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "Pop", "$('#modalEliminar').modal('show');", true);
+
+         
+
+        }
+
     }
 }

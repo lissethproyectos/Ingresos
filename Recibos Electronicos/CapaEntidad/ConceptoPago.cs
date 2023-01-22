@@ -190,6 +190,14 @@ namespace CapaEntidad
             get { return _Carrera; }
             set { _Carrera = value; }
         }
+        private string _CveCarrera;
+
+        public string CveCarrera
+        {
+            get { return _CveCarrera; }
+            set { _CveCarrera = value; }
+        }
+
         private string _TipoPersonaStr; 
 
         public string TipoPersonaStr
