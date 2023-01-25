@@ -537,24 +537,6 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.Label lblReferenciaOrig;
 
         /// <summary>
-        /// Control txtReferenciaOrig.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReferenciaOrig;
-
-        /// <summary>
-        /// Control lblReferenciaPagada.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblReferenciaPagada;
-
-        /// <summary>
         /// Control txtReferenciaPagada.
         /// </summary>
         /// <remarks>

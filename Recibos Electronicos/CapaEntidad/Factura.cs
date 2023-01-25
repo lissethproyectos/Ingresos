@@ -92,6 +92,7 @@ namespace CapaEntidad
         private string _Status;
         private string _FACT_EVENTO;
         private int    _ID_RECIBO;
+        private string _FACT_REFERENCIA_PAGADA;
 
         //Metodos agregados por Lisseth
         public string FACT_EVENTO
@@ -303,7 +304,11 @@ namespace CapaEntidad
             get { return _FACT_REFERENCIA; }
             set { _FACT_REFERENCIA = value; }
         }
-
+        public string FACT_REFERENCIA_PAGADA
+        {
+            get { return _FACT_REFERENCIA_PAGADA; }
+            set { _FACT_REFERENCIA_PAGADA = value; }
+        }
         public string TOOLTIP
         {
             get { return _TOOLTIP; }

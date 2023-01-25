@@ -287,7 +287,7 @@ namespace Recibos_Electronicos.Form
             objFactura.FACT_FOLIOBANCARIO = txtFolioBanco.Text;
             objFactura.FACT_FECHA_FACTURA = txtFechaPago.Text;
             objFactura.FACT_BANCO = ddlBanco.SelectedValue;
-            objFactura.FACT_REFERENCIA = txtReferenciaOrig.Text;
+            //objFactura.FACT_REFERENCIA = txtReferenciaOrig.Text;
             objFactura.FACT_CONFIRMADO = (chkPagoAplicado.Checked == true) ? "S" : "N";
             objFactura.CICLO_ESCOLAR = txtCiclo.Text;
             objFactura.FACT_DEPENDENCIA = txtEscuela.Text;
@@ -390,7 +390,7 @@ namespace Recibos_Electronicos.Form
                 txtFolioBanco.Text = string.Empty;
                 txtFechaPago.Text = string.Empty;
                 ddlBanco.SelectedIndex = 0;
-                txtReferenciaOrig.Text = string.Empty;
+                //txtReferenciaOrig.Text = string.Empty;
                 chkPagoAplicado.Checked = false;
                 LinkButton cbi = (LinkButton)(sender);
                 GridViewRow row = (GridViewRow)cbi.NamingContainer;
@@ -399,8 +399,9 @@ namespace Recibos_Electronicos.Form
                 if (ddlOrigen.SelectedValue == "SIAE")
                 {
                     pnlDatosGral.Visible = true;
-                    lblReferenciaPagada.Visible = true;
+                    //lblReferenciaPagada.Visible = true;
                     txtReferenciaPagada.Visible = true;
+                    txtReferenciaPagada.Text = string.Empty;
                     //bttnConfirmaPago.Visible = true;
                     lblPagoAplicado.Visible = true;
                     chkPagoAplicado.Visible = true;
@@ -410,8 +411,8 @@ namespace Recibos_Electronicos.Form
                 }
                 else
                 {
-                    txtReferenciaOrig.Text = grvReferenciasSIAE.SelectedRow.Cells[5].Text;
-                    lblReferenciaPagada.Visible = false;
+                    //txtReferenciaOrig.Text = grvReferenciasSIAE.SelectedRow.Cells[5].Text;
+                    //lblReferenciaPagada.Visible = false;
                     txtReferenciaPagada.Visible = false;
                     txtEvento.Visible = true;
                     //pnlDatosGral.Visible = false;
@@ -447,7 +448,8 @@ namespace Recibos_Electronicos.Form
                         ddlBanco.SelectedIndex = 0;
                     }
 
-                    txtReferenciaOrig.Text = objFactura.FACT_REFERENCIA;
+                    //txtReferenciaOrig.Text = objFactura.FACT_REFERENCIA;
+                    txtReferenciaPagada.Text = objFactura.FACT_REFERENCIA_PAGADA;
                     chkPagoAplicado.Checked = (objFactura.FACT_CONFIRMADO == "S") ? true : false;
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowPopupError", "$('#modalPagos').modal('show')", true);
                 }

@@ -325,9 +325,8 @@
                                                             </Columns>
                                                             <FooterStyle CssClass="enc" />
                                                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />
-                                                            <RowStyle Font-Size="14px" />
                                                             <SelectedRowStyle CssClass="sel" />
-                                                            <HeaderStyle CssClass="enc" Font-Size="12px" HorizontalAlign="Center" />
+                                                            <HeaderStyle CssClass="enc" />
                                                             <AlternatingRowStyle CssClass="alt" />
                                                         </asp:GridView>
                                                     </ContentTemplate>
@@ -408,7 +407,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col">
-                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" ScrollBars="Both">
+                                            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="2" Width="100%" OnActiveTabChanged="TabContainer1_ActiveTabChanged1" ScrollBars="Both">
                                                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                                     <HeaderTemplate>
                                                         <i class="fa fa fa-user fa-2x" aria-hidden="true"></i>&nbsp;Datos del Alumno
@@ -489,7 +488,7 @@
                                                                             <ContentTemplate>
                                                                                 <span class="input-group">
                                                                                     <asp:LinkButton ID="linkBttnBuscar" runat="server" CssClass="btn btn-warning form-control" OnClick="linkBttnBuscar_Click"> <i class="fa fa-search" aria-hidden="true"></i>Buscar
-                                                                                </asp:LinkButton>
+                                                                                    </asp:LinkButton>
                                                                                     <asp:LinkButton ID="Registrar" runat="server" CssClass="btn btn-blue-grey" Visible="false"> Agregar</asp:LinkButton>
                                                                                 </span>
                                                                             </ContentTemplate>
@@ -907,7 +906,12 @@
                                                                     Autorizado Por
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                    <asp:TextBox ID="txtAutorizado" runat="server" CssClass="form-control" MaxLength="700" TabIndex="18"></asp:TextBox>
+                                                                    <asp:UpdatePanel ID="updPnlAutorizado" runat="server">
+                                                                        <ContentTemplate>
+                                                                            <asp:DropDownList ID="ddlLAutorizado" runat="server" CssClass="form-control" Visible="False"></asp:DropDownList>
+                                                                            <asp:TextBox ID="txtAutorizado" runat="server" CssClass="form-control" TabIndex="18"></asp:TextBox>
+                                                                        </ContentTemplate>
+                                                                    </asp:UpdatePanel>
                                                                 </div>
                                                                 <div class="col-md-2">
                                                                     Solicitado Por

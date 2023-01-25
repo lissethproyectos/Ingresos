@@ -202,8 +202,8 @@ namespace Recibos_Electronicos.Form
             }
         }
         private void Cargarcombos()
-
         {
+            Verificador = string.Empty;
             try
             {
                 CNComun.LlenaCombo("PKG_FELECTRONICA_2016.Obt_Combo_Familiares", ref ddlParentescoFam);
@@ -235,10 +235,14 @@ namespace Recibos_Electronicos.Form
                     txtFechaInicial.Text = ListEvento[ddlEvento.SelectedIndex].EtiquetaDos;
                     txtFechaFinal.Text = ListEvento[ddlEvento.SelectedIndex].EtiquetaTres;
                 }
+                CNComun.LlenaCombo("pkg_pagos_2016.Obt_Combo_EmpleadosAutoriza", ref ddlLAutorizado, "INGRESOS");
+                
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + ex.Message + "');", true);  //lblMsj.Text = ex.Message;
+                Verificador = ex.Message;
+                CNComun.VerificaTextoMensajeError(ref Verificador);
+                ScriptManager.RegisterStartupScript(this.Page, Page.GetType(), "modal", "mostrar_modal(0, '" + Verificador + "');", true);  //lblMsj.Text = ex.Message;
             }
         }
         private void CargarGridCatConceptos()

@@ -681,7 +681,7 @@
                             <div class="col text-right">
                                 <asp:UpdatePanel ID="UpdatePanel11" runat="server">
                                     <ContentTemplate>
-                                        <asp:Button ID="btnGuardar_Concep_Continuar" runat="server" CssClass="btn btn-info" OnClick="btnGuardar_Concep_Continuar_Click" Text="GUARDAR" ValidationGroup="guardar_conceptos" />
+                                        <asp:Button ID="btnGuardar_Concep_Continuar" runat="server" CssClass="btn btn-info" OnClick="btnGuardar_Concep_Continuar_Click" Text="AGREGAR" ValidationGroup="guardar_conceptos" />
                                     </ContentTemplate>
                                 </asp:UpdatePanel>
                             </div>

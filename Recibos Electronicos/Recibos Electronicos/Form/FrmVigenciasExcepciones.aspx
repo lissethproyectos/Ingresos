@@ -56,16 +56,16 @@
                                 </asp:BoundField>
                                 <asp:TemplateField HeaderText="FECHA INICIAL">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("FechaInicial") %>' type="date"></asp:TextBox>
+                                        <asp:TextBox ID="txtFechaIniAct" runat="server" Text='<%# Bind("FechaInicial") %>' type="date"></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
-                                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("FechaInicial") %>'></asp:Label>
+                                        <asp:Label ID="lblFechaIniAct" runat="server" Text='<%# Bind("FechaInicial") %>'></asp:Label>
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" />
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="FECHA FINAL">
                                     <EditItemTemplate>
-                                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("FechaFinal") %>'></asp:TextBox>
+                                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("FechaFinal") %>' type="date"></asp:TextBox>
                                     </EditItemTemplate>
                                     <ItemTemplate>
                                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("FechaFinal") %>'></asp:Label>
@@ -234,7 +234,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Eliminar</h5>
+                    <h5 class="modal-title"><i class="fa fa-trash  fa-2x" aria-hidden="true"></i> Eliminar</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -246,7 +246,7 @@
                     <p>
                     <asp:UpdatePanel ID="UpdatePanel7" runat="server">
                         <ContentTemplate>
-                            <asp:Label ID="lblErrorElim" runat="server" Text="Label"></asp:Label>
+                            <asp:Label ID="lblErrorElim" runat="server" Text=""></asp:Label>
                         </ContentTemplate>
                     </asp:UpdatePanel></p>
                 </div>

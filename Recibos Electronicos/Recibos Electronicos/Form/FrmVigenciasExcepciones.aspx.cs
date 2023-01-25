@@ -145,13 +145,14 @@ namespace Recibos_Electronicos.Form
 
         protected void grdVigencias_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            //int Row = e.NewEditIndex;
-            //GridViewRow currentRow = this.grdVigencias.Rows[e.NewEditIndex];
-            grdVigencias.EditIndex = e.NewEditIndex;
-            //ImageButton imgBttn = currentRow.FindControl("imgCalendarioIni") as ImageButton;
-            //TextBox txtFechIni = currentRow.FindControl("txtFecha_Factura_Ini") as TextBox;
-            //imgBttn.Visible = true;
-            //txtFechIni.Enabled = true;
+            int fila = e.NewEditIndex;
+            GridView gv = sender as GridView;
+            gv.EditIndex = e.NewEditIndex;
+            //grdVigencias.EditIndex = e.NewEditIndex;
+
+            Label lblFechaIni = (Label)(gv.Rows[fila].Cells[2].FindControl("lblFechaIniAct"));
+            TextBox txtFechaIni = (TextBox)(gv.Rows[fila].Cells[2].FindControl("txtFechaIniAct"));
+            //txtFechaIni.Text = "01/02/2023";
             CargarGrid();
 
 
@@ -167,17 +168,18 @@ DateTime FechaValidaIni;
             string FechaIni = Convert.ToString(((TextBox)(row.Cells[2].Controls[1])).Text);
             FechaValidaIni = Convert.ToDateTime(FechaIni);
             string FechaFin = Convert.ToString(((TextBox)(row.Cells[3].Controls[1])).Text);
-            
+            FechaValidaFin = Convert.ToDateTime(FechaFin);
+
             if (DateTime.TryParse(FechaIni, out FechaValidaIni) && DateTime.TryParse(FechaFin, out FechaValidaFin))
             {
                 DateTime FechaInicial = FechaValidaIni;
-                DateTime FechaFinal = Convert.ToDateTime(FechaFin);
+                DateTime FechaFinal = FechaValidaFin;
                 if (FechaFinal >= FechaInicial)
                 {
                     ObjVigencias.ClaveConcepto = Convert.ToString(((DropDownList)(row.Cells[5].Controls[1])).SelectedValue);
                     ObjVigencias.FechaInicial = FechaInicial.Day+"/"+FechaInicial.Month + "/" +FechaInicial.Year;
                     //ObjVigencias.FechaInicial = FechaIni.ToString("dd-MM-yyyy");  // Convert.ToString(((TextBox)(row.Cells[1].Controls[0])).Text);
-                    ObjVigencias.FechaFinal = FechaFin; //Convert.ToString(((TextBox)(row.Cells[2].Controls[0])).Text);
+                    ObjVigencias.FechaFinal = FechaFinal.Day + "/" + FechaFinal.Month + "/" + FechaFinal.Year;
                     ObjVigencias.Id = Convert.ToInt32(((TextBox)(row.Cells[8].Controls[0])).Text);
                     grdVigencias.EditIndex = -1;
                     CNConcepto.ActualizarVigenciasEscuela(ObjVigencias, ref Verificador);

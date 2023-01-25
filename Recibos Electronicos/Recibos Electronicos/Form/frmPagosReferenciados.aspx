@@ -395,19 +395,19 @@
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <asp:TextBox ID="txtReferenciaOrig" runat="server" Enabled="False" Width="100%"></asp:TextBox>
+                                            <asp:TextBox ID="txtReferenciaPagada" runat="server" CssClass="form-control"></asp:TextBox>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                   <%-- <div class="row">
                                         <div class="col font-weight-bold">
                                             <asp:Label ID="lblReferenciaPagada" runat="server" Text="Referencia Generada"></asp:Label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col">
-                                            <asp:TextBox ID="txtReferenciaPagada" runat="server" Width="100%"></asp:TextBox>
+                                            <asp:TextBox ID="txtReferenciaOrig" runat="server"  CssClass="form-control"></asp:TextBox>
                                         </div>
-                                    </div>
+                                    </div>--%>
                                     <div class="row">
                                         <div class="col text-right">
                                             <button type="button" class="btn btn-grey" data-dismiss="modal">CERRAR</button>

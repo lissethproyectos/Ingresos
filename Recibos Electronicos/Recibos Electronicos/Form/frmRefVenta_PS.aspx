@@ -263,6 +263,11 @@
                                                                 </ItemTemplate>
                                                             </asp:TemplateField>
                                                             <asp:BoundField DataField="ID_CODIGO_QR" />
+                                                            <asp:TemplateField HeaderText="Envio Referencia">
+                                                                <ItemTemplate>
+                                                                    <asp:LinkButton ID="linkBttnCorreo" runat="server" CssClass="btn btn-info">Correo</asp:LinkButton>
+                                                                </ItemTemplate>
+                                                            </asp:TemplateField>
                                                         </Columns>
                                                         <FooterStyle CssClass="enc" />
                                                         <PagerStyle CssClass="enc" HorizontalAlign="Center" />
@@ -666,34 +671,13 @@
                                 </asp:UpdatePanel>
                             </div>
                         </div>
-                        <%--                 <div class="row">
-                            <div class="col text-right">
-                                <asp:UpdatePanel ID="UpdatePanel13" runat="server">
-                                    <ContentTemplate>
-                                        <asp:LinkButton ID="linkBttnRedirectPagar" runat="server" CssClass="btn btn-info  buttons-pdf buttons-html5 btn-app export pdf" OnClick="linkBttnRedirectPagar_Click"><i class="fa fa-id-card fa-2x" aria-hidden="true"></i>Pagar</asp:LinkButton>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                             <div class="col-md-4 text-center">
-                                <asp:UpdatePanel ID="updPnlBttnGenPDF" runat="server">
-                                    <ContentTemplate>
-                                        <asp:LinkButton ID="linkBttnGenPDF" runat="server" CssClass="btn btn-info  buttons-pdf buttons-html5 btn-app export csv" OnClick="linkBttnGenPDF_Click"><i class="fa fa-file fa-2x" aria-hidden="true"></i>Generar Referencia</asp:LinkButton>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <asp:UpdatePanel ID="updPnlBttnPagoLinea" runat="server">
-                                    <ContentTemplate>
-                                        <asp:LinkButton ID="linkBttnPagoLinea" runat="server" CssClass="btn btn-info  buttons-pdf buttons-html5 btn-app export pdf" OnClick="linkBttnPagoLinea_Click"><i class="fa fa-id-card fa-2x" aria-hidden="true"></i>Pago en Línea</asp:LinkButton>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
-                            </div>
-                            <div class="col-md-4 text-center">
-                                <asp:UpdatePanel ID="UpdatePanel13" runat="server">
-                                    <ContentTemplate>
-                                        <asp:LinkButton ID="linkBttnGenLink" runat="server" class="btn btn-secondary buttons-pdf buttons-html5 btn-app export excel" OnClick="linkBttnGenLink_Click"><i class="fa fa-bars fa-2x"></i>Link pago en Línea</asp:LinkButton>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                        <%--<div class="row">
+                            <div class="col text-center">
+                                <asp:UpdateProgress ID="updPgrBttnPagoLinea" runat="server" AssociatedUpdatePanelID="updPnlBttnPagoLinea">
+                                    <ProgressTemplate>
+                                        <asp:Image ID="imgPagoLinea" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
+                                    </ProgressTemplate>
+                                </asp:UpdateProgress>
                             </div>
                         </div>--%>
                         <div class="row">
@@ -714,24 +698,7 @@
                                 </asp:UpdateProgress>
                             </div>
                         </div>
-                        <%--<div class="row">
-                            <div class="col text-center">
-                                <asp:UpdateProgress ID="updgrBttnGenPDF" runat="server" AssociatedUpdatePanelID="updPnlBttnGenPDF">
-                                    <ProgressTemplate>
-                                        <asp:Image ID="imgGenPDF" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                            </div>
-                        </div>--%>
-                        <%--<div class="row">
-                            <div class="col text-center">
-                                <asp:UpdateProgress ID="updPgrBttnPagoLinea" runat="server" AssociatedUpdatePanelID="updPnlBttnPagoLinea">
-                                    <ProgressTemplate>
-                                        <asp:Image ID="imgPagoLinea" runat="server" AlternateText="Espere un momento, por favor.." Height="50px" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" ToolTip="Espere un momento, por favor.." />
-                                    </ProgressTemplate>
-                                </asp:UpdateProgress>
-                            </div>
-                        </div>--%>
+                        <%--<asp:TextBox ID="txtBuscaCliente" runat="server" Width="100%"></asp:TextBox>--%>                        <%--<div class="modal" tabindex="-1" role="dialog" id="modalDetalle">--%>
                     </div>
                 </div>
             </div>
@@ -1099,7 +1066,27 @@
         </div>
     </div>
 
-
+    <div class="modal" tabindex="-1" role="dialog" id="modalCorreo">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Correo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Enviar referencia y link de pago al correo:</p>
+          <p>
+              <asp:TextBox ID="txtCorreoUsuario" runat="server"></asp:TextBox></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
