@@ -40,10 +40,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-2">Ejercicio</div>
-            <div class="col-md-10">
+            <div class="col-md-2">
                 <asp:UpdatePanel ID="UpdatePanel3" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="ddlEjercicio" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlEjercicio_SelectedIndexChanged">
+                        <asp:DropDownList ID="ddlEjercicio" runat="server" CssClass="form-control" AutoPostBack="True" OnSelectedIndexChanged="ddlEjercicio_SelectedIndexChanged">
+                            <asp:ListItem>2023</asp:ListItem>
                             <asp:ListItem>2022</asp:ListItem>
                             <asp:ListItem>2021</asp:ListItem>
                             <asp:ListItem>2020</asp:ListItem>
@@ -56,14 +57,12 @@
                         </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-            </div>
-        </div>
-        <div class="row">
+            </div>       
             <div class="col-md-2">
                 Clave/Descripción Dependencia
             </div>
-            <div class="col-md-9">
-                <asp:TextBox ID="txtBuscar" runat="server" Width="100%"></asp:TextBox>
+            <div class="col-md-5">
+                <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="col-md-1">
                 <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" />
@@ -141,7 +140,15 @@
                                     </ItemTemplate>
                                     <ItemStyle HorizontalAlign="Center" Width="30%" />
                                 </asp:TemplateField>
-                                <asp:CommandField ShowEditButton="True" CancelText="CANCELAR" DeleteText="ELIMINAR" EditText="EDITAR" UpdateText="ACTUALIZAR" />
+                                <asp:TemplateField ShowHeader="False">
+                                    <EditItemTemplate>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Actualizar" CssClass="btn btn-warning"></asp:LinkButton>
+                                        &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar" CssClass="btn btn-grey"></asp:LinkButton>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Editar" CssClass="btn btn-info"></asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                             <FooterStyle CssClass="enc" />
                             <PagerStyle CssClass="enc" HorizontalAlign="Center" />

@@ -47,6 +47,44 @@ namespace CapaDatos
                 CDDatos.LimpiarOracleCommand(ref cmm);
             }
         }
+        public void ConsultarCuotasPosgrado(CuotaPosgrado ObjCuotaPosgrado, ref List<CuotaPosgrado> List)
+        {
+            CD_Datos CDDatos = new CD_Datos("SIAE");
+            OracleCommand cmm = null;
+            try
+            {
+                OracleDataReader dr = null;
+
+                string[] Parametros = { "P_Dependencia", "P_Carrera" };
+                object[] Valores = { ObjCuotaPosgrado.Escuela, ObjCuotaPosgrado.Carrera };
+
+                cmm = CDDatos.GenerarOracleCommandCursor("PKG_POSGRADO.Obt_Grid_Cuotas", ref dr, Parametros, Valores);
+                while (dr.Read())
+                {
+                    CuotaPosgrado objPagos = new CuotaPosgrado();
+                    objPagos.IdCuota = Convert.ToInt32(dr[0]);
+                    objPagos.Concepto = Convert.ToString(dr[5]);
+                    objPagos.No_Pago = Convert.ToInt32(dr[1]);
+                    objPagos.Importe = Convert.ToDouble(dr[2]);
+                    objPagos.Referencia = Convert.ToString(dr[3]);
+                    objPagos.Fecha_Pago = Convert.ToString(dr[4]);
+                    objPagos.Semestre = Convert.ToInt32(dr[6]);
+                    //objPagos.IdPago = Convert.ToInt32(dr[8]);
+                    objPagos.Ciclo_Actual = Convert.ToString(dr[9]);
+                    List.Add(objPagos);
+                }
+
+                dr.Close();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                CDDatos.LimpiarOracleCommand(ref cmm);
+            }
+        }
         public void EditarPagosPosgrado(PagosPosgrado ObjPagoPosgrado, ref string Verificador)
         {
             CD_Datos CDDatos = new CD_Datos("SIAE");

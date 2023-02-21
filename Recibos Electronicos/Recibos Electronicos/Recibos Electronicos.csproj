@@ -672,6 +672,7 @@
     <Content Include="Form\frmCatReportes.aspx" />
     <Content Include="Form\frmControl_Cierre.aspx" />
     <Content Include="Form\FrmConceptos2.aspx" />
+    <Content Include="Form\frmCuotasPosgrado.aspx" />
     <Content Include="Form\frmCuotasSIAE_Lenguas.aspx" />
     <Content Include="Form\frmCuotasSIAE.aspx" />
     <Content Include="Form\frmCursos2.aspx" />
@@ -1182,6 +1183,13 @@
     </Compile>
     <Compile Include="Form\FrmConceptos2.aspx.designer.cs">
       <DependentUpon>FrmConceptos2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmCuotasPosgrado.aspx.cs">
+      <DependentUpon>frmCuotasPosgrado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Form\frmCuotasPosgrado.aspx.designer.cs">
+      <DependentUpon>frmCuotasPosgrado.aspx</DependentUpon>
     </Compile>
     <Compile Include="Form\frmCuotasSIAE_Lenguas.aspx.cs">
       <DependentUpon>frmCuotasSIAE_Lenguas.aspx</DependentUpon>

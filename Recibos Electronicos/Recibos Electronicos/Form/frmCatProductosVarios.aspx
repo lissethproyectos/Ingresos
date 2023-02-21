@@ -8,7 +8,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <asp:UpdatePanel ID="UpdatePanel15" runat="server">
         <ContentTemplate>
-            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" CssClass="mGrid" Width="100%" ScrollBars="Horizontal">
+            <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" CssClass="mGrid" Width="100%" ScrollBars="Horizontal">
                 <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                     <HeaderTemplate>
                         Productos
@@ -54,14 +54,23 @@
                                                     <asp:BoundField DataField="Descripcion" HeaderText="Descripción">
                                                         <ItemStyle Width="45%" />
                                                     </asp:BoundField>
-                                                    <asp:CommandField ShowEditButton="True" EditImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" />
+                                                    <asp:TemplateField ShowHeader="False">
+                                                        <EditItemTemplate>
+                                                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Actualizar"></asp:LinkButton>
+                                                            &#160;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar"></asp:LinkButton>
+                                                        </EditItemTemplate>
+                                                        <ItemTemplate>
+                                                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" CssClass="btn btn-grey" Text="Editar"></asp:LinkButton>
+                                                        </ItemTemplate>
+                                                        <ItemStyle HorizontalAlign="Center" />
+                                                    </asp:TemplateField>
                                                     <asp:TemplateField>
                                                         <HeaderTemplate>
-                                                            <asp:Button ID="bttnAgregar" runat="server" CssClass="btn btn-blue-grey" Font-Size="X-Small" OnClick="bttnAgregar_Click" Text="AGREGAR" />
+                                                            <asp:Button ID="bttnAgregar" runat="server" CssClass="btn btn-primary" Font-Size="X-Small" OnClick="bttnAgregar_Click" Text="AGREGAR" />
                                                         </HeaderTemplate>
                                                         <ItemTemplate>
-                                                            <asp:LinkButton ID="linkEliminar" runat="server" OnClick="linkEliminar_Click" OnClientClick="return confirm('¿Eliminar registro?');">Eliminar</asp:LinkButton>
-<%--<asp:LinkButton ID="linkBttnEliminar" runat="server" CausesValidation="False" OnClientClick="return confirm('¿En realidad desea Eliminar este registro?');"  OnClick="linkEliminar_Click" ><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>--%>
+                                                            <asp:LinkButton ID="linkEliminar" runat="server" CssClass="btn btn-grey" OnClick="linkEliminar_Click" OnClientClick="return confirm('¿Eliminar registro?');">Eliminar</asp:LinkButton>
+                                                            <%--<asp:LinkButton ID="linkBttnEliminar" runat="server" CausesValidation="False" OnClientClick="return confirm('¿En realidad desea Eliminar este registro?');"  OnClick="linkEliminar_Click" ><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>--%>
                                                         </ItemTemplate>
 
                                                         <HeaderStyle HorizontalAlign="Center" />
@@ -91,31 +100,21 @@
                                     Dependencia
                                 </div>
                                 <div class="col-md-10">
-                                    <asp:DropDownList ID="DDLDependencia2" runat="server" ClientIDMode="Predictable" Width="100%" AutoPostBack="True" OnSelectedIndexChanged="DDLDependencia2_SelectedIndexChanged">
+                                    <asp:DropDownList ID="DDLDependencia2" runat="server" ClientIDMode="Predictable" AutoPostBack="True" OnSelectedIndexChanged="DDLDependencia2_SelectedIndexChanged" CssClass="form-control">
                                     </asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="reqDepcia" runat="server" ErrorMessage="RequiredFieldValidator" ControlToValidate="DDLDependencia2" InitialValue="00000" Text="* Se debe seleccionar una dependencia." ValidationGroup="nuevo"></asp:RequiredFieldValidator>
                                 </div>
-                            </div>
+                            </div>                            
                             <div class="row">
-                                <div class="col-md-2">
-                                    <asp:Label ID="lblBuscar" runat="server" Text="Buscar"></asp:Label>
-                                </div>
-                                <div class="col-md-9">
-                                    <asp:TextBox ID="txtBuscar" runat="server" Width="100%" Placeholder="Grupo/Descripción"></asp:TextBox>
-                                </div>
-                                <div class="col-md-1">
-                                    <asp:ImageButton ID="imgBttnBuscar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/buscar.png" OnClick="imgBttnBuscar_Click" />
+                                <div class="col text-center">
+                                    <asp:UpdateProgress ID="updPgrServicios" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
+                                        <ProgressTemplate>
+                                            <asp:Image ID="imgDatos" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
+                                                ToolTip="Espere un momento, por favor.." Width="50px" Height="50px" />
+                                        </ProgressTemplate>
+                                    </asp:UpdateProgress>
                                 </div>
                             </div>
-<div class="row">
-                                    <div class="col text-center">
-                                        <asp:UpdateProgress ID="updPgrServicios" runat="server" AssociatedUpdatePanelID="UpdatePanel2">
-                                            <ProgressTemplate>
-                                                <asp:Image ID="imgDatos" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/ajax_loader_gray_512.gif" AlternateText="Espere un momento, por favor.."
-                                                    ToolTip="Espere un momento, por favor.." Width="50px" Height="50px" />
-                                            </ProgressTemplate>
-                                        </asp:UpdateProgress>
-                                    </div>
-                                </div>
                             <div class="row">
                                 <div class="col">
                                     <asp:UpdatePanel ID="UpdatePanel2" runat="server">
@@ -143,15 +142,15 @@
                                                     <asp:BoundField DataField="CONCEPTO" HeaderText="CONCEPTO" />
                                                     <asp:TemplateField>
                                                         <HeaderTemplate>
-                                                            <asp:Button ID="bttnAgregar2" runat="server" CssClass="btn btn-blue-grey" Font-Size="X-Small" OnClick="bttnAgregar2_Click" Text="AGREGAR" Width="87px" />
+                                                            <asp:Button ID="bttnAgregar2" runat="server" CssClass="btn btn-primary" Font-Size="X-Small" OnClick="bttnAgregar2_Click" Text="AGREGAR" Width="87px" ValidationGroup="nuevo" />
                                                         </HeaderTemplate>
                                                         <ItemTemplate>
                                                             <%--&#160;<asp:ImageButton ID="imgBttnEliminar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/del.png" OnClick="imgBttnEliminar_Click" OnClientClick="return confirm('¿Eliminar registro?');" />--%>
-                                                            <asp:LinkButton ID="linkBttnEliminarConc" runat="server" CausesValidation="False" OnClientClick="return confirm('¿En realidad desea Eliminar este registro?');" OnClick="linkBttnEliminarConc_Click"><i class="fa fa-trash fa-2x" aria-hidden="true"></i></asp:LinkButton>
-                                                            <asp:LinkButton ID="linkBttnEditarConc" runat="server" CausesValidation="False" OnClick="linkBttnEditarConc_Click"><i class="fa fa-pencil  fa-2x" aria-hidden="true"></i></asp:LinkButton>
+                                                            <asp:LinkButton ID="linkBttnEliminarConc" runat="server" CssClass="btn btn-grey" CausesValidation="False" OnClientClick="return confirm('¿En realidad desea Eliminar este registro?');" OnClick="linkBttnEliminarConc_Click"><i class="fa fa-trash" aria-hidden="true"></i> Eliminar</asp:LinkButton>
+                                                            <asp:LinkButton ID="linkBttnEditarConc" runat="server" CssClass="btn btn-grey" CausesValidation="False" OnClick="linkBttnEditarConc_Click"><i class="fa fa-pencil" aria-hidden="true"></i> Editar</asp:LinkButton>
                                                             <%--&#160;<asp:ImageButton ID="imgBttnEditar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/Imagenes/edit.png" OnClick="imgBttnEditar_Click" />--%>
                                                         </ItemTemplate>
-                                                        <ItemStyle HorizontalAlign="Center" />
+                                                        <ItemStyle HorizontalAlign="Center" Width="22%" />
                                                     </asp:TemplateField>
                                                     <asp:BoundField DataField="ID_CONCEPTO" />
                                                 </Columns>
@@ -166,7 +165,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col">
+                                <div class="col text-right">
                                     <asp:ImageButton ID="imgBttnReporte" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/pdf.png" OnClick="imgBttnReporte_Click" />
                                     &nbsp;<asp:ImageButton ID="imgBttnExportar" runat="server" ImageUrl="https://sysweb.unach.mx/resources/imagenes/excel.png" OnClick="imgBttnExportar_Click" />
                                 </div>
@@ -254,23 +253,24 @@
                                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DDLDependencia" ErrorMessage="RequiredFieldValidator" ValidationGroup="Guardar" InitialValue="00000">* Requerido</asp:RequiredFieldValidator>
                                             </div>
                                         </div>
-                                       <div class="row">
-                                             <%--<div class="col-md-2">Clave</div>
+                                        <div class="row">
+                                            <%--<div class="col-md-2">Clave</div>
                                             <div class="col-md-4">
                                                 <asp:TextBox ID="txtClave" runat="server" Width="100%"></asp:TextBox>
                                             </div>--%>
                                             <div class="col-md-2">Grupo</div>
-                                            <div class="col-md-4">
-                                                <asp:DropDownList ID="DDLGrupo" runat="server" Width="100%">
+                                            <div class="col-md-10">
+                                                <asp:DropDownList ID="DDLGrupo" runat="server" CssClass="form-control">
                                                     <asp:ListItem>CONSULTA</asp:ListItem>
                                                     <asp:ListItem>SERVICIO</asp:ListItem>
+                                                    <asp:ListItem>IMPRESIONES</asp:ListItem>
                                                 </asp:DropDownList>
                                             </div>
-                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-2">SubGrupo</div>
                                             <div class="col-md-10">
-                                                <asp:DropDownList ID="DDLRubro" runat="server" Width="100%">
+                                                <asp:DropDownList ID="DDLRubro" runat="server" CssClass="form-control">
                                                     <asp:ListItem>ANÁLISIS DE SUELO</asp:ListItem>
                                                     <asp:ListItem>ANÁLISIS DE AGUA</asp:ListItem>
                                                     <asp:ListItem>ANÁLISIS DE COMPOSTA</asp:ListItem>
@@ -294,14 +294,13 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2">
                                                 Concepto
                                             </div>
                                             <div class="col-md-10">
-                                                <asp:DropDownList ID="DDLConcepto" runat="server" Width="100%">
+                                                <asp:DropDownList ID="DDLConcepto" runat="server" CssClass="form-control">
                                                 </asp:DropDownList>
                                             </div>
                                         </div>

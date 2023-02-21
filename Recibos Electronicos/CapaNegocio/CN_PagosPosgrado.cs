@@ -21,6 +21,18 @@ namespace CapaNegocio
                 throw new Exception(ex.Message);
             }
         }
+        public void ConsultarCuotasPosgrado(PagosPosgrado objPago, ref List<PagosPosgrado> List)
+        {
+            try
+            {
+                CD_PagosPosgrado CDAlumno = new CD_PagosPosgrado();
+                CDAlumno.ConsultarPagosPosgrado(objPago, ref List);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public void EditarPagosPosgrado(PagosPosgrado objPago, ref string Verificador)
         {
             try

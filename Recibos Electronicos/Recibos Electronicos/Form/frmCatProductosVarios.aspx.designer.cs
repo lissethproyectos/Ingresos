@@ -87,31 +87,13 @@ namespace Recibos_Electronicos.Form
         protected global::System.Web.UI.WebControls.DropDownList DDLDependencia2;
 
         /// <summary>
-        /// Control lblBuscar.
+        /// Control reqDepcia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBuscar;
-
-        /// <summary>
-        /// Control txtBuscar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscar;
-
-        /// <summary>
-        /// Control imgBttnBuscar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgBttnBuscar;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator reqDepcia;
 
         /// <summary>
         /// Control updPgrServicios.

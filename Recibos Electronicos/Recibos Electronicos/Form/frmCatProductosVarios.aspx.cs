@@ -128,7 +128,7 @@ namespace Recibos_Electronicos.Form
             try
             {
                 List<Bien> List = new List<Bien>();
-                CNBien.ConsultarGridServicios(DDLDependencia2.SelectedValue, txtBuscar.Text, ref List);
+                CNBien.ConsultarGridServicios(DDLDependencia2.SelectedValue, "", ref List);
                 return List;
             }
             catch (Exception ex)
@@ -477,7 +477,7 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP058&dependencia=" + DDLDependencia2.SelectedValue + "&Observaciones=" + txtBuscar.Text.ToUpper() + "&enExcel=N";
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP058&dependencia=" + DDLDependencia2.SelectedValue + "&Observaciones=" + "" + "&enExcel=N";
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 
@@ -485,7 +485,7 @@ namespace Recibos_Electronicos.Form
 
         protected void imgBttnExportar_Click(object sender, ImageClickEventArgs e)
         {
-            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP058&dependencia=" + DDLDependencia2.SelectedValue + "&Observaciones=" + txtBuscar.Text.ToUpper() + "&enExcel=S";
+            string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP058&dependencia=" + DDLDependencia2.SelectedValue + "&Observaciones=" + "" + "&enExcel=S";
             string _open = "window.open('" + ruta + "', '_newtab');";
             ScriptManager.RegisterStartupScript(this, this.GetType(), Guid.NewGuid().ToString(), _open, true);
 

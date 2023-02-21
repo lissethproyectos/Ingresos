@@ -186,7 +186,7 @@
                                 </div>
                             </asp:View>
                             <asp:View ID="View2" runat="server">
-                                <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="0" Width="100%" Font-Names="Calibri" Height="100%">
+                                <ajaxToolkit:TabContainer ID="TabContainer1" runat="server" ActiveTabIndex="1" Width="100%" Font-Names="Calibri" Height="100%">
                                     <ajaxToolkit:TabPanel ID="TabPanel1" runat="server" HeaderText="TabPanel1">
                                         <HeaderTemplate>
                                             Datos Generales
@@ -283,12 +283,6 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <asp:DropDownList ID="ddlCiclo" runat="server" CssClass="form-control"></asp:DropDownList>
-                                                       <%-- <div class="input-group mb-3">
-                                                            <asp:ListBox ID="lstCiclo" runat="server" CssClass="form-control"></asp:ListBox>
-                                                            <span id="basic-addon3">
-                                                                <asp:LinkButton ID="linkBttnAgregarCiclo" CssClass="input-group-text btn-grey" runat="server" data-toggle="modal" data-target="#modalCiclos"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Agregar</asp:LinkButton>
-                                                            </span>
-                                                        </div>--%>
                                                     </div>
                                                     <div class="col-md-1">
                                                         Status
@@ -925,8 +919,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Conceptos
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <h5 class="modal-title" id="exampleModalLabel">Conceptos<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>

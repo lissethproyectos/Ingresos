@@ -103,6 +103,7 @@ namespace Recibos_Electronicos.Form
                 grvReferenciasSIAE.DataSource = GetList();
                 grvReferenciasSIAE.DataBind();
                 if (grvReferenciasSIAE.Rows.Count > 0)
+                {
                     if (ddlOrigen.SelectedValue == "SIAE")
                     {
                         CNComun.HideColumns(grvReferenciasSIAE, Celdas);
@@ -114,7 +115,7 @@ namespace Recibos_Electronicos.Form
                         CNComun.HideColumns(grvReferenciasSIAE, CeldasSysWeb);
                         //ScriptManager.RegisterStartupScript(this, GetType(), "GridPagos", "PagosSYSWEB();", true);
                     }
-
+                }
             }
             catch (Exception ex)
             {
@@ -323,7 +324,7 @@ namespace Recibos_Electronicos.Form
             objFactura.FACT_BANCO = ddlBanco.SelectedValue;
             try
             {
-                if (Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[15].Text) != 0 && Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[16].Text) == "SYSWEB")
+                if (Convert.ToInt32(grvReferenciasSIAE.SelectedRow.Cells[15].Text) != 0 && Convert.ToString(grvReferenciasSIAE.SelectedRow.Cells[8].Text) == "TITULO")
                     CNFactura.Generar_Recibo_OnLine(objFactura, ref Verificador);
                 else
                 {
