@@ -474,7 +474,6 @@ namespace Recibos_Electronicos.Form
         {
             CargarGridServicios();
         }
-
         protected void imgBttnReporte_Click(object sender, ImageClickEventArgs e)
         {
             string ruta = "../Reportes/VisualizadorCrystal.aspx?Tipo=REP058&dependencia=" + DDLDependencia2.SelectedValue + "&Observaciones=" + "" + "&enExcel=N";
