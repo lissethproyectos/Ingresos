@@ -907,7 +907,7 @@ namespace Recibos_Electronicos.Form
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            //Verificar paginacion
+            //Verificar paginacion 1
             SesionUsu = (Sesion)Session["Usuario"];
 
             if (!IsPostBack)
