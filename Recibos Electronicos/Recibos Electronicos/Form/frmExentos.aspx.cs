@@ -906,8 +906,9 @@ namespace Recibos_Electronicos.Form
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            //Verificar paginacion
             SesionUsu = (Sesion)Session["Usuario"];
-            //ScriptManager.RegisterStartupScript(this, this.GetType(), "Pop", "openPopoverDetalle();", true);
 
             if (!IsPostBack)
                 Inicializar();
