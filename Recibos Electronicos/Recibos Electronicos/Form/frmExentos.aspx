@@ -16,7 +16,6 @@
             right: 0px;
             bottom: 0px;
             background-color: #aaa;
-            filter: alpha(opacity=80);
             opacity: 0.8;
         }
 
