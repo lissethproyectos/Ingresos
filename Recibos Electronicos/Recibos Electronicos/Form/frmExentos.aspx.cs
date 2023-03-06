@@ -298,6 +298,8 @@ namespace Recibos_Electronicos.Form
                     HideColumns(grvAlumnos);
 
 
+              
+
 
             }
             catch (Exception ex)
@@ -914,13 +916,15 @@ namespace Recibos_Electronicos.Form
                 Inicializar();
 
             ScriptManager.RegisterStartupScript(this, GetType(), "Eventos", "FiltEventos();", true);
-            if (SesionUsu.Usu_Central == "S")
-            {
-                ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "ExentosAdmin();", true);
-                ScriptManager.RegisterStartupScript(this, GetType(), "grdMonitor", "Monitor();", true);
-            }
-            else
-                ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "ExentosNormal();", true);
+            ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "ExentosAdmin();", true);
+
+            //if (SesionUsu.Usu_Central == "S")
+            //{
+            //    ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "ExentosAdmin();", true);
+            //    ScriptManager.RegisterStartupScript(this, GetType(), "grdMonitor", "Monitor();", true);
+            //}
+            //else
+            //    ScriptManager.RegisterStartupScript(this, GetType(), "grdExentos", "ExentosNormal();", true);
 
 
         }

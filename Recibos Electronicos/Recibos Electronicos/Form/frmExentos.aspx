@@ -124,19 +124,23 @@
                                         <div class="col-md-11">
                                             <asp:UpdatePanel ID="updPnlDepcia" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:DropDownList ID="ddlDependencia" runat="server" Width="100%">
+                                                    <asp:DropDownList ID="ddlDependencia" runat="server" CssClass="form-control">
                                                     </asp:DropDownList>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-1">Tipo</div>
+                                        <div class="col-md-1">Alumno / Aspirante</div>
                                         <div class="col-md-2">
-                                            <asp:DropDownList ID="ddlTipoPers1" runat="server" CssClass="btn btn-tipo dropdown-toggle browser-default custom-select custom-select-lg mb-3" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoPers_SelectedIndexChanged">
-                                                <asp:ListItem Value="UNACH">Aspirante/Alumno UNACH</asp:ListItem>
-                                                <asp:ListItem Value="PSU">Alumno PSU</asp:ListItem>
-                                            </asp:DropDownList>
+                                            <asp:UpdatePanel ID="updPnlddlTipoPers1" runat="server">
+                                                <ContentTemplate>
+                                                    <asp:DropDownList ID="ddlTipoPers1" runat="server" CssClass="btn btn-tipo dropdown-toggle browser-default custom-select custom-select-lg mb-3">
+                                                        <asp:ListItem Value="UNACH">UNACH</asp:ListItem>
+                                                        <asp:ListItem Value="PSU">PSU</asp:ListItem>
+                                                    </asp:DropDownList>
+                                                </ContentTemplate>
+                                            </asp:UpdatePanel>
                                         </div>
                                         <div class="col-md-1">
                                             <asp:Label ID="lblNivel1" runat="server" Text="Nivel"></asp:Label>
@@ -144,7 +148,7 @@
                                         <div class="col-md-4">
                                             <asp:UpdatePanel ID="updPnlNivel" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:DropDownList ID="ddlNivel1" runat="server" Width="100%">
+                                                    <asp:DropDownList ID="ddlNivel1" runat="server" CssClass="form-control">
                                                     </asp:DropDownList>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
@@ -155,7 +159,7 @@
                                         <div class="col-md-2">
                                             <asp:UpdatePanel ID="updPnlCiclo" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:DropDownList ID="ddlCiclo" runat="server" Width="100%">
+                                                    <asp:DropDownList ID="ddlCiclo" runat="server" CssClass="form-control">
                                                     </asp:DropDownList>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
@@ -168,7 +172,7 @@
                                         <div class="col-md-2">
                                             <asp:UpdatePanel ID="updPnlSubtipo1" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:DropDownList ID="ddlSubTipo1" runat="server" AutoPostBack="True" Width="100%" OnSelectedIndexChanged="ddlSubTipo_SelectedIndexChanged">
+                                                    <asp:DropDownList ID="ddlSubTipo1" runat="server" AutoPostBack="True" CssClass="form-control" OnSelectedIndexChanged="ddlSubTipo_SelectedIndexChanged">
                                                         <asp:ListItem Value="T">TODOS</asp:ListItem>
                                                         <asp:ListItem>RECARGO</asp:ListItem>
                                                         <asp:ListItem>EXENTO</asp:ListItem>
@@ -184,18 +188,18 @@
                                         <div class="col-md-2">
                                             <asp:UpdatePanel ID="updPnlStatusIni" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:DropDownList ID="ddlStatus_Ini" runat="server" AutoPostBack="False" TabIndex="3" Width="100%">
+                                                    <asp:DropDownList ID="ddlStatus_Ini" runat="server" AutoPostBack="False" TabIndex="3" CssClass="form-control">
                                                     </asp:DropDownList>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </div>
                                         <div class="col-md-3">
-                                            <asp:TextBox ID="txtReferencia" runat="server" PlaceHolder="Nombre ó Matricula" TabIndex="4" Visible="true" Width="100%"></asp:TextBox>
+                                            <asp:TextBox ID="txtReferencia" runat="server" PlaceHolder="Nombre ó Matricula" TabIndex="4" Visible="true" CssClass="form-control"></asp:TextBox>
                                         </div>
                                         <div class="col-md-3 text-right">
                                             <asp:UpdatePanel ID="updPnlBuscarExenciones" runat="server">
                                                 <ContentTemplate>
-                                                    <asp:LinkButton ID="linkBttnBuscarEx" runat="server" CssClass="btn btn-warning" OnClick="linkBttnBuscarEx_Click"><i class="fa fa-search" aria-hidden="true"></i> Ver Exenciones</asp:LinkButton>
+                                                    <asp:LinkButton ID="linkBttnBuscarEx" runat="server" CssClass="btn btn-warning" OnClick="linkBttnBuscarEx_Click"><i class="fa fa-search" aria-hidden="true"></i>Ver Exenciones</asp:LinkButton>
                                                     &nbsp;<asp:LinkButton ID="linkBttnNewEx" runat="server" CssClass="btn btn-blue-grey" OnClick="linkBttnNewEx_Click" ValidationGroup="Nuevo"><i class="fa fa-plus-square" aria-hidden="true"></i> Nuevo</asp:LinkButton>
                                                 </ContentTemplate>
                                             </asp:UpdatePanel>
@@ -225,7 +229,7 @@
                                             <div style="overflow-x: auto;">
                                                 <asp:UpdatePanel ID="updPnlAlumnos" runat="server">
                                                     <ContentTemplate>
-                                                        <asp:GridView ID="grvAlumnos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" GridLines="None" OnPageIndexChanging="grvAlumnos_PageIndexChanging" OnRowDeleting="grvAlumnos_RowDeleting" OnSelectedIndexChanged="grvAlumnos_SelectedIndexChanged" Width="100%" ShowFooter="True">
+                                                        <asp:GridView ID="grvAlumnos" runat="server" AutoGenerateColumns="False" CssClass="mGrid" EmptyDataText="No se encontro ningún registro" OnRowDeleting="grvAlumnos_RowDeleting" OnSelectedIndexChanged="grvAlumnos_SelectedIndexChanged" Width="100%">
                                                             <Columns>
                                                                 <asp:BoundField DataField="IdPersona" HeaderText="id" />
                                                                 <asp:BoundField DataField="GenerarPermiso" SortExpression="GenerarPermiso" />
@@ -465,13 +469,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="row">
-                                                                <div class="col-md-1">Tipo</div>
+                                                                <div class="col-md-1">Alumno</div>
                                                                 <div class="col-md-3">
                                                                     <asp:UpdatePanel ID="updPnlTipoPers" runat="server">
                                                                         <ContentTemplate>
                                                                             <asp:DropDownList ID="ddlTipoPers" runat="server" CssClass="btn btn-tipo dropdown-toggle browser-default custom-select custom-select-lg mb-3" AutoPostBack="True" OnSelectedIndexChanged="ddlTipoPers_SelectedIndexChanged">
-                                                                                <asp:ListItem Value="UNACH">Aspirante/Alumno UNACH</asp:ListItem>
-                                                                                <asp:ListItem Value="PSU">Alumno PSU</asp:ListItem>
+                                                                                <asp:ListItem Value="UNACH">UNACH</asp:ListItem>
+                                                                                <asp:ListItem Value="PSU">PSU</asp:ListItem>
                                                                             </asp:DropDownList>
                                                                         </ContentTemplate>
                                                                     </asp:UpdatePanel>
@@ -483,13 +487,15 @@
                                                                     <div class="input-group">
                                                                         <asp:TextBox ID="txtMatricula" runat="server" CssClass="form-control"
                                                                             TabIndex="2" MaxLength="9" CausesValidation="True"
-                                                                            ValidationGroup="gpoBusca"></asp:TextBox>
+                                                                            ValidationGroup="gpoBusca">
+                                                                        </asp:TextBox>
                                                                         <asp:UpdatePanel ID="UpdMatricula" runat="server">
                                                                             <ContentTemplate>
                                                                                 <span class="input-group">
-                                                                                    <asp:LinkButton ID="linkBttnBuscar" runat="server" CssClass="btn btn-warning form-control" OnClick="linkBttnBuscar_Click"> <i class="fa fa-search" aria-hidden="true"></i>Buscar
+                                                                                    <asp:LinkButton ID="linkBttnBuscar" runat="server" CssClass="btn btn-warning form-control" OnClick="linkBttnBuscar_Click">
+                                                                                        <i class="fa fa-search" aria-hidden="true"></i>Buscar
                                                                                     </asp:LinkButton>
-                                                                                    <asp:LinkButton ID="Registrar" runat="server" CssClass="btn btn-blue-grey" Visible="false"> Agregar</asp:LinkButton>
+                                                                                    <asp:LinkButton ID="Registrar" runat="server" CssClass="btn btn-blue-grey" Visible="false">Agregar</asp:LinkButton>
                                                                                 </span>
                                                                             </ContentTemplate>
                                                                         </asp:UpdatePanel>
@@ -1317,7 +1323,8 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <h4>
-                                                        <asp:Label ID="lblEtParentesco" runat="server" Text="Familiares"></asp:Label></h4>
+                                                        <asp:Label ID="lblEtParentesco" runat="server" Text="Familiares"></asp:Label>
+                                                    </h4>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -1357,6 +1364,20 @@
         </div>
     </div>
     <script type="text/javascript">
+      
+<%--        $(document).ready(function () {
+            var tableExentosAdmin = $('#<%= grvAlumnos.ClientID %>').DataTable();
+
+            tableExentosAdmin
+                .clear()
+                .draw();
+
+
+
+            
+        };
+
+
 
         function FiltEventos() {
             $('#<%= ddlEvento.ClientID %>').select2();
@@ -1381,6 +1402,8 @@
                 ]
             })
         };
+--%>
+
         function ExentosAdmin() {
             $('#<%= grvAlumnos.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvAlumnos.ClientID %>').find("tr:first"))).DataTable()({
                 "destroy": true,
@@ -1397,19 +1420,19 @@
                     null,
                     null,
                     null,
+                    null,
                     null
                 ]
             })
         };
 
-
-        function Monitor() {
+       <%-- function Monitor() {
             $('#<%= grvStatus.ClientID %>').prepend($("<thead></thead>").append($('#<%= grvStatus.ClientID %>').find("tr:first"))).DataTable({
                 "destroy": true,
                 "stateSave": true,
                 "ordering": false
             });
-        };
+        };--%>
 
     </script>
 </asp:Content>
